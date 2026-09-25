@@ -1,0 +1,2868 @@
+{
+  "version": "3.2.0",
+  "description": "Architectural blueprints for 24 domains: section flows, signature widgets, layout flavors, theme biases, and real mock data.",
+  "domains": {
+    "beauty_clinical_wellness": {
+      "domain_id": "beauty_clinical_wellness",
+      "theme_bias": "light",
+      "primary_styles": [
+        "quiet_luxury",
+        "soft_humanist",
+        "editorial_magazine"
+      ],
+      "section_flow": [
+        {
+          "id": "hero",
+          "name": "Aesthetic Serenity Hero",
+          "type": "split_hero",
+          "purpose": "Immediate sense of calm luxury with appointment booking trigger"
+        },
+        {
+          "id": "services",
+          "name": "Treatment Carousel & Menu",
+          "type": "service_tabs",
+          "purpose": "Interactive category switching with transparent pricing"
+        },
+        {
+          "id": "signature",
+          "name": "Before/After Slider & Doctor Credentials",
+          "type": "signature_widget",
+          "purpose": "Physical clinical proof of results"
+        },
+        {
+          "id": "social_proof",
+          "name": "Verified Patient Testimonials",
+          "type": "masonry_reviews",
+          "purpose": "Real patient stories with dermatological outcome stars"
+        },
+        {
+          "id": "booking_footer",
+          "name": "VIP Concierge Booking & Location",
+          "type": "booking_card",
+          "purpose": "Calendar slot selection with zero friction"
+        }
+      ],
+      "signature_widget": {
+        "name": "Clinical Before/After Visualizer & Slot Picker",
+        "type": "slider_with_calendar",
+        "props": {
+          "interactive_slider": true,
+          "drag_physics": "smooth_lerp",
+          "default_comparison_tag": "Laser Rejuvenation - 4 Weeks Post",
+          "slot_picker_active": true
+        }
+      },
+      "layout_flavors": [
+        {
+          "flavor_id": "luxury_warm_light",
+          "name": "Quiet Warm Luxury",
+          "hero_layout": "asymmetric_split",
+          "card_style": "subtle_border_sand"
+        },
+        {
+          "flavor_id": "editorial_spa",
+          "name": "Editorial Spa & Wellness",
+          "hero_layout": "centered_curated",
+          "card_style": "minimal_frame"
+        },
+        {
+          "flavor_id": "clinical_high_tech",
+          "name": "Dermatology High Precision",
+          "hero_layout": "bento_compact",
+          "card_style": "glass_card_white"
+        }
+      ],
+      "ambient_motion": {
+        "type": "spotlight_cursor_soft",
+        "bg_gradient": "radial-gradient(circle at center, oklch(0.97 0.015 85) 0%, oklch(0.94 0.01 75) 100%)",
+        "motion_hint": "subtle floating botanical or soft light refraction",
+        "lcp_safe": true
+      },
+      "mock_data": {
+        "en": {
+          "headline": "Advanced Aesthetic Dermatology & Regenerative Care",
+          "subheadline": "Board-certified specialists delivering natural, luminous results with clinically certified protocols.",
+          "cta_primary": "Book Private Consultation",
+          "cta_secondary": "Explore Treatment Catalog",
+          "metrics": [
+            {
+              "label": "Patient Satisfaction",
+              "value": "99.4%"
+            },
+            {
+              "label": "Board Certified Dermatologists",
+              "value": "12"
+            },
+            {
+              "label": "Clinical Case Studies",
+              "value": "18,000+"
+            }
+          ]
+        },
+        "fa": {
+          "headline": "مراقبت پیشرفته پوست، زیبایی و جوانسازی بالینی",
+          "subheadline": "متخصصان دارای بورد با پروتکل های تایید شده بین المللی برای نتایج طبیعی و درخشان.",
+          "cta_primary": "رزرو وقت مشاوره تخصصی",
+          "cta_secondary": "مشاهده تعرفه و لیست خدمات",
+          "metrics": [
+            {
+              "label": "رضایت مراجعین",
+              "value": "۹۹.۴٪"
+            },
+            {
+              "label": "پزشک متخصص بورد",
+              "value": "۱۲"
+            },
+            {
+              "label": "پرونده موفق بالینی",
+              "value": "+۱۸,۰۰۰"
+            }
+          ]
+        }
+      }
+    },
+    "fintech_banking": {
+      "domain_id": "fintech_banking",
+      "theme_bias": "light",
+      "primary_styles": [
+        "clean_stripe",
+        "minimal_swiss",
+        "editorial_magazine"
+      ],
+      "section_flow": [
+        {
+          "id": "hero",
+          "name": "Institutional Trust Hero",
+          "type": "split_hero",
+          "purpose": "Immediate high-net-worth authority and APY yields"
+        },
+        {
+          "id": "signature",
+          "name": "Interactive Yield Calculator & Virtual Card",
+          "type": "signature_widget",
+          "purpose": "Live slider showing compounding interest & 3D holographic card"
+        },
+        {
+          "id": "security",
+          "name": "Tier-1 Compliance & Audit Badges",
+          "type": "security_grid",
+          "purpose": "SOC2, FDIC insurance, zero-liability guarantees"
+        },
+        {
+          "id": "pricing",
+          "name": "Transparent Fee Comparison Table",
+          "type": "comparison_matrix",
+          "purpose": "Direct contrast with legacy banking markups"
+        },
+        {
+          "id": "footer",
+          "name": "Institutional Compliance Footer",
+          "type": "dense_footer",
+          "purpose": "Legal disclaimers, licensing, swift routing"
+        }
+      ],
+      "signature_widget": {
+        "name": "High-Yield APY Compounding Simulator",
+        "type": "financial_calculator",
+        "props": {
+          "interactive_slider": true,
+          "range_min": 1000,
+          "range_max": 250000,
+          "default_val": 25000,
+          "apy_rate": 0.052,
+          "tabular_nums": true
+        }
+      },
+      "layout_flavors": [
+        {
+          "flavor_id": "stripe_engineered",
+          "name": "Engineered Precision Stripe",
+          "hero_layout": "split_hero_card",
+          "card_style": "slate_subtle_border"
+        },
+        {
+          "flavor_id": "swiss_wealth",
+          "name": "Swiss Private Banking",
+          "hero_layout": "asymmetric_editorial",
+          "card_style": "crisp_hairline_frame"
+        },
+        {
+          "flavor_id": "modern_treasury",
+          "name": "Corporate Treasury Dashboard",
+          "hero_layout": "dense_hud_summary",
+          "card_style": "flat_tabular_card"
+        }
+      ],
+      "ambient_motion": {
+        "type": "subtle_geometric_grid",
+        "bg_gradient": "linear-gradient(180deg, oklch(0.98 0.005 240) 0%, oklch(0.95 0.01 240) 100%)",
+        "motion_hint": "hairline grid with gentle micro-glow on active inputs",
+        "lcp_safe": true
+      },
+      "mock_data": {
+        "en": {
+          "headline": "Institutional Wealth Management & Modern Treasury",
+          "subheadline": "Automated cash yield, multi-currency accounts, and zero-fee corporate transfers with institutional-grade security.",
+          "cta_primary": "Open Treasury Account",
+          "cta_secondary": "Calculate Net Yield",
+          "metrics": [
+            {
+              "label": "Assets Monitored",
+              "value": "$4.8B"
+            },
+            {
+              "label": "FDIC Insured Up To",
+              "value": "$5,000,000"
+            },
+            {
+              "label": "Average Annual Yield",
+              "value": "5.25% APY"
+            }
+          ]
+        },
+        "fa": {
+          "headline": "مدیریت ثروت نهادی و خزانه داری شرکتی هوشمند",
+          "subheadline": "سوددهی خودکار موجودی، حساب های چندارزی و انتقالات بدون کارمزد با امنیت بانکی سطح اول.",
+          "cta_primary": "افتتاح حساب شرکتی",
+          "cta_secondary": "محاسبه سود مرکب سالانه",
+          "metrics": [
+            {
+              "label": "حجم دارایی تحت نظارت",
+              "value": "$۴.۸B"
+            },
+            {
+              "label": "پوشش بیمه حساب",
+              "value": "$۵,۰۰۰,۰۰۰"
+            },
+            {
+              "label": "میانگین سود سالانه",
+              "value": "۵.۲۵٪ APY"
+            }
+          ]
+        }
+      }
+    },
+    "crypto_trading_web3": {
+      "domain_id": "crypto_trading_web3",
+      "theme_bias": "dark",
+      "primary_styles": [
+        "linear_dark",
+        "data_dense_terminal",
+        "clean_stripe"
+      ],
+      "section_flow": [
+        {
+          "id": "hero",
+          "name": "Live Market Telemetry Hero",
+          "type": "ticker_hero",
+          "purpose": "Real-time ticker stream with sparklines and instant buy widget"
+        },
+        {
+          "id": "signature",
+          "name": "Live Orderbook & Slippage Simulator",
+          "type": "signature_widget",
+          "purpose": "Live bid/ask depth chart with instant convert calculator"
+        },
+        {
+          "id": "assets",
+          "name": "24h Volume & Gainer Matrix",
+          "type": "tabular_market_grid",
+          "purpose": "Sortable high-frequency market data"
+        },
+        {
+          "id": "security",
+          "name": "Cold Storage & Multi-Sig Proof",
+          "type": "proof_cards",
+          "purpose": "Proof-of-reserves Merkle tree verification"
+        },
+        {
+          "id": "cta",
+          "name": "Pro Trader Terminal Access",
+          "type": "terminal_cta",
+          "purpose": "Zero-latency API keys and web interface"
+        }
+      ],
+      "signature_widget": {
+        "name": "Zero-Slippage Quick Swap & Depth Sparkline",
+        "type": "crypto_swap_telemetry",
+        "props": {
+          "live_sparklines": true,
+          "swap_currencies": [
+            "BTC",
+            "ETH",
+            "USDT",
+            "SOL"
+          ],
+          "show_gas_tracker": true,
+          "tabular_nums": true
+        }
+      },
+      "layout_flavors": [
+        {
+          "flavor_id": "linear_terminal_dark",
+          "name": "Minimalist Linear Dark",
+          "hero_layout": "split_chart_hero",
+          "card_style": "pitch_charcoal_1px"
+        },
+        {
+          "flavor_id": "cyber_glass_hud",
+          "name": "Cyberpunk Glass HUD",
+          "hero_layout": "multi_pane_hud",
+          "card_style": "deep_tint_glass_border"
+        },
+        {
+          "flavor_id": "swiss_fintech_crypto",
+          "name": "Swiss Web3 Protocol",
+          "hero_layout": "asymmetric_contrast",
+          "card_style": "sharp_mono_cards"
+        }
+      ],
+      "ambient_motion": {
+        "type": "subtle_particle_glow",
+        "bg_gradient": "radial-gradient(ellipse at 50% 0%, oklch(0.22 0.04 150) 0%, oklch(0.12 0.01 240) 80%)",
+        "motion_hint": "pulsing green/red micro-glows on price updates",
+        "lcp_safe": true
+      },
+      "mock_data": {
+        "en": {
+          "headline": "Sub-Millisecond Crypto Derivatives & Spot Exchange",
+          "subheadline": "Trade 300+ markets with institutional deep liquidity, 0% maker fees, and on-chain Proof of Reserves.",
+          "cta_primary": "Start Trading Now",
+          "cta_secondary": "View Live Orderbook",
+          "metrics": [
+            {
+              "label": "24h Trading Volume",
+              "value": "$1.42B"
+            },
+            {
+              "label": "Matching Latency",
+              "value": "<12µs"
+            },
+            {
+              "label": "Proof of Reserves",
+              "value": "100% Backed"
+            }
+          ]
+        },
+        "fa": {
+          "headline": "صرافی اسپات و مشتقه ارز دیجیتال با تاخیر زیر میلی ثانیه",
+          "subheadline": "معامله بیش از ۳۰۰ رمزارز با نقدینگی عمیق، کارمزد صفر میکر و تاییدیه شفاف اثبات ذخایر آنچین.",
+          "cta_primary": "شروع آنی معاملات",
+          "cta_secondary": "مشاهده زنده عمق بازار",
+          "metrics": [
+            {
+              "label": "حجم معاملات ۲۴ ساعته",
+              "value": "$۱.۴۲B"
+            },
+            {
+              "label": "سرعت مچینگ سفارشات",
+              "value": "<۱۲µs"
+            },
+            {
+              "label": "تعهد ذخایر اثبات شده",
+              "value": "۱۰۰٪ کامل"
+            }
+          ]
+        }
+      }
+    },
+    "devops_cloud_terminal": {
+      "domain_id": "devops_cloud_terminal",
+      "theme_bias": "dark",
+      "primary_styles": [
+        "data_dense_terminal",
+        "linear_dark",
+        "minimal_swiss"
+      ],
+      "section_flow": [
+        {
+          "id": "hero",
+          "name": "Cluster Health & Telemetry HUD",
+          "type": "hud_hero",
+          "purpose": "Immediate node health badges, latency radar and CLI curl snippet"
+        },
+        {
+          "id": "signature",
+          "name": "Interactive Shell & Diff Inspector",
+          "type": "signature_widget",
+          "purpose": "Live streaming log preview and YAML pipeline validator"
+        },
+        {
+          "id": "benchmarks",
+          "name": "Throughput & P99 Latency Benchmarks",
+          "type": "latency_chart",
+          "purpose": "Comparative performance against AWS/GCP"
+        },
+        {
+          "id": "architecture",
+          "name": "Topology & Ingress Gateway Graph",
+          "type": "interactive_nodes",
+          "purpose": "Microservice mesh status visualizer"
+        },
+        {
+          "id": "footer",
+          "name": "Developer Doc Hub & Status Ticker",
+          "type": "dense_dev_footer",
+          "purpose": "All systems operational 99.999%"
+        }
+      ],
+      "signature_widget": {
+        "name": "Live Kubectl Pod Terminal & Log Streamer",
+        "type": "cli_emulator",
+        "props": {
+          "copyable_command": "curl -sSL https://get.coreos.sh | bash",
+          "tab_switcher": [
+            "STDOUT",
+            "K8s Events",
+            "Raw Metrics"
+          ],
+          "font_family": "JetBrains Mono, monospace"
+        }
+      },
+      "layout_flavors": [
+        {
+          "flavor_id": "dense_ops_hud",
+          "name": "Dense 12-Column HUD",
+          "hero_layout": "multi_pane_terminal",
+          "card_style": "terminal_carbon_1px"
+        },
+        {
+          "flavor_id": "minimalist_infra",
+          "name": "Minimalist Linear Infra",
+          "hero_layout": "split_hero_code",
+          "card_style": "slate_subtle_wireframe"
+        },
+        {
+          "flavor_id": "cyber_observability",
+          "name": "Cyber Observability Matrix",
+          "hero_layout": "bento_dense",
+          "card_style": "glass_terminal_border"
+        }
+      ],
+      "ambient_motion": {
+        "type": "matrix_subtle_raster",
+        "bg_gradient": "linear-gradient(180deg, oklch(0.14 0.01 240) 0%, oklch(0.10 0.005 240) 100%)",
+        "motion_hint": "subtle green telemetry pulses and blinking cursor",
+        "lcp_safe": true
+      },
+      "mock_data": {
+        "en": {
+          "headline": "Zero-Config Kubernetes Ingress & Edge Orchestration",
+          "subheadline": "Deploy global container clusters in seconds with automatic TLS, wireguard mesh, and sub-10ms P99 latency.",
+          "cta_primary": "Deploy In 30 Seconds",
+          "cta_secondary": "Read Architecture RFC",
+          "metrics": [
+            {
+              "label": "P99 Edge Latency",
+              "value": "8.4ms"
+            },
+            {
+              "label": "Global PoPs",
+              "value": "120+"
+            },
+            {
+              "label": "SLA Uptime",
+              "value": "99.999%"
+            }
+          ]
+        },
+        "fa": {
+          "headline": "ارکستراسیون کوبرنتیز و اینگرس لبه با پیکربندی صفر",
+          "subheadline": "استقرار کلاسترهای جهانی در چند ثانیه با TLS خودکار، شبکه مش و تاخیر لبه زیر ۱۰ میلی ثانیه.",
+          "cta_primary": "استقرار فوری در ۳۰ ثانیه",
+          "cta_secondary": "مطالعه معماری فنی",
+          "metrics": [
+            {
+              "label": "تاخیر لبه P99",
+              "value": "۸.۴ms"
+            },
+            {
+              "label": "نقاط دسترسی جهانی",
+              "value": "+۱۲۰"
+            },
+            {
+              "label": "پایداری تضمین شده SLA",
+              "value": "۹۹.۹۹۹٪"
+            }
+          ]
+        }
+      }
+    },
+    "saas_b2b_enterprise": {
+      "domain_id": "saas_b2b_enterprise",
+      "theme_bias": "light",
+      "primary_styles": [
+        "clean_stripe",
+        "minimal_swiss",
+        "editorial_magazine"
+      ],
+      "section_flow": [
+        {
+          "id": "hero",
+          "name": "Executive ROI & Product Preview Hero",
+          "type": "split_hero_mockup",
+          "purpose": "High-impact value proposition with interactive dashboard screenshot"
+        },
+        {
+          "id": "social_proof",
+          "name": "Fortune 500 Enterprise Logos",
+          "type": "logo_ticker",
+          "purpose": "Instant institutional credibility"
+        },
+        {
+          "id": "signature",
+          "name": "Interactive Feature Bento & ROI Calculator",
+          "type": "signature_widget",
+          "purpose": "Directly calculating enterprise engineering hours saved"
+        },
+        {
+          "id": "security",
+          "name": "SOC2 Type II, HIPAA & Single Sign-On",
+          "type": "compliance_badge_grid",
+          "purpose": "Neutralizing enterprise procurement objections"
+        },
+        {
+          "id": "pricing",
+          "name": "Transparent Team & Enterprise Plans",
+          "type": "pricing_tier_matrix",
+          "purpose": "Monthly/Annual toggle with clear enterprise tier"
+        }
+      ],
+      "signature_widget": {
+        "name": "Enterprise Productivity ROI Calculator",
+        "type": "roi_slider_bento",
+        "props": {
+          "seat_slider": true,
+          "default_seats": 50,
+          "annual_savings_multiplier": 1400,
+          "currency": "$"
+        }
+      },
+      "layout_flavors": [
+        {
+          "flavor_id": "clean_enterprise_stripe",
+          "name": "Clean Stripe Light",
+          "hero_layout": "split_hero_browser",
+          "card_style": "subtle_white_lifted"
+        },
+        {
+          "flavor_id": "swiss_executive",
+          "name": "Swiss Corporate Editorial",
+          "hero_layout": "asymmetric_bento",
+          "card_style": "sharp_mono_border"
+        },
+        {
+          "flavor_id": "modern_saas_hybrid",
+          "name": "Modern Hybrid Bento",
+          "hero_layout": "center_hero_bento",
+          "card_style": "pill_badge_modern"
+        }
+      ],
+      "ambient_motion": {
+        "type": "subtle_mesh_glow",
+        "bg_gradient": "radial-gradient(ellipse at 50% 0%, oklch(0.96 0.02 240) 0%, oklch(0.98 0.005 240) 100%)",
+        "motion_hint": "smooth stagger on bento card reveal with spring easing",
+        "lcp_safe": true
+      },
+      "mock_data": {
+        "en": {
+          "headline": "Unified Enterprise Intelligence & Workflow Orchestration",
+          "subheadline": "Connect disconnected data silos, eliminate manual reporting, and accelerate delivery across 500+ seat organizations.",
+          "cta_primary": "Request Executive Demo",
+          "cta_secondary": "Calculate Enterprise ROI",
+          "metrics": [
+            {
+              "label": "Time-To-Value",
+              "value": "14 Days"
+            },
+            {
+              "label": "Engineering Hours Saved/Mo",
+              "value": "1,200h"
+            },
+            {
+              "label": "SOC2 Type II",
+              "value": "Certified"
+            }
+          ]
+        },
+        "fa": {
+          "headline": "هوش سازمانی یکپارچه و ارکستراسیون هوشمند جریان کار",
+          "subheadline": "اتصال پایگاه های داده مجزا، حذف گزارش های دستی و افزایش سرعت تصمیم گیری در سازمان های بزرگ.",
+          "cta_primary": "درخواست دموی سازمانی",
+          "cta_secondary": "محاسبه بازگشت سرمایه ROI",
+          "metrics": [
+            {
+              "label": "زمان راه اندازی کامل",
+              "value": "۱۴ روز"
+            },
+            {
+              "label": "صرفه جویی ساعتی ماهانه",
+              "value": "۱,۲۰۰ ساعت"
+            },
+            {
+              "label": "استاندارد امنیتی",
+              "value": "SOC2 تایید شده"
+            }
+          ]
+        }
+      }
+    },
+    "ai_developer_platform": {
+      "domain_id": "ai_developer_platform",
+      "theme_bias": "dark",
+      "primary_styles": [
+        "linear_dark",
+        "modern_glass_2",
+        "data_dense_terminal"
+      ],
+      "section_flow": [
+        {
+          "id": "hero",
+          "name": "Neural Canvas & Live Prompt Studio",
+          "type": "interactive_prompt_hero",
+          "purpose": "Immediate hands-on demonstration of intelligence"
+        },
+        {
+          "id": "signature",
+          "name": "Multi-Model Arena & Latency Benchmark HUD",
+          "type": "signature_widget",
+          "purpose": "Live comparison of token latency, accuracy, and reasoning step"
+        },
+        {
+          "id": "features",
+          "name": "Agentic Reasoning & Tool-Call Mesh",
+          "type": "bento_agentic",
+          "purpose": "Visualizing function calling, sandbox memory, and DAG execution"
+        },
+        {
+          "id": "code_snippet",
+          "name": "SDK Integration in 3 Lines",
+          "type": "tabbed_sdk_code",
+          "purpose": "Python, TypeScript, and cURL instant copy"
+        },
+        {
+          "id": "footer",
+          "name": "Developer Community & Model Registry",
+          "type": "community_footer",
+          "purpose": "Discord, GitHub stars, API uptime"
+        }
+      ],
+      "signature_widget": {
+        "name": "Live Reasoning Step & Token Telemetry Drawer",
+        "type": "thinking_drawer_arena",
+        "props": {
+          "streaming_demo": true,
+          "tokens_per_second": 142,
+          "latency_first_token_ms": 18,
+          "model_selector": [
+            "Claude 3.7",
+            "Gemini 2.5 Pro",
+            "DeepSeek R1"
+          ]
+        }
+      },
+      "layout_flavors": [
+        {
+          "flavor_id": "linear_ai_dark",
+          "name": "Linear Minimalist AI",
+          "hero_layout": "split_prompt_canvas",
+          "card_style": "pitch_charcoal_subtle"
+        },
+        {
+          "flavor_id": "glass_nebula",
+          "name": "Modern Luxury Glass 2.0",
+          "hero_layout": "nebula_glow_hero",
+          "card_style": "layered_glass_frost"
+        },
+        {
+          "flavor_id": "terminal_arena",
+          "name": "High-Velocity Benchmark HUD",
+          "hero_layout": "arena_split",
+          "card_style": "dense_mono_card"
+        }
+      ],
+      "ambient_motion": {
+        "type": "glowing_edge_shimmer",
+        "bg_gradient": "radial-gradient(circle at 50% 10%, oklch(0.25 0.05 280) 0%, oklch(0.12 0.01 260) 90%)",
+        "motion_hint": "shimmering border beam on model selection card",
+        "lcp_safe": true
+      },
+      "mock_data": {
+        "en": {
+          "headline": "The Autonomous Intelligence Engine for Mission-Critical Agents",
+          "subheadline": "Sub-20ms first-token latency, native tool orchestration, and deterministic schema enforcement at planetary scale.",
+          "cta_primary": "Get Instant API Key",
+          "cta_secondary": "Try Live Reasoning Canvas",
+          "metrics": [
+            {
+              "label": "First Token Latency",
+              "value": "18ms"
+            },
+            {
+              "label": "Tokens / Second",
+              "value": "145 t/s"
+            },
+            {
+              "label": "Schema Compliance",
+              "value": "100%"
+            }
+          ]
+        },
+        "fa": {
+          "headline": "موتور هوش مصنوعی خودمختار برای ایجنت های مقیاس پذیر",
+          "subheadline": "تاخیر اولین توکن زیر ۲۰ میلی ثانیه، هماهنگی بومی ابزارها و خروجی های ساختاریافته بدون خطا.",
+          "cta_primary": "دریافت رایگان کلید API",
+          "cta_secondary": "تست محیط استدلال زنده",
+          "metrics": [
+            {
+              "label": "تاخیر اولین توکن",
+              "value": "۱۸ms"
+            },
+            {
+              "label": "سرعت تولید توکن",
+              "value": "۱۴۵ t/s"
+            },
+            {
+              "label": "دقت تطابق با اسکیما",
+              "value": "۱۰۰٪ کامل"
+            }
+          ]
+        }
+      }
+    },
+    "food_restaurant_cafe": {
+      "domain_id": "food_restaurant_cafe",
+      "theme_bias": "dark",
+      "primary_styles": [
+        "editorial_magazine",
+        "quiet_luxury",
+        "soft_humanist"
+      ],
+      "section_flow": [
+        {
+          "id": "hero",
+          "name": "Atmospheric Culinary Showcase",
+          "type": "cinematic_hero",
+          "purpose": "High-appetite food photography with live open/closed status badge"
+        },
+        {
+          "id": "signature",
+          "name": "Interactive Category Menu & Table Reservation",
+          "type": "signature_widget",
+          "purpose": "Seamless tabbed menu with dietary badges and 1-click table booking"
+        },
+        {
+          "id": "story",
+          "name": "Chef Philosophy & Farm-to-Table Ingredients",
+          "type": "artisan_story",
+          "purpose": "Establishing organic quality and craft pedigree"
+        },
+        {
+          "id": "reviews",
+          "name": "Culinary Press & Michelin Mentions",
+          "type": "press_quotes",
+          "purpose": "Prestigious dining reviews"
+        },
+        {
+          "id": "location",
+          "name": "Operating Hours, Map & Parking Concierge",
+          "type": "interactive_map_hours",
+          "purpose": "Zero ambiguity for arriving guests"
+        }
+      ],
+      "signature_widget": {
+        "name": "Live Tabbed Menu & Table Booking Drawer",
+        "type": "menu_booking_card",
+        "props": {
+          "tabs": [
+            "Main Courses",
+            "Artisan Starters",
+            "Desserts",
+            "Cocktails"
+          ],
+          "live_status_badge": "Open Now Until 11:30 PM",
+          "table_reservation_modal": true,
+          "dietary_pills": [
+            "Vegan",
+            "Gluten-Free",
+            "Chef's Signature"
+          ]
+        }
+      },
+      "layout_flavors": [
+        {
+          "flavor_id": "bistronomy_dark",
+          "name": "Moody Bistro Charcoal",
+          "hero_layout": "split_cinematic_hero",
+          "card_style": "warm_slate_dark"
+        },
+        {
+          "flavor_id": "warm_editorial_terroir",
+          "name": "Warm Editorial Terroir",
+          "hero_layout": "asymmetric_food_grid",
+          "card_style": "terracotta_paper_border"
+        },
+        {
+          "flavor_id": "modern_minimal_cafe",
+          "name": "Japanese Zen Cafe",
+          "hero_layout": "zen_whitespace",
+          "card_style": "subtle_wash_card"
+        }
+      ],
+      "ambient_motion": {
+        "type": "subtle_warm_glow",
+        "bg_gradient": "radial-gradient(circle at 50% 20%, oklch(0.20 0.03 40) 0%, oklch(0.12 0.01 30) 100%)",
+        "motion_hint": "soft candlelight warmth and micro-hover zoom on menu dishes",
+        "lcp_safe": true
+      },
+      "mock_data": {
+        "en": {
+          "headline": "Artisanal Wood-Fired Dining & Seasonal Terroir",
+          "subheadline": "Locally sourced heirloom produce, slow-fermented sourdough, and natural wines crafted by Chef Julien.",
+          "cta_primary": "Reserve Your Table",
+          "cta_secondary": "Explore Seasonal Menu",
+          "metrics": [
+            {
+              "label": "Current Status",
+              "value": "Open Tonight"
+            },
+            {
+              "label": "Seating Capacity",
+              "value": "45 Intimate Guests"
+            },
+            {
+              "label": "Michelin Guide",
+              "value": "2026 Recommended"
+            }
+          ]
+        },
+        "fa": {
+          "headline": "تجربه دست ساز طعم های اصیل و فصلی در فضایی صمیمی",
+          "subheadline": "مواد اولیه ارگانیک و دستچین شده از مزارع محلی با طبخ آرام هیزمی و دستپخت سرآشپز بین المللی.",
+          "cta_primary": "رزرو آنلاین میز",
+          "cta_secondary": "مشاهده منوی فصلی غذاها",
+          "metrics": [
+            {
+              "label": "وضعیت پذیرش",
+              "value": "هم اکنون باز است"
+            },
+            {
+              "label": "ظرفیت سالن",
+              "value": "۴۵ مهمان اختصاصی"
+            },
+            {
+              "label": "امتیاز رضایت",
+              "value": "۴.۹ از ۵ ستاره"
+            }
+          ]
+        }
+      }
+    },
+    "real_estate_architecture": {
+      "domain_id": "real_estate_architecture",
+      "theme_bias": "light",
+      "primary_styles": [
+        "editorial_magazine",
+        "minimal_swiss",
+        "quiet_luxury"
+      ],
+      "section_flow": [
+        {
+          "id": "hero",
+          "name": "Architectural Statement & Multi-Filter Search",
+          "type": "split_search_hero",
+          "purpose": "Stunning 16:9 property visual with instantaneous buy/rent filter bar"
+        },
+        {
+          "id": "signature",
+          "name": "Interactive Property Card Grid & 3D Tour",
+          "type": "signature_widget",
+          "purpose": "Floor plans, bedroom/bath specs, sqft tags, and virtual walkthrough trigger"
+        },
+        {
+          "id": "curated",
+          "name": "Featured Off-Market Residences",
+          "type": "luxury_carousel",
+          "purpose": "Exclusive high-value estates"
+        },
+        {
+          "id": "neighborhood",
+          "name": "District Amenities & Transit Radar",
+          "type": "neighborhood_map",
+          "purpose": "WalkScore, nearby private schools, airport transit"
+        },
+        {
+          "id": "contact",
+          "name": "Private Broker Consultation",
+          "type": "concierge_broker_card",
+          "purpose": "Direct WhatsApp/Call with lead architect/broker"
+        }
+      ],
+      "signature_widget": {
+        "name": "Multi-Parameter Architectural Property Filter",
+        "type": "property_filter_grid",
+        "props": {
+          "filters": [
+            "Buy",
+            "Rent",
+            "Off-Plan"
+          ],
+          "price_slider": true,
+          "bedroom_selector": [
+            1,
+            2,
+            3,
+            4,
+            "5+"
+          ],
+          "aspect_ratio": "aspect-video"
+        }
+      },
+      "layout_flavors": [
+        {
+          "flavor_id": "swiss_architectural",
+          "name": "Swiss Architectural Editorial",
+          "hero_layout": "asymmetric_split_16_9",
+          "card_style": "razor_thin_border"
+        },
+        {
+          "flavor_id": "luxury_residence_light",
+          "name": "Ultra-Luxury Penthouse Light",
+          "hero_layout": "full_screen_panoramic",
+          "card_style": "sandstone_soft_shadow"
+        },
+        {
+          "flavor_id": "modern_urban_grid",
+          "name": "Modern Urban Development",
+          "hero_layout": "bento_spatial",
+          "card_style": "clean_pill_badge"
+        }
+      ],
+      "ambient_motion": {
+        "type": "clean_monochrome_pan",
+        "bg_gradient": "linear-gradient(180deg, oklch(0.98 0.005 60) 0%, oklch(0.95 0.01 60) 100%)",
+        "motion_hint": "crisp geometry with smooth image pan and zero layout shift",
+        "lcp_safe": true
+      },
+      "mock_data": {
+        "en": {
+          "headline": "Curated Modernist Estates & Architectural Landmarks",
+          "subheadline": "Exclusive residential portfolios engineered with sustainable materials, panoramic floor-to-ceiling glass, and private sanctuaries.",
+          "cta_primary": "Explore Available Residences",
+          "cta_secondary": "Request Private Tour",
+          "metrics": [
+            {
+              "label": "Total Portfolio Value",
+              "value": "$850M+"
+            },
+            {
+              "label": "Architectural Awards",
+              "value": "18"
+            },
+            {
+              "label": "Average Days on Market",
+              "value": "24 Days"
+            }
+          ]
+        },
+        "fa": {
+          "headline": "کلکسیون اختصاصی عمارت های مدرن و املاک شاخص معماری",
+          "subheadline": "واحدهای لوکس مهندسی شده با پنجره های قدی پانوراما، متریال پایدار و موقعیت های ممتاز شهری.",
+          "cta_primary": "مشاهده املاک موجود",
+          "cta_secondary": "درخواست بازدید حضوری",
+          "metrics": [
+            {
+              "label": "ارزش پورتفولیوی املاک",
+              "value": "+$۸۵۰M"
+            },
+            {
+              "label": "جوایز بین المللی معماری",
+              "value": "۱۸"
+            },
+            {
+              "label": "میانگین زمان فروش",
+              "value": "۲۴ روز"
+            }
+          ]
+        }
+      }
+    },
+    "healthcare_hospital_medical": {
+      "domain_id": "healthcare_hospital_medical",
+      "theme_bias": "light",
+      "primary_styles": [
+        "clean_stripe",
+        "soft_humanist",
+        "minimal_swiss"
+      ],
+      "section_flow": [
+        {
+          "id": "hero",
+          "name": "Clinical Trust & Urgent Care Access",
+          "type": "emergency_care_hero",
+          "purpose": "Instant appointment triage with live wait times"
+        },
+        {
+          "id": "signature",
+          "name": "Doctor Specialization Finder & Slot Picker",
+          "type": "signature_widget",
+          "purpose": "Search by symptom or department with instant calendar booking"
+        },
+        {
+          "id": "departments",
+          "name": "Centers of Excellence",
+          "type": "card_department_grid",
+          "purpose": "Cardiology, Oncology, Neurology, Pediatrics"
+        },
+        {
+          "id": "insurance",
+          "name": "In-Network Insurance & Telehealth",
+          "type": "insurance_badges",
+          "purpose": "Immediate financial reassurance"
+        },
+        {
+          "id": "faq",
+          "name": "Patient Preparation & Hospital Guidelines",
+          "type": "accordion_faq",
+          "purpose": "Admission instructions and visitor hours"
+        }
+      ],
+      "signature_widget": {
+        "name": "Symptom Triage & Physician Scheduling Hub",
+        "type": "medical_scheduler",
+        "props": {
+          "symptom_search": true,
+          "wait_time_counter": "7 mins average wait",
+          "telehealth_toggle": true,
+          "accessible_contrast": "WCAG_AAA_17_TO_1"
+        }
+      },
+      "layout_flavors": [
+        {
+          "flavor_id": "clean_hospital_blue",
+          "name": "Nordic Healthcare Trust",
+          "hero_layout": "split_hero_telehealth",
+          "card_style": "frost_blue_border"
+        },
+        {
+          "flavor_id": "warm_humanist_clinic",
+          "name": "Warm Humanist Clinic",
+          "hero_layout": "approachable_centered",
+          "card_style": "soft_cream_border"
+        },
+        {
+          "flavor_id": "high_precision_medical",
+          "name": "High-Precision Medical Institute",
+          "hero_layout": "dense_triage_hud",
+          "card_style": "crisp_hairline_medical"
+        }
+      ],
+      "ambient_motion": {
+        "type": "calm_stable_lighting",
+        "bg_gradient": "linear-gradient(180deg, oklch(0.98 0.01 220) 0%, oklch(0.95 0.015 220) 100%)",
+        "motion_hint": "solid, zero-flicker calming surfaces designed for anxious patients",
+        "lcp_safe": true
+      },
+      "mock_data": {
+        "en": {
+          "headline": "World-Class Academic Medicine & Compassionate Clinical Care",
+          "subheadline": "Leading specialists, state-of-the-art diagnostic imaging, and seamless in-person and telehealth consultations.",
+          "cta_primary": "Book Immediate Appointment",
+          "cta_secondary": "Find Your Doctor",
+          "metrics": [
+            {
+              "label": "Board Certified Physicians",
+              "value": "350+"
+            },
+            {
+              "label": "Emergency Wait Time",
+              "value": "<10 Mins"
+            },
+            {
+              "label": "Patient Safety Score",
+              "value": "Grade A"
+            }
+          ]
+        },
+        "fa": {
+          "headline": "مرکز تخصصی درمان، پژوهش بالینی و مراقبت دلسوزانه بیمار",
+          "subheadline": "برترین اساتید پزشکی، تجهیزات پیشرفته تصویربرداری و نوبت دهی آنلاین حضوری و تله مدیسین.",
+          "cta_primary": "رزرو آنلاین نوبت ویزیت",
+          "cta_secondary": "جستجوی پزشک متخصص",
+          "metrics": [
+            {
+              "label": "پزشک و جراح فوق تخصص",
+              "value": "+۳۵۰"
+            },
+            {
+              "label": "میانگین انتظار اورژانس",
+              "value": "<۱۰ دقیقه"
+            },
+            {
+              "label": "رتبه ایمنی و کیفیت درمان",
+              "value": "درجه یک A"
+            }
+          ]
+        }
+      }
+    },
+    "education_edtech_lms": {
+      "domain_id": "education_edtech_lms",
+      "theme_bias": "light",
+      "primary_styles": [
+        "clean_stripe",
+        "playful_consumer",
+        "editorial_magazine"
+      ],
+      "section_flow": [
+        {
+          "id": "hero",
+          "name": "Outcome-Driven Learning Hero",
+          "type": "split_learning_hero",
+          "purpose": "Interactive course preview with student graduation proof"
+        },
+        {
+          "id": "signature",
+          "name": "Interactive Syllabus Explorer & Project Canvas",
+          "type": "signature_widget",
+          "purpose": "Collapsible syllabus modules with live coding exercise demo"
+        },
+        {
+          "id": "instructors",
+          "name": "Industry Practitioner Mentors",
+          "type": "mentor_roster",
+          "purpose": "Mentors from Google, Stripe, Apple"
+        },
+        {
+          "id": "outcomes",
+          "name": "Hiring Partners & Career Trajectory",
+          "type": "alumni_salary_grid",
+          "purpose": "Audited salary placement data"
+        },
+        {
+          "id": "pricing",
+          "name": "Flexible Tuition & Scholarship Aid",
+          "type": "tuition_calculator",
+          "purpose": "Monthly installments vs upfront savings"
+        }
+      ],
+      "signature_widget": {
+        "name": "Live Curriculum Module & Exercise Player",
+        "type": "syllabus_player_card",
+        "props": {
+          "module_accordion": true,
+          "interactive_quiz_preview": true,
+          "completion_progress_bar": true,
+          "project_deliverables": [
+            "Production SaaS API",
+            "Custom Design System"
+          ]
+        }
+      },
+      "layout_flavors": [
+        {
+          "flavor_id": "modern_edtech_clean",
+          "name": "Clean Stripe EdTech",
+          "hero_layout": "split_hero_preview",
+          "card_style": "subtle_white_card"
+        },
+        {
+          "flavor_id": "campus_editorial",
+          "name": "Academic Editorial",
+          "hero_layout": "asymmetric_scholar",
+          "card_style": "warm_sand_border"
+        },
+        {
+          "flavor_id": "developer_academy",
+          "name": "Interactive Dev Bootcamp",
+          "hero_layout": "bento_interactive",
+          "card_style": "terminal_light_card"
+        }
+      ],
+      "ambient_motion": {
+        "type": "dynamic_progress_glow",
+        "bg_gradient": "radial-gradient(circle at 50% 0%, oklch(0.97 0.02 260) 0%, oklch(0.98 0.005 260) 100%)",
+        "motion_hint": "fluid progress bars with positive reinforcement micro-animations",
+        "lcp_safe": true
+      },
+      "mock_data": {
+        "en": {
+          "headline": "Master Modern Software Engineering & Systems Architecture",
+          "subheadline": "Project-based curriculum mentored by staff engineers. Build 4 production-grade systems and accelerate your career.",
+          "cta_primary": "Enroll in Next Cohort",
+          "cta_secondary": "Download Full Syllabus",
+          "metrics": [
+            {
+              "label": "Alumni Placement Rate",
+              "value": "94.2%"
+            },
+            {
+              "label": "Average Starting Salary",
+              "value": "$128k"
+            },
+            {
+              "label": "Hiring Partners",
+              "value": "240+"
+            }
+          ]
+        },
+        "fa": {
+          "headline": "آموزش پروژه محور مهندسی نرم افزار و معماری سیستم",
+          "subheadline": "سرفصل های عملی با منتورشیپ مهندسان ارشد صنعت. ساخت ۴ پروژه پروداکشن برای ورود قدرتمند به بازار کار.",
+          "cta_primary": "ثبت نام در دوره جدید",
+          "cta_secondary": "دریافت سرفصل های کامل",
+          "metrics": [
+            {
+              "label": "نرخ استخدام دانش آموختگان",
+              "value": "۹۴.۲٪"
+            },
+            {
+              "label": "میانگین افزایش درآمد",
+              "value": "+۱۴۰٪"
+            },
+            {
+              "label": "شرکت های همکار استخدامی",
+              "value": "+۲۴۰"
+            }
+          ]
+        }
+      }
+    },
+    "creative_portfolio_agency": {
+      "domain_id": "creative_portfolio_agency",
+      "theme_bias": "dark",
+      "primary_styles": [
+        "neobrutalism",
+        "editorial_magazine",
+        "minimal_swiss"
+      ],
+      "section_flow": [
+        {
+          "id": "hero",
+          "name": "Bold Creative Statement & Featured Reel",
+          "type": "bold_statement_hero",
+          "purpose": "High-confidence typographic hook with magnetic cursor attraction"
+        },
+        {
+          "id": "signature",
+          "name": "Case Study Interactive Filter & Gallery",
+          "type": "signature_widget",
+          "purpose": "Asymmetric bento project showcase with tactile hover reveals"
+        },
+        {
+          "id": "services",
+          "name": "Core Capabilities & Engineering Stack",
+          "type": "capabilities_marquee",
+          "purpose": "Brand Identity, Full-Stack Design Systems, 3D WebGL"
+        },
+        {
+          "id": "awards",
+          "name": "Design Honors & Recognition",
+          "type": "award_ticker",
+          "purpose": "Awwwards, FWA, Red Dot historical wins"
+        },
+        {
+          "id": "cta",
+          "name": "Direct Project Inquiries & Pitch Deck",
+          "type": "bold_contact_footer",
+          "purpose": "High-energy conversation starter"
+        }
+      ],
+      "signature_widget": {
+        "name": "Magnetic Bento Project Showcase with Hover Reveal",
+        "type": "magnetic_bento_gallery",
+        "props": {
+          "cursor_magnetic_effect": true,
+          "project_tags": [
+            "Design Systems",
+            "Web3 HUD",
+            "Fintech Mobile",
+            "Editorial"
+          ],
+          "aspect_ratio_matrix": [
+            "span-2",
+            "span-1",
+            "span-1",
+            "span-2"
+          ]
+        }
+      },
+      "layout_flavors": [
+        {
+          "flavor_id": "brutalist_mono_dark",
+          "name": "High-Contrast Neobrutalism",
+          "hero_layout": "bold_editorial_typography",
+          "card_style": "hard_offset_shadow_card"
+        },
+        {
+          "flavor_id": "swiss_minimal_dark",
+          "name": "Swiss High-Contrast Portfolio",
+          "hero_layout": "asymmetric_monochrome",
+          "card_style": "hairline_grid_card"
+        },
+        {
+          "flavor_id": "luxury_creative_atelier",
+          "name": "Dark Luxury Atelier",
+          "hero_layout": "cinematic_staggered",
+          "card_style": "frost_glass_atelier"
+        }
+      ],
+      "ambient_motion": {
+        "type": "spotlight_cursor_bold",
+        "bg_gradient": "radial-gradient(circle at center, oklch(0.18 0.02 280) 0%, oklch(0.10 0.005 280) 100%)",
+        "motion_hint": "tactile cursor spring physics with crisp responsive hover offsets",
+        "lcp_safe": true
+      },
+      "mock_data": {
+        "en": {
+          "headline": "Engineering Brand Chemistry & High-Conversion Digital Flags",
+          "subheadline": "We partner with visionary founders to build category-defining interfaces that convert attention into enterprise value.",
+          "cta_primary": "Initiate New Project",
+          "cta_secondary": "Explore Selected Works",
+          "metrics": [
+            {
+              "label": "Client Valuation Created",
+              "value": "$1.2B+"
+            },
+            {
+              "label": "International Design Awards",
+              "value": "34"
+            },
+            {
+              "label": "Average Conversion Lift",
+              "value": "+42%"
+            }
+          ]
+        },
+        "fa": {
+          "headline": "خلق تجربه های دیجیتال پیشرو و دیزاین سیستم های مقیاس پذیر",
+          "subheadline": "همکاری با برترین برندها برای طراحی محصولاتی که توجه کاربر را به ارزش پایدار تجاری تبدیل می کند.",
+          "cta_primary": "شروع همکاری در پروژه",
+          "cta_secondary": "مشاهده نمونه کارهای منتخب",
+          "metrics": [
+            {
+              "label": "ارزش آفرینی برای مشتریان",
+              "value": "+$۱.۲B"
+            },
+            {
+              "label": "جوایز بین المللی طراحی",
+              "value": "۳۴"
+            },
+            {
+              "label": "میانگین رشد نرخ تبدیل",
+              "value": "+۴۲٪"
+            }
+          ]
+        }
+      }
+    },
+    "ecommerce_luxury_fashion": {
+      "domain_id": "ecommerce_luxury_fashion",
+      "theme_bias": "light",
+      "primary_styles": [
+        "quiet_luxury",
+        "editorial_magazine"
+      ],
+      "section_flow": [
+        {
+          "id": "hero",
+          "name": "Luxury Fashion & Haute Couture Hero Section",
+          "type": "split_hero",
+          "purpose": "Clear value hook and primary conversion action"
+        },
+        {
+          "id": "signature",
+          "name": "Interactive Luxury Fashion & Haute Couture Core Engine",
+          "type": "signature_widget",
+          "purpose": "Engaging interactive widget demonstrating core value"
+        },
+        {
+          "id": "features",
+          "name": "Key Pillars & Architecture",
+          "type": "bento_grid",
+          "purpose": "Modular feature exploration"
+        },
+        {
+          "id": "proof",
+          "name": "Audited Results & Testimonials",
+          "type": "proof_cards",
+          "purpose": "High-trust evidence and social validation"
+        },
+        {
+          "id": "footer",
+          "name": "Complete Navigation & Legal Hub",
+          "type": "standard_footer",
+          "purpose": "Zero-friction secondary discovery"
+        }
+      ],
+      "signature_widget": {
+        "name": "Interactive Luxury Fashion & Haute Couture Showcase",
+        "type": "interactive_tabs_widget",
+        "props": {
+          "interactive": true,
+          "domain": "ecommerce_luxury_fashion"
+        }
+      },
+      "layout_flavors": [
+        {
+          "flavor_id": "ecommerce_luxury_fashion_clean",
+          "name": "Clean Luxury Fashion & Haute Couture",
+          "hero_layout": "split_hero",
+          "card_style": "subtle_card"
+        },
+        {
+          "flavor_id": "ecommerce_luxury_fashion_bento",
+          "name": "Bento Luxury Fashion & Haute Couture",
+          "hero_layout": "asymmetric_bento",
+          "card_style": "modern_bento_card"
+        },
+        {
+          "flavor_id": "ecommerce_luxury_fashion_bold",
+          "name": "Bold Luxury Fashion & Haute Couture",
+          "hero_layout": "bold_centered",
+          "card_style": "contrast_border_card"
+        }
+      ],
+      "ambient_motion": {
+        "type": "subtle_gradient_wash",
+        "bg_gradient": "linear-gradient(180deg, oklch(0.98 0.005 240) 0%, oklch(0.94 0.01 240) 100%)",
+        "motion_hint": "subtle stagger and zero-lag CSS transitions",
+        "lcp_safe": true
+      },
+      "mock_data": {
+        "en": {
+          "headline": "Next-Generation Luxury Fashion & Haute Couture Platform",
+          "subheadline": "Engineered for reliability, velocity, and seamless user experience.",
+          "cta_primary": "Get Started Immediately",
+          "cta_secondary": "Explore Live Demo",
+          "metrics": [
+            {
+              "label": "Active Users",
+              "value": "100k+"
+            },
+            {
+              "label": "Uptime",
+              "value": "99.99%"
+            },
+            {
+              "label": "Customer Rating",
+              "value": "4.9/5"
+            }
+          ]
+        },
+        "fa": {
+          "headline": "پلتفرم پیشرفته Luxury Fashion & Haute Couture",
+          "subheadline": "طراحی شده برای پایداری، سرعت و تجربه کاربری روان و متمایز.",
+          "cta_primary": "شروع آنی و رایگان",
+          "cta_secondary": "مشاهده دموی تعاملی",
+          "metrics": [
+            {
+              "label": "کاربران فعال",
+              "value": "+۱۰۰ هزار"
+            },
+            {
+              "label": "پایداری سیستم",
+              "value": "۹۹.۹۹٪"
+            },
+            {
+              "label": "رضایت مندی",
+              "value": "۴.۹ از ۵"
+            }
+          ]
+        }
+      }
+    },
+    "ecommerce_mass_market": {
+      "domain_id": "ecommerce_mass_market",
+      "theme_bias": "light",
+      "primary_styles": [
+        "clean_stripe",
+        "playful_consumer"
+      ],
+      "section_flow": [
+        {
+          "id": "hero",
+          "name": "High-Volume Consumer Commerce Hero Section",
+          "type": "split_hero",
+          "purpose": "Clear value hook and primary conversion action"
+        },
+        {
+          "id": "signature",
+          "name": "Interactive High-Volume Consumer Commerce Core Engine",
+          "type": "signature_widget",
+          "purpose": "Engaging interactive widget demonstrating core value"
+        },
+        {
+          "id": "features",
+          "name": "Key Pillars & Architecture",
+          "type": "bento_grid",
+          "purpose": "Modular feature exploration"
+        },
+        {
+          "id": "proof",
+          "name": "Audited Results & Testimonials",
+          "type": "proof_cards",
+          "purpose": "High-trust evidence and social validation"
+        },
+        {
+          "id": "footer",
+          "name": "Complete Navigation & Legal Hub",
+          "type": "standard_footer",
+          "purpose": "Zero-friction secondary discovery"
+        }
+      ],
+      "signature_widget": {
+        "name": "Interactive High-Volume Consumer Commerce Showcase",
+        "type": "interactive_tabs_widget",
+        "props": {
+          "interactive": true,
+          "domain": "ecommerce_mass_market"
+        }
+      },
+      "layout_flavors": [
+        {
+          "flavor_id": "ecommerce_mass_market_clean",
+          "name": "Clean High-Volume Consumer Commerce",
+          "hero_layout": "split_hero",
+          "card_style": "subtle_card"
+        },
+        {
+          "flavor_id": "ecommerce_mass_market_bento",
+          "name": "Bento High-Volume Consumer Commerce",
+          "hero_layout": "asymmetric_bento",
+          "card_style": "modern_bento_card"
+        },
+        {
+          "flavor_id": "ecommerce_mass_market_bold",
+          "name": "Bold High-Volume Consumer Commerce",
+          "hero_layout": "bold_centered",
+          "card_style": "contrast_border_card"
+        }
+      ],
+      "ambient_motion": {
+        "type": "subtle_gradient_wash",
+        "bg_gradient": "linear-gradient(180deg, oklch(0.98 0.005 240) 0%, oklch(0.94 0.01 240) 100%)",
+        "motion_hint": "subtle stagger and zero-lag CSS transitions",
+        "lcp_safe": true
+      },
+      "mock_data": {
+        "en": {
+          "headline": "Next-Generation High-Volume Consumer Commerce Platform",
+          "subheadline": "Engineered for reliability, velocity, and seamless user experience.",
+          "cta_primary": "Get Started Immediately",
+          "cta_secondary": "Explore Live Demo",
+          "metrics": [
+            {
+              "label": "Active Users",
+              "value": "100k+"
+            },
+            {
+              "label": "Uptime",
+              "value": "99.99%"
+            },
+            {
+              "label": "Customer Rating",
+              "value": "4.9/5"
+            }
+          ]
+        },
+        "fa": {
+          "headline": "پلتفرم پیشرفته High-Volume Consumer Commerce",
+          "subheadline": "طراحی شده برای پایداری، سرعت و تجربه کاربری روان و متمایز.",
+          "cta_primary": "شروع آنی و رایگان",
+          "cta_secondary": "مشاهده دموی تعاملی",
+          "metrics": [
+            {
+              "label": "کاربران فعال",
+              "value": "+۱۰۰ هزار"
+            },
+            {
+              "label": "پایداری سیستم",
+              "value": "۹۹.۹۹٪"
+            },
+            {
+              "label": "رضایت مندی",
+              "value": "۴.۹ از ۵"
+            }
+          ]
+        }
+      }
+    },
+    "media_editorial_magazine": {
+      "domain_id": "media_editorial_magazine",
+      "theme_bias": "light",
+      "primary_styles": [
+        "editorial_magazine",
+        "minimal_swiss"
+      ],
+      "section_flow": [
+        {
+          "id": "hero",
+          "name": "Journalism, Cultural Essays & Magazine Hero Section",
+          "type": "split_hero",
+          "purpose": "Clear value hook and primary conversion action"
+        },
+        {
+          "id": "signature",
+          "name": "Interactive Journalism, Cultural Essays & Magazine Core Engine",
+          "type": "signature_widget",
+          "purpose": "Engaging interactive widget demonstrating core value"
+        },
+        {
+          "id": "features",
+          "name": "Key Pillars & Architecture",
+          "type": "bento_grid",
+          "purpose": "Modular feature exploration"
+        },
+        {
+          "id": "proof",
+          "name": "Audited Results & Testimonials",
+          "type": "proof_cards",
+          "purpose": "High-trust evidence and social validation"
+        },
+        {
+          "id": "footer",
+          "name": "Complete Navigation & Legal Hub",
+          "type": "standard_footer",
+          "purpose": "Zero-friction secondary discovery"
+        }
+      ],
+      "signature_widget": {
+        "name": "Interactive Journalism, Cultural Essays & Magazine Showcase",
+        "type": "interactive_tabs_widget",
+        "props": {
+          "interactive": true,
+          "domain": "media_editorial_magazine"
+        }
+      },
+      "layout_flavors": [
+        {
+          "flavor_id": "media_editorial_magazine_clean",
+          "name": "Clean Journalism, Cultural Essays & Magazine",
+          "hero_layout": "split_hero",
+          "card_style": "subtle_card"
+        },
+        {
+          "flavor_id": "media_editorial_magazine_bento",
+          "name": "Bento Journalism, Cultural Essays & Magazine",
+          "hero_layout": "asymmetric_bento",
+          "card_style": "modern_bento_card"
+        },
+        {
+          "flavor_id": "media_editorial_magazine_bold",
+          "name": "Bold Journalism, Cultural Essays & Magazine",
+          "hero_layout": "bold_centered",
+          "card_style": "contrast_border_card"
+        }
+      ],
+      "ambient_motion": {
+        "type": "subtle_gradient_wash",
+        "bg_gradient": "linear-gradient(180deg, oklch(0.98 0.005 240) 0%, oklch(0.94 0.01 240) 100%)",
+        "motion_hint": "subtle stagger and zero-lag CSS transitions",
+        "lcp_safe": true
+      },
+      "mock_data": {
+        "en": {
+          "headline": "Next-Generation Journalism, Cultural Essays & Magazine Platform",
+          "subheadline": "Engineered for reliability, velocity, and seamless user experience.",
+          "cta_primary": "Get Started Immediately",
+          "cta_secondary": "Explore Live Demo",
+          "metrics": [
+            {
+              "label": "Active Users",
+              "value": "100k+"
+            },
+            {
+              "label": "Uptime",
+              "value": "99.99%"
+            },
+            {
+              "label": "Customer Rating",
+              "value": "4.9/5"
+            }
+          ]
+        },
+        "fa": {
+          "headline": "پلتفرم پیشرفته Journalism, Cultural Essays & Magazine",
+          "subheadline": "طراحی شده برای پایداری، سرعت و تجربه کاربری روان و متمایز.",
+          "cta_primary": "شروع آنی و رایگان",
+          "cta_secondary": "مشاهده دموی تعاملی",
+          "metrics": [
+            {
+              "label": "کاربران فعال",
+              "value": "+۱۰۰ هزار"
+            },
+            {
+              "label": "پایداری سیستم",
+              "value": "۹۹.۹۹٪"
+            },
+            {
+              "label": "رضایت مندی",
+              "value": "۴.۹ از ۵"
+            }
+          ]
+        }
+      }
+    },
+    "travel_hospitality_tourism": {
+      "domain_id": "travel_hospitality_tourism",
+      "theme_bias": "light",
+      "primary_styles": [
+        "editorial_magazine",
+        "quiet_luxury"
+      ],
+      "section_flow": [
+        {
+          "id": "hero",
+          "name": "Boutique Hospitality & Expedition Booking Hero Section",
+          "type": "split_hero",
+          "purpose": "Clear value hook and primary conversion action"
+        },
+        {
+          "id": "signature",
+          "name": "Interactive Boutique Hospitality & Expedition Booking Core Engine",
+          "type": "signature_widget",
+          "purpose": "Engaging interactive widget demonstrating core value"
+        },
+        {
+          "id": "features",
+          "name": "Key Pillars & Architecture",
+          "type": "bento_grid",
+          "purpose": "Modular feature exploration"
+        },
+        {
+          "id": "proof",
+          "name": "Audited Results & Testimonials",
+          "type": "proof_cards",
+          "purpose": "High-trust evidence and social validation"
+        },
+        {
+          "id": "footer",
+          "name": "Complete Navigation & Legal Hub",
+          "type": "standard_footer",
+          "purpose": "Zero-friction secondary discovery"
+        }
+      ],
+      "signature_widget": {
+        "name": "Interactive Boutique Hospitality & Expedition Booking Showcase",
+        "type": "interactive_tabs_widget",
+        "props": {
+          "interactive": true,
+          "domain": "travel_hospitality_tourism"
+        }
+      },
+      "layout_flavors": [
+        {
+          "flavor_id": "travel_hospitality_tourism_clean",
+          "name": "Clean Boutique Hospitality & Expedition Booking",
+          "hero_layout": "split_hero",
+          "card_style": "subtle_card"
+        },
+        {
+          "flavor_id": "travel_hospitality_tourism_bento",
+          "name": "Bento Boutique Hospitality & Expedition Booking",
+          "hero_layout": "asymmetric_bento",
+          "card_style": "modern_bento_card"
+        },
+        {
+          "flavor_id": "travel_hospitality_tourism_bold",
+          "name": "Bold Boutique Hospitality & Expedition Booking",
+          "hero_layout": "bold_centered",
+          "card_style": "contrast_border_card"
+        }
+      ],
+      "ambient_motion": {
+        "type": "subtle_gradient_wash",
+        "bg_gradient": "linear-gradient(180deg, oklch(0.98 0.005 240) 0%, oklch(0.94 0.01 240) 100%)",
+        "motion_hint": "subtle stagger and zero-lag CSS transitions",
+        "lcp_safe": true
+      },
+      "mock_data": {
+        "en": {
+          "headline": "Next-Generation Boutique Hospitality & Expedition Booking Platform",
+          "subheadline": "Engineered for reliability, velocity, and seamless user experience.",
+          "cta_primary": "Get Started Immediately",
+          "cta_secondary": "Explore Live Demo",
+          "metrics": [
+            {
+              "label": "Active Users",
+              "value": "100k+"
+            },
+            {
+              "label": "Uptime",
+              "value": "99.99%"
+            },
+            {
+              "label": "Customer Rating",
+              "value": "4.9/5"
+            }
+          ]
+        },
+        "fa": {
+          "headline": "پلتفرم پیشرفته Boutique Hospitality & Expedition Booking",
+          "subheadline": "طراحی شده برای پایداری، سرعت و تجربه کاربری روان و متمایز.",
+          "cta_primary": "شروع آنی و رایگان",
+          "cta_secondary": "مشاهده دموی تعاملی",
+          "metrics": [
+            {
+              "label": "کاربران فعال",
+              "value": "+۱۰۰ هزار"
+            },
+            {
+              "label": "پایداری سیستم",
+              "value": "۹۹.۹۹٪"
+            },
+            {
+              "label": "رضایت مندی",
+              "value": "۴.۹ از ۵"
+            }
+          ]
+        }
+      }
+    },
+    "legal_compliance_law": {
+      "domain_id": "legal_compliance_law",
+      "theme_bias": "light",
+      "primary_styles": [
+        "minimal_swiss",
+        "clean_stripe"
+      ],
+      "section_flow": [
+        {
+          "id": "hero",
+          "name": "Corporate Law & Regulatory Compliance Hero Section",
+          "type": "split_hero",
+          "purpose": "Clear value hook and primary conversion action"
+        },
+        {
+          "id": "signature",
+          "name": "Interactive Corporate Law & Regulatory Compliance Core Engine",
+          "type": "signature_widget",
+          "purpose": "Engaging interactive widget demonstrating core value"
+        },
+        {
+          "id": "features",
+          "name": "Key Pillars & Architecture",
+          "type": "bento_grid",
+          "purpose": "Modular feature exploration"
+        },
+        {
+          "id": "proof",
+          "name": "Audited Results & Testimonials",
+          "type": "proof_cards",
+          "purpose": "High-trust evidence and social validation"
+        },
+        {
+          "id": "footer",
+          "name": "Complete Navigation & Legal Hub",
+          "type": "standard_footer",
+          "purpose": "Zero-friction secondary discovery"
+        }
+      ],
+      "signature_widget": {
+        "name": "Interactive Corporate Law & Regulatory Compliance Showcase",
+        "type": "interactive_tabs_widget",
+        "props": {
+          "interactive": true,
+          "domain": "legal_compliance_law"
+        }
+      },
+      "layout_flavors": [
+        {
+          "flavor_id": "legal_compliance_law_clean",
+          "name": "Clean Corporate Law & Regulatory Compliance",
+          "hero_layout": "split_hero",
+          "card_style": "subtle_card"
+        },
+        {
+          "flavor_id": "legal_compliance_law_bento",
+          "name": "Bento Corporate Law & Regulatory Compliance",
+          "hero_layout": "asymmetric_bento",
+          "card_style": "modern_bento_card"
+        },
+        {
+          "flavor_id": "legal_compliance_law_bold",
+          "name": "Bold Corporate Law & Regulatory Compliance",
+          "hero_layout": "bold_centered",
+          "card_style": "contrast_border_card"
+        }
+      ],
+      "ambient_motion": {
+        "type": "subtle_gradient_wash",
+        "bg_gradient": "linear-gradient(180deg, oklch(0.98 0.005 240) 0%, oklch(0.94 0.01 240) 100%)",
+        "motion_hint": "subtle stagger and zero-lag CSS transitions",
+        "lcp_safe": true
+      },
+      "mock_data": {
+        "en": {
+          "headline": "Next-Generation Corporate Law & Regulatory Compliance Platform",
+          "subheadline": "Engineered for reliability, velocity, and seamless user experience.",
+          "cta_primary": "Get Started Immediately",
+          "cta_secondary": "Explore Live Demo",
+          "metrics": [
+            {
+              "label": "Active Users",
+              "value": "100k+"
+            },
+            {
+              "label": "Uptime",
+              "value": "99.99%"
+            },
+            {
+              "label": "Customer Rating",
+              "value": "4.9/5"
+            }
+          ]
+        },
+        "fa": {
+          "headline": "پلتفرم پیشرفته Corporate Law & Regulatory Compliance",
+          "subheadline": "طراحی شده برای پایداری، سرعت و تجربه کاربری روان و متمایز.",
+          "cta_primary": "شروع آنی و رایگان",
+          "cta_secondary": "مشاهده دموی تعاملی",
+          "metrics": [
+            {
+              "label": "کاربران فعال",
+              "value": "+۱۰۰ هزار"
+            },
+            {
+              "label": "پایداری سیستم",
+              "value": "۹۹.۹۹٪"
+            },
+            {
+              "label": "رضایت مندی",
+              "value": "۴.۹ از ۵"
+            }
+          ]
+        }
+      }
+    },
+    "gaming_entertainment_streaming": {
+      "domain_id": "gaming_entertainment_streaming",
+      "theme_bias": "dark",
+      "primary_styles": [
+        "linear_dark",
+        "modern_glass_2"
+      ],
+      "section_flow": [
+        {
+          "id": "hero",
+          "name": "Next-Gen Gaming Guild & Streaming Hub Hero Section",
+          "type": "split_hero",
+          "purpose": "Clear value hook and primary conversion action"
+        },
+        {
+          "id": "signature",
+          "name": "Interactive Next-Gen Gaming Guild & Streaming Hub Core Engine",
+          "type": "signature_widget",
+          "purpose": "Engaging interactive widget demonstrating core value"
+        },
+        {
+          "id": "features",
+          "name": "Key Pillars & Architecture",
+          "type": "bento_grid",
+          "purpose": "Modular feature exploration"
+        },
+        {
+          "id": "proof",
+          "name": "Audited Results & Testimonials",
+          "type": "proof_cards",
+          "purpose": "High-trust evidence and social validation"
+        },
+        {
+          "id": "footer",
+          "name": "Complete Navigation & Legal Hub",
+          "type": "standard_footer",
+          "purpose": "Zero-friction secondary discovery"
+        }
+      ],
+      "signature_widget": {
+        "name": "Interactive Next-Gen Gaming Guild & Streaming Hub Showcase",
+        "type": "interactive_tabs_widget",
+        "props": {
+          "interactive": true,
+          "domain": "gaming_entertainment_streaming"
+        }
+      },
+      "layout_flavors": [
+        {
+          "flavor_id": "gaming_entertainment_streaming_clean",
+          "name": "Clean Next-Gen Gaming Guild & Streaming Hub",
+          "hero_layout": "split_hero",
+          "card_style": "subtle_card"
+        },
+        {
+          "flavor_id": "gaming_entertainment_streaming_bento",
+          "name": "Bento Next-Gen Gaming Guild & Streaming Hub",
+          "hero_layout": "asymmetric_bento",
+          "card_style": "modern_bento_card"
+        },
+        {
+          "flavor_id": "gaming_entertainment_streaming_bold",
+          "name": "Bold Next-Gen Gaming Guild & Streaming Hub",
+          "hero_layout": "bold_centered",
+          "card_style": "contrast_border_card"
+        }
+      ],
+      "ambient_motion": {
+        "type": "subtle_gradient_wash",
+        "bg_gradient": "linear-gradient(180deg, oklch(0.16 0.01 240) 0%, oklch(0.10 0.005 240) 100%)",
+        "motion_hint": "subtle stagger and zero-lag CSS transitions",
+        "lcp_safe": true
+      },
+      "mock_data": {
+        "en": {
+          "headline": "Next-Generation Next-Gen Gaming Guild & Streaming Hub Platform",
+          "subheadline": "Engineered for reliability, velocity, and seamless user experience.",
+          "cta_primary": "Get Started Immediately",
+          "cta_secondary": "Explore Live Demo",
+          "metrics": [
+            {
+              "label": "Active Users",
+              "value": "100k+"
+            },
+            {
+              "label": "Uptime",
+              "value": "99.99%"
+            },
+            {
+              "label": "Customer Rating",
+              "value": "4.9/5"
+            }
+          ]
+        },
+        "fa": {
+          "headline": "پلتفرم پیشرفته Next-Gen Gaming Guild & Streaming Hub",
+          "subheadline": "طراحی شده برای پایداری، سرعت و تجربه کاربری روان و متمایز.",
+          "cta_primary": "شروع آنی و رایگان",
+          "cta_secondary": "مشاهده دموی تعاملی",
+          "metrics": [
+            {
+              "label": "کاربران فعال",
+              "value": "+۱۰۰ هزار"
+            },
+            {
+              "label": "پایداری سیستم",
+              "value": "۹۹.۹۹٪"
+            },
+            {
+              "label": "رضایت مندی",
+              "value": "۴.۹ از ۵"
+            }
+          ]
+        }
+      }
+    },
+    "automotive_ev_mobility": {
+      "domain_id": "automotive_ev_mobility",
+      "theme_bias": "dark",
+      "primary_styles": [
+        "linear_dark",
+        "clean_stripe"
+      ],
+      "section_flow": [
+        {
+          "id": "hero",
+          "name": "EV Mobility & Autonomous Vehicle Fleet Hero Section",
+          "type": "split_hero",
+          "purpose": "Clear value hook and primary conversion action"
+        },
+        {
+          "id": "signature",
+          "name": "Interactive EV Mobility & Autonomous Vehicle Fleet Core Engine",
+          "type": "signature_widget",
+          "purpose": "Engaging interactive widget demonstrating core value"
+        },
+        {
+          "id": "features",
+          "name": "Key Pillars & Architecture",
+          "type": "bento_grid",
+          "purpose": "Modular feature exploration"
+        },
+        {
+          "id": "proof",
+          "name": "Audited Results & Testimonials",
+          "type": "proof_cards",
+          "purpose": "High-trust evidence and social validation"
+        },
+        {
+          "id": "footer",
+          "name": "Complete Navigation & Legal Hub",
+          "type": "standard_footer",
+          "purpose": "Zero-friction secondary discovery"
+        }
+      ],
+      "signature_widget": {
+        "name": "Interactive EV Mobility & Autonomous Vehicle Fleet Showcase",
+        "type": "interactive_tabs_widget",
+        "props": {
+          "interactive": true,
+          "domain": "automotive_ev_mobility"
+        }
+      },
+      "layout_flavors": [
+        {
+          "flavor_id": "automotive_ev_mobility_clean",
+          "name": "Clean EV Mobility & Autonomous Vehicle Fleet",
+          "hero_layout": "split_hero",
+          "card_style": "subtle_card"
+        },
+        {
+          "flavor_id": "automotive_ev_mobility_bento",
+          "name": "Bento EV Mobility & Autonomous Vehicle Fleet",
+          "hero_layout": "asymmetric_bento",
+          "card_style": "modern_bento_card"
+        },
+        {
+          "flavor_id": "automotive_ev_mobility_bold",
+          "name": "Bold EV Mobility & Autonomous Vehicle Fleet",
+          "hero_layout": "bold_centered",
+          "card_style": "contrast_border_card"
+        }
+      ],
+      "ambient_motion": {
+        "type": "subtle_gradient_wash",
+        "bg_gradient": "linear-gradient(180deg, oklch(0.16 0.01 240) 0%, oklch(0.10 0.005 240) 100%)",
+        "motion_hint": "subtle stagger and zero-lag CSS transitions",
+        "lcp_safe": true
+      },
+      "mock_data": {
+        "en": {
+          "headline": "Next-Generation EV Mobility & Autonomous Vehicle Fleet Platform",
+          "subheadline": "Engineered for reliability, velocity, and seamless user experience.",
+          "cta_primary": "Get Started Immediately",
+          "cta_secondary": "Explore Live Demo",
+          "metrics": [
+            {
+              "label": "Active Users",
+              "value": "100k+"
+            },
+            {
+              "label": "Uptime",
+              "value": "99.99%"
+            },
+            {
+              "label": "Customer Rating",
+              "value": "4.9/5"
+            }
+          ]
+        },
+        "fa": {
+          "headline": "پلتفرم پیشرفته EV Mobility & Autonomous Vehicle Fleet",
+          "subheadline": "طراحی شده برای پایداری، سرعت و تجربه کاربری روان و متمایز.",
+          "cta_primary": "شروع آنی و رایگان",
+          "cta_secondary": "مشاهده دموی تعاملی",
+          "metrics": [
+            {
+              "label": "کاربران فعال",
+              "value": "+۱۰۰ هزار"
+            },
+            {
+              "label": "پایداری سیستم",
+              "value": "۹۹.۹۹٪"
+            },
+            {
+              "label": "رضایت مندی",
+              "value": "۴.۹ از ۵"
+            }
+          ]
+        }
+      }
+    },
+    "logistics_supply_chain": {
+      "domain_id": "logistics_supply_chain",
+      "theme_bias": "light",
+      "primary_styles": [
+        "clean_stripe",
+        "minimal_swiss"
+      ],
+      "section_flow": [
+        {
+          "id": "hero",
+          "name": "Global Freight & Predictive Logistics Hero Section",
+          "type": "split_hero",
+          "purpose": "Clear value hook and primary conversion action"
+        },
+        {
+          "id": "signature",
+          "name": "Interactive Global Freight & Predictive Logistics Core Engine",
+          "type": "signature_widget",
+          "purpose": "Engaging interactive widget demonstrating core value"
+        },
+        {
+          "id": "features",
+          "name": "Key Pillars & Architecture",
+          "type": "bento_grid",
+          "purpose": "Modular feature exploration"
+        },
+        {
+          "id": "proof",
+          "name": "Audited Results & Testimonials",
+          "type": "proof_cards",
+          "purpose": "High-trust evidence and social validation"
+        },
+        {
+          "id": "footer",
+          "name": "Complete Navigation & Legal Hub",
+          "type": "standard_footer",
+          "purpose": "Zero-friction secondary discovery"
+        }
+      ],
+      "signature_widget": {
+        "name": "Interactive Global Freight & Predictive Logistics Showcase",
+        "type": "interactive_tabs_widget",
+        "props": {
+          "interactive": true,
+          "domain": "logistics_supply_chain"
+        }
+      },
+      "layout_flavors": [
+        {
+          "flavor_id": "logistics_supply_chain_clean",
+          "name": "Clean Global Freight & Predictive Logistics",
+          "hero_layout": "split_hero",
+          "card_style": "subtle_card"
+        },
+        {
+          "flavor_id": "logistics_supply_chain_bento",
+          "name": "Bento Global Freight & Predictive Logistics",
+          "hero_layout": "asymmetric_bento",
+          "card_style": "modern_bento_card"
+        },
+        {
+          "flavor_id": "logistics_supply_chain_bold",
+          "name": "Bold Global Freight & Predictive Logistics",
+          "hero_layout": "bold_centered",
+          "card_style": "contrast_border_card"
+        }
+      ],
+      "ambient_motion": {
+        "type": "subtle_gradient_wash",
+        "bg_gradient": "linear-gradient(180deg, oklch(0.98 0.005 240) 0%, oklch(0.94 0.01 240) 100%)",
+        "motion_hint": "subtle stagger and zero-lag CSS transitions",
+        "lcp_safe": true
+      },
+      "mock_data": {
+        "en": {
+          "headline": "Next-Generation Global Freight & Predictive Logistics Platform",
+          "subheadline": "Engineered for reliability, velocity, and seamless user experience.",
+          "cta_primary": "Get Started Immediately",
+          "cta_secondary": "Explore Live Demo",
+          "metrics": [
+            {
+              "label": "Active Users",
+              "value": "100k+"
+            },
+            {
+              "label": "Uptime",
+              "value": "99.99%"
+            },
+            {
+              "label": "Customer Rating",
+              "value": "4.9/5"
+            }
+          ]
+        },
+        "fa": {
+          "headline": "پلتفرم پیشرفته Global Freight & Predictive Logistics",
+          "subheadline": "طراحی شده برای پایداری، سرعت و تجربه کاربری روان و متمایز.",
+          "cta_primary": "شروع آنی و رایگان",
+          "cta_secondary": "مشاهده دموی تعاملی",
+          "metrics": [
+            {
+              "label": "کاربران فعال",
+              "value": "+۱۰۰ هزار"
+            },
+            {
+              "label": "پایداری سیستم",
+              "value": "۹۹.۹۹٪"
+            },
+            {
+              "label": "رضایت مندی",
+              "value": "۴.۹ از ۵"
+            }
+          ]
+        }
+      }
+    },
+    "energy_greentech_sustainability": {
+      "domain_id": "energy_greentech_sustainability",
+      "theme_bias": "light",
+      "primary_styles": [
+        "clean_stripe",
+        "soft_humanist"
+      ],
+      "section_flow": [
+        {
+          "id": "hero",
+          "name": "Clean Energy Grid & Carbon Accounting Hero Section",
+          "type": "split_hero",
+          "purpose": "Clear value hook and primary conversion action"
+        },
+        {
+          "id": "signature",
+          "name": "Interactive Clean Energy Grid & Carbon Accounting Core Engine",
+          "type": "signature_widget",
+          "purpose": "Engaging interactive widget demonstrating core value"
+        },
+        {
+          "id": "features",
+          "name": "Key Pillars & Architecture",
+          "type": "bento_grid",
+          "purpose": "Modular feature exploration"
+        },
+        {
+          "id": "proof",
+          "name": "Audited Results & Testimonials",
+          "type": "proof_cards",
+          "purpose": "High-trust evidence and social validation"
+        },
+        {
+          "id": "footer",
+          "name": "Complete Navigation & Legal Hub",
+          "type": "standard_footer",
+          "purpose": "Zero-friction secondary discovery"
+        }
+      ],
+      "signature_widget": {
+        "name": "Interactive Clean Energy Grid & Carbon Accounting Showcase",
+        "type": "interactive_tabs_widget",
+        "props": {
+          "interactive": true,
+          "domain": "energy_greentech_sustainability"
+        }
+      },
+      "layout_flavors": [
+        {
+          "flavor_id": "energy_greentech_sustainability_clean",
+          "name": "Clean Clean Energy Grid & Carbon Accounting",
+          "hero_layout": "split_hero",
+          "card_style": "subtle_card"
+        },
+        {
+          "flavor_id": "energy_greentech_sustainability_bento",
+          "name": "Bento Clean Energy Grid & Carbon Accounting",
+          "hero_layout": "asymmetric_bento",
+          "card_style": "modern_bento_card"
+        },
+        {
+          "flavor_id": "energy_greentech_sustainability_bold",
+          "name": "Bold Clean Energy Grid & Carbon Accounting",
+          "hero_layout": "bold_centered",
+          "card_style": "contrast_border_card"
+        }
+      ],
+      "ambient_motion": {
+        "type": "subtle_gradient_wash",
+        "bg_gradient": "linear-gradient(180deg, oklch(0.98 0.005 240) 0%, oklch(0.94 0.01 240) 100%)",
+        "motion_hint": "subtle stagger and zero-lag CSS transitions",
+        "lcp_safe": true
+      },
+      "mock_data": {
+        "en": {
+          "headline": "Next-Generation Clean Energy Grid & Carbon Accounting Platform",
+          "subheadline": "Engineered for reliability, velocity, and seamless user experience.",
+          "cta_primary": "Get Started Immediately",
+          "cta_secondary": "Explore Live Demo",
+          "metrics": [
+            {
+              "label": "Active Users",
+              "value": "100k+"
+            },
+            {
+              "label": "Uptime",
+              "value": "99.99%"
+            },
+            {
+              "label": "Customer Rating",
+              "value": "4.9/5"
+            }
+          ]
+        },
+        "fa": {
+          "headline": "پلتفرم پیشرفته Clean Energy Grid & Carbon Accounting",
+          "subheadline": "طراحی شده برای پایداری، سرعت و تجربه کاربری روان و متمایز.",
+          "cta_primary": "شروع آنی و رایگان",
+          "cta_secondary": "مشاهده دموی تعاملی",
+          "metrics": [
+            {
+              "label": "کاربران فعال",
+              "value": "+۱۰۰ هزار"
+            },
+            {
+              "label": "پایداری سیستم",
+              "value": "۹۹.۹۹٪"
+            },
+            {
+              "label": "رضایت مندی",
+              "value": "۴.۹ از ۵"
+            }
+          ]
+        }
+      }
+    },
+    "nonprofit_charity_social": {
+      "domain_id": "nonprofit_charity_social",
+      "theme_bias": "light",
+      "primary_styles": [
+        "soft_humanist",
+        "editorial_magazine"
+      ],
+      "section_flow": [
+        {
+          "id": "hero",
+          "name": "Direct Social Impact & Philanthropy Hero Section",
+          "type": "split_hero",
+          "purpose": "Clear value hook and primary conversion action"
+        },
+        {
+          "id": "signature",
+          "name": "Interactive Direct Social Impact & Philanthropy Core Engine",
+          "type": "signature_widget",
+          "purpose": "Engaging interactive widget demonstrating core value"
+        },
+        {
+          "id": "features",
+          "name": "Key Pillars & Architecture",
+          "type": "bento_grid",
+          "purpose": "Modular feature exploration"
+        },
+        {
+          "id": "proof",
+          "name": "Audited Results & Testimonials",
+          "type": "proof_cards",
+          "purpose": "High-trust evidence and social validation"
+        },
+        {
+          "id": "footer",
+          "name": "Complete Navigation & Legal Hub",
+          "type": "standard_footer",
+          "purpose": "Zero-friction secondary discovery"
+        }
+      ],
+      "signature_widget": {
+        "name": "Interactive Direct Social Impact & Philanthropy Showcase",
+        "type": "interactive_tabs_widget",
+        "props": {
+          "interactive": true,
+          "domain": "nonprofit_charity_social"
+        }
+      },
+      "layout_flavors": [
+        {
+          "flavor_id": "nonprofit_charity_social_clean",
+          "name": "Clean Direct Social Impact & Philanthropy",
+          "hero_layout": "split_hero",
+          "card_style": "subtle_card"
+        },
+        {
+          "flavor_id": "nonprofit_charity_social_bento",
+          "name": "Bento Direct Social Impact & Philanthropy",
+          "hero_layout": "asymmetric_bento",
+          "card_style": "modern_bento_card"
+        },
+        {
+          "flavor_id": "nonprofit_charity_social_bold",
+          "name": "Bold Direct Social Impact & Philanthropy",
+          "hero_layout": "bold_centered",
+          "card_style": "contrast_border_card"
+        }
+      ],
+      "ambient_motion": {
+        "type": "subtle_gradient_wash",
+        "bg_gradient": "linear-gradient(180deg, oklch(0.98 0.005 240) 0%, oklch(0.94 0.01 240) 100%)",
+        "motion_hint": "subtle stagger and zero-lag CSS transitions",
+        "lcp_safe": true
+      },
+      "mock_data": {
+        "en": {
+          "headline": "Next-Generation Direct Social Impact & Philanthropy Platform",
+          "subheadline": "Engineered for reliability, velocity, and seamless user experience.",
+          "cta_primary": "Get Started Immediately",
+          "cta_secondary": "Explore Live Demo",
+          "metrics": [
+            {
+              "label": "Active Users",
+              "value": "100k+"
+            },
+            {
+              "label": "Uptime",
+              "value": "99.99%"
+            },
+            {
+              "label": "Customer Rating",
+              "value": "4.9/5"
+            }
+          ]
+        },
+        "fa": {
+          "headline": "پلتفرم پیشرفته Direct Social Impact & Philanthropy",
+          "subheadline": "طراحی شده برای پایداری، سرعت و تجربه کاربری روان و متمایز.",
+          "cta_primary": "شروع آنی و رایگان",
+          "cta_secondary": "مشاهده دموی تعاملی",
+          "metrics": [
+            {
+              "label": "کاربران فعال",
+              "value": "+۱۰۰ هزار"
+            },
+            {
+              "label": "پایداری سیستم",
+              "value": "۹۹.۹۹٪"
+            },
+            {
+              "label": "رضایت مندی",
+              "value": "۴.۹ از ۵"
+            }
+          ]
+        }
+      }
+    },
+    "personal_branding_creator": {
+      "domain_id": "personal_branding_creator",
+      "theme_bias": "dark",
+      "primary_styles": [
+        "neobrutalism",
+        "linear_dark"
+      ],
+      "section_flow": [
+        {
+          "id": "hero",
+          "name": "Creator Economy & Thought Leadership Hero Section",
+          "type": "split_hero",
+          "purpose": "Clear value hook and primary conversion action"
+        },
+        {
+          "id": "signature",
+          "name": "Interactive Creator Economy & Thought Leadership Core Engine",
+          "type": "signature_widget",
+          "purpose": "Engaging interactive widget demonstrating core value"
+        },
+        {
+          "id": "features",
+          "name": "Key Pillars & Architecture",
+          "type": "bento_grid",
+          "purpose": "Modular feature exploration"
+        },
+        {
+          "id": "proof",
+          "name": "Audited Results & Testimonials",
+          "type": "proof_cards",
+          "purpose": "High-trust evidence and social validation"
+        },
+        {
+          "id": "footer",
+          "name": "Complete Navigation & Legal Hub",
+          "type": "standard_footer",
+          "purpose": "Zero-friction secondary discovery"
+        }
+      ],
+      "signature_widget": {
+        "name": "Interactive Creator Economy & Thought Leadership Showcase",
+        "type": "interactive_tabs_widget",
+        "props": {
+          "interactive": true,
+          "domain": "personal_branding_creator"
+        }
+      },
+      "layout_flavors": [
+        {
+          "flavor_id": "personal_branding_creator_clean",
+          "name": "Clean Creator Economy & Thought Leadership",
+          "hero_layout": "split_hero",
+          "card_style": "subtle_card"
+        },
+        {
+          "flavor_id": "personal_branding_creator_bento",
+          "name": "Bento Creator Economy & Thought Leadership",
+          "hero_layout": "asymmetric_bento",
+          "card_style": "modern_bento_card"
+        },
+        {
+          "flavor_id": "personal_branding_creator_bold",
+          "name": "Bold Creator Economy & Thought Leadership",
+          "hero_layout": "bold_centered",
+          "card_style": "contrast_border_card"
+        }
+      ],
+      "ambient_motion": {
+        "type": "subtle_gradient_wash",
+        "bg_gradient": "linear-gradient(180deg, oklch(0.16 0.01 240) 0%, oklch(0.10 0.005 240) 100%)",
+        "motion_hint": "subtle stagger and zero-lag CSS transitions",
+        "lcp_safe": true
+      },
+      "mock_data": {
+        "en": {
+          "headline": "Next-Generation Creator Economy & Thought Leadership Platform",
+          "subheadline": "Engineered for reliability, velocity, and seamless user experience.",
+          "cta_primary": "Get Started Immediately",
+          "cta_secondary": "Explore Live Demo",
+          "metrics": [
+            {
+              "label": "Active Users",
+              "value": "100k+"
+            },
+            {
+              "label": "Uptime",
+              "value": "99.99%"
+            },
+            {
+              "label": "Customer Rating",
+              "value": "4.9/5"
+            }
+          ]
+        },
+        "fa": {
+          "headline": "پلتفرم پیشرفته Creator Economy & Thought Leadership",
+          "subheadline": "طراحی شده برای پایداری، سرعت و تجربه کاربری روان و متمایز.",
+          "cta_primary": "شروع آنی و رایگان",
+          "cta_secondary": "مشاهده دموی تعاملی",
+          "metrics": [
+            {
+              "label": "کاربران فعال",
+              "value": "+۱۰۰ هزار"
+            },
+            {
+              "label": "پایداری سیستم",
+              "value": "۹۹.۹۹٪"
+            },
+            {
+              "label": "رضایت مندی",
+              "value": "۴.۹ از ۵"
+            }
+          ]
+        }
+      }
+    },
+    "cybersecurity_identity_auth": {
+      "domain_id": "cybersecurity_identity_auth",
+      "theme_bias": "dark",
+      "primary_styles": [
+        "linear_dark",
+        "data_dense_terminal"
+      ],
+      "section_flow": [
+        {
+          "id": "hero",
+          "name": "Zero-Trust Identity & Threat Intelligence Hero Section",
+          "type": "split_hero",
+          "purpose": "Clear value hook and primary conversion action"
+        },
+        {
+          "id": "signature",
+          "name": "Interactive Zero-Trust Identity & Threat Intelligence Core Engine",
+          "type": "signature_widget",
+          "purpose": "Engaging interactive widget demonstrating core value"
+        },
+        {
+          "id": "features",
+          "name": "Key Pillars & Architecture",
+          "type": "bento_grid",
+          "purpose": "Modular feature exploration"
+        },
+        {
+          "id": "proof",
+          "name": "Audited Results & Testimonials",
+          "type": "proof_cards",
+          "purpose": "High-trust evidence and social validation"
+        },
+        {
+          "id": "footer",
+          "name": "Complete Navigation & Legal Hub",
+          "type": "standard_footer",
+          "purpose": "Zero-friction secondary discovery"
+        }
+      ],
+      "signature_widget": {
+        "name": "Interactive Zero-Trust Identity & Threat Intelligence Showcase",
+        "type": "interactive_tabs_widget",
+        "props": {
+          "interactive": true,
+          "domain": "cybersecurity_identity_auth"
+        }
+      },
+      "layout_flavors": [
+        {
+          "flavor_id": "cybersecurity_identity_auth_clean",
+          "name": "Clean Zero-Trust Identity & Threat Intelligence",
+          "hero_layout": "split_hero",
+          "card_style": "subtle_card"
+        },
+        {
+          "flavor_id": "cybersecurity_identity_auth_bento",
+          "name": "Bento Zero-Trust Identity & Threat Intelligence",
+          "hero_layout": "asymmetric_bento",
+          "card_style": "modern_bento_card"
+        },
+        {
+          "flavor_id": "cybersecurity_identity_auth_bold",
+          "name": "Bold Zero-Trust Identity & Threat Intelligence",
+          "hero_layout": "bold_centered",
+          "card_style": "contrast_border_card"
+        }
+      ],
+      "ambient_motion": {
+        "type": "subtle_gradient_wash",
+        "bg_gradient": "linear-gradient(180deg, oklch(0.16 0.01 240) 0%, oklch(0.10 0.005 240) 100%)",
+        "motion_hint": "subtle stagger and zero-lag CSS transitions",
+        "lcp_safe": true
+      },
+      "mock_data": {
+        "en": {
+          "headline": "Next-Generation Zero-Trust Identity & Threat Intelligence Platform",
+          "subheadline": "Engineered for reliability, velocity, and seamless user experience.",
+          "cta_primary": "Get Started Immediately",
+          "cta_secondary": "Explore Live Demo",
+          "metrics": [
+            {
+              "label": "Active Users",
+              "value": "100k+"
+            },
+            {
+              "label": "Uptime",
+              "value": "99.99%"
+            },
+            {
+              "label": "Customer Rating",
+              "value": "4.9/5"
+            }
+          ]
+        },
+        "fa": {
+          "headline": "پلتفرم پیشرفته Zero-Trust Identity & Threat Intelligence",
+          "subheadline": "طراحی شده برای پایداری، سرعت و تجربه کاربری روان و متمایز.",
+          "cta_primary": "شروع آنی و رایگان",
+          "cta_secondary": "مشاهده دموی تعاملی",
+          "metrics": [
+            {
+              "label": "کاربران فعال",
+              "value": "+۱۰۰ هزار"
+            },
+            {
+              "label": "پایداری سیستم",
+              "value": "۹۹.۹۹٪"
+            },
+            {
+              "label": "رضایت مندی",
+              "value": "۴.۹ از ۵"
+            }
+          ]
+        }
+      }
+    },
+    "general_modern_saas": {
+      "domain_id": "general_modern_saas",
+      "theme_bias": "light",
+      "primary_styles": [
+        "clean_stripe",
+        "minimal_swiss"
+      ],
+      "section_flow": [
+        {
+          "id": "hero",
+          "name": "Modern High-Velocity Software Platform Hero Section",
+          "type": "split_hero",
+          "purpose": "Clear value hook and primary conversion action"
+        },
+        {
+          "id": "signature",
+          "name": "Interactive Modern High-Velocity Software Platform Core Engine",
+          "type": "signature_widget",
+          "purpose": "Engaging interactive widget demonstrating core value"
+        },
+        {
+          "id": "features",
+          "name": "Key Pillars & Architecture",
+          "type": "bento_grid",
+          "purpose": "Modular feature exploration"
+        },
+        {
+          "id": "proof",
+          "name": "Audited Results & Testimonials",
+          "type": "proof_cards",
+          "purpose": "High-trust evidence and social validation"
+        },
+        {
+          "id": "footer",
+          "name": "Complete Navigation & Legal Hub",
+          "type": "standard_footer",
+          "purpose": "Zero-friction secondary discovery"
+        }
+      ],
+      "signature_widget": {
+        "name": "Interactive Modern High-Velocity Software Platform Showcase",
+        "type": "interactive_tabs_widget",
+        "props": {
+          "interactive": true,
+          "domain": "general_modern_saas"
+        }
+      },
+      "layout_flavors": [
+        {
+          "flavor_id": "general_modern_saas_clean",
+          "name": "Clean Modern High-Velocity Software Platform",
+          "hero_layout": "split_hero",
+          "card_style": "subtle_card"
+        },
+        {
+          "flavor_id": "general_modern_saas_bento",
+          "name": "Bento Modern High-Velocity Software Platform",
+          "hero_layout": "asymmetric_bento",
+          "card_style": "modern_bento_card"
+        },
+        {
+          "flavor_id": "general_modern_saas_bold",
+          "name": "Bold Modern High-Velocity Software Platform",
+          "hero_layout": "bold_centered",
+          "card_style": "contrast_border_card"
+        }
+      ],
+      "ambient_motion": {
+        "type": "subtle_gradient_wash",
+        "bg_gradient": "linear-gradient(180deg, oklch(0.98 0.005 240) 0%, oklch(0.94 0.01 240) 100%)",
+        "motion_hint": "subtle stagger and zero-lag CSS transitions",
+        "lcp_safe": true
+      },
+      "mock_data": {
+        "en": {
+          "headline": "Next-Generation Modern High-Velocity Software Platform Platform",
+          "subheadline": "Engineered for reliability, velocity, and seamless user experience.",
+          "cta_primary": "Get Started Immediately",
+          "cta_secondary": "Explore Live Demo",
+          "metrics": [
+            {
+              "label": "Active Users",
+              "value": "100k+"
+            },
+            {
+              "label": "Uptime",
+              "value": "99.99%"
+            },
+            {
+              "label": "Customer Rating",
+              "value": "4.9/5"
+            }
+          ]
+        },
+        "fa": {
+          "headline": "پلتفرم پیشرفته Modern High-Velocity Software Platform",
+          "subheadline": "طراحی شده برای پایداری، سرعت و تجربه کاربری روان و متمایز.",
+          "cta_primary": "شروع آنی و رایگان",
+          "cta_secondary": "مشاهده دموی تعاملی",
+          "metrics": [
+            {
+              "label": "کاربران فعال",
+              "value": "+۱۰۰ هزار"
+            },
+            {
+              "label": "پایداری سیستم",
+              "value": "۹۹.۹۹٪"
+            },
+            {
+              "label": "رضایت مندی",
+              "value": "۴.۹ از ۵"
+            }
+          ]
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,57 @@
+{
+  "version": "3.2.0",
+  "note": "Anti-slop typography matrix breaking the Inter monopoly with character-rich modern pairings",
+  "slop_penalty_rule": "Direct usage of Inter for both display and body without intentional domain necessity incurs anti-slop penalty.",
+  "pairings": [
+    {
+      "id": "modern_saas_jakarta",
+      "name": "Plus Jakarta Sans & Satoshi Character",
+      "display_en": "Plus Jakarta Sans",
+      "body_en": "Plus Jakarta Sans",
+      "display_fa": "Shabnam",
+      "body_fa": "Vazirmatn",
+      "google_font_url": "https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Vazirmatn:wght@400;500;600;700&display=swap",
+      "vibe_feel": "Energetic, modern, high-conversion SaaS"
+    },
+    {
+      "id": "luxury_editorial_instrument",
+      "name": "Instrument Serif & Archivo Contrast",
+      "display_en": "Instrument Serif",
+      "body_en": "Archivo",
+      "display_fa": "Sahel",
+      "body_fa": "Vazirmatn",
+      "google_font_url": "https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700&family=Instrument+Serif:ital@0;1&family=Vazirmatn:wght@400;500;600&display=swap",
+      "vibe_feel": "High-end luxury, boutique agency, Michelin gastronomy"
+    },
+    {
+      "id": "technical_syne_grotesk",
+      "name": "Syne & Space Grotesk Architecture",
+      "display_en": "Syne",
+      "body_en": "Space Grotesk",
+      "display_fa": "Samim",
+      "body_fa": "Vazirmatn",
+      "google_font_url": "https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Syne:wght@600;700;800&family=Vazirmatn:wght@400;600&display=swap",
+      "vibe_feel": "Futuristic Web3, bold avant-garde, creative technology"
+    },
+    {
+      "id": "clinical_fraunces_humanist",
+      "name": "Fraunces Warm Serif & Manrope",
+      "display_en": "Fraunces",
+      "body_en": "Manrope",
+      "display_fa": "Parastoo",
+      "body_fa": "Vazirmatn",
+      "google_font_url": "https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,700&family=Manrope:wght@400;500;600;700&family=Vazirmatn:wght@400;500;600&display=swap",
+      "vibe_feel": "Clinical wellness, organic dermatology, ethical health"
+    },
+    {
+      "id": "dense_mono_jetbrains",
+      "name": "JetBrains Mono Tabular Precision",
+      "display_en": "JetBrains Mono",
+      "body_en": "JetBrains Mono",
+      "display_fa": "Vazirmatn",
+      "body_fa": "Vazirmatn",
+      "google_font_url": "https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700;800&family=Vazirmatn:wght@400;600&display=swap",
+      "vibe_feel": "Terminal telemetry, financial orderbooks, DevOps CLI"
+    }
+  ]
+}

@@ -1,7 +1,7 @@
 ---
 name: ui-kit
 description: Exhaustive, domain-agnostic UI/UX Component Engine & Design Intelligence. Curated from Beautiful UI (beautifului.dev - 20 AI primitives), Shadcn UI (ui.shadcn.com - 50+ components), BeUI (beui.dev), Rare UI (rareui.com), and Transitions.dev. Provides copy-paste primitives for AI Thinking states, Streaming text, Tool chips, Approval cards, Task rows, Flowcharts, Insight sparklines, Bento grids, Physics transitions, and accessible UI controls for any tech stack (React, Next.js, Vue, Tailwind, HTML/Vanilla, Flutter) in any visual style or language (LTR/RTL).
-triggers: ["ui-kit", "uikit", "beautifului", "beui", "rareui", "transitions.dev", "shadcn", "component library", "ui components", "ai ui", "کامپوننت", "طراحی رابط کاربری", "دیزاین فرانت"]
+triggers: ["ui-kit", "uikit", "beautifului", "beui", "rareui", "transitions.dev", "shadcn", "component library", "ui components", "ai ui", "components", "ui design", "frontend design"]
 ---
 
 # 🎨 UI-Kit: Exhaustive AI-Native & Modern Component Recipes

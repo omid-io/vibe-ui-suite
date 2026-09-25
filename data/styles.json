@@ -78,7 +78,7 @@
     {
       "id": "data_dense_terminal",
       "name_en": "Data-Dense Terminal HUD",
-      "name_fa": "ترمینال داده‌محور و مونو",
+      "name_fa": "ترمینال داده محور و مونو",
       "family": "Monospace HUD",
       "geometry": { "radius_base": "2px", "border_width": "1px", "border_style": "solid" },
       "typography": { "display": "mono", "body": "mono", "case": "uppercase_headers" },
@@ -114,7 +114,7 @@
     {
       "id": "soft_humanist",
       "name_en": "Soft Humanist",
-      "name_fa": "انسان‌محور نرم و درمانی",
+      "name_fa": "انسان محور نرم و درمانی",
       "family": "Human Centered",
       "geometry": { "radius_base": "12px", "border_width": "1px", "border_style": "solid" },
       "typography": { "display": "sans", "body": "sans", "case": "sentence" },
@@ -168,7 +168,7 @@
     {
       "id": "modern_glass_2",
       "name_en": "Specular Glassmorphism 2.0",
-      "name_fa": "شیشه‌ای مدرن و کالیبره",
+      "name_fa": "شیشه ای مدرن و کالیبره",
       "family": "Luminous Depth",
       "geometry": { "radius_base": "16px", "border_width": "1px", "border_style": "solid" },
       "typography": { "display": "sans", "body": "sans", "case": "sentence" },
@@ -240,7 +240,7 @@
     {
       "id": "biophilic_wellness",
       "name_en": "Biophilic Wellness",
-      "name_fa": "زیست‌محور، طبیعت و آرامش",
+      "name_fa": "زیست محور، طبیعت و آرامش",
       "family": "Organic Naturalist",
       "geometry": { "radius_base": "14px", "border_width": "1px", "border_style": "solid" },
       "typography": { "display": "serif", "body": "sans", "case": "sentence" },
@@ -294,7 +294,7 @@
     {
       "id": "y2k_aesthetic",
       "name_en": "Y2K Cyber Optimism",
-      "name_fa": "خوش‌بینی دیجیتال Y2K و ژله‌ای",
+      "name_fa": "خوش بینی دیجیتال Y2K و ژله ای",
       "family": "Millennium Chrome",
       "geometry": { "radius_base": "24px", "border_width": "2px", "border_style": "solid" },
       "typography": { "display": "sans", "body": "sans", "case": "lowercase_modern" },
@@ -312,7 +312,7 @@
     {
       "id": "enterprise_dense",
       "name_en": "Enterprise Dense Data Grid",
-      "name_fa": "سازمانی داده‌فشرده و جدول‌محور",
+      "name_fa": "سازمانی داده فشرده و جدول محور",
       "family": "Enterprise Workflow",
       "geometry": { "radius_base": "4px", "border_width": "1px", "border_style": "solid" },
       "typography": { "display": "sans", "body": "sans", "case": "sentence" },
@@ -366,7 +366,7 @@
     {
       "id": "playful_consumer",
       "name_en": "Playful Consumer / Bubbly",
-      "name_fa": "مصرف‌کننده شاداب و تعاملی",
+      "name_fa": "مصرف کننده شاداب و تعاملی",
       "family": "Consumer Engagement",
       "geometry": { "radius_base": "18px", "border_width": "2px", "border_style": "solid" },
       "typography": { "display": "sans", "body": "sans", "case": "friendly_sentence" },
@@ -420,7 +420,7 @@
     {
       "id": "high_end_hospitality",
       "name_en": "High-End Hospitality & Dining",
-      "name_fa": "هتلداری لوکس و رستوران‌های مجلل",
+      "name_fa": "هتلداری لوکس و رستوران های مجلل",
       "family": "Opulent Sensory",
       "geometry": { "radius_base": "6px", "border_width": "1px", "border_style": "solid" },
       "typography": { "display": "serif", "body": "sans", "case": "letterspaced_title" },
@@ -456,7 +456,7 @@
     {
       "id": "scientific_dashboard",
       "name_en": "Scientific Instrumentation & Bio",
-      "name_fa": "تجهیزات آزمایشگاهی و داده‌های علمی",
+      "name_fa": "تجهیزات آزمایشگاهی و داده های علمی",
       "family": "Empirical Scientific",
       "geometry": { "radius_base": "6px", "border_width": "1px", "border_style": "solid" },
       "typography": { "display": "sans", "body": "mono", "case": "sentence" },

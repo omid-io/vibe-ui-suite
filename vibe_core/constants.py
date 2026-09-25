@@ -28,3 +28,10 @@ MAX_REFINEMENT_ITERATIONS: int = 2
 
 MAX_DEFECTS_IN_CORRECTION_PROMPT: int = 5
 """Maximum defects included in a generated LLM correction prompt to avoid token bloat."""
+
+# Aesthetic & Anti-Slop Thresholds (v3.2.0)
+MAX_SPARKLE_ICONS: int = 1
+"""Maximum allowable AI sparkle icons before flagging generic AI-slop trope."""
+
+SLOP_GENERIC_GRADIENT_PENALTY: int = 6
+"""Score deduction when clichéd purple/indigo gradients are detected."""

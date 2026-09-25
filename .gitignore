@@ -43,3 +43,8 @@ htmlcov/
 *.gz
 *.tar
 *.tgz
+
+# Internal Project Tracking
+PROJECT_STATE.md
+
+

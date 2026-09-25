@@ -2,9 +2,11 @@
 ### Machine-Checkable Design Contracts, Visual Style Explorer & Mathematical WCAG Contrast Linter
 
 [![Open-VSX Version](https://img.shields.io/open-vsx/v/omid-io/vibe-ui-vscode?color=blue&style=flat-square)](https://open-vsx.org/extension/omid-io/vibe-ui-vscode)
-[![Open-VSX Downloads](https://img.shields.io/open-vsx/dt/omid-io/vibe-ui-vscode?color=green&style=flat-square)](https://open-vsx.org/extension/omid-io/vibe-ui-vscode)
+[![Open-VSX Downloads](https://img.shields.io/open-vsx/dt/omid-io/vibe-ui-vscode?color=green&style=flat-square&logo=eclipseche)](https://open-vsx.org/extension/omid-io/vibe-ui-vscode)
+[![VS Code Marketplace Installs](https://img.shields.io/visual-studio-marketplace/i/omid-io.vibe-ui-vscode?color=blue&style=flat-square&logo=visual-studio-code)](https://marketplace.visualstudio.com/items?itemName=omid-io.vibe-ui-vscode)
+[![NPM Downloads](https://img.shields.io/npm/dm/%40omid-io%2Ftokens?color=red&style=flat-square&logo=npm)](https://www.npmjs.com/package/@omid-io/tokens)
+[![GitHub Stars](https://img.shields.io/github/stars/omid-io/vibe-ui-suite?style=flat-square&logo=github&color=ffb400)](https://github.com/omid-io/vibe-ui-suite)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg?style=flat-square)](https://github.com/omid-io/vibe-ui-suite/blob/main/LICENSE)
-[![GitHub Repository](https://img.shields.io/badge/GitHub-omid--io%2Fvibe--ui--suite-181717?style=flat-square&logo=github)](https://github.com/omid-io/vibe-ui-suite)
 
 The official IDE extension for **Vibe UI Suite** — an open-source deterministic design architecture and headless Chromium evaluation engine that prevents AI coding assistants (Cursor, Claude Code, Windsurf, Copilot) from generating generic, low-contrast **"AI Design Slop"**.
 
@@ -83,6 +85,11 @@ code --install-extension vibe-ui-vscode-3.1.1.vsix
 * **CLI & Design Tokens (NPM):** [`@omid-io/tokens`](https://www.npmjs.com/package/@omid-io/tokens) (`npx @omid-io/tokens init`)
 * **Live Design Studio:** [https://omid-io.github.io/vibe-ui-suite/](https://omid-io.github.io/vibe-ui-suite/)
 * **GitHub Repository:** [https://github.com/omid-io/vibe-ui-suite](https://github.com/omid-io/vibe-ui-suite)
+
+## ⭐ Support & Star on GitHub
+If Vibe UI helps your team build cleaner, higher-contrast UIs without AI slop, please **[star the repository on GitHub](https://github.com/omid-io/vibe-ui-suite)**! Every star directly supports ongoing maintenance, dataset updates, and multi-model evaluations.
+
+[![Star on GitHub](https://img.shields.io/badge/⭐_Star_Repository-omid--io%2Fvibe--ui--suite-blue?style=for-the-badge&logo=github)](https://github.com/omid-io/vibe-ui-suite)
 
 ---
 

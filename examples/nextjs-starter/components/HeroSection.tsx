@@ -37,13 +37,13 @@ export function HeroSection({
     },
     {
       id: 'fa-s3',
-      label: 'محاسبه درخشندگی نسبی رنگ‌های OKLCH و رعایت کنتراست ۴.۵:۱',
+      label: 'محاسبه درخشندگی نسبی رنگ های OKLCH و رعایت کنتراست ۴.۵:۱',
       status: 'completed',
       duration: '112ms',
     },
     {
       id: 'fa-s4',
-      label: 'قفل موقعیت فیزیکی گریدها و اعمال جهت‌دهی معنایی به متون فارسی',
+      label: 'قفل موقعیت فیزیکی گریدها و اعمال جهت دهی معنایی به متون فارسی',
       status: 'completed',
       duration: '256ms',
     },
@@ -94,7 +94,7 @@ export function HeroSection({
             <h1 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight text-textPrimary leading-[1.15]">
               {isRtl ? (
                 <>
-                  معماری قطعی رابط کاربری برای ایجنت‌های کدنویسی{' '}
+                  معماری قطعی رابط کاربری برای ایجنت های کدنویسی{' '}
                   <span className="text-accent underline decoration-accent/40 decoration-2 underline-offset-4">
                     هوش مصنوعی
                   </span>
@@ -113,9 +113,9 @@ export function HeroSection({
             <p className="text-base sm:text-lg text-textMuted leading-relaxed max-w-2xl">
               {isRtl ? (
                 <>
-                  پایان خطاهای رندوم طراحی با توکن‌های رنگی{' '}
+                  پایان خطاهای رندوم طراحی با توکن های رنگی{' '}
                   <bdi className="font-mono font-semibold text-textPrimary">OKLCH</bdi>، موتور فیزیک مستقل از نرخ
-                  فریم، آیکون‌های وکتور خالص <bdi className="font-mono font-semibold text-textPrimary">SVG</bdi> و
+                  فریم، آیکون های وکتور خالص <bdi className="font-mono font-semibold text-textPrimary">SVG</bdi> و
                   ثبات ساختاری <bdi className="font-mono font-semibold text-textPrimary">Semantic RTL</bdi> در پشته{' '}
                   <bdi className="font-mono font-semibold text-textPrimary">Next.js 15 App Router</bdi>.
                 </>
@@ -149,7 +149,7 @@ export function HeroSection({
                   <path d="M6 10L3.5 12.5" />
                   <circle cx="9.5" cy="6.5" r="1" fill="currentColor" />
                 </svg>
-                <span>{isRtl ? 'استقرار پایپ‌لاین' : 'Deploy Pipeline'}</span>
+                <span>{isRtl ? 'استقرار پایپ لاین' : 'Deploy Pipeline'}</span>
               </button>
 
               <button

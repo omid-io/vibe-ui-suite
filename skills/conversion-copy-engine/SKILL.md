@@ -40,7 +40,7 @@ $$\mathbf{\text{Hero Headline}} = [\text{Dream Outcome}] + [\text{Without Main F
 Place risk-reversal microcopy directly below primary CTAs to dissolve hesitation at the point of action:
 - *«No credit card required • 2-minute instant setup • Cancel anytime»*
 - *«Transparent pricing • Free migration • Live 24/7 human support»*
-- *«تست رایگان ۱۴ روزه • بدون نیاز به کارت بانکی • راه‌اندازی فوری در ۲ دقیقه»*
+- *«14-day free trial • No credit card required • Instant 2-minute setup»*
 
 ### D. Direct Concierge Conversion Funnel
 Move high-intent traffic into direct 1-on-1 conversations using context-aware, pre-filled deep links (WhatsApp, Telegram, or Live Chat).

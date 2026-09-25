@@ -12,28 +12,28 @@ This document provides the authoritative reference catalog for all **26 orthogon
 | 2 | `clean_stripe` | Clean Stripe SaaS | استرایپ مدرن و شرکتی | Modern Corporate SaaS | Balanced | Micro Shadow |
 | 3 | `linear_dark` | Linear Deep Dark | دارک عمیق مهندسی | Technical Dark | Dense | Diffused Soft |
 | 4 | `quiet_luxury` | Quiet Luxury | مجلل آرام و اصیل | Prestige Heritage | Airy | Diffused Soft |
-| 5 | `data_dense_terminal` | Data-Dense Terminal HUD | ترمینال داده‌محور و مونو | Monospace HUD | Dense | Flat |
+| 5 | `data_dense_terminal` | Data-Dense Terminal HUD | ترمینال داده محور و مونو | Monospace HUD | Dense | Flat |
 | 6 | `neobrutalism` | Neo-Brutalism | نئوبروتالیسم پرانرژی | Raw High-Contrast | Balanced | Hard Drop |
-| 7 | `soft_humanist` | Soft Humanist | انسان‌محور نرم و درمانی | Human Centered | Balanced | Micro Shadow |
+| 7 | `soft_humanist` | Soft Humanist | انسان محور نرم و درمانی | Human Centered | Balanced | Micro Shadow |
 | 8 | `organic_nordic` | Organic Nordic | ارگانیک نوردیک و آرام | Scandinavian Organic | Airy | Diffused Soft |
 | 9 | `bauhaus_geometric` | Bauhaus Geometric | باهاوس هندسی و آوانگارد | Constructivist Geometric | Balanced | Flat |
-| 10 | `modern_glass_2` | Specular Glassmorphism 2.0 | شیشه‌ای مدرن و کالیبره | Luminous Depth | Balanced | Specular Glass 2 |
+| 10 | `modern_glass_2` | Specular Glassmorphism 2.0 | شیشه ای مدرن و کالیبره | Luminous Depth | Balanced | Specular Glass 2 |
 | 11 | `retro_futurism` | Retro Futurism / Cyber | سایبرپانک و رترو-فیوچریسم | Synthwave Cybernetic | Dense | Diffused Soft |
 | 12 | `editorial_magazine` | Swiss Editorial Magazine | نشریه و ادیتوریال مدرن | Editorial Typographic | Balanced | Flat |
 | 13 | `industrial_utility` | Industrial Utility | صنعتی و ابزار مهندسی | Heavy Industrial | Dense | Flat |
-| 14 | `biophilic_wellness` | Biophilic Wellness | زیست‌محور، طبیعت و آرامش | Organic Naturalist | Airy | Diffused Soft |
+| 14 | `biophilic_wellness` | Biophilic Wellness | زیست محور، طبیعت و آرامش | Organic Naturalist | Airy | Diffused Soft |
 | 15 | `futuristic_tech` | Futuristic Aerotech HUD | فناوری آینده و هوانوردی | Aerospace Telemetry | Dense | Micro Shadow |
 | 16 | `retro_computing_80s`| Retro Computing CRT Phosphor | محاسبات کلاسیک و نمایشگر فسفری | Early Digital Hardware | Dense | Flat |
-| 17 | `y2k_aesthetic` | Y2K Cyber Optimism | خوش‌بینی دیجیتال Y2K و ژله‌ای | Millennium Chrome | Balanced | Specular Glass 2 |
-| 18 | `enterprise_dense` | Enterprise Dense Data Grid | سازمانی داده‌فشرده و جدول‌محور | Enterprise Workflow | Dense | Micro Shadow |
+| 17 | `y2k_aesthetic` | Y2K Cyber Optimism | خوش بینی دیجیتال Y2K و ژله ای | Millennium Chrome | Balanced | Specular Glass 2 |
+| 18 | `enterprise_dense` | Enterprise Dense Data Grid | سازمانی داده فشرده و جدول محور | Enterprise Workflow | Dense | Micro Shadow |
 | 19 | `financial_terminal` | High-Frequency Financial Terminal | ترمینال مالی و بازارهای سرمایه | Capital Markets | Dense | Flat |
 | 20 | `civic_institutional` | Civic Institutional Public | نهادی و خدمات عمومی دولتی | Public Utility Governance | Balanced | Micro Shadow |
-| 21 | `playful_consumer` | Playful Consumer / Bubbly | مصرف‌کننده شاداب و تعاملی | Consumer Engagement | Airy | Diffused Soft |
+| 21 | `playful_consumer` | Playful Consumer / Bubbly | مصرف کننده شاداب و تعاملی | Consumer Engagement | Airy | Diffused Soft |
 | 22 | `mobile_native_consumer` | Mobile-Native Sheet & Stack | نیتیو موبایل و ارگونومیک | Handheld Ergonomics | Balanced | Specular Glass 2 |
 | 23 | `art_gallery` | Monochrome Art Gallery | گالری هنری، استوار و مینیمال | Curatorial Spatial | Airy | Flat |
-| 24 | `high_end_hospitality` | High-End Hospitality & Dining | هتلداری لوکس و رستوران‌های مجلل | Opulent Sensory | Airy | Diffused Soft |
+| 24 | `high_end_hospitality` | High-End Hospitality & Dining | هتلداری لوکس و رستوران های مجلل | Opulent Sensory | Airy | Diffused Soft |
 | 25 | `cultural_heritage` | Cultural Heritage & Archives | میراث فرهنگی، تاریخ و آرشیو | Historical Archival | Balanced | Flat |
-| 26 | `scientific_dashboard` | Scientific Instrumentation & Bio | تجهیزات آزمایشگاهی و داده‌های علمی | Empirical Scientific | Dense | Micro Shadow |
+| 26 | `scientific_dashboard` | Scientific Instrumentation & Bio | تجهیزات آزمایشگاهی و داده های علمی | Empirical Scientific | Dense | Micro Shadow |
 
 ---
 

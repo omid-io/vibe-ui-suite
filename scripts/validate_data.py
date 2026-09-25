@@ -39,7 +39,9 @@ EXPECTED_FILES = [
     "interaction-patterns.json",
     "states.json",
     "anti-patterns.json",
-    "compatibility.json"
+    "compatibility.json",
+    "domain_blueprints.json",
+    "typography_variants.json"
 ]
 
 def check_emojis(obj, file_name, path=""):

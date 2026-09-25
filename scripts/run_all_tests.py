@@ -21,10 +21,11 @@ ROOT_DIR = Path(__file__).resolve().parent.parent
 TEST_SUITES = [
     ("Version Synchronization", ["python", "scripts/validate_versions.py"]),
     ("Schema Validation (8 Schemas)", ["python", "scripts/validate_schemas.py"]),
-    ("Knowledge Base Validation (13 Datasets)", ["python", "scripts/validate_data.py"]),
+    ("Knowledge Base Validation (15 Datasets)", ["python", "scripts/validate_data.py"]),
     ("Search & Recommendation Unit Tests", ["python", "scripts/test_search.py"]),
     ("Design Critic & AutoRefiner Unit Tests", ["python", "scripts/test_critic_refiner.py"]),
     ("Full Pipeline Integration Tests (E2E)", ["python", "scripts/test_pipeline_e2e.py"]),
+    ("Vibe UI v3.2.0 Feature Verification", ["python", "scripts/test_v32_features.py"]),
     ("Stratified 100-Scenario Benchmark", ["python", "evals/benchmark/run_benchmark.py"]),
     ("Physical Runtime Evals (WCAG AA & DOM)", ["python", "evals/run_evals.py", "--json"])
 ]

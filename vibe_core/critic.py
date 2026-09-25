@@ -279,24 +279,60 @@ class DesignCritic:
 
         # Scorecard computation — all values derived from measurable HTML signals, no hardcoded constants.
         # Touch target policy: HARD_MIN_TOUCH_PX = 24px (WCAG 2.2 AA), RECOMMENDED_TOUCH_PX = 44px (mobile HIG)
-        # Visual Hierarchy: evidence — heading tags and display-font tokens present
+        
+        # Visual Hierarchy: evidence — heading tags, display-font tokens, and asymmetric layout rhythm
         heading_tags = len(re.findall(r"<h[1-3][^>]*>", html_content, re.IGNORECASE))
-        visual_hierarchy = min(14, 6 + (heading_tags * 2) + (4 if "display-font" in html_content else 0))
+        has_asymmetric_grid = "md:col-span-2" in html_content or "col-span-2" in html_content or "row-span-2" in html_content
+        visual_hierarchy = min(14, 5 + (heading_tags * 2) + (3 if has_asymmetric_grid else 0) + (2 if "display-font" in html_content else 0))
 
-        # Anti-Slop Distinctiveness: evidence — absence of generic purple/indigo AI gradient trope
-        anti_slop_distinctiveness = 14 if "from-purple-600" not in html_content else 8
+        # Anti-Slop Distinctiveness: evidence — penalize clichéd purple/indigo gradients and sparkle icon tropes
+        sparkle_count = len(re.findall(r"sparkle|lucide-sparkle|✨", html_content, re.IGNORECASE))
+        has_purple_slop = "from-purple-600" in html_content or "from-indigo-500" in html_content
+        
+        anti_slop_distinctiveness = 15
+        if has_purple_slop:
+            anti_slop_distinctiveness -= 5
+            defects_ranked.append({
+                "severity": "medium",
+                "type": "cliche_ai_gradient",
+                "message": "Generic purple/indigo AI gradient detected. Use brand-calibrated OKLCH color palettes.",
+                "suggested_patch": "Replace purple gradient with domain-calibrated OKLCH palette."
+            })
+        if sparkle_count > 1:
+            anti_slop_distinctiveness -= 3
+            defects_ranked.append({
+                "severity": "low",
+                "type": "ai_sparkle_infestation",
+                "message": f"Excessive AI sparkle icons ({sparkle_count}) detected. Replace with domain-specific conceptual iconography.",
+                "suggested_patch": "Use purposeful domain vector icons instead of repetitive sparkles."
+            })
+        anti_slop_distinctiveness = max(4, anti_slop_distinctiveness)
 
         # Domain Fit: evidence — CSS custom properties and domain-calibrated tokens signal intentional design
         css_var_count = len(re.findall(r"var\(--", html_content))
-        domain_fit = min(14, 4 + min(10, css_var_count))
+        has_signature_widget = "signature-widget" in html_content or "data-widget" in html_content or "calculator" in html_content or "slider" in html_content
+        domain_fit = min(14, 4 + min(8, css_var_count) + (2 if has_signature_widget else 0))
 
         # Usability: evidence — presence of interactive semantic elements and absence of div-onclick violations
         usability = 10 if not div_onclick else 6
 
-        # Typography: evidence — font-family declarations and display-font token usage
+        # Typography: evidence — character-rich font-family declarations beyond generic Inter
         has_font_family = bool(re.search(r"font-family\s*:", html_content) or "display-font" in html_content)
-        font_stack_count = len(re.findall(r"font-family\s*:", html_content))
-        typography = min(10, 4 + (4 if has_font_family else 0) + min(2, font_stack_count))
+        is_only_inter = "family=Inter" in html_content and not any(f in html_content for f in ["Plus+Jakarta", "Playfair", "Space+Grotesk", "JetBrains", "Instrument", "Syne", "Fraunces", "Vazirmatn", "Shabnam"])
+        
+        typography = 5
+        if has_font_family:
+            typography += 3
+        if not is_only_inter:
+            typography += 2
+        else:
+            defects_ranked.append({
+                "severity": "low",
+                "type": "monotonous_typography",
+                "message": "Generic Inter-only typography detected without distinct display character pairing.",
+                "suggested_patch": "Pair body font with distinct display typography (e.g. Plus Jakarta Sans, Instrument Serif, Vazirmatn)."
+            })
+        typography = min(10, typography)
 
         # Responsive: evidence — mobile viewport meta tag presence
         responsive = 10 if 'name="viewport"' in html_content else 4

@@ -17,7 +17,7 @@
     {
       "id": "fintech_banking",
       "name_en": "Fintech, Wealth & Corporate Banking",
-      "name_fa": "فین‌تک، بانکداری و سرمایه‌گذاری",
+      "name_fa": "فین تک، بانکداری و سرمایه گذاری",
       "aliases": ["بانک", "مالی", "وام", "سرمایه", "حسابداری", "fintech", "banking", "wealth", "investment", "bonds"],
       "primary_mode": "operate",
       "default_trust_level": "maximum",
@@ -53,7 +53,7 @@
     {
       "id": "saas_b2b_enterprise",
       "name_en": "Enterprise B2B SaaS & CRM",
-      "name_fa": "سامانه‌های ابری سازمانی و سی‌آرام",
+      "name_fa": "سامانه های ابری سازمانی و سی آرام",
       "aliases": ["سازمانی", "اتوماسیون", "سی آر ام", "نرم افزار ابری", "saas", "crm", "enterprise", "b2b", "workflow"],
       "primary_mode": "operate",
       "default_trust_level": "high",
@@ -65,7 +65,7 @@
     {
       "id": "ai_developer_platform",
       "name_en": "AI Developer Platform & Agent Workspaces",
-      "name_fa": "پلتفرم‌های هوش مصنوعی و ایجنت‌ها",
+      "name_fa": "پلتفرم های هوش مصنوعی و ایجنت ها",
       "aliases": ["هوش مصنوعی", "ایجنت", "مدل زبانی", "ai", "llm", "agents", "copilot", "prompt", "vector"],
       "primary_mode": "operate",
       "default_trust_level": "high",
@@ -89,7 +89,7 @@
     {
       "id": "ecommerce_mass_market",
       "name_en": "E-Commerce & Digital Marketplaces",
-      "name_fa": "فروشگاه آنلاین و مارکت‌پلیس عمومی",
+      "name_fa": "فروشگاه آنلاین و مارکت پلیس عمومی",
       "aliases": ["فروشگاه", "خرید آنلاین", "مارکت پلیس", "کالا", "سبد خرید", "shop", "store", "marketplace", "ecommerce"],
       "primary_mode": "persuade",
       "default_trust_level": "high",
@@ -173,7 +173,7 @@
     {
       "id": "travel_hospitality_tourism",
       "name_en": "Travel, Boutique Hotels & Tourism",
-      "name_fa": "هتل‌داری، بومگردی و گردشگری",
+      "name_fa": "هتل داری، بومگردی و گردشگری",
       "aliases": ["هتل", "سفر", "گردشگری", "تور", "اقامتگاه", "hotel", "travel", "tourism", "resort", "flight"],
       "primary_mode": "persuade",
       "default_trust_level": "high",
@@ -209,7 +209,7 @@
     {
       "id": "automotive_ev_mobility",
       "name_en": "Automotive, Electric Vehicles & Mobility",
-      "name_fa": "خودروهای برقی، حمل‌ونقل و صنایع خودرو",
+      "name_fa": "خودروهای برقی، حمل ونقل و صنایع خودرو",
       "aliases": ["ماشین", "خودرو", "برقی", "موتور", "تسلا", "car", "auto", "automotive", "ev", "mobility"],
       "primary_mode": "persuade",
       "default_trust_level": "high",
@@ -233,7 +233,7 @@
     {
       "id": "energy_greentech_sustainability",
       "name_en": "Clean Energy, GreenTech & Sustainability",
-      "name_fa": "انرژی‌های پاک، محیط‌زیست و فناوری سبز",
+      "name_fa": "انرژی های پاک، محیط زیست و فناوری سبز",
       "aliases": ["انرژی", "خورشیدی", "سبز", "محیط زیست", "تجدیدپذیر", "energy", "solar", "green", "sustainability", "cleantech"],
       "primary_mode": "persuade",
       "default_trust_level": "high",
@@ -245,7 +245,7 @@
     {
       "id": "nonprofit_charity_social",
       "name_en": "Non-Profit, Charities & Social Causes",
-      "name_fa": "خیریه، خدمات اجتماعی و سازمان‌های مردم‌نهاد",
+      "name_fa": "خیریه، خدمات اجتماعی و سازمان های مردم نهاد",
       "aliases": ["خیریه", "نیکوکاری", "کمک", "داوطلب", "عام المنفعه", "charity", "nonprofit", "ngo", "volunteer", "donation"],
       "primary_mode": "persuade",
       "default_trust_level": "maximum",

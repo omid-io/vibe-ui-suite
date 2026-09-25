@@ -1,7 +1,7 @@
 ---
 name: ui-verifier
 description: Complete 5-Pillar UI & Frontend Quality Verification Engine (WCAG AA Accessibility, Responsive Breakpoints, Anti-Slop Visual Architecture, Sub-Pixel rAF Motion Performance, and Semantic RTL/BiDi Resilience).
-triggers: ["verify ui", "ui-verifier", "audit ui", "a11y check", "check design", "responsive audit", "بررسی ظاهر", "تست یو آی", "چک فرانت", "ارزیابی دیزاین"]
+triggers: ["verify ui", "ui-verifier", "audit ui", "a11y check", "check design", "responsive audit", "ui inspection", "frontend audit", "design review"]
 ---
 
 # 🔍 UI-Verifier: 5-Pillar Frontend Quality & Verification Engine

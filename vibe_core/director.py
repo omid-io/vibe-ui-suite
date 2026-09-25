@@ -1,12 +1,15 @@
 """
 vibe_core.director — Design Director Module
-Autonomous intent extraction, domain matching, confidence estimation, and VoI protocol.
+Autonomous intent extraction, domain blueprint alignment, project stack sensing,
+confidence estimation, and autonomous best-in-class fallback without interrogation halts.
 """
 
 import json
 import re
 from pathlib import Path
 from typing import Dict, Any, List, Optional, Tuple
+
+from vibe_core.stack_sensor import ProjectStackSensor
 
 ROOT_DIR = Path(__file__).resolve().parent.parent
 DATA_DIR = ROOT_DIR / "data"
@@ -17,7 +20,7 @@ def normalize_text(text: str) -> str:
         return ""
     text = text.strip().lower()
     # Normalize Arabic/Persian characters
-    text = text.replace("ي", "ی").replace("ك", "ک").replace("ة", "ه").replace("‌", " ")
+    text = text.replace("ي", "ی").replace("ك", "ک").replace("ة", "ه").replace(" ", " ")
     # Remove punctuation
     text = re.sub(r"[^\w\s\u0600-\u06FF]", " ", text)
     return " ".join(text.split())
@@ -26,28 +29,50 @@ class DesignDirector:
     def __init__(self, data_dir: Optional[Path] = None):
         self.data_dir = data_dir or DATA_DIR
         self.taxonomy = self._load_taxonomy()
+        self.blueprints = self._load_blueprints()
 
     def _load_taxonomy(self) -> List[Dict[str, Any]]:
         tax_path = self.data_dir / "taxonomy.json"
         if not tax_path.exists():
             return []
-        with open(tax_path, "r", encoding="utf-8") as f:
-            data = json.load(f)
-            return data.get("domains", [])
+        try:
+            with open(tax_path, "r", encoding="utf-8") as f:
+                data = json.load(f)
+                return data.get("domains", [])
+        except Exception:
+            return []
 
-    def infer_intent(self, prompt: str, user_overrides: Optional[Dict[str, Any]] = None) -> Dict[str, Any]:
+    def _load_blueprints(self) -> Dict[str, Any]:
+        bp_path = self.data_dir / "domain_blueprints.json"
+        if not bp_path.exists():
+            return {}
+        try:
+            with open(bp_path, "r", encoding="utf-8") as f:
+                data = json.load(f)
+                return data.get("domains", {})
+        except Exception:
+            return {}
+
+    def infer_intent(self, prompt: str, user_overrides: Optional[Dict[str, Any]] = None, project_dir: Optional[Path] = None) -> Dict[str, Any]:
         """
-        Infers DesignIntentContract from natural language user prompt.
+        Infers DesignIntentContract from natural language user prompt,
+        auto-sensing project stack, domain blueprints, and autonomous best-in-class defaults.
         """
         norm_prompt = normalize_text(prompt)
         user_overrides = user_overrides or {}
 
         matched_domain, confidence_score, match_reasons = self._match_domain(norm_prompt)
-        
-        # Determine product mode
         detected_mode = self._detect_product_mode(norm_prompt, matched_domain)
 
-        # Ambiguity determination
+        # Autonomously scan project stack context
+        stack_sensor = ProjectStackSensor(project_dir)
+        stack_profile = stack_sensor.scan()
+
+        # Retrieve domain blueprint
+        domain_id = matched_domain["id"]
+        blueprint = self.blueprints.get(domain_id, {})
+
+        # Autonomous Ambiguity Handling (Zero-Interrogation Protocol)
         if confidence_score >= 0.80:
             ambiguity_status = "low_ambiguity"
             clarification_needed = False
@@ -57,36 +82,56 @@ class DesignDirector:
             clarification_needed = False
             candidate_directions = self._generate_candidate_directions(matched_domain)
         else:
-            ambiguity_status = "high_ambiguity"
-            clarification_needed = True
+            # Autonomous Best-in-Class Fallback — NEVER halt vibe coding with clarification questions
+            ambiguity_status = "autonomous_best_in_class_fallback"
+            clarification_needed = False
             candidate_directions = self._generate_candidate_directions(matched_domain)
 
         # Language detection
         has_persian = bool(re.search(r"[\u0600-\u06FF]", prompt))
         language = ["fa", "en"] if has_persian else ["en"]
 
+        # Smart Lighting / Theme Strategy (Breaking the Dark Mode Bias)
+        theme_bias = user_overrides.get("theme_bias") or blueprint.get("theme_bias", "light")
+
         # Hard constraints extraction
         hard_constraints = [
-            "WCAG AA contrast >= 4.5:1",
-            "Zero horizontal overflow on 320px/375px",
-            "Touch targets >= 44px"
+            "WCAG AA contrast >= 4.5:1 (Target AAA >= 7:1 for text)",
+            "Zero horizontal overflow on 320px/375px/390px",
+            "Touch targets >= 44px (Minimum accessible tap area)",
+            "Zero raw unicode emojis in UI (Inline SVGs with stroke='currentColor' only)",
+            "Interactive buttons and switches must have real functional React state"
         ]
         if has_persian:
-            hard_constraints.append("RTL punctuation isolation (<bdi> / unicode-bidi)")
-            hard_constraints.append("Vazirmatn web font integration")
+            hard_constraints.append("RTL punctuation and numerical isolation via <bdi>")
+            hard_constraints.append("Vazirmatn / Shabnam Persian web font integration")
 
-        # Construct DesignIntentContract
+        # Wireframe-First Thinking: Pre-compute 3-step spatial skeleton
+        section_flow = blueprint.get("section_flow", [
+            {"id": "hero", "name": "Hero Section", "type": "split_hero"},
+            {"id": "features", "name": "Core Features", "type": "bento_grid"},
+            {"id": "footer", "name": "Footer Hub", "type": "standard_footer"}
+        ])
+
+        # Research Hook: autonomous lookup guidance if confidence is modest
+        research_hook = {
+            "should_research": confidence_score < 0.60,
+            "suggested_query": f"{matched_domain.get('name_en', 'Modern Web')} UI UX trends 2026 Dribbble Mobbin"
+        }
+
+        # Construct Comprehensive DesignIntentContract
         intent = {
-            "product_domain": user_overrides.get("product_domain") or matched_domain["id"],
+            "product_domain": user_overrides.get("product_domain") or domain_id,
             "audience": {
                 "type": matched_domain.get("name_en", "General Audience"),
-                "technical_level": "expert" if "terminal" in matched_domain["id"] or "devops" in matched_domain["id"] else "general",
+                "technical_level": "expert" if "terminal" in domain_id or "devops" in domain_id else "general",
                 "primary_device": "mobile" if matched_domain.get("density") == "airy" else "cross_platform"
             },
             "product_mode": user_overrides.get("product_mode") or detected_mode,
-            "business_goal": f"Deliver high-conversion and high-trust experience for {matched_domain['name_en']}",
+            "business_goal": f"Deliver high-conversion, masterpiece experience for {matched_domain['name_en']}",
             "visual_energy": matched_domain.get("visual_energy", "calm_restrained"),
             "density": user_overrides.get("density") or matched_domain.get("density", "balanced"),
+            "theme_strategy": theme_bias,
             "platform": ["mobile", "tablet", "desktop"],
             "language": language,
             "confidence": {
@@ -99,14 +144,24 @@ class DesignDirector:
             "clarification_needed": clarification_needed,
             "candidate_directions": candidate_directions,
             "hard_constraints": hard_constraints,
+            "blueprint": {
+                "signature_widget": blueprint.get("signature_widget", {}),
+                "layout_flavors": blueprint.get("layout_flavors", []),
+                "ambient_motion": blueprint.get("ambient_motion", {}),
+                "mock_data": blueprint.get("mock_data", {}).get("fa" if has_persian else "en", {})
+            },
+            "wireframe_skeleton": [s["name"] for s in section_flow],
+            "research_hook": research_hook,
+            "stack_profile": stack_profile,
             "soft_preferences": [
-                f"Prioritize {matched_domain.get('visual_energy', 'calm')} aesthetic",
-                f"Recommended style family: {matched_domain.get('recommended_styles', ['clean_stripe'])[0]}"
+                f"Prioritize {theme_bias} mode based on domain psychology",
+                f"Recommended style family: {matched_domain.get('recommended_styles', ['clean_stripe'])[0]}",
+                f"Format output as {stack_profile['recommendation']['file_extension']} ({stack_profile['recommendation']['tailwind_syntax']})"
             ],
             "provenance": {
                 "product_domain": "user_explicit" if "product_domain" in user_overrides else "inferred",
                 "product_mode": "user_explicit" if "product_mode" in user_overrides else "inferred",
-                "confidence": "system_policy"
+                "confidence": "system_policy_v3_2"
             }
         }
         return intent

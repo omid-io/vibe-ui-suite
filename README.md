@@ -8,8 +8,10 @@
 
 [![CI Pipeline](https://github.com/omid-io/vibe-ui-suite/actions/workflows/ci.yml/badge.svg)](https://github.com/omid-io/vibe-ui-suite/actions/workflows/ci.yml)
 [![npm version](https://img.shields.io/npm/v/@omid-io/tokens.svg?color=cb3837&label=npm)](https://www.npmjs.com/package/@omid-io/tokens)
-[![Open VSX](https://img.shields.io/badge/Open--VSX-omid--io.vibe--ui--vscode-purple.svg)](https://open-vsx.org/extension/omid-io/vibe-ui-vscode)
-[![VS Code Marketplace](https://img.shields.io/badge/VS_Code_Marketplace-omid--io.vibe--ui--vscode-blue.svg)](https://marketplace.visualstudio.com/items?itemName=omid-io.vibe-ui-vscode)
+[![npm downloads](https://img.shields.io/npm/dm/%40omid-io%2Ftokens?color=red&label=npm%20downloads)](https://www.npmjs.com/package/@omid-io/tokens)
+[![Open-VSX Downloads](https://img.shields.io/open-vsx/dt/omid-io/vibe-ui-vscode?color=green&logo=eclipseche&label=open-vsx%20downloads)](https://open-vsx.org/extension/omid-io/vibe-ui-vscode)
+[![VS Code Marketplace Installs](https://img.shields.io/visual-studio-marketplace/i/omid-io.vibe-ui-vscode?color=blue&logo=visual-studio-code&label=marketplace%20installs)](https://marketplace.visualstudio.com/items?itemName=omid-io.vibe-ui-vscode)
+[![GitHub Stars](https://img.shields.io/github/stars/omid-io/vibe-ui-suite?style=social)](https://github.com/omid-io/vibe-ui-suite)
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
 [![WCAG 2.2 AA](https://img.shields.io/badge/WCAG_2.2-AA_Mathematical-success.svg)](evals/)
 
@@ -67,7 +69,7 @@ Headless Browser Evaluation (Playwright 375px mobile overflow)
 Verified Output or Actionable Failure Diagnostics
 ```
 
-> **Day-One Transparency**: Vibe UI Suite is at `v3.1.0`. The project is actively evolving. Constructive criticism, issues, and contributions from frontend engineers and AI researchers are warmly welcomed.
+> **Day-One Transparency**: Vibe UI Suite is at `v3.2.0` (The Autonomous Masterpiece Engine — Vibe Coding Edition). Featuring 24 domain blueprints, non-blocking stack sensing (<1ms), smart lighting strategy eliminating dark-mode bias, anti-slop aesthetic invariants, and living React 19 TSX generation. Constructive criticism, issues, and contributions from frontend engineers and AI researchers are warmly welcomed.
 
 ---
 

@@ -135,7 +135,7 @@ export default function HomePage() {
         <HeroSection
           chemistry={chemistry}
           isRtl={isRtl}
-          onDeployClick={() => alert(isRtl ? 'دستور استقرار پایپ‌لاین ارسال شد' : 'Pipeline deployment initiated')}
+          onDeployClick={() => alert(isRtl ? 'دستور استقرار پایپ لاین ارسال شد' : 'Pipeline deployment initiated')}
           onSpecClick={() => alert(isRtl ? 'سند دیزاین در حال بارگذاری است' : 'Opening canonical design-spec.json')}
         />
 
@@ -150,7 +150,7 @@ export default function HomePage() {
             </h2>
             <p className="text-sm text-textMuted max-w-2xl">
               {isRtl
-                ? 'به جای تولید صفحات تکراری و کلیشه‌ای، ایجنت به صورت خودکار یکی از ۵ ساختار دیزاین زیر را متناسب با حوزه انتخاب می‌کند.'
+                ? 'به جای تولید صفحات تکراری و کلیشه ای، ایجنت به صورت خودکار یکی از ۵ ساختار دیزاین زیر را متناسب با حوزه انتخاب می کند.'
                 : 'Vibe UI eliminates monotonous AI slop by actively alternating across 5 production-grade design archetypes.'}
             </p>
           </div>
@@ -214,7 +214,7 @@ export default function HomePage() {
               </h3>
               <p className="text-xs text-textMuted leading-relaxed">
                 {isRtl
-                  ? 'تمامی رنگ‌ها در فضای OKLCH اعتبارسنجی شده و حداقل کنتراست ۴.۵:۱ برای متن و ۳:۱ برای تیترها تضمین می‌شود.'
+                  ? 'تمامی رنگ ها در فضای OKLCH اعتبارسنجی شده و حداقل کنتراست ۴.۵:۱ برای متن و ۳:۱ برای تیترها تضمین می شود.'
                   : 'Calculates exact relative luminance in OKLCH space, guaranteeing >= 4.5:1 for body copy and >= 3.0:1 for headlines.'}
               </p>
               <div className="ltr-code text-xs font-mono bg-canvas rounded-md p-2 border border-border text-emerald-500">
@@ -234,7 +234,7 @@ export default function HomePage() {
               </h3>
               <p className="text-xs text-textMuted leading-relaxed">
                 {isRtl
-                  ? 'حرکات نرم و اسکرول پیوسته بدون وابستگی به فریم‌ریت با فرمول میراشوندگی نمایی یکپارچه اجرا می‌شوند.'
+                  ? 'حرکات نرم و اسکرول پیوسته بدون وابستگی به فریم ریت با فرمول میراشوندگی نمایی یکپارچه اجرا می شوند.'
                   : 'Exponential decay integration across 60Hz, 120Hz, and 144Hz displays with lambda decay physics.'}
               </p>
               <div className="ltr-code text-xs font-mono bg-canvas rounded-md p-2 border border-border text-textPrimary">
@@ -250,11 +250,11 @@ export default function HomePage() {
                 </svg>
               </div>
               <h3 className="text-base font-bold text-textPrimary">
-                {isRtl ? 'ثبات ساختاری راست‌چین' : 'Fixed-Structure Semantic RTL'}
+                {isRtl ? 'ثبات ساختاری راست چین' : 'Fixed-Structure Semantic RTL'}
               </h3>
               <p className="text-xs text-textMuted leading-relaxed">
                 {isRtl
-                  ? 'گریدها و ستون‌های ماکرو قفل می‌مانند؛ تغییر جهت صرفاً روی پاراگراف‌ها و کلمات انگلیسی در تگ bdi اعمال می‌شود.'
+                  ? 'گریدها و ستون های ماکرو قفل می مانند؛ تغییر جهت صرفاً روی پاراگراف ها و کلمات انگلیسی در تگ bdi اعمال می شود.'
                   : 'Macro grid coordinates remain physically locked while typography adopts semantic RTL with bidi isolation.'}
               </p>
               <div className="ltr-code text-xs font-mono bg-canvas rounded-md p-2 border border-border text-accent">

@@ -7,6 +7,29 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ---
 
+## [3.2.0] - 2026-09-24
+
+### Added & Revolutionized — The Autonomous Masterpiece Engine (Vibe Coding Edition)
+- **Domain Blueprints Knowledge Base (`data/domain_blueprints.json`)**:
+  - Authored comprehensive architectural specifications across all 24 canonical domains covering section flow, signature interactive widgets (e.g. Yield Simulator for FinTech, Before/After Slider for Clinical Wellness, Orderbook Ticker for Crypto, Menu Tab Carousel for Dining), 3 distinct layout flavors per domain, and realistic production mock data.
+- **Project Stack & Context Sensor (`vibe_core/stack_sensor.py`)**:
+  - Implemented ultra-fast (<1ms) non-blocking stack sensor scanning `package.json` and CSS entry points to detect React 18/19, Tailwind v3/v4 (`@theme`), icon libraries (`lucide-react`, `@heroicons`, `inline_svg`), and existing brand CSS variables for zero-friction design inheritance.
+- **Smart Lighting Strategy & Zero-Interrogation Director (`vibe_core/director.py`)**:
+  - Completely eliminated halting interrogation questions (`clarification_needed = True` replaced by `autonomous_best_in_class_fallback`).
+  - Implemented contextual theme bias: light themes (Warm Editorial / Clean Slate) are enforced for clinical wellness, healthcare, real estate, education, fashion, news, and charity; dark mode is restricted to terminal, crypto, and devops.
+  - Implemented 3-step wireframe-first spatial planning and autonomous research hook.
+- **Anti-Slop Aesthetic Invariants & Critic Upgrade (`vibe_core/critic.py` & `constants.py`)**:
+  - Codified aesthetic hard gates penalizing clichéd AI tropes: repetitive `sparkle` icons (`✨`), generic purple/indigo gradients, and Inter-only typography without display pairing.
+  - Integrated `data/typography_variants.json` promoting character-rich pairings (Plus Jakarta Sans, Cabinet Grotesk, Instrument Serif, Syne, Vazirmatn, Shabnam).
+- **Living React 19 TSX Generation (`vibe_core/generator.py`)**:
+  - Added native `generate_react_tsx()` emitting modular `.tsx` components featuring real functional React state (`useState`) for pricing switches, interactive tabs, metric sliders, glowing edge border beams, and strict `<bdi>` isolation.
+- **Lead Agent Protocols Overhaul (`mr-ui-designer/AGENT.md`)**:
+  - Codified the One-Shot Delighter Protocol, screenshot-to-code reference mode, and wireframe-first thinking.
+- **Verified Master Quality Gates**:
+  - 100% of 9 test suites passing clean in 2300ms via `scripts/run_all_tests.py`.
+
+---
+
 ## [3.1.1] - 2026-09-04
 
 ### Enhanced & Standardized — VS Code & Open-VSX Extension Overhaul
