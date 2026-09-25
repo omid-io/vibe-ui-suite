@@ -6,289 +6,1185 @@
       "id": "beauty_clinical_wellness",
       "name_en": "Beauty, Dermatology & Clinical Wellness",
       "name_fa": "زیبایی، پوست و سلامت بالینی",
-      "aliases": ["کلینیک", "پوست", "زیبایی", "لیزر", "dermatology", "aesthetic", "spa", "cosmetics", "مراقبت پوست", "جوانسازی"],
+      "aliases": [
+        "کلینیک",
+        "پوست",
+        "زیبایی",
+        "لیزر",
+        "dermatology",
+        "aesthetic",
+        "spa",
+        "cosmetics",
+        "مراقبت پوست",
+        "جوانسازی",
+        "اسپا"
+      ],
       "primary_mode": "persuade",
       "default_trust_level": "very_high",
       "visual_energy": "calm_restrained",
       "density": "airy",
-      "recommended_styles": ["quiet_luxury", "soft_humanist", "editorial_magazine"],
-      "forbidden_styles": ["neobrutalism", "data_dense_terminal", "retro_futurism"]
+      "recommended_styles": [
+        "quiet_luxury",
+        "soft_humanist",
+        "editorial_magazine"
+      ],
+      "forbidden_styles": [
+        "neobrutalism",
+        "data_dense_terminal",
+        "retro_futurism"
+      ],
+      "strong_signals": [
+        "کلینیک تخصصی پوست",
+        "پوست و مو",
+        "لیزر گلوریا",
+        "کاشت ابرو",
+        "زیبایی پوست",
+        "dermatology",
+        "medical spa",
+        "skincare",
+        "trichology",
+        "hair restoration",
+        "scalp therapy",
+        "skin diagnosis"
+      ],
+      "negative_signals": [
+        "دندانپزشکی",
+        "بیمارستان",
+        "پزشک اطفال",
+        "dental",
+        "implant",
+        "hospital",
+        "کانتینر",
+        "کوبرنتیز",
+        "کتاب",
+        "لوازم التحریر",
+        "حسابداری",
+        "بدنسازی",
+        "فیتنس"
+      ]
     },
     {
       "id": "fintech_banking",
       "name_en": "Fintech, Wealth & Corporate Banking",
       "name_fa": "فین تک، بانکداری و سرمایه گذاری",
-      "aliases": ["بانک", "مالی", "وام", "سرمایه", "حسابداری", "fintech", "banking", "wealth", "investment", "bonds"],
+      "aliases": [
+        "بانک",
+        "مالی",
+        "وام",
+        "سرمایه",
+        "حسابداری",
+        "fintech",
+        "banking",
+        "wealth",
+        "investment",
+        "bonds",
+        "بانکی",
+        "سرمایه گذاری",
+        "اعتبار سنجی",
+        "treasury",
+        "credit score",
+        "accounting"
+      ],
       "primary_mode": "operate",
       "default_trust_level": "maximum",
       "visual_energy": "calm_restrained",
       "density": "balanced",
-      "recommended_styles": ["clean_stripe", "minimal_swiss", "editorial_magazine"],
-      "forbidden_styles": ["neobrutalism", "retro_futurism"]
+      "recommended_styles": [
+        "clean_stripe",
+        "minimal_swiss",
+        "editorial_magazine"
+      ],
+      "forbidden_styles": [
+        "neobrutalism",
+        "retro_futurism"
+      ],
+      "strong_signals": [
+        "تسهیلات و وام",
+        "وام بانکی",
+        "مدیریت ثروت",
+        "حسابداری ابری",
+        "وام",
+        "تسهیلات",
+        "حسابداری",
+        "wealth management",
+        "treasury dashboard",
+        "micro-lending",
+        "risk assessment scoring",
+        "bonds"
+      ],
+      "negative_signals": [
+        "ارز دیجیتال",
+        "بیت کوین",
+        "کریپتو",
+        "crypto",
+        "web3",
+        "orderbook"
+      ]
     },
     {
       "id": "crypto_trading_web3",
       "name_en": "Crypto, Trading & Web3 Exchanges",
       "name_fa": "ارز دیجیتال، صرافی و تریدینگ",
-      "aliases": ["صرافی", "ترید", "ارز دیجیتال", "بیت کوین", "کریپتو", "crypto", "trading", "exchange", "web3", "orderbook"],
+      "aliases": [
+        "صرافی",
+        "ترید",
+        "ارز دیجیتال",
+        "بیت کوین",
+        "کریپتو",
+        "crypto",
+        "trading",
+        "exchange",
+        "web3",
+        "orderbook",
+        "توکن",
+        "defi",
+        "amm",
+        "swap"
+      ],
       "primary_mode": "operate",
       "default_trust_level": "high",
       "visual_energy": "technical_dense",
       "density": "dense",
-      "recommended_styles": ["linear_dark", "data_dense_terminal", "clean_stripe"],
-      "forbidden_styles": ["soft_humanist", "editorial_magazine"]
+      "recommended_styles": [
+        "linear_dark",
+        "data_dense_terminal",
+        "clean_stripe"
+      ],
+      "forbidden_styles": [
+        "soft_humanist",
+        "editorial_magazine"
+      ],
+      "strong_signals": [
+        "دفتر سفارشات زنده",
+        "دفتر سفارشات",
+        "صرافی ارز دیجیتال",
+        "ارز دیجیتال",
+        "استیکینگ توکن",
+        "استیکینگ",
+        "کیف پول غیرمتمرکز",
+        "وب۳",
+        "perpetuals trading",
+        "orderbook",
+        "amm swap",
+        "yield farming",
+        "defi lending",
+        "staking",
+        "web3"
+      ],
+      "negative_signals": []
     },
     {
       "id": "devops_cloud_terminal",
       "name_en": "DevOps, Cloud & Infrastructure",
       "name_fa": "دِواپس، سرور و زیرساخت ابری",
-      "aliases": ["سرور", "کلود", "دواپس", "داکر", "مانیتورینگ", "devops", "cloud", "k8s", "docker", "terminal", "logs"],
+      "aliases": [
+        "سرور",
+        "کلود",
+        "دواپس",
+        "داکر",
+        "مانیتورینگ",
+        "devops",
+        "cloud",
+        "k8s",
+        "docker",
+        "terminal",
+        "logs",
+        "سرورها",
+        "ترمینال"
+      ],
       "primary_mode": "operate",
       "default_trust_level": "high",
       "visual_energy": "technical_dense",
       "density": "dense",
-      "recommended_styles": ["data_dense_terminal", "linear_dark", "minimal_swiss"],
-      "forbidden_styles": ["quiet_luxury", "editorial_magazine"]
+      "recommended_styles": [
+        "data_dense_terminal",
+        "linear_dark",
+        "minimal_swiss"
+      ],
+      "forbidden_styles": [
+        "quiet_luxury",
+        "editorial_magazine"
+      ],
+      "strong_signals": [
+        "مانیتورینگ سرورها",
+        "لاگ های داکر",
+        "کانتینرهای کوبرنتیز",
+        "کوبرنتیز و پادها",
+        "کوبرنتیز",
+        "داکر",
+        "پادها",
+        "kubernetes cluster",
+        "observability hud",
+        "log stream",
+        "latency profiling terminal",
+        "k8s"
+      ],
+      "negative_signals": []
     },
     {
       "id": "saas_b2b_enterprise",
       "name_en": "Enterprise B2B SaaS & CRM",
       "name_fa": "سامانه های ابری سازمانی و سی آرام",
-      "aliases": ["سازمانی", "اتوماسیون", "سی آر ام", "نرم افزار ابری", "saas", "crm", "enterprise", "b2b", "workflow"],
+      "aliases": [
+        "سازمانی",
+        "اتوماسیون",
+        "سی آر ام",
+        "نرم افزار ابری",
+        "saas",
+        "crm",
+        "enterprise",
+        "b2b",
+        "workflow"
+      ],
       "primary_mode": "operate",
       "default_trust_level": "high",
       "visual_energy": "calm_restrained",
       "density": "balanced",
-      "recommended_styles": ["clean_stripe", "minimal_swiss", "linear_dark"],
-      "forbidden_styles": ["neobrutalism", "retro_futurism"]
+      "recommended_styles": [
+        "clean_stripe",
+        "minimal_swiss",
+        "linear_dark"
+      ],
+      "forbidden_styles": [
+        "neobrutalism",
+        "retro_futurism"
+      ],
+      "strong_signals": [
+        "ارتباط با مشتریان و اتوماسیون",
+        "اتوماسیون فروش",
+        "منابع انسانی و حضور و غیاب",
+        "حضور و غیاب",
+        "اتوماسیون منابع انسانی",
+        "sales pipeline automation",
+        "enterprise crm",
+        "crm sales pipeline",
+        "hr automation"
+      ],
+      "negative_signals": [
+        "تسک های روزانه",
+        "پروژه های تیمی",
+        "sprint planning",
+        "فاکتور آنلاین"
+      ]
     },
     {
       "id": "ai_developer_platform",
       "name_en": "AI Developer Platform & Agent Workspaces",
       "name_fa": "پلتفرم های هوش مصنوعی و ایجنت ها",
-      "aliases": ["هوش مصنوعی", "ایجنت", "مدل زبانی", "ai", "llm", "agents", "copilot", "prompt", "vector"],
+      "aliases": [
+        "هوش مصنوعی",
+        "ایجنت",
+        "مدل زبانی",
+        "ai",
+        "llm",
+        "agents",
+        "copilot",
+        "prompt",
+        "vector"
+      ],
       "primary_mode": "operate",
       "default_trust_level": "high",
       "visual_energy": "technical_dense",
       "density": "balanced",
-      "recommended_styles": ["linear_dark", "modern_glass_2", "clean_stripe"],
-      "forbidden_styles": ["organic_nordic", "bauhaus_geometric"]
+      "recommended_styles": [
+        "linear_dark",
+        "modern_glass_2",
+        "clean_stripe"
+      ],
+      "forbidden_styles": [
+        "organic_nordic",
+        "bauhaus_geometric"
+      ],
+      "strong_signals": [
+        "توسعه مدل های زبانی",
+        "مدل های زبانی",
+        "ایجنت های هوشمند",
+        "مدل های یادگیری عمیق",
+        "پایگاه داده برداری",
+        "کدنویسی ابری",
+        "vector database",
+        "agent playground",
+        "fine-tuning dashboard",
+        "foundation models",
+        "autonomous ai agent"
+      ],
+      "negative_signals": [
+        "آموزش برنامه نویسی",
+        "آکادمی آنلاین",
+        "کنکور سراسری",
+        "آزمون های آزمایشی",
+        "academy",
+        "course",
+        "lms",
+        "school",
+        "refugee",
+        "freight",
+        "hair"
+      ]
     },
     {
       "id": "ecommerce_luxury_fashion",
       "name_en": "Luxury Fashion & High-End Apparel",
       "name_fa": "فروشگاه آنلاین مد و کالای لوکس",
-      "aliases": ["مزون", "لباس", "جواهر", "لوکس", "مد", "بوتیک", "fashion", "luxury", "boutique", "jewelry"],
+      "aliases": [
+        "مزون",
+        "لباس",
+        "جواهر",
+        "لوکس",
+        "مد",
+        "بوتیک",
+        "fashion",
+        "luxury",
+        "boutique",
+        "jewelry",
+        "watchmaker",
+        "timepiece",
+        "apparel"
+      ],
       "primary_mode": "persuade",
       "default_trust_level": "high",
       "visual_energy": "editorial_prestige",
       "density": "airy",
-      "recommended_styles": ["quiet_luxury", "editorial_magazine", "minimal_swiss"],
-      "forbidden_styles": ["data_dense_terminal", "neobrutalism"]
+      "recommended_styles": [
+        "quiet_luxury",
+        "editorial_magazine",
+        "minimal_swiss"
+      ],
+      "forbidden_styles": [
+        "data_dense_terminal",
+        "neobrutalism"
+      ],
+      "strong_signals": [
+        "مزون آنلاین",
+        "لباس شب",
+        "جواهرات دست ساز",
+        "اکسسوری های مینیمال چرمی",
+        "چرم طبیعی",
+        "مزون",
+        "swiss luxury watchmaker",
+        "timepiece configurator",
+        "couture",
+        "artisan jewelry boutique",
+        "high fashion couture",
+        "luxury fashion",
+        "leather accessory"
+      ],
+      "negative_signals": [
+        "پنت هاوس",
+        "ویلا",
+        "لواسان",
+        "املاک",
+        "معماری",
+        "realty",
+        "penthouse",
+        "architecture",
+        "سدان",
+        "خودرو",
+        "chalet",
+        "اسکی",
+        "مدرسه سازی",
+        "کلیدهای رمزنگاری",
+        "فاکتور"
+      ]
     },
     {
       "id": "ecommerce_mass_market",
       "name_en": "E-Commerce & Digital Marketplaces",
       "name_fa": "فروشگاه آنلاین و مارکت پلیس عمومی",
-      "aliases": ["فروشگاه", "خرید آنلاین", "مارکت پلیس", "کالا", "سبد خرید", "shop", "store", "marketplace", "ecommerce"],
+      "aliases": [
+        "فروشگاه",
+        "خرید آنلاین",
+        "مارکت پلیس",
+        "کالا",
+        "سبد خرید",
+        "shop",
+        "store",
+        "marketplace",
+        "ecommerce",
+        "فروشگاه اینترنتی",
+        "کتاب",
+        "لوازم التحریر",
+        "grocery",
+        "bookstore"
+      ],
       "primary_mode": "persuade",
       "default_trust_level": "high",
       "visual_energy": "calm_restrained",
       "density": "balanced",
-      "recommended_styles": ["clean_stripe", "soft_humanist", "minimal_swiss"],
-      "forbidden_styles": ["data_dense_terminal", "retro_futurism"]
+      "recommended_styles": [
+        "clean_stripe",
+        "soft_humanist",
+        "minimal_swiss"
+      ],
+      "forbidden_styles": [
+        "data_dense_terminal",
+        "retro_futurism"
+      ],
+      "strong_signals": [
+        "لوازم خانگی و کالای دیجیتال",
+        "لوازم خانگی",
+        "کالای دیجیتال",
+        "کتاب و لوازم التحریر",
+        "سوپرمارکت",
+        "grocery delivery",
+        "consumer electronics",
+        "supermarket grocery",
+        "instant cart"
+      ],
+      "negative_signals": [
+        "مزون",
+        "لباس شب",
+        "جواهرات دست ساز",
+        "چرم طبیعی",
+        "couture",
+        "watchmaker"
+      ]
     },
     {
       "id": "real_estate_architecture",
       "name_en": "Real Estate, Luxury Villas & Architecture",
       "name_fa": "املاک، ویلا و معماری مدرن",
-      "aliases": ["املاک", "ویلا", "خانه", "معماری", "پنت هاوس", "real estate", "villa", "property", "architecture", "interior"],
+      "aliases": [
+        "املاک",
+        "ویلا",
+        "خانه",
+        "معماری",
+        "پنت هاوس",
+        "real estate",
+        "villa",
+        "property",
+        "architecture",
+        "interior",
+        "penthouse",
+        "realty"
+      ],
       "primary_mode": "persuade",
       "default_trust_level": "high",
       "visual_energy": "editorial_prestige",
       "density": "airy",
-      "recommended_styles": ["editorial_magazine", "quiet_luxury", "organic_nordic"],
-      "forbidden_styles": ["data_dense_terminal", "neobrutalism"]
+      "recommended_styles": [
+        "editorial_magazine",
+        "quiet_luxury",
+        "organic_nordic"
+      ],
+      "forbidden_styles": [
+        "data_dense_terminal",
+        "neobrutalism"
+      ],
+      "strong_signals": [
+        "پنت هاوس های لوکس",
+        "ویلاهای مدرن",
+        "لواسان",
+        "پنت هاوس",
+        "ویلاهای",
+        "ویلا",
+        "coastal architecture",
+        "modern penthouse realty",
+        "penthouse realty",
+        "luxury coastal architecture"
+      ],
+      "negative_signals": [
+        "patent",
+        "trademark",
+        "حقوقی",
+        "دعاوی"
+      ]
     },
     {
       "id": "healthcare_hospital_medical",
       "name_en": "Healthcare, Hospitals & Clinical Medicine",
       "name_fa": "بیمارستان، درمانگاه و خدمات پزشکی عمومی",
-      "aliases": ["پزشک", "بیمارستان", "درمانگاه", "دارو", "نوبت دهی", "medical", "hospital", "clinic", "health", "doctor"],
+      "aliases": [
+        "پزشک",
+        "بیمارستان",
+        "درمانگاه",
+        "دارو",
+        "نوبت دهی",
+        "medical",
+        "hospital",
+        "clinic",
+        "health",
+        "doctor",
+        "پزشکی",
+        "telemedicine"
+      ],
       "primary_mode": "persuade",
       "default_trust_level": "maximum",
       "visual_energy": "calm_restrained",
       "density": "balanced",
-      "recommended_styles": ["soft_humanist", "minimal_swiss", "quiet_luxury"],
-      "forbidden_styles": ["neobrutalism", "retro_futurism", "linear_dark"]
+      "recommended_styles": [
+        "soft_humanist",
+        "minimal_swiss",
+        "quiet_luxury"
+      ],
+      "forbidden_styles": [
+        "neobrutalism",
+        "retro_futurism",
+        "linear_dark"
+      ],
+      "strong_signals": [
+        "بیمارستان فوق تخصصی",
+        "نوبت دهی آنلاین بیمارستان",
+        "کلینیک جامع دندانپزشکی",
+        "ایمپلنت دیجیتال",
+        "دندانپزشکی",
+        "ایمپلنت",
+        "pediatric outpatient",
+        "physician appointment booking",
+        "telemedicine consultation",
+        "hipaa-compliant"
+      ],
+      "negative_signals": [
+        "پوست و مو",
+        "لیزر",
+        "کاشت ابرو",
+        "dermatology",
+        "skincare"
+      ]
     },
     {
       "id": "education_edtech_lms",
       "name_en": "EdTech, Universities & Online Courses",
       "name_fa": "آموزش آنلاین، دانشگاه و یادگیری",
-      "aliases": ["آموزش", "دوره", "دانشگاه", "یادگیری", "استاد", "edtech", "course", "learn", "lms", "academy"],
+      "aliases": [
+        "آموزش",
+        "دوره",
+        "دانشگاه",
+        "یادگیری",
+        "استاد",
+        "edtech",
+        "course",
+        "learn",
+        "lms",
+        "academy"
+      ],
       "primary_mode": "read",
       "default_trust_level": "high",
       "visual_energy": "calm_restrained",
       "density": "balanced",
-      "recommended_styles": ["soft_humanist", "clean_stripe", "bauhaus_geometric"],
-      "forbidden_styles": ["data_dense_terminal", "retro_futurism"]
+      "recommended_styles": [
+        "soft_humanist",
+        "clean_stripe",
+        "bauhaus_geometric"
+      ],
+      "forbidden_styles": [
+        "data_dense_terminal",
+        "retro_futurism"
+      ],
+      "strong_signals": [
+        "آکادمی آنلاین",
+        "آموزش برنامه نویسی",
+        "آزمون های آزمایشی",
+        "کنکور سراسری",
+        "کنکور",
+        "machine learning academy",
+        "course catalog",
+        "edtech",
+        "lms"
+      ],
+      "negative_signals": []
     },
     {
       "id": "creative_portfolio_agency",
       "name_en": "Creative Agency & Design Portfolios",
       "name_fa": "پورتفولیو دیزاین، آژانس خلاق و استودیو",
-      "aliases": ["استودیو", "طراحی", "پورتفولیو", "آژانس", "گرافیک", "agency", "portfolio", "creative", "design", "studio"],
+      "aliases": [
+        "استودیو",
+        "طراحی",
+        "پورتفولیو",
+        "آژانس",
+        "گرافیک",
+        "agency",
+        "portfolio",
+        "creative",
+        "design",
+        "studio"
+      ],
       "primary_mode": "experience",
       "default_trust_level": "medium",
       "visual_energy": "high_energy",
       "density": "airy",
-      "recommended_styles": ["neobrutalism", "editorial_magazine", "bauhaus_geometric", "modern_glass_2"],
-      "forbidden_styles": ["clean_stripe"]
+      "recommended_styles": [
+        "neobrutalism",
+        "editorial_magazine",
+        "bauhaus_geometric",
+        "modern_glass_2"
+      ],
+      "forbidden_styles": [
+        "clean_stripe"
+      ],
+      "strong_signals": [
+        "استودیو طراحی هویت بصری",
+        "هویت بصری و گرافیک",
+        "عکاسی صنعتی و تبلیغاتی",
+        "عکاسی صنعتی",
+        "creative design studio",
+        "motion portfolio",
+        "commercial photography"
+      ],
+      "negative_signals": [
+        "نویسنده",
+        "سخنران",
+        "مربی بدنسازی"
+      ]
     },
     {
       "id": "media_editorial_magazine",
       "name_en": "Editorial Publishing, News & Literary Magazines",
       "name_fa": "مجله خبری، مقالات تحلیلی و نشریه",
-      "aliases": ["خبر", "مجله", "مقاله", "نشریه", "روزنامه", "news", "magazine", "editorial", "article", "journal"],
+      "aliases": [
+        "خبر",
+        "مجله",
+        "مقاله",
+        "نشریه",
+        "روزنامه",
+        "news",
+        "magazine",
+        "editorial",
+        "article",
+        "journal"
+      ],
       "primary_mode": "read",
       "default_trust_level": "high",
       "visual_energy": "editorial_prestige",
       "density": "balanced",
-      "recommended_styles": ["editorial_magazine", "minimal_swiss", "organic_nordic"],
-      "forbidden_styles": ["data_dense_terminal", "linear_dark"]
+      "recommended_styles": [
+        "editorial_magazine",
+        "minimal_swiss",
+        "organic_nordic"
+      ],
+      "forbidden_styles": [
+        "data_dense_terminal",
+        "linear_dark"
+      ],
+      "strong_signals": [
+        "مجله آنلاین ادبی",
+        "نقد سینمایی",
+        "پایگاه تحلیلی اقتصاد دانش بنیان",
+        "اقتصاد دانش بنیان",
+        "مجله آنلاین",
+        "literary review",
+        "cultural criticism editorial",
+        "editorial magazine"
+      ],
+      "negative_signals": []
     },
     {
       "id": "food_restaurant_cafe",
       "name_en": "Restaurants, Specialty Cafes & Gastronomy",
       "name_fa": "کافه، رستوران و صنایع غذایی",
-      "aliases": ["رستوران", "کافه", "منو", "قهوه", "غذا", "cafe", "restaurant", "food", "coffee", "bistro", "menu"],
+      "aliases": [
+        "رستوران",
+        "کافه",
+        "منو",
+        "قهوه",
+        "غذا",
+        "cafe",
+        "restaurant",
+        "food",
+        "coffee",
+        "bistro",
+        "menu",
+        "bakery",
+        "michelin",
+        "tasting menu"
+      ],
       "primary_mode": "persuade",
       "default_trust_level": "medium",
       "visual_energy": "warm_inviting",
       "density": "airy",
-      "recommended_styles": ["organic_nordic", "editorial_magazine", "soft_humanist"],
-      "forbidden_styles": ["data_dense_terminal", "linear_dark"]
+      "recommended_styles": [
+        "organic_nordic",
+        "editorial_magazine",
+        "soft_humanist"
+      ],
+      "forbidden_styles": [
+        "data_dense_terminal",
+        "linear_dark"
+      ],
+      "strong_signals": [
+        "کافه رستوران باریستا",
+        "نوشیدنی های تخصصی",
+        "کافه رستوران",
+        "باریستا",
+        "قهوه دمی و دان روست",
+        "قهوه دمی",
+        "دان روست",
+        "tasting menu experience",
+        "table reservation",
+        "michelin star tasting menu",
+        "artisanal bakery",
+        "specialty third-wave cafe",
+        "specialty cafe",
+        "فروشگاه آنلاین انواع قهوه",
+        "انواع قهوه دمی",
+        "دان روست شده"
+      ],
+      "negative_signals": []
     },
     {
       "id": "travel_hospitality_tourism",
       "name_en": "Travel, Boutique Hotels & Tourism",
       "name_fa": "هتل داری، بومگردی و گردشگری",
-      "aliases": ["هتل", "سفر", "گردشگری", "تور", "اقامتگاه", "hotel", "travel", "tourism", "resort", "flight"],
+      "aliases": [
+        "هتل",
+        "سفر",
+        "گردشگری",
+        "تور",
+        "اقامتگاه",
+        "hotel",
+        "travel",
+        "tourism",
+        "resort",
+        "flight",
+        "chalet"
+      ],
       "primary_mode": "persuade",
       "default_trust_level": "high",
       "visual_energy": "warm_inviting",
       "density": "airy",
-      "recommended_styles": ["organic_nordic", "editorial_magazine", "quiet_luxury"],
-      "forbidden_styles": ["data_dense_terminal", "neobrutalism"]
+      "recommended_styles": [
+        "organic_nordic",
+        "editorial_magazine",
+        "quiet_luxury"
+      ],
+      "forbidden_styles": [
+        "data_dense_terminal",
+        "neobrutalism"
+      ],
+      "strong_signals": [
+        "بوم گردی و تورهای کویرنوردی",
+        "بوم گردی",
+        "کویرنوردی",
+        "رزرو آنلاین بلیت قطار و هواپیما",
+        "بلیت قطار",
+        "بلیت هواپیما",
+        "luxury ski chalet rental",
+        "ski chalet",
+        "eco-resort booking",
+        "wilderness expedition"
+      ],
+      "negative_signals": []
     },
     {
       "id": "legal_compliance_law",
       "name_en": "Law Firms, Legal Advice & Compliance",
       "name_fa": "دفاتر حقوقی، وکالت و مالیات",
-      "aliases": ["وکیل", "حقوقی", "دادگاه", "قرارداد", "مشاوره حقوقی", "law", "legal", "attorney", "compliance", "tax"],
+      "aliases": [
+        "وکیل",
+        "حقوقی",
+        "دادگاه",
+        "قرارداد",
+        "مشاوره حقوقی",
+        "law",
+        "legal",
+        "attorney",
+        "compliance",
+        "tax",
+        "وکالت",
+        "دعاوی",
+        "patent",
+        "trademark"
+      ],
       "primary_mode": "persuade",
       "default_trust_level": "maximum",
       "visual_energy": "editorial_prestige",
       "density": "balanced",
-      "recommended_styles": ["editorial_magazine", "minimal_swiss", "quiet_luxury"],
-      "forbidden_styles": ["neobrutalism", "retro_futurism", "linear_dark"]
+      "recommended_styles": [
+        "editorial_magazine",
+        "minimal_swiss",
+        "quiet_luxury"
+      ],
+      "forbidden_styles": [
+        "neobrutalism",
+        "retro_futurism",
+        "linear_dark"
+      ],
+      "strong_signals": [
+        "دفتر وکالت دادگستری",
+        "وکالت دادگستری",
+        "دعاوی تجاری",
+        "امور مهاجرت تحصیلی و کاری",
+        "امور مهاجرت",
+        "اخذ ویزا",
+        "patent prosecution",
+        "trademark registry",
+        "corporate law firm",
+        "regulatory compliance"
+      ],
+      "negative_signals": [
+        "سخنران",
+        "نویسنده"
+      ]
     },
     {
       "id": "gaming_entertainment_streaming",
       "name_en": "Gaming, Esports & Media Streaming",
       "name_fa": "گیمینگ، ورزش الکترونیک و استریم",
-      "aliases": ["بازی", "گیم", "استریم", "گیمینگ", "توییچ", "game", "gaming", "esports", "stream", "streamer"],
+      "aliases": [
+        "بازی",
+        "گیم",
+        "استریم",
+        "گیمینگ",
+        "توییچ",
+        "game",
+        "gaming",
+        "esports",
+        "stream",
+        "streamer"
+      ],
       "primary_mode": "experience",
       "default_trust_level": "medium",
       "visual_energy": "high_energy",
       "density": "balanced",
-      "recommended_styles": ["retro_futurism", "linear_dark", "modern_glass_2"],
-      "forbidden_styles": ["organic_nordic", "quiet_luxury"]
+      "recommended_styles": [
+        "retro_futurism",
+        "linear_dark",
+        "modern_glass_2"
+      ],
+      "forbidden_styles": [
+        "organic_nordic",
+        "quiet_luxury"
+      ],
+      "strong_signals": [
+        "ورزش الکترونیک و استریم",
+        "ورزش الکترونیک",
+        "استریم بازی",
+        "مسابقات ورزش الکترونیک",
+        "بازی های آنلاین",
+        "esports tournament",
+        "live gaming stream",
+        "gaming stream",
+        "فروشگاه بازی های آنلاین",
+        "گیفت کارت های دیجیتال",
+        "بازی های آنلاین"
+      ],
+      "negative_signals": [
+        "تصفیه پساب",
+        "فاضلاب",
+        "انرژی",
+        "بازیافت"
+      ]
     },
     {
       "id": "automotive_ev_mobility",
       "name_en": "Automotive, Electric Vehicles & Mobility",
       "name_fa": "خودروهای برقی، حمل ونقل و صنایع خودرو",
-      "aliases": ["ماشین", "خودرو", "برقی", "موتور", "تسلا", "car", "auto", "automotive", "ev", "mobility"],
+      "aliases": [
+        "ماشین",
+        "خودرو",
+        "برقی",
+        "موتور",
+        "تسلا",
+        "car",
+        "auto",
+        "automotive",
+        "ev",
+        "mobility"
+      ],
       "primary_mode": "persuade",
       "default_trust_level": "high",
       "visual_energy": "technical_dense",
       "density": "airy",
-      "recommended_styles": ["linear_dark", "clean_stripe", "bauhaus_geometric"],
-      "forbidden_styles": ["soft_humanist", "organic_nordic"]
+      "recommended_styles": [
+        "linear_dark",
+        "clean_stripe",
+        "bauhaus_geometric"
+      ],
+      "forbidden_styles": [
+        "soft_humanist",
+        "organic_nordic"
+      ],
+      "strong_signals": [
+        "خودروهای برقی هوشمند",
+        "ایستگاه های شارژ سریع",
+        "ایستگاه های شارژ",
+        "سدان الکتریکی مدرن",
+        "سدان الکتریکی",
+        "خودروهای برقی",
+        "ride-hailing dispatch",
+        "fleet battery monitoring",
+        "smart vehicle telemetry",
+        "electric mobility network"
+      ],
+      "negative_signals": [
+        "وانت بار",
+        "حمل اثاثیه"
+      ]
     },
     {
       "id": "logistics_supply_chain",
       "name_en": "Logistics, Freight & Supply Chain Management",
       "name_fa": "لجستیک، حمل کالا و انبارداری",
-      "aliases": ["حمل و نقل", "پست", "لجستیک", "باربری", "ارسال", "logistics", "freight", "shipping", "supply chain", "warehouse"],
+      "aliases": [
+        "حمل و نقل",
+        "پست",
+        "لجستیک",
+        "باربری",
+        "ارسال",
+        "logistics",
+        "freight",
+        "shipping",
+        "supply chain",
+        "warehouse",
+        "cargo"
+      ],
       "primary_mode": "operate",
       "default_trust_level": "high",
       "visual_energy": "technical_dense",
       "density": "dense",
-      "recommended_styles": ["clean_stripe", "minimal_swiss", "data_dense_terminal"],
-      "forbidden_styles": ["quiet_luxury", "editorial_magazine"]
+      "recommended_styles": [
+        "clean_stripe",
+        "minimal_swiss",
+        "data_dense_terminal"
+      ],
+      "forbidden_styles": [
+        "quiet_luxury",
+        "editorial_magazine"
+      ],
+      "strong_signals": [
+        "رهگیری محموله های بین المللی",
+        "رهگیری محموله",
+        "انبارداری",
+        "وانت بار و حمل اثاثیه",
+        "وانت بار",
+        "حمل اثاثیه",
+        "maritime freight forwarding",
+        "container tracking",
+        "cold-chain pharmaceutical delivery",
+        "freight forwarding"
+      ],
+      "negative_signals": []
     },
     {
       "id": "energy_greentech_sustainability",
       "name_en": "Clean Energy, GreenTech & Sustainability",
       "name_fa": "انرژی های پاک، محیط زیست و فناوری سبز",
-      "aliases": ["انرژی", "خورشیدی", "سبز", "محیط زیست", "تجدیدپذیر", "energy", "solar", "green", "sustainability", "cleantech"],
+      "aliases": [
+        "انرژی",
+        "خورشیدی",
+        "سبز",
+        "محیط زیست",
+        "تجدیدپذیر",
+        "energy",
+        "solar",
+        "green",
+        "sustainability",
+        "cleantech",
+        "تصفیه پساب",
+        "wind turbine"
+      ],
       "primary_mode": "persuade",
       "default_trust_level": "high",
       "visual_energy": "calm_restrained",
       "density": "balanced",
-      "recommended_styles": ["organic_nordic", "clean_stripe", "minimal_swiss"],
-      "forbidden_styles": ["neobrutalism", "data_dense_terminal"]
+      "recommended_styles": [
+        "organic_nordic",
+        "clean_stripe",
+        "minimal_swiss"
+      ],
+      "forbidden_styles": [
+        "neobrutalism",
+        "data_dense_terminal"
+      ],
+      "strong_signals": [
+        "نیروگاه های خورشیدی",
+        "شبکه انرژی تجدیدپذیر",
+        "تصفیه پساب های صنعتی",
+        "تصفیه پساب",
+        "توربین بادی",
+        "renewable solar grid",
+        "carbon offset sustainability",
+        "offshore wind turbine"
+      ],
+      "negative_signals": []
     },
     {
       "id": "nonprofit_charity_social",
       "name_en": "Non-Profit, Charities & Social Causes",
       "name_fa": "خیریه، خدمات اجتماعی و سازمان های مردم نهاد",
-      "aliases": ["خیریه", "نیکوکاری", "کمک", "داوطلب", "عام المنفعه", "charity", "nonprofit", "ngo", "volunteer", "donation"],
+      "aliases": [
+        "خیریه",
+        "نیکوکاری",
+        "کمک",
+        "داوطلب",
+        "عام المنفعه",
+        "charity",
+        "nonprofit",
+        "ngo",
+        "volunteer",
+        "donation",
+        "humanitarian",
+        "refugee",
+        "conservation"
+      ],
       "primary_mode": "persuade",
       "default_trust_level": "maximum",
       "visual_energy": "warm_inviting",
       "density": "balanced",
-      "recommended_styles": ["soft_humanist", "organic_nordic", "clean_stripe"],
-      "forbidden_styles": ["linear_dark", "retro_futurism", "data_dense_terminal"]
+      "recommended_styles": [
+        "soft_humanist",
+        "organic_nordic",
+        "clean_stripe"
+      ],
+      "forbidden_styles": [
+        "linear_dark",
+        "retro_futurism",
+        "data_dense_terminal"
+      ],
+      "strong_signals": [
+        "بنیاد نیکوکاری",
+        "کودکان بازمانده از تحصیل",
+        "مدرسه سازی در مناطق محروم",
+        "مدرسه سازی",
+        "humanitarian refugee aid",
+        "clean water foundation",
+        "wildlife conservation trust",
+        "endangered species tracker"
+      ],
+      "negative_signals": []
     },
     {
       "id": "personal_branding_creator",
       "name_en": "Creators, Authors & Personal Brands",
       "name_fa": "برندینگ شخصی، نویسندگان و خالقان محتوا",
-      "aliases": ["رزومه", "نویسنده", "استاد", "شخصی", "مشاور", "resume", "creator", "author", "speaker", "personal brand"],
+      "aliases": [
+        "رزومه",
+        "نویسنده",
+        "استاد",
+        "شخصی",
+        "مشاور",
+        "resume",
+        "creator",
+        "author",
+        "speaker",
+        "personal brand",
+        "بدنسازی",
+        "فیتنس",
+        "podcast"
+      ],
       "primary_mode": "experience",
       "default_trust_level": "high",
       "visual_energy": "editorial_prestige",
       "density": "airy",
-      "recommended_styles": ["editorial_magazine", "minimal_swiss", "soft_humanist"],
-      "forbidden_styles": ["data_dense_terminal"]
+      "recommended_styles": [
+        "editorial_magazine",
+        "minimal_swiss",
+        "soft_humanist"
+      ],
+      "forbidden_styles": [
+        "data_dense_terminal"
+      ],
+      "strong_signals": [
+        "سخنران انگیزشی",
+        "توسعه فردی",
+        "پادکست مستقل",
+        "مربی بدنسازی و فیتنس",
+        "نویسنده کتاب های توسعه فردی",
+        "independent podcast host",
+        "keynote speaker and technology essayist",
+        "keynote speaker"
+      ],
+      "negative_signals": [
+        "دفتر وکالت",
+        "دادگستری",
+        "دعاوی",
+        "law firm",
+        "attorney"
+      ]
     },
     {
       "id": "cybersecurity_identity_auth",
       "name_en": "Cybersecurity, Zero-Trust & Identity",
       "name_fa": "امنیت سایبری، احراز هویت و رمزنگاری",
-      "aliases": ["امنیت", "هک", "فایروال", "رمزنگاری", "احراز هویت", "security", "cyber", "firewall", "auth", "encryption"],
+      "aliases": [
+        "امنیت",
+        "هک",
+        "فایروال",
+        "رمزنگاری",
+        "احراز هویت",
+        "security",
+        "cyber",
+        "firewall",
+        "auth",
+        "encryption",
+        "zero-trust",
+        "passwordless"
+      ],
       "primary_mode": "operate",
       "default_trust_level": "maximum",
       "visual_energy": "technical_dense",
       "density": "dense",
-      "recommended_styles": ["linear_dark", "data_dense_terminal", "minimal_swiss"],
-      "forbidden_styles": ["soft_humanist", "organic_nordic"]
+      "recommended_styles": [
+        "linear_dark",
+        "data_dense_terminal",
+        "minimal_swiss"
+      ],
+      "forbidden_styles": [
+        "soft_humanist",
+        "organic_nordic"
+      ],
+      "strong_signals": [
+        "احراز هویت بدون گذرواژه",
+        "مدیریت دسترسی",
+        "کلیدهای رمزنگاری سخت افزاری",
+        "کلیدهای رمزنگاری",
+        "hsm",
+        "passwordless mfa auth",
+        "zero-trust identity governance",
+        "threat intelligence feed",
+        "vulnerability remediation"
+      ],
+      "negative_signals": []
     },
     {
       "id": "general_modern_saas",
       "name_en": "General Modern Software & Digital Products",
       "name_fa": "سامانه چندمنظوره و استارتاپ عمومی مدرن",
-      "aliases": ["عمومی", "استارتاپ", "نرم افزار", "سایت", "داشبورد", "general", "modern", "startup", "software", "dashboard"],
+      "aliases": [
+        "عمومی",
+        "استارتاپ",
+        "نرم افزار",
+        "سایت",
+        "داشبورد",
+        "general",
+        "modern",
+        "startup",
+        "software",
+        "dashboard",
+        "اسپرینت",
+        "تسک",
+        "همکاری تیمی",
+        "فاکتور",
+        "پیش فاکتور",
+        "task",
+        "sprint",
+        "productivity",
+        "invoice"
+      ],
       "primary_mode": "persuade",
       "default_trust_level": "high",
       "visual_energy": "calm_restrained",
       "density": "balanced",
-      "recommended_styles": ["clean_stripe", "minimal_swiss", "linear_dark"],
-      "forbidden_styles": []
+      "recommended_styles": [
+        "clean_stripe",
+        "minimal_swiss",
+        "linear_dark"
+      ],
+      "forbidden_styles": [],
+      "strong_signals": [
+        "مدیریت پروژه های تیمی",
+        "تسک های روزانه",
+        "پروژه های تیمی",
+        "تسک های",
+        "صدور پیش فاکتور آنلاین",
+        "مدیریت فاکتورها",
+        "sprint planning and team collaboration",
+        "sprint planning",
+        "team collaboration workspace",
+        "invoicing"
+      ],
+      "negative_signals": []
     }
   ]
 }

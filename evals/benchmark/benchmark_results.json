@@ -1,7 +1,7 @@
 {
   "$schema": "../../schemas/benchmark-result.v1.json",
-  "timestamp": "2026-09-25T10:26:17.635634+00:00",
-  "suite_version": "3.0.1",
+  "timestamp": "2026-09-25T11:15:22.940122+00:00",
+  "suite_version": "3.2.0",
   "scenario_count": 100,
   "benchmark_type": "internal_deterministic_heuristic",
   "baseline_system": "Vanilla LLM / V2 Heuristic Baseline",
@@ -14,6 +14,11 @@
       "candidate": 100.0,
       "delta_percent": 48.0
     },
+    "domain_resolution_accuracy": {
+      "baseline": 56.0,
+      "candidate": 100.0,
+      "delta_percent": 44.0
+    },
     "avg_user_corrections": {
       "baseline": 2.4,
       "candidate": 0.0,
@@ -25,7 +30,7 @@
       "reduction_percent": 100.0
     },
     "avg_time_to_accept_ms": {
-      "candidate": 13.03
+      "candidate": 13.53
     },
     "visual_diversity_index": {
       "candidate": 66.7,
@@ -41,207 +46,226 @@
       "domain": "beauty_clinical_wellness",
       "prompt": "کلینیک تخصصی پوست و مو و لیزر گلوریا",
       "detected_domain": "beauty_clinical_wellness",
+      "domain_match": true,
       "selected_style": "quiet_luxury",
       "candidate_passed_first_pass": true,
-      "critic_score": 95,
+      "critic_score": 95.0,
       "verification_status": "PASS",
-      "elapsed_ms": 23.0
+      "elapsed_ms": 23.97
     },
     {
       "scenario_id": "sc-002",
       "domain": "beauty_clinical_wellness",
       "prompt": "Luxury dermatology and medical spa clinic landing page",
       "detected_domain": "beauty_clinical_wellness",
+      "domain_match": true,
       "selected_style": "quiet_luxury",
       "candidate_passed_first_pass": true,
-      "critic_score": 95,
+      "critic_score": 95.0,
       "verification_status": "PASS",
-      "elapsed_ms": 12.98
+      "elapsed_ms": 14.06
     },
     {
       "scenario_id": "sc-003",
       "domain": "fintech_banking",
       "prompt": "سامانه مدیریت تسهیلات و وام بانکی شرکتی",
       "detected_domain": "fintech_banking",
+      "domain_match": true,
       "selected_style": "clean_stripe",
       "candidate_passed_first_pass": true,
-      "critic_score": 95,
+      "critic_score": 95.0,
       "verification_status": "PASS",
-      "elapsed_ms": 12.43
+      "elapsed_ms": 13.1
     },
     {
       "scenario_id": "sc-004",
       "domain": "fintech_banking",
       "prompt": "Enterprise wealth management and treasury dashboard",
       "detected_domain": "fintech_banking",
+      "domain_match": true,
       "selected_style": "clean_stripe",
       "candidate_passed_first_pass": true,
-      "critic_score": 95,
+      "critic_score": 95.0,
       "verification_status": "PASS",
-      "elapsed_ms": 12.4
+      "elapsed_ms": 12.93
     },
     {
       "scenario_id": "sc-005",
       "domain": "crypto_trading_web3",
       "prompt": "صرافی ارز دیجیتال با دفتر سفارشات زنده",
       "detected_domain": "crypto_trading_web3",
+      "domain_match": true,
       "selected_style": "linear_dark",
       "candidate_passed_first_pass": true,
-      "critic_score": 95,
+      "critic_score": 95.0,
       "verification_status": "PASS",
-      "elapsed_ms": 11.21
+      "elapsed_ms": 12.32
     },
     {
       "scenario_id": "sc-006",
       "domain": "crypto_trading_web3",
       "prompt": "Crypto perpetuals trading terminal with realtime orderbook",
       "detected_domain": "crypto_trading_web3",
+      "domain_match": true,
       "selected_style": "linear_dark",
       "candidate_passed_first_pass": true,
-      "critic_score": 95,
+      "critic_score": 95.0,
       "verification_status": "PASS",
-      "elapsed_ms": 12.61
+      "elapsed_ms": 12.47
     },
     {
       "scenario_id": "sc-007",
       "domain": "devops_cloud_terminal",
       "prompt": "پنل مانیتورینگ سرورها و لاگ های داکر",
       "detected_domain": "devops_cloud_terminal",
+      "domain_match": true,
       "selected_style": "data_dense_terminal",
       "candidate_passed_first_pass": true,
-      "critic_score": 95,
+      "critic_score": 95.0,
       "verification_status": "PASS",
-      "elapsed_ms": 12.23
+      "elapsed_ms": 13.23
     },
     {
       "scenario_id": "sc-008",
       "domain": "devops_cloud_terminal",
       "prompt": "Cloud Kubernetes cluster observability HUD and log stream",
       "detected_domain": "devops_cloud_terminal",
+      "domain_match": true,
       "selected_style": "data_dense_terminal",
       "candidate_passed_first_pass": true,
-      "critic_score": 95,
+      "critic_score": 95.0,
       "verification_status": "PASS",
-      "elapsed_ms": 11.22
+      "elapsed_ms": 12.88
     },
     {
       "scenario_id": "sc-009",
       "domain": "saas_b2b_enterprise",
       "prompt": "نرم افزار مدیریت ارتباط با مشتریان و اتوماسیون فروش",
       "detected_domain": "saas_b2b_enterprise",
+      "domain_match": true,
       "selected_style": "clean_stripe",
       "candidate_passed_first_pass": true,
-      "critic_score": 95,
+      "critic_score": 95.0,
       "verification_status": "PASS",
-      "elapsed_ms": 13.2
+      "elapsed_ms": 13.06
     },
     {
       "scenario_id": "sc-010",
       "domain": "saas_b2b_enterprise",
       "prompt": "B2B enterprise CRM sales pipeline automation platform",
       "detected_domain": "saas_b2b_enterprise",
+      "domain_match": true,
       "selected_style": "clean_stripe",
       "candidate_passed_first_pass": true,
-      "critic_score": 95,
+      "critic_score": 95.0,
       "verification_status": "PASS",
-      "elapsed_ms": 12.11
+      "elapsed_ms": 12.84
     },
     {
       "scenario_id": "sc-011",
       "domain": "ai_developer_platform",
       "prompt": "پلتفرم توسعه مدل های زبانی و ایجنت های هوشمند",
       "detected_domain": "ai_developer_platform",
+      "domain_match": true,
       "selected_style": "linear_dark",
       "candidate_passed_first_pass": true,
-      "critic_score": 95,
+      "critic_score": 95.0,
       "verification_status": "PASS",
-      "elapsed_ms": 15.17
+      "elapsed_ms": 15.12
     },
     {
       "scenario_id": "sc-012",
       "domain": "ai_developer_platform",
       "prompt": "Autonomous AI agent playground and vector database studio",
       "detected_domain": "ai_developer_platform",
+      "domain_match": true,
       "selected_style": "linear_dark",
       "candidate_passed_first_pass": true,
-      "critic_score": 95,
+      "critic_score": 95.0,
       "verification_status": "PASS",
-      "elapsed_ms": 12.15
+      "elapsed_ms": 13.35
     },
     {
       "scenario_id": "sc-013",
       "domain": "ecommerce_luxury_fashion",
       "prompt": "مزون آنلاین لباس شب و جواهرات دست ساز لوکس",
       "detected_domain": "ecommerce_luxury_fashion",
+      "domain_match": true,
       "selected_style": "quiet_luxury",
       "candidate_passed_first_pass": true,
-      "critic_score": 95,
+      "critic_score": 95.0,
       "verification_status": "PASS",
-      "elapsed_ms": 11.05
+      "elapsed_ms": 14.93
     },
     {
       "scenario_id": "sc-014",
       "domain": "ecommerce_luxury_fashion",
       "prompt": "High fashion couture and artisan jewelry boutique store",
       "detected_domain": "ecommerce_luxury_fashion",
+      "domain_match": true,
       "selected_style": "quiet_luxury",
       "candidate_passed_first_pass": true,
-      "critic_score": 95,
+      "critic_score": 95.0,
       "verification_status": "PASS",
-      "elapsed_ms": 12.28
+      "elapsed_ms": 13.67
     },
     {
       "scenario_id": "sc-015",
       "domain": "ecommerce_mass_market",
       "prompt": "فروشگاه اینترنتی لوازم خانگی و کالای دیجیتال",
       "detected_domain": "ecommerce_mass_market",
+      "domain_match": true,
       "selected_style": "clean_stripe",
       "candidate_passed_first_pass": true,
-      "critic_score": 95,
+      "critic_score": 95.0,
       "verification_status": "PASS",
-      "elapsed_ms": 13.65
+      "elapsed_ms": 13.1
     },
     {
       "scenario_id": "sc-016",
       "domain": "ecommerce_mass_market",
       "prompt": "Multi-category digital consumer electronics marketplace",
       "detected_domain": "ecommerce_mass_market",
+      "domain_match": true,
       "selected_style": "clean_stripe",
       "candidate_passed_first_pass": true,
-      "critic_score": 95,
+      "critic_score": 95.0,
       "verification_status": "PASS",
-      "elapsed_ms": 11.65
+      "elapsed_ms": 12.02
     },
     {
       "scenario_id": "sc-017",
       "domain": "real_estate_architecture",
       "prompt": "سایت فروش پنت هاوس های لوکس و ویلاهای مدرن لواسان",
-      "detected_domain": "ecommerce_luxury_fashion",
-      "selected_style": "quiet_luxury",
+      "detected_domain": "real_estate_architecture",
+      "domain_match": true,
+      "selected_style": "editorial_magazine",
       "candidate_passed_first_pass": true,
-      "critic_score": 95,
+      "critic_score": 95.0,
       "verification_status": "PASS",
-      "elapsed_ms": 12.91
+      "elapsed_ms": 12.85
     },
     {
       "scenario_id": "sc-018",
       "domain": "real_estate_architecture",
       "prompt": "Luxury coastal architecture and modern penthouse realty",
-      "detected_domain": "ecommerce_luxury_fashion",
-      "selected_style": "quiet_luxury",
+      "detected_domain": "real_estate_architecture",
+      "domain_match": true,
+      "selected_style": "editorial_magazine",
       "candidate_passed_first_pass": true,
-      "critic_score": 95,
+      "critic_score": 95.0,
       "verification_status": "PASS",
-      "elapsed_ms": 14.14
+      "elapsed_ms": 12.87
     },
     {
       "scenario_id": "sc-019",
       "domain": "healthcare_hospital_medical",
       "prompt": "سامانه نوبت دهی آنلاین بیمارستان فوق تخصصی کودکان",
       "detected_domain": "healthcare_hospital_medical",
+      "domain_match": true,
       "selected_style": "soft_humanist",
       "candidate_passed_first_pass": true,
-      "critic_score": 95,
+      "critic_score": 95.0,
       "verification_status": "PASS",
       "elapsed_ms": 12.66
     },
@@ -250,891 +274,972 @@
       "domain": "healthcare_hospital_medical",
       "prompt": "Hospital pediatric outpatient portal and physician appointment booking",
       "detected_domain": "healthcare_hospital_medical",
+      "domain_match": true,
       "selected_style": "soft_humanist",
       "candidate_passed_first_pass": true,
-      "critic_score": 95,
+      "critic_score": 95.0,
       "verification_status": "PASS",
-      "elapsed_ms": 15.53
+      "elapsed_ms": 16.23
     },
     {
       "scenario_id": "sc-021",
       "domain": "education_edtech_lms",
       "prompt": "آکادمی آنلاین آموزش برنامه نویسی پایتون و هوش مصنوعی",
-      "detected_domain": "ai_developer_platform",
-      "selected_style": "linear_dark",
+      "detected_domain": "education_edtech_lms",
+      "domain_match": true,
+      "selected_style": "soft_humanist",
       "candidate_passed_first_pass": true,
-      "critic_score": 95,
+      "critic_score": 95.0,
       "verification_status": "PASS",
-      "elapsed_ms": 12.03
+      "elapsed_ms": 12.81
     },
     {
       "scenario_id": "sc-022",
       "domain": "education_edtech_lms",
       "prompt": "Interactive machine learning academy and course catalog",
       "detected_domain": "education_edtech_lms",
+      "domain_match": true,
       "selected_style": "soft_humanist",
       "candidate_passed_first_pass": true,
-      "critic_score": 95,
+      "critic_score": 95.0,
       "verification_status": "PASS",
-      "elapsed_ms": 11.79
+      "elapsed_ms": 13.26
     },
     {
       "scenario_id": "sc-023",
       "domain": "creative_portfolio_agency",
       "prompt": "پورتفولیو استودیو طراحی هویت بصری و گرافیک",
       "detected_domain": "creative_portfolio_agency",
+      "domain_match": true,
       "selected_style": "neobrutalism",
       "candidate_passed_first_pass": true,
-      "critic_score": 95,
+      "critic_score": 95.0,
       "verification_status": "PASS",
-      "elapsed_ms": 11.76
+      "elapsed_ms": 12.78
     },
     {
       "scenario_id": "sc-024",
       "domain": "creative_portfolio_agency",
       "prompt": "Avant-garde creative design studio and motion portfolio",
       "detected_domain": "creative_portfolio_agency",
+      "domain_match": true,
       "selected_style": "neobrutalism",
       "candidate_passed_first_pass": true,
-      "critic_score": 95,
+      "critic_score": 95.0,
       "verification_status": "PASS",
-      "elapsed_ms": 11.42
+      "elapsed_ms": 12.99
     },
     {
       "scenario_id": "sc-025",
       "domain": "media_editorial_magazine",
       "prompt": "مجله آنلاین ادبی، هنری و نقد سینمایی",
       "detected_domain": "media_editorial_magazine",
+      "domain_match": true,
       "selected_style": "editorial_magazine",
       "candidate_passed_first_pass": true,
-      "critic_score": 95,
+      "critic_score": 95.0,
       "verification_status": "PASS",
-      "elapsed_ms": 11.09
+      "elapsed_ms": 12.64
     },
     {
       "scenario_id": "sc-026",
       "domain": "media_editorial_magazine",
       "prompt": "Literary review and cultural criticism editorial magazine",
       "detected_domain": "media_editorial_magazine",
+      "domain_match": true,
       "selected_style": "editorial_magazine",
       "candidate_passed_first_pass": true,
-      "critic_score": 95,
+      "critic_score": 95.0,
       "verification_status": "PASS",
-      "elapsed_ms": 12.56
+      "elapsed_ms": 13.55
     },
     {
       "scenario_id": "sc-027",
       "domain": "food_restaurant_cafe",
       "prompt": "کافه رستوران باریستا و منوی نوشیدنی های تخصصی",
       "detected_domain": "food_restaurant_cafe",
+      "domain_match": true,
       "selected_style": "editorial_magazine",
       "candidate_passed_first_pass": true,
-      "critic_score": 95,
+      "critic_score": 95.0,
       "verification_status": "PASS",
-      "elapsed_ms": 13.98
+      "elapsed_ms": 12.68
     },
     {
       "scenario_id": "sc-028",
       "domain": "food_restaurant_cafe",
       "prompt": "Artisanal bakery and specialty third-wave cafe menu",
       "detected_domain": "food_restaurant_cafe",
+      "domain_match": true,
       "selected_style": "editorial_magazine",
       "candidate_passed_first_pass": true,
-      "critic_score": 95,
+      "critic_score": 95.0,
       "verification_status": "PASS",
-      "elapsed_ms": 13.22
+      "elapsed_ms": 12.74
     },
     {
       "scenario_id": "sc-029",
       "domain": "travel_hospitality_tourism",
       "prompt": "سامانه رزرو بوم گردی و تورهای کویرنوردی ایران",
       "detected_domain": "travel_hospitality_tourism",
+      "domain_match": true,
       "selected_style": "editorial_magazine",
       "candidate_passed_first_pass": true,
-      "critic_score": 95,
+      "critic_score": 95.0,
       "verification_status": "PASS",
-      "elapsed_ms": 15.59
+      "elapsed_ms": 15.17
     },
     {
       "scenario_id": "sc-030",
       "domain": "travel_hospitality_tourism",
       "prompt": "Eco-resort booking and wilderness expedition retreats",
       "detected_domain": "travel_hospitality_tourism",
+      "domain_match": true,
       "selected_style": "editorial_magazine",
       "candidate_passed_first_pass": true,
-      "critic_score": 95,
+      "critic_score": 95.0,
       "verification_status": "PASS",
-      "elapsed_ms": 13.48
+      "elapsed_ms": 12.3
     },
     {
       "scenario_id": "sc-031",
       "domain": "legal_compliance_law",
       "prompt": "دفتر وکالت دادگستری و مشاوره دعاوی تجاری",
-      "detected_domain": "personal_branding_creator",
+      "detected_domain": "legal_compliance_law",
+      "domain_match": true,
       "selected_style": "editorial_magazine",
       "candidate_passed_first_pass": true,
-      "critic_score": 95,
+      "critic_score": 95.0,
       "verification_status": "PASS",
-      "elapsed_ms": 12.39
+      "elapsed_ms": 12.74
     },
     {
       "scenario_id": "sc-032",
       "domain": "legal_compliance_law",
       "prompt": "Corporate law firm and cross-border regulatory compliance",
       "detected_domain": "legal_compliance_law",
+      "domain_match": true,
       "selected_style": "editorial_magazine",
       "candidate_passed_first_pass": true,
-      "critic_score": 95,
+      "critic_score": 95.0,
       "verification_status": "PASS",
-      "elapsed_ms": 13.78
+      "elapsed_ms": 13.91
     },
     {
       "scenario_id": "sc-033",
       "domain": "gaming_entertainment_streaming",
       "prompt": "پلتفرم مسابقات ورزش الکترونیک و استریم بازی",
       "detected_domain": "gaming_entertainment_streaming",
+      "domain_match": true,
       "selected_style": "modern_glass_2",
       "candidate_passed_first_pass": true,
-      "critic_score": 95,
+      "critic_score": 95.0,
       "verification_status": "PASS",
-      "elapsed_ms": 12.55
+      "elapsed_ms": 12.85
     },
     {
       "scenario_id": "sc-034",
       "domain": "gaming_entertainment_streaming",
       "prompt": "Esports tournament championship and live gaming stream hub",
       "detected_domain": "gaming_entertainment_streaming",
+      "domain_match": true,
       "selected_style": "modern_glass_2",
       "candidate_passed_first_pass": true,
-      "critic_score": 95,
+      "critic_score": 95.0,
       "verification_status": "PASS",
-      "elapsed_ms": 12.85
+      "elapsed_ms": 13.74
     },
     {
       "scenario_id": "sc-035",
       "domain": "automotive_ev_mobility",
       "prompt": "خودروهای برقی هوشمند و ایستگاه های شارژ سریع",
       "detected_domain": "automotive_ev_mobility",
+      "domain_match": true,
       "selected_style": "clean_stripe",
       "candidate_passed_first_pass": true,
-      "critic_score": 95,
+      "critic_score": 95.0,
       "verification_status": "PASS",
-      "elapsed_ms": 12.14
+      "elapsed_ms": 12.47
     },
     {
       "scenario_id": "sc-036",
       "domain": "automotive_ev_mobility",
       "prompt": "Electric mobility network and smart vehicle telemetry",
       "detected_domain": "automotive_ev_mobility",
+      "domain_match": true,
       "selected_style": "clean_stripe",
       "candidate_passed_first_pass": true,
-      "critic_score": 95,
+      "critic_score": 95.0,
       "verification_status": "PASS",
-      "elapsed_ms": 12.75
+      "elapsed_ms": 13.06
     },
     {
       "scenario_id": "sc-037",
       "domain": "logistics_supply_chain",
       "prompt": "سامانه رهگیری محموله های بین المللی و انبارداری",
-      "detected_domain": "general_modern_saas",
+      "detected_domain": "logistics_supply_chain",
+      "domain_match": true,
       "selected_style": "clean_stripe",
       "candidate_passed_first_pass": true,
-      "critic_score": 95,
+      "critic_score": 95.0,
       "verification_status": "PASS",
-      "elapsed_ms": 12.31
+      "elapsed_ms": 12.66
     },
     {
       "scenario_id": "sc-038",
       "domain": "logistics_supply_chain",
       "prompt": "Global maritime freight forwarding and container tracking",
-      "detected_domain": "ai_developer_platform",
-      "selected_style": "linear_dark",
+      "detected_domain": "logistics_supply_chain",
+      "domain_match": true,
+      "selected_style": "clean_stripe",
       "candidate_passed_first_pass": true,
-      "critic_score": 95,
+      "critic_score": 95.0,
       "verification_status": "PASS",
-      "elapsed_ms": 16.83
+      "elapsed_ms": 15.74
     },
     {
       "scenario_id": "sc-039",
       "domain": "energy_greentech_sustainability",
       "prompt": "نیروگاه های خورشیدی و مدیریت شبکه انرژی تجدیدپذیر",
       "detected_domain": "energy_greentech_sustainability",
+      "domain_match": true,
       "selected_style": "clean_stripe",
       "candidate_passed_first_pass": true,
-      "critic_score": 95,
+      "critic_score": 95.0,
       "verification_status": "PASS",
-      "elapsed_ms": 12.71
+      "elapsed_ms": 13.1
     },
     {
       "scenario_id": "sc-040",
       "domain": "energy_greentech_sustainability",
       "prompt": "Renewable solar grid and carbon offset sustainability telemetry",
       "detected_domain": "energy_greentech_sustainability",
+      "domain_match": true,
       "selected_style": "clean_stripe",
       "candidate_passed_first_pass": true,
-      "critic_score": 95,
+      "critic_score": 95.0,
       "verification_status": "PASS",
-      "elapsed_ms": 13.54
+      "elapsed_ms": 12.07
     },
     {
       "scenario_id": "sc-041",
       "domain": "nonprofit_charity_social",
       "prompt": "بنیاد نیکوکاری حمایت از کودکان بازمانده از تحصیل",
       "detected_domain": "nonprofit_charity_social",
+      "domain_match": true,
       "selected_style": "soft_humanist",
       "candidate_passed_first_pass": true,
-      "critic_score": 95,
+      "critic_score": 95.0,
       "verification_status": "PASS",
-      "elapsed_ms": 13.09
+      "elapsed_ms": 13.29
     },
     {
       "scenario_id": "sc-042",
       "domain": "nonprofit_charity_social",
       "prompt": "Global humanitarian refugee aid and clean water foundation",
-      "detected_domain": "ai_developer_platform",
-      "selected_style": "linear_dark",
+      "detected_domain": "nonprofit_charity_social",
+      "domain_match": true,
+      "selected_style": "soft_humanist",
       "candidate_passed_first_pass": true,
-      "critic_score": 95,
+      "critic_score": 95.0,
       "verification_status": "PASS",
-      "elapsed_ms": 13.35
+      "elapsed_ms": 12.4
     },
     {
       "scenario_id": "sc-043",
       "domain": "personal_branding_creator",
       "prompt": "وبسایت شخصی سخنران انگیزشی و نویسنده کتاب های توسعه فردی",
       "detected_domain": "personal_branding_creator",
+      "domain_match": true,
       "selected_style": "editorial_magazine",
       "candidate_passed_first_pass": true,
-      "critic_score": 95,
+      "critic_score": 95.0,
       "verification_status": "PASS",
-      "elapsed_ms": 12.95
+      "elapsed_ms": 11.71
     },
     {
       "scenario_id": "sc-044",
       "domain": "personal_branding_creator",
       "prompt": "Author, keynote speaker and technology essayist personal site",
       "detected_domain": "personal_branding_creator",
+      "domain_match": true,
       "selected_style": "editorial_magazine",
       "candidate_passed_first_pass": true,
-      "critic_score": 95,
+      "critic_score": 95.0,
       "verification_status": "PASS",
-      "elapsed_ms": 13.28
+      "elapsed_ms": 12.89
     },
     {
       "scenario_id": "sc-045",
       "domain": "cybersecurity_identity_auth",
       "prompt": "پلتفرم جامع احراز هویت بدون گذرواژه و مدیریت دسترسی",
-      "detected_domain": "ecommerce_luxury_fashion",
-      "selected_style": "quiet_luxury",
+      "detected_domain": "cybersecurity_identity_auth",
+      "domain_match": true,
+      "selected_style": "linear_dark",
       "candidate_passed_first_pass": true,
-      "critic_score": 95,
+      "critic_score": 95.0,
       "verification_status": "PASS",
-      "elapsed_ms": 13.18
+      "elapsed_ms": 12.21
     },
     {
       "scenario_id": "sc-046",
       "domain": "cybersecurity_identity_auth",
       "prompt": "Zero-trust identity governance and passwordless MFA auth engine",
       "detected_domain": "cybersecurity_identity_auth",
+      "domain_match": true,
       "selected_style": "linear_dark",
       "candidate_passed_first_pass": true,
-      "critic_score": 95,
+      "critic_score": 95.0,
       "verification_status": "PASS",
-      "elapsed_ms": 15.56
+      "elapsed_ms": 15.22
     },
     {
       "scenario_id": "sc-047",
       "domain": "general_modern_saas",
       "prompt": "ابزار مدیریت پروژه های تیمی و تسک های روزانه",
-      "detected_domain": "ecommerce_luxury_fashion",
-      "selected_style": "quiet_luxury",
+      "detected_domain": "general_modern_saas",
+      "domain_match": true,
+      "selected_style": "clean_stripe",
       "candidate_passed_first_pass": true,
-      "critic_score": 95,
+      "critic_score": 95.0,
       "verification_status": "PASS",
-      "elapsed_ms": 13.17
+      "elapsed_ms": 12.76
     },
     {
       "scenario_id": "sc-048",
       "domain": "general_modern_saas",
       "prompt": "Minimalist sprint planning and team collaboration workspace",
-      "detected_domain": "beauty_clinical_wellness",
-      "selected_style": "quiet_luxury",
+      "detected_domain": "general_modern_saas",
+      "domain_match": true,
+      "selected_style": "clean_stripe",
       "candidate_passed_first_pass": true,
-      "critic_score": 95,
+      "critic_score": 95.0,
       "verification_status": "PASS",
-      "elapsed_ms": 12.89
+      "elapsed_ms": 11.93
     },
     {
       "scenario_id": "sc-049",
       "domain": "beauty_clinical_wellness",
       "prompt": "مرکز تخصصی کاشت ابرو و زیبایی پوست در تهران",
       "detected_domain": "beauty_clinical_wellness",
+      "domain_match": true,
       "selected_style": "quiet_luxury",
       "candidate_passed_first_pass": true,
-      "critic_score": 95,
+      "critic_score": 95.0,
       "verification_status": "PASS",
-      "elapsed_ms": 13.18
+      "elapsed_ms": 12.27
     },
     {
       "scenario_id": "sc-050",
       "domain": "fintech_banking",
       "prompt": "SaaS micro-lending API and risk assessment scoring console",
-      "detected_domain": "saas_b2b_enterprise",
+      "detected_domain": "fintech_banking",
+      "domain_match": true,
       "selected_style": "clean_stripe",
       "candidate_passed_first_pass": true,
-      "critic_score": 95,
+      "critic_score": 95.0,
       "verification_status": "PASS",
-      "elapsed_ms": 11.76
+      "elapsed_ms": 12.89
     },
     {
       "scenario_id": "sc-051",
       "domain": "crypto_trading_web3",
       "prompt": "کیف پول غیرمتمرکز وب۳ و پلتفرم استیکینگ توکن",
-      "detected_domain": "general_modern_saas",
-      "selected_style": "clean_stripe",
+      "detected_domain": "crypto_trading_web3",
+      "domain_match": true,
+      "selected_style": "linear_dark",
       "candidate_passed_first_pass": true,
-      "critic_score": 95,
+      "critic_score": 95.0,
       "verification_status": "PASS",
-      "elapsed_ms": 12.03
+      "elapsed_ms": 14.0
     },
     {
       "scenario_id": "sc-052",
       "domain": "devops_cloud_terminal",
       "prompt": "Distributed database health monitor and latency profiling terminal",
       "detected_domain": "devops_cloud_terminal",
+      "domain_match": true,
       "selected_style": "data_dense_terminal",
       "candidate_passed_first_pass": true,
-      "critic_score": 95,
+      "critic_score": 95.0,
       "verification_status": "PASS",
-      "elapsed_ms": 12.05
+      "elapsed_ms": 13.1
     },
     {
       "scenario_id": "sc-053",
       "domain": "saas_b2b_enterprise",
       "prompt": "سامانه اتوماسیون منابع انسانی و حضور و غیاب پرسنل",
       "detected_domain": "saas_b2b_enterprise",
+      "domain_match": true,
       "selected_style": "clean_stripe",
       "candidate_passed_first_pass": true,
-      "critic_score": 95,
+      "critic_score": 95.0,
       "verification_status": "PASS",
-      "elapsed_ms": 13.41
+      "elapsed_ms": 13.52
     },
     {
       "scenario_id": "sc-054",
       "domain": "ai_developer_platform",
       "prompt": "Fine-tuning dashboard for open-source foundation models",
-      "detected_domain": "general_modern_saas",
-      "selected_style": "clean_stripe",
+      "detected_domain": "ai_developer_platform",
+      "domain_match": true,
+      "selected_style": "linear_dark",
       "candidate_passed_first_pass": true,
-      "critic_score": 95,
+      "critic_score": 95.0,
       "verification_status": "PASS",
-      "elapsed_ms": 12.99
+      "elapsed_ms": 12.74
     },
     {
       "scenario_id": "sc-055",
       "domain": "ecommerce_luxury_fashion",
       "prompt": "فروشگاه اکسسوری های مینیمال چرمی با چرم طبیعی",
-      "detected_domain": "ecommerce_mass_market",
-      "selected_style": "clean_stripe",
+      "detected_domain": "ecommerce_luxury_fashion",
+      "domain_match": true,
+      "selected_style": "quiet_luxury",
       "candidate_passed_first_pass": true,
-      "critic_score": 95,
+      "critic_score": 95.0,
       "verification_status": "PASS",
-      "elapsed_ms": 16.05
+      "elapsed_ms": 15.86
     },
     {
       "scenario_id": "sc-056",
       "domain": "ecommerce_mass_market",
       "prompt": "Supermarket grocery delivery app with instant cart checkout",
-      "detected_domain": "automotive_ev_mobility",
+      "detected_domain": "ecommerce_mass_market",
+      "domain_match": true,
       "selected_style": "clean_stripe",
       "candidate_passed_first_pass": true,
-      "critic_score": 95,
+      "critic_score": 95.0,
       "verification_status": "PASS",
-      "elapsed_ms": 13.07
+      "elapsed_ms": 12.87
     },
     {
       "scenario_id": "sc-057",
       "domain": "real_estate_architecture",
       "prompt": "آژانس املاک تجاری و اداری در منطقه یک تهران",
       "detected_domain": "real_estate_architecture",
+      "domain_match": true,
       "selected_style": "editorial_magazine",
       "candidate_passed_first_pass": true,
-      "critic_score": 95,
+      "critic_score": 95.0,
       "verification_status": "PASS",
-      "elapsed_ms": 13.08
+      "elapsed_ms": 12.73
     },
     {
       "scenario_id": "sc-058",
       "domain": "healthcare_hospital_medical",
       "prompt": "Telemedicine consultation app with HIPAA-compliant video calls",
-      "detected_domain": "general_modern_saas",
-      "selected_style": "clean_stripe",
+      "detected_domain": "healthcare_hospital_medical",
+      "domain_match": true,
+      "selected_style": "soft_humanist",
       "candidate_passed_first_pass": true,
-      "critic_score": 95,
+      "critic_score": 95.0,
       "verification_status": "PASS",
-      "elapsed_ms": 13.13
+      "elapsed_ms": 13.16
     },
     {
       "scenario_id": "sc-059",
       "domain": "education_edtech_lms",
       "prompt": "سامانه آزمون های آزمایشی آنلاین کنکور سراسری",
-      "detected_domain": "general_modern_saas",
-      "selected_style": "clean_stripe",
+      "detected_domain": "education_edtech_lms",
+      "domain_match": true,
+      "selected_style": "soft_humanist",
       "candidate_passed_first_pass": true,
-      "critic_score": 95,
+      "critic_score": 95.0,
       "verification_status": "PASS",
-      "elapsed_ms": 12.41
+      "elapsed_ms": 13.01
     },
     {
       "scenario_id": "sc-060",
       "domain": "creative_portfolio_agency",
       "prompt": "3D interactive typography and architectural rendering studio",
       "detected_domain": "creative_portfolio_agency",
+      "domain_match": true,
       "selected_style": "neobrutalism",
       "candidate_passed_first_pass": true,
-      "critic_score": 95,
+      "critic_score": 95.0,
       "verification_status": "PASS",
-      "elapsed_ms": 12.42
+      "elapsed_ms": 12.77
     },
     {
       "scenario_id": "sc-061",
       "domain": "media_editorial_magazine",
       "prompt": "پایگاه تحلیلی اقتصاد دانش بنیان و نوآوری",
-      "detected_domain": "general_modern_saas",
-      "selected_style": "clean_stripe",
+      "detected_domain": "media_editorial_magazine",
+      "domain_match": true,
+      "selected_style": "editorial_magazine",
       "candidate_passed_first_pass": true,
-      "critic_score": 95,
+      "critic_score": 95.0,
       "verification_status": "PASS",
-      "elapsed_ms": 12.69
+      "elapsed_ms": 14.06
     },
     {
       "scenario_id": "sc-062",
       "domain": "food_restaurant_cafe",
       "prompt": "Michelin star tasting menu experience and table reservation",
       "detected_domain": "food_restaurant_cafe",
+      "domain_match": true,
       "selected_style": "editorial_magazine",
       "candidate_passed_first_pass": true,
-      "critic_score": 95,
+      "critic_score": 95.0,
       "verification_status": "PASS",
-      "elapsed_ms": 13.11
+      "elapsed_ms": 13.82
     },
     {
       "scenario_id": "sc-063",
       "domain": "travel_hospitality_tourism",
       "prompt": "سایت رزرو آنلاین بلیت قطار و هواپیما",
-      "detected_domain": "general_modern_saas",
-      "selected_style": "clean_stripe",
+      "detected_domain": "travel_hospitality_tourism",
+      "domain_match": true,
+      "selected_style": "editorial_magazine",
       "candidate_passed_first_pass": true,
-      "critic_score": 95,
+      "critic_score": 95.0,
       "verification_status": "PASS",
-      "elapsed_ms": 13.47
+      "elapsed_ms": 13.5
     },
     {
       "scenario_id": "sc-064",
       "domain": "legal_compliance_law",
       "prompt": "Intellectual property patent prosecution and trademark registry",
-      "detected_domain": "real_estate_architecture",
+      "detected_domain": "legal_compliance_law",
+      "domain_match": true,
       "selected_style": "editorial_magazine",
       "candidate_passed_first_pass": true,
-      "critic_score": 95,
+      "critic_score": 95.0,
       "verification_status": "PASS",
-      "elapsed_ms": 16.26
+      "elapsed_ms": 16.44
     },
     {
       "scenario_id": "sc-065",
       "domain": "gaming_entertainment_streaming",
       "prompt": "فروشگاه بازی های آنلاین و گیفت کارت های دیجیتال",
-      "detected_domain": "ecommerce_mass_market",
-      "selected_style": "clean_stripe",
+      "detected_domain": "gaming_entertainment_streaming",
+      "domain_match": true,
+      "selected_style": "modern_glass_2",
       "candidate_passed_first_pass": true,
-      "critic_score": 95,
+      "critic_score": 95.0,
       "verification_status": "PASS",
-      "elapsed_ms": 12.44
+      "elapsed_ms": 13.25
     },
     {
       "scenario_id": "sc-066",
       "domain": "automotive_ev_mobility",
       "prompt": "Autonomous ride-hailing dispatch and fleet battery monitoring",
-      "detected_domain": "beauty_clinical_wellness",
-      "selected_style": "quiet_luxury",
+      "detected_domain": "automotive_ev_mobility",
+      "domain_match": true,
+      "selected_style": "clean_stripe",
       "candidate_passed_first_pass": true,
-      "critic_score": 95,
+      "critic_score": 95.0,
       "verification_status": "PASS",
-      "elapsed_ms": 12.08
+      "elapsed_ms": 13.26
     },
     {
       "scenario_id": "sc-067",
       "domain": "logistics_supply_chain",
       "prompt": "اپلیکیشن درخواست وانت بار و حمل اثاثیه منزل",
-      "detected_domain": "general_modern_saas",
+      "detected_domain": "logistics_supply_chain",
+      "domain_match": true,
       "selected_style": "clean_stripe",
       "candidate_passed_first_pass": true,
-      "critic_score": 95,
+      "critic_score": 95.0,
       "verification_status": "PASS",
-      "elapsed_ms": 11.99
+      "elapsed_ms": 14.12
     },
     {
       "scenario_id": "sc-068",
       "domain": "energy_greentech_sustainability",
       "prompt": "Offshore wind turbine performance and blade condition monitoring",
-      "detected_domain": "general_modern_saas",
+      "detected_domain": "energy_greentech_sustainability",
+      "domain_match": true,
       "selected_style": "clean_stripe",
       "candidate_passed_first_pass": true,
-      "critic_score": 95,
+      "critic_score": 95.0,
       "verification_status": "PASS",
-      "elapsed_ms": 12.81
+      "elapsed_ms": 12.28
     },
     {
       "scenario_id": "sc-069",
       "domain": "nonprofit_charity_social",
       "prompt": "پویش مردمی مدرسه سازی در مناطق محروم کشور",
-      "detected_domain": "ecommerce_luxury_fashion",
-      "selected_style": "quiet_luxury",
+      "detected_domain": "nonprofit_charity_social",
+      "domain_match": true,
+      "selected_style": "soft_humanist",
       "candidate_passed_first_pass": true,
-      "critic_score": 95,
+      "critic_score": 95.0,
       "verification_status": "PASS",
-      "elapsed_ms": 11.55
+      "elapsed_ms": 12.86
     },
     {
       "scenario_id": "sc-070",
       "domain": "personal_branding_creator",
       "prompt": "Independent podcast host and community membership site",
-      "detected_domain": "general_modern_saas",
-      "selected_style": "clean_stripe",
+      "detected_domain": "personal_branding_creator",
+      "domain_match": true,
+      "selected_style": "editorial_magazine",
       "candidate_passed_first_pass": true,
-      "critic_score": 95,
+      "critic_score": 95.0,
       "verification_status": "PASS",
-      "elapsed_ms": 11.35
+      "elapsed_ms": 12.4
     },
     {
       "scenario_id": "sc-071",
       "domain": "cybersecurity_identity_auth",
       "prompt": "سامانه مدیریت کلیدهای رمزنگاری سخت افزاری HSM",
-      "detected_domain": "ecommerce_luxury_fashion",
-      "selected_style": "quiet_luxury",
+      "detected_domain": "cybersecurity_identity_auth",
+      "domain_match": true,
+      "selected_style": "linear_dark",
       "candidate_passed_first_pass": true,
-      "critic_score": 95,
+      "critic_score": 95.0,
       "verification_status": "PASS",
-      "elapsed_ms": 11.36
+      "elapsed_ms": 12.88
     },
     {
       "scenario_id": "sc-072",
       "domain": "general_modern_saas",
       "prompt": "Customer feedback widget and satisfaction survey builder",
       "detected_domain": "general_modern_saas",
+      "domain_match": true,
       "selected_style": "clean_stripe",
       "candidate_passed_first_pass": true,
-      "critic_score": 95,
+      "critic_score": 95.0,
       "verification_status": "PASS",
-      "elapsed_ms": 11.42
+      "elapsed_ms": 13.18
     },
     {
       "scenario_id": "sc-073",
       "domain": "beauty_clinical_wellness",
       "prompt": "Organic skincare routine advisor and skin diagnosis quiz",
-      "detected_domain": "automotive_ev_mobility",
-      "selected_style": "clean_stripe",
+      "detected_domain": "beauty_clinical_wellness",
+      "domain_match": true,
+      "selected_style": "quiet_luxury",
       "candidate_passed_first_pass": true,
-      "critic_score": 95,
+      "critic_score": 95.0,
       "verification_status": "PASS",
-      "elapsed_ms": 14.42
+      "elapsed_ms": 15.12
     },
     {
       "scenario_id": "sc-074",
       "domain": "fintech_banking",
       "prompt": "نرم افزار حسابداری ابری ویژه فروشگاه ها و کسب وکارهای خرد",
       "detected_domain": "fintech_banking",
+      "domain_match": true,
       "selected_style": "clean_stripe",
       "candidate_passed_first_pass": true,
-      "critic_score": 95,
+      "critic_score": 95.0,
       "verification_status": "PASS",
-      "elapsed_ms": 13.99
+      "elapsed_ms": 13.01
     },
     {
       "scenario_id": "sc-075",
       "domain": "crypto_trading_web3",
       "prompt": "DeFi lending protocol yield farming analytics dashboard",
-      "detected_domain": "general_modern_saas",
-      "selected_style": "clean_stripe",
+      "detected_domain": "crypto_trading_web3",
+      "domain_match": true,
+      "selected_style": "linear_dark",
       "candidate_passed_first_pass": true,
-      "critic_score": 95,
+      "critic_score": 95.0,
       "verification_status": "PASS",
-      "elapsed_ms": 11.77
+      "elapsed_ms": 12.54
     },
     {
       "scenario_id": "sc-076",
       "domain": "devops_cloud_terminal",
       "prompt": "داشبورد مدیریت کانتینرهای کوبرنتیز و پادها",
-      "detected_domain": "ecommerce_luxury_fashion",
-      "selected_style": "quiet_luxury",
+      "detected_domain": "devops_cloud_terminal",
+      "domain_match": true,
+      "selected_style": "data_dense_terminal",
       "candidate_passed_first_pass": true,
-      "critic_score": 95,
+      "critic_score": 95.0,
       "verification_status": "PASS",
-      "elapsed_ms": 11.07
+      "elapsed_ms": 12.78
     },
     {
       "scenario_id": "sc-077",
       "domain": "saas_b2b_enterprise",
       "prompt": "Enterprise contract lifecycle management and signature audit",
       "detected_domain": "saas_b2b_enterprise",
+      "domain_match": true,
       "selected_style": "clean_stripe",
       "candidate_passed_first_pass": true,
-      "critic_score": 95,
+      "critic_score": 95.0,
       "verification_status": "PASS",
-      "elapsed_ms": 12.82
+      "elapsed_ms": 13.62
     },
     {
       "scenario_id": "sc-078",
       "domain": "ai_developer_platform",
       "prompt": "محیط کدنویسی ابری برای آموزش مدل های یادگیری عمیق",
-      "detected_domain": "education_edtech_lms",
-      "selected_style": "soft_humanist",
+      "detected_domain": "ai_developer_platform",
+      "domain_match": true,
+      "selected_style": "linear_dark",
       "candidate_passed_first_pass": true,
-      "critic_score": 95,
+      "critic_score": 95.0,
       "verification_status": "PASS",
-      "elapsed_ms": 13.68
+      "elapsed_ms": 13.01
     },
     {
       "scenario_id": "sc-079",
       "domain": "ecommerce_luxury_fashion",
       "prompt": "Swiss luxury watchmaker catalog and bespoke timepiece configurator",
       "detected_domain": "ecommerce_luxury_fashion",
+      "domain_match": true,
       "selected_style": "quiet_luxury",
       "candidate_passed_first_pass": true,
-      "critic_score": 95,
+      "critic_score": 95.0,
       "verification_status": "PASS",
-      "elapsed_ms": 12.51
+      "elapsed_ms": 13.51
     },
     {
       "scenario_id": "sc-080",
       "domain": "ecommerce_mass_market",
       "prompt": "فروشگاه آنلاین کتاب و لوازم التحریر با تخفیف روز",
       "detected_domain": "ecommerce_mass_market",
+      "domain_match": true,
       "selected_style": "clean_stripe",
       "candidate_passed_first_pass": true,
-      "critic_score": 95,
+      "critic_score": 95.0,
       "verification_status": "PASS",
-      "elapsed_ms": 12.75
+      "elapsed_ms": 13.18
     },
     {
       "scenario_id": "sc-081",
       "domain": "real_estate_architecture",
       "prompt": "Commercial skyscraper property leasing and tenant portal",
       "detected_domain": "real_estate_architecture",
+      "domain_match": true,
       "selected_style": "editorial_magazine",
       "candidate_passed_first_pass": true,
-      "critic_score": 95,
+      "critic_score": 95.0,
       "verification_status": "PASS",
-      "elapsed_ms": 11.68
+      "elapsed_ms": 12.89
     },
     {
       "scenario_id": "sc-082",
       "domain": "healthcare_hospital_medical",
       "prompt": "کلینیک جامع دندانپزشکی و ایمپلنت دیجیتال",
-      "detected_domain": "beauty_clinical_wellness",
-      "selected_style": "quiet_luxury",
+      "detected_domain": "healthcare_hospital_medical",
+      "domain_match": true,
+      "selected_style": "soft_humanist",
       "candidate_passed_first_pass": true,
-      "critic_score": 95,
+      "critic_score": 95.0,
       "verification_status": "PASS",
-      "elapsed_ms": 14.47
+      "elapsed_ms": 15.99
     },
     {
       "scenario_id": "sc-083",
       "domain": "education_edtech_lms",
       "prompt": "Language learning immersion app with speech recognition practice",
       "detected_domain": "education_edtech_lms",
+      "domain_match": true,
       "selected_style": "soft_humanist",
       "candidate_passed_first_pass": true,
-      "critic_score": 95,
+      "critic_score": 95.0,
       "verification_status": "PASS",
-      "elapsed_ms": 20.35
+      "elapsed_ms": 19.65
     },
     {
       "scenario_id": "sc-084",
       "domain": "creative_portfolio_agency",
       "prompt": "استودیو عکاسی صنعتی و تبلیغاتی کالا و محصولات",
-      "detected_domain": "ecommerce_mass_market",
-      "selected_style": "clean_stripe",
+      "detected_domain": "creative_portfolio_agency",
+      "domain_match": true,
+      "selected_style": "neobrutalism",
       "candidate_passed_first_pass": true,
-      "critic_score": 95,
+      "critic_score": 95.0,
       "verification_status": "PASS",
-      "elapsed_ms": 14.0
+      "elapsed_ms": 13.32
     },
     {
       "scenario_id": "sc-085",
       "domain": "media_editorial_magazine",
       "prompt": "Investigative journalism portal with interactive data visualizations",
       "detected_domain": "media_editorial_magazine",
+      "domain_match": true,
       "selected_style": "editorial_magazine",
       "candidate_passed_first_pass": true,
-      "critic_score": 95,
+      "critic_score": 95.0,
       "verification_status": "PASS",
-      "elapsed_ms": 12.23
+      "elapsed_ms": 13.42
     },
     {
       "scenario_id": "sc-086",
       "domain": "food_restaurant_cafe",
       "prompt": "فروشگاه آنلاین انواع قهوه دمی و دان روست شده",
-      "detected_domain": "ecommerce_mass_market",
-      "selected_style": "clean_stripe",
+      "detected_domain": "food_restaurant_cafe",
+      "domain_match": true,
+      "selected_style": "editorial_magazine",
       "candidate_passed_first_pass": true,
-      "critic_score": 95,
+      "critic_score": 95.0,
       "verification_status": "PASS",
-      "elapsed_ms": 13.51
+      "elapsed_ms": 14.84
     },
     {
       "scenario_id": "sc-087",
       "domain": "travel_hospitality_tourism",
       "prompt": "Luxury ski chalet rental in the Swiss Alps",
-      "detected_domain": "ecommerce_luxury_fashion",
-      "selected_style": "quiet_luxury",
+      "detected_domain": "travel_hospitality_tourism",
+      "domain_match": true,
+      "selected_style": "editorial_magazine",
       "candidate_passed_first_pass": true,
-      "critic_score": 95,
+      "critic_score": 95.0,
       "verification_status": "PASS",
-      "elapsed_ms": 11.89
+      "elapsed_ms": 13.91
     },
     {
       "scenario_id": "sc-088",
       "domain": "legal_compliance_law",
       "prompt": "مشاوره امور مهاجرت تحصیلی و کاری و اخذ ویزا",
-      "detected_domain": "personal_branding_creator",
+      "detected_domain": "legal_compliance_law",
+      "domain_match": true,
       "selected_style": "editorial_magazine",
       "candidate_passed_first_pass": true,
-      "critic_score": 95,
+      "critic_score": 95.0,
       "verification_status": "PASS",
-      "elapsed_ms": 12.83
+      "elapsed_ms": 20.16
     },
     {
       "scenario_id": "sc-089",
       "domain": "gaming_entertainment_streaming",
       "prompt": "Cloud gaming subscription portal with zero-latency streaming",
       "detected_domain": "gaming_entertainment_streaming",
+      "domain_match": true,
       "selected_style": "modern_glass_2",
       "candidate_passed_first_pass": true,
-      "critic_score": 95,
+      "critic_score": 95.0,
       "verification_status": "PASS",
-      "elapsed_ms": 11.68
+      "elapsed_ms": 12.65
     },
     {
       "scenario_id": "sc-090",
       "domain": "automotive_ev_mobility",
       "prompt": "سایت معرفی و پیش فروش سدان الکتریکی مدرن",
-      "detected_domain": "ecommerce_luxury_fashion",
-      "selected_style": "quiet_luxury",
+      "detected_domain": "automotive_ev_mobility",
+      "domain_match": true,
+      "selected_style": "clean_stripe",
       "candidate_passed_first_pass": true,
-      "critic_score": 95,
+      "critic_score": 95.0,
       "verification_status": "PASS",
-      "elapsed_ms": 11.45
+      "elapsed_ms": 12.76
     },
     {
       "scenario_id": "sc-091",
       "domain": "logistics_supply_chain",
       "prompt": "Cold-chain pharmaceutical delivery monitoring network",
-      "detected_domain": "ai_developer_platform",
-      "selected_style": "linear_dark",
+      "detected_domain": "logistics_supply_chain",
+      "domain_match": true,
+      "selected_style": "clean_stripe",
       "candidate_passed_first_pass": true,
-      "critic_score": 95,
+      "critic_score": 95.0,
       "verification_status": "PASS",
-      "elapsed_ms": 13.55
+      "elapsed_ms": 12.6
     },
     {
       "scenario_id": "sc-092",
       "domain": "energy_greentech_sustainability",
       "prompt": "سایت شرکت مهندسی تصفیه پساب های صنعتی و بازیافت",
-      "detected_domain": "gaming_entertainment_streaming",
-      "selected_style": "modern_glass_2",
+      "detected_domain": "energy_greentech_sustainability",
+      "domain_match": true,
+      "selected_style": "clean_stripe",
       "candidate_passed_first_pass": true,
-      "critic_score": 95,
+      "critic_score": 95.0,
       "verification_status": "PASS",
-      "elapsed_ms": 14.48
+      "elapsed_ms": 14.55
     },
     {
       "scenario_id": "sc-093",
       "domain": "nonprofit_charity_social",
       "prompt": "Wildlife conservation trust and endangered species tracker",
-      "detected_domain": "general_modern_saas",
-      "selected_style": "clean_stripe",
+      "detected_domain": "nonprofit_charity_social",
+      "domain_match": true,
+      "selected_style": "soft_humanist",
       "candidate_passed_first_pass": true,
-      "critic_score": 95,
+      "critic_score": 95.0,
       "verification_status": "PASS",
-      "elapsed_ms": 12.22
+      "elapsed_ms": 12.97
     },
     {
       "scenario_id": "sc-094",
       "domain": "personal_branding_creator",
       "prompt": "وبلاگ شخصی مربی بدنسازی و فیتنس با برنامه های تغذیه",
       "detected_domain": "personal_branding_creator",
+      "domain_match": true,
       "selected_style": "editorial_magazine",
       "candidate_passed_first_pass": true,
-      "critic_score": 95,
+      "critic_score": 95.0,
       "verification_status": "PASS",
-      "elapsed_ms": 12.01
+      "elapsed_ms": 11.98
     },
     {
       "scenario_id": "sc-095",
       "domain": "cybersecurity_identity_auth",
       "prompt": "Threat intelligence feed and vulnerability remediation dashboard",
-      "detected_domain": "general_modern_saas",
-      "selected_style": "clean_stripe",
+      "detected_domain": "cybersecurity_identity_auth",
+      "domain_match": true,
+      "selected_style": "linear_dark",
       "candidate_passed_first_pass": true,
-      "critic_score": 95,
+      "critic_score": 95.0,
       "verification_status": "PASS",
-      "elapsed_ms": 13.21
+      "elapsed_ms": 12.8
     },
     {
       "scenario_id": "sc-096",
       "domain": "general_modern_saas",
       "prompt": "سامانه مدیریت فاکتورها و صدور پیش فاکتور آنلاین",
-      "detected_domain": "ecommerce_luxury_fashion",
-      "selected_style": "quiet_luxury",
+      "detected_domain": "general_modern_saas",
+      "domain_match": true,
+      "selected_style": "clean_stripe",
       "candidate_passed_first_pass": true,
-      "critic_score": 95,
+      "critic_score": 95.0,
       "verification_status": "PASS",
-      "elapsed_ms": 12.32
+      "elapsed_ms": 12.93
     },
     {
       "scenario_id": "sc-097",
       "domain": "beauty_clinical_wellness",
       "prompt": "High-tech trichology hair restoration and scalp therapy center",
-      "detected_domain": "ai_developer_platform",
-      "selected_style": "linear_dark",
+      "detected_domain": "beauty_clinical_wellness",
+      "domain_match": true,
+      "selected_style": "quiet_luxury",
       "candidate_passed_first_pass": true,
-      "critic_score": 95,
+      "critic_score": 95.0,
       "verification_status": "PASS",
-      "elapsed_ms": 13.06
+      "elapsed_ms": 13.55
     },
     {
       "scenario_id": "sc-098",
       "domain": "fintech_banking",
       "prompt": "صندوق سرمایه گذاری با درآمد ثابت و سود روزشمار",
       "detected_domain": "fintech_banking",
+      "domain_match": true,
       "selected_style": "clean_stripe",
       "candidate_passed_first_pass": true,
-      "critic_score": 95,
+      "critic_score": 95.0,
       "verification_status": "PASS",
-      "elapsed_ms": 12.55
+      "elapsed_ms": 13.7
     },
     {
       "scenario_id": "sc-099",
       "domain": "crypto_trading_web3",
       "prompt": "Multi-chain decentralized automated market maker (AMM) swap interface",
-      "detected_domain": "ai_developer_platform",
+      "detected_domain": "crypto_trading_web3",
+      "domain_match": true,
       "selected_style": "linear_dark",
       "candidate_passed_first_pass": true,
-      "critic_score": 95,
+      "critic_score": 95.0,
       "verification_status": "PASS",
-      "elapsed_ms": 12.26
+      "elapsed_ms": 12.44
     },
     {
       "scenario_id": "sc-100",
       "domain": "devops_cloud_terminal",
       "prompt": "ترمینال ابری مدیریت سرورهای لینوکس با وب سوکت",
       "detected_domain": "devops_cloud_terminal",
+      "domain_match": true,
       "selected_style": "data_dense_terminal",
       "candidate_passed_first_pass": true,
-      "critic_score": 95,
+      "critic_score": 95.0,
       "verification_status": "PASS",
-      "elapsed_ms": 13.49
+      "elapsed_ms": 14.95
     }
   ]
 }

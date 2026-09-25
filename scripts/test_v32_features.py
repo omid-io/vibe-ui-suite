@@ -93,7 +93,15 @@ def run_tests():
         failures.append("TSX missing useState hook for living micro-states")
     if "<bdi>" not in tsx:
         failures.append("TSX missing <bdi> isolation for mixed numerals/terms")
-    print(f"  [PASS] Test 5: Living React 19 TSX Generation with State & BiDi")
+    if "activeTab === 0" not in tsx or "activeTab === 1" not in tsx or "activeTab === 2" not in tsx:
+        failures.append("TSX missing functional conditional tab panels (activeTab === 0/1/2)")
+    if "simulatedValue" not in tsx and "splitPos" not in tsx and "isLiveActive" not in tsx:
+        failures.append("TSX missing living dynamic interactive widget state")
+    
+    html_gen = gen.generate_html(decision, "DentalClinicBooking")
+    if f'data-domain="{intent_med["product_domain"]}"' not in html_gen:
+        failures.append(f"Generated HTML missing data-domain attribute for {intent_med['product_domain']}")
+    print(f"  [PASS] Test 5: Living React 19 TSX Generation with State, BiDi & Conditional Tabs")
 
     # 6. Aesthetic Critic Invariants
     critic = DesignCritic()

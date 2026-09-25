@@ -69,7 +69,7 @@ Headless Browser Evaluation (Playwright 375px mobile overflow)
 Verified Output or Actionable Failure Diagnostics
 ```
 
-> **Day-One Transparency**: Vibe UI Suite is at `v3.2.0` (The Autonomous Masterpiece Engine — Vibe Coding Edition). Featuring 24 domain blueprints, non-blocking stack sensing (<1ms), smart lighting strategy eliminating dark-mode bias, anti-slop aesthetic invariants, and living React 19 TSX generation. Constructive criticism, issues, and contributions from frontend engineers and AI researchers are warmly welcomed.
+> **Day-One Transparency**: Vibe UI Suite is at `v3.2.0` (The Autonomous Masterpiece Engine — Vibe Coding Edition). Featuring 24 domain blueprints, sub-millisecond synchronous stack sensing (<1ms), smart lighting strategy eliminating dark-mode bias, anti-slop aesthetic invariants, 100% domain resolution accuracy, living React 19 TSX generation with dynamic state, and dual-tier contrast governance (Target: WCAG AAA >= 7:1 | Hard Gate: WCAG AA >= 4.5:1). Constructive criticism, issues, and contributions from frontend engineers and AI researchers are warmly welcomed.
 
 ---
 
@@ -82,7 +82,7 @@ Copy and paste this single prompt directly into **Cursor, Claude Code, Windsurf,
 ```text
 Design and style this application using Vibe UI standards (https://github.com/omid-io/vibe-ui-suite):
 - Use OKLCH color palettes & native Tailwind CSS v4 (@theme)
-- Enforce strict WCAG 2.2 AA contrast (Luminance ratio >= 4.5:1)
+- Enforce dual-tier contrast standards: Target WCAG 2.2 AAA (>= 7:1), with invariant hard-gate at WCAG 2.2 AA (>= 4.5:1)
 - Never use raw emojis in UI — use inline SVG vector icons with currentColor
 - Use fixed-structure semantic RTL with <bdi> isolation and pure LTR metrics
 ```

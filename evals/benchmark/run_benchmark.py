@@ -58,6 +58,7 @@ def main():
     v3_tokens = 0
     v3_total_ms = 0.0
     v3_styles = set()
+    v3_domain_matches = 0
     v3_details = []
 
     # Baseline Methodology Note:
@@ -81,6 +82,9 @@ def main():
 
         # Step 1: Director
         intent = director.infer_intent(prompt_text)
+        is_domain_match = (intent["product_domain"] == domain_id)
+        if is_domain_match:
+            v3_domain_matches += 1
 
         # Step 2: Recommendation & Genome
         decision = engine.recommend(intent)
@@ -114,6 +118,7 @@ def main():
             "domain": domain_id,
             "prompt": prompt_text,
             "detected_domain": intent["product_domain"],
+            "domain_match": is_domain_match,
             "selected_style": selected_style,
             "candidate_passed_first_pass": critique_report["acceptance_status"] == "ACCEPTED",
             "critic_score": final_report["quality_score"],
@@ -127,6 +132,7 @@ def main():
     total_bench_ms = (time.perf_counter() - start_bench_time) * 1000.0
 
     v3_first_pass_rate = (v3_first_pass / len(scenarios)) * 100.0
+    v3_domain_accuracy = (v3_domain_matches / len(scenarios)) * 100.0
     v3_avg_corrections = round(v3_corrections / len(scenarios), 2)
     v3_avg_tokens = round(v3_tokens / len(scenarios), 0)
     v3_avg_ms = round(v3_total_ms / len(scenarios), 2)
@@ -138,7 +144,7 @@ def main():
     benchmark_results = {
         "$schema": "../../schemas/benchmark-result.v1.json",
         "timestamp": datetime.now(timezone.utc).isoformat(),
-        "suite_version": "3.0.1",
+        "suite_version": "3.2.0",
         "scenario_count": len(scenarios),
         "benchmark_type": "internal_deterministic_heuristic",
         "baseline_system": "Vanilla LLM / V2 Heuristic Baseline",
@@ -150,6 +156,11 @@ def main():
                 "baseline": 52.0,
                 "candidate": v3_first_pass_rate,
                 "delta_percent": round(v3_first_pass_rate - 52.0, 1)
+            },
+            "domain_resolution_accuracy": {
+                "baseline": 56.0,
+                "candidate": round(v3_domain_accuracy, 1),
+                "delta_percent": round(v3_domain_accuracy - 56.0, 1)
             },
             "avg_user_corrections": {
                 "baseline": baseline_corrections,
@@ -180,11 +191,12 @@ def main():
         json.dump(benchmark_results, f, indent=2, ensure_ascii=False)
 
     print("\n" + "=" * 70)
-    print("📊 VIBE UI V3 BENCHMARK SCOREBOARD")
+    print("📊 VIBE UI V3 BENCHMARK SCOREBOARD (v3.2.0)")
     print("=" * 70)
     print(f"| KPI Metric               | Baseline (V2) | Vibe UI V3    | Improvement           |")
     print(f"| :----------------------- | :------------ | :------------ | :-------------------- |")
     print(f"| First-Pass Acceptance    | 52.0%         | {v3_first_pass_rate:.1f}%         | +{v3_first_pass_rate - 52.0:.1f}%               |")
+    print(f"| Domain Match Accuracy    | 56.0%         | {v3_domain_accuracy:.1f}%        | +{v3_domain_accuracy - 56.0:.1f}% accuracy gain   |")
     print(f"| Avg Correction Count     | {baseline_corrections} prompts   | {v3_avg_corrections} prompts   | -{((baseline_corrections - v3_avg_corrections)/baseline_corrections)*100:.1f}% reduction       |")
     print(f"| Avg Correction Tokens    | {baseline_tokens} tokens   | {v3_avg_tokens:.0f} tokens     | -{((baseline_tokens - v3_avg_tokens)/baseline_tokens)*100:.1f}% token savings   |")
     print(f"| Avg Inference Time       | ~4500ms       | {v3_avg_ms:.1f}ms       | > 100x faster local   |")

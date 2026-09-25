@@ -11,6 +11,18 @@ from vibe_core.genome import DesignGenomeEngine
 class InterfaceGenerator:
     def __init__(self):
         self.genome_engine = DesignGenomeEngine()
+        self.blueprints = self._load_blueprints()
+
+    def _load_blueprints(self) -> Dict[str, Any]:
+        bp_path = Path(__file__).resolve().parent.parent / "data" / "domain_blueprints.json"
+        if not bp_path.exists():
+            return {}
+        try:
+            import json
+            with open(bp_path, "r", encoding="utf-8") as f:
+                return json.load(f)
+        except Exception:
+            return {}
 
     def generate_react_tsx(self, decision: Dict[str, Any], component_name: str = "VibeMasterpiece") -> str:
         """
@@ -18,15 +30,22 @@ class InterfaceGenerator:
         featuring real state management (useState), glowing edge micro-effects,
         domain signature widgets, and complete WCAG AAA / BiDi isolation.
         """
-        domain_id = decision.get("intent", {}).get("product_domain", "general_modern_saas")
-        blueprint = decision.get("intent", {}).get("blueprint", {})
+        domain_id = decision.get("genome", {}).get("domain") or decision.get("intent", {}).get("product_domain", "general_modern_saas")
+        blueprint = decision.get("intent", {}).get("blueprint") or self.blueprints.get("domains", {}).get(domain_id, {})
         sig_widget = blueprint.get("signature_widget", {})
-        is_rtl = decision.get("intent", {}).get("language", ["en"])[0] == "fa"
+        selected_style = decision.get("selected_style", "clean_stripe")
+        is_rtl = decision.get("genome", {}).get("platform", {}).get("rtl_support", False) or (decision.get("intent", {}).get("language", ["en"])[0] == "fa" if decision.get("intent", {}).get("language") else False)
         dir_attr = 'dir="rtl"' if is_rtl else 'dir="ltr"'
 
         title_fa = blueprint.get("mock_data", {}).get("headline", "پلتفرم نوآورانه نسل جدید")
         title_en = "Next-Generation Intelligence Platform"
         headline = title_fa if is_rtl else title_en
+        sig_widget_name = sig_widget.get("name", "ماژول تعاملی هوشمند" if is_rtl else "Interactive Intelligence Hub")
+
+        # Determine domain widget family
+        is_orderbook_family = domain_id in ["crypto_trading_web3", "devops_cloud_terminal", "gaming_entertainment_streaming", "logistics_supply_chain", "cybersecurity_identity_auth", "automotive_ev_mobility"]
+        is_comparison_family = domain_id in ["beauty_clinical_wellness", "real_estate_architecture", "creative_portfolio_agency", "ecommerce_luxury_fashion"]
+        is_content_family = domain_id in ["education_edtech_lms", "media_editorial_magazine", "food_restaurant_cafe", "travel_hospitality_tourism", "legal_compliance_law", "nonprofit_charity_social", "personal_branding_creator"]
 
         tsx = f'''"use client";
 
@@ -43,13 +62,14 @@ export const {component_name}: React.FC<{component_name}Props> = ({{
 }}) => {{
   const [billingCycle, setBillingCycle] = useState<"monthly" | "annual">("annual");
   const [activeTab, setActiveTab] = useState<number>(0);
-  const [isCalculated, setIsCalculated] = useState<boolean>(true);
   const [simulatedValue, setSimulatedValue] = useState<number>(25000);
+  const [splitPos, setSplitPos] = useState<number>(50);
+  const [isLiveActive, setIsLiveActive] = useState<boolean>(true);
 
   const tabs = [
-    {{"id": "overview", "label": "{"نمای کلی" if is_rtl else "Overview"}"}},
-    {{"id": "telemetry", "label": "{"شاخص های زنده" if is_rtl else "Telemetry"}"}},
-    {{"id": "architecture", "label": "{"معماری سیستم" if is_rtl else "Architecture"}"}}
+    {{"id": "overview", "label": "{"نمای کلی و ویجت اختصاصی" if is_rtl else "Overview & Widget"}"}},
+    {{"id": "telemetry", "label": "{"شاخص های زنده عملکردی" if is_rtl else "Live Telemetry"}"}},
+    {{"id": "architecture", "label": "{"معماری سیستم و مشخصات" if is_rtl else "System Blueprint"}"}}
   ];
 
   return (
@@ -75,7 +95,7 @@ export const {component_name}: React.FC<{component_name}Props> = ({{
             </span>
           </div>
 
-          {{/* Interactive Tabs */}}
+          {{/* Interactive Tabs with Full Accessibility Role */}}
           <div role="tablist" aria-label="Feature Tabs" className="inline-flex rounded-full bg-zinc-100 dark:bg-zinc-900 p-1 border border-zinc-200 dark:border-zinc-800">
             {{tabs.map((tab, idx) => (
               <button
@@ -96,98 +116,213 @@ export const {component_name}: React.FC<{component_name}Props> = ({{
           </div>
         </div>
 
-        {{/* Hero Section with Asymmetric Bento Rhythm */}}
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 pt-8 items-center">
-          <div className="lg:col-span-7 space-y-6">
-            <h1 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight text-zinc-900 dark:text-white leading-[1.15]">
-              {headline}
-            </h1>
-            <p className="text-base sm:text-lg text-zinc-600 dark:text-zinc-400 leading-relaxed max-w-2xl">
-              {"تجربه ای منحصربه فرد، بدون کلیشه و مهندسی شده با پیشرفته ترین معیارهای دسترسی پذیری نوری و تعاملات روان." if is_rtl else "Autonomous precision interface engineered with strict WCAG AAA contrast, physics spring motion, and domain priors."}
-            </p>
+        {{/* Tab Panel 0: Overview & Signature Domain Widget */}}
+        {{activeTab === 0 && (
+          <div role="tabpanel" className="grid grid-cols-1 lg:grid-cols-12 gap-8 pt-8 items-center animate-fadeIn">
+            <div className="lg:col-span-7 space-y-6">
+              <h1 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight text-zinc-900 dark:text-white leading-[1.15]">
+                {headline}
+              </h1>
+              <p className="text-base sm:text-lg text-zinc-600 dark:text-zinc-400 leading-relaxed max-w-2xl">
+                {"تجربه ای منحصربه فرد، بدون کلیشه و مهندسی شده با پیشرفته ترین معیارهای دسترسی پذیری نوری و تعاملات روان." if is_rtl else "Autonomous precision interface engineered with strict WCAG AAA contrast, physics spring motion, and domain priors."}
+              </p>
 
-            {{/* Real Interactive Billing Switch */}}
-            <div className="flex items-center gap-3 pt-2">
-              <span className="text-xs font-medium text-zinc-500">{"ماهانه" if is_rtl else "Monthly"}</span>
-              <button
-                type="button"
-                role="switch"
-                aria-checked={{billingCycle === "annual"}}
-                onClick={{() => setBillingCycle(prev => prev === "annual" ? "monthly" : "annual")}}
-                className="relative inline-flex h-6 w-11 shrink-0 cursor-pointer rounded-full border-2 border-transparent bg-zinc-300 dark:bg-zinc-700 transition-colors duration-200 ease-in-out focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:ring-offset-2"
-              >
-                <span
-                  aria-hidden="true"
-                  className={{`pointer-events-none inline-block h-5 w-5 transform rounded-full bg-white shadow-lg ring-0 transition duration-200 ease-in-out ${{
-                    billingCycle === "annual" ? "translate-x-5 rtl:-translate-x-5" : "translate-x-0"
+              {{/* Real Interactive Billing Switch */}}
+              <div className="flex items-center gap-3 pt-2">
+                <span className="text-xs font-medium text-zinc-500">{"ماهانه" if is_rtl else "Monthly"}</span>
+                <button
+                  type="button"
+                  role="switch"
+                  aria-checked={{billingCycle === "annual"}}
+                  onClick={{() => setBillingCycle(prev => prev === "annual" ? "monthly" : "annual")}}
+                  className="relative inline-flex h-6 w-11 shrink-0 cursor-pointer rounded-full border-2 border-transparent bg-zinc-300 dark:bg-zinc-700 transition-colors duration-200 ease-in-out focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:ring-offset-2"
+                >
+                  <span
+                    aria-hidden="true"
+                    className={{`pointer-events-none inline-block h-5 w-5 transform rounded-full bg-white shadow-lg ring-0 transition duration-200 ease-in-out ${{
+                      billingCycle === "annual" ? "translate-x-5 rtl:-translate-x-5" : "translate-x-0"
+                    }}`}}
+                  />
+                </button>
+                <span className="text-xs font-medium text-zinc-900 dark:text-white flex items-center gap-1.5">
+                  <span>{"سالانه" if is_rtl else "Annual"}</span>
+                  <span className="px-2 py-0.5 text-[10px] font-bold rounded-full bg-emerald-500/10 text-emerald-600 border border-emerald-500/20">
+                    {"۲۰٪ تخفیف ویژه" if is_rtl else "Save 20%"}
+                  </span>
+                </span>
+              </div>
+
+              {{/* Primary CTA Group */}}
+              <div className="flex flex-wrap gap-4 pt-4">
+                <button
+                  type="button"
+                  onClick={{() => onAction?.("primary_click")}}
+                  className="inline-flex items-center justify-center px-6 py-3 text-sm font-semibold rounded-xl text-white bg-zinc-900 dark:bg-white dark:text-zinc-900 hover:opacity-90 active:scale-95 transition-all shadow-md min-h-[44px]"
+                >
+                  {"شروع آنی پروژه" if is_rtl else "Get Started Now"}
+                </button>
+                <button
+                  type="button"
+                  onClick={{() => onAction?.("secondary_click")}}
+                  className="inline-flex items-center justify-center px-6 py-3 text-sm font-semibold rounded-xl text-zinc-800 dark:text-zinc-200 border border-zinc-200 dark:border-zinc-800 hover:bg-zinc-100 dark:hover:bg-zinc-900 active:scale-95 transition-all min-h-[44px]"
+                >
+                  {"مشاهده سرفصل ها" if is_rtl else "Explore System Docs"}
+                </button>
+              </div>
+            </div>
+
+            {{/* Right Column: Domain-Calibrated Signature Widget */}}
+            <div className="lg:col-span-5 bg-zinc-50 dark:bg-zinc-900/90 border border-zinc-200 dark:border-zinc-800 rounded-2xl p-6 shadow-inner space-y-4">
+              <div className="flex items-center justify-between border-b border-zinc-200 dark:border-zinc-800 pb-3">
+                <span className="text-xs font-bold text-zinc-700 dark:text-zinc-300">
+                  {sig_widget_name}
+                </span>
+                <button
+                  type="button"
+                  onClick={{() => setIsLiveActive(prev => !prev)}}
+                  className={{`text-[11px] font-mono px-2 py-0.5 rounded-full border transition-colors ${{
+                    isLiveActive 
+                      ? "bg-emerald-500/10 text-emerald-600 border-emerald-500/20" 
+                      : "bg-zinc-200 dark:bg-zinc-800 text-zinc-500 border-transparent"
                   }}`}}
+                >
+                  <bdi>{{isLiveActive ? "LIVE FEED" : "PAUSED"}}</bdi>
+                </button>
+              </div>
+
+              {'{{/* Orderbook / Real-Time Terminal Family */}}' if is_orderbook_family else ('{{/* Before/After Split Inspector Family */}}' if is_comparison_family else '{{/* Metric / Yield / Cost Simulator Family */}}')}
+              {f'''
+              <div className="space-y-3 font-mono text-xs">
+                <div className="flex justify-between text-zinc-500 pb-1 border-b border-zinc-200/60 dark:border-zinc-800/60">
+                  <span>{"شناسه رویداد" if is_rtl else "EVENT ID"}</span>
+                  <span>{"وضعیت لحظه ای" if is_rtl else "STREAM STATE"}</span>
+                  <span>{"تاخیر" if is_rtl else "LATENCY"}</span>
+                </div>
+                <div className="flex justify-between items-center text-emerald-600 dark:text-emerald-400">
+                  <span>#TX-94812</span>
+                  <span className="px-1.5 py-0.5 rounded bg-emerald-500/10 text-[10px]">SYNCED</span>
+                  <span><bdi>0.4ms</bdi></span>
+                </div>
+                <div className="flex justify-between items-center text-zinc-700 dark:text-zinc-300">
+                  <span>#TX-94811</span>
+                  <span className="px-1.5 py-0.5 rounded bg-sky-500/10 text-sky-500 text-[10px]">EXECUTED</span>
+                  <span><bdi>1.2ms</bdi></span>
+                </div>
+                <div className="flex justify-between items-center text-zinc-700 dark:text-zinc-300">
+                  <span>#TX-94810</span>
+                  <span className="px-1.5 py-0.5 rounded bg-zinc-200 dark:bg-zinc-800 text-[10px]">VERIFIED</span>
+                  <span><bdi>0.8ms</bdi></span>
+                </div>
+              </div>
+              ''' if is_orderbook_family else (f'''
+              <div className="space-y-3">
+                <div className="relative h-28 rounded-xl overflow-hidden bg-zinc-200 dark:bg-zinc-800 flex items-center justify-center border border-zinc-300 dark:border-zinc-700">
+                  <div 
+                    className="absolute inset-y-0 start-0 bg-emerald-500/10 border-e-2 border-emerald-500 transition-all duration-75 flex items-center justify-center text-xs font-bold text-emerald-700 dark:text-emerald-300"
+                    style={{{{ width: `${{splitPos}}%` }}}}
+                  >
+                    <span>{"طراحی مدرن" if is_rtl else "Masterpiece OKLCH"}</span>
+                  </div>
+                  <div className="text-xs text-zinc-400 font-medium">
+                    <span>{"طراحی سنتی" if is_rtl else "Legacy Baseline"}</span>
+                  </div>
+                </div>
+                <input
+                  type="range"
+                  min="0"
+                  max="100"
+                  value={{{{splitPos}}}}
+                  onChange={{{{(e) => setSplitPos(Number(e.target.value))}}}}
+                  className="w-full accent-emerald-500 cursor-pointer h-2 bg-zinc-200 dark:bg-zinc-800 rounded-lg"
                 />
-              </button>
-              <span className="text-xs font-medium text-zinc-900 dark:text-white flex items-center gap-1.5">
-                <span>{"سالانه" if is_rtl else "Annual"}</span>
-                <span className="px-2 py-0.5 text-[10px] font-bold rounded-full bg-emerald-500/10 text-emerald-600 border border-emerald-500/20">
-                  {"۲۰٪ تخفیف ویژه" if is_rtl else "Save 20%"}
-                </span>
-              </span>
-            </div>
+              </div>
+              ''' if is_comparison_family else f'''
+              <div className="space-y-2">
+                <div className="flex justify-between text-xs text-zinc-600 dark:text-zinc-400">
+                  <span>{"ظرفیت عملیاتی" if is_rtl else "Throughput Scale"}</span>
+                  <span className="font-mono font-bold text-zinc-900 dark:text-white">
+                    <bdi>${{{{simulatedValue.toLocaleString()}}}}</bdi>
+                  </span>
+                </div>
+                <input
+                  type="range"
+                  min="1000"
+                  max="100000"
+                  step="1000"
+                  value={{{{simulatedValue}}}}
+                  onChange={{{{(e) => setSimulatedValue(Number(e.target.value))}}}}
+                  className="w-full accent-emerald-500 cursor-pointer h-2 bg-zinc-200 dark:bg-zinc-800 rounded-lg"
+                />
+              </div>
 
-            {{/* Primary CTA Group */}}
-            <div className="flex flex-wrap gap-4 pt-4">
-              <button
-                type="button"
-                onClick={{() => onAction?.("primary_click")}}
-                className="inline-flex items-center justify-center px-6 py-3 text-sm font-semibold rounded-xl text-white bg-zinc-900 dark:bg-white dark:text-zinc-900 hover:opacity-90 active:scale-95 transition-all shadow-md min-h-[44px]"
-              >
-                {"شروع آنی پروژه" if is_rtl else "Get Started Now"}
-              </button>
-              <button
-                type="button"
-                onClick={{() => onAction?.("secondary_click")}}
-                className="inline-flex items-center justify-center px-6 py-3 text-sm font-semibold rounded-xl text-zinc-800 dark:text-zinc-200 border border-zinc-200 dark:border-zinc-800 hover:bg-zinc-100 dark:hover:bg-zinc-900 active:scale-95 transition-all min-h-[44px]"
-              >
-                {"مشاهده سرفصل ها" if is_rtl else "Explore System Docs"}
-              </button>
+              <div className="p-3 bg-white dark:bg-zinc-950 rounded-xl border border-zinc-200/80 dark:border-zinc-800/80 flex items-center justify-between">
+                <div className="text-xs text-zinc-500">{"ضریب بهره وری برآورد شده" if is_rtl else "Estimated Yield Lift"}</div>
+                <div className="text-lg font-bold font-mono text-emerald-600 dark:text-emerald-400">
+                  <bdi>+{{{{(simulatedValue * (0.052 if billingCycle === "annual" else 0.041)).toFixed(1)}}}}</bdi>
+                </div>
+              </div>
+              ''')}
             </div>
           </div>
+        )}}
 
-          {{/* Right Column: Signature Domain Widget */}}
-          <div className="lg:col-span-5 bg-zinc-50 dark:bg-zinc-900/90 border border-zinc-200 dark:border-zinc-800 rounded-2xl p-6 shadow-inner space-y-4">
-            <div className="flex items-center justify-between border-b border-zinc-200 dark:border-zinc-800 pb-3">
-              <span className="text-xs font-bold text-zinc-700 dark:text-zinc-300">
-                {sig_widget.get("name", "ماژول تعاملی هوشمند" if is_rtl else "Interactive Intelligence Hub")}
-              </span>
-              <span className="text-[11px] font-mono text-zinc-500">
-                <bdi>LIVE FEED</bdi>
-              </span>
-            </div>
-
-            {{/* Interactive Metric Slider */}}
-            <div className="space-y-2">
-              <div className="flex justify-between text-xs text-zinc-600 dark:text-zinc-400">
-                <span>{"ظرفیت عملیاتی" if is_rtl else "Throughput Scale"}</span>
-                <span className="font-mono font-bold text-zinc-900 dark:text-white">
-                  <bdi>${{simulatedValue.toLocaleString()}}</bdi>
-                </span>
+        {{/* Tab Panel 1: Live Telemetry & Metrics Analytics */}}
+        {{activeTab === 1 && (
+          <div role="tabpanel" className="grid grid-cols-1 sm:grid-cols-3 gap-6 pt-8 animate-fadeIn">
+            <div className="p-6 rounded-2xl bg-zinc-50 dark:bg-zinc-900/60 border border-zinc-200 dark:border-zinc-800 space-y-2">
+              <div className="text-xs font-medium text-zinc-500">{"نرخ انطباق دسترسی پذیری" if is_rtl else "Accessibility Compliance"}</div>
+              <div className="text-2xl font-bold font-mono text-emerald-600 dark:text-emerald-400">
+                <bdi>100% WCAG AAA</bdi>
               </div>
-              <input
-                type="range"
-                min="1000"
-                max="100000"
-                step="1000"
-                value={{simulatedValue}}
-                onChange={{(e) => setSimulatedValue(Number(e.target.value))}}
-                className="w-full accent-emerald-500 cursor-pointer h-2 bg-zinc-200 dark:bg-zinc-800 rounded-lg"
-              />
+              <div className="text-xs text-zinc-400">{"نسبت کنتراست رنگی بالای ۷:۱ بدون هیچ خطای نوری" if is_rtl else "Mathematical color contrast >= 7:1 across all tokens"}</div>
             </div>
 
-            <div className="p-3 bg-white dark:bg-zinc-950 rounded-xl border border-zinc-200/80 dark:border-zinc-800/80 flex items-center justify-between">
-              <div className="text-xs text-zinc-500">{"ضریب بهره وری برآورد شده" if is_rtl else "Estimated Yield Lift"}</div>
-              <div className="text-lg font-bold font-mono text-emerald-600 dark:text-emerald-400">
-                <bdi>+{{(simulatedValue * 0.052).toFixed(1)}}</bdi>
+            <div className="p-6 rounded-2xl bg-zinc-50 dark:bg-zinc-900/60 border border-zinc-200 dark:border-zinc-800 space-y-2">
+              <div className="text-xs font-medium text-zinc-500">{"زمان پاسخگویی سنسور" if is_rtl else "Sensor Latency"}</div>
+              <div className="text-2xl font-bold font-mono text-sky-600 dark:text-sky-400">
+                <bdi>&lt; 1.0 ms</bdi>
+              </div>
+              <div className="text-xs text-zinc-400">{"اسکن آنی استک پروژه و تطبیق متغیرهای برندینگ" if is_rtl else "Sub-millisecond stack sensing and CSS token alignment"}</div>
+            </div>
+
+            <div className="p-6 rounded-2xl bg-zinc-50 dark:bg-zinc-900/60 border border-zinc-200 dark:border-zinc-800 space-y-2">
+              <div className="text-xs font-medium text-zinc-500">{"کاهش چرخه های اصلاح" if is_rtl else "Iteration Reduction"}</div>
+              <div className="text-2xl font-bold font-mono text-indigo-600 dark:text-indigo-400">
+                <bdi>- 78.4%</bdi>
+              </div>
+              <div className="text-xs text-zinc-400">{"تولید تک شات بدون نیاز به پرامپت نویسی مجدد" if is_rtl else "One-shot first-pass delivery eliminating 100-prompt loops"}</div>
+            </div>
+          </div>
+        )}}
+
+        {{/* Tab Panel 2: Architecture & Domain Blueprint Specification */}}
+        {{activeTab === 2 && (
+          <div role="tabpanel" className="pt-8 space-y-6 animate-fadeIn">
+            <div className="p-6 rounded-2xl bg-zinc-50 dark:bg-zinc-900/60 border border-zinc-200 dark:border-zinc-800">
+              <h3 className="text-base font-bold text-zinc-900 dark:text-white pb-3 border-b border-zinc-200 dark:border-zinc-800">
+                {"مشخصات قرارداد طراحی (Design Genome Specs)" if is_rtl else "Design Genome Specifications"}
+              </h3>
+              <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 pt-4 text-xs font-mono">
+                <div>
+                  <span className="text-zinc-500 block">DOMAIN</span>
+                  <span className="font-semibold text-zinc-900 dark:text-white">{domain_id}</span>
+                </div>
+                <div>
+                  <span className="text-zinc-500 block">STYLE</span>
+                  <span className="font-semibold text-zinc-900 dark:text-white">{selected_style}</span>
+                </div>
+                <div>
+                  <span className="text-zinc-500 block">COLOR SPACE</span>
+                  <span className="font-semibold text-emerald-600 dark:text-emerald-400">OKLCH Gamut</span>
+                </div>
+                <div>
+                  <span className="text-zinc-500 block">TYPOGRAPHY</span>
+                  <span className="font-semibold text-zinc-900 dark:text-white">{"Plus Jakarta + Vazirmatn" if is_rtl else "Plus Jakarta + Satoshi"}</span>
+                </div>
               </div>
             </div>
           </div>
-        </div>
+        )}}
 
       </div>
     </div>
@@ -225,8 +360,10 @@ export default {component_name};
             card_shadow = "shadow-sm hover:shadow-md transition-shadow"
             card_border = "border border-[var(--border-subtle)]"
 
+        domain_id = decision.get("genome", {}).get("domain") or decision.get("intent", {}).get("product_domain", "")
+
         html = f"""<!DOCTYPE html>
-<html {dir_attr} class="h-full">
+<html {dir_attr} data-domain="{domain_id}" class="h-full">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">

@@ -167,31 +167,63 @@ class DesignDirector:
         return intent
 
     def _match_domain(self, text: str) -> Tuple[Dict[str, Any], float, List[str]]:
-        """Matches normalized prompt text against taxonomy aliases."""
+        """Matches normalized prompt text against taxonomy strong signals, aliases, and negative disambiguation."""
         best_domain = None
-        best_score = 0.0
+        best_score = 0.05
         reasons = []
 
         tokens = set(text.split())
+        stems = set(tokens)
+        for t in tokens:
+            for suffix in ['های', 'ها', 'ان', 'ات', 'ی', 'ین', 'ترین', 'تر', 's', 'es', 'ing', 'ed']:
+                if len(t) > len(suffix) + 2 and t.endswith(suffix):
+                    stems.add(t[:-len(suffix)])
 
         for domain in self.taxonomy:
             domain_score = 0.0
             matched_aliases = []
+
+            # Check negative disambiguation signals first
+            is_negated = False
+            for neg in domain.get("negative_signals", []):
+                norm_neg = normalize_text(neg)
+                if norm_neg and norm_neg in text:
+                    is_negated = True
+                    break
+            if is_negated:
+                continue
 
             # Exact ID / Name match
             if domain["id"].replace("_", " ") in text:
                 domain_score += 0.95
                 matched_aliases.append(domain["id"])
 
-            # Alias matching
+            # 1. Strong multi-word or distinct signals
+            for sig in domain.get("strong_signals", []):
+                norm_sig = normalize_text(sig)
+                if norm_sig in text:
+                    domain_score += 0.85
+                    matched_aliases.append(sig)
+                    break
+                sig_tokens = norm_sig.split()
+                if len(sig_tokens) > 1 and all(w in stems for w in sig_tokens):
+                    domain_score += 0.70
+                    matched_aliases.append(sig)
+                    break
+
+            # 2. Aliases and secondary signals
             for alias in domain.get("aliases", []):
                 norm_alias = normalize_text(alias)
                 if norm_alias in text:
-                    domain_score += 0.45
-                    matched_aliases.append(alias)
-                elif set(norm_alias.split()).issubset(tokens):
                     domain_score += 0.35
                     matched_aliases.append(alias)
+                elif norm_alias in stems:
+                    domain_score += 0.25
+                    matched_aliases.append(alias)
+
+            # Downweight generic SaaS fallback unless explicitly matched
+            if domain["id"] == "general_modern_saas":
+                domain_score *= 0.70
 
             # Cap score to 0.98 max for non-exact overrides
             domain_score = min(0.98, domain_score)
@@ -201,8 +233,7 @@ class DesignDirector:
                 best_domain = domain
                 reasons = matched_aliases
 
-        if not best_domain or best_score < 0.30:
-            # Fallback to general_modern_saas with honest zero/actual match score
+        if not best_domain or best_score < 0.20:
             fallback = next((d for d in self.taxonomy if d["id"] == "general_modern_saas"), self.taxonomy[0] if self.taxonomy else {})
             actual_score = round(best_score, 2) if best_domain else 0.0
             return fallback, actual_score, ["fallback_general_modern_saas", "no_matching_taxonomy"]

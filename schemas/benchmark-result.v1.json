@@ -24,16 +24,32 @@
       "type": "object",
       "required": [
         "first_pass_rate",
-        "avg_correction_prompts",
+        "domain_resolution_accuracy",
         "avg_correction_tokens"
       ],
       "properties": {
+        "domain_resolution_accuracy": {
+          "type": "object",
+          "properties": {
+            "baseline": { "type": "number" },
+            "candidate": { "type": "number" },
+            "delta_percent": { "type": "number" }
+          }
+        },
         "first_pass_rate": {
           "type": "object",
           "properties": {
             "baseline": { "type": "number" },
             "candidate": { "type": "number" },
             "delta_percent": { "type": "number" }
+          }
+        },
+        "avg_user_corrections": {
+          "type": "object",
+          "properties": {
+            "baseline": { "type": "number" },
+            "candidate": { "type": "number" },
+            "reduction_percent": { "type": "number" }
           }
         },
         "avg_correction_prompts": {
@@ -47,6 +63,13 @@
           "type": "object",
           "properties": {
             "baseline": { "type": "number" },
+            "candidate": { "type": "number" },
+            "reduction_percent": { "type": "number" }
+          }
+        },
+        "avg_time_to_accept_ms": {
+          "type": "object",
+          "properties": {
             "candidate": { "type": "number" }
           }
         },
@@ -54,6 +77,13 @@
           "type": "object",
           "properties": {
             "baseline": { "type": "number" },
+            "candidate": { "type": "number" },
+            "unique_styles_rendered": { "type": "integer" }
+          }
+        },
+        "hard_gates_compliance": {
+          "type": "object",
+          "properties": {
             "candidate": { "type": "number" }
           }
         }

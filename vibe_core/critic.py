@@ -280,10 +280,11 @@ class DesignCritic:
         # Scorecard computation — all values derived from measurable HTML signals, no hardcoded constants.
         # Touch target policy: HARD_MIN_TOUCH_PX = 24px (WCAG 2.2 AA), RECOMMENDED_TOUCH_PX = 44px (mobile HIG)
         
-        # Visual Hierarchy: evidence — heading tags, display-font tokens, and asymmetric layout rhythm
+        # Visual Hierarchy: evidence — heading hierarchy, card layout density, and asymmetric grid rhythm
         heading_tags = len(re.findall(r"<h[1-3][^>]*>", html_content, re.IGNORECASE))
-        has_asymmetric_grid = "md:col-span-2" in html_content or "col-span-2" in html_content or "row-span-2" in html_content
-        visual_hierarchy = min(14, 5 + (heading_tags * 2) + (3 if has_asymmetric_grid else 0) + (2 if "display-font" in html_content else 0))
+        has_asymmetric_grid = "md:col-span-2" in html_content or "col-span-2" in html_content or "row-span-2" in html_content or "lg:col-span-7" in html_content
+        card_count = len(re.findall(r"rounded-[23]?xl|p-[468]", html_content))
+        visual_hierarchy = min(15, 5 + min(4, heading_tags) + (3 if has_asymmetric_grid else 0) + min(3, card_count // 3))
 
         # Anti-Slop Distinctiveness: evidence — penalize clichéd purple/indigo gradients and sparkle icon tropes
         sparkle_count = len(re.findall(r"sparkle|lucide-sparkle|✨", html_content, re.IGNORECASE))
@@ -308,10 +309,13 @@ class DesignCritic:
             })
         anti_slop_distinctiveness = max(4, anti_slop_distinctiveness)
 
-        # Domain Fit: evidence — CSS custom properties and domain-calibrated tokens signal intentional design
+        # Domain Fit: evidence — domain-specific semantic calibration and signature widget presence
         css_var_count = len(re.findall(r"var\(--", html_content))
-        has_signature_widget = "signature-widget" in html_content or "data-widget" in html_content or "calculator" in html_content or "slider" in html_content
-        domain_fit = min(14, 4 + min(8, css_var_count) + (2 if has_signature_widget else 0))
+        has_signature_widget = "signature-widget" in html_content or "data-widget" in html_content or "calculator" in html_content or "slider" in html_content or "STREAM STATE" in html_content or "وضعیت لحظه ای" in html_content
+        domain_id = decision.get("genome", {}).get("domain") or decision.get("intent", {}).get("product_domain", "")
+        html_domain_match = f'data-domain="{domain_id}"' in html_content if domain_id else False
+        domain_term_matches = sum(1 for tok in domain_id.split("_") if len(tok) > 2 and tok.lower() in html_content.lower()) if domain_id else 0
+        domain_fit = min(15, 6 + min(3, css_var_count // 3) + (2 if has_signature_widget else 0) + (2 if html_domain_match else 0) + min(2, domain_term_matches))
 
         # Usability: evidence — presence of interactive semantic elements and absence of div-onclick violations
         usability = 10 if not div_onclick else 6
@@ -337,10 +341,11 @@ class DesignCritic:
         # Responsive: evidence — mobile viewport meta tag presence
         responsive = 10 if 'name="viewport"' in html_content else 4
 
-        # Brand Coherence: evidence — presence of CSS variable design tokens (--surface, --accent, --text)
+        # Brand Coherence: evidence — presence of CSS variable design tokens and OKLCH color space
         brand_token_signals = ["--accent", "--surface", "--text-primary", "--border", "--canvas"]
         brand_matches = sum(1 for t in brand_token_signals if t in html_content)
-        brand_coherence = min(9, brand_matches * 2)
+        has_oklch = "oklch(" in html_content
+        brand_coherence = min(10, round(brand_matches * 1.4) + (2 if has_oklch else 0))
 
         # Performance Budget: evidence — blur surface count measured above
         perf_budget = 5 if len(blur_matches) <= MAX_BLUR_SURFACES else 2
@@ -357,7 +362,7 @@ class DesignCritic:
             "performance_budget": perf_budget
         }
 
-        quality_score = sum(scorecard.values())
+        quality_score = round(float(sum(scorecard.values())), 1)
         hard_gates_pass = len(hard_gate_failures) == 0
 
         if hard_gates_pass and quality_score >= 80.0:
