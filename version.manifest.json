@@ -1,12 +1,12 @@
 {
   "$schema": "./schemas/version-manifest.schema.json",
-  "version": "3.2.0",
-  "codename": "The Autonomous Masterpiece Engine — Vibe Coding Edition",
+  "version": "3.3.0",
+  "codename": "The Autonomous Closed-Loop Masterpiece Engine",
   "release_channel": "stable",
   "packages": {
-    "@omid-io/tokens": "3.2.0",
-    "vibe-ui-vscode": "3.2.0",
-    "vibe-ui-nextjs-starter": "3.2.0"
+    "@omid-io/tokens": "3.3.0",
+    "vibe-ui-vscode": "3.3.0",
+    "vibe-ui-nextjs-starter": "3.3.0"
   },
   "schemas": {
     "intent_contract": "v1",

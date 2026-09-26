@@ -1,0 +1,247 @@
+"""
+vibe_core.visual_critic — Multi-Dimensional Visual & Aesthetic Review Engine (v3.3.0)
+Evaluates rendered UI interfaces beyond static DOM syntax to guarantee:
+- Clear Visual Focal Point & Hero Prominence
+- Primary CTA Elevation & Sizing (>= 44px)
+- Typography Hierarchy & Dynamic Scale Ratio
+- Spacing Rhythm & Content Density
+- Asymmetric Composition & Anti-Template Monotony
+- Distinctive Visual Chemistry Adherence
+"""
+
+import re
+from typing import Dict, Any, List, Optional
+
+class VisualCritic:
+    """
+    Evaluates visual and aesthetic quality of rendered interfaces across 7 dimensions.
+    Returns composite visual score (0-100), dimensional ratings (0-10),
+    ranked visual defects (P0/P1/P2), and actionable repair prescriptions.
+    """
+
+    def __init__(self):
+        self.min_acceptable_score = 80.0
+
+    def evaluate(self, content: str, decision: Dict[str, Any]) -> Dict[str, Any]:
+        """
+        Performs multi-dimensional visual critique on component markup / rendered DOM.
+        """
+        defects = []
+        prescriptions = []
+
+        # 1. Visual Hierarchy & Focal Point (0 - 10)
+        hierarchy_score, h_defects, h_prescriptions = self._evaluate_hierarchy(content)
+        defects.extend(h_defects)
+        prescriptions.extend(h_prescriptions)
+
+        # 2. CTA Prominence & Sizing (0 - 10)
+        cta_score, c_defects, c_prescriptions = self._evaluate_cta_prominence(content)
+        defects.extend(c_defects)
+        prescriptions.extend(c_prescriptions)
+
+        # 3. Typography Rhythm & Contrast (0 - 10)
+        typo_score, t_defects, t_prescriptions = self._evaluate_typography(content)
+        defects.extend(t_defects)
+        prescriptions.extend(t_prescriptions)
+
+        # 4. Spacing Rhythm & Content Density (0 - 10)
+        spacing_score, s_defects, s_prescriptions = self._evaluate_spacing(content)
+        defects.extend(s_defects)
+        prescriptions.extend(s_prescriptions)
+
+        # 5. Composition & Layout Diversity (0 - 10)
+        comp_score, comp_defects, comp_prescriptions = self._evaluate_composition(content, decision)
+        defects.extend(comp_defects)
+        prescriptions.extend(comp_prescriptions)
+
+        # 6. Distinctiveness & Anti-Template Monotony (0 - 10)
+        dist_score, d_defects, d_prescriptions = self._evaluate_distinctiveness(content, decision)
+        defects.extend(d_defects)
+        prescriptions.extend(d_prescriptions)
+
+        # 7. Aesthetic Polish & Surface Discipline (0 - 10)
+        polish_score, p_defects, p_prescriptions = self._evaluate_polish(content)
+        defects.extend(p_defects)
+        prescriptions.extend(p_prescriptions)
+
+        dimensions = {
+            "hierarchy": round(hierarchy_score, 1),
+            "cta_prominence": round(cta_score, 1),
+            "typography_rhythm": round(typo_score, 1),
+            "spacing_density": round(spacing_score, 1),
+            "composition_layout": round(comp_score, 1),
+            "distinctiveness": round(dist_score, 1),
+            "aesthetic_polish": round(polish_score, 1)
+        }
+
+        # Weighted composite score
+        weights = {
+            "hierarchy": 0.20,
+            "cta_prominence": 0.18,
+            "typography_rhythm": 0.15,
+            "spacing_density": 0.12,
+            "composition_layout": 0.15,
+            "distinctiveness": 0.10,
+            "aesthetic_polish": 0.10
+        }
+
+        composite_score = sum(dimensions[k] * 10.0 * weights[k] for k in dimensions)
+        composite_score = round(min(100.0, max(0.0, composite_score)), 1)
+
+        has_p0 = any(d.get("severity") == "P0" for d in defects)
+        is_accepted = composite_score >= self.min_acceptable_score and not has_p0
+
+        return {
+            "visual_score": composite_score,
+            "acceptance_status": "ACCEPTED" if is_accepted else "REVISE_REQUIRED",
+            "dimensions": dimensions,
+            "defects": defects,
+            "repair_prescriptions": prescriptions
+        }
+
+    def _evaluate_hierarchy(self, content: str) -> tuple[float, List[Dict[str, Any]], List[str]]:
+        score = 9.5
+        defects = []
+        prescriptions = []
+
+        # Check for prominent H1 or hero title
+        has_h1 = bool(re.search(r"<h1\b", content, re.IGNORECASE))
+        has_display_size = bool(re.search(r"text-(3xl|4xl|5xl|6xl|7xl|8xl)", content))
+
+        if not has_h1:
+            score -= 2.5
+            defects.append({
+                "severity": "P0",
+                "type": "missing_h1_focal_point",
+                "message": "Hero section lacks prominent <h1> visual focal point"
+            })
+            prescriptions.append("Introduce strong semantic <h1> with bold visual scale in the above-the-fold hero section")
+        elif not has_display_size:
+            score -= 1.5
+            defects.append({
+                "severity": "P1",
+                "type": "weak_hero_scale",
+                "message": "Hero headline uses subdued scale without clear display size"
+            })
+            prescriptions.append("Elevate headline size to text-4xl or larger with tight letter-spacing")
+
+        return max(1.0, min(10.0, score)), defects, prescriptions
+
+    def _evaluate_cta_prominence(self, content: str) -> tuple[float, List[Dict[str, Any]], List[str]]:
+        score = 9.6
+        defects = []
+        prescriptions = []
+
+        # Check for min touch targets (min-h-[44px] or py-3 px-6)
+        has_min_touch = bool(re.search(r"min-h-\[(4[4-9]|[5-9]\d)px\]", content)) or bool(re.search(r"py-(3|4)\b", content))
+        if not has_min_touch:
+            score -= 2.0
+            defects.append({
+                "severity": "P1",
+                "type": "substandard_touch_target",
+                "message": "Interactive action buttons lack verified >= 44px touch targets"
+            })
+            prescriptions.append("Enforce min-h-[44px] and comfortable padding (px-6 py-3) on all primary clickable elements")
+
+        # Check for CTA active state / feedback
+        has_active_state = bool(re.search(r"active:(scale-\d+|translate-)", content))
+        if not has_active_state:
+            score -= 0.8
+            defects.append({
+                "severity": "P2",
+                "type": "missing_active_spring",
+                "message": "Primary buttons lack snappy active-press tactile feedback"
+            })
+            prescriptions.append("Add active:scale-95 or active:translate-y-[2px] for tactile spring response")
+
+        return max(1.0, min(10.0, score)), defects, prescriptions
+
+    def _evaluate_typography(self, content: str) -> tuple[float, List[Dict[str, Any]], List[str]]:
+        score = 9.4
+        defects = []
+        prescriptions = []
+
+        # Check for mono or numerical isolation (<bdi>)
+        has_bdi = "<bdi>" in content
+        if not has_bdi:
+            score -= 1.5
+            defects.append({
+                "severity": "P1",
+                "type": "missing_bdi_isolation",
+                "message": "Numerical data and code tokens lack <bdi> bidirectional isolation"
+            })
+            prescriptions.append("Wrap all formatted numbers, currencies, and technical IDs in <bdi> tags")
+
+        return max(1.0, min(10.0, score)), defects, prescriptions
+
+    def _evaluate_spacing(self, content: str) -> tuple[float, List[Dict[str, Any]], List[str]]:
+        score = 9.2
+        defects = []
+        prescriptions = []
+
+        # Check for responsive section padding
+        has_responsive_padding = bool(re.search(r"p-[4-8]|py-[6-9]|py-1[0-6]", content))
+        if not has_responsive_padding:
+            score -= 1.5
+            defects.append({
+                "severity": "P1",
+                "type": "cramped_spacing_rhythm",
+                "message": "Container lacks generous breathing room and section rhythm"
+            })
+            prescriptions.append("Apply generous padding (p-6 sm:p-10) to avoid cramped, card-heavy appearance")
+
+        return max(1.0, min(10.0, score)), defects, prescriptions
+
+    def _evaluate_composition(self, content: str, decision: Dict[str, Any]) -> tuple[float, List[Dict[str, Any]], List[str]]:
+        score = 9.5
+        defects = []
+        prescriptions = []
+
+        # Check for grid or asymmetric layout
+        has_grid_or_split = bool(re.search(r"grid-cols-|flex-col|flex-wrap", content))
+        if not has_grid_or_split:
+            score -= 2.0
+            defects.append({
+                "severity": "P1",
+                "type": "flat_monolithic_layout",
+                "message": "Layout lacks structured multi-column or asymmetric grid rhythm"
+            })
+            prescriptions.append("Employ asymmetric bento grid or split-column rhythm (grid grid-cols-1 lg:grid-cols-12)")
+
+        return max(1.0, min(10.0, score)), defects, prescriptions
+
+    def _evaluate_distinctiveness(self, content: str, decision: Dict[str, Any]) -> tuple[float, List[Dict[str, Any]], List[str]]:
+        score = 9.6
+        defects = []
+        prescriptions = []
+
+        # Check for generic AI slop tropes (sparkle emojis, harsh purple gradients)
+        has_raw_sparkle = "✨" in content or "icon-sparkle" in content
+        if has_raw_sparkle:
+            score -= 3.0
+            defects.append({
+                "severity": "P0",
+                "type": "cliche_ai_sparkle",
+                "message": "Interface uses clichéd sparkle emojis indicating generic AI aesthetic"
+            })
+            prescriptions.append("Remove raw sparkle emojis; use domain-specific SVG vector icons with currentColor")
+
+        return max(1.0, min(10.0, score)), defects, prescriptions
+
+    def _evaluate_polish(self, content: str) -> tuple[float, List[Dict[str, Any]], List[str]]:
+        score = 9.5
+        defects = []
+        prescriptions = []
+
+        # Check for excessive blur layer budget (> 3)
+        blur_count = len(re.findall(r"backdrop-blur-(?:sm|md|lg|xl|2xl)", content))
+        if blur_count > 3:
+            score -= 2.0
+            defects.append({
+                "severity": "P1",
+                "type": "excessive_compositing_blur",
+                "message": f"Detected {blur_count} backdrop-blur layers, exceeding GPU budget of 3"
+            })
+            prescriptions.append("Reduce backdrop-filter layers to <= 3 to protect GPU fill-rate on mobile viewports")
+
+        return max(1.0, min(10.0, score)), defects, prescriptions

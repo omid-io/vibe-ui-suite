@@ -24,9 +24,11 @@ TEST_SUITES = [
     ("Knowledge Base Validation (15 Datasets)", ["python", "scripts/validate_data.py"]),
     ("Search & Recommendation Unit Tests", ["python", "scripts/test_search.py"]),
     ("Design Critic & AutoRefiner Unit Tests", ["python", "scripts/test_critic_refiner.py"]),
+    ("Visual Critic Multi-Dimensional Tests", ["python", "scripts/test_visual_critic.py"]),
     ("Full Pipeline Integration Tests (E2E)", ["python", "scripts/test_pipeline_e2e.py"]),
-    ("Vibe UI v3.2.0 Feature Verification", ["python", "scripts/test_v32_features.py"]),
+    ("Vibe UI Feature Verification", ["python", "scripts/test_v32_features.py"]),
     ("Stratified 100-Scenario Benchmark", ["python", "evals/benchmark/run_benchmark.py"]),
+    ("Blind Holdout 50-Scenario Benchmark", ["python", "evals/benchmark/run_benchmark.py", "--holdout"]),
     ("Physical Runtime Evals (WCAG AA & DOM)", ["python", "evals/run_evals.py", "--json"])
 ]
 

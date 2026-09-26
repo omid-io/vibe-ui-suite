@@ -69,7 +69,7 @@ Headless Browser Evaluation (Playwright 375px mobile overflow)
 Verified Output or Actionable Failure Diagnostics
 ```
 
-> **Day-One Transparency**: Vibe UI Suite is at `v3.2.0` (The Autonomous Masterpiece Engine — Vibe Coding Edition). Featuring 24 domain blueprints, sub-millisecond synchronous stack sensing (<1ms), smart lighting strategy eliminating dark-mode bias, anti-slop aesthetic invariants, 100% domain resolution accuracy, living React 19 TSX generation with dynamic state, and dual-tier contrast governance (Target: WCAG AAA >= 7:1 | Hard Gate: WCAG AA >= 4.5:1). Constructive criticism, issues, and contributions from frontend engineers and AI researchers are warmly welcomed.
+> **Day-One Transparency**: Vibe UI Suite is at `v3.3.0` (The Autonomous Closed-Loop Masterpiece Engine). Featuring render-affecting style compilers (Neobrutalism, Swiss, Luxury, Terminal, Glass, Stripe), multi-dimensional visual critique with automated repair loops, deep design system inheritance (shadcn/ui), 24 domain signature widgets, 100% blind holdout benchmark accuracy, and dual-tier contrast governance (Target: WCAG AAA >= 7:1 | Hard Gate: WCAG AA >= 4.5:1). Constructive criticism, issues, and contributions from frontend engineers and AI researchers are warmly welcomed.
 
 ---
 

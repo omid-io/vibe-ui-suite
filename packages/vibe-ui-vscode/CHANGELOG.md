@@ -3,6 +3,13 @@
 All notable changes to the **Vibe UI (VS Code, Cursor & Open-VSX)** extension will be documented in this file.
 This project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [3.3.0] — 2026-09-26
+
+### Added
+- **Render-Affecting Style Compiler:** Dynamic style compiler support for Neobrutalism, Swiss Editorial, Quiet Luxury, Terminal HUD, Specular Glass, and Clean Stripe.
+- **Visual Critic & Contrast Inspector:** Integration hooks for the 7-dimensional visual critic engine (contrast, hierarchy, CTA touch targets >= 44px, typography rhythm).
+- **Design System Inheritance:** Auto-detection for shadcn/ui, Radix primitives, and next-themes provider architectures.
+
 ---
 
 ## [3.1.1] — 2026-09-04

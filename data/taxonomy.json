@@ -118,7 +118,11 @@
         "کریپتو",
         "crypto",
         "web3",
-        "orderbook"
+        "orderbook",
+        "برج مسکونی",
+        "چیدمان مبلمان",
+        "تور مجازی",
+        "پنت هاوس"
       ]
     },
     {
@@ -234,7 +238,16 @@
         "crm",
         "enterprise",
         "b2b",
-        "workflow"
+        "workflow",
+        "payroll",
+        "clock-in",
+        "shiftpunch",
+        "حضور و غیاب",
+        "ساعت ورود و خروج",
+        "مرخصی کارکنان",
+        "استعلام قرارداد",
+        "نرم افزارهای سازمانی",
+        "کاربران فعال"
       ],
       "primary_mode": "operate",
       "default_trust_level": "high",
@@ -258,13 +271,23 @@
         "sales pipeline automation",
         "enterprise crm",
         "crm sales pipeline",
-        "hr automation"
+        "hr automation",
+        "shiftpunch",
+        "clock-in",
+        "ساعت ورود و خروج",
+        "نرم افزارهای سازمانی",
+        "استعلام قرارداد"
       ],
       "negative_signals": [
         "تسک های روزانه",
         "پروژه های تیمی",
         "sprint planning",
-        "فاکتور آنلاین"
+        "فاکتور آنلاین",
+        "کیف پول",
+        "پادکست",
+        "شهرداری",
+        "خودرو برقی",
+        "بیمارستان"
       ]
     },
     {
@@ -280,7 +303,13 @@
         "agents",
         "copilot",
         "prompt",
-        "vector"
+        "vector",
+        "large language model",
+        "tokens per second",
+        "مدل‌های هوش مصنوعی",
+        "کارت گرافیک",
+        "quantization",
+        "حافظه گرافیک"
       ],
       "primary_mode": "operate",
       "default_trust_level": "high",
@@ -306,7 +335,11 @@
         "agent playground",
         "fine-tuning dashboard",
         "foundation models",
-        "autonomous ai agent"
+        "autonomous ai agent",
+        "large language model",
+        "tokens per second",
+        "مدل‌های هوش مصنوعی",
+        "مصرف حافظه کارت گرافیک"
       ],
       "negative_signals": [
         "آموزش برنامه نویسی",
@@ -319,7 +352,9 @@
         "school",
         "refugee",
         "freight",
-        "hair"
+        "hair",
+        "شهرداری",
+        "پادکست"
       ]
     },
     {
@@ -456,7 +491,12 @@
         "architecture",
         "interior",
         "penthouse",
-        "realty"
+        "realty",
+        "برج مسکونی",
+        "واحدهای برج",
+        "چیدمان مبلمان",
+        "تور مجازی",
+        "اقساط وام مسکن"
       ],
       "primary_mode": "persuade",
       "default_trust_level": "high",
@@ -481,13 +521,21 @@
         "coastal architecture",
         "modern penthouse realty",
         "penthouse realty",
-        "luxury coastal architecture"
+        "luxury coastal architecture",
+        "برج مسکونی",
+        "واحدهای برج",
+        "3d floor plan",
+        "penthouse property",
+        "چیدمان مبلمان",
+        "تور مجازی"
       ],
       "negative_signals": [
         "patent",
         "trademark",
         "حقوقی",
-        "دعاوی"
+        "دعاوی",
+        "ارز دیجیتال",
+        "پادکست"
       ]
     },
     {
@@ -556,7 +604,14 @@
         "course",
         "learn",
         "lms",
-        "academy"
+        "academy",
+        "bootcamp",
+        "student portal",
+        "quiz",
+        "کلاس مجازی",
+        "کارنامه نمرات",
+        "جزوات درسی",
+        "دانش آموزان"
       ],
       "primary_mode": "read",
       "default_trust_level": "high",
@@ -580,9 +635,17 @@
         "machine learning academy",
         "course catalog",
         "edtech",
-        "lms"
+        "lms",
+        "coding bootcamp",
+        "student portal",
+        "کلاس مجازی",
+        "کارنامه نمرات",
+        "آموزش الکترونیکی"
       ],
-      "negative_signals": []
+      "negative_signals": [
+        "ارز دیجیتال",
+        "بیمارستان"
+      ]
     },
     {
       "id": "creative_portfolio_agency",
@@ -880,7 +943,15 @@
         "auto",
         "automotive",
         "ev",
-        "mobility"
+        "mobility",
+        "electric vehicle",
+        "kilowatt-hour",
+        "battery mileage",
+        "supercharger",
+        "خودرو برقی",
+        "شارژ سریع",
+        "کیلومتر قابل پیمایش",
+        "شارژ باتری"
       ],
       "primary_mode": "persuade",
       "default_trust_level": "high",
@@ -905,11 +976,20 @@
         "ride-hailing dispatch",
         "fleet battery monitoring",
         "smart vehicle telemetry",
-        "electric mobility network"
+        "electric mobility network",
+        "electric vehicle",
+        "battery mileage",
+        "خودرو برقی",
+        "شارژ باتری",
+        "کیلومتر قابل پیمایش",
+        "supercharger"
       ],
       "negative_signals": [
         "وانت بار",
-        "حمل اثاثیه"
+        "حمل اثاثیه",
+        "پادکست",
+        "مطب",
+        "دانش آموزان"
       ]
     },
     {
@@ -1016,7 +1096,14 @@
         "donation",
         "humanitarian",
         "refugee",
-        "conservation"
+        "conservation",
+        "charity campaign",
+        "borehole",
+        "کمپین کمک‌های مردمی",
+        "مناطق محروم",
+        "احداث مدارس",
+        "شفافیت هزینه",
+        "donor"
       ],
       "primary_mode": "persuade",
       "default_trust_level": "maximum",
@@ -1040,9 +1127,17 @@
         "humanitarian refugee aid",
         "clean water foundation",
         "wildlife conservation trust",
-        "endangered species tracker"
+        "endangered species tracker",
+        "charity campaign",
+        "کمپین کمک‌های مردمی",
+        "مناطق محروم",
+        "borehole",
+        "احداث مدارس"
       ],
-      "negative_signals": []
+      "negative_signals": [
+        "ارز دیجیتال",
+        "ترید"
+      ]
     },
     {
       "id": "personal_branding_creator",
@@ -1061,7 +1156,13 @@
         "personal brand",
         "بدنسازی",
         "فیتنس",
-        "podcast"
+        "podcast",
+        "media kit",
+        "پادکست",
+        "پورتفولیو فردی",
+        "تولیدکننده محتوا",
+        "تعرفه اسپانسری",
+        "شنوندگان پادکست"
       ],
       "primary_mode": "experience",
       "default_trust_level": "high",
@@ -1083,14 +1184,23 @@
         "نویسنده کتاب های توسعه فردی",
         "independent podcast host",
         "keynote speaker and technology essayist",
-        "keynote speaker"
+        "keynote speaker",
+        "podcast host",
+        "media kit",
+        "پادکست",
+        "تولیدکننده محتوا",
+        "پورتفولیو فردی",
+        "تعرفه اسپانسری"
       ],
       "negative_signals": [
         "دفتر وکالت",
         "دادگستری",
         "دعاوی",
         "law firm",
-        "attorney"
+        "attorney",
+        "خودرو",
+        "بیمارستان",
+        "وام"
       ]
     },
     {
@@ -1109,7 +1219,16 @@
         "auth",
         "encryption",
         "zero-trust",
-        "passwordless"
+        "passwordless",
+        "access control",
+        "biometric",
+        "fido2",
+        "passkey",
+        "کنترل هویت",
+        "بدون پسورد",
+        "احراز هویت بدون گذرواژه",
+        "ورود مشکوک",
+        "anomalous login"
       ],
       "primary_mode": "operate",
       "default_trust_level": "maximum",
@@ -1133,9 +1252,18 @@
         "passwordless mfa auth",
         "zero-trust identity governance",
         "threat intelligence feed",
-        "vulnerability remediation"
+        "vulnerability remediation",
+        "access control portal",
+        "کنترل هویت",
+        "fido2",
+        "biometric key",
+        "بدون استفاده از پسورد"
       ],
-      "negative_signals": []
+      "negative_signals": [
+        "کلاس مجازی",
+        "وام مسکن",
+        "پادکست"
+      ]
     },
     {
       "id": "general_modern_saas",
@@ -1160,7 +1288,14 @@
         "task",
         "sprint",
         "productivity",
-        "invoice"
+        "invoice",
+        "municipal",
+        "civic services",
+        "خدمات شهروندی",
+        "شهرداری",
+        "پروانه ساختمانی",
+        "پروژه‌های تیمی",
+        "بردهای کانبان"
       ],
       "primary_mode": "persuade",
       "default_trust_level": "high",
@@ -1182,7 +1317,13 @@
         "sprint planning and team collaboration",
         "sprint planning",
         "team collaboration workspace",
-        "invoicing"
+        "invoicing",
+        "municipal civic",
+        "خدمات شهروندی",
+        "شهرداری",
+        "پروانه ساختمانی",
+        "پروژه‌های تیمی",
+        "بردهای کانبان"
       ],
       "negative_signals": []
     }

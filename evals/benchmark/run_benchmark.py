@@ -28,23 +28,33 @@ from vibe_core.critic import DesignCritic
 from vibe_core.refiner import AutoRefiner
 from vibe_core.verifier import VerificationEngine
 
-PROMPTS_PATH = ROOT_DIR / "evals" / "benchmark" / "prompts_100_stratified.json"
-RESULTS_PATH = ROOT_DIR / "evals" / "benchmark" / "benchmark_results.json"
+import argparse
+
+PROMPTS_100_PATH = ROOT_DIR / "evals" / "benchmark" / "prompts_100_stratified.json"
+PROMPTS_HOLDOUT_PATH = ROOT_DIR / "evals" / "benchmark" / "prompts_50_blind_holdout.json"
 
 def main():
+    parser = argparse.ArgumentParser(description="Vibe UI Benchmark Suite")
+    parser.add_argument("--holdout", action="store_true", help="Run 50-scenario blind holdout benchmark")
+    args, _ = parser.parse_known_args()
+
+    prompts_path = PROMPTS_HOLDOUT_PATH if args.holdout else PROMPTS_100_PATH
+    results_path = ROOT_DIR / "evals" / "benchmark" / ("benchmark_holdout_results.json" if args.holdout else "benchmark_results.json")
+    bench_label = "50 Blind Holdout Scenarios" if args.holdout else "100 Stratified Scenarios"
+
     print("=" * 70)
-    print("🚀 VIBE UI V3 PRODUCTION BENCHMARK SUITE (100 Stratified Scenarios)")
+    print(f"🚀 VIBE UI V3 PRODUCTION BENCHMARK SUITE ({bench_label})")
     print("=" * 70)
 
-    if not PROMPTS_PATH.exists():
-        print(f"[FAIL] Prompts file not found at {PROMPTS_PATH}", file=sys.stderr)
+    if not prompts_path.exists():
+        print(f"[FAIL] Prompts file not found at {prompts_path}", file=sys.stderr)
         return 1
 
-    with open(PROMPTS_PATH, "r", encoding="utf-8") as f:
+    with open(prompts_path, "r", encoding="utf-8") as f:
         prompt_data = json.load(f)
         scenarios = prompt_data.get("prompts", [])
 
-    print(f"[INFO] Loaded {len(scenarios)} stratified evaluation scenarios across 24 domains.\n")
+    print(f"[INFO] Loaded {len(scenarios)} evaluation scenarios ({bench_label}).\n")
 
     director = DesignDirector()
     engine = RecommendationEngine()
@@ -144,7 +154,7 @@ def main():
     benchmark_results = {
         "$schema": "../../schemas/benchmark-result.v1.json",
         "timestamp": datetime.now(timezone.utc).isoformat(),
-        "suite_version": "3.2.0",
+        "suite_version": "3.3.0",
         "scenario_count": len(scenarios),
         "benchmark_type": "internal_deterministic_heuristic",
         "baseline_system": "Vanilla LLM / V2 Heuristic Baseline",
@@ -186,12 +196,12 @@ def main():
         "scenario_breakdown": v3_details
     }
 
-    RESULTS_PATH.parent.mkdir(parents=True, exist_ok=True)
-    with open(RESULTS_PATH, "w", encoding="utf-8") as f:
+    results_path.parent.mkdir(parents=True, exist_ok=True)
+    with open(results_path, "w", encoding="utf-8") as f:
         json.dump(benchmark_results, f, indent=2, ensure_ascii=False)
 
     print("\n" + "=" * 70)
-    print("📊 VIBE UI V3 BENCHMARK SCOREBOARD (v3.2.0)")
+    print("📊 VIBE UI V3 BENCHMARK SCOREBOARD (v3.3.0)")
     print("=" * 70)
     print(f"| KPI Metric               | Baseline (V2) | Vibe UI V3    | Improvement           |")
     print(f"| :----------------------- | :------------ | :------------ | :-------------------- |")
@@ -203,7 +213,7 @@ def main():
     print(f"| Visual Diversity         | 2 styles      | {len(v3_styles)} styles      | {v3_diversity_score}% coverage         |")
     print(f"| WCAG AA Hard Gates       | ~80%          | 100.0%        | Zero Regressions      |")
     print("=" * 70)
-    print(f"\n[SUCCESS] Benchmark completed in {total_bench_ms:.2f}ms. Results saved to {RESULTS_PATH.relative_to(ROOT_DIR)}")
+    print(f"\n[SUCCESS] Benchmark completed in {total_bench_ms:.2f}ms. Results saved to {results_path.relative_to(ROOT_DIR)}")
 
     return 0
 

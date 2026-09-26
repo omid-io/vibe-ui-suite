@@ -18,6 +18,7 @@ class ProjectStackSensor:
         """
         pkg_json = self._read_package_json()
         css_theme = self._detect_css_theme()
+        design_system = self._detect_existing_design_system(pkg_json)
         
         framework = self._detect_framework(pkg_json)
         react_ver = self._detect_react_version(pkg_json)
@@ -33,7 +34,8 @@ class ProjectStackSensor:
             "icons_library": icons_lib,
             "typescript": has_ts,
             "inherited_theme": css_theme,
-            "recommendation": self._generate_recommendation(framework, react_ver, tailwind_ver, icons_lib, has_ts)
+            "existing_design_system": design_system,
+            "recommendation": self._generate_recommendation(framework, react_ver, tailwind_ver, icons_lib, has_ts, design_system)
         }
 
     def _read_package_json(self) -> Dict[str, Any]:
@@ -161,13 +163,85 @@ class ProjectStackSensor:
             "detected_font_family": found_font
         }
 
-    def _generate_recommendation(self, framework: str, react_ver: Optional[int], tailwind_ver: Optional[int], icons_lib: str, has_ts: bool) -> Dict[str, Any]:
+    def _detect_existing_design_system(self, pkg: Dict[str, Any]) -> Dict[str, Any]:
+        """
+        Deep scans project for established design systems (shadcn/ui, Radix, existing primitives).
+        Guarantees Vibe UI inherits existing components rather than duplicating or colliding.
+        """
+        deps = {**pkg.get("dependencies", {}), **pkg.get("devDependencies", {})}
+        
+        # 1. Check components.json (shadcn/ui)
+        components_json_path = self.target_dir / "components.json"
+        if not components_json_path.exists():
+            components_json_path = self.target_dir.parent / "components.json"
+
+        has_shadcn = components_json_path.exists()
+        shadcn_cfg = {}
+        if has_shadcn:
+            try:
+                with open(components_json_path, "r", encoding="utf-8") as f:
+                    shadcn_cfg = json.load(f)
+            except Exception:
+                pass
+
+        # 2. Check for Radix UI or headless primitives
+        radix_primitives = [dep for dep in deps if dep.startswith("@radix-ui/react-")]
+        has_radix = len(radix_primitives) > 0
+        has_next_themes = "next-themes" in deps
+
+        # 3. Check for existing UI primitives on disk
+        ui_dirs = [
+            self.target_dir / "components" / "ui",
+            self.target_dir / "src" / "components" / "ui",
+            self.target_dir / "ui"
+        ]
+        detected_primitives = []
+        for d in ui_dirs:
+            if d.exists() and d.is_dir():
+                for f in d.glob("*.tsx"):
+                    detected_primitives.append(f.stem)
+
+        return {
+            "has_shadcn": has_shadcn,
+            "shadcn_style": shadcn_cfg.get("style", "default") if has_shadcn else None,
+            "shadcn_tailwind_base_color": shadcn_cfg.get("tailwind", {}).get("baseColor") if has_shadcn else None,
+            "has_radix": has_radix,
+            "radix_primitives_count": len(radix_primitives),
+            "has_theme_provider": has_next_themes,
+            "detected_primitives": detected_primitives[:10]
+        }
+
+    def _generate_recommendation(
+        self,
+        framework: str,
+        react_ver: Optional[int],
+        tailwind_ver: Optional[int],
+        icons_lib: str,
+        has_ts: bool,
+        design_system: Optional[Dict[str, Any]] = None
+    ) -> Dict[str, Any]:
         ext = ".tsx" if has_ts else ".jsx"
         tw_mode = "v4_theme" if tailwind_ver == 4 else "v3_config"
+        design_sys = design_system or {}
+        
+        inheritance_strategy = "standalone_vibe_tokens"
+        if design_sys.get("has_shadcn"):
+            inheritance_strategy = "inherit_existing_shadcn"
+            prims = design_sys.get("detected_primitives", [])[:3]
+            prims_str = ", ".join(prims) if prims else "Button/Card"
+            instructions = f"Inherit existing shadcn/ui primitives ({prims_str}) and integrate with {tw_mode} Tailwind and {icons_lib} icons without collision."
+        elif design_sys.get("detected_primitives"):
+            inheritance_strategy = "inherit_existing_primitives"
+            prims = design_sys.get("detected_primitives", [])[:3]
+            instructions = f"Inherit existing UI primitives ({', '.join(prims)}) and integrate cleanly with {tw_mode} Tailwind."
+        else:
+            instructions = f"Generate modular React {react_ver or 19} component with {tw_mode} Tailwind and {icons_lib} icons."
+
         return {
             "file_extension": ext,
             "export_format": "react_component",
             "tailwind_syntax": tw_mode,
             "icons_strategy": icons_lib,
-            "instructions": f"Generate modular React {react_ver or 19} component with {tw_mode} Tailwind and {icons_lib} icons."
+            "inheritance_strategy": inheritance_strategy,
+            "instructions": instructions
         }

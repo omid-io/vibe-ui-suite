@@ -6,6 +6,7 @@ Applies bounded surgical patches to resolve Critic defects with strict anti-regr
 import re
 from typing import Dict, Any, Tuple, Optional, Callable, List
 from vibe_core.critic import DesignCritic
+from vibe_core.visual_critic import VisualCritic
 
 # Token scanner regex matching comments, scripts, styles, closing divs, and opening divs with attributes
 TAG_TOKEN_RE = re.compile(
@@ -79,6 +80,7 @@ def replace_clickable_divs(html: str) -> str:
 class AutoRefiner:
     def __init__(self):
         self.critic = DesignCritic()
+        self.visual_critic = VisualCritic()
 
     replace_clickable_divs = staticmethod(replace_clickable_divs)
 
@@ -141,6 +143,7 @@ class AutoRefiner:
         current_html = html_content
         current_report = self.critic.critique(current_html, decision, iteration=1)
 
+        current_report["visual_critic"] = self.visual_critic.evaluate(current_html, decision)
         if current_report["acceptance_status"] == "ACCEPTED":
             return current_html, current_report
 
@@ -218,4 +221,5 @@ class AutoRefiner:
                 # Explicit rejection: discard patched_html, keep current_html
                 pass
 
+        current_report["visual_critic"] = self.visual_critic.evaluate(current_html, decision)
         return current_html, current_report

@@ -1,0 +1,257 @@
+{
+  "version": "3.3.0",
+  "benchmark_type": "blind_holdout_adversarial",
+  "description": "50 paraphrased and adversarial user prompts across 24 domains. Prompts intentionally omit canonical taxonomy keywords to evaluate zero-shot domain generalization and prevent benchmark overfitting.",
+  "prompts": [
+    {
+      "id": "holdout_01",
+      "domain": "saas_b2b_enterprise",
+      "prompt": "Design a ShiftPunch employee clock-in and payroll portal with real-time worked-hours timer, weekly schedule view with swap requests, and timecard exception approvals."
+    },
+    {
+      "id": "holdout_02",
+      "domain": "saas_b2b_enterprise",
+      "prompt": "سامانه مدیریت حضور و غیاب پرسنل با ثبت ساعت ورود و خروج، محاسبه آنلاین حقوق ماهانه و کارتابل تایید مرخصی کارکنان"
+    },
+    {
+      "id": "holdout_03",
+      "domain": "crypto_trading_web3",
+      "prompt": "Build a decentralized exchange token swap interface like a Uniswap-style aggregator with slippage presets, liquidity route breakdown, and gas-price gauge."
+    },
+    {
+      "id": "holdout_04",
+      "domain": "crypto_trading_web3",
+      "prompt": "پلتفرم تبادل دارایی‌های دیجیتال با اتصال به کیف پول متامسک، دفترچه سفارشات آنی و نمودار عمق نقدینگی استخرهای غیرمتمرکز"
+    },
+    {
+      "id": "holdout_05",
+      "domain": "healthcare_hospital_medical",
+      "prompt": "Create a dentist appointment scheduler for a family practice with doctor chair-side lanes, time slot availability grid, and insurance pre-visit form."
+    },
+    {
+      "id": "holdout_06",
+      "domain": "healthcare_hospital_medical",
+      "prompt": "نوبت دهی اینترنتی مطب پزشکان متخصص با امکان انتخاب تاریخ ویزیت، بارگذاری پرونده رادیولوژی و پرداخت حق ویزیت بیمه سلامت"
+    },
+    {
+      "id": "holdout_07",
+      "domain": "food_restaurant_cafe",
+      "prompt": "Design a restaurant table booking page for an intimate bistro with floor plan seat selection, tasting menu preview, and party-size selector."
+    },
+    {
+      "id": "holdout_08",
+      "domain": "food_restaurant_cafe",
+      "prompt": "رزرو آنلاین میز در کافه رستوران همراه با مشاهده منوی عصرانه، سفارش پیش از موعد غذای اصلی و انتخاب فضای روباز تراس"
+    },
+    {
+      "id": "holdout_09",
+      "domain": "devops_cloud_terminal",
+      "prompt": "Server cluster monitoring dashboard for a NOC wall display with CPU load sparklines, live latency heatmap of API endpoints, and streaming log tail panel."
+    },
+    {
+      "id": "holdout_10",
+      "domain": "devops_cloud_terminal",
+      "prompt": "داشبورد نظارت بر سرورهای لینوکسی و وضعیت پردازنده‌ها، ترافیک شبکه‌ای کانتینرها و کنسول دستورات با تاخیر میلی ثانیه‌ای"
+    },
+    {
+      "id": "holdout_11",
+      "domain": "beauty_clinical_wellness",
+      "prompt": "Aesthetic laser skincare studio landing page with dermatologist credentials, treatment outcome comparison slider, and concierge booking."
+    },
+    {
+      "id": "holdout_12",
+      "domain": "beauty_clinical_wellness",
+      "prompt": "سایت مرکز تخصصی جوانسازی پوست و اسپا با مقایسه عکس‌های مراجعین قبل و بعد از لیزر و پکیج‌های ماساژ آرامش بخش"
+    },
+    {
+      "id": "holdout_13",
+      "domain": "fintech_banking",
+      "prompt": "Personal wealth compounding simulator with dynamic monthly contribution slider, inflation-adjusted retirement projection, and asset allocation pie."
+    },
+    {
+      "id": "holdout_14",
+      "domain": "fintech_banking",
+      "prompt": "محاسبه‌گر هوشمند سود سپرده بانکی و صندوق‌های درآمد ثابت با اسلایدر سرمایه گذاری ماهانه و نمودار رشد دارایی در افق ۵ ساله"
+    },
+    {
+      "id": "holdout_15",
+      "domain": "real_estate_architecture",
+      "prompt": "Luxury penthouse property showcase with architectural 3D floor plan layout, sun exposure diagram, and mortgage monthly payment estimator."
+    },
+    {
+      "id": "holdout_16",
+      "domain": "real_estate_architecture",
+      "prompt": "مشاهده واحدهای برج مسکونی با نقشه چیدمان مبلمان، محاسبه اقساط وام مسکن و تور مجازی طبقات مشرف به شهر"
+    },
+    {
+      "id": "holdout_17",
+      "domain": "ecommerce_luxury_fashion",
+      "prompt": "High-fashion atelier catalog with dynamic fabric texture zoom, size fitting guide, and limited edition garment reservation drawer."
+    },
+    {
+      "id": "holdout_18",
+      "domain": "ecommerce_luxury_fashion",
+      "prompt": "فروشگاه آنلاین برند پوشاک و کیف دست دوز چرم طبیعی با انتخاب سایزبندی دقیق، مشاهده زوایای لباس و بسته بندی سفارشی هدیه"
+    },
+    {
+      "id": "holdout_19",
+      "domain": "logistics_supply_chain",
+      "prompt": "Cross-border freight consignment tracking portal with live vessel GPS waypoints, customs clearance checklist, and courier route timeline."
+    },
+    {
+      "id": "holdout_20",
+      "domain": "logistics_supply_chain",
+      "prompt": "سامانه رهگیری بار هوایی و جاده‌ای با ثبت بارکد مرسوله پستی، زمان تقریبی تحویل و وضعیت تخلیه بار در انبار مرکزی"
+    },
+    {
+      "id": "holdout_21",
+      "domain": "education_edtech_lms",
+      "prompt": "Self-paced coding bootcamp student portal with module video progression, interactive quiz completion badges, and mentorship office hours scheduler."
+    },
+    {
+      "id": "holdout_22",
+      "domain": "education_edtech_lms",
+      "prompt": "سامانه آموزش الکترونیکی و کلاس مجازی با مشاهده جلسات ویدئویی، دانلود جزوات درسی و کارنامه نمرات پایان ترم دانش آموزان"
+    },
+    {
+      "id": "holdout_23",
+      "domain": "automotive_ev_mobility",
+      "prompt": "Electric vehicle telemetry cockpit showing kilowatt-hour consumption rate, remaining battery mileage range against cruising velocity, and nearby supercharger stops."
+    },
+    {
+      "id": "holdout_24",
+      "domain": "automotive_ev_mobility",
+      "prompt": "اپلیکیشن مدیریت خودرو برقی با نمایش درصد شارژ باتری، تخمین کیلومتر قابل پیمایش و نقشه ایستگاه‌های شارژ سریع بین راهی"
+    },
+    {
+      "id": "holdout_25",
+      "domain": "cybersecurity_identity_auth",
+      "prompt": "Enterprise access control portal featuring biometric key verification, anomalous login geo-map, and active session termination switch."
+    },
+    {
+      "id": "holdout_26",
+      "domain": "cybersecurity_identity_auth",
+      "prompt": "سامانه کنترل هویت کارکنان بدون استفاده از پسورد با کلیدهای امنیتی FIDO2 و لاگ لحظه‌ای ورودهای مشکوک به شبکه سازمانی"
+    },
+    {
+      "id": "holdout_27",
+      "domain": "gaming_entertainment_streaming",
+      "prompt": "Esports tournament championship bracket viewer with live match score tickers, twitch caster stream embeds, and team victory probability meters."
+    },
+    {
+      "id": "holdout_28",
+      "domain": "gaming_entertainment_streaming",
+      "prompt": "جدول لیگ مسابقات بازی‌های رایانه‌ای با نتایج زنده تیم‌ها، جدول رده بندی قهرمانی و زمان پخش مسابقه فینال"
+    },
+    {
+      "id": "holdout_29",
+      "domain": "legal_compliance_law",
+      "prompt": "Commercial legal retainer dashboard with automated contract clause clause liability analyzer, retainer billing hours balance, and attorney appointment booking."
+    },
+    {
+      "id": "holdout_30",
+      "domain": "legal_compliance_law",
+      "prompt": "دفتر وکالت آنلاین و تنظیم قراردادهای تجاری با بررسی میزان ریسک حقوقی بندهای قرارداد و درخواست مشاوره با وکیل پایه یک"
+    },
+    {
+      "id": "holdout_31",
+      "domain": "media_editorial_magazine",
+      "prompt": "Digital longform journalism reader with estimated reading duration ticker, typography serif scaling controls, and article bookmarking drawer."
+    },
+    {
+      "id": "holdout_32",
+      "domain": "media_editorial_magazine",
+      "prompt": "مجله فرهنگی و تحلیلی با مقالات بلند، امکان تغییر اندازه قلم متون، زمان تخمینی مطالعه هر مطلب و ذخیره برای مطالعه آفلاین"
+    },
+    {
+      "id": "holdout_33",
+      "domain": "travel_hospitality_tourism",
+      "prompt": "Boutique eco-resort vacation package planner with day-by-day excursion itinerary builder, flight integration, and room villa tier selector."
+    },
+    {
+      "id": "holdout_34",
+      "domain": "travel_hospitality_tourism",
+      "prompt": "برنامه ریزی سفر توریستی با انتخاب شب‌های اقامت در اقامتگاه بوم‌گردی، تورهای تفریحی محلی و محاسبه هزینه کلی بلیط و هتل"
+    },
+    {
+      "id": "holdout_35",
+      "domain": "creative_portfolio_agency",
+      "prompt": "Design agency showcase with full-screen interactive case study slides, client roster marquee, and project enquiry contact trigger."
+    },
+    {
+      "id": "holdout_36",
+      "domain": "creative_portfolio_agency",
+      "prompt": "نمونه کارهای استودیو معماری و طراحی خلاقانه با اسلایدر پروژه‌ها، معرفی جوایز بین المللی و فرم استعلام قیمت هویت بصری"
+    },
+    {
+      "id": "holdout_37",
+      "domain": "energy_greentech_sustainability",
+      "prompt": "Rooftop solar panel yield visualizer with annual kilowatt power generation estimator, grid feed-in tariff calculator, and metric tons CO2 offset counter."
+    },
+    {
+      "id": "holdout_38",
+      "domain": "energy_greentech_sustainability",
+      "prompt": "محاسبه‌گر میزان تولید برق پاک پنل‌های خورشیدی خانگی و کاهش ردپای کربن با نمودار صرفه جویی سالانه در قبض برق"
+    },
+    {
+      "id": "holdout_39",
+      "domain": "saas_b2b_enterprise",
+      "prompt": "Vendor vendor license seat calculator with multi-tier volume discounts, 99.99% uptime SLA commitments, and enterprise invoice approval flow."
+    },
+    {
+      "id": "holdout_40",
+      "domain": "saas_b2b_enterprise",
+      "prompt": "استعلام قرارداد نرم افزارهای سازمانی با محاسبه تعرفه بر اساس تعداد کاربران فعال، تضمین پایداری سیستم و پرداخت اقساطی پیش فاکتور"
+    },
+    {
+      "id": "holdout_41",
+      "domain": "personal_branding_creator",
+      "prompt": "Podcast host personal media kit with sponsor impression rates, monthly listener demographic breakdowns, and brand partnership contact card."
+    },
+    {
+      "id": "holdout_42",
+      "domain": "personal_branding_creator",
+      "prompt": "پورتفولیو فردی گوینده و تولیدکننده محتوا با معرفی آمار شنوندگان پادکست، تعرفه اسپانسری اپیزودها و پل‌های ارتباطی همکاری"
+    },
+    {
+      "id": "holdout_43",
+      "domain": "nonprofit_charity_social",
+      "prompt": "Clean water borehole charity campaign with transparent dollar allocation percentage breakdowns and real-time community impact donor counter."
+    },
+    {
+      "id": "holdout_44",
+      "domain": "nonprofit_charity_social",
+      "prompt": "کمپین کمک‌های مردمی برای احداث مدارس در مناطق محروم با نمایش شفاف محل صرف هزینه‌ها و تعداد دانش آموزان بهره مند شده"
+    },
+    {
+      "id": "holdout_45",
+      "domain": "ai_developer_platform",
+      "prompt": "Large language model benchmark comparison matrix showing tokens per second generation speed vs parameter quantization memory footprints."
+    },
+    {
+      "id": "holdout_46",
+      "domain": "ai_developer_platform",
+      "prompt": "ابزار مقایسه سرعت اجرای مدل‌های هوش مصنوعی با نمودار مصرف حافظه کارت گرافیک و تعداد توکن تولید شده در ثانیه"
+    },
+    {
+      "id": "holdout_47",
+      "domain": "general_modern_saas",
+      "prompt": "Municipal civic services portal for road pothole repair requests, digital building permit status tracker, and estimated municipal queue time."
+    },
+    {
+      "id": "holdout_48",
+      "domain": "general_modern_saas",
+      "prompt": "سامانه خدمات شهروندی شهرداری برای پیگیری درخواست صدور پروانه ساختمانی و نوبت دهی باجه‌های اداری بدون صف حضوری"
+    },
+    {
+      "id": "holdout_49",
+      "domain": "general_modern_saas",
+      "prompt": "Modern productivity workspace landing page with drag-and-drop kanban task preview, integration badge icons, and instant signup modal."
+    },
+    {
+      "id": "holdout_50",
+      "domain": "general_modern_saas",
+      "prompt": "ابزار ابری مدیریت تسک‌ها و پروژه‌های تیمی با بردهای کانبان، امکان ایجاد یادآور و هماهنگ سازی با تقویم کاری"
+    }
+  ]
+}
