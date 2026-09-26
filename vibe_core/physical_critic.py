@@ -13,6 +13,8 @@ import os
 from typing import Dict, Any, List, Optional
 from vibe_core.interaction_contract import get_interaction_contract, InteractionContract
 from vibe_core.vision_sensor import VisionSensor
+from vibe_core.pixel_critic import PixelCritic
+
 
 class PhysicalCritic:
     """
@@ -32,129 +34,147 @@ class PhysicalCritic:
     def audit_physical_layout(
         self,
         html_content: str,
-        viewports: Optional[List[Dict[str, int]]] = None
+        viewports: Optional[List[Dict[str, int]]] = None,
+        page: Any = None
     ) -> Dict[str, Any]:
         """
         Renders HTML in headless Chromium and measures exact pixel geometries.
         If browser cannot be launched, uses static geometric fallback.
+        Supports passing an existing Playwright Page to prevent redundant browser boots.
         """
         viewports = viewports or self.STANDARD_VIEWPORTS
         if not self.enable_browser:
             return self._static_fallback_audit(html_content, viewports)
 
+        owns_page = page is None
+        playwright_ctx = None
+        browser = None
         try:
-            from playwright.sync_api import sync_playwright
-            with sync_playwright() as p:
+            if owns_page:
+                from playwright.sync_api import sync_playwright
+                playwright_ctx = sync_playwright()
+                p = playwright_ctx.__enter__()
                 browser = p.chromium.launch(headless=True)
-                page = browser.new_page()
+                active_page = browser.new_page()
+            else:
+                active_page = page
 
-                defects = []
-                viewport_results = {}
-                total_touch_targets = 0
-                compliant_touch_targets = 0
-                has_overflow = False
+            defects = []
+            viewport_results = {}
+            total_touch_targets = 0
+            compliant_touch_targets = 0
+            has_overflow = False
 
-                for vp in viewports:
-                    page.set_viewport_size({"width": vp["width"], "height": vp["height"]})
-                    page.set_content(html_content, wait_until="domcontentloaded")
+            for vp in viewports:
+                active_page.set_viewport_size({"width": vp["width"], "height": vp["height"]})
+                active_page.set_content(html_content, wait_until="domcontentloaded")
 
-                    # 1. Measure physical scroll width blowout
-                    overflow_data = page.evaluate("""() => {
-                        const doc = document.documentElement;
-                        const body = document.body;
-                        const scrollW = Math.max(doc.scrollWidth, body ? body.scrollWidth : 0);
-                        const clientW = doc.clientWidth;
+                # 1. Measure physical scroll width blowout
+                overflow_data = active_page.evaluate("""() => {
+                    const doc = document.documentElement;
+                    const body = document.body;
+                    const scrollW = Math.max(doc.scrollWidth, body ? body.scrollWidth : 0);
+                    const clientW = doc.clientWidth;
+                    return {
+                        scroll_width: scrollW,
+                        client_width: clientW,
+                        overflows: scrollW > (clientW + 1)
+                    };
+                }""")
+
+                if overflow_data["overflows"]:
+                    has_overflow = True
+                    defects.append({
+                        "type": "physical_horizontal_overflow",
+                        "severity": "P0",
+                        "viewport": vp["name"],
+                        "width": vp["width"],
+                        "message": f"Physical layout blew out viewport width ({overflow_data['scroll_width']}px > {overflow_data['client_width']}px) on {vp['name']} (390px/768px)"
+                    })
+
+                # 2. Measure physical touch targets (>= 44x44px)
+                elements_data = active_page.evaluate("""() => {
+                    const selectors = 'button, a, input, select, [role="button"], [role="switch"], [role="tab"]';
+                    const nodes = Array.from(document.querySelectorAll(selectors));
+                    return nodes.map((el, i) => {
+                        const rect = el.getBoundingClientRect();
+                        const style = window.getComputedStyle(el);
+                        const isVisible = style.display !== 'none' && style.visibility !== 'hidden' && style.opacity !== '0' && rect.width > 0 && rect.height > 0;
                         return {
-                            scroll_width: scrollW,
-                            client_width: clientW,
-                            overflows: scrollW > (clientW + 1)
+                            tag: el.tagName.toLowerCase(),
+                            role: el.getAttribute('role') || '',
+                            text: (el.innerText || el.value || '').trim().substring(0, 30),
+                            width: Math.round(rect.width * 10) / 10,
+                            height: Math.round(rect.height * 10) / 10,
+                            is_visible: isVisible
                         };
-                    }""")
+                    });
+                }""")
 
-                    if overflow_data["overflows"]:
-                        has_overflow = True
+                vp_targets = [el for el in elements_data if el["is_visible"]]
+                vp_substandard = [el for el in vp_targets if el["width"] < 43.5 or el["height"] < 43.5]
+
+                total_touch_targets += len(vp_targets)
+                compliant_touch_targets += (len(vp_targets) - len(vp_substandard))
+
+                if vp_substandard and vp["name"] == "mobile":
+                    for bad in vp_substandard[:3]:
                         defects.append({
-                            "type": "physical_horizontal_overflow",
-                            "severity": "P0",
-                            "viewport": vp["name"],
-                            "width": vp["width"],
-                            "message": f"Physical layout blew out viewport width ({overflow_data['scroll_width']}px > {overflow_data['client_width']}px) on {vp['name']} (390px/768px)"
+                            "type": "physical_substandard_touch_target",
+                            "severity": "P1",
+                            "viewport": "mobile",
+                            "element": f"<{bad['tag']}> {bad['text']}",
+                            "physical_size": f"{bad['width']}x{bad['height']}px",
+                            "message": f"Element '{bad['text']}' measures {bad['width']}x{bad['height']}px physically on screen, below 44x44px requirement"
                         })
 
-                    # 2. Measure physical touch targets (>= 44x44px)
-                    elements_data = page.evaluate("""() => {
-                        const selectors = 'button, a, input, select, [role="button"], [role="switch"], [role="tab"]';
-                        const nodes = Array.from(document.querySelectorAll(selectors));
-                        return nodes.map((el, i) => {
-                            const rect = el.getBoundingClientRect();
-                            const style = window.getComputedStyle(el);
-                            const isVisible = style.display !== 'none' && style.visibility !== 'hidden' && style.opacity !== '0' && rect.width > 0 && rect.height > 0;
-                            return {
-                                tag: el.tagName.toLowerCase(),
-                                role: el.getAttribute('role') || '',
-                                text: (el.innerText || el.value || '').trim().substring(0, 30),
-                                width: Math.round(rect.width * 10) / 10,
-                                height: Math.round(rect.height * 10) / 10,
-                                is_visible: isVisible
-                            };
-                        });
-                    }""")
-
-                    vp_targets = [el for el in elements_data if el["is_visible"]]
-                    vp_substandard = [el for el in vp_targets if el["width"] < 43.5 or el["height"] < 43.5]
-
-                    total_touch_targets += len(vp_targets)
-                    compliant_touch_targets += (len(vp_targets) - len(vp_substandard))
-
-                    if vp_substandard and vp["name"] == "mobile":
-                        for bad in vp_substandard[:3]:
-                            defects.append({
-                                "type": "physical_substandard_touch_target",
-                                "severity": "P1",
-                                "viewport": "mobile",
-                                "element": f"<{bad['tag']}> {bad['text']}",
-                                "physical_size": f"{bad['width']}x{bad['height']}px",
-                                "message": f"Element '{bad['text']}' measures {bad['width']}x{bad['height']}px physically on screen, below 44x44px requirement"
-                            })
-
-                    viewport_results[vp["name"]] = {
-                        "width": vp["width"],
-                        "overflow": overflow_data["overflows"],
-                        "targets_count": len(vp_targets),
-                        "substandard_count": len(vp_substandard)
-                    }
-
-                browser.close()
-
-                # Calculate physical score
-                score = 100.0
-                if has_overflow:
-                    score -= 30.0
-                if total_touch_targets > 0:
-                    compliance_ratio = compliant_touch_targets / total_touch_targets
-                    score -= ((1.0 - compliance_ratio) * 25.0)
-
-                score = round(max(0.0, min(100.0, score)), 1)
-                has_p0 = any(d.get("severity") == "P0" for d in defects)
-                is_accepted = (score >= 80.0) and not has_p0
-
-                return {
-                    "physical_score": score,
-                    "acceptance_status": "ACCEPTED" if is_accepted else "REVISE_REQUIRED",
-                    "viewports_tested": [vp["width"] for vp in viewports],
-                    "defects": defects,
-                    "metrics": {
-                        "total_touch_targets": total_touch_targets,
-                        "compliant_touch_targets": compliant_touch_targets,
-                        "horizontal_overflow": has_overflow,
-                        "viewport_details": viewport_results
-                    },
-                    "engine": "playwright_headless_chromium"
+                viewport_results[vp["name"]] = {
+                    "width": vp["width"],
+                    "overflow": overflow_data["overflows"],
+                    "targets_count": len(vp_targets),
+                    "substandard_count": len(vp_substandard)
                 }
+
+            # Calculate physical score
+            score = 100.0
+            if has_overflow:
+                score -= 30.0
+            if total_touch_targets > 0:
+                compliance_ratio = compliant_touch_targets / total_touch_targets
+                score -= ((1.0 - compliance_ratio) * 25.0)
+
+            score = round(max(0.0, min(100.0, score)), 1)
+            has_p0 = any(d.get("severity") == "P0" for d in defects)
+            is_accepted = (score >= 80.0) and not has_p0
+
+            return {
+                "physical_score": score,
+                "acceptance_status": "ACCEPTED" if is_accepted else "REVISE_REQUIRED",
+                "viewports_tested": [vp["width"] for vp in viewports],
+                "defects": defects,
+                "metrics": {
+                    "total_touch_targets": total_touch_targets,
+                    "compliant_touch_targets": compliant_touch_targets,
+                    "horizontal_overflow": has_overflow,
+                    "viewport_details": viewport_results
+                },
+                "engine": "playwright_headless_chromium"
+            }
 
         except Exception as e:
             # Safe fallback if Chromium fails to boot
             return self._static_fallback_audit(html_content, viewports, error_note=str(e))
+        finally:
+            if owns_page and browser:
+                try:
+                    browser.close()
+                except Exception:
+                    pass
+                try:
+                    playwright_ctx.__exit__(None, None, None)
+                except Exception:
+                    pass
+
 
     def _static_fallback_audit(
         self,
@@ -209,7 +229,8 @@ class PhysicalCritic:
         target_slider_value: Optional[float] = None,
         is_rtl: bool = False,
         capture_screenshots: bool = False,
-        domain_id: Optional[str] = None
+        domain_id: Optional[str] = None,
+        page: Any = None
     ) -> Dict[str, Any]:
         """
         End-to-End Browser Truth Audit for real React 19 TSX components:
@@ -218,8 +239,11 @@ class PhysicalCritic:
         3. Listens for React runtime crashes or unhandled exceptions.
         4. Simulates physical pointer / native value change targeted via InteractionContract.
         5. Asserts dynamic causal recalculation in bound semantic metrics.
-        6. Executes in-browser VisionSensor to detect collisions, clipping, and hero prominence.
-        7. Optionally captures real multi-viewport screenshots (390px, 768px, 1440px).
+        6. Asserts directional compliance (positive/negative/recalculated) per domain contract.
+        7. Inspects rendered screenshot pixel buffers via PixelCritic (blank screen / contrast collapse).
+        8. Executes in-browser VisionSensor to detect collisions, clipping, and hero prominence.
+        9. Optionally captures real multi-viewport screenshots (390px, 768px, 1440px).
+        Supports reusable external page instances for zero-overhead continuous benchmarking.
         """
         if not self.enable_browser:
             return {
@@ -245,19 +269,29 @@ class PhysicalCritic:
 
         contract = get_interaction_contract(domain_id or "general_modern_saas")
 
+        owns_page = page is None
         try:
-            from playwright.sync_api import sync_playwright
-            with sync_playwright() as p:
+            if owns_page:
+                from playwright.sync_api import sync_playwright
+                playwright_ctx = sync_playwright()
+                p = playwright_ctx.__enter__()
                 browser = p.chromium.launch(headless=True)
-                page = browser.new_page(viewport={"width": 1280, "height": 800})
+                active_page = browser.new_page(viewport={"width": 1280, "height": 800})
+            else:
+                playwright_ctx = None
+                browser = None
+                active_page = page
 
+            try:
                 errors = []
-                page.on("pageerror", lambda e: errors.append(str(e)))
+                active_page.on("pageerror", lambda e: errors.append(str(e)))
 
-                page.set_content(harness_html, wait_until="load")
+                active_page.set_content(harness_html, wait_until="load")
 
                 if errors:
-                    browser.close()
+                    if owns_page and browser:
+                        browser.close()
+                        playwright_ctx.__exit__(None, None, None)
                     return {
                         "interactive_verified": False,
                         "status": "REACT_RUNTIME_CRASH",
@@ -270,23 +304,28 @@ class PhysicalCritic:
                     }
 
                 # 1. Read initial metrics before user interaction
-                metrics_before = page.eval_on_selector_all('bdi', 'els => els.map(el => el.innerText.trim())')
-                dynamic_before = page.eval_on_selector_all('[data-vibe-metric]', 'els => els.map(el => el.innerText.trim())')
+                metrics_before = active_page.eval_on_selector_all('bdi', 'els => els.map(el => el.innerText.trim())')
+                dynamic_before = active_page.eval_on_selector_all('[data-vibe-metric]', 'els => els.map(el => el.innerText.trim())')
 
                 # 2. Find targeted interactive control using InteractionContract
-                slider = page.query_selector(contract.control_selector)
+                slider = active_page.query_selector(contract.control_selector)
                 if not slider:
-                    slider = page.query_selector('input[type="range"]')
+                    slider = active_page.query_selector('input[type="range"]')
 
                 if not slider:
                     # Execute visual perception audit even if no slider
-                    vision_audit = VisionSensor.audit_page_visual_intelligence(page, viewport_name="desktop")
-                    browser.close()
+                    vision_audit = VisionSensor.audit_page_visual_intelligence(active_page, viewport_name="desktop")
+                    desktop_screenshot = active_page.screenshot(type="png")
+                    pixel_audit = PixelCritic().audit_screenshot(desktop_screenshot, viewport_name="desktop")
+                    if owns_page and browser:
+                        browser.close()
+                        playwright_ctx.__exit__(None, None, None)
                     return {
                         "interactive_verified": True,
                         "status": "NO_RANGE_SLIDER",
                         "message": "No range slider in component; mounted cleanly.",
-                        "vision_report": vision_audit
+                        "vision_report": vision_audit,
+                        "pixel_report": pixel_audit
                     }
 
                 curr_val = float(slider.get_attribute("value") or 0)
@@ -301,7 +340,7 @@ class PhysicalCritic:
                         new_val = min_val + 0.25 * (max_val - min_val)
 
                 # 3. Dispatch native React synthetic event to targeted control
-                page.evaluate("""({sel, val}) => {
+                active_page.evaluate("""({sel, val}) => {
                     const input = document.querySelector(sel) || document.querySelector('input[type="range"]');
                     if (input) {
                         const nativeSetter = Object.getOwnPropertyDescriptor(window.HTMLInputElement.prototype, 'value').set;
@@ -311,11 +350,11 @@ class PhysicalCritic:
                     }
                 }""", {"sel": contract.control_selector, "val": new_val})
 
-                page.wait_for_timeout(80)
+                active_page.wait_for_timeout(80)
 
                 # 4. Read metrics after interaction and verify causal assertion
-                metrics_after = page.eval_on_selector_all('bdi', 'els => els.map(el => el.innerText.trim())')
-                dynamic_after = page.eval_on_selector_all('[data-vibe-metric]', 'els => els.map(el => el.innerText.trim())')
+                metrics_after = active_page.eval_on_selector_all('bdi', 'els => els.map(el => el.innerText.trim())')
+                dynamic_after = active_page.eval_on_selector_all('[data-vibe-metric]', 'els => els.map(el => el.innerText.trim())')
 
                 recalculated = [f"{b} -> {a}" for b, a in zip(metrics_before, metrics_after) if b != a]
                 dynamic_recalculated = [f"{b} -> {a}" for b, a in zip(dynamic_before, dynamic_after) if b != a]
@@ -323,23 +362,57 @@ class PhysicalCritic:
                 is_causal = len(recalculated) > 0
                 causal_contract_satisfied = (len(dynamic_recalculated) > 0) or is_causal
 
-                # 5. In-Browser Visual Intelligence Analysis (VisionSensor)
-                vision_audit = VisionSensor.audit_page_visual_intelligence(page, viewport_name="desktop")
+                # 5. Assert directional compliance per interaction contract
+                directional_passed = True
+                if contract.expected_direction in ("positive", "negative") and len(recalculated) > 0:
+                    import re
+                    def extract_num(s: str) -> Optional[float]:
+                        nums = re.findall(r"[-+]?\d*\.?\d+", s.replace(",", ""))
+                        return float(nums[0]) if nums else None
+
+                    slider_delta = new_val - curr_val
+                    for pair in recalculated:
+                        parts = pair.split(" -> ")
+                        if len(parts) == 2:
+                            n_before = extract_num(parts[0])
+                            n_after = extract_num(parts[1])
+                            if n_before is not None and n_after is not None and n_before != n_after:
+                                metric_delta = n_after - n_before
+                                if contract.expected_direction == "positive":
+                                    if slider_delta > 0 and metric_delta < 0:
+                                        directional_passed = False
+                                    elif slider_delta < 0 and metric_delta > 0:
+                                        directional_passed = False
+                                elif contract.expected_direction == "negative":
+                                    if slider_delta > 0 and metric_delta > 0:
+                                        directional_passed = False
+                                    elif slider_delta < 0 and metric_delta < 0:
+                                        directional_passed = False
+
+                # 6. In-Browser Visual Intelligence Analysis (VisionSensor)
+                vision_audit = VisionSensor.audit_page_visual_intelligence(active_page, viewport_name="desktop")
+
+                # 7. Rendered Screenshot Pixel Inspection (PixelCritic)
+                desktop_screenshot = active_page.screenshot(type="png")
+                pixel_audit = PixelCritic().audit_screenshot(desktop_screenshot, viewport_name="desktop")
 
                 screenshots = {}
                 if capture_screenshots:
-                    for vp_name, vp_w in [("mobile", 390), ("tablet", 768), ("desktop", 1440)]:
-                        page.set_viewport_size({"width": vp_w, "height": 844 if vp_w < 500 else 900})
-                        page.wait_for_timeout(40)
-                        screenshots[vp_name] = page.screenshot(type="png")
+                    screenshots["desktop"] = desktop_screenshot
+                    for vp_name, vp_w in [("mobile", 390), ("tablet", 768)]:
+                        active_page.set_viewport_size({"width": vp_w, "height": 844 if vp_w < 500 else 900})
+                        active_page.wait_for_timeout(40)
+                        vp_bytes = active_page.screenshot(type="png")
+                        screenshots[vp_name] = vp_bytes
                         if vp_name == "mobile":
-                            mobile_vision = VisionSensor.audit_page_visual_intelligence(page, viewport_name="mobile")
-                            # If mobile detects collisions or clippings, merge them
+                            mobile_vision = VisionSensor.audit_page_visual_intelligence(active_page, viewport_name="mobile")
                             for d in mobile_vision.get("defects", []):
                                 if not any(existing.get("type") == d.get("type") for existing in vision_audit.get("defects", [])):
                                     vision_audit["defects"].append(d)
 
-                browser.close()
+                if owns_page and browser:
+                    browser.close()
+                    playwright_ctx.__exit__(None, None, None)
 
                 defects = []
                 if not causal_contract_satisfied:
@@ -349,19 +422,35 @@ class PhysicalCritic:
                         "message": f"Interaction on '{contract.input_variable}' did not causally recalculate bound metrics in domain '{contract.domain_id}'."
                     })
 
+                if not directional_passed:
+                    defects.append({
+                        "type": "runtime_direction_inversion",
+                        "severity": "P1",
+                        "message": f"Metric changed in opposite direction than expected ({contract.expected_direction}) for domain '{contract.domain_id}'."
+                    })
+
                 # Merge vision defects
                 defects.extend(vision_audit.get("defects", []))
+
+                # Merge pixel defects
+                defects.extend(pixel_audit.get("defects", []))
+
+                if pixel_audit.get("is_blank"):
+                    causal_contract_satisfied = False
 
                 is_fully_verified = causal_contract_satisfied and not any(d.get("severity") == "P0" for d in defects)
 
                 return {
                     "interactive_verified": is_fully_verified,
                     "causal_contract_satisfied": causal_contract_satisfied,
+                    "directional_passed": directional_passed,
                     "causal_contract": {
                         "domain_id": contract.domain_id,
                         "control": contract.input_variable,
                         "target_value": new_val,
-                        "expected_metrics": contract.bound_metrics
+                        "expected_metrics": contract.bound_metrics,
+                        "expected_direction": contract.expected_direction,
+                        "formula_expr": contract.formula_expr
                     },
                     "status": "PASSED" if is_fully_verified else "DEFECTS_DETECTED",
                     "metrics_count": len(metrics_before),
@@ -369,9 +458,16 @@ class PhysicalCritic:
                     "recalculated_pairs": recalculated,
                     "dynamic_recalculated": dynamic_recalculated,
                     "vision_report": vision_audit,
+                    "pixel_report": pixel_audit,
                     "screenshots_captured": list(screenshots.keys()),
                     "defects": defects
                 }
+            except Exception as e:
+                if owns_page and browser:
+                    browser.close()
+                    playwright_ctx.__exit__(None, None, None)
+                raise e
+
         except Exception as e:
             return {
                 "interactive_verified": False,

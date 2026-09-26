@@ -1,12 +1,12 @@
 {
   "$schema": "./schemas/version-manifest.schema.json",
-  "version": "3.8.0",
-  "codename": "Autonomous Closed-Loop Visual Vision & Browser Truth Engine",
+  "version": "3.9.0",
+  "codename": "The True Closed-Loop Autonomous Browser Engine",
   "release_channel": "stable",
   "packages": {
-    "@omid-io/tokens": "3.8.0",
-    "vibe-ui-vscode": "3.8.0",
-    "vibe-ui-nextjs-starter": "3.8.0"
+    "@omid-io/tokens": "3.9.0",
+    "vibe-ui-vscode": "3.9.0",
+    "vibe-ui-nextjs-starter": "3.9.0"
   },
   "schemas": {
     "intent_contract": "v1",

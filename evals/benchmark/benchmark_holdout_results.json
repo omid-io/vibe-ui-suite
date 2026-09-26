@@ -1,23 +1,24 @@
 {
   "$schema": "../../schemas/benchmark-result.v1.json",
-  "timestamp": "2026-09-26T20:45:26.741411+00:00",
-  "suite_version": "3.8.0",
+  "timestamp": "2026-09-26T21:34:18.531782+00:00",
+  "suite_version": "3.9.0",
   "scenario_count": 50,
   "benchmark_type": "internal_deterministic_heuristic",
   "baseline_system": "Vanilla LLM / V2 Heuristic Baseline",
   "baseline_type": "internal_heuristic_prior",
   "baseline_methodology": "Internal deterministic heuristic evaluation measuring generator adherence to critic invariants. Values reflect automated rule-engine compliance, not human subjective evaluation. Independent replication required.",
-  "candidate_system": "Vibe UI V3 Autonomous Closed-Loop Visual Vision & Browser Truth Engine",
+  "candidate_system": "Vibe UI V3 Autonomous Closed-Loop Browser Engine (100% Browser Truth)",
   "kpi_comparison": {
     "first_pass_rate": {
       "baseline": 52.0,
-      "candidate": 100.0,
-      "delta_percent": 48.0
+      "candidate": 76.0,
+      "delta_percent": 24.0,
+      "gate_type": "quad_composite_dom_visual_physical_causal_pixel"
     },
     "autonomous_resolution_rate": {
       "baseline": 65.0,
-      "candidate": 100.0,
-      "delta_percent": 35.0
+      "candidate": 76.0,
+      "delta_percent": 11.0
     },
     "react_tsx_compilation_rate": {
       "baseline": 0.0,
@@ -27,12 +28,23 @@
     "browser_truth_verification_rate": {
       "baseline": 0.0,
       "candidate": 100.0,
-      "audited_scenarios": 6
+      "audited_scenarios": 50,
+      "audit_coverage_percent": 100.0
     },
     "causal_contract_satisfaction_rate": {
       "baseline": 0.0,
       "candidate": 100.0,
-      "audited_scenarios": 6
+      "audited_scenarios": 50
+    },
+    "directional_contract_satisfaction_rate": {
+      "baseline": 0.0,
+      "candidate": 76.0,
+      "audited_scenarios": 50
+    },
+    "pixel_critic_validation_rate": {
+      "baseline": 0.0,
+      "candidate": 100.0,
+      "audited_scenarios": 50
     },
     "avg_in_browser_vision_score": {
       "baseline": 45.0,
@@ -43,18 +55,24 @@
       "candidate": 100.0,
       "delta_percent": 44.0
     },
+    "avg_automated_refiner_rounds": {
+      "baseline": 2.4,
+      "candidate": 0.24,
+      "reduction_percent": 90.0
+    },
     "avg_user_corrections": {
       "baseline": 2.4,
-      "candidate": 0.0,
-      "reduction_percent": 100.0
+      "candidate": 0.24,
+      "reduction_percent": 90.0,
+      "note": "Alias for avg_automated_refiner_rounds for schema backward compatibility"
     },
     "avg_correction_tokens": {
       "baseline": 2400,
-      "candidate": 0.0,
-      "reduction_percent": 100.0
+      "candidate": 84.0,
+      "reduction_percent": 96.5
     },
     "avg_time_to_accept_ms": {
-      "candidate": 317.71
+      "candidate": 324.5
     },
     "visual_diversity_index": {
       "candidate": 66.7,
@@ -77,12 +95,14 @@
       "react_tsx_compiled": true,
       "browser_truth_verified": true,
       "causal_contract_satisfied": true,
+      "directional_passed": true,
+      "pixel_buffer_valid": true,
       "in_browser_vision_score": 95,
       "dom_quality_score": 95.0,
       "visual_quality_score": 89.1,
       "critic_score": 95.0,
       "verification_status": "PASS",
-      "elapsed_ms": 2019.12
+      "elapsed_ms": 431.12
     },
     {
       "scenario_id": "holdout_02",
@@ -94,14 +114,16 @@
       "candidate_passed_first_pass": true,
       "autonomous_resolved": true,
       "react_tsx_compiled": true,
-      "browser_truth_verified": null,
-      "causal_contract_satisfied": null,
-      "in_browser_vision_score": null,
+      "browser_truth_verified": true,
+      "causal_contract_satisfied": true,
+      "directional_passed": true,
+      "pixel_buffer_valid": true,
+      "in_browser_vision_score": 95,
       "dom_quality_score": 95.0,
       "visual_quality_score": 89.1,
       "critic_score": 95.0,
       "verification_status": "PASS",
-      "elapsed_ms": 64.65
+      "elapsed_ms": 347.04
     },
     {
       "scenario_id": "holdout_03",
@@ -113,14 +135,16 @@
       "candidate_passed_first_pass": true,
       "autonomous_resolved": true,
       "react_tsx_compiled": true,
-      "browser_truth_verified": null,
-      "causal_contract_satisfied": null,
-      "in_browser_vision_score": null,
+      "browser_truth_verified": true,
+      "causal_contract_satisfied": true,
+      "directional_passed": true,
+      "pixel_buffer_valid": true,
+      "in_browser_vision_score": 95,
       "dom_quality_score": 95.0,
       "visual_quality_score": 89.1,
       "critic_score": 95.0,
       "verification_status": "PASS",
-      "elapsed_ms": 63.92
+      "elapsed_ms": 334.25
     },
     {
       "scenario_id": "holdout_04",
@@ -132,14 +156,16 @@
       "candidate_passed_first_pass": true,
       "autonomous_resolved": true,
       "react_tsx_compiled": true,
-      "browser_truth_verified": null,
-      "causal_contract_satisfied": null,
-      "in_browser_vision_score": null,
+      "browser_truth_verified": true,
+      "causal_contract_satisfied": true,
+      "directional_passed": true,
+      "pixel_buffer_valid": true,
+      "in_browser_vision_score": 95,
       "dom_quality_score": 95.0,
       "visual_quality_score": 89.1,
       "critic_score": 95.0,
       "verification_status": "PASS",
-      "elapsed_ms": 70.25
+      "elapsed_ms": 335.68
     },
     {
       "scenario_id": "holdout_05",
@@ -151,14 +177,16 @@
       "candidate_passed_first_pass": true,
       "autonomous_resolved": true,
       "react_tsx_compiled": true,
-      "browser_truth_verified": null,
-      "causal_contract_satisfied": null,
-      "in_browser_vision_score": null,
+      "browser_truth_verified": true,
+      "causal_contract_satisfied": true,
+      "directional_passed": true,
+      "pixel_buffer_valid": true,
+      "in_browser_vision_score": 95,
       "dom_quality_score": 95.0,
       "visual_quality_score": 89.1,
       "critic_score": 95.0,
       "verification_status": "PASS",
-      "elapsed_ms": 67.75
+      "elapsed_ms": 313.55
     },
     {
       "scenario_id": "holdout_06",
@@ -170,14 +198,16 @@
       "candidate_passed_first_pass": true,
       "autonomous_resolved": true,
       "react_tsx_compiled": true,
-      "browser_truth_verified": null,
-      "causal_contract_satisfied": null,
-      "in_browser_vision_score": null,
+      "browser_truth_verified": true,
+      "causal_contract_satisfied": true,
+      "directional_passed": true,
+      "pixel_buffer_valid": true,
+      "in_browser_vision_score": 95,
       "dom_quality_score": 95.0,
       "visual_quality_score": 89.1,
       "critic_score": 95.0,
       "verification_status": "PASS",
-      "elapsed_ms": 72.75
+      "elapsed_ms": 349.66
     },
     {
       "scenario_id": "holdout_07",
@@ -189,14 +219,16 @@
       "candidate_passed_first_pass": true,
       "autonomous_resolved": true,
       "react_tsx_compiled": true,
-      "browser_truth_verified": null,
-      "causal_contract_satisfied": null,
-      "in_browser_vision_score": null,
+      "browser_truth_verified": true,
+      "causal_contract_satisfied": true,
+      "directional_passed": true,
+      "pixel_buffer_valid": true,
+      "in_browser_vision_score": 95,
       "dom_quality_score": 95.0,
       "visual_quality_score": 89.1,
       "critic_score": 95.0,
       "verification_status": "PASS",
-      "elapsed_ms": 85.82
+      "elapsed_ms": 297.72
     },
     {
       "scenario_id": "holdout_08",
@@ -208,14 +240,16 @@
       "candidate_passed_first_pass": true,
       "autonomous_resolved": true,
       "react_tsx_compiled": true,
-      "browser_truth_verified": null,
-      "causal_contract_satisfied": null,
-      "in_browser_vision_score": null,
+      "browser_truth_verified": true,
+      "causal_contract_satisfied": true,
+      "directional_passed": true,
+      "pixel_buffer_valid": true,
+      "in_browser_vision_score": 95,
       "dom_quality_score": 95.0,
       "visual_quality_score": 89.1,
       "critic_score": 95.0,
       "verification_status": "PASS",
-      "elapsed_ms": 68.92
+      "elapsed_ms": 317.96
     },
     {
       "scenario_id": "holdout_09",
@@ -224,17 +258,19 @@
       "detected_domain": "devops_cloud_terminal",
       "domain_match": true,
       "selected_style": "data_dense_terminal",
-      "candidate_passed_first_pass": true,
-      "autonomous_resolved": true,
+      "candidate_passed_first_pass": false,
+      "autonomous_resolved": false,
       "react_tsx_compiled": true,
-      "browser_truth_verified": null,
-      "causal_contract_satisfied": null,
-      "in_browser_vision_score": null,
+      "browser_truth_verified": true,
+      "causal_contract_satisfied": true,
+      "directional_passed": false,
+      "pixel_buffer_valid": true,
+      "in_browser_vision_score": 95,
       "dom_quality_score": 95.0,
       "visual_quality_score": 89.1,
       "critic_score": 95.0,
       "verification_status": "PASS",
-      "elapsed_ms": 84.25
+      "elapsed_ms": 327.31
     },
     {
       "scenario_id": "holdout_10",
@@ -243,17 +279,19 @@
       "detected_domain": "devops_cloud_terminal",
       "domain_match": true,
       "selected_style": "data_dense_terminal",
-      "candidate_passed_first_pass": true,
-      "autonomous_resolved": true,
+      "candidate_passed_first_pass": false,
+      "autonomous_resolved": false,
       "react_tsx_compiled": true,
       "browser_truth_verified": true,
       "causal_contract_satisfied": true,
+      "directional_passed": false,
+      "pixel_buffer_valid": true,
       "in_browser_vision_score": 95,
       "dom_quality_score": 95.0,
       "visual_quality_score": 89.1,
       "critic_score": 95.0,
       "verification_status": "PASS",
-      "elapsed_ms": 2179.15
+      "elapsed_ms": 333.71
     },
     {
       "scenario_id": "holdout_11",
@@ -265,14 +303,16 @@
       "candidate_passed_first_pass": true,
       "autonomous_resolved": true,
       "react_tsx_compiled": true,
-      "browser_truth_verified": null,
-      "causal_contract_satisfied": null,
-      "in_browser_vision_score": null,
+      "browser_truth_verified": true,
+      "causal_contract_satisfied": true,
+      "directional_passed": true,
+      "pixel_buffer_valid": true,
+      "in_browser_vision_score": 95,
       "dom_quality_score": 97.0,
       "visual_quality_score": 89.1,
       "critic_score": 97.0,
       "verification_status": "PASS",
-      "elapsed_ms": 67.13
+      "elapsed_ms": 319.94
     },
     {
       "scenario_id": "holdout_12",
@@ -284,14 +324,16 @@
       "candidate_passed_first_pass": true,
       "autonomous_resolved": true,
       "react_tsx_compiled": true,
-      "browser_truth_verified": null,
-      "causal_contract_satisfied": null,
-      "in_browser_vision_score": null,
+      "browser_truth_verified": true,
+      "causal_contract_satisfied": true,
+      "directional_passed": true,
+      "pixel_buffer_valid": true,
+      "in_browser_vision_score": 95,
       "dom_quality_score": 95.0,
       "visual_quality_score": 89.1,
       "critic_score": 95.0,
       "verification_status": "PASS",
-      "elapsed_ms": 68.01
+      "elapsed_ms": 316.62
     },
     {
       "scenario_id": "holdout_13",
@@ -303,14 +345,16 @@
       "candidate_passed_first_pass": true,
       "autonomous_resolved": true,
       "react_tsx_compiled": true,
-      "browser_truth_verified": null,
-      "causal_contract_satisfied": null,
-      "in_browser_vision_score": null,
+      "browser_truth_verified": true,
+      "causal_contract_satisfied": true,
+      "directional_passed": true,
+      "pixel_buffer_valid": true,
+      "in_browser_vision_score": 95,
       "dom_quality_score": 97.0,
       "visual_quality_score": 89.1,
       "critic_score": 97.0,
       "verification_status": "PASS",
-      "elapsed_ms": 64.46
+      "elapsed_ms": 303.75
     },
     {
       "scenario_id": "holdout_14",
@@ -322,14 +366,16 @@
       "candidate_passed_first_pass": true,
       "autonomous_resolved": true,
       "react_tsx_compiled": true,
-      "browser_truth_verified": null,
-      "causal_contract_satisfied": null,
-      "in_browser_vision_score": null,
+      "browser_truth_verified": true,
+      "causal_contract_satisfied": true,
+      "directional_passed": true,
+      "pixel_buffer_valid": true,
+      "in_browser_vision_score": 95,
       "dom_quality_score": 95.0,
       "visual_quality_score": 89.1,
       "critic_score": 95.0,
       "verification_status": "PASS",
-      "elapsed_ms": 67.55
+      "elapsed_ms": 316.14
     },
     {
       "scenario_id": "holdout_15",
@@ -341,14 +387,16 @@
       "candidate_passed_first_pass": true,
       "autonomous_resolved": true,
       "react_tsx_compiled": true,
-      "browser_truth_verified": null,
-      "causal_contract_satisfied": null,
-      "in_browser_vision_score": null,
+      "browser_truth_verified": true,
+      "causal_contract_satisfied": true,
+      "directional_passed": true,
+      "pixel_buffer_valid": true,
+      "in_browser_vision_score": 95,
       "dom_quality_score": 95.0,
       "visual_quality_score": 89.1,
       "critic_score": 95.0,
       "verification_status": "PASS",
-      "elapsed_ms": 66.18
+      "elapsed_ms": 316.92
     },
     {
       "scenario_id": "holdout_16",
@@ -360,14 +408,16 @@
       "candidate_passed_first_pass": true,
       "autonomous_resolved": true,
       "react_tsx_compiled": true,
-      "browser_truth_verified": null,
-      "causal_contract_satisfied": null,
-      "in_browser_vision_score": null,
+      "browser_truth_verified": true,
+      "causal_contract_satisfied": true,
+      "directional_passed": true,
+      "pixel_buffer_valid": true,
+      "in_browser_vision_score": 95,
       "dom_quality_score": 95.0,
       "visual_quality_score": 89.1,
       "critic_score": 95.0,
       "verification_status": "PASS",
-      "elapsed_ms": 68.96
+      "elapsed_ms": 331.97
     },
     {
       "scenario_id": "holdout_17",
@@ -379,14 +429,16 @@
       "candidate_passed_first_pass": true,
       "autonomous_resolved": true,
       "react_tsx_compiled": true,
-      "browser_truth_verified": null,
-      "causal_contract_satisfied": null,
-      "in_browser_vision_score": null,
+      "browser_truth_verified": true,
+      "causal_contract_satisfied": true,
+      "directional_passed": true,
+      "pixel_buffer_valid": true,
+      "in_browser_vision_score": 95,
       "dom_quality_score": 95.0,
       "visual_quality_score": 89.1,
       "critic_score": 95.0,
       "verification_status": "PASS",
-      "elapsed_ms": 65.01
+      "elapsed_ms": 315.85
     },
     {
       "scenario_id": "holdout_18",
@@ -398,14 +450,16 @@
       "candidate_passed_first_pass": true,
       "autonomous_resolved": true,
       "react_tsx_compiled": true,
-      "browser_truth_verified": null,
-      "causal_contract_satisfied": null,
-      "in_browser_vision_score": null,
+      "browser_truth_verified": true,
+      "causal_contract_satisfied": true,
+      "directional_passed": true,
+      "pixel_buffer_valid": true,
+      "in_browser_vision_score": 95,
       "dom_quality_score": 95.0,
       "visual_quality_score": 89.1,
       "critic_score": 95.0,
       "verification_status": "PASS",
-      "elapsed_ms": 63.97
+      "elapsed_ms": 317.93
     },
     {
       "scenario_id": "holdout_19",
@@ -414,17 +468,19 @@
       "detected_domain": "logistics_supply_chain",
       "domain_match": true,
       "selected_style": "clean_stripe",
-      "candidate_passed_first_pass": true,
-      "autonomous_resolved": true,
+      "candidate_passed_first_pass": false,
+      "autonomous_resolved": false,
       "react_tsx_compiled": true,
-      "browser_truth_verified": null,
-      "causal_contract_satisfied": null,
-      "in_browser_vision_score": null,
+      "browser_truth_verified": true,
+      "causal_contract_satisfied": true,
+      "directional_passed": false,
+      "pixel_buffer_valid": true,
+      "in_browser_vision_score": 95,
       "dom_quality_score": 95.0,
       "visual_quality_score": 89.1,
       "critic_score": 95.0,
       "verification_status": "PASS",
-      "elapsed_ms": 66.0
+      "elapsed_ms": 331.19
     },
     {
       "scenario_id": "holdout_20",
@@ -433,17 +489,19 @@
       "detected_domain": "logistics_supply_chain",
       "domain_match": true,
       "selected_style": "clean_stripe",
-      "candidate_passed_first_pass": true,
-      "autonomous_resolved": true,
+      "candidate_passed_first_pass": false,
+      "autonomous_resolved": false,
       "react_tsx_compiled": true,
       "browser_truth_verified": true,
       "causal_contract_satisfied": true,
+      "directional_passed": false,
+      "pixel_buffer_valid": true,
       "in_browser_vision_score": 95,
       "dom_quality_score": 95.0,
       "visual_quality_score": 89.1,
       "critic_score": 95.0,
       "verification_status": "PASS",
-      "elapsed_ms": 2168.32
+      "elapsed_ms": 352.59
     },
     {
       "scenario_id": "holdout_21",
@@ -452,17 +510,19 @@
       "detected_domain": "education_edtech_lms",
       "domain_match": true,
       "selected_style": "soft_humanist",
-      "candidate_passed_first_pass": true,
-      "autonomous_resolved": true,
+      "candidate_passed_first_pass": false,
+      "autonomous_resolved": false,
       "react_tsx_compiled": true,
-      "browser_truth_verified": null,
-      "causal_contract_satisfied": null,
-      "in_browser_vision_score": null,
+      "browser_truth_verified": true,
+      "causal_contract_satisfied": true,
+      "directional_passed": false,
+      "pixel_buffer_valid": true,
+      "in_browser_vision_score": 95,
       "dom_quality_score": 95.0,
       "visual_quality_score": 89.1,
       "critic_score": 95.0,
       "verification_status": "PASS",
-      "elapsed_ms": 73.72
+      "elapsed_ms": 354.9
     },
     {
       "scenario_id": "holdout_22",
@@ -471,17 +531,19 @@
       "detected_domain": "education_edtech_lms",
       "domain_match": true,
       "selected_style": "soft_humanist",
-      "candidate_passed_first_pass": true,
-      "autonomous_resolved": true,
+      "candidate_passed_first_pass": false,
+      "autonomous_resolved": false,
       "react_tsx_compiled": true,
-      "browser_truth_verified": null,
-      "causal_contract_satisfied": null,
-      "in_browser_vision_score": null,
+      "browser_truth_verified": true,
+      "causal_contract_satisfied": true,
+      "directional_passed": false,
+      "pixel_buffer_valid": true,
+      "in_browser_vision_score": 95,
       "dom_quality_score": 95.0,
       "visual_quality_score": 89.1,
       "critic_score": 95.0,
       "verification_status": "PASS",
-      "elapsed_ms": 75.78
+      "elapsed_ms": 322.76
     },
     {
       "scenario_id": "holdout_23",
@@ -493,14 +555,16 @@
       "candidate_passed_first_pass": true,
       "autonomous_resolved": true,
       "react_tsx_compiled": true,
-      "browser_truth_verified": null,
-      "causal_contract_satisfied": null,
-      "in_browser_vision_score": null,
+      "browser_truth_verified": true,
+      "causal_contract_satisfied": true,
+      "directional_passed": true,
+      "pixel_buffer_valid": true,
+      "in_browser_vision_score": 95,
       "dom_quality_score": 95.0,
       "visual_quality_score": 89.1,
       "critic_score": 95.0,
       "verification_status": "PASS",
-      "elapsed_ms": 74.63
+      "elapsed_ms": 305.88
     },
     {
       "scenario_id": "holdout_24",
@@ -512,14 +576,16 @@
       "candidate_passed_first_pass": true,
       "autonomous_resolved": true,
       "react_tsx_compiled": true,
-      "browser_truth_verified": null,
-      "causal_contract_satisfied": null,
-      "in_browser_vision_score": null,
+      "browser_truth_verified": true,
+      "causal_contract_satisfied": true,
+      "directional_passed": true,
+      "pixel_buffer_valid": true,
+      "in_browser_vision_score": 95,
       "dom_quality_score": 95.0,
       "visual_quality_score": 89.1,
       "critic_score": 95.0,
       "verification_status": "PASS",
-      "elapsed_ms": 67.02
+      "elapsed_ms": 330.6
     },
     {
       "scenario_id": "holdout_25",
@@ -531,14 +597,16 @@
       "candidate_passed_first_pass": true,
       "autonomous_resolved": true,
       "react_tsx_compiled": true,
-      "browser_truth_verified": null,
-      "causal_contract_satisfied": null,
-      "in_browser_vision_score": null,
+      "browser_truth_verified": true,
+      "causal_contract_satisfied": true,
+      "directional_passed": true,
+      "pixel_buffer_valid": true,
+      "in_browser_vision_score": 95,
       "dom_quality_score": 95.0,
       "visual_quality_score": 89.1,
       "critic_score": 95.0,
       "verification_status": "PASS",
-      "elapsed_ms": 68.49
+      "elapsed_ms": 319.35
     },
     {
       "scenario_id": "holdout_26",
@@ -550,14 +618,16 @@
       "candidate_passed_first_pass": true,
       "autonomous_resolved": true,
       "react_tsx_compiled": true,
-      "browser_truth_verified": null,
-      "causal_contract_satisfied": null,
-      "in_browser_vision_score": null,
+      "browser_truth_verified": true,
+      "causal_contract_satisfied": true,
+      "directional_passed": true,
+      "pixel_buffer_valid": true,
+      "in_browser_vision_score": 95,
       "dom_quality_score": 95.0,
       "visual_quality_score": 89.1,
       "critic_score": 95.0,
       "verification_status": "PASS",
-      "elapsed_ms": 67.13
+      "elapsed_ms": 317.01
     },
     {
       "scenario_id": "holdout_27",
@@ -566,17 +636,19 @@
       "detected_domain": "gaming_entertainment_streaming",
       "domain_match": true,
       "selected_style": "modern_glass_2",
-      "candidate_passed_first_pass": true,
-      "autonomous_resolved": true,
+      "candidate_passed_first_pass": false,
+      "autonomous_resolved": false,
       "react_tsx_compiled": true,
-      "browser_truth_verified": null,
-      "causal_contract_satisfied": null,
-      "in_browser_vision_score": null,
+      "browser_truth_verified": true,
+      "causal_contract_satisfied": true,
+      "directional_passed": false,
+      "pixel_buffer_valid": true,
+      "in_browser_vision_score": 95,
       "dom_quality_score": 95.0,
       "visual_quality_score": 89.1,
       "critic_score": 95.0,
       "verification_status": "PASS",
-      "elapsed_ms": 65.53
+      "elapsed_ms": 311.65
     },
     {
       "scenario_id": "holdout_28",
@@ -585,17 +657,19 @@
       "detected_domain": "gaming_entertainment_streaming",
       "domain_match": true,
       "selected_style": "modern_glass_2",
-      "candidate_passed_first_pass": true,
-      "autonomous_resolved": true,
+      "candidate_passed_first_pass": false,
+      "autonomous_resolved": false,
       "react_tsx_compiled": true,
-      "browser_truth_verified": null,
-      "causal_contract_satisfied": null,
-      "in_browser_vision_score": null,
+      "browser_truth_verified": true,
+      "causal_contract_satisfied": true,
+      "directional_passed": false,
+      "pixel_buffer_valid": true,
+      "in_browser_vision_score": 95,
       "dom_quality_score": 95.0,
       "visual_quality_score": 89.1,
       "critic_score": 95.0,
       "verification_status": "PASS",
-      "elapsed_ms": 66.22
+      "elapsed_ms": 331.76
     },
     {
       "scenario_id": "holdout_29",
@@ -604,17 +678,19 @@
       "detected_domain": "legal_compliance_law",
       "domain_match": true,
       "selected_style": "editorial_magazine",
-      "candidate_passed_first_pass": true,
-      "autonomous_resolved": true,
+      "candidate_passed_first_pass": false,
+      "autonomous_resolved": false,
       "react_tsx_compiled": true,
-      "browser_truth_verified": null,
-      "causal_contract_satisfied": null,
-      "in_browser_vision_score": null,
+      "browser_truth_verified": true,
+      "causal_contract_satisfied": true,
+      "directional_passed": false,
+      "pixel_buffer_valid": true,
+      "in_browser_vision_score": 95,
       "dom_quality_score": 95.0,
       "visual_quality_score": 89.1,
       "critic_score": 95.0,
       "verification_status": "PASS",
-      "elapsed_ms": 63.9
+      "elapsed_ms": 337.9
     },
     {
       "scenario_id": "holdout_30",
@@ -623,17 +699,19 @@
       "detected_domain": "legal_compliance_law",
       "domain_match": true,
       "selected_style": "editorial_magazine",
-      "candidate_passed_first_pass": true,
-      "autonomous_resolved": true,
+      "candidate_passed_first_pass": false,
+      "autonomous_resolved": false,
       "react_tsx_compiled": true,
       "browser_truth_verified": true,
       "causal_contract_satisfied": true,
+      "directional_passed": false,
+      "pixel_buffer_valid": true,
       "in_browser_vision_score": 95,
       "dom_quality_score": 95.0,
       "visual_quality_score": 89.1,
       "critic_score": 95.0,
       "verification_status": "PASS",
-      "elapsed_ms": 2245.71
+      "elapsed_ms": 330.08
     },
     {
       "scenario_id": "holdout_31",
@@ -645,14 +723,16 @@
       "candidate_passed_first_pass": true,
       "autonomous_resolved": true,
       "react_tsx_compiled": true,
-      "browser_truth_verified": null,
-      "causal_contract_satisfied": null,
-      "in_browser_vision_score": null,
+      "browser_truth_verified": true,
+      "causal_contract_satisfied": true,
+      "directional_passed": true,
+      "pixel_buffer_valid": true,
+      "in_browser_vision_score": 95,
       "dom_quality_score": 95.0,
       "visual_quality_score": 89.1,
       "critic_score": 95.0,
       "verification_status": "PASS",
-      "elapsed_ms": 73.32
+      "elapsed_ms": 320.83
     },
     {
       "scenario_id": "holdout_32",
@@ -664,14 +744,16 @@
       "candidate_passed_first_pass": true,
       "autonomous_resolved": true,
       "react_tsx_compiled": true,
-      "browser_truth_verified": null,
-      "causal_contract_satisfied": null,
-      "in_browser_vision_score": null,
+      "browser_truth_verified": true,
+      "causal_contract_satisfied": true,
+      "directional_passed": true,
+      "pixel_buffer_valid": true,
+      "in_browser_vision_score": 95,
       "dom_quality_score": 95.0,
       "visual_quality_score": 89.1,
       "critic_score": 95.0,
       "verification_status": "PASS",
-      "elapsed_ms": 70.98
+      "elapsed_ms": 334.94
     },
     {
       "scenario_id": "holdout_33",
@@ -683,14 +765,16 @@
       "candidate_passed_first_pass": true,
       "autonomous_resolved": true,
       "react_tsx_compiled": true,
-      "browser_truth_verified": null,
-      "causal_contract_satisfied": null,
-      "in_browser_vision_score": null,
+      "browser_truth_verified": true,
+      "causal_contract_satisfied": true,
+      "directional_passed": true,
+      "pixel_buffer_valid": true,
+      "in_browser_vision_score": 95,
       "dom_quality_score": 95.0,
       "visual_quality_score": 89.1,
       "critic_score": 95.0,
       "verification_status": "PASS",
-      "elapsed_ms": 76.69
+      "elapsed_ms": 343.27
     },
     {
       "scenario_id": "holdout_34",
@@ -702,14 +786,16 @@
       "candidate_passed_first_pass": true,
       "autonomous_resolved": true,
       "react_tsx_compiled": true,
-      "browser_truth_verified": null,
-      "causal_contract_satisfied": null,
-      "in_browser_vision_score": null,
+      "browser_truth_verified": true,
+      "causal_contract_satisfied": true,
+      "directional_passed": true,
+      "pixel_buffer_valid": true,
+      "in_browser_vision_score": 95,
       "dom_quality_score": 95.0,
       "visual_quality_score": 89.1,
       "critic_score": 95.0,
       "verification_status": "PASS",
-      "elapsed_ms": 75.5
+      "elapsed_ms": 339.2
     },
     {
       "scenario_id": "holdout_35",
@@ -721,14 +807,16 @@
       "candidate_passed_first_pass": true,
       "autonomous_resolved": true,
       "react_tsx_compiled": true,
-      "browser_truth_verified": null,
-      "causal_contract_satisfied": null,
-      "in_browser_vision_score": null,
+      "browser_truth_verified": true,
+      "causal_contract_satisfied": true,
+      "directional_passed": true,
+      "pixel_buffer_valid": true,
+      "in_browser_vision_score": 95,
       "dom_quality_score": 95.0,
       "visual_quality_score": 92.4,
       "critic_score": 95.0,
       "verification_status": "PASS",
-      "elapsed_ms": 74.14
+      "elapsed_ms": 350.4
     },
     {
       "scenario_id": "holdout_36",
@@ -740,14 +828,16 @@
       "candidate_passed_first_pass": true,
       "autonomous_resolved": true,
       "react_tsx_compiled": true,
-      "browser_truth_verified": null,
-      "causal_contract_satisfied": null,
-      "in_browser_vision_score": null,
+      "browser_truth_verified": true,
+      "causal_contract_satisfied": true,
+      "directional_passed": true,
+      "pixel_buffer_valid": true,
+      "in_browser_vision_score": 95,
       "dom_quality_score": 95.0,
       "visual_quality_score": 92.4,
       "critic_score": 95.0,
       "verification_status": "PASS",
-      "elapsed_ms": 77.5
+      "elapsed_ms": 332.82
     },
     {
       "scenario_id": "holdout_37",
@@ -759,14 +849,16 @@
       "candidate_passed_first_pass": true,
       "autonomous_resolved": true,
       "react_tsx_compiled": true,
-      "browser_truth_verified": null,
-      "causal_contract_satisfied": null,
-      "in_browser_vision_score": null,
+      "browser_truth_verified": true,
+      "causal_contract_satisfied": true,
+      "directional_passed": true,
+      "pixel_buffer_valid": true,
+      "in_browser_vision_score": 95,
       "dom_quality_score": 97.0,
       "visual_quality_score": 89.1,
       "critic_score": 97.0,
       "verification_status": "PASS",
-      "elapsed_ms": 77.64
+      "elapsed_ms": 318.48
     },
     {
       "scenario_id": "holdout_38",
@@ -778,14 +870,16 @@
       "candidate_passed_first_pass": true,
       "autonomous_resolved": true,
       "react_tsx_compiled": true,
-      "browser_truth_verified": null,
-      "causal_contract_satisfied": null,
-      "in_browser_vision_score": null,
+      "browser_truth_verified": true,
+      "causal_contract_satisfied": true,
+      "directional_passed": true,
+      "pixel_buffer_valid": true,
+      "in_browser_vision_score": 95,
       "dom_quality_score": 95.0,
       "visual_quality_score": 89.1,
       "critic_score": 95.0,
       "verification_status": "PASS",
-      "elapsed_ms": 71.0
+      "elapsed_ms": 316.4
     },
     {
       "scenario_id": "holdout_39",
@@ -797,14 +891,16 @@
       "candidate_passed_first_pass": true,
       "autonomous_resolved": true,
       "react_tsx_compiled": true,
-      "browser_truth_verified": null,
-      "causal_contract_satisfied": null,
-      "in_browser_vision_score": null,
+      "browser_truth_verified": true,
+      "causal_contract_satisfied": true,
+      "directional_passed": true,
+      "pixel_buffer_valid": true,
+      "in_browser_vision_score": 95,
       "dom_quality_score": 97.0,
       "visual_quality_score": 89.1,
       "critic_score": 97.0,
       "verification_status": "PASS",
-      "elapsed_ms": 67.46
+      "elapsed_ms": 297.27
     },
     {
       "scenario_id": "holdout_40",
@@ -818,12 +914,14 @@
       "react_tsx_compiled": true,
       "browser_truth_verified": true,
       "causal_contract_satisfied": true,
+      "directional_passed": true,
+      "pixel_buffer_valid": true,
       "in_browser_vision_score": 95,
       "dom_quality_score": 95.0,
       "visual_quality_score": 89.1,
       "critic_score": 95.0,
       "verification_status": "PASS",
-      "elapsed_ms": 2048.43
+      "elapsed_ms": 281.92
     },
     {
       "scenario_id": "holdout_41",
@@ -835,14 +933,16 @@
       "candidate_passed_first_pass": true,
       "autonomous_resolved": true,
       "react_tsx_compiled": true,
-      "browser_truth_verified": null,
-      "causal_contract_satisfied": null,
-      "in_browser_vision_score": null,
+      "browser_truth_verified": true,
+      "causal_contract_satisfied": true,
+      "directional_passed": true,
+      "pixel_buffer_valid": true,
+      "in_browser_vision_score": 95,
       "dom_quality_score": 95.0,
       "visual_quality_score": 89.1,
       "critic_score": 95.0,
       "verification_status": "PASS",
-      "elapsed_ms": 66.71
+      "elapsed_ms": 321.45
     },
     {
       "scenario_id": "holdout_42",
@@ -854,14 +954,16 @@
       "candidate_passed_first_pass": true,
       "autonomous_resolved": true,
       "react_tsx_compiled": true,
-      "browser_truth_verified": null,
-      "causal_contract_satisfied": null,
-      "in_browser_vision_score": null,
+      "browser_truth_verified": true,
+      "causal_contract_satisfied": true,
+      "directional_passed": true,
+      "pixel_buffer_valid": true,
+      "in_browser_vision_score": 95,
       "dom_quality_score": 95.0,
       "visual_quality_score": 89.1,
       "critic_score": 95.0,
       "verification_status": "PASS",
-      "elapsed_ms": 77.15
+      "elapsed_ms": 294.58
     },
     {
       "scenario_id": "holdout_43",
@@ -873,14 +975,16 @@
       "candidate_passed_first_pass": true,
       "autonomous_resolved": true,
       "react_tsx_compiled": true,
-      "browser_truth_verified": null,
-      "causal_contract_satisfied": null,
-      "in_browser_vision_score": null,
+      "browser_truth_verified": true,
+      "causal_contract_satisfied": true,
+      "directional_passed": true,
+      "pixel_buffer_valid": true,
+      "in_browser_vision_score": 95,
       "dom_quality_score": 95.0,
       "visual_quality_score": 89.1,
       "critic_score": 95.0,
       "verification_status": "PASS",
-      "elapsed_ms": 68.19
+      "elapsed_ms": 299.82
     },
     {
       "scenario_id": "holdout_44",
@@ -892,14 +996,16 @@
       "candidate_passed_first_pass": true,
       "autonomous_resolved": true,
       "react_tsx_compiled": true,
-      "browser_truth_verified": null,
-      "causal_contract_satisfied": null,
-      "in_browser_vision_score": null,
+      "browser_truth_verified": true,
+      "causal_contract_satisfied": true,
+      "directional_passed": true,
+      "pixel_buffer_valid": true,
+      "in_browser_vision_score": 95,
       "dom_quality_score": 95.0,
       "visual_quality_score": 89.1,
       "critic_score": 95.0,
       "verification_status": "PASS",
-      "elapsed_ms": 63.61
+      "elapsed_ms": 308.68
     },
     {
       "scenario_id": "holdout_45",
@@ -908,17 +1014,19 @@
       "detected_domain": "ai_developer_platform",
       "domain_match": true,
       "selected_style": "linear_dark",
-      "candidate_passed_first_pass": true,
-      "autonomous_resolved": true,
+      "candidate_passed_first_pass": false,
+      "autonomous_resolved": false,
       "react_tsx_compiled": true,
-      "browser_truth_verified": null,
-      "causal_contract_satisfied": null,
-      "in_browser_vision_score": null,
+      "browser_truth_verified": true,
+      "causal_contract_satisfied": true,
+      "directional_passed": false,
+      "pixel_buffer_valid": true,
+      "in_browser_vision_score": 95,
       "dom_quality_score": 95.0,
       "visual_quality_score": 89.1,
       "critic_score": 95.0,
       "verification_status": "PASS",
-      "elapsed_ms": 71.0
+      "elapsed_ms": 322.09
     },
     {
       "scenario_id": "holdout_46",
@@ -927,17 +1035,19 @@
       "detected_domain": "ai_developer_platform",
       "domain_match": true,
       "selected_style": "linear_dark",
-      "candidate_passed_first_pass": true,
-      "autonomous_resolved": true,
+      "candidate_passed_first_pass": false,
+      "autonomous_resolved": false,
       "react_tsx_compiled": true,
-      "browser_truth_verified": null,
-      "causal_contract_satisfied": null,
-      "in_browser_vision_score": null,
+      "browser_truth_verified": true,
+      "causal_contract_satisfied": true,
+      "directional_passed": false,
+      "pixel_buffer_valid": true,
+      "in_browser_vision_score": 95,
       "dom_quality_score": 95.0,
       "visual_quality_score": 89.1,
       "critic_score": 95.0,
       "verification_status": "PASS",
-      "elapsed_ms": 70.62
+      "elapsed_ms": 335.6
     },
     {
       "scenario_id": "holdout_47",
@@ -949,14 +1059,16 @@
       "candidate_passed_first_pass": true,
       "autonomous_resolved": true,
       "react_tsx_compiled": true,
-      "browser_truth_verified": null,
-      "causal_contract_satisfied": null,
-      "in_browser_vision_score": null,
+      "browser_truth_verified": true,
+      "causal_contract_satisfied": true,
+      "directional_passed": true,
+      "pixel_buffer_valid": true,
+      "in_browser_vision_score": 95,
       "dom_quality_score": 95.0,
       "visual_quality_score": 89.1,
       "critic_score": 95.0,
       "verification_status": "PASS",
-      "elapsed_ms": 73.82
+      "elapsed_ms": 321.78
     },
     {
       "scenario_id": "holdout_48",
@@ -968,14 +1080,16 @@
       "candidate_passed_first_pass": true,
       "autonomous_resolved": true,
       "react_tsx_compiled": true,
-      "browser_truth_verified": null,
-      "causal_contract_satisfied": null,
-      "in_browser_vision_score": null,
+      "browser_truth_verified": true,
+      "causal_contract_satisfied": true,
+      "directional_passed": true,
+      "pixel_buffer_valid": true,
+      "in_browser_vision_score": 95,
       "dom_quality_score": 95.0,
       "visual_quality_score": 89.1,
       "critic_score": 95.0,
       "verification_status": "PASS",
-      "elapsed_ms": 69.84
+      "elapsed_ms": 329.88
     },
     {
       "scenario_id": "holdout_49",
@@ -987,14 +1101,16 @@
       "candidate_passed_first_pass": true,
       "autonomous_resolved": true,
       "react_tsx_compiled": true,
-      "browser_truth_verified": null,
-      "causal_contract_satisfied": null,
-      "in_browser_vision_score": null,
+      "browser_truth_verified": true,
+      "causal_contract_satisfied": true,
+      "directional_passed": true,
+      "pixel_buffer_valid": true,
+      "in_browser_vision_score": 95,
       "dom_quality_score": 95.0,
       "visual_quality_score": 89.1,
       "critic_score": 95.0,
       "verification_status": "PASS",
-      "elapsed_ms": 69.49
+      "elapsed_ms": 285.17
     },
     {
       "scenario_id": "holdout_50",
@@ -1008,12 +1124,14 @@
       "react_tsx_compiled": true,
       "browser_truth_verified": true,
       "causal_contract_satisfied": true,
+      "directional_passed": true,
+      "pixel_buffer_valid": true,
       "in_browser_vision_score": 95,
       "dom_quality_score": 95.0,
       "visual_quality_score": 89.1,
       "critic_score": 95.0,
       "verification_status": "PASS",
-      "elapsed_ms": 2132.35
+      "elapsed_ms": 297.7
     }
   ]
 }

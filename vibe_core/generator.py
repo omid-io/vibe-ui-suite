@@ -17,7 +17,47 @@ from vibe_core.genome import DesignGenomeEngine
 from vibe_core.asset_director import AssetDirector
 from vibe_core.domain_widgets import render_domain_widget
 
+# 6 Distinct Macro Layout Archetypes mapped to all 24 Canonical Domains (v3.9.0)
+DOMAIN_MACRO_ARCHETYPES: Dict[str, str] = {
+    # 1. dense_telemetry_hud
+    "devops_cloud_terminal": "dense_telemetry_hud",
+    "crypto_trading_web3": "dense_telemetry_hud",
+    "cybersecurity_identity_auth": "dense_telemetry_hud",
+    "logistics_supply_chain": "dense_telemetry_hud",
+
+    # 2. editorial_asymmetric_spread
+    "media_editorial_magazine": "editorial_asymmetric_spread",
+    "ecommerce_luxury_fashion": "editorial_asymmetric_spread",
+    "real_estate_architecture": "editorial_asymmetric_spread",
+
+    # 3. conversion_stepper_funnel
+    "fintech_banking": "conversion_stepper_funnel",
+    "travel_hospitality_tourism": "conversion_stepper_funnel",
+    "healthcare_hospital_medical": "conversion_stepper_funnel",
+    "ecommerce_mass_market": "conversion_stepper_funnel",
+    "food_restaurant_cafe": "conversion_stepper_funnel",
+
+    # 4. creative_canvas_showcase
+    "creative_portfolio_agency": "creative_canvas_showcase",
+    "personal_branding_creator": "creative_canvas_showcase",
+    "gaming_entertainment_streaming": "creative_canvas_showcase",
+    "automotive_ev_mobility": "creative_canvas_showcase",
+
+    # 5. split_laboratory_studio
+    "ai_developer_platform": "split_laboratory_studio",
+    "energy_greentech_sustainability": "split_laboratory_studio",
+    "beauty_clinical_wellness": "split_laboratory_studio",
+
+    # 6. classic_structured_saas
+    "saas_b2b_enterprise": "classic_structured_saas",
+    "education_edtech_lms": "classic_structured_saas",
+    "legal_compliance_law": "classic_structured_saas",
+    "nonprofit_charity_social": "classic_structured_saas",
+    "general_modern_saas": "classic_structured_saas",
+}
+
 class InterfaceGenerator:
+
     def __init__(self):
         self.genome_engine = DesignGenomeEngine()
         self.asset_director = AssetDirector()
@@ -165,7 +205,351 @@ class InterfaceGenerator:
         """
         return render_domain_widget(domain_id, is_rtl, style_cfg, blueprint)
 
+    def _render_macro_panel(
+        self,
+        domain_id: str,
+        is_rtl: bool,
+        style_cfg: Dict[str, str],
+        headline: str,
+        subheadline: str,
+        cta_primary: str,
+        cta_secondary: str,
+        sig_widget_name: str,
+        domain_widget_code: str,
+        media_container_code: str
+    ) -> str:
+        """
+        Renders one of 6 distinct macro layout compositions based on domain archetype:
+        1. dense_telemetry_hud (DevOps, Crypto, Cybersecurity, Logistics)
+        2. editorial_asymmetric_spread (Media, Luxury Fashion, Architecture)
+        3. conversion_stepper_funnel (Fintech, Travel, Healthcare, Mass Market, Food)
+        4. creative_canvas_showcase (Creative Agency, Creator Brand, Gaming, Auto)
+        5. split_laboratory_studio (AI Dev, Greentech, Clinical Wellness)
+        6. classic_structured_saas (SaaS Enterprise, EdTech, Legal, NonProfit, General SaaS)
+        """
+        archetype = DOMAIN_MACRO_ARCHETYPES.get(domain_id, "classic_structured_saas")
+
+        billing_switch = f'''<div className="flex items-center gap-3 pt-2">
+                <span className="text-xs font-medium text-zinc-500">{"ماهانه" if is_rtl else "Monthly"}</span>
+                <button
+                  type="button"
+                  role="switch"
+                  aria-checked={{billingCycle === "annual"}}
+                  aria-label="{"تغییر دوره پرداخت" if is_rtl else "Billing cycle toggle"}"
+                  onClick={{() => setBillingCycle(prev => prev === "annual" ? "monthly" : "annual")}}
+                  className="relative inline-flex min-h-[44px] min-w-[48px] items-center justify-center p-2 rounded-full cursor-pointer focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:ring-offset-2"
+                >
+                  <span className="relative inline-flex h-6 w-11 shrink-0 rounded-full border-2 border-transparent bg-zinc-300 dark:bg-zinc-700 transition-colors duration-200 ease-in-out">
+                    <span
+                      aria-hidden="true"
+                      className={{`pointer-events-none inline-block h-5 w-5 transform rounded-full bg-white shadow-lg ring-0 transition duration-200 ease-in-out ${{
+                        billingCycle === "annual" ? "translate-x-5 rtl:-translate-x-5" : "translate-x-0"
+                      }}`}}
+                    />
+                  </span>
+                </button>
+                <span className="text-xs font-medium text-zinc-900 dark:text-white flex items-center gap-1.5">
+                  <span>{"سالانه" if is_rtl else "Annual"}</span>
+                  <span className="px-2 py-0.5 text-[10px] font-bold rounded-full bg-emerald-500/10 text-emerald-600 border border-emerald-500/20">
+                    {"۲۰٪ تخفیف ویژه" if is_rtl else "Save 20%"}
+                  </span>
+                </span>
+              </div>'''
+
+        cta_group = f'''<div className="flex flex-wrap gap-4 pt-4">
+                <button
+                  type="button"
+                  onClick={{() => onAction?.("primary_click")}}
+                  className="{style_cfg['primary_cta']}"
+                >
+                  {cta_primary}
+                </button>
+                <button
+                  type="button"
+                  onClick={{() => onAction?.("secondary_click")}}
+                  className="{style_cfg['secondary_cta']}"
+                >
+                  {cta_secondary}
+                </button>
+              </div>'''
+
+        if archetype == "dense_telemetry_hud":
+            return f'''<div role="tabpanel" className="space-y-6 pt-6 animate-fadeIn" data-layout-macro="dense_telemetry_hud">
+            {{/* Command Status Ribbon */}}
+            <div className="flex flex-wrap items-center justify-between gap-3 px-4 py-2.5 bg-zinc-900/90 dark:bg-black border border-zinc-800 rounded-xl font-mono text-xs">
+              <div className="flex items-center gap-2">
+                <span className="size-2 rounded-full bg-emerald-400 animate-ping" />
+                <span className="text-emerald-400 font-bold">NODE://SYS.ONLINE</span>
+                <span className="text-zinc-600">|</span>
+                <span className="text-zinc-400">LATENCY: &lt;1.2ms</span>
+              </div>
+              <div className="flex items-center gap-3">
+                {billing_switch}
+              </div>
+            </div>
+
+            {{/* Split Cockpit Grid: 8 Cols Telemetry Console + 4 Cols HUD Sidebar */}}
+            <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
+              <div className="lg:col-span-8 space-y-6">
+                <div className="space-y-4">
+                  <h1 className="{style_cfg['headline']}">
+                    {headline}
+                  </h1>
+                  <p className="{style_cfg['body_text']}">
+                    {subheadline}
+                  </p>
+                </div>
+
+                <div className="{style_cfg['widget_card']}">
+                  <div className="flex items-center justify-between border-b border-zinc-800 pb-3">
+                    <span className="text-xs font-mono font-bold text-zinc-300">
+                      // {sig_widget_name}
+                    </span>
+                    <button
+                      type="button"
+                      onClick={{() => setIsLiveActive(prev => !prev)}}
+                      className="text-[11px] font-mono px-3 py-1.5 rounded border border-emerald-500/30 text-emerald-400 bg-emerald-950/40 min-h-[44px] inline-flex items-center"
+                    >
+                      <bdi>{{isLiveActive ? "LIVE_TELEMETRY: ACTIVE" : "PAUSED"}}</bdi>
+                    </button>
+                  </div>
+                  {domain_widget_code}
+                </div>
+
+                {cta_group}
+              </div>
+
+              <div className="lg:col-span-4 space-y-6">
+                {media_container_code}
+              </div>
+            </div>
+          </div>'''
+
+        elif archetype == "editorial_asymmetric_spread":
+            return f'''<div role="tabpanel" className="space-y-8 pt-8 animate-fadeIn" data-layout-macro="editorial_asymmetric_spread">
+            {{/* Masthead Headline Spread */}}
+            <div className="max-w-4xl space-y-4">
+              <div className="text-xs font-mono tracking-widest uppercase text-emerald-600 dark:text-emerald-400 font-semibold">
+                {"نسخه اختصاصی حوزه" if is_rtl else "Exclusive Curated Spread"}
+              </div>
+              <h1 className="{style_cfg['headline']}">
+                {headline}
+              </h1>
+              <p className="{style_cfg['body_text']}">
+                {subheadline}
+              </p>
+            </div>
+
+            {{/* Asymmetric 7/5 Spread: Media Leading */}}
+            <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+              <div className="lg:col-span-7">
+                {media_container_code}
+              </div>
+              <div className="lg:col-span-5 space-y-6">
+                <div className="{style_cfg['widget_card']}">
+                  <div className="flex items-center justify-between border-b border-zinc-200 dark:border-zinc-800 pb-3">
+                    <span className="text-xs font-bold text-zinc-700 dark:text-zinc-300">
+                      {sig_widget_name}
+                    </span>
+                    <button
+                      type="button"
+                      onClick={{() => setIsLiveActive(prev => !prev)}}
+                      className="text-[11px] font-mono px-3 py-1.5 rounded border transition-colors min-h-[44px] inline-flex items-center justify-center bg-zinc-100 dark:bg-zinc-800 text-zinc-600 dark:text-zinc-300"
+                    >
+                      <bdi>{{isLiveActive ? "LIVE FEED" : "PAUSED"}}</bdi>
+                    </button>
+                  </div>
+                  {domain_widget_code}
+                </div>
+
+                {billing_switch}
+                {cta_group}
+              </div>
+            </div>
+          </div>'''
+
+        elif archetype == "conversion_stepper_funnel":
+            return f'''<div role="tabpanel" className="space-y-8 pt-8 animate-fadeIn max-w-5xl mx-auto" data-layout-macro="conversion_stepper_funnel">
+            {{/* Conversion Stepper Header */}}
+            <div className="text-center space-y-4 max-w-3xl mx-auto">
+              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-semibold bg-emerald-500/10 text-emerald-600 border border-emerald-500/20">
+                {"۳ مرحله ساده تا نتیجه" if is_rtl else "3 Step Transactional Flow"}
+              </div>
+              <h1 className="{style_cfg['headline']}">
+                {headline}
+              </h1>
+              <p className="{style_cfg['body_text']} mx-auto">
+                {subheadline}
+              </p>
+            </div>
+
+            {{/* Step Indicators */}}
+            <div className="grid grid-cols-3 gap-3 text-center text-xs font-medium">
+              <div className="p-3 rounded-xl bg-emerald-500/10 border border-emerald-500/30 text-emerald-600 dark:text-emerald-400 font-bold">
+                {"۱. تنظیم پارامترها" if is_rtl else "1. Configure Inputs"}
+              </div>
+              <div className="p-3 rounded-xl bg-zinc-100 dark:bg-zinc-800/60 border border-zinc-200 dark:border-zinc-700 text-zinc-600 dark:text-zinc-300">
+                {"۲. شبیه سازی زنده" if is_rtl else "2. Real-Time Simulation"}
+              </div>
+              <div className="p-3 rounded-xl bg-zinc-100 dark:bg-zinc-800/60 border border-zinc-200 dark:border-zinc-700 text-zinc-600 dark:text-zinc-300">
+                {"۳. تایید و صدور" if is_rtl else "3. Instant Execution"}
+              </div>
+            </div>
+
+            {{/* Central Funnel Card */}}
+            <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+              <div className="lg:col-span-7">
+                <div className="{style_cfg['widget_card']}">
+                  <div className="flex items-center justify-between border-b border-zinc-200 dark:border-zinc-800 pb-3">
+                    <span className="text-xs font-bold text-zinc-700 dark:text-zinc-300">
+                      {sig_widget_name}
+                    </span>
+                    <button
+                      type="button"
+                      onClick={{() => setIsLiveActive(prev => !prev)}}
+                      className="text-[11px] font-mono px-3 py-1.5 rounded border transition-colors min-h-[44px] inline-flex items-center justify-center bg-emerald-500/10 text-emerald-600 border-emerald-500/20"
+                    >
+                      <bdi>{{isLiveActive ? "SIMULATOR: ACTIVE" : "PAUSED"}}</bdi>
+                    </button>
+                  </div>
+                  {domain_widget_code}
+                </div>
+              </div>
+
+              <div className="lg:col-span-5 space-y-6">
+                {media_container_code}
+                {billing_switch}
+                {cta_group}
+              </div>
+            </div>
+          </div>'''
+
+        elif archetype == "creative_canvas_showcase":
+            return f'''<div role="tabpanel" className="space-y-8 pt-8 animate-fadeIn" data-layout-macro="creative_canvas_showcase">
+            <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+              <div className="lg:col-span-6 space-y-6">
+                <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider bg-purple-500/10 text-purple-600 dark:text-purple-400 border border-purple-500/20">
+                  {"استودیو تعاملی و خلاق" if is_rtl else "Creative Canvas Showcase"}
+                </span>
+                <h1 className="{style_cfg['headline']}">
+                  {headline}
+                </h1>
+                <p className="{style_cfg['body_text']}">
+                  {subheadline}
+                </p>
+                {billing_switch}
+                {cta_group}
+              </div>
+              <div className="lg:col-span-6">
+                {media_container_code}
+              </div>
+            </div>
+
+            {{/* Floating Interactive Widget Deck */}}
+            <div className="{style_cfg['widget_card']} max-w-4xl mx-auto shadow-2xl">
+              <div className="flex items-center justify-between border-b border-zinc-200 dark:border-zinc-800 pb-3">
+                <span className="text-xs font-bold text-zinc-700 dark:text-zinc-300">
+                  {sig_widget_name}
+                </span>
+                <button
+                  type="button"
+                  onClick={{() => setIsLiveActive(prev => !prev)}}
+                  className="text-[11px] font-mono px-3 py-1.5 rounded border transition-colors min-h-[44px] inline-flex items-center justify-center bg-purple-500/10 text-purple-600 border-purple-500/20"
+                >
+                  <bdi>{{isLiveActive ? "RENDER ACTIVE" : "PAUSED"}}</bdi>
+                </button>
+              </div>
+              {domain_widget_code}
+            </div>
+          </div>'''
+
+        elif archetype == "split_laboratory_studio":
+            return f'''<div role="tabpanel" className="space-y-6 pt-6 animate-fadeIn" data-layout-macro="split_laboratory_studio">
+            <div className="flex items-center justify-between border-b border-zinc-200 dark:border-zinc-800 pb-4">
+              <div className="space-y-1">
+                <div className="text-xs font-mono text-emerald-600 dark:text-emerald-400 uppercase tracking-wider">
+                  {"آزمایشگاه پژوهش و کالیبراسیون داده" if is_rtl else "RESEARCH LAB & DIAGNOSTIC STUDIO"}
+                </div>
+                <h1 className="{style_cfg['headline']}">
+                  {headline}
+                </h1>
+              </div>
+              <div className="hidden sm:block">
+                {billing_switch}
+              </div>
+            </div>
+
+            <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+              {{/* Parameter Console (5 Cols) */}}
+              <div className="lg:col-span-5 space-y-6">
+                <p className="{style_cfg['body_text']}">
+                  {subheadline}
+                </p>
+                <div className="{style_cfg['widget_card']}">
+                  <div className="flex items-center justify-between border-b border-zinc-200 dark:border-zinc-800 pb-3">
+                    <span className="text-xs font-mono font-bold text-zinc-700 dark:text-zinc-300">
+                      LAB://{sig_widget_name}
+                    </span>
+                    <button
+                      type="button"
+                      onClick={{() => setIsLiveActive(prev => !prev)}}
+                      className="text-[11px] font-mono px-3 py-1.5 rounded border transition-colors min-h-[44px] inline-flex items-center justify-center bg-emerald-500/10 text-emerald-600 border-emerald-500/20"
+                    >
+                      <bdi>{{isLiveActive ? "ACTIVE TEST" : "IDLE"}}</bdi>
+                    </button>
+                  </div>
+                  {domain_widget_code}
+                </div>
+                {cta_group}
+              </div>
+
+              {{/* Viewport Visualizer (7 Cols) */}}
+              <div className="lg:col-span-7 space-y-6">
+                {media_container_code}
+              </div>
+            </div>
+          </div>'''
+
+        else: # classic_structured_saas
+            return f'''<div role="tabpanel" className="grid grid-cols-1 lg:grid-cols-12 gap-8 pt-8 items-center animate-fadeIn" data-layout-macro="classic_structured_saas">
+            <div className="lg:col-span-7 space-y-6">
+              <h1 className="{style_cfg['headline']}">
+                {headline}
+              </h1>
+              <p className="{style_cfg['body_text']}">
+                {subheadline}
+              </p>
+              {billing_switch}
+              {cta_group}
+            </div>
+
+            <div className="lg:col-span-5 space-y-6">
+              <div className="{style_cfg['widget_card']}">
+                <div className="flex items-center justify-between border-b border-zinc-200 dark:border-zinc-800 pb-3">
+                  <span className="text-xs font-bold text-zinc-700 dark:text-zinc-300">
+                    {sig_widget_name}
+                  </span>
+                  <button
+                    type="button"
+                    onClick={{() => setIsLiveActive(prev => !prev)}}
+                    className={{`text-[11px] font-mono px-3 py-1.5 rounded border transition-colors min-h-[44px] inline-flex items-center justify-center ${{
+                      isLiveActive 
+                        ? "bg-emerald-500/10 text-emerald-600 border-emerald-500/20" 
+                        : "bg-zinc-200 dark:bg-zinc-800 text-zinc-500 border-transparent"
+                    }}`}}
+                  >
+                    <bdi>{{isLiveActive ? "LIVE FEED" : "PAUSED"}}</bdi>
+                  </button>
+                </div>
+                {domain_widget_code}
+              </div>
+
+              {media_container_code}
+            </div>
+          </div>'''
+
     def generate_react_tsx(self, decision: Dict[str, Any], component_name: str = "VibeMasterpiece") -> str:
+
         """
         Generates a modular, living React 19 / TypeScript component (.tsx)
         featuring render-affecting style compiler, living micro-states (useState),
@@ -199,7 +583,21 @@ class InterfaceGenerator:
         domain_widget_code = self._render_domain_widget(domain_id, is_rtl, style_cfg, blueprint)
         media_container_code = self.asset_director.generate_media_container_jsx(domain_id, selected_style, is_rtl)
 
+        macro_panel_jsx = self._render_macro_panel(
+            domain_id=domain_id,
+            is_rtl=is_rtl,
+            style_cfg=style_cfg,
+            headline=headline,
+            subheadline=subheadline,
+            cta_primary=cta_primary,
+            cta_secondary=cta_secondary,
+            sig_widget_name=sig_widget_name,
+            domain_widget_code=domain_widget_code,
+            media_container_code=media_container_code
+        )
+
         tsx = f'''"use client";
+
 
 import React, {{ useState }} from "react";
 
@@ -263,89 +661,9 @@ export const {component_name}: React.FC<{component_name}Props> = ({{
 
         {{/* Tab Panel 0: Overview & Signature Domain Widget */}}
         {{activeTab === 0 && (
-          <div role="tabpanel" className="grid grid-cols-1 lg:grid-cols-12 gap-8 pt-8 items-center animate-fadeIn">
-            <div className="lg:col-span-7 space-y-6">
-              <h1 className="{style_cfg['headline']}">
-                {headline}
-              </h1>
-              <p className="{style_cfg['body_text']}">
-                {subheadline}
-              </p>
-
-              {{/* Real Interactive Billing Switch */}}
-              <div className="flex items-center gap-3 pt-2">
-                <span className="text-xs font-medium text-zinc-500">{"ماهانه" if is_rtl else "Monthly"}</span>
-                <button
-                  type="button"
-                  role="switch"
-                  aria-checked={{billingCycle === "annual"}}
-                  aria-label="{"تغییر دوره پرداخت" if is_rtl else "Billing cycle toggle"}"
-                  onClick={{() => setBillingCycle(prev => prev === "annual" ? "monthly" : "annual")}}
-                  className="relative inline-flex min-h-[44px] min-w-[48px] items-center justify-center p-2 rounded-full cursor-pointer focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:ring-offset-2"
-                >
-                  <span className="relative inline-flex h-6 w-11 shrink-0 rounded-full border-2 border-transparent bg-zinc-300 dark:bg-zinc-700 transition-colors duration-200 ease-in-out">
-                    <span
-                      aria-hidden="true"
-                      className={{`pointer-events-none inline-block h-5 w-5 transform rounded-full bg-white shadow-lg ring-0 transition duration-200 ease-in-out ${{
-                        billingCycle === "annual" ? "translate-x-5 rtl:-translate-x-5" : "translate-x-0"
-                      }}`}}
-                    />
-                  </span>
-                </button>
-                <span className="text-xs font-medium text-zinc-900 dark:text-white flex items-center gap-1.5">
-                  <span>{"سالانه" if is_rtl else "Annual"}</span>
-                  <span className="px-2 py-0.5 text-[10px] font-bold rounded-full bg-emerald-500/10 text-emerald-600 border border-emerald-500/20">
-                    {"۲۰٪ تخفیف ویژه" if is_rtl else "Save 20%"}
-                  </span>
-                </span>
-              </div>
-
-              {{/* Primary CTA Group */}}
-              <div className="flex flex-wrap gap-4 pt-4">
-                <button
-                  type="button"
-                  onClick={{() => onAction?.("primary_click")}}
-                  className="{style_cfg['primary_cta']}"
-                >
-                  {cta_primary}
-                </button>
-                <button
-                  type="button"
-                  onClick={{() => onAction?.("secondary_click")}}
-                  className="{style_cfg['secondary_cta']}"
-                >
-                  {cta_secondary}
-                </button>
-              </div>
-            </div>
-
-            {{/* Right Column: Domain-Calibrated Signature Widget & Media Direction */}}
-            <div className="lg:col-span-5 space-y-6">
-              <div className="{style_cfg['widget_card']}">
-                <div className="flex items-center justify-between border-b border-zinc-200 dark:border-zinc-800 pb-3">
-                  <span className="text-xs font-bold text-zinc-700 dark:text-zinc-300">
-                    {sig_widget_name}
-                  </span>
-                  <button
-                    type="button"
-                    onClick={{() => setIsLiveActive(prev => !prev)}}
-                    className={{`text-[11px] font-mono px-3 py-1.5 rounded border transition-colors min-h-[44px] inline-flex items-center justify-center ${{
-                      isLiveActive 
-                        ? "bg-emerald-500/10 text-emerald-600 border-emerald-500/20" 
-                        : "bg-zinc-200 dark:bg-zinc-800 text-zinc-500 border-transparent"
-                    }}`}}
-                  >
-                    <bdi>{{isLiveActive ? "LIVE FEED" : "PAUSED"}}</bdi>
-                  </button>
-                </div>
-
-                {domain_widget_code}
-              </div>
-
-              {media_container_code}
-            </div>
-          </div>
+          {macro_panel_jsx}
         )}}
+
 
         {{/* Tab Panel 1: Live Telemetry & Metrics Analytics */}}
         {{activeTab === 1 && (

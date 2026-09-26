@@ -3,7 +3,19 @@
 All notable changes to the **Vibe UI (VS Code, Cursor & Open-VSX)** extension will be documented in this file.
 This project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [3.9.0] — 2026-09-27
+
+### Added
+- **True Closed-Loop Autonomous Browser Engine:** 100% of benchmark scenarios audited in headless Chromium with zero sampling skips.
+- **In-Browser Pixel Critic:** Pure Python screenshot buffer inspector catching blank screens and contrast collapse.
+- **Domain-Adaptive Macro Page Layouts:** 6 distinct macro layout compositions for the 24 canonical domains.
+- **Strict Directional Invariant Verification:** Mathematical correlation checks for positive/recalculated metric changes.
+- **Pure Zero-Network Offline Harness:** Sub-80ms harness mount latency with zero external CDN dependencies.
+
+---
+
 ## [3.8.0] — 2026-09-26
+
 
 ### Added
 - **Autonomous Closed-Loop Visual Vision & Browser Truth:** Default-on Chromium browser truth validation and causal state verification.

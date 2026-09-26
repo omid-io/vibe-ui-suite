@@ -28,6 +28,7 @@ TEST_SUITES = [
     ("24-Domain Canonical Widget & Causal Model Suite", ["python", "scripts/test_domain_registry.py"]),
     ("Asset Director 24-Domain Alignment Suite", ["python", "scripts/test_asset_director.py"]),
     ("Headless Physical Viewport Critic Suite", ["python", "scripts/test_physical_critic.py"]),
+    ("In-Browser Pixel Buffer Critic Unit Tests", ["python", "scripts/test_pixel_critic.py"]),
     ("Full Pipeline Integration Tests (E2E)", ["python", "scripts/test_pipeline_e2e.py"]),
     ("Vibe UI Feature Verification", ["python", "scripts/test_v32_features.py"]),
     ("Stratified 100-Scenario Benchmark", ["python", "evals/benchmark/run_benchmark.py"]),
