@@ -35,19 +35,30 @@ import argparse
 
 PROMPTS_100_PATH = ROOT_DIR / "evals" / "benchmark" / "prompts_100_stratified.json"
 PROMPTS_HOLDOUT_PATH = ROOT_DIR / "evals" / "benchmark" / "prompts_50_blind_holdout.json"
+PROMPTS_HUMAN_PATH = ROOT_DIR / "evals" / "benchmark" / "prompts_25_human_tasks.json"
 
 def main():
     parser = argparse.ArgumentParser(description="Vibe UI Benchmark Suite")
     parser.add_argument("--holdout", action="store_true", help="Run 50-scenario blind holdout benchmark")
+    parser.add_argument("--human", action="store_true", help="Run 25-task human one-shot benchmark")
     parser.add_argument("--browser-audit-sample", type=int, default=10, help="Sampling interval for live Chromium Browser Truth audit (default: 10)")
     args, _ = parser.parse_known_args()
 
-    prompts_path = PROMPTS_HOLDOUT_PATH if args.holdout else PROMPTS_100_PATH
-    results_path = ROOT_DIR / "evals" / "benchmark" / ("benchmark_holdout_results.json" if args.holdout else "benchmark_results.json")
-    bench_label = "50 Blind Holdout Scenarios" if args.holdout else "100 Stratified Scenarios"
+    if args.human:
+        prompts_path = PROMPTS_HUMAN_PATH
+        results_path = ROOT_DIR / "evals" / "benchmark" / "benchmark_human_results.json"
+        bench_label = "25 Human One-Shot Tasks"
+    elif args.holdout:
+        prompts_path = PROMPTS_HOLDOUT_PATH
+        results_path = ROOT_DIR / "evals" / "benchmark" / "benchmark_holdout_results.json"
+        bench_label = "50 Blind Holdout Scenarios"
+    else:
+        prompts_path = PROMPTS_100_PATH
+        results_path = ROOT_DIR / "evals" / "benchmark" / "benchmark_results.json"
+        bench_label = "100 Stratified Scenarios"
 
     print("=" * 70)
-    print(f"🚀 VIBE UI V3 PRODUCTION BENCHMARK SUITE ({bench_label})")
+    print(f"🚀 VIBE UI V4 ENDGAME BENCHMARK SUITE ({bench_label})")
     print("=" * 70)
 
     if not prompts_path.exists():
@@ -56,7 +67,7 @@ def main():
 
     with open(prompts_path, "r", encoding="utf-8") as f:
         prompt_data = json.load(f)
-        scenarios = prompt_data.get("prompts", [])
+        scenarios = prompt_data.get("tasks", prompt_data.get("prompts", []))
 
     print(f"[INFO] Loaded {len(scenarios)} evaluation scenarios ({bench_label}).\n")
 
@@ -76,6 +87,7 @@ def main():
     v3_browser_truth_passes = 0
     v3_causal_contract_passes = 0
     v3_directional_passes = 0
+    v3_formula_passes = 0
     v3_pixel_passes = 0
     v3_browser_audited_count = 0
     v3_vision_scores = []
@@ -141,9 +153,10 @@ def main():
 
             # Step 3b: 100% Live Chromium Browser Truth Audit across all scenarios
             is_rtl = ("fa" in intent.get("language", [])) or decision.get("genome", {}).get("platform", {}).get("rtl_support", False)
+            active_domain = decision.get("genome", {}).get("domain") or intent.get("product_domain") or domain_id
             browser_audit = physical_critic.audit_runtime_react_tsx(
                 react_tsx,
-                domain_id=domain_id,
+                domain_id=active_domain,
                 is_rtl=is_rtl,
                 capture_screenshots=False,
                 page=shared_page
@@ -153,6 +166,7 @@ def main():
             browser_truth_accepted = browser_audit.get("interactive_verified", False)
             causal_contract_accepted = browser_audit.get("causal_contract_satisfied", False)
             directional_accepted = browser_audit.get("directional_passed", True)
+            formula_accepted = browser_audit.get("formula_passed", True)
             pixel_accepted = not browser_audit.get("pixel_report", {}).get("is_blank", False)
 
             if browser_truth_accepted:
@@ -161,6 +175,8 @@ def main():
                 v3_causal_contract_passes += 1
             if directional_accepted:
                 v3_directional_passes += 1
+            if formula_accepted:
+                v3_formula_passes += 1
             if pixel_accepted:
                 v3_pixel_passes += 1
 
@@ -176,7 +192,7 @@ def main():
 
             dom_accepted = (critique_report.get("acceptance_status") == "ACCEPTED")
             vis_accepted = (visual_report.get("acceptance_status") == "ACCEPTED")
-            composite_first_pass = (dom_accepted and vis_accepted and browser_truth_accepted and causal_contract_accepted and directional_accepted)
+            composite_first_pass = (dom_accepted and vis_accepted and browser_truth_accepted and causal_contract_accepted and directional_accepted and formula_accepted and pixel_accepted)
 
             # Step 5: Refiner (if any gate requires revision)
             if composite_first_pass:
@@ -188,7 +204,7 @@ def main():
                 v3_corrections += 1
                 v3_tokens += 350
 
-            is_accepted = (final_report.get("acceptance_status") == "ACCEPTED")
+            is_accepted = (final_report.get("acceptance_status") == "ACCEPTED" and browser_truth_accepted and causal_contract_accepted and directional_accepted and formula_accepted and pixel_accepted)
             if is_accepted:
                 v3_autonomous_resolved += 1
 
@@ -211,6 +227,7 @@ def main():
                 "browser_truth_verified": browser_truth_accepted,
                 "causal_contract_satisfied": causal_contract_accepted,
                 "directional_passed": directional_accepted,
+                "formula_validation_passed": formula_accepted,
                 "pixel_buffer_valid": pixel_accepted,
                 "in_browser_vision_score": browser_audit.get("vision_report", {}).get("visual_score") if browser_audit else None,
                 "dom_quality_score": final_report.get("quality_score", 0),
@@ -247,6 +264,7 @@ def main():
     v3_browser_truth_rate = round((v3_browser_truth_passes / v3_browser_audited_count) * 100.0, 1) if v3_browser_audited_count else 100.0
     v3_causal_contract_rate = round((v3_causal_contract_passes / v3_browser_audited_count) * 100.0, 1) if v3_browser_audited_count else 100.0
     v3_directional_rate = round((v3_directional_passes / v3_browser_audited_count) * 100.0, 1) if v3_browser_audited_count else 100.0
+    v3_formula_rate = round((v3_formula_passes / v3_browser_audited_count) * 100.0, 1) if v3_browser_audited_count else 100.0
     v3_pixel_rate = round((v3_pixel_passes / v3_browser_audited_count) * 100.0, 1) if v3_browser_audited_count else 100.0
     v3_avg_vision_score = round(sum(v3_vision_scores) / len(v3_vision_scores), 1) if v3_vision_scores else 95.0
 
@@ -254,13 +272,13 @@ def main():
     benchmark_results = {
         "$schema": "../../schemas/benchmark-result.v1.json",
         "timestamp": datetime.now(timezone.utc).isoformat(),
-        "suite_version": "3.9.0",
+        "suite_version": "4.0.0",
         "scenario_count": len(scenarios),
         "benchmark_type": "internal_deterministic_heuristic",
         "baseline_system": "Vanilla LLM / V2 Heuristic Baseline",
         "baseline_type": BASELINE_TYPE,
         "baseline_methodology": "Internal deterministic heuristic evaluation measuring generator adherence to critic invariants. Values reflect automated rule-engine compliance, not human subjective evaluation. Independent replication required.",
-        "candidate_system": "Vibe UI V3 Autonomous Closed-Loop Browser Engine (100% Browser Truth)",
+        "candidate_system": "Vibe UI V4 Endgame Autonomous Closed-Loop Browser Engine (100% Browser Truth)",
         "kpi_comparison": {
             "first_pass_rate": {
                 "baseline": 52.0,
@@ -292,6 +310,11 @@ def main():
             "directional_contract_satisfaction_rate": {
                 "baseline": 0.0,
                 "candidate": v3_directional_rate,
+                "audited_scenarios": v3_browser_audited_count
+            },
+            "formula_validation_rate": {
+                "baseline": 0.0,
+                "candidate": v3_formula_rate,
                 "audited_scenarios": v3_browser_audited_count
             },
             "pixel_critic_validation_rate": {
@@ -343,16 +366,17 @@ def main():
         json.dump(benchmark_results, f, indent=2, ensure_ascii=False)
 
     print("\n" + "=" * 70)
-    print("📊 VIBE UI V3 BENCHMARK SCOREBOARD (v3.9.0 — 100% Browser Truth)")
+    print("📊 VIBE UI V4 BENCHMARK SCOREBOARD (v4.0.0 — Endgame / Closed-Loop Autonomy)")
     print("=" * 70)
-    print(f"| KPI Metric                  | Baseline (V2) | Vibe UI V3    | Improvement           |")
+    print(f"| KPI Metric                  | Baseline (V2) | Vibe UI V4    | Improvement           |")
     print(f"| :-------------------------- | :------------ | :------------ | :-------------------- |")
     print(f"| Quad First-Pass Acceptance  | 52.0%         | {v3_first_pass_rate:.1f}%         | +{v3_first_pass_rate - 52.0:.1f}% (Quad-Gate)   |")
     print(f"| Autonomous Resolution Rate  | 65.0%         | {v3_autonomous_rate:.1f}%        | +{v3_autonomous_rate - 65.0:.1f}%               |")
     print(f"| React 19 TSX ESM Compile    | 0.0%          | {v3_react_compile_rate:.1f}%        | Native In-Memory ESM  |")
     print(f"| 100% Browser Truth Live     | 0.0%          | {v3_browser_truth_rate:.1f}%        | 100/100 Real Chromium |")
     print(f"| Causal Contract Satisfied   | 0.0%          | {v3_causal_contract_rate:.1f}%        | 24/24 Reactive Metric |")
-    print(f"| Directional Invariant Valid | 0.0%          | {v3_directional_rate:.1f}%        | Positive/Recalc Delta |")
+    print(f"| Directional Invariant Valid | 0.0%          | {v3_directional_rate:.1f}%        | Metric-Level Invariants|")
+    print(f"| Executable Formula Valid    | 0.0%          | {v3_formula_rate:.1f}%        | DOM vs Math Eval Match|")
     print(f"| Pixel Critic Buffer Valid   | 0.0%          | {v3_pixel_rate:.1f}%        | 0 Blank / 0 Collapse  |")
     print(f"| In-Browser Vision Score     | 45.0/100      | {v3_avg_vision_score:.1f}/100       | Hero/Collision/Touch  |")
     print(f"| Domain Match Accuracy       | 56.0%         | {v3_domain_accuracy:.1f}%        | +{v3_domain_accuracy - 56.0:.1f}% accuracy gain   |")

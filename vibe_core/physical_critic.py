@@ -306,6 +306,14 @@ class PhysicalCritic:
                 # 1. Read initial metrics before user interaction
                 metrics_before = active_page.eval_on_selector_all('bdi', 'els => els.map(el => el.innerText.trim())')
                 dynamic_before = active_page.eval_on_selector_all('[data-vibe-metric]', 'els => els.map(el => el.innerText.trim())')
+                metrics_by_id_before = active_page.evaluate("""() => {
+                    const res = {};
+                    document.querySelectorAll('[data-vibe-metric]').forEach(el => {
+                        const id = el.getAttribute('data-vibe-metric');
+                        if (id) res[id] = el.innerText.trim();
+                    });
+                    return res;
+                }""")
 
                 # 2. Find targeted interactive control using InteractionContract
                 slider = active_page.query_selector(contract.control_selector)
@@ -355,6 +363,14 @@ class PhysicalCritic:
                 # 4. Read metrics after interaction and verify causal assertion
                 metrics_after = active_page.eval_on_selector_all('bdi', 'els => els.map(el => el.innerText.trim())')
                 dynamic_after = active_page.eval_on_selector_all('[data-vibe-metric]', 'els => els.map(el => el.innerText.trim())')
+                metrics_by_id_after = active_page.evaluate("""() => {
+                    const res = {};
+                    document.querySelectorAll('[data-vibe-metric]').forEach(el => {
+                        const id = el.getAttribute('data-vibe-metric');
+                        if (id) res[id] = el.innerText.trim();
+                    });
+                    return res;
+                }""")
 
                 recalculated = [f"{b} -> {a}" for b, a in zip(metrics_before, metrics_after) if b != a]
                 dynamic_recalculated = [f"{b} -> {a}" for b, a in zip(dynamic_before, dynamic_after) if b != a]
@@ -362,15 +378,94 @@ class PhysicalCritic:
                 is_causal = len(recalculated) > 0
                 causal_contract_satisfied = (len(dynamic_recalculated) > 0) or is_causal
 
-                # 5. Assert directional compliance per interaction contract
-                directional_passed = True
-                if contract.expected_direction in ("positive", "negative") and len(recalculated) > 0:
-                    import re
-                    def extract_num(s: str) -> Optional[float]:
-                        nums = re.findall(r"[-+]?\d*\.?\d+", s.replace(",", ""))
-                        return float(nums[0]) if nums else None
+                # 5. Assert fine-grained directional compliance & executable formulas
+                import re
+                def extract_num(s: str) -> Optional[float]:
+                    nums = re.findall(r"[-+]?\d*\.?\d+", s.replace(",", ""))
+                    return float(nums[0]) if nums else None
 
-                    slider_delta = new_val - curr_val
+                slider_delta = new_val - curr_val
+                directional_passed = True
+                formula_passed = True
+                metric_eval_details = []
+                direction_defects = []
+                formula_defects = []
+
+                metric_contracts = getattr(contract, "metrics", [])
+                if metric_contracts:
+                    for idx, m in enumerate(metric_contracts):
+                        m_passed = True
+                        m_form_passed = True
+                        before_str = metrics_by_id_before.get(m.metric_id)
+                        after_str = metrics_by_id_after.get(m.metric_id)
+
+                        # Positional fallback if explicit ID not found
+                        if (before_str is None or after_str is None) and idx < len(recalculated):
+                            parts = recalculated[idx].split(" -> ")
+                            if len(parts) == 2:
+                                before_str, after_str = parts[0], parts[1]
+
+                        if before_str is not None and after_str is not None:
+                            n_before = extract_num(before_str)
+                            n_after = extract_num(after_str)
+                            if n_before is not None and n_after is not None:
+                                metric_delta = n_after - n_before
+
+                                if m.expected_direction == "positive":
+                                    if slider_delta > 0 and metric_delta < 0 and not (n_before < 0 and n_after < 0 and abs(n_after) > abs(n_before)):
+                                        m_passed = False
+                                    elif slider_delta < 0 and metric_delta > 0:
+                                        m_passed = False
+                                elif m.expected_direction == "negative":
+                                    if slider_delta > 0 and metric_delta > 0:
+                                        m_passed = False
+                                    elif slider_delta < 0 and metric_delta < 0:
+                                        m_passed = False
+                                elif m.expected_direction == "recalculated":
+                                    if n_before == n_after and before_str == after_str:
+                                        m_passed = False
+
+                                # Executable formula verification
+                                if m.formula_expr:
+                                    try:
+                                        js_formula = m.formula_expr.replace("max(", "Math.max(").replace("round(", "Math.round(").replace("min(", "Math.min(")
+                                        calc_expected = active_page.evaluate(
+                                            f"((simulatedValue, splitPos) => {{ try {{ return Number({js_formula}); }} catch(e) {{ return null; }} }})",
+                                            new_val, new_val
+                                        )
+                                        if calc_expected is not None:
+                                            diff = abs(abs(n_after) - abs(calc_expected))
+                                            allowed = max(2.0, abs(calc_expected) * m.tolerance)
+                                            if diff > allowed:
+                                                m_form_passed = False
+                                                formula_defects.append({
+                                                    "type": "formula_mismatch",
+                                                    "severity": "P1",
+                                                    "metric_id": m.metric_id,
+                                                    "message": f"Metric '{m.metric_id}' computed value ({n_after}) does not match formula '{m.formula_expr}' expected ({calc_expected}) within tolerance."
+                                                })
+                                    except Exception:
+                                        pass
+
+                        if not m_passed:
+                            directional_passed = False
+                            direction_defects.append({
+                                "type": "runtime_direction_inversion",
+                                "severity": "P1",
+                                "metric_id": m.metric_id,
+                                "message": f"Metric '{m.metric_id}' changed inversely ({m.expected_direction}) for domain '{contract.domain_id}'."
+                            })
+
+                        metric_eval_details.append({
+                            "metric_id": m.metric_id,
+                            "directional_passed": m_passed,
+                            "formula_passed": m_form_passed
+                        })
+
+                    if formula_defects:
+                        formula_passed = False
+
+                elif contract.expected_direction in ("positive", "negative") and len(recalculated) > 0:
                     for pair in recalculated:
                         parts = pair.split(" -> ")
                         if len(parts) == 2:
@@ -379,7 +474,7 @@ class PhysicalCritic:
                             if n_before is not None and n_after is not None and n_before != n_after:
                                 metric_delta = n_after - n_before
                                 if contract.expected_direction == "positive":
-                                    if slider_delta > 0 and metric_delta < 0:
+                                    if slider_delta > 0 and metric_delta < 0 and not (n_before < 0 and n_after < 0 and abs(n_after) > abs(n_before)):
                                         directional_passed = False
                                     elif slider_delta < 0 and metric_delta > 0:
                                         directional_passed = False
@@ -422,12 +517,8 @@ class PhysicalCritic:
                         "message": f"Interaction on '{contract.input_variable}' did not causally recalculate bound metrics in domain '{contract.domain_id}'."
                     })
 
-                if not directional_passed:
-                    defects.append({
-                        "type": "runtime_direction_inversion",
-                        "severity": "P1",
-                        "message": f"Metric changed in opposite direction than expected ({contract.expected_direction}) for domain '{contract.domain_id}'."
-                    })
+                defects.extend(direction_defects)
+                defects.extend(formula_defects)
 
                 # Merge vision defects
                 defects.extend(vision_audit.get("defects", []))
@@ -438,12 +529,14 @@ class PhysicalCritic:
                 if pixel_audit.get("is_blank"):
                     causal_contract_satisfied = False
 
-                is_fully_verified = causal_contract_satisfied and not any(d.get("severity") == "P0" for d in defects)
+                is_fully_verified = causal_contract_satisfied and directional_passed and not any(d.get("severity") == "P0" for d in defects)
 
                 return {
                     "interactive_verified": is_fully_verified,
                     "causal_contract_satisfied": causal_contract_satisfied,
                     "directional_passed": directional_passed,
+                    "formula_passed": formula_passed,
+                    "metric_details": metric_eval_details,
                     "causal_contract": {
                         "domain_id": contract.domain_id,
                         "control": contract.input_variable,

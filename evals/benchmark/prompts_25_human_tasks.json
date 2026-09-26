@@ -1,0 +1,334 @@
+{
+  "$schema": "../../schemas/benchmark-result.v1.json",
+  "suite": "vibe_ui_human_one_shot_benchmark",
+  "version": "4.0.0",
+  "tasks": [
+    {
+      "id": "task_01",
+      "domain": "devops_cloud_terminal",
+      "title": "Kubernetes Fleet Cluster Management & Latency Dashboard",
+      "prompt": "Create an ultra-dense, dark-themed DevOps cluster control console for managing 64 Kubernetes replica pods across 3 multi-cloud zones. Include real-time range slider for replica scaling with dynamic cluster latency in ms, network throughput in Gbps, CPU/RAM telemetry, active crashloop alerts, and terminal log stream.",
+      "expected_style": "terminal_dark",
+      "acceptance_criteria": [
+        "Dynamic slider scaling replicas from 2 to 64",
+        "Cluster latency inversely proportional to replica count",
+        "Throughput proportional to replica count",
+        "WCAG AAA contrast in dark mode",
+        "Bidirectional text isolation with <bdi> on all numbers and metrics"
+      ]
+    },
+    {
+      "id": "task_02",
+      "domain": "fintech_banking",
+      "title": "High-Yield Tiered Wealth Allocation & Compounding Calculator",
+      "prompt": "Design a high-end neo-banking asset allocation interface with an interactive deposit slider calculating compounded annual APY yield, daily liquidity projections, portfolio rebalancing triggers, and risk score visualization in Swiss minimalist aesthetic.",
+      "expected_style": "swiss_high_contrast",
+      "acceptance_criteria": [
+        "Deposit capital slider from $5,000 to $250,000",
+        "Compounded APY dollar return causally recalculated",
+        "Daily liquidity calculated with 365-day denominator",
+        "Tabular number formatting with <bdi> isolation",
+        "Touch target minimum 44px on all action controls"
+      ]
+    },
+    {
+      "id": "task_03",
+      "domain": "crypto_trading_web3",
+      "title": "DEX High-Frequency Liquidity Pool & Slippage Visualizer",
+      "prompt": "Build a responsive Web3 DEX swap interface with orderbook depth visualization, trade volume slider adjusting pool slippage percentage and estimated gas execution, dynamic routing paths, and token pair selector.",
+      "expected_style": "cyberpunk_matrix",
+      "acceptance_criteria": [
+        "Volume slider adjusting trade size in ETH",
+        "Pool slippage dynamically calculated with positive correlation",
+        "Zero-latency causal DOM reactivity",
+        "Accessible color contrast for buy/sell orderbook spreads"
+      ]
+    },
+    {
+      "id": "task_04",
+      "domain": "beauty_clinical_wellness",
+      "title": "Dermatology Split-View Laser Treatment Efficacy Visualizer",
+      "prompt": "Create an elegant clinical skincare visualizer featuring an interactive split-view comparison slider demonstrating melanin uniformity improvement and dermal collagen index over a 4-week laser rejuvenation protocol.",
+      "expected_style": "editorial_luxury",
+      "acceptance_criteria": [
+        "Interactive 0-100% split comparison slider",
+        "Melanin uniformity percentage metric updating causally",
+        "Collagen index score updating on slider drag",
+        "Clean luxury editorial typography and muted warm palette"
+      ]
+    },
+    {
+      "id": "task_05",
+      "domain": "ai_developer_platform",
+      "title": "LLM Inference Cluster Provisioning & VRAM Optimizer",
+      "prompt": "Design a developer platform console for AI engineers to scale dedicated GPU clusters. Include a token throughput slider adjusting monthly budget, allocated H100 SXM5 VRAM, active worker slots, and per-token inference latency.",
+      "expected_style": "terminal_dark",
+      "acceptance_criteria": [
+        "Monthly token budget slider",
+        "VRAM allocation increasing with budget",
+        "Inference latency decreasing with higher cluster compute",
+        "Accessible code snippets and parameter key-values"
+      ]
+    },
+    {
+      "id": "task_06",
+      "domain": "saas_b2b_enterprise",
+      "title": "Enterprise Workforce License ROI & Automation Savings Calculator",
+      "prompt": "Develop an enterprise B2B SaaS pricing calculator with seat-count slider showing projected annual labor hours saved, SLA guarantee tier, enterprise SSO compliance checklist, and modular feature comparison matrix.",
+      "expected_style": "clean_modern_saas",
+      "acceptance_criteria": [
+        "Seat allocation slider from 50 to 5,000 seats",
+        "Projected annual labor savings metric updating dynamically",
+        "High-contrast card modules with responsive grid layout",
+        "WCAG AAA contrast and semantic button states"
+      ]
+    },
+    {
+      "id": "task_07",
+      "domain": "healthcare_hospital_medical",
+      "title": "Emergency Room Intake & ICU Bed Capacity Telemetry",
+      "prompt": "Design a mission-critical hospital ER triage console with incoming patient volume slider, dynamic average triage wait minutes, ICU bed occupancy percentage, real-time vital sign telemetry cards, and rapid-dispatch protocol buttons.",
+      "expected_style": "high_contrast_clinical",
+      "acceptance_criteria": [
+        "Incoming volume slider adjusting triage wait time",
+        "ICU bed occupancy rate updating causally",
+        "Accessible emergency color status indicators (green/yellow/red)",
+        "Minimum 48px touch targets for high-stress triage buttons"
+      ]
+    },
+    {
+      "id": "task_08",
+      "domain": "education_edtech_lms",
+      "title": "Accelerated Degree Curriculum Pacing & Weekly Commitment Planner",
+      "prompt": "Build an engaging EdTech course planning dashboard with weekly study commitment slider, dynamic projected completion horizon in weeks, interactive module mastery checklist, and gamified progress milestones.",
+      "expected_style": "warm_editorial",
+      "acceptance_criteria": [
+        "Weekly study commitment slider from 5 to 40 hours",
+        "Completion timeline in weeks decreasing as weekly study hours increase",
+        "Accessible progress bar with numerical readouts in <bdi>",
+        "Mobile-first responsive card stacking"
+      ]
+    },
+    {
+      "id": "task_09",
+      "domain": "ecommerce_luxury_fashion",
+      "title": "Atelier Bespoke Cashmere Garment Customizer & Price Calculator",
+      "prompt": "Create an ultra-luxury bespoke fashion configurator with fabric grade slider adjusting cashmere weight in GSM, handcrafted atelier unit pricing, seasonal colorway selector, and high-fashion editorial imagery layout.",
+      "expected_style": "editorial_luxury",
+      "acceptance_criteria": [
+        "Fabric weight slider from 250 to 650 GSM",
+        "Bespoke unit price updating proportionally",
+        "Subtle micro-interactions with smooth ease-out curves",
+        "Zero raw emojis, custom monochrome iconography"
+      ]
+    },
+    {
+      "id": "task_10",
+      "domain": "ecommerce_mass_market",
+      "title": "High-Volume B2B Wholesale Cart Subtotal & Tiered Discount Engine",
+      "prompt": "Design a high-volume retail wholesale checkout overview with bulk quantity slider calculating tiered volume discount percentage, freight shipping estimate, and tax-adjusted subtotal.",
+      "expected_style": "clean_modern_saas",
+      "acceptance_criteria": [
+        "Bulk quantity slider scaling order units",
+        "Cart subtotal increasing with quantity",
+        "Volume discount percentage increasing dynamically",
+        "Tabular financial breakdown with RTL/LTR bidi isolation"
+      ]
+    },
+    {
+      "id": "task_11",
+      "domain": "gaming_entertainment_streaming",
+      "title": "4K Ultra-Low Latency Broadcast Bitrate & Framerate Studio",
+      "prompt": "Develop an esports broadcasting studio interface with stream bitrate slider adjusting upload bandwidth, target framerate (FPS), and frame encode latency in milliseconds.",
+      "expected_style": "cyberpunk_matrix",
+      "acceptance_criteria": [
+        "Bitrate slider from 2,500 to 25,000 kbps",
+        "Target FPS increasing with higher bitrate allocation",
+        "Frame encode latency decreasing with optimized pipeline",
+        "Dark neon aesthetic with WCAG AA compliance"
+      ]
+    },
+    {
+      "id": "task_12",
+      "domain": "real_estate_architecture",
+      "title": "Architectural Penthouse Spatial Volume & Commercial Yield Modeler",
+      "prompt": "Build an architectural development analyzer with usable square meters slider dynamically computing structural volume, estimated cap rate percentage, and construction cost per square meter.",
+      "expected_style": "swiss_high_contrast",
+      "acceptance_criteria": [
+        "Area slider adjusting interior floor space",
+        "Cap rate percentage updating causally",
+        "Architectural floorplan layout schema with blueprint lines",
+        "Robust typographic hierarchy and grid structure"
+      ]
+    },
+    {
+      "id": "task_13",
+      "domain": "automotive_ev_mobility",
+      "title": "Electric Vehicle Battery Pack Range & Supercharging Horizon",
+      "prompt": "Create a sleek EV connected cockpit telemetry screen with battery capacity slider estimating real-world highway range in km, supercharging 10-80% ETA in minutes, and regenerative braking efficiency.",
+      "expected_style": "clean_modern_saas",
+      "acceptance_criteria": [
+        "Battery pack slider from 50 to 120 kWh",
+        "Driving range increasing proportionally with kWh",
+        "Charging speed and duration updating causally",
+        "Tactile slider thumb with 44px touch envelope"
+      ]
+    },
+    {
+      "id": "task_14",
+      "domain": "logistics_supply_chain",
+      "title": "Cross-Border Fleet Dispatch & Last-Mile Latency Control",
+      "prompt": "Design a supply chain control tower interface with active fleet size slider calculating average dispatch latency, fuel consumption index, and on-time delivery confidence.",
+      "expected_style": "terminal_dark",
+      "acceptance_criteria": [
+        "Fleet size slider from 20 to 500 vehicles",
+        "Dispatch latency in minutes decreasing as active fleet expands",
+        "Fleet operational efficiency score updating causally",
+        "Dense data tables with zebra striping and sticky headers"
+      ]
+    },
+    {
+      "id": "task_15",
+      "domain": "energy_greentech_sustainability",
+      "title": "Commercial Solar Microgrid Photovoltaic Yield & CO2 Offset",
+      "prompt": "Build a green energy infrastructure dashboard with solar panel array capacity slider projecting annual megawatt-hour generation, metric tons of CO2 offset, and clean grid feed-in revenue.",
+      "expected_style": "clean_modern_saas",
+      "acceptance_criteria": [
+        "Array capacity slider from 10 to 500 kWp",
+        "Annual CO2 offset in metric tons scaling with capacity",
+        "Grid revenue updating with solar yield formula",
+        "High contrast eco-palette with dark mode toggle"
+      ]
+    },
+    {
+      "id": "task_16",
+      "domain": "legal_compliance_law",
+      "title": "Forensic Contract Audit Portfolio & Retainer Hours Estimator",
+      "prompt": "Develop an automated legal compliance assessment tool with contract volume slider adjusting forensic review hours, compliance risk score, and attorney retainer savings.",
+      "expected_style": "warm_editorial",
+      "acceptance_criteria": [
+        "Contract volume slider from 100 to 5,000 documents",
+        "Audit completion hours scaling proportionally",
+        "Turnaround review time per document decreasing with automated triage",
+        "Clean legal serif typography with clear document cards"
+      ]
+    },
+    {
+      "id": "task_17",
+      "domain": "cybersecurity_identity_auth",
+      "title": "Zero-Trust Endpoint Ingress Anomaly Monitor & MTTR Forensics",
+      "prompt": "Create a cybersecurity threat intelligence dashboard with network ingress monitor slider adjusting simulated intercepted anomalies, Mean Time To Respond (MTTR) in seconds, and SOC threat posture.",
+      "expected_style": "terminal_dark",
+      "acceptance_criteria": [
+        "Ingress packet rate slider",
+        "Intercepted threats count increasing dynamically",
+        "MTTR latency updating causally",
+        "Monochrome security terminal styling with crisp borders"
+      ]
+    },
+    {
+      "id": "task_18",
+      "domain": "food_restaurant_cafe",
+      "title": "Michelin Degustation Course Seating & Wine Pairing Allocator",
+      "prompt": "Design a fine dining reservation and tasting menu configurator with guest count slider adjusting multi-course pricing subtotal, sommelier wine pairing allocations, and kitchen prep time.",
+      "expected_style": "warm_editorial",
+      "acceptance_criteria": [
+        "Guest count slider from 2 to 24 seats",
+        "Tasting menu subtotal scaling with guest count",
+        "Wine pairing bottle allocation calculated dynamically",
+        "Warm artisanal aesthetics with tactile selection buttons"
+      ]
+    },
+    {
+      "id": "task_19",
+      "domain": "media_editorial_magazine",
+      "title": "Investigative Longform Journalism Depth & Readership Reach",
+      "prompt": "Build an editorial publishing analytics suite with investigative wordcount slider projecting average reader completion time, subscriber retention lift, and social citation velocity.",
+      "expected_style": "warm_editorial",
+      "acceptance_criteria": [
+        "Word count slider adjusting story depth",
+        "Estimated read-through minutes scaling proportionally",
+        "Editorial layout with multi-column magazine grid",
+        "Balanced typographic hierarchy"
+      ]
+    },
+    {
+      "id": "task_20",
+      "domain": "travel_hospitality_tourism",
+      "title": "Luxury Alpine Resort Itinerary Duration & All-Inclusive Total",
+      "prompt": "Create an alpine luxury resort booking visualizer with stay duration slider adjusting room nights, private ski concierge packages, and total all-inclusive checkout price.",
+      "expected_style": "editorial_luxury",
+      "acceptance_criteria": [
+        "Nights stay slider from 2 to 21 nights",
+        "Total package price updating dynamically",
+        "Seasonal package perks toggle",
+        "Sophisticated mountain resort visual motif"
+      ]
+    },
+    {
+      "id": "task_21",
+      "domain": "nonprofit_charity_social",
+      "title": "Clean Water Filtration Infrastructure & Community Impact Modeler",
+      "prompt": "Design a humanitarian donor transparency tool with donation contribution slider projecting clean drinking water liters filtered, families supported, and medical clinic supplies funded.",
+      "expected_style": "clean_modern_saas",
+      "acceptance_criteria": [
+        "Monthly contribution slider from $10 to $1,000",
+        "Filtered water volume scaling directly",
+        "Community impact numbers isolated with <bdi>",
+        "Emotionally resonant, transparent, accessible layout"
+      ]
+    },
+    {
+      "id": "task_22",
+      "domain": "personal_branding_creator",
+      "title": "Substack Creator Newsletter Growth & Sponsorship Valuation",
+      "prompt": "Build a creator monetization engine with active subscriber slider calculating projected monthly sponsor slot valuation, open-rate CPM, and premium tier revenue.",
+      "expected_style": "swiss_high_contrast",
+      "acceptance_criteria": [
+        "Subscriber slider from 1,000 to 100,000 subscribers",
+        "Monthly sponsorship valuation calculating dynamically",
+        "Clean minimal cards with bold statistics",
+        "Optimized mobile touch targets"
+      ]
+    },
+    {
+      "id": "task_23",
+      "domain": "creative_portfolio_agency",
+      "title": "Design Sprint Delivery Scope & Conversion Acceleration",
+      "prompt": "Develop a boutique creative agency sprint scope visualizer with sprint week slider estimating clickable prototype fidelity, user test sessions, and expected conversion lift percentage.",
+      "expected_style": "swiss_high_contrast",
+      "acceptance_criteria": [
+        "Sprint duration slider from 1 to 6 weeks",
+        "Prototype delivery milestones updating causally",
+        "Conversion lift projection calculating dynamically",
+        "Asymmetric bold grid layout"
+      ]
+    },
+    {
+      "id": "task_24",
+      "domain": "general_modern_saas",
+      "title": "Event-Driven Stream Processing Throughput & Efficiency Matrix",
+      "prompt": "Create a cloud event streaming operations dashboard with throughput slider adjusting events processed per second, queue drain latency, and system efficiency percentage.",
+      "expected_style": "clean_modern_saas",
+      "acceptance_criteria": [
+        "Events/sec slider from 1,000 to 500,000",
+        "System throughput updating causally",
+        "Queue drain latency in ms decreasing with throughput",
+        "Full dark/light theme tokens and WCAG AAA compliance"
+      ]
+    },
+    {
+      "id": "task_25",
+      "domain": "ai_developer_platform",
+      "title": "Multi-Modal Agentic Orchestration Pipeline & Memory Latency",
+      "prompt": "Design an advanced AI agent pipeline orchestrator with concurrent agent subtask slider adjusting active context window tokens, vector store retrieval latency in ms, and pipeline throughput.",
+      "expected_style": "terminal_dark",
+      "acceptance_criteria": [
+        "Concurrent agent subtask slider from 1 to 32 subagents",
+        "Active token consumption scaling with agent count",
+        "Vector retrieval latency updating dynamically",
+        "Graph/pipeline node visual cards with interactive states"
+      ]
+    }
+  ]
+}

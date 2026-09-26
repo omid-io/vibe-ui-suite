@@ -33,12 +33,13 @@ TEST_SUITES = [
     ("Vibe UI Feature Verification", ["python", "scripts/test_v32_features.py"]),
     ("Stratified 100-Scenario Benchmark", ["python", "evals/benchmark/run_benchmark.py"]),
     ("Blind Holdout 50-Scenario Benchmark", ["python", "evals/benchmark/run_benchmark.py", "--holdout"]),
+    ("Human One-Shot 25-Task Benchmark", ["python", "evals/benchmark/run_benchmark.py", "--human"]),
     ("Physical Runtime Evals (WCAG AA & DOM)", ["python", "evals/run_evals.py", "--json"])
 ]
 
 def main():
     print("=" * 70)
-    print("🛡️  VIBE UI V3 PRODUCTION VALIDATION & QUALITY GATES")
+    print("🛡️  VIBE UI V4 ENDGAME VALIDATION & QUALITY GATES")
     print("=" * 70)
 
     overall_failures = []

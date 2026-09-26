@@ -49,11 +49,11 @@ def render_beauty_clinical_wellness(is_rtl: bool, style_cfg: Dict[str, Any], blu
                 <div className="grid grid-cols-2 gap-3 text-xs">
                   <div className="p-2.5 rounded-lg bg-stone-50 dark:bg-stone-900/60 border border-stone-200 dark:border-stone-800">
                     <div className="text-stone-500 text-[10px]">{"یکنواختی ملانین" if is_rtl else "Melanin Uniformity"}</div>
-                    <div className="font-mono font-bold text-stone-900 dark:text-stone-100"><bdi data-vibe-metric="dynamic-output">+{{(splitPos * 0.42).toFixed(1)}}%</bdi></div>
+                    <div className="font-mono font-bold text-stone-900 dark:text-stone-100"><bdi data-vibe-metric="melanin-uniformity">+{{(splitPos * 0.42).toFixed(1)}}%</bdi></div>
                   </div>
                   <div className="p-2.5 rounded-lg bg-stone-50 dark:bg-stone-900/60 border border-stone-200 dark:border-stone-800">
                     <div className="text-stone-500 text-[10px]">{"چگالی کلاژن لایه درم" if is_rtl else "Dermal Collagen Index"}</div>
-                    <div className="font-mono font-bold text-emerald-600 dark:text-emerald-400"><bdi data-vibe-metric="dynamic-output">{{Math.round(62 + splitPos * 0.36)}} / 100</bdi></div>
+                    <div className="font-mono font-bold text-emerald-600 dark:text-emerald-400"><bdi data-vibe-metric="collagen-index">{{Math.round(62 + splitPos * 0.36)}} / 100</bdi></div>
                   </div>
                 </div>
               </div>'''
@@ -67,7 +67,7 @@ def render_fintech_banking(is_rtl: bool, style_cfg: Dict[str, Any], blueprint: D
                   <div className="flex justify-between text-xs text-zinc-600 dark:text-zinc-400">
                     <span>{"سپرده سرمایه گذاری هوشمند" if is_rtl else "Active Capital Allocation"}</span>
                     <span className="font-mono font-bold text-zinc-900 dark:text-white">
-                      <bdi>${{simulatedValue.toLocaleString()}} USD</bdi>
+                      <bdi data-vibe-metric="capital-deposit">${{simulatedValue.toLocaleString()}} USD</bdi>
                     </span>
                   </div>
                   <input
@@ -87,13 +87,13 @@ def render_fintech_banking(is_rtl: bool, style_cfg: Dict[str, Any], blueprint: D
                   <div className="p-3 bg-white dark:bg-zinc-950 rounded-xl border border-zinc-200/80 dark:border-zinc-800/80">
                     <div className="text-zinc-500 text-[10px]">{"سود ناخالص سالانه (APY)" if is_rtl else "Est. Annual APY (6.8%)"}</div>
                     <div className="text-base font-bold font-mono text-emerald-600 dark:text-emerald-400">
-                      <bdi>+${{Math.round(simulatedValue * (billingCycle === "annual" ? 0.074 : 0.068)).toLocaleString()}}</bdi>
+                      <bdi data-vibe-metric="annual-yield">+${{Math.round(simulatedValue * (billingCycle === "annual" ? 0.074 : 0.068)).toLocaleString()}}</bdi>
                     </div>
                   </div>
                   <div className="p-3 bg-white dark:bg-zinc-950 rounded-xl border border-zinc-200/80 dark:border-zinc-800/80">
                     <div className="text-zinc-500 text-[10px]">{"نقدشوندگی روزانه" if is_rtl else "T+0 Daily Liquidity"}</div>
                     <div className="text-base font-bold font-mono text-zinc-900 dark:text-zinc-100">
-                      <bdi>${{Math.round((simulatedValue * 0.068) / 365).toLocaleString()}}/day</bdi>
+                      <bdi data-vibe-metric="daily-liquidity">${{Math.round((simulatedValue * 0.068) / 365).toLocaleString()}}/day</bdi>
                     </div>
                   </div>
                 </div>
@@ -108,7 +108,7 @@ def render_crypto_trading_web3(is_rtl: bool, style_cfg: Dict[str, Any], blueprin
                   <div className="flex justify-between text-xs text-zinc-600 dark:text-zinc-400">
                     <span>{"حجم سفارش اجرایی (ETH/USDC)" if is_rtl else "Execution Order Volume (ETH/USDC)"}</span>
                     <span className="font-mono font-bold text-zinc-900 dark:text-white">
-                      <bdi data-vibe-metric="dynamic-output">{{(simulatedValue / 2850).toFixed(2) }} ETH</bdi>
+                      <bdi data-vibe-metric="order-volume">{{(simulatedValue / 2850).toFixed(2) }} ETH</bdi>
                     </span>
                   </div>
                   <input
@@ -127,7 +127,7 @@ def render_crypto_trading_web3(is_rtl: bool, style_cfg: Dict[str, Any], blueprin
                 <div className="p-3 bg-zinc-950 rounded-xl border border-zinc-800 text-xs font-mono space-y-2">
                   <div className="flex justify-between items-center pb-1 border-b border-zinc-900 text-zinc-400">
                     <span>{"نرخ لغزش تخمینی (Slippage)" if is_rtl else "Estimated Slippage"}</span>
-                    <span className="text-emerald-400"><bdi data-vibe-metric="dynamic-output">{{(0.02 + (simulatedValue / 100000) * 0.12).toFixed(3)}}%</bdi></span>
+                    <span className="text-emerald-400"><bdi data-vibe-metric="slippage-rate">{{(0.02 + (simulatedValue / 100000) * 0.12).toFixed(3)}}%</bdi></span>
                   </div>
                   <div className="flex justify-between items-center text-zinc-400">
                     <span>{"مسیر مسیریابی هوشمند" if is_rtl else "Route Optimizer"}</span>
@@ -149,7 +149,7 @@ def render_devops_cloud_terminal(is_rtl: bool, style_cfg: Dict[str, Any], bluepr
                   <div className="flex justify-between text-xs text-zinc-600 dark:text-zinc-400">
                     <span>{"تعداد نودهای فعال کلاستر" if is_rtl else "Dynamic Node Cluster Capacity"}</span>
                     <span className="font-mono font-bold text-sky-500">
-                      <bdi data-vibe-metric="dynamic-output">{{ Math.round(4 + (simulatedValue / 5000)) }} {"نود اختصاصی" if is_rtl else "Nodes (c6i.4xlarge)"}</bdi>
+                      <bdi data-vibe-metric="node-count">{{ Math.round(4 + (simulatedValue / 5000)) }} {"نود اختصاصی" if is_rtl else "Nodes (c6i.4xlarge)"}</bdi>
                     </span>
                   </div>
                   <input
@@ -169,13 +169,13 @@ def render_devops_cloud_terminal(is_rtl: bool, style_cfg: Dict[str, Any], bluepr
                   <div className="p-3 bg-zinc-950 rounded-xl border border-zinc-800">
                     <div className="text-zinc-500 text-[10px]">{"تاخیر P99 سرویس" if is_rtl else "P99 Edge Latency"}</div>
                     <div className="text-base font-bold text-emerald-400">
-                      <bdi data-vibe-metric="dynamic-output">{{ Math.max(12, Math.round(48 - (simulatedValue / 2500))) }} ms</bdi>
+                      <bdi data-vibe-metric="cluster-latency">{{ Math.max(12, Math.round(48 - (simulatedValue / 2500))) }} ms</bdi>
                     </div>
                   </div>
                   <div className="p-3 bg-zinc-950 rounded-xl border border-zinc-800">
                     <div className="text-zinc-500 text-[10px]">{"توان پردازش درخواست (RPS)" if is_rtl else "Peak Throughput"}</div>
                     <div className="text-base font-bold text-sky-400">
-                      <bdi data-vibe-metric="dynamic-output">{{ (simulatedValue * 1.8).toLocaleString() }} req/s</bdi>
+                      <bdi data-vibe-metric="network-throughput">{{ (simulatedValue * 1.8).toLocaleString() }} req/s</bdi>
                     </div>
                   </div>
                 </div>
@@ -190,7 +190,7 @@ def render_saas_b2b_enterprise(is_rtl: bool, style_cfg: Dict[str, Any], blueprin
                   <div className="flex justify-between text-xs text-zinc-600 dark:text-zinc-400">
                     <span>{"تعداد صندلی های سازمانی (Seats)" if is_rtl else "Enterprise Active Seats"}</span>
                     <span className="font-mono font-bold text-zinc-900 dark:text-white">
-                      <bdi data-vibe-metric="dynamic-output">{{ Math.round(simulatedValue / 500) }} {"کاربر همزمان" if is_rtl else "Seats"}</bdi>
+                      <bdi data-vibe-metric="seat-allocation">{{ Math.round(simulatedValue / 500) }} {"کاربر همزمان" if is_rtl else "Seats"}</bdi>
                     </span>
                   </div>
                   <input
@@ -210,7 +210,7 @@ def render_saas_b2b_enterprise(is_rtl: bool, style_cfg: Dict[str, Any], blueprin
                   <div className="p-3 bg-white dark:bg-zinc-950 rounded-xl border border-zinc-200/80 dark:border-zinc-800/80">
                     <div className="text-zinc-500 text-[10px]">{"صرفه جویی سالانه نیروی کار" if is_rtl else "Annual Ops Savings"}</div>
                     <div className="text-base font-bold font-mono text-emerald-600 dark:text-emerald-400">
-                      <bdi>${{ Math.round((simulatedValue / 500) * 4200).toLocaleString() }}</bdi>
+                      <bdi data-vibe-metric="enterprise-savings">${{ Math.round((simulatedValue / 500) * 4200).toLocaleString() }}</bdi>
                     </div>
                   </div>
                   <div className="p-3 bg-white dark:bg-zinc-950 rounded-xl border border-zinc-200/80 dark:border-zinc-800/80">
@@ -231,7 +231,7 @@ def render_ai_developer_platform(is_rtl: bool, style_cfg: Dict[str, Any], bluepr
                   <div className="flex justify-between text-xs text-zinc-600 dark:text-zinc-400">
                     <span>{"حجم توکن های پردازشی در ماه" if is_rtl else "Monthly Processed Token Budget"}</span>
                     <span className="font-mono font-bold text-violet-500">
-                      <bdi data-vibe-metric="dynamic-output">{{ (simulatedValue * 10000).toLocaleString() }} {"توکن" if is_rtl else "Tokens"}</bdi>
+                      <bdi data-vibe-metric="token-budget">{{ (simulatedValue * 10000).toLocaleString() }} {"توکن" if is_rtl else "Tokens"}</bdi>
                     </span>
                   </div>
                   <input
@@ -251,13 +251,13 @@ def render_ai_developer_platform(is_rtl: bool, style_cfg: Dict[str, Any], bluepr
                   <div className="p-3 bg-zinc-950 rounded-xl border border-zinc-800">
                     <div className="text-zinc-500 text-[10px]">{"سرعت تولید توکن (TTFT)" if is_rtl else "Time-To-First-Token"}</div>
                     <div className="text-base font-bold text-emerald-400">
-                      <bdi data-vibe-metric="dynamic-output">{{ Math.max(18, Math.round(95 - (simulatedValue / 800))) }} ms</bdi>
+                      <bdi data-vibe-metric="ttft-latency">{{ Math.max(18, Math.round(95 - (simulatedValue / 800))) }} ms</bdi>
                     </div>
                   </div>
                   <div className="p-3 bg-zinc-950 rounded-xl border border-zinc-800">
                     <div className="text-zinc-500 text-[10px]">{"تخصیص حافظه گرافیکی" if is_rtl else "Active H100 GPU Slices"}</div>
                     <div className="text-base font-bold text-violet-400">
-                      <bdi data-vibe-metric="dynamic-output">{{ Math.max(2, Math.round(simulatedValue / 6000)) }}x SXM5 80GB</bdi>
+                      <bdi data-vibe-metric="gpu-slices">{{ Math.max(2, Math.round(simulatedValue / 6000)) }}x SXM5 80GB</bdi>
                     </div>
                   </div>
                 </div>
@@ -272,7 +272,7 @@ def render_food_restaurant_cafe(is_rtl: bool, style_cfg: Dict[str, Any], bluepri
                   <div className="flex justify-between text-xs text-stone-600 dark:text-stone-400">
                     <span>{"تعداد مهمانان منوی تیستینگ اختصاصی" if is_rtl else "Private Dining & Tasting Guests"}</span>
                     <span className="font-mono font-bold text-stone-900 dark:text-stone-100">
-                      <bdi data-vibe-metric="dynamic-output">{{ Math.max(2, Math.round(simulatedValue / 10000)) }} {"نفر" if is_rtl else "Guests"}</bdi>
+                      <bdi data-vibe-metric="guest-count">{{ Math.max(2, Math.round(simulatedValue / 10000)) }} {"نفر" if is_rtl else "Guests"}</bdi>
                     </span>
                   </div>
                   <input
@@ -292,7 +292,7 @@ def render_food_restaurant_cafe(is_rtl: bool, style_cfg: Dict[str, Any], bluepri
                   <div className="flex justify-between items-center text-stone-700 dark:text-stone-300">
                     <span>{"منوی ۷ مرحله ای با نوشیدنی های جفت شده" if is_rtl else "7-Course Seasonal Pairing"}</span>
                     <span className="font-mono font-bold text-amber-700 dark:text-amber-400">
-                      <bdi>${{ (Math.max(2, Math.round(simulatedValue / 10000)) * 185).toLocaleString() }}</bdi>
+                      <bdi data-vibe-metric="tasting-subtotal">${{ (Math.max(2, Math.round(simulatedValue / 10000)) * 185).toLocaleString() }}</bdi>
                     </span>
                   </div>
                   <div className="flex justify-between items-center text-stone-500 text-[10px]">
@@ -311,7 +311,7 @@ def render_real_estate_architecture(is_rtl: bool, style_cfg: Dict[str, Any], blu
                   <div className="flex justify-between text-xs text-stone-600 dark:text-stone-400">
                     <span>{"ارزش ملک یا پنت هاوس انتخابی" if is_rtl else "Property Portfolio Valuation"}</span>
                     <span className="font-mono font-bold text-stone-900 dark:text-stone-100">
-                      <bdi>${{ (simulatedValue * 50).toLocaleString() }} USD</bdi>
+                      <bdi data-vibe-metric="capital-value">${{ (simulatedValue * 50).toLocaleString() }} USD</bdi>
                     </span>
                   </div>
                   <input
@@ -331,7 +331,7 @@ def render_real_estate_architecture(is_rtl: bool, style_cfg: Dict[str, Any], blu
                   <div className="p-3 bg-stone-50 dark:bg-stone-900/60 rounded-xl border border-stone-200 dark:border-stone-800">
                     <div className="text-stone-500 text-[10px]">{"اقساط ماهانه وام بانکی" if is_rtl else "Est. Monthly Mortgage"}</div>
                     <div className="text-base font-bold font-mono text-emerald-600 dark:text-emerald-400">
-                      <bdi>${{ Math.round((simulatedValue * 50) * 0.0051).toLocaleString() }}/mo</bdi>
+                      <bdi data-vibe-metric="projected-rent">${{ Math.round((simulatedValue * 50) * 0.0051).toLocaleString() }}/mo</bdi>
                     </div>
                   </div>
                   <div className="p-3 bg-stone-50 dark:bg-stone-900/60 rounded-xl border border-stone-200 dark:border-stone-800">
@@ -352,7 +352,7 @@ def render_healthcare_hospital_medical(is_rtl: bool, style_cfg: Dict[str, Any], 
                   <div className="flex justify-between text-xs text-sky-700 dark:text-sky-300">
                     <span>{"ظرفیت پذیرش اورژانس و تله مدیسین" if is_rtl else "Triage Inflow & Tele-consult Queue"}</span>
                     <span className="font-mono font-bold text-sky-900 dark:text-sky-100">
-                      <bdi data-vibe-metric="dynamic-output">{{ Math.round(simulatedValue / 1500) }} {"بیمار در صف" if is_rtl else "In Queue"}</bdi>
+                      <bdi data-vibe-metric="triage-queue">{{ Math.round(simulatedValue / 1500) }} {"بیمار در صف" if is_rtl else "In Queue"}</bdi>
                     </span>
                   </div>
                   <input
@@ -372,13 +372,13 @@ def render_healthcare_hospital_medical(is_rtl: bool, style_cfg: Dict[str, Any], 
                   <div className="p-3 bg-white dark:bg-zinc-950 rounded-xl border border-sky-200/80 dark:border-sky-900/60">
                     <div className="text-zinc-500 text-[10px]">{"میانگین زمان انتظار تریاژ" if is_rtl else "Average Triage Wait"}</div>
                     <div className="text-base font-bold font-mono text-emerald-600 dark:text-emerald-400">
-                      <bdi data-vibe-metric="dynamic-output">{{ Math.max(4, Math.round((simulatedValue / 1500) * 1.8)) }} min</bdi>
+                      <bdi data-vibe-metric="triage-wait">{{ Math.max(4, Math.round((simulatedValue / 1500) * 1.8)) }} min</bdi>
                     </div>
                   </div>
                   <div className="p-3 bg-white dark:bg-zinc-950 rounded-xl border border-sky-200/80 dark:border-sky-900/60">
                     <div className="text-zinc-500 text-[10px]">{"پزشکان متخصص آنکال" if is_rtl else "Active Physicians On-Duty"}</div>
                     <div className="text-base font-bold font-mono text-sky-600 dark:text-sky-400">
-                      <bdi data-vibe-metric="dynamic-output">{{ Math.round(12 + (simulatedValue / 5000)) }} MDs</bdi>
+                      <bdi data-vibe-metric="physicians-assigned">{{ Math.round(12 + (simulatedValue / 5000)) }} MDs</bdi>
                     </div>
                   </div>
                 </div>
@@ -393,7 +393,7 @@ def render_education_edtech_lms(is_rtl: bool, style_cfg: Dict[str, Any], bluepri
                   <div className="flex justify-between text-xs text-zinc-600 dark:text-zinc-400">
                     <span>{"ساعات هفتگی مطالعه تعاملی" if is_rtl else "Weekly Interactive Study Hours"}</span>
                     <span className="font-mono font-bold text-zinc-900 dark:text-white">
-                      <bdi data-vibe-metric="dynamic-output">{{ Math.max(2, Math.round(simulatedValue / 5000)) }} {"ساعت در هفته" if is_rtl else "hrs / week"}</bdi>
+                      <bdi data-vibe-metric="weekly-study">{{ Math.max(2, Math.round(simulatedValue / 5000)) }} {"ساعت در هفته" if is_rtl else "hrs / week"}</bdi>
                     </span>
                   </div>
                   <input
@@ -413,7 +413,7 @@ def render_education_edtech_lms(is_rtl: bool, style_cfg: Dict[str, Any], bluepri
                   <div className="p-3 bg-white dark:bg-zinc-950 rounded-xl border border-zinc-200/80 dark:border-zinc-800/80">
                     <div className="text-zinc-500 text-[10px]">{"مدت زمان تا تسلط کامل" if is_rtl else "Weeks to Certification"}</div>
                     <div className="text-base font-bold font-mono text-blue-600 dark:text-blue-400">
-                      <bdi data-vibe-metric="dynamic-output">{{ Math.max(4, Math.round(160 / Math.max(2, (simulatedValue / 5000)))) }} Weeks</bdi>
+                      <bdi data-vibe-metric="completion-timeline">{{ Math.max(4, Math.round(160 / Math.max(2, (simulatedValue / 5000)))) }} Weeks</bdi>
                     </div>
                   </div>
                   <div className="p-3 bg-white dark:bg-zinc-950 rounded-xl border border-zinc-200/80 dark:border-zinc-800/80">
@@ -434,7 +434,7 @@ def render_creative_portfolio_agency(is_rtl: bool, style_cfg: Dict[str, Any], bl
                   <div className="flex justify-between text-xs text-zinc-600 dark:text-zinc-400">
                     <span>{"دامنه پروژه طراحی و هویت برند" if is_rtl else "Design Sprint & Brand Scope"}</span>
                     <span className="font-mono font-bold text-zinc-900 dark:text-white">
-                      <bdi data-vibe-metric="dynamic-output">{{ Math.round(simulatedValue / 10000) }} {"اسپرینت خلاق" if is_rtl else "Design Sprints"}</bdi>
+                      <bdi data-vibe-metric="sprint-scope">{{ Math.round(simulatedValue / 10000) }} {"اسپرینت خلاق" if is_rtl else "Design Sprints"}</bdi>
                     </span>
                   </div>
                   <input
@@ -454,13 +454,13 @@ def render_creative_portfolio_agency(is_rtl: bool, style_cfg: Dict[str, Any], bl
                   <div className="p-3 bg-white dark:bg-zinc-950 rounded-xl border border-zinc-200/80 dark:border-zinc-800/80">
                     <div className="text-zinc-500 text-[10px]">{"زمان تحویل پروتوتایپ نهایی" if is_rtl else "Prototype Delivery"}</div>
                     <div className="text-base font-bold font-mono text-fuchsia-600 dark:text-fuchsia-400">
-                      <bdi data-vibe-metric="dynamic-output">{{ Math.max(2, Math.round(simulatedValue / 15000)) }} Weeks</bdi>
+                      <bdi data-vibe-metric="delivery-weeks">{{ Math.max(2, Math.round(simulatedValue / 15000)) }} Weeks</bdi>
                     </div>
                   </div>
                   <div className="p-3 bg-white dark:bg-zinc-950 rounded-xl border border-zinc-200/80 dark:border-zinc-800/80">
                     <div className="text-zinc-500 text-[10px]">{"افزایش نرخ تبدیل برند" if is_rtl else "Est. Conversion Lift"}</div>
                     <div className="text-base font-bold font-mono text-emerald-600 dark:text-emerald-400">
-                      <bdi>+{{(24 + (simulatedValue / 10000) * 3.2).toFixed(1)}}%</bdi>
+                      <bdi data-vibe-metric="conversion-lift">+{{(24 + (simulatedValue / 10000) * 3.2).toFixed(1)}}%</bdi>
                     </div>
                   </div>
                 </div>
@@ -475,7 +475,7 @@ def render_ecommerce_luxury_fashion(is_rtl: bool, style_cfg: Dict[str, Any], blu
                   <div className="flex justify-between text-xs text-stone-600 dark:text-stone-400">
                     <span>{"کیفیت متریال دست دوز و کشمیر" if is_rtl else "Artisanal Cashmere & Silk Weight"}</span>
                     <span className="font-mono font-bold text-stone-900 dark:text-stone-100">
-                      <bdi data-vibe-metric="dynamic-output">{{ Math.round(300 + (simulatedValue / 400)) }} {"گرم در متر مربع" if is_rtl else "g/m² Super 160s"}</bdi>
+                      <bdi data-vibe-metric="fabric-weight">{{ Math.round(300 + (simulatedValue / 400)) }} {"گرم در متر مربع" if is_rtl else "g/m² Super 160s"}</bdi>
                     </span>
                   </div>
                   <input
@@ -495,7 +495,7 @@ def render_ecommerce_luxury_fashion(is_rtl: bool, style_cfg: Dict[str, Any], blu
                   <div className="p-3 bg-stone-50 dark:bg-stone-900/60 rounded-xl border border-stone-200 dark:border-stone-800">
                     <div className="text-stone-500 text-[10px]">{"سفارش اختصاصی آتلیه" if is_rtl else "Bespoke Atelier Price"}</div>
                     <div className="text-base font-bold font-mono text-stone-900 dark:text-stone-100">
-                      <bdi>${{ Math.round(1850 + (simulatedValue / 20)).toLocaleString() }}</bdi>
+                      <bdi data-vibe-metric="atelier-price">${{ Math.round(1850 + (simulatedValue / 20)).toLocaleString() }}</bdi>
                     </div>
                   </div>
                   <div className="p-3 bg-stone-50 dark:bg-stone-900/60 rounded-xl border border-stone-200 dark:border-stone-800">
@@ -516,7 +516,7 @@ def render_ecommerce_mass_market(is_rtl: bool, style_cfg: Dict[str, Any], bluepr
                   <div className="flex justify-between text-xs text-zinc-600 dark:text-zinc-400">
                     <span>{"مجموع ارزش سبد خرید" if is_rtl else "Total Shopping Cart Value"}</span>
                     <span className="font-mono font-bold text-zinc-900 dark:text-white">
-                      <bdi data-vibe-metric="dynamic-output">${{ (simulatedValue / 100).toFixed(2) }} USD</bdi>
+                      <bdi data-vibe-metric="cart-subtotal">${{ (simulatedValue / 100).toFixed(2) }} USD</bdi>
                     </span>
                   </div>
                   <input
@@ -536,7 +536,7 @@ def render_ecommerce_mass_market(is_rtl: bool, style_cfg: Dict[str, Any], bluepr
                   <div className="p-3 bg-white dark:bg-zinc-950 rounded-xl border border-zinc-200/80 dark:border-zinc-800/80">
                     <div className="text-zinc-500 text-[10px]">{"تخفیف پلکانی هوشمند" if is_rtl else "Tiered Volume Discount"}</div>
                     <div className="text-base font-bold font-mono text-rose-600 dark:text-rose-400">
-                      <bdi>-{{ ((simulatedValue > 25000 ? 25 : 15)).toFixed(0) }}% Off</bdi>
+                      <bdi data-vibe-metric="volume-discount">-{{ ((simulatedValue > 25000 ? 25 : 15)).toFixed(0) }}% Off</bdi>
                     </div>
                   </div>
                   <div className="p-3 bg-white dark:bg-zinc-950 rounded-xl border border-zinc-200/80 dark:border-zinc-800/80">
@@ -557,7 +557,7 @@ def render_media_editorial_magazine(is_rtl: bool, style_cfg: Dict[str, Any], blu
                   <div className="flex justify-between text-xs text-zinc-600 dark:text-zinc-400">
                     <span>{"حجم واژگان گزارش های تحقیقی ماهانه" if is_rtl else "Monthly Investigative Report Depth"}</span>
                     <span className="font-mono font-bold text-zinc-900 dark:text-white">
-                      <bdi data-vibe-metric="dynamic-output">{{ (simulatedValue * 1.5).toLocaleString() }} {"کلمه" if is_rtl else "Words"}</bdi>
+                      <bdi data-vibe-metric="wordcount-depth">{{ (simulatedValue * 1.5).toLocaleString() }} {"کلمه" if is_rtl else "Words"}</bdi>
                     </span>
                   </div>
                   <input
@@ -577,7 +577,7 @@ def render_media_editorial_magazine(is_rtl: bool, style_cfg: Dict[str, Any], blu
                   <div className="p-3 bg-white dark:bg-zinc-950 rounded-xl border border-zinc-200/80 dark:border-zinc-800/80">
                     <div className="text-zinc-500 text-[10px]">{"زمان تخمینی مطالعه عمیق" if is_rtl else "Est. Reading Immersion"}</div>
                     <div className="text-base font-bold font-mono text-zinc-900 dark:text-zinc-100">
-                      <bdi data-vibe-metric="dynamic-output">{{ Math.round((simulatedValue * 1.5) / 220) }} min/mo</bdi>
+                      <bdi data-vibe-metric="reading-time">{{ Math.round((simulatedValue * 1.5) / 220) }} min/mo</bdi>
                     </div>
                   </div>
                   <div className="p-3 bg-white dark:bg-zinc-950 rounded-xl border border-zinc-200/80 dark:border-zinc-800/80">
@@ -598,7 +598,7 @@ def render_travel_hospitality_tourism(is_rtl: bool, style_cfg: Dict[str, Any], b
                   <div className="flex justify-between text-xs text-zinc-600 dark:text-zinc-400">
                     <span>{"مدت اقامت در ویلای اختصاصی" if is_rtl else "Boutique Resort Duration"}</span>
                     <span className="font-mono font-bold text-zinc-900 dark:text-white">
-                      <bdi data-vibe-metric="dynamic-output">{{ Math.max(3, Math.round(simulatedValue / 8000)) }} {"شب اقامت" if is_rtl else "Nights Stay"}</bdi>
+                      <bdi data-vibe-metric="nights-stay">{{ Math.max(3, Math.round(simulatedValue / 8000)) }} {"شب اقامت" if is_rtl else "Nights Stay"}</bdi>
                     </span>
                   </div>
                   <input
@@ -618,7 +618,7 @@ def render_travel_hospitality_tourism(is_rtl: bool, style_cfg: Dict[str, Any], b
                   <div className="p-3 bg-white dark:bg-zinc-950 rounded-xl border border-zinc-200/80 dark:border-zinc-800/80">
                     <div className="text-zinc-500 text-[10px]">{"برآورد کل هزینه پکیج" if is_rtl else "Total All-Inclusive"}</div>
                     <div className="text-base font-bold font-mono text-teal-600 dark:text-teal-400">
-                      <bdi>${{ (Math.max(3, Math.round(simulatedValue / 8000)) * 480).toLocaleString() }}</bdi>
+                      <bdi data-vibe-metric="all-inclusive-price">${{ (Math.max(3, Math.round(simulatedValue / 8000)) * 480).toLocaleString() }}</bdi>
                     </div>
                   </div>
                   <div className="p-3 bg-white dark:bg-zinc-950 rounded-xl border border-zinc-200/80 dark:border-zinc-800/80">
@@ -639,7 +639,7 @@ def render_legal_compliance_law(is_rtl: bool, style_cfg: Dict[str, Any], bluepri
                   <div className="flex justify-between text-xs text-zinc-600 dark:text-zinc-400">
                     <span>{"تعداد قراردادهای تجاری تحت ممیزی" if is_rtl else "Active Audited Contracts"}</span>
                     <span className="font-mono font-bold text-zinc-900 dark:text-white">
-                      <bdi data-vibe-metric="dynamic-output">{{ Math.round(simulatedValue / 1000) }} {"قرارداد بین المللی" if is_rtl else "Contracts"}</bdi>
+                      <bdi data-vibe-metric="audited-contracts">{{ Math.round(simulatedValue / 1000) }} {"قرارداد بین المللی" if is_rtl else "Contracts"}</bdi>
                     </span>
                   </div>
                   <input
@@ -665,7 +665,7 @@ def render_legal_compliance_law(is_rtl: bool, style_cfg: Dict[str, Any], bluepri
                   <div className="p-3 bg-white dark:bg-zinc-950 rounded-xl border border-zinc-200/80 dark:border-zinc-800/80">
                     <div className="text-zinc-500 text-[10px]">{"کاهش ریسک دعاوی حقوقی" if is_rtl else "Litigation Exposure"}</div>
                     <div className="text-base font-bold font-mono text-slate-800 dark:text-slate-200">
-                      <bdi>-{{(72 + (simulatedValue / 10000) * 1.5).toFixed(1)}}%</bdi>
+                      <bdi data-vibe-metric="litigation-exposure">-{{(72 + (simulatedValue / 10000) * 1.5).toFixed(1)}}%</bdi>
                     </div>
                   </div>
                 </div>
@@ -680,7 +680,7 @@ def render_gaming_entertainment_streaming(is_rtl: bool, style_cfg: Dict[str, Any
                   <div className="flex justify-between text-xs text-zinc-600 dark:text-zinc-400">
                     <span>{"نرخ فریم رندر موتور بازی (FPS)" if is_rtl else "Engine Render Frame Rate Target"}</span>
                     <span className="font-mono font-bold text-amber-500">
-                      <bdi data-vibe-metric="dynamic-output">{{ Math.round(120 + (simulatedValue / 500)) }} FPS</bdi>
+                      <bdi data-vibe-metric="framerate-target">{{ Math.round(120 + (simulatedValue / 500)) }} FPS</bdi>
                     </span>
                   </div>
                   <input
@@ -700,7 +700,7 @@ def render_gaming_entertainment_streaming(is_rtl: bool, style_cfg: Dict[str, Any
                   <div className="p-3 bg-zinc-950 rounded-xl border border-zinc-800">
                     <div className="text-zinc-500 text-[10px]">{"پینگ شبکه تا سرور ابری" if is_rtl else "Tickrate / Ping (EU-Central)"}</div>
                     <div className="text-base font-bold text-emerald-400">
-                      <bdi data-vibe-metric="dynamic-output">{{ Math.max(3, Math.round(18 - (simulatedValue / 5000))) }} ms</bdi>
+                      <bdi data-vibe-metric="ping-latency">{{ Math.max(3, Math.round(18 - (simulatedValue / 5000))) }} ms</bdi>
                     </div>
                   </div>
                   <div className="p-3 bg-zinc-950 rounded-xl border border-zinc-800">
@@ -721,7 +721,7 @@ def render_automotive_ev_mobility(is_rtl: bool, style_cfg: Dict[str, Any], bluep
                   <div className="flex justify-between text-xs text-zinc-600 dark:text-zinc-400">
                     <span>{"ظرفیت بسته باتری سیلیکون کاربید (kWh)" if is_rtl else "Active Battery Pack Capacity"}</span>
                     <span className="font-mono font-bold text-emerald-600 dark:text-emerald-400">
-                      <bdi data-vibe-metric="dynamic-output">{{ Math.round(60 + (simulatedValue / 1250)) }} kWh</bdi>
+                      <bdi data-vibe-metric="battery-capacity">{{ Math.round(60 + (simulatedValue / 1250)) }} kWh</bdi>
                     </span>
                   </div>
                   <input
@@ -741,7 +741,7 @@ def render_automotive_ev_mobility(is_rtl: bool, style_cfg: Dict[str, Any], bluep
                   <div className="p-3 bg-white dark:bg-zinc-950 rounded-xl border border-zinc-200/80 dark:border-zinc-800/80">
                     <div className="text-zinc-500 text-[10px]">{"برد مسافت واقعی (WLTP)" if is_rtl else "Real-World Range (WLTP)"}</div>
                     <div className="text-base font-bold font-mono text-emerald-600 dark:text-emerald-400">
-                      <bdi data-vibe-metric="dynamic-output">{{ Math.round((60 + (simulatedValue / 1250)) * 6.4) }} km</bdi>
+                      <bdi data-vibe-metric="ev-range">{{ Math.round((60 + (simulatedValue / 1250)) * 6.4) }} km</bdi>
                     </div>
                   </div>
                   <div className="p-3 bg-white dark:bg-zinc-950 rounded-xl border border-zinc-200/80 dark:border-zinc-800/80">
@@ -762,7 +762,7 @@ def render_logistics_supply_chain(is_rtl: bool, style_cfg: Dict[str, Any], bluep
                   <div className="flex justify-between text-xs text-zinc-600 dark:text-zinc-400">
                     <span>{"تعداد ناوگان فعال در مسیر" if is_rtl else "Active Dispatched Fleet Units"}</span>
                     <span className="font-mono font-bold text-amber-600 dark:text-amber-400">
-                      <bdi data-vibe-metric="dynamic-output">{{ Math.round(15 + (simulatedValue / 2000)) }} {"کامیون متصل" if is_rtl else "Fleet Units"}</bdi>
+                      <bdi data-vibe-metric="fleet-units">{{ Math.round(15 + (simulatedValue / 2000)) }} {"کامیون متصل" if is_rtl else "Fleet Units"}</bdi>
                     </span>
                   </div>
                   <input
@@ -782,7 +782,7 @@ def render_logistics_supply_chain(is_rtl: bool, style_cfg: Dict[str, Any], bluep
                   <div className="p-3 bg-white dark:bg-zinc-950 rounded-xl border border-zinc-200/80 dark:border-zinc-800/80">
                     <div className="text-zinc-500 text-[10px]">{"صرفه جویی مصرف سوخت ماهانه" if is_rtl else "Fuel Economy Optimization"}</div>
                     <div className="text-base font-bold font-mono text-emerald-600 dark:text-emerald-400">
-                      <bdi>-{{(18.5 + (simulatedValue / 10000) * 1.2).toFixed(1)}}%</bdi>
+                      <bdi data-vibe-metric="fuel-economy">-{{(18.5 + (simulatedValue / 10000) * 1.2).toFixed(1)}}%</bdi>
                     </div>
                   </div>
                   <div className="p-3 bg-white dark:bg-zinc-950 rounded-xl border border-zinc-200/80 dark:border-zinc-800/80">
@@ -803,7 +803,7 @@ def render_energy_greentech_sustainability(is_rtl: bool, style_cfg: Dict[str, An
                   <div className="flex justify-between text-xs text-zinc-600 dark:text-zinc-400">
                     <span>{"ظرفیت فتوولتائیک نصب شده (kWp)" if is_rtl else "Solar Array Generation Capacity"}</span>
                     <span className="font-mono font-bold text-emerald-600 dark:text-emerald-400">
-                      <bdi data-vibe-metric="dynamic-output">{{ Math.round(50 + (simulatedValue / 1000)) }} kWp</bdi>
+                      <bdi data-vibe-metric="solar-capacity">{{ Math.round(50 + (simulatedValue / 1000)) }} kWp</bdi>
                     </span>
                   </div>
                   <input
@@ -823,7 +823,7 @@ def render_energy_greentech_sustainability(is_rtl: bool, style_cfg: Dict[str, An
                   <div className="p-3 bg-white dark:bg-zinc-950 rounded-xl border border-zinc-200/80 dark:border-zinc-800/80">
                     <div className="text-zinc-500 text-[10px]">{"کاهش دی اکسید کربن سالانه" if is_rtl else "Annual CO2 Offset"}</div>
                     <div className="text-base font-bold font-mono text-emerald-600 dark:text-emerald-400">
-                      <bdi data-vibe-metric="dynamic-output">{{ Math.round((50 + (simulatedValue / 1000)) * 1.45) }} Tons CO2e</bdi>
+                      <bdi data-vibe-metric="carbon-offset">{{ Math.round((50 + (simulatedValue / 1000)) * 1.45) }} Tons CO2e</bdi>
                     </div>
                   </div>
                   <div className="p-3 bg-white dark:bg-zinc-950 rounded-xl border border-zinc-200/80 dark:border-zinc-800/80">
@@ -844,7 +844,7 @@ def render_nonprofit_charity_social(is_rtl: bool, style_cfg: Dict[str, Any], blu
                   <div className="flex justify-between text-xs text-zinc-600 dark:text-zinc-400">
                     <span>{"مبلغ مشارکت و حمایت مستقیم" if is_rtl else "Direct Humanitarian Contribution"}</span>
                     <span className="font-mono font-bold text-rose-600 dark:text-rose-400">
-                      <bdi>${{ Math.round(simulatedValue / 20).toLocaleString() }} USD</bdi>
+                      <bdi data-vibe-metric="donation-budget">${{ Math.round(simulatedValue / 20).toLocaleString() }} USD</bdi>
                     </span>
                   </div>
                   <input
@@ -864,7 +864,7 @@ def render_nonprofit_charity_social(is_rtl: bool, style_cfg: Dict[str, Any], blu
                   <div className="p-3 bg-white dark:bg-zinc-950 rounded-xl border border-zinc-200/80 dark:border-zinc-800/80">
                     <div className="text-zinc-500 text-[10px]">{"افراد بهره مند از آب پاک" if is_rtl else "People Provided Clean Water"}</div>
                     <div className="text-base font-bold font-mono text-emerald-600 dark:text-emerald-400">
-                      <bdi data-vibe-metric="dynamic-output">{{ Math.round((simulatedValue / 20) * 4) }} People</bdi>
+                      <bdi data-vibe-metric="impact-beneficiaries">{{ Math.round((simulatedValue / 20) * 4) }} People</bdi>
                     </div>
                   </div>
                   <div className="p-3 bg-white dark:bg-zinc-950 rounded-xl border border-zinc-200/80 dark:border-zinc-800/80">
@@ -885,7 +885,7 @@ def render_personal_branding_creator(is_rtl: bool, style_cfg: Dict[str, Any], bl
                   <div className="flex justify-between text-xs text-zinc-600 dark:text-zinc-400">
                     <span>{"تعداد مشترکین فعال خبرنامه تخصصی" if is_rtl else "Engaged Newsletter Subscribers"}</span>
                     <span className="font-mono font-bold text-indigo-600 dark:text-indigo-400">
-                      <bdi data-vibe-metric="dynamic-output">{{ (simulatedValue * 2).toLocaleString() }} {"عضو" if is_rtl else "Subscribers"}</bdi>
+                      <bdi data-vibe-metric="creator-subscribers">{{ (simulatedValue * 2).toLocaleString() }} {"عضو" if is_rtl else "Subscribers"}</bdi>
                     </span>
                   </div>
                   <input
@@ -905,7 +905,7 @@ def render_personal_branding_creator(is_rtl: bool, style_cfg: Dict[str, Any], bl
                   <div className="p-3 bg-white dark:bg-zinc-950 rounded-xl border border-zinc-200/80 dark:border-zinc-800/80">
                     <div className="text-zinc-500 text-[10px]">{"درآمد ماهانه اسپانسرینگ" if is_rtl else "Monthly Sponsorship Rev"}</div>
                     <div className="text-base font-bold font-mono text-emerald-600 dark:text-emerald-400">
-                      <bdi>${{ Math.round((simulatedValue * 2) * 0.045).toLocaleString() }}/mo</bdi>
+                      <bdi data-vibe-metric="creator-revenue">${{ Math.round((simulatedValue * 2) * 0.045).toLocaleString() }}/mo</bdi>
                     </div>
                   </div>
                   <div className="p-3 bg-white dark:bg-zinc-950 rounded-xl border border-zinc-200/80 dark:border-zinc-800/80">
@@ -926,7 +926,7 @@ def render_cybersecurity_identity_auth(is_rtl: bool, style_cfg: Dict[str, Any], 
                   <div className="flex justify-between text-xs text-zinc-600 dark:text-zinc-400">
                     <span>{"تعداد هویت های تحت پایش بلادرنگ (Zero Trust)" if is_rtl else "Monitored Zero-Trust Identities"}</span>
                     <span className="font-mono font-bold text-red-500">
-                      <bdi data-vibe-metric="dynamic-output">{{ (simulatedValue / 10).toLocaleString() }} {"کاربر و سرویس" if is_rtl else "Entities"}</bdi>
+                      <bdi data-vibe-metric="active-entities">{{ (simulatedValue / 10).toLocaleString() }} {"کاربر و سرویس" if is_rtl else "Entities"}</bdi>
                     </span>
                   </div>
                   <input
@@ -967,7 +967,7 @@ def render_general_modern_saas(is_rtl: bool, style_cfg: Dict[str, Any], blueprin
                   <div className="flex justify-between text-xs text-zinc-600 dark:text-zinc-400">
                     <span>{"تعداد فرآیندهای خودکارسازی شده در ماه" if is_rtl else "Monthly Automated Workflows"}</span>
                     <span className="font-mono font-bold text-zinc-900 dark:text-white">
-                      <bdi>${{simulatedValue.toLocaleString()}} {"عملیات" if is_rtl else "Executions"}</bdi>
+                      <bdi data-vibe-metric="workflow-volume">${{simulatedValue.toLocaleString()}} {"عملیات" if is_rtl else "Executions"}</bdi>
                     </span>
                   </div>
                   <input
@@ -987,7 +987,7 @@ def render_general_modern_saas(is_rtl: bool, style_cfg: Dict[str, Any], blueprin
                   <div className="p-3 bg-white dark:bg-zinc-950 rounded-xl border border-zinc-200/80 dark:border-zinc-800/80">
                     <div className="text-zinc-500 text-[10px]">{"صرفه جویی زمان کاری ماهانه" if is_rtl else "Monthly Hours Saved"}</div>
                     <div className="text-base font-bold font-mono text-emerald-600 dark:text-emerald-400">
-                      <bdi>+{{Math.round(simulatedValue * (billingCycle === "annual" ? 0.052 : 0.041)).toLocaleString()}} hrs</bdi>
+                      <bdi data-vibe-metric="time-savings">+{{Math.round(simulatedValue * (billingCycle === "annual" ? 0.052 : 0.041)).toLocaleString()}} hrs</bdi>
                     </div>
                   </div>
                   <div className="p-3 bg-white dark:bg-zinc-950 rounded-xl border border-zinc-200/80 dark:border-zinc-800/80">

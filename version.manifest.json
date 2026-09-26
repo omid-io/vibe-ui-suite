@@ -1,12 +1,12 @@
 {
   "$schema": "./schemas/version-manifest.schema.json",
-  "version": "3.9.0",
-  "codename": "The True Closed-Loop Autonomous Browser Engine",
+  "version": "4.0.0",
+  "codename": "Endgame / Closed-Loop Autonomy & Feature Freeze",
   "release_channel": "stable",
   "packages": {
-    "@omid-io/tokens": "3.9.0",
-    "vibe-ui-vscode": "3.9.0",
-    "vibe-ui-nextjs-starter": "3.9.0"
+    "@omid-io/tokens": "4.0.0",
+    "vibe-ui-vscode": "4.0.0",
+    "vibe-ui-nextjs-starter": "4.0.0"
   },
   "schemas": {
     "intent_contract": "v1",
@@ -23,5 +23,5 @@
     "nextjs": ">=15.0.0",
     "react": ">=19.0.0"
   },
-  "last_updated": "2026-09-26"
+  "last_updated": "2026-09-27"
 }

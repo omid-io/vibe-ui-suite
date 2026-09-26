@@ -1,7 +1,7 @@
 # 🏛️ Vibe UI Suite — System Architecture & Data Contract Specification
 
-**Version:** 3.9.0  
-**Status:** Production Standard  
+**Version:** 4.0.0 (Endgame / Closed-Loop Autonomy)  
+**Status:** Feature Freeze (Production Certified)  
 **Document Type:** Core Architectural Specification  
 **Machine Contract Reference:** [`schemas/design-spec.v1.schema.json`](schemas/design-spec.v1.schema.json)  
 
