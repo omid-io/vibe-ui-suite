@@ -375,13 +375,59 @@ def main():
         failures.append("Test 16 Failed: Legacy defect alias generic_ai_purple_gradient was not resolved")
     print("  [PASS] Test 16: Defect ID Alias Normalization resolved legacy defect types")
 
+    # Test 17: Triple Composite Gate & Physical Critic Veto
+    # If DOM passes and Visual passes, but Physical fails, composite must be REVISE_REQUIRED
+    perfect_dom_html = """<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    button:focus-visible { outline: 2px solid blue; }
+    body { unicode-bidi: plaintext; }
+    bdi { direction: ltr !important; unicode-bidi: isolate; }
+  </style>
+</head>
+<body class="bg-zinc-900 text-white p-8">
+  <h1 class="text-5xl font-extrabold tracking-tight mb-6">Autonomous Vision</h1>
+  <p>Performance metric: <bdi class="tabular-nums">99.8%</bdi></p>
+  <div class="w-[600px] bg-red-500">Fixed width blowout causing horizontal scrollbar</div>
+  <button type="button" class="min-h-[44px] px-6 py-3 transition-all active:scale-95">Action</button>
+</body>
+</html>"""
+    triple_refiner = AutoRefiner(enable_physical_browser=False)
+    _, triple_report = triple_refiner.refine(perfect_dom_html, {}, max_iterations=1)
+    if triple_report["physical_critic"]["acceptance_status"] != "REVISE_REQUIRED":
+        failures.append("Test 17 Failed: Physical critic should flag fixed blowout as REVISE_REQUIRED")
+    if triple_report["acceptance_status"] != "REVISE_REQUIRED":
+        failures.append("Test 17 Failed: Triple Composite gate did not enforce REVISE_REQUIRED upon physical defect")
+    print("  [PASS] Test 17: Triple Composite Gate enforced REVISE_REQUIRED on physical defect veto")
+
+    # Test 18: Physical Monotonicity Invariant Gate in should_accept_patch
+    curr_rep = {"hard_gate_failures": [], "quality_score": 90.0}
+    re_crit = {"hard_gate_failures": [], "quality_score": 90.0}
+    curr_phys = {"physical_score": 95.0, "defects": []}
+    regressed_phys = {
+        "physical_score": 85.0,
+        "defects": [{"type": "physical_horizontal_overflow", "severity": "P0"}]
+    }
+    phys_accepted = AutoRefiner.should_accept_patch(
+        curr_rep,
+        re_crit,
+        "<div>clean</div>",
+        current_physical=curr_phys,
+        patched_physical=regressed_phys
+    )
+    if phys_accepted:
+        failures.append("Test 18 Failed: should_accept_patch accepted patch that introduced physical P0 defect")
+    print("  [PASS] Test 18: Physical Monotonicity Invariant Gate blocked physical defect regression")
+
     if failures:
         print("\n[FAIL] Critic/Refiner Test Failures:", file=sys.stderr)
         for f in failures:
             print(f"  - {f}", file=sys.stderr)
         return 1
 
-    print("\n[SUCCESS] All Design Critic and AutoRefiner unit tests passed (16/16).")
+    print("\n[SUCCESS] All Design Critic and AutoRefiner unit tests passed (18/18).")
     return 0
 
 if __name__ == "__main__":

@@ -77,7 +77,7 @@ def render_fintech_banking(is_rtl: bool, style_cfg: Dict[str, Any], blueprint: D
                     value={{{{simulatedValue}}}}
                     onChange={{{{(e) => setSimulatedValue(Number(e.target.value))}}}}
                     aria-label="{{"اسلایدر مبلغ سرمایه گذاری" if is_rtl else "Capital Investment Slider"}}"
-                    className="w-full accent-emerald-500 cursor-pointer h-2 bg-zinc-200 dark:bg-zinc-800 rounded-lg"
+                    className="w-full accent-emerald-500 cursor-pointer min-h-[44px] h-11 py-3 bg-transparent"
                   />
                 </div>
 
@@ -117,7 +117,7 @@ def render_crypto_trading_web3(is_rtl: bool, style_cfg: Dict[str, Any], blueprin
                     value={{{{simulatedValue}}}}
                     onChange={{{{(e) => setSimulatedValue(Number(e.target.value))}}}}
                     aria-label="{{"اسلایدر حجم سفارش معاملات ارز دیجیتال" if is_rtl else "Order Size Range Slider"}}"
-                    className="w-full accent-cyan-500 cursor-pointer h-2 bg-zinc-200 dark:bg-zinc-800 rounded-lg"
+                    className="w-full accent-cyan-500 cursor-pointer min-h-[44px] h-11 py-3 bg-transparent"
                   />
                 </div>
 
@@ -157,7 +157,7 @@ def render_devops_cloud_terminal(is_rtl: bool, style_cfg: Dict[str, Any], bluepr
                     value={{{{simulatedValue}}}}
                     onChange={{{{(e) => setSimulatedValue(Number(e.target.value))}}}}
                     aria-label="{{"اسلایدر تنظیم ظرفیت نودها" if is_rtl else "Node Cluster Scale Slider"}}"
-                    className="w-full accent-sky-500 cursor-pointer h-2 bg-zinc-200 dark:bg-zinc-800 rounded-lg"
+                    className="w-full accent-sky-500 cursor-pointer min-h-[44px] h-11 py-3 bg-transparent"
                   />
                 </div>
 
@@ -197,7 +197,7 @@ def render_saas_b2b_enterprise(is_rtl: bool, style_cfg: Dict[str, Any], blueprin
                     value={{{{simulatedValue}}}}
                     onChange={{{{(e) => setSimulatedValue(Number(e.target.value))}}}}
                     aria-label="{{"اسلایدر تعداد صندلی های سازمانی" if is_rtl else "Enterprise Seat Slider"}}"
-                    className="w-full accent-indigo-500 cursor-pointer h-2 bg-zinc-200 dark:bg-zinc-800 rounded-lg"
+                    className="w-full accent-indigo-500 cursor-pointer min-h-[44px] h-11 py-3 bg-transparent"
                   />
                 </div>
 
@@ -237,7 +237,7 @@ def render_ai_developer_platform(is_rtl: bool, style_cfg: Dict[str, Any], bluepr
                     value={{{{simulatedValue}}}}
                     onChange={{{{(e) => setSimulatedValue(Number(e.target.value))}}}}
                     aria-label="{{"اسلایدر حجم توکن ها" if is_rtl else "Token Volume Slider"}}"
-                    className="w-full accent-violet-500 cursor-pointer h-2 bg-zinc-200 dark:bg-zinc-800 rounded-lg"
+                    className="w-full accent-violet-500 cursor-pointer min-h-[44px] h-11 py-3 bg-transparent"
                   />
                 </div>
 
@@ -277,7 +277,7 @@ def render_food_restaurant_cafe(is_rtl: bool, style_cfg: Dict[str, Any], bluepri
                     value={{{{simulatedValue}}}}
                     onChange={{{{(e) => setSimulatedValue(Number(e.target.value))}}}}
                     aria-label="{{"اسلایدر تعداد مهمانان رستوران" if is_rtl else "Restaurant Guests Slider"}}"
-                    className="w-full accent-amber-600 cursor-pointer h-2 bg-stone-200 dark:bg-stone-800 rounded-lg"
+                    className="w-full accent-amber-600 cursor-pointer min-h-[44px] h-11 py-3 bg-transparent"
                   />
                 </div>
 
@@ -315,7 +315,7 @@ def render_real_estate_architecture(is_rtl: bool, style_cfg: Dict[str, Any], blu
                     value={{{{simulatedValue}}}}
                     onChange={{{{(e) => setSimulatedValue(Number(e.target.value))}}}}
                     aria-label="{{"اسلایدر ارزش ملک" if is_rtl else "Real Estate Value Slider"}}"
-                    className="w-full accent-stone-700 dark:accent-stone-400 cursor-pointer h-2 bg-stone-200 dark:bg-stone-800 rounded-lg"
+                    className="w-full accent-stone-700 dark:accent-stone-400 cursor-pointer min-h-[44px] h-11 py-3 bg-transparent"
                   />
                 </div>
 
@@ -355,7 +355,7 @@ def render_healthcare_hospital_medical(is_rtl: bool, style_cfg: Dict[str, Any], 
                     value={{{{simulatedValue}}}}
                     onChange={{{{(e) => setSimulatedValue(Number(e.target.value))}}}}
                     aria-label="{{"اسلایدر ظرفیت تریاژ بیمارستان" if is_rtl else "Hospital Triage Queue Slider"}}"
-                    className="w-full accent-sky-600 cursor-pointer h-2 bg-sky-100 dark:bg-sky-950 rounded-lg"
+                    className="w-full accent-sky-600 cursor-pointer min-h-[44px] h-11 py-3 bg-transparent"
                   />
                 </div>
 
@@ -395,7 +395,7 @@ def render_education_edtech_lms(is_rtl: bool, style_cfg: Dict[str, Any], bluepri
                     value={{{{simulatedValue}}}}
                     onChange={{{{(e) => setSimulatedValue(Number(e.target.value))}}}}
                     aria-label="{{"اسلایدر ساعات مطالعه هفتگی" if is_rtl else "Study Hours Slider"}}"
-                    className="w-full accent-blue-600 cursor-pointer h-2 bg-zinc-200 dark:bg-zinc-800 rounded-lg"
+                    className="w-full accent-blue-600 cursor-pointer min-h-[44px] h-11 py-3 bg-transparent"
                   />
                 </div>
 
@@ -435,7 +435,7 @@ def render_creative_portfolio_agency(is_rtl: bool, style_cfg: Dict[str, Any], bl
                     value={{{{simulatedValue}}}}
                     onChange={{{{(e) => setSimulatedValue(Number(e.target.value))}}}}
                     aria-label="{{"اسلایدر اسپرینت های طراحی" if is_rtl else "Design Sprint Slider"}}"
-                    className="w-full accent-fuchsia-600 cursor-pointer h-2 bg-zinc-200 dark:bg-zinc-800 rounded-lg"
+                    className="w-full accent-fuchsia-600 cursor-pointer min-h-[44px] h-11 py-3 bg-transparent"
                   />
                 </div>
 
@@ -475,7 +475,7 @@ def render_ecommerce_luxury_fashion(is_rtl: bool, style_cfg: Dict[str, Any], blu
                     value={{{{simulatedValue}}}}
                     onChange={{{{(e) => setSimulatedValue(Number(e.target.value))}}}}
                     aria-label="{{"اسلایدر کیفیت متریال مد لوکس" if is_rtl else "Fabric Grade Slider"}}"
-                    className="w-full accent-amber-700 cursor-pointer h-2 bg-stone-200 dark:bg-stone-800 rounded-lg"
+                    className="w-full accent-amber-700 cursor-pointer min-h-[44px] h-11 py-3 bg-transparent"
                   />
                 </div>
 
@@ -515,7 +515,7 @@ def render_ecommerce_mass_market(is_rtl: bool, style_cfg: Dict[str, Any], bluepr
                     value={{{{simulatedValue}}}}
                     onChange={{{{(e) => setSimulatedValue(Number(e.target.value))}}}}
                     aria-label="{{"اسلایدر ارزش سبد خرید" if is_rtl else "Cart Value Slider"}}"
-                    className="w-full accent-rose-600 cursor-pointer h-2 bg-zinc-200 dark:bg-zinc-800 rounded-lg"
+                    className="w-full accent-rose-600 cursor-pointer min-h-[44px] h-11 py-3 bg-transparent"
                   />
                 </div>
 
@@ -555,7 +555,7 @@ def render_media_editorial_magazine(is_rtl: bool, style_cfg: Dict[str, Any], blu
                     value={{{{simulatedValue}}}}
                     onChange={{{{(e) => setSimulatedValue(Number(e.target.value))}}}}
                     aria-label="{{"اسلایدر حجم مقالات تحلیلی" if is_rtl else "Editorial Length Slider"}}"
-                    className="w-full accent-neutral-800 dark:accent-neutral-200 cursor-pointer h-2 bg-zinc-200 dark:bg-zinc-800 rounded-lg"
+                    className="w-full accent-neutral-800 dark:accent-neutral-200 cursor-pointer min-h-[44px] h-11 py-3 bg-transparent"
                   />
                 </div>
 
@@ -595,7 +595,7 @@ def render_travel_hospitality_tourism(is_rtl: bool, style_cfg: Dict[str, Any], b
                     value={{{{simulatedValue}}}}
                     onChange={{{{(e) => setSimulatedValue(Number(e.target.value))}}}}
                     aria-label="{{"اسلایدر تعداد شب های اقامت" if is_rtl else "Travel Nights Slider"}}"
-                    className="w-full accent-teal-600 cursor-pointer h-2 bg-zinc-200 dark:bg-zinc-800 rounded-lg"
+                    className="w-full accent-teal-600 cursor-pointer min-h-[44px] h-11 py-3 bg-transparent"
                   />
                 </div>
 
@@ -635,7 +635,7 @@ def render_legal_compliance_law(is_rtl: bool, style_cfg: Dict[str, Any], bluepri
                     value={{{{simulatedValue}}}}
                     onChange={{{{(e) => setSimulatedValue(Number(e.target.value))}}}}
                     aria-label="{{"اسلایدر تعداد قراردادهای حقوقی" if is_rtl else "Contract Volume Slider"}}"
-                    className="w-full accent-slate-700 dark:accent-slate-300 cursor-pointer h-2 bg-zinc-200 dark:bg-zinc-800 rounded-lg"
+                    className="w-full accent-slate-700 dark:accent-slate-300 cursor-pointer min-h-[44px] h-11 py-3 bg-transparent"
                   />
                 </div>
 
@@ -675,7 +675,7 @@ def render_gaming_entertainment_streaming(is_rtl: bool, style_cfg: Dict[str, Any
                     value={{{{simulatedValue}}}}
                     onChange={{{{(e) => setSimulatedValue(Number(e.target.value))}}}}
                     aria-label="{{"اسلایدر نرخ فریم بازی" if is_rtl else "Frame Rate Slider"}}"
-                    className="w-full accent-amber-500 cursor-pointer h-2 bg-zinc-200 dark:bg-zinc-800 rounded-lg"
+                    className="w-full accent-amber-500 cursor-pointer min-h-[44px] h-11 py-3 bg-transparent"
                   />
                 </div>
 
@@ -715,7 +715,7 @@ def render_automotive_ev_mobility(is_rtl: bool, style_cfg: Dict[str, Any], bluep
                     value={{{{simulatedValue}}}}
                     onChange={{{{(e) => setSimulatedValue(Number(e.target.value))}}}}
                     aria-label="{{"اسلایدر ظرفیت باتری خودرو برقی" if is_rtl else "EV Battery Range Slider"}}"
-                    className="w-full accent-emerald-500 cursor-pointer h-2 bg-zinc-200 dark:bg-zinc-800 rounded-lg"
+                    className="w-full accent-emerald-500 cursor-pointer min-h-[44px] h-11 py-3 bg-transparent"
                   />
                 </div>
 
@@ -755,7 +755,7 @@ def render_logistics_supply_chain(is_rtl: bool, style_cfg: Dict[str, Any], bluep
                     value={{{{simulatedValue}}}}
                     onChange={{{{(e) => setSimulatedValue(Number(e.target.value))}}}}
                     aria-label="{{"اسلایدر تعداد ناوگان لجستیک" if is_rtl else "Fleet Units Range Slider"}}"
-                    className="w-full accent-amber-500 cursor-pointer h-2 bg-zinc-200 dark:bg-zinc-800 rounded-lg"
+                    className="w-full accent-amber-500 cursor-pointer min-h-[44px] h-11 py-3 bg-transparent"
                   />
                 </div>
 
@@ -795,7 +795,7 @@ def render_energy_greentech_sustainability(is_rtl: bool, style_cfg: Dict[str, An
                     value={{{{simulatedValue}}}}
                     onChange={{{{(e) => setSimulatedValue(Number(e.target.value))}}}}
                     aria-label="{{"اسلایدر ظرفیت انرژی خورشیدی" if is_rtl else "Solar Capacity Slider"}}"
-                    className="w-full accent-emerald-500 cursor-pointer h-2 bg-zinc-200 dark:bg-zinc-800 rounded-lg"
+                    className="w-full accent-emerald-500 cursor-pointer min-h-[44px] h-11 py-3 bg-transparent"
                   />
                 </div>
 
@@ -835,7 +835,7 @@ def render_nonprofit_charity_social(is_rtl: bool, style_cfg: Dict[str, Any], blu
                     value={{{{simulatedValue}}}}
                     onChange={{{{(e) => setSimulatedValue(Number(e.target.value))}}}}
                     aria-label="{{"اسلایدر مبلغ حمایت خیریه" if is_rtl else "Donation Contribution Slider"}}"
-                    className="w-full accent-rose-500 cursor-pointer h-2 bg-zinc-200 dark:bg-zinc-800 rounded-lg"
+                    className="w-full accent-rose-500 cursor-pointer min-h-[44px] h-11 py-3 bg-transparent"
                   />
                 </div>
 
@@ -875,7 +875,7 @@ def render_personal_branding_creator(is_rtl: bool, style_cfg: Dict[str, Any], bl
                     value={{{{simulatedValue}}}}
                     onChange={{{{(e) => setSimulatedValue(Number(e.target.value))}}}}
                     aria-label="{{"اسلایدر تعداد مخاطبان سازنده محتوا" if is_rtl else "Creator Audience Slider"}}"
-                    className="w-full accent-indigo-500 cursor-pointer h-2 bg-zinc-200 dark:bg-zinc-800 rounded-lg"
+                    className="w-full accent-indigo-500 cursor-pointer min-h-[44px] h-11 py-3 bg-transparent"
                   />
                 </div>
 
@@ -915,7 +915,7 @@ def render_cybersecurity_identity_auth(is_rtl: bool, style_cfg: Dict[str, Any], 
                     value={{{{simulatedValue}}}}
                     onChange={{{{(e) => setSimulatedValue(Number(e.target.value))}}}}
                     aria-label="{{"اسلایدر تعداد هویت های سایبری" if is_rtl else "Cybersecurity Entities Range Slider"}}"
-                    className="w-full accent-red-500 cursor-pointer h-2 bg-zinc-200 dark:bg-zinc-800 rounded-lg"
+                    className="w-full accent-red-500 cursor-pointer min-h-[44px] h-11 py-3 bg-transparent"
                   />
                 </div>
 
@@ -955,7 +955,7 @@ def render_general_modern_saas(is_rtl: bool, style_cfg: Dict[str, Any], blueprin
                     value={{{{simulatedValue}}}}
                     onChange={{{{(e) => setSimulatedValue(Number(e.target.value))}}}}
                     aria-label="{{"اسلایدر تعداد فرآیندهای خودکارسازی" if is_rtl else "Automated Workflows Slider"}}"
-                    className="w-full accent-emerald-500 cursor-pointer h-2 bg-zinc-200 dark:bg-zinc-800 rounded-lg"
+                    className="w-full accent-emerald-500 cursor-pointer min-h-[44px] h-11 py-3 bg-transparent"
                   />
                 </div>
 

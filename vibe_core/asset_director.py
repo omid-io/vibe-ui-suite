@@ -1,5 +1,5 @@
 """
-vibe_core.asset_director — Media Composition & Asset Direction Engine (v3.5.0)
+vibe_core.asset_director — Media Composition & Asset Direction Engine (v3.6.0)
 Directs responsive aspect ratios, image framing, and editorial media containers
 across all 24 canonical industry domains with zero domain-key mismatches.
 Demarcates placeholders transparently as synthetic slots awaiting source assets.

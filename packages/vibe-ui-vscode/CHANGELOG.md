@@ -3,6 +3,23 @@
 All notable changes to the **Vibe UI (VS Code, Cursor & Open-VSX)** extension will be documented in this file.
 This project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [3.6.0] — 2026-09-26
+
+### Added
+- **Triple Composite Invariant Gate:** Enforces consensus between DOM, Visual, and Physical Chromium Critics.
+- **Strict Touch Target Compliance:** Guarantees minimum 44x44px bounding hit boxes across all 24 interactive widgets.
+- **Runtime Causal Interaction Verification:** Simulates real slider drags and asserts dynamic DOM recalculation in Chromium.
+
+---
+
+## [3.5.0] — 2026-09-26
+
+### Added
+- **Headless Physical Viewport Auditor:** Real geometry and touch target validation via Playwright Chromium.
+- **24-Domain Widget Registry:** Dedicated modular renderers for all 24 canonical domains.
+
+---
+
 ## [3.4.0] — 2026-09-26
 
 ### Added

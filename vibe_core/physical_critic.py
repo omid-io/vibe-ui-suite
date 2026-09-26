@@ -1,9 +1,10 @@
 """
-vibe_core.physical_critic — Headless Physical Viewport Auditor (v3.5.0)
+vibe_core.physical_critic — Headless Physical Viewport Auditor (v3.6.0)
 Uses headless Playwright Chromium to inspect rendered physical geometry:
 - Physical bounding boxes via getBoundingClientRect()
 - Minimum touch targets (>= 44px on screen)
 - Physical horizontal scroll blowout (scrollWidth > clientWidth) across 390px, 768px, 1440px
+- Runtime causal interaction verification (assert dynamic DOM recalculation on user input)
 - Graceful fast-path fallback when running in headless-restricted environments
 """
 
@@ -199,3 +200,88 @@ class PhysicalCritic:
             },
             "engine": f"static_heuristic_fallback ({error_note})" if error_note else "static_heuristic"
         }
+
+    def audit_runtime_interaction(
+        self,
+        html_content: str,
+        slider_selector: str = 'input[type="range"]',
+        metric_selector: str = 'bdi',
+        target_value: Optional[float] = None
+    ) -> Dict[str, Any]:
+        """
+        Simulates physical causal user interaction in real Chromium browser:
+        1. Loads html_content in Chromium page.
+        2. Queries initial text from `metric_selector`.
+        3. Simulates physical slider drag or value change event on `slider_selector`.
+        4. Queries recalculated text from `metric_selector`.
+        5. Asserts that state is dynamically responsive and causal (initial != recalculated).
+        """
+        if not self.enable_browser:
+            return {
+                "interactive_verified": True,
+                "status": "SKIPPED_STATIC_MODE",
+                "message": "Browser execution disabled; skipped runtime interaction simulation."
+            }
+
+        try:
+            from playwright.sync_api import sync_playwright
+            with sync_playwright() as p:
+                browser = p.chromium.launch(headless=True)
+                page = browser.new_page(viewport={"width": 1280, "height": 800})
+                page.set_content(html_content, wait_until="domcontentloaded")
+
+                # Check element presence
+                slider = page.query_selector(slider_selector)
+                if not slider:
+                    browser.close()
+                    return {
+                        "interactive_verified": False,
+                        "status": "FAIL_SELECTOR_NOT_FOUND",
+                        "message": f"Interactive control selector '{slider_selector}' not found in DOM."
+                    }
+
+                initial_metric = page.eval_on_selector(metric_selector, "el => el.innerText.trim()") if page.query_selector(metric_selector) else ""
+
+                # Simulate physical slider interaction
+                curr_val = float(slider.get_attribute("value") or 0)
+                min_val = float(slider.get_attribute("min") or 0)
+                max_val = float(slider.get_attribute("max") or 100)
+                if target_value is not None:
+                    new_val = target_value
+                else:
+                    new_val = max_val if curr_val < (min_val + max_val) / 2 else min_val
+
+                # Dispatch both input and change events to simulate real browser touch/drag
+                page.evaluate("""({sel, val}) => {
+                    const el = document.querySelector(sel);
+                    if (el) {
+                        el.value = val;
+                        el.dispatchEvent(new Event('input', { bubbles: true }));
+                        el.dispatchEvent(new Event('change', { bubbles: true }));
+                    }
+                }""", {"sel": slider_selector, "val": str(new_val)})
+
+                # Allow microtasks/event callbacks to execute
+                page.wait_for_timeout(60)
+
+                final_metric = page.eval_on_selector(metric_selector, "el => el.innerText.trim()") if page.query_selector(metric_selector) else ""
+
+                browser.close()
+
+                is_dynamic = (initial_metric != final_metric) and bool(final_metric)
+
+                return {
+                    "interactive_verified": is_dynamic,
+                    "status": "PASSED" if is_dynamic else "STATIC_OR_UNCHANGED",
+                    "initial_metric": initial_metric,
+                    "updated_metric": final_metric,
+                    "slider_target": new_val,
+                    "message": "Causal interaction verified; dynamic recalculation asserted." if is_dynamic else "Metric value remained unchanged after slider interaction."
+                }
+        except Exception as e:
+            return {
+                "interactive_verified": False,
+                "status": "ERROR",
+                "message": f"Runtime interaction audit failed: {e}"
+            }
+

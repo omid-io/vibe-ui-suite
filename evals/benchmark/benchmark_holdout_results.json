@@ -1,7 +1,7 @@
 {
   "$schema": "../../schemas/benchmark-result.v1.json",
-  "timestamp": "2026-09-26T18:26:41.839186+00:00",
-  "suite_version": "3.5.0",
+  "timestamp": "2026-09-26T18:48:55.335156+00:00",
+  "suite_version": "3.6.0",
   "scenario_count": 50,
   "benchmark_type": "internal_deterministic_heuristic",
   "baseline_system": "Vanilla LLM / V2 Heuristic Baseline",
@@ -13,6 +13,11 @@
       "baseline": 52.0,
       "candidate": 100.0,
       "delta_percent": 48.0
+    },
+    "autonomous_resolution_rate": {
+      "baseline": 65.0,
+      "candidate": 100.0,
+      "delta_percent": 35.0
     },
     "domain_resolution_accuracy": {
       "baseline": 56.0,
@@ -30,7 +35,7 @@
       "reduction_percent": 100.0
     },
     "avg_time_to_accept_ms": {
-      "candidate": 14.09
+      "candidate": 14.73
     },
     "visual_diversity_index": {
       "candidate": 66.7,
@@ -49,11 +54,12 @@
       "domain_match": true,
       "selected_style": "clean_stripe",
       "candidate_passed_first_pass": true,
+      "autonomous_resolved": true,
       "dom_quality_score": 95.0,
       "visual_quality_score": 89.1,
       "critic_score": 95.0,
       "verification_status": "PASS",
-      "elapsed_ms": 31.03
+      "elapsed_ms": 28.23
     },
     {
       "scenario_id": "holdout_02",
@@ -63,11 +69,12 @@
       "domain_match": true,
       "selected_style": "clean_stripe",
       "candidate_passed_first_pass": true,
+      "autonomous_resolved": true,
       "dom_quality_score": 95.0,
       "visual_quality_score": 89.1,
       "critic_score": 95.0,
       "verification_status": "PASS",
-      "elapsed_ms": 13.07
+      "elapsed_ms": 14.27
     },
     {
       "scenario_id": "holdout_03",
@@ -77,11 +84,12 @@
       "domain_match": true,
       "selected_style": "linear_dark",
       "candidate_passed_first_pass": true,
+      "autonomous_resolved": true,
       "dom_quality_score": 95.0,
       "visual_quality_score": 89.1,
       "critic_score": 95.0,
       "verification_status": "PASS",
-      "elapsed_ms": 14.47
+      "elapsed_ms": 13.7
     },
     {
       "scenario_id": "holdout_04",
@@ -91,11 +99,12 @@
       "domain_match": true,
       "selected_style": "linear_dark",
       "candidate_passed_first_pass": true,
+      "autonomous_resolved": true,
       "dom_quality_score": 95.0,
       "visual_quality_score": 89.1,
       "critic_score": 95.0,
       "verification_status": "PASS",
-      "elapsed_ms": 14.19
+      "elapsed_ms": 15.6
     },
     {
       "scenario_id": "holdout_05",
@@ -105,11 +114,12 @@
       "domain_match": true,
       "selected_style": "soft_humanist",
       "candidate_passed_first_pass": true,
+      "autonomous_resolved": true,
       "dom_quality_score": 95.0,
       "visual_quality_score": 89.1,
       "critic_score": 95.0,
       "verification_status": "PASS",
-      "elapsed_ms": 13.4
+      "elapsed_ms": 12.92
     },
     {
       "scenario_id": "holdout_06",
@@ -119,11 +129,12 @@
       "domain_match": true,
       "selected_style": "soft_humanist",
       "candidate_passed_first_pass": true,
+      "autonomous_resolved": true,
       "dom_quality_score": 95.0,
       "visual_quality_score": 89.1,
       "critic_score": 95.0,
       "verification_status": "PASS",
-      "elapsed_ms": 13.45
+      "elapsed_ms": 13.88
     },
     {
       "scenario_id": "holdout_07",
@@ -133,11 +144,12 @@
       "domain_match": true,
       "selected_style": "editorial_magazine",
       "candidate_passed_first_pass": true,
+      "autonomous_resolved": true,
       "dom_quality_score": 95.0,
       "visual_quality_score": 89.1,
       "critic_score": 95.0,
       "verification_status": "PASS",
-      "elapsed_ms": 12.85
+      "elapsed_ms": 13.27
     },
     {
       "scenario_id": "holdout_08",
@@ -147,11 +159,12 @@
       "domain_match": true,
       "selected_style": "editorial_magazine",
       "candidate_passed_first_pass": true,
+      "autonomous_resolved": true,
       "dom_quality_score": 95.0,
       "visual_quality_score": 89.1,
       "critic_score": 95.0,
       "verification_status": "PASS",
-      "elapsed_ms": 13.13
+      "elapsed_ms": 12.85
     },
     {
       "scenario_id": "holdout_09",
@@ -161,11 +174,12 @@
       "domain_match": true,
       "selected_style": "data_dense_terminal",
       "candidate_passed_first_pass": true,
+      "autonomous_resolved": true,
       "dom_quality_score": 95.0,
       "visual_quality_score": 89.1,
       "critic_score": 95.0,
       "verification_status": "PASS",
-      "elapsed_ms": 14.61
+      "elapsed_ms": 12.9
     },
     {
       "scenario_id": "holdout_10",
@@ -175,11 +189,12 @@
       "domain_match": true,
       "selected_style": "data_dense_terminal",
       "candidate_passed_first_pass": true,
+      "autonomous_resolved": true,
       "dom_quality_score": 95.0,
       "visual_quality_score": 89.1,
       "critic_score": 95.0,
       "verification_status": "PASS",
-      "elapsed_ms": 14.88
+      "elapsed_ms": 14.72
     },
     {
       "scenario_id": "holdout_11",
@@ -189,11 +204,12 @@
       "domain_match": true,
       "selected_style": "quiet_luxury",
       "candidate_passed_first_pass": true,
+      "autonomous_resolved": true,
       "dom_quality_score": 97.0,
       "visual_quality_score": 89.1,
       "critic_score": 97.0,
       "verification_status": "PASS",
-      "elapsed_ms": 12.98
+      "elapsed_ms": 13.59
     },
     {
       "scenario_id": "holdout_12",
@@ -203,11 +219,12 @@
       "domain_match": true,
       "selected_style": "quiet_luxury",
       "candidate_passed_first_pass": true,
+      "autonomous_resolved": true,
       "dom_quality_score": 95.0,
       "visual_quality_score": 89.1,
       "critic_score": 95.0,
       "verification_status": "PASS",
-      "elapsed_ms": 12.7
+      "elapsed_ms": 14.87
     },
     {
       "scenario_id": "holdout_13",
@@ -217,11 +234,12 @@
       "domain_match": true,
       "selected_style": "clean_stripe",
       "candidate_passed_first_pass": true,
+      "autonomous_resolved": true,
       "dom_quality_score": 97.0,
       "visual_quality_score": 89.1,
       "critic_score": 97.0,
       "verification_status": "PASS",
-      "elapsed_ms": 13.53
+      "elapsed_ms": 14.26
     },
     {
       "scenario_id": "holdout_14",
@@ -231,11 +249,12 @@
       "domain_match": true,
       "selected_style": "clean_stripe",
       "candidate_passed_first_pass": true,
+      "autonomous_resolved": true,
       "dom_quality_score": 95.0,
       "visual_quality_score": 89.1,
       "critic_score": 95.0,
       "verification_status": "PASS",
-      "elapsed_ms": 14.15
+      "elapsed_ms": 14.57
     },
     {
       "scenario_id": "holdout_15",
@@ -245,11 +264,12 @@
       "domain_match": true,
       "selected_style": "editorial_magazine",
       "candidate_passed_first_pass": true,
+      "autonomous_resolved": true,
       "dom_quality_score": 95.0,
       "visual_quality_score": 89.1,
       "critic_score": 95.0,
       "verification_status": "PASS",
-      "elapsed_ms": 13.56
+      "elapsed_ms": 15.14
     },
     {
       "scenario_id": "holdout_16",
@@ -259,11 +279,12 @@
       "domain_match": true,
       "selected_style": "editorial_magazine",
       "candidate_passed_first_pass": true,
+      "autonomous_resolved": true,
       "dom_quality_score": 95.0,
       "visual_quality_score": 89.1,
       "critic_score": 95.0,
       "verification_status": "PASS",
-      "elapsed_ms": 14.13
+      "elapsed_ms": 14.46
     },
     {
       "scenario_id": "holdout_17",
@@ -273,11 +294,12 @@
       "domain_match": true,
       "selected_style": "quiet_luxury",
       "candidate_passed_first_pass": true,
+      "autonomous_resolved": true,
       "dom_quality_score": 95.0,
       "visual_quality_score": 89.1,
       "critic_score": 95.0,
       "verification_status": "PASS",
-      "elapsed_ms": 13.76
+      "elapsed_ms": 14.57
     },
     {
       "scenario_id": "holdout_18",
@@ -287,11 +309,12 @@
       "domain_match": true,
       "selected_style": "quiet_luxury",
       "candidate_passed_first_pass": true,
+      "autonomous_resolved": true,
       "dom_quality_score": 95.0,
       "visual_quality_score": 89.1,
       "critic_score": 95.0,
       "verification_status": "PASS",
-      "elapsed_ms": 14.97
+      "elapsed_ms": 15.08
     },
     {
       "scenario_id": "holdout_19",
@@ -301,11 +324,12 @@
       "domain_match": true,
       "selected_style": "clean_stripe",
       "candidate_passed_first_pass": true,
+      "autonomous_resolved": true,
       "dom_quality_score": 95.0,
       "visual_quality_score": 89.1,
       "critic_score": 95.0,
       "verification_status": "PASS",
-      "elapsed_ms": 15.56
+      "elapsed_ms": 16.87
     },
     {
       "scenario_id": "holdout_20",
@@ -315,11 +339,12 @@
       "domain_match": true,
       "selected_style": "clean_stripe",
       "candidate_passed_first_pass": true,
+      "autonomous_resolved": true,
       "dom_quality_score": 95.0,
       "visual_quality_score": 89.1,
       "critic_score": 95.0,
       "verification_status": "PASS",
-      "elapsed_ms": 13.8
+      "elapsed_ms": 14.73
     },
     {
       "scenario_id": "holdout_21",
@@ -329,11 +354,12 @@
       "domain_match": true,
       "selected_style": "soft_humanist",
       "candidate_passed_first_pass": true,
+      "autonomous_resolved": true,
       "dom_quality_score": 95.0,
       "visual_quality_score": 89.1,
       "critic_score": 95.0,
       "verification_status": "PASS",
-      "elapsed_ms": 12.96
+      "elapsed_ms": 16.25
     },
     {
       "scenario_id": "holdout_22",
@@ -343,11 +369,12 @@
       "domain_match": true,
       "selected_style": "soft_humanist",
       "candidate_passed_first_pass": true,
+      "autonomous_resolved": true,
       "dom_quality_score": 95.0,
       "visual_quality_score": 89.1,
       "critic_score": 95.0,
       "verification_status": "PASS",
-      "elapsed_ms": 12.22
+      "elapsed_ms": 17.29
     },
     {
       "scenario_id": "holdout_23",
@@ -357,11 +384,12 @@
       "domain_match": true,
       "selected_style": "clean_stripe",
       "candidate_passed_first_pass": true,
+      "autonomous_resolved": true,
       "dom_quality_score": 95.0,
       "visual_quality_score": 89.1,
       "critic_score": 95.0,
       "verification_status": "PASS",
-      "elapsed_ms": 12.15
+      "elapsed_ms": 14.11
     },
     {
       "scenario_id": "holdout_24",
@@ -371,11 +399,12 @@
       "domain_match": true,
       "selected_style": "clean_stripe",
       "candidate_passed_first_pass": true,
+      "autonomous_resolved": true,
       "dom_quality_score": 95.0,
       "visual_quality_score": 89.1,
       "critic_score": 95.0,
       "verification_status": "PASS",
-      "elapsed_ms": 13.63
+      "elapsed_ms": 14.08
     },
     {
       "scenario_id": "holdout_25",
@@ -385,11 +414,12 @@
       "domain_match": true,
       "selected_style": "linear_dark",
       "candidate_passed_first_pass": true,
+      "autonomous_resolved": true,
       "dom_quality_score": 95.0,
       "visual_quality_score": 89.1,
       "critic_score": 95.0,
       "verification_status": "PASS",
-      "elapsed_ms": 14.52
+      "elapsed_ms": 14.68
     },
     {
       "scenario_id": "holdout_26",
@@ -399,11 +429,12 @@
       "domain_match": true,
       "selected_style": "linear_dark",
       "candidate_passed_first_pass": true,
+      "autonomous_resolved": true,
       "dom_quality_score": 95.0,
       "visual_quality_score": 89.1,
       "critic_score": 95.0,
       "verification_status": "PASS",
-      "elapsed_ms": 12.74
+      "elapsed_ms": 13.63
     },
     {
       "scenario_id": "holdout_27",
@@ -413,11 +444,12 @@
       "domain_match": true,
       "selected_style": "modern_glass_2",
       "candidate_passed_first_pass": true,
+      "autonomous_resolved": true,
       "dom_quality_score": 95.0,
       "visual_quality_score": 89.1,
       "critic_score": 95.0,
       "verification_status": "PASS",
-      "elapsed_ms": 12.24
+      "elapsed_ms": 13.45
     },
     {
       "scenario_id": "holdout_28",
@@ -427,11 +459,12 @@
       "domain_match": true,
       "selected_style": "modern_glass_2",
       "candidate_passed_first_pass": true,
+      "autonomous_resolved": true,
       "dom_quality_score": 95.0,
       "visual_quality_score": 89.1,
       "critic_score": 95.0,
       "verification_status": "PASS",
-      "elapsed_ms": 14.18
+      "elapsed_ms": 16.14
     },
     {
       "scenario_id": "holdout_29",
@@ -441,11 +474,12 @@
       "domain_match": true,
       "selected_style": "editorial_magazine",
       "candidate_passed_first_pass": true,
+      "autonomous_resolved": true,
       "dom_quality_score": 95.0,
       "visual_quality_score": 89.1,
       "critic_score": 95.0,
       "verification_status": "PASS",
-      "elapsed_ms": 12.07
+      "elapsed_ms": 14.25
     },
     {
       "scenario_id": "holdout_30",
@@ -455,11 +489,12 @@
       "domain_match": true,
       "selected_style": "editorial_magazine",
       "candidate_passed_first_pass": true,
+      "autonomous_resolved": true,
       "dom_quality_score": 95.0,
       "visual_quality_score": 89.1,
       "critic_score": 95.0,
       "verification_status": "PASS",
-      "elapsed_ms": 12.71
+      "elapsed_ms": 14.13
     },
     {
       "scenario_id": "holdout_31",
@@ -469,11 +504,12 @@
       "domain_match": true,
       "selected_style": "editorial_magazine",
       "candidate_passed_first_pass": true,
+      "autonomous_resolved": true,
       "dom_quality_score": 95.0,
       "visual_quality_score": 89.1,
       "critic_score": 95.0,
       "verification_status": "PASS",
-      "elapsed_ms": 12.93
+      "elapsed_ms": 14.68
     },
     {
       "scenario_id": "holdout_32",
@@ -483,11 +519,12 @@
       "domain_match": true,
       "selected_style": "editorial_magazine",
       "candidate_passed_first_pass": true,
+      "autonomous_resolved": true,
       "dom_quality_score": 95.0,
       "visual_quality_score": 89.1,
       "critic_score": 95.0,
       "verification_status": "PASS",
-      "elapsed_ms": 12.87
+      "elapsed_ms": 14.3
     },
     {
       "scenario_id": "holdout_33",
@@ -497,11 +534,12 @@
       "domain_match": true,
       "selected_style": "editorial_magazine",
       "candidate_passed_first_pass": true,
+      "autonomous_resolved": true,
       "dom_quality_score": 95.0,
       "visual_quality_score": 89.1,
       "critic_score": 95.0,
       "verification_status": "PASS",
-      "elapsed_ms": 13.81
+      "elapsed_ms": 13.46
     },
     {
       "scenario_id": "holdout_34",
@@ -511,11 +549,12 @@
       "domain_match": true,
       "selected_style": "editorial_magazine",
       "candidate_passed_first_pass": true,
+      "autonomous_resolved": true,
       "dom_quality_score": 95.0,
       "visual_quality_score": 89.1,
       "critic_score": 95.0,
       "verification_status": "PASS",
-      "elapsed_ms": 14.94
+      "elapsed_ms": 13.57
     },
     {
       "scenario_id": "holdout_35",
@@ -525,11 +564,12 @@
       "domain_match": true,
       "selected_style": "neobrutalism",
       "candidate_passed_first_pass": true,
+      "autonomous_resolved": true,
       "dom_quality_score": 95.0,
       "visual_quality_score": 92.4,
       "critic_score": 95.0,
       "verification_status": "PASS",
-      "elapsed_ms": 14.27
+      "elapsed_ms": 13.41
     },
     {
       "scenario_id": "holdout_36",
@@ -539,11 +579,12 @@
       "domain_match": true,
       "selected_style": "neobrutalism",
       "candidate_passed_first_pass": true,
+      "autonomous_resolved": true,
       "dom_quality_score": 95.0,
       "visual_quality_score": 92.4,
       "critic_score": 95.0,
       "verification_status": "PASS",
-      "elapsed_ms": 13.76
+      "elapsed_ms": 12.96
     },
     {
       "scenario_id": "holdout_37",
@@ -553,11 +594,12 @@
       "domain_match": true,
       "selected_style": "clean_stripe",
       "candidate_passed_first_pass": true,
+      "autonomous_resolved": true,
       "dom_quality_score": 97.0,
       "visual_quality_score": 89.1,
       "critic_score": 97.0,
       "verification_status": "PASS",
-      "elapsed_ms": 16.36
+      "elapsed_ms": 21.86
     },
     {
       "scenario_id": "holdout_38",
@@ -567,11 +609,12 @@
       "domain_match": true,
       "selected_style": "clean_stripe",
       "candidate_passed_first_pass": true,
+      "autonomous_resolved": true,
       "dom_quality_score": 95.0,
       "visual_quality_score": 89.1,
       "critic_score": 95.0,
       "verification_status": "PASS",
-      "elapsed_ms": 13.99
+      "elapsed_ms": 14.47
     },
     {
       "scenario_id": "holdout_39",
@@ -581,11 +624,12 @@
       "domain_match": true,
       "selected_style": "clean_stripe",
       "candidate_passed_first_pass": true,
+      "autonomous_resolved": true,
       "dom_quality_score": 97.0,
       "visual_quality_score": 89.1,
       "critic_score": 97.0,
       "verification_status": "PASS",
-      "elapsed_ms": 13.14
+      "elapsed_ms": 13.69
     },
     {
       "scenario_id": "holdout_40",
@@ -595,11 +639,12 @@
       "domain_match": true,
       "selected_style": "clean_stripe",
       "candidate_passed_first_pass": true,
+      "autonomous_resolved": true,
       "dom_quality_score": 95.0,
       "visual_quality_score": 89.1,
       "critic_score": 95.0,
       "verification_status": "PASS",
-      "elapsed_ms": 13.31
+      "elapsed_ms": 12.61
     },
     {
       "scenario_id": "holdout_41",
@@ -609,11 +654,12 @@
       "domain_match": true,
       "selected_style": "editorial_magazine",
       "candidate_passed_first_pass": true,
+      "autonomous_resolved": true,
       "dom_quality_score": 95.0,
       "visual_quality_score": 89.1,
       "critic_score": 95.0,
       "verification_status": "PASS",
-      "elapsed_ms": 15.34
+      "elapsed_ms": 14.14
     },
     {
       "scenario_id": "holdout_42",
@@ -623,11 +669,12 @@
       "domain_match": true,
       "selected_style": "editorial_magazine",
       "candidate_passed_first_pass": true,
+      "autonomous_resolved": true,
       "dom_quality_score": 95.0,
       "visual_quality_score": 89.1,
       "critic_score": 95.0,
       "verification_status": "PASS",
-      "elapsed_ms": 12.22
+      "elapsed_ms": 14.06
     },
     {
       "scenario_id": "holdout_43",
@@ -637,11 +684,12 @@
       "domain_match": true,
       "selected_style": "soft_humanist",
       "candidate_passed_first_pass": true,
+      "autonomous_resolved": true,
       "dom_quality_score": 95.0,
       "visual_quality_score": 89.1,
       "critic_score": 95.0,
       "verification_status": "PASS",
-      "elapsed_ms": 14.59
+      "elapsed_ms": 13.38
     },
     {
       "scenario_id": "holdout_44",
@@ -651,11 +699,12 @@
       "domain_match": true,
       "selected_style": "soft_humanist",
       "candidate_passed_first_pass": true,
+      "autonomous_resolved": true,
       "dom_quality_score": 95.0,
       "visual_quality_score": 89.1,
       "critic_score": 95.0,
       "verification_status": "PASS",
-      "elapsed_ms": 13.74
+      "elapsed_ms": 13.7
     },
     {
       "scenario_id": "holdout_45",
@@ -665,11 +714,12 @@
       "domain_match": true,
       "selected_style": "linear_dark",
       "candidate_passed_first_pass": true,
+      "autonomous_resolved": true,
       "dom_quality_score": 95.0,
       "visual_quality_score": 89.1,
       "critic_score": 95.0,
       "verification_status": "PASS",
-      "elapsed_ms": 14.62
+      "elapsed_ms": 13.44
     },
     {
       "scenario_id": "holdout_46",
@@ -679,11 +729,12 @@
       "domain_match": true,
       "selected_style": "linear_dark",
       "candidate_passed_first_pass": true,
+      "autonomous_resolved": true,
       "dom_quality_score": 95.0,
       "visual_quality_score": 89.1,
       "critic_score": 95.0,
       "verification_status": "PASS",
-      "elapsed_ms": 16.42
+      "elapsed_ms": 17.52
     },
     {
       "scenario_id": "holdout_47",
@@ -693,11 +744,12 @@
       "domain_match": true,
       "selected_style": "clean_stripe",
       "candidate_passed_first_pass": true,
+      "autonomous_resolved": true,
       "dom_quality_score": 95.0,
       "visual_quality_score": 89.1,
       "critic_score": 95.0,
       "verification_status": "PASS",
-      "elapsed_ms": 14.13
+      "elapsed_ms": 15.24
     },
     {
       "scenario_id": "holdout_48",
@@ -707,11 +759,12 @@
       "domain_match": true,
       "selected_style": "clean_stripe",
       "candidate_passed_first_pass": true,
+      "autonomous_resolved": true,
       "dom_quality_score": 95.0,
       "visual_quality_score": 89.1,
       "critic_score": 95.0,
       "verification_status": "PASS",
-      "elapsed_ms": 12.95
+      "elapsed_ms": 14.37
     },
     {
       "scenario_id": "holdout_49",
@@ -721,11 +774,12 @@
       "domain_match": true,
       "selected_style": "clean_stripe",
       "candidate_passed_first_pass": true,
+      "autonomous_resolved": true,
       "dom_quality_score": 95.0,
       "visual_quality_score": 89.1,
       "critic_score": 95.0,
       "verification_status": "PASS",
-      "elapsed_ms": 13.72
+      "elapsed_ms": 13.44
     },
     {
       "scenario_id": "holdout_50",
@@ -735,11 +789,12 @@
       "domain_match": true,
       "selected_style": "clean_stripe",
       "candidate_passed_first_pass": true,
+      "autonomous_resolved": true,
       "dom_quality_score": 95.0,
       "visual_quality_score": 89.1,
       "critic_score": 95.0,
       "verification_status": "PASS",
-      "elapsed_ms": 13.74
+      "elapsed_ms": 13.94
     }
   ]
 }

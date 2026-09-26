@@ -7,6 +7,37 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ---
 
+## [3.6.0] - 2026-09-26
+
+### Added & Revolutionized — The Triple Composite Autonomous Vision & Living Interaction Engine
+- **Triple Composite Invariant Gate (`vibe_core/refiner.py`)**:
+  - Enforced atomic 3-critic consensus: `DOM ACCEPTED and VISUAL ACCEPTED and PHYSICAL ACCEPTED`.
+  - Upgraded invariant checks in `should_accept_patch` from 7 rules to 9 rules (Rules 8 & 9: Physical P0 monotonicity and physical score non-regression within 2.0 pt tolerance).
+  - Injected physical defects (`physical_substandard_touch_target`, `physical_horizontal_overflow`) into surgical repair loop.
+- **Strict WCAG 2.5.5 Physical Touch Target Compliance Across All 24 Domains**:
+  - Wrapped billing toggle switch in `vibe_core/generator.py` with `min-h-[44px] min-w-[48px] p-2` accessible envelope around the visual track.
+  - Upgraded all 24 interactive sliders in `vibe_core/domain_widgets.py` with `min-h-[44px] h-11 py-3` interactive envelopes, ensuring physical hit box >= 44x44px across all viewports.
+- **Runtime Causal Interaction Verification (`vibe_core/physical_critic.py`)**:
+  - Added `audit_runtime_interaction()` executing in headless Chromium to simulate physical slider drags and verify causal DOM metric recalculations.
+- **Benchmark KPI Integrity Overhaul (`evals/benchmark/run_benchmark.py`)**:
+  - Explicitly differentiated `first_pass_rate` (100% on holdout) and `autonomous_resolution_rate` (100% on holdout).
+  - Added `autonomous_resolution_rate` to benchmark summary table and JSON schema.
+
+---
+
+## [3.5.0] - 2026-09-26
+
+### Added & Revolutionized — The Autonomous Physical Vision & Full-Spectrum Architecture Engine
+- **Headless Physical Viewport Auditor (`vibe_core/physical_critic.py`)**:
+  - Integrated Playwright Chromium for real geometric inspection on 390px, 768px, and 1440px viewports.
+  - Verified physical touch targets (`getBoundingClientRect()`) and detected scroll width blowouts.
+- **Modular 24-Domain Widget Architecture (`vibe_core/domain_widgets.py`)**:
+  - Extracted 24 dedicated domain renderers with authentic causal models and zero generic fallbacks.
+- **Full Media Composition & Asset Direction Engine (`vibe_core/asset_director.py`)**:
+  - Implemented 24-domain asset specifications with editorial aspect ratios and semantic demarcation.
+
+---
+
 ## [3.4.0] - 2026-09-26
 
 ### Added & Revolutionized — The True Vision & Dynamic Architecture Engine

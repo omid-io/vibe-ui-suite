@@ -1,12 +1,12 @@
 {
   "$schema": "./schemas/version-manifest.schema.json",
-  "version": "3.5.0",
-  "codename": "The Autonomous Physical Vision & Full-Spectrum Architecture Engine",
+  "version": "3.6.0",
+  "codename": "The Triple Composite Autonomous Vision & Living Interaction Engine",
   "release_channel": "stable",
   "packages": {
-    "@omid-io/tokens": "3.5.0",
-    "vibe-ui-vscode": "3.5.0",
-    "vibe-ui-nextjs-starter": "3.5.0"
+    "@omid-io/tokens": "3.6.0",
+    "vibe-ui-vscode": "3.6.0",
+    "vibe-ui-nextjs-starter": "3.6.0"
   },
   "schemas": {
     "intent_contract": "v1",

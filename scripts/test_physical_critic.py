@@ -98,13 +98,46 @@ def main():
         failures.append("Test 4 Failed: Expected static fallback engine")
     print(f"  [PASS] Test 4: Static fallback engine verified successfully")
 
+    # Test 5: Runtime Causal Interaction Verification in Chromium
+    interactive_html = """<!DOCTYPE html>
+<html>
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body>
+  <div>
+    <span id="label">Estimated Volume: <bdi id="metric">50,000 USD</bdi></span>
+    <input
+      type="range"
+      id="vol-slider"
+      min="1000"
+      max="100000"
+      value="50000"
+      oninput="document.getElementById('metric').innerText = Number(this.value).toLocaleString() + ' USD';"
+    />
+  </div>
+</body>
+</html>"""
+
+    res5 = critic.audit_runtime_interaction(
+        interactive_html,
+        slider_selector="#vol-slider",
+        metric_selector="#metric",
+        target_value=85000
+    )
+    if not res5.get("interactive_verified"):
+        failures.append(f"Test 5 Failed: Interactive state not verified (result={res5})")
+    if "85,000 USD" not in res5.get("updated_metric", ""):
+        failures.append(f"Test 5 Failed: Expected updated metric to contain '85,000 USD', got '{res5.get('updated_metric')}'")
+    print(f"  [PASS] Test 5: Runtime causal interaction verified in Chromium ({res5.get('initial_metric')} -> {res5.get('updated_metric')})")
+
     if failures:
         print("\n[FAIL] Physical Critic Suite Failures:", file=sys.stderr)
         for f in failures:
             print(f"  - {f}", file=sys.stderr)
         return 1
 
-    print("\n[SUCCESS] Headless Physical Viewport Critic passed all tests (4/4).")
+    print("\n[SUCCESS] Headless Physical Viewport Critic passed all tests (5/5).")
     return 0
 
 if __name__ == "__main__":

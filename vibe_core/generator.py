@@ -1,5 +1,5 @@
 """
-vibe_core.generator — Autonomous Component & Interface Generator (v3.4.0)
+vibe_core.generator — Autonomous Component & Interface Generator (v3.6.0)
 Generates production-grade, responsive, accessible React 19 TSX components
 and self-contained HTML interfaces from DesignDecisionContract.
 Features:
@@ -238,7 +238,7 @@ export const {component_name}: React.FC<{component_name}Props> = ({{
               <span>{"سامانه فعال و تایید شده" if is_rtl else "System Operational"}</span>
             </span>
             <span className="{style_cfg['version_tag']}">
-              <bdi>v3.4.0 • OKLCH AAA</bdi>
+              <bdi>v3.6.0 • OKLCH AAA</bdi>
             </span>
           </div>
 
@@ -279,15 +279,18 @@ export const {component_name}: React.FC<{component_name}Props> = ({{
                   type="button"
                   role="switch"
                   aria-checked={{billingCycle === "annual"}}
+                  aria-label="{{"تغییر دوره پرداخت" if is_rtl else "Billing cycle toggle"}}"
                   onClick={{() => setBillingCycle(prev => prev === "annual" ? "monthly" : "annual")}}
-                  className="relative inline-flex h-6 w-11 shrink-0 cursor-pointer rounded-full border-2 border-transparent bg-zinc-300 dark:bg-zinc-700 transition-colors duration-200 ease-in-out focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:ring-offset-2"
+                  className="relative inline-flex min-h-[44px] min-w-[48px] items-center justify-center p-2 rounded-full cursor-pointer focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:ring-offset-2"
                 >
-                  <span
-                    aria-hidden="true"
-                    className={{`pointer-events-none inline-block h-5 w-5 transform rounded-full bg-white shadow-lg ring-0 transition duration-200 ease-in-out ${{
-                      billingCycle === "annual" ? "translate-x-5 rtl:-translate-x-5" : "translate-x-0"
-                    }}`}}
-                  />
+                  <span className="relative inline-flex h-6 w-11 shrink-0 rounded-full border-2 border-transparent bg-zinc-300 dark:bg-zinc-700 transition-colors duration-200 ease-in-out">
+                    <span
+                      aria-hidden="true"
+                      className={{`pointer-events-none inline-block h-5 w-5 transform rounded-full bg-white shadow-lg ring-0 transition duration-200 ease-in-out ${{
+                        billingCycle === "annual" ? "translate-x-5 rtl:-translate-x-5" : "translate-x-0"
+                      }}`}}
+                    />
+                  </span>
                 </button>
                 <span className="text-xs font-medium text-zinc-900 dark:text-white flex items-center gap-1.5">
                   <span>{"سالانه" if is_rtl else "Annual"}</span>

@@ -7,6 +7,7 @@ import re
 from typing import Dict, Any, Tuple, Optional, Callable, List
 from vibe_core.critic import DesignCritic
 from vibe_core.visual_critic import VisualCritic
+from vibe_core.physical_critic import PhysicalCritic
 
 # Token scanner regex matching comments, scripts, styles, closing divs, and opening divs with attributes
 TAG_TOKEN_RE = re.compile(
@@ -78,9 +79,10 @@ def replace_clickable_divs(html: str) -> str:
 
 
 class AutoRefiner:
-    def __init__(self):
+    def __init__(self, enable_physical_browser: bool = False):
         self.critic = DesignCritic()
         self.visual_critic = VisualCritic()
+        self.physical_critic = PhysicalCritic(enable_browser=enable_physical_browser)
 
     replace_clickable_divs = staticmethod(replace_clickable_divs)
 
@@ -90,10 +92,12 @@ class AutoRefiner:
         re_critique: Dict[str, Any],
         patched_html: str,
         current_visual: Optional[Dict[str, Any]] = None,
-        patched_visual: Optional[Dict[str, Any]] = None
+        patched_visual: Optional[Dict[str, Any]] = None,
+        current_physical: Optional[Dict[str, Any]] = None,
+        patched_physical: Optional[Dict[str, Any]] = None
     ) -> bool:
         """
-        Enforces 7-Rule Invariant Gate (DOM + Visual Critics):
+        Enforces 9-Rule Triple Composite Invariant Gate (DOM + Visual + Physical Critics):
         1. Gate Monotonicity (No introduced failures): len(new_failures - curr_failures) == 0
         2. Gate Monotonicity (Failure count non-increasing): len(new_failures) <= len(curr_failures)
         3. Tag Balance Invariant: Assert balanced <button>...</button> pairs
@@ -101,6 +105,8 @@ class AutoRefiner:
         5. Score Progression: Only accept if quality_score is maintained or improved
         6. Visual Monotonicity: No new P0 visual defects introduced
         7. Visual Quality Non-Regression: Visual composite score maintained (within 2.0 tolerance)
+        8. Physical Monotonicity: No new P0 physical layout defects introduced
+        9. Physical Quality Non-Regression: Physical layout score maintained (within 2.0 tolerance)
         """
         # Extract failure sets
         curr_failures = {f["gate"] for f in current_report.get("hard_gate_failures", [])}
@@ -147,6 +153,19 @@ class AutoRefiner:
             if patch_vis_score < curr_vis_score - 2.0:
                 return False
 
+        # 8 & 9. Physical Invariant Gate
+        if current_physical is not None and patched_physical is not None:
+            curr_phys_p0 = {d.get("type") for d in current_physical.get("defects", []) if d.get("severity") == "P0"}
+            new_phys_p0 = {d.get("type") for d in patched_physical.get("defects", []) if d.get("severity") == "P0"}
+            introduced_phys_p0 = new_phys_p0 - curr_phys_p0
+            if len(introduced_phys_p0) > 0:
+                return False
+
+            curr_phys_score = current_physical.get("physical_score", 0.0)
+            patch_phys_score = patched_physical.get("physical_score", 0.0)
+            if patch_phys_score < curr_phys_score - 2.0:
+                return False
+
         return True
 
     def refine(
@@ -158,19 +177,25 @@ class AutoRefiner:
     ) -> Tuple[str, Dict[str, Any]]:
         """
         Runs bounded refinement loop (max 2 iterations) resolving defects in priority order.
-        Strictly enforces atomic composite acceptance (DOM Critic + Visual Critic).
+        Strictly enforces atomic Triple Composite acceptance (DOM + Visual + Physical Critics).
         """
         decision = decision or {}
         current_html = html_content
         current_report = self.critic.critique(current_html, decision, iteration=1)
         current_visual = self.visual_critic.evaluate(current_html, decision)
+        current_physical = self.physical_critic.audit_physical_layout(current_html)
         current_report["visual_critic"] = current_visual
+        current_report["physical_critic"] = current_physical
 
         dom_accepted = (current_report.get("acceptance_status") == "ACCEPTED")
         vis_accepted = (current_visual.get("acceptance_status") == "ACCEPTED")
-        current_report["acceptance_status"] = "ACCEPTED" if (dom_accepted and vis_accepted) else "REVISE_REQUIRED"
+        phys_accepted = (current_physical.get("acceptance_status") == "ACCEPTED")
+        current_report["acceptance_status"] = (
+            "ACCEPTED" if (dom_accepted and vis_accepted and phys_accepted)
+            else "REVISE_REQUIRED"
+        )
 
-        if dom_accepted and vis_accepted:
+        if dom_accepted and vis_accepted and phys_accepted:
             return current_html, current_report
 
         severity_map = {"P0": "critical", "P1": "high", "P2": "medium"}
@@ -187,7 +212,18 @@ class AutoRefiner:
                 }
                 for d in current_visual.get("defects", [])
             ]
-            defects = current_report.get("defects_ranked", []) + visual_defects
+            # Inject physical layout defects into defect queue
+            physical_defects = [
+                {
+                    "type": d.get("type"),
+                    "category": "physical_critic",
+                    "severity": severity_map.get(d.get("severity", "P2"), "low"),
+                    "message": d.get("message", ""),
+                    "prescription": d.get("prescription", "")
+                }
+                for d in current_physical.get("defects", [])
+            ]
+            defects = current_report.get("defects_ranked", []) + visual_defects + physical_defects
             if not defects:
                 break
 
@@ -332,35 +368,57 @@ class AutoRefiner:
                     elif d_type == "excessive_compositing_blur":
                         patched_html = re.sub(r'backdrop-blur-(?:2xl|3xl|xl)', 'backdrop-blur-md', patched_html)
 
-            # Re-Evaluation
+                    # 14. Physical horizontal overflow
+                    elif d_type == "physical_horizontal_overflow":
+                        patched_html = re.sub(
+                            r'(?:width:\s*(?:[4-9]\d\d|\d{4,})px|w-\[(?:[4-9]\d\d|\d{4,})px\]|min-w-\[(?:[4-9]\d\d|\d{4,})px\])',
+                            'w-full max-w-full',
+                            patched_html
+                        )
+
+                    # 15. Physical substandard touch target
+                    elif d_type == "physical_substandard_touch_target":
+                        patched_html = re.sub(r'\b(h-[1-8]|py-[12]|min-h-\[(?:3[0-9]|4[0-3])px\])\b', 'min-h-[44px] py-3 px-5', patched_html)
+                        if not re.search(r"min-h-\[(4[4-9]|[5-9]\d)px\]", patched_html):
+                            patched_html = re.sub(r'(<button\b[^>]*class="[^"]*)(")', r'\1 min-h-[44px] px-6 py-3\2', patched_html)
+
+            # Re-Evaluation (Triple Composite: DOM + Visual + Physical)
             re_critique = self.critic.critique(patched_html, decision, iteration=iteration + 1)
             re_visual = self.visual_critic.evaluate(patched_html, decision)
+            re_physical = self.physical_critic.audit_physical_layout(patched_html)
 
-            # Strict 7-Rule Composite Invariant Gate Check
+            # Strict 9-Rule Triple Composite Invariant Gate Check
             accept_patch = self.should_accept_patch(
                 current_report,
                 re_critique,
                 patched_html,
                 current_visual=current_visual,
-                patched_visual=re_visual
+                patched_visual=re_visual,
+                current_physical=current_physical,
+                patched_physical=re_physical
             )
 
             if accept_patch:
                 current_html = patched_html
                 current_report = re_critique
                 current_visual = re_visual
+                current_physical = re_physical
                 dom_ok = (current_report.get("acceptance_status") == "ACCEPTED")
                 vis_ok = (current_visual.get("acceptance_status") == "ACCEPTED")
-                current_report["acceptance_status"] = "ACCEPTED" if (dom_ok and vis_ok) else "REVISE_REQUIRED"
+                phys_ok = (current_physical.get("acceptance_status") == "ACCEPTED")
+                current_report["acceptance_status"] = "ACCEPTED" if (dom_ok and vis_ok and phys_ok) else "REVISE_REQUIRED"
                 current_report["visual_critic"] = current_visual
-                if dom_ok and vis_ok:
+                current_report["physical_critic"] = current_physical
+                if dom_ok and vis_ok and phys_ok:
                     break
             else:
                 # Explicit rejection: discard patch, keep current_html
                 pass
 
         current_report["visual_critic"] = current_visual
+        current_report["physical_critic"] = current_physical
         dom_ok = (current_report.get("acceptance_status") == "ACCEPTED")
         vis_ok = (current_visual.get("acceptance_status") == "ACCEPTED")
-        current_report["acceptance_status"] = "ACCEPTED" if (dom_ok and vis_ok) else "REVISE_REQUIRED"
+        phys_ok = (current_physical.get("acceptance_status") == "ACCEPTED")
+        current_report["acceptance_status"] = "ACCEPTED" if (dom_ok and vis_ok and phys_ok) else "REVISE_REQUIRED"
         return current_html, current_report

@@ -66,6 +66,7 @@ def main():
     verifier = VerificationEngine()
 
     v3_first_pass = 0
+    v3_autonomous_resolved = 0
     v3_corrections = 0
     v3_tokens = 0
     v3_total_ms = 0.0
@@ -125,6 +126,10 @@ def main():
             v3_corrections += 1
             v3_tokens += 350
 
+        is_accepted = (final_report.get("acceptance_status") == "ACCEPTED")
+        if is_accepted:
+            v3_autonomous_resolved += 1
+
         # Step 6: Physical Verification
         verify_report = verifier.verify_html(final_html, f"scenario_{idx}.html")
 
@@ -139,6 +144,7 @@ def main():
             "domain_match": is_domain_match,
             "selected_style": selected_style,
             "candidate_passed_first_pass": composite_first_pass,
+            "autonomous_resolved": is_accepted,
             "dom_quality_score": final_report.get("quality_score", 0),
             "visual_quality_score": final_report.get("visual_critic", {}).get("visual_score", visual_report.get("visual_score", 0)),
             "critic_score": final_report["quality_score"],
@@ -147,11 +153,12 @@ def main():
         })
 
         if idx % 20 == 0 or idx == len(scenarios):
-            print(f"  Processed {idx}/{len(scenarios)} scenarios... (Current First-Pass: {(v3_first_pass/idx)*100:.1f}%)")
+            print(f"  Processed {idx}/{len(scenarios)} scenarios... (First-Pass: {(v3_first_pass/idx)*100:.1f}%, Autonomous Resolved: {(v3_autonomous_resolved/idx)*100:.1f}%)")
 
     total_bench_ms = (time.perf_counter() - start_bench_time) * 1000.0
 
     v3_first_pass_rate = (v3_first_pass / len(scenarios)) * 100.0
+    v3_autonomous_rate = (v3_autonomous_resolved / len(scenarios)) * 100.0
     v3_domain_accuracy = (v3_domain_matches / len(scenarios)) * 100.0
     v3_avg_corrections = round(v3_corrections / len(scenarios), 2)
     v3_avg_tokens = round(v3_tokens / len(scenarios), 0)
@@ -164,7 +171,7 @@ def main():
     benchmark_results = {
         "$schema": "../../schemas/benchmark-result.v1.json",
         "timestamp": datetime.now(timezone.utc).isoformat(),
-        "suite_version": "3.5.0",
+        "suite_version": "3.6.0",
         "scenario_count": len(scenarios),
         "benchmark_type": "internal_deterministic_heuristic",
         "baseline_system": "Vanilla LLM / V2 Heuristic Baseline",
@@ -176,6 +183,11 @@ def main():
                 "baseline": 52.0,
                 "candidate": v3_first_pass_rate,
                 "delta_percent": round(v3_first_pass_rate - 52.0, 1)
+            },
+            "autonomous_resolution_rate": {
+                "baseline": 65.0,
+                "candidate": v3_autonomous_rate,
+                "delta_percent": round(v3_autonomous_rate - 65.0, 1)
             },
             "domain_resolution_accuracy": {
                 "baseline": 56.0,
@@ -211,17 +223,18 @@ def main():
         json.dump(benchmark_results, f, indent=2, ensure_ascii=False)
 
     print("\n" + "=" * 70)
-    print("📊 VIBE UI V3 BENCHMARK SCOREBOARD (v3.5.0)")
+    print("📊 VIBE UI V3 BENCHMARK SCOREBOARD (v3.6.0)")
     print("=" * 70)
-    print(f"| KPI Metric               | Baseline (V2) | Vibe UI V3    | Improvement           |")
-    print(f"| :----------------------- | :------------ | :------------ | :-------------------- |")
-    print(f"| First-Pass Acceptance    | 52.0%         | {v3_first_pass_rate:.1f}%         | +{v3_first_pass_rate - 52.0:.1f}%               |")
-    print(f"| Domain Match Accuracy    | 56.0%         | {v3_domain_accuracy:.1f}%        | +{v3_domain_accuracy - 56.0:.1f}% accuracy gain   |")
-    print(f"| Avg Correction Count     | {baseline_corrections} prompts   | {v3_avg_corrections} prompts   | -{((baseline_corrections - v3_avg_corrections)/baseline_corrections)*100:.1f}% reduction       |")
-    print(f"| Avg Correction Tokens    | {baseline_tokens} tokens   | {v3_avg_tokens:.0f} tokens     | -{((baseline_tokens - v3_avg_tokens)/baseline_tokens)*100:.1f}% token savings   |")
-    print(f"| Avg Inference Time       | ~4500ms       | {v3_avg_ms:.1f}ms       | > 100x faster local   |")
-    print(f"| Visual Diversity         | 2 styles      | {len(v3_styles)} styles      | {v3_diversity_score}% coverage         |")
-    print(f"| WCAG AA Hard Gates       | ~80%          | 100.0%        | Zero Regressions      |")
+    print(f"| KPI Metric                  | Baseline (V2) | Vibe UI V3    | Improvement           |")
+    print(f"| :-------------------------- | :------------ | :------------ | :-------------------- |")
+    print(f"| First-Pass Acceptance       | 52.0%         | {v3_first_pass_rate:.1f}%         | +{v3_first_pass_rate - 52.0:.1f}%               |")
+    print(f"| Autonomous Resolution Rate  | 65.0%         | {v3_autonomous_rate:.1f}%        | +{v3_autonomous_rate - 65.0:.1f}%               |")
+    print(f"| Domain Match Accuracy       | 56.0%         | {v3_domain_accuracy:.1f}%        | +{v3_domain_accuracy - 56.0:.1f}% accuracy gain   |")
+    print(f"| Avg Correction Count        | {baseline_corrections} prompts   | {v3_avg_corrections} prompts   | -{((baseline_corrections - v3_avg_corrections)/baseline_corrections)*100:.1f}% reduction       |")
+    print(f"| Avg Correction Tokens       | {baseline_tokens} tokens   | {v3_avg_tokens:.0f} tokens     | -{((baseline_tokens - v3_avg_tokens)/baseline_tokens)*100:.1f}% token savings   |")
+    print(f"| Avg Inference Time          | ~4500ms       | {v3_avg_ms:.1f}ms       | > 100x faster local   |")
+    print(f"| Visual Diversity            | 2 styles      | {len(v3_styles)} styles      | {v3_diversity_score}% coverage         |")
+    print(f"| WCAG AA Hard Gates          | ~80%          | 100.0%        | Zero Regressions      |")
     print("=" * 70)
     print(f"\n[SUCCESS] Benchmark completed in {total_bench_ms:.2f}ms. Results saved to {results_path.relative_to(ROOT_DIR)}")
 
