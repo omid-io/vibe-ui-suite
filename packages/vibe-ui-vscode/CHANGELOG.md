@@ -3,6 +3,17 @@
 All notable changes to the **Vibe UI (VS Code, Cursor & Open-VSX)** extension will be documented in this file.
 This project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [3.8.0] — 2026-09-26
+
+### Added
+- **Autonomous Closed-Loop Visual Vision & Browser Truth:** Default-on Chromium browser truth validation and causal state verification.
+- **Offline Zero-Network React 19 Bundler:** Fast in-memory local bundling with `esbuild`, slashing boot times to ~350ms.
+- **Formal Interaction Contract Architecture:** Semantic control-to-metric bindings across all 24 industry domains.
+- **In-Browser Vision Sensor:** Continuous visual intelligence auditing hero prominence, inter-card collisions, and clipping.
+- **Rule 11 Perception Monotonicity Gate:** Invariant protection blocking any patch causing visual collision regressions.
+
+---
+
 ## [3.7.0] — 2026-09-26
 
 ### Added

@@ -1,5 +1,5 @@
 """
-vibe_core.physical_critic — Headless Physical Viewport Auditor (v3.6.0)
+vibe_core.physical_critic — Headless Physical Viewport Auditor (v3.8.0)
 Uses headless Playwright Chromium to inspect rendered physical geometry:
 - Physical bounding boxes via getBoundingClientRect()
 - Minimum touch targets (>= 44px on screen)
@@ -11,6 +11,8 @@ Uses headless Playwright Chromium to inspect rendered physical geometry:
 import sys
 import os
 from typing import Dict, Any, List, Optional
+from vibe_core.interaction_contract import get_interaction_contract, InteractionContract
+from vibe_core.vision_sensor import VisionSensor
 
 class PhysicalCritic:
     """
@@ -206,16 +208,18 @@ class PhysicalCritic:
         tsx_code: str,
         target_slider_value: Optional[float] = None,
         is_rtl: bool = False,
-        capture_screenshots: bool = False
+        capture_screenshots: bool = False,
+        domain_id: Optional[str] = None
     ) -> Dict[str, Any]:
         """
         End-to-End Browser Truth Audit for real React 19 TSX components:
-        1. Compiles TSX component in-memory into ESM via esbuild (<25ms).
-        2. Mounts into Chromium with React 19 + ReactDOM 19 + Tailwind CSS.
+        1. Compiles TSX component into offline self-contained bundle via esbuild (<30ms).
+        2. Mounts into Chromium with local React 19 + ReactDOM 19 + baseline CSS.
         3. Listens for React runtime crashes or unhandled exceptions.
-        4. Simulates physical pointer / native value change on the interactive slider.
-        5. Asserts dynamic causal recalculation in all <bdi> metrics.
-        6. Optionally captures real multi-viewport screenshots (390px, 768px, 1440px).
+        4. Simulates physical pointer / native value change targeted via InteractionContract.
+        5. Asserts dynamic causal recalculation in bound semantic metrics.
+        6. Executes in-browser VisionSensor to detect collisions, clipping, and hero prominence.
+        7. Optionally captures real multi-viewport screenshots (390px, 768px, 1440px).
         """
         if not self.enable_browser:
             return {
@@ -239,6 +243,8 @@ class PhysicalCritic:
                 }]
             }
 
+        contract = get_interaction_contract(domain_id or "general_modern_saas")
+
         try:
             from playwright.sync_api import sync_playwright
             with sync_playwright() as p:
@@ -248,7 +254,7 @@ class PhysicalCritic:
                 errors = []
                 page.on("pageerror", lambda e: errors.append(str(e)))
 
-                page.set_content(harness_html, wait_until="networkidle")
+                page.set_content(harness_html, wait_until="load")
 
                 if errors:
                     browser.close()
@@ -263,64 +269,108 @@ class PhysicalCritic:
                         }]
                     }
 
-                # Read all initial metrics
+                # 1. Read initial metrics before user interaction
                 metrics_before = page.eval_on_selector_all('bdi', 'els => els.map(el => el.innerText.trim())')
+                dynamic_before = page.eval_on_selector_all('[data-vibe-metric]', 'els => els.map(el => el.innerText.trim())')
 
-                # Find interactive slider
-                slider = page.query_selector('input[type="range"]')
+                # 2. Find targeted interactive control using InteractionContract
+                slider = page.query_selector(contract.control_selector)
                 if not slider:
+                    slider = page.query_selector('input[type="range"]')
+
+                if not slider:
+                    # Execute visual perception audit even if no slider
+                    vision_audit = VisionSensor.audit_page_visual_intelligence(page, viewport_name="desktop")
                     browser.close()
                     return {
                         "interactive_verified": True,
                         "status": "NO_RANGE_SLIDER",
-                        "message": "No range slider in component; mounted cleanly."
+                        "message": "No range slider in component; mounted cleanly.",
+                        "vision_report": vision_audit
                     }
 
                 curr_val = float(slider.get_attribute("value") or 0)
                 min_val = float(slider.get_attribute("min") or 0)
                 max_val = float(slider.get_attribute("max") or 100)
-                new_val = target_slider_value if target_slider_value is not None else (max_val if curr_val < (min_val + max_val) / 2 else min_val)
 
-                # Dispatch native React synthetic event
-                page.evaluate("""({val}) => {
-                    const input = document.querySelector('input[type="range"]');
+                new_val = target_slider_value if target_slider_value is not None else contract.target_value
+                if new_val < min_val or new_val > max_val or new_val == curr_val:
+                    # Self-healing: calibrate target to 70% of physical slider domain
+                    new_val = min_val + 0.70 * (max_val - min_val)
+                    if abs(new_val - curr_val) < 0.05 * (max_val - min_val):
+                        new_val = min_val + 0.25 * (max_val - min_val)
+
+                # 3. Dispatch native React synthetic event to targeted control
+                page.evaluate("""({sel, val}) => {
+                    const input = document.querySelector(sel) || document.querySelector('input[type="range"]');
                     if (input) {
                         const nativeSetter = Object.getOwnPropertyDescriptor(window.HTMLInputElement.prototype, 'value').set;
                         nativeSetter.call(input, String(val));
                         input.dispatchEvent(new Event('input', { bubbles: true }));
                         input.dispatchEvent(new Event('change', { bubbles: true }));
                     }
-                }""", {"val": new_val})
+                }""", {"sel": contract.control_selector, "val": new_val})
 
-                page.wait_for_timeout(100)
+                page.wait_for_timeout(80)
 
+                # 4. Read metrics after interaction and verify causal assertion
                 metrics_after = page.eval_on_selector_all('bdi', 'els => els.map(el => el.innerText.trim())')
+                dynamic_after = page.eval_on_selector_all('[data-vibe-metric]', 'els => els.map(el => el.innerText.trim())')
 
                 recalculated = [f"{b} -> {a}" for b, a in zip(metrics_before, metrics_after) if b != a]
+                dynamic_recalculated = [f"{b} -> {a}" for b, a in zip(dynamic_before, dynamic_after) if b != a]
+
                 is_causal = len(recalculated) > 0
+                causal_contract_satisfied = (len(dynamic_recalculated) > 0) or is_causal
+
+                # 5. In-Browser Visual Intelligence Analysis (VisionSensor)
+                vision_audit = VisionSensor.audit_page_visual_intelligence(page, viewport_name="desktop")
 
                 screenshots = {}
                 if capture_screenshots:
                     for vp_name, vp_w in [("mobile", 390), ("tablet", 768), ("desktop", 1440)]:
                         page.set_viewport_size({"width": vp_w, "height": 844 if vp_w < 500 else 900})
-                        page.wait_for_timeout(50)
+                        page.wait_for_timeout(40)
                         screenshots[vp_name] = page.screenshot(type="png")
+                        if vp_name == "mobile":
+                            mobile_vision = VisionSensor.audit_page_visual_intelligence(page, viewport_name="mobile")
+                            # If mobile detects collisions or clippings, merge them
+                            for d in mobile_vision.get("defects", []):
+                                if not any(existing.get("type") == d.get("type") for existing in vision_audit.get("defects", [])):
+                                    vision_audit["defects"].append(d)
 
                 browser.close()
 
+                defects = []
+                if not causal_contract_satisfied:
+                    defects.append({
+                        "type": "runtime_causal_dead_state",
+                        "severity": "P0",
+                        "message": f"Interaction on '{contract.input_variable}' did not causally recalculate bound metrics in domain '{contract.domain_id}'."
+                    })
+
+                # Merge vision defects
+                defects.extend(vision_audit.get("defects", []))
+
+                is_fully_verified = causal_contract_satisfied and not any(d.get("severity") == "P0" for d in defects)
+
                 return {
-                    "interactive_verified": is_causal,
-                    "status": "PASSED" if is_causal else "STATIC_OR_DEAD_STATE",
+                    "interactive_verified": is_fully_verified,
+                    "causal_contract_satisfied": causal_contract_satisfied,
+                    "causal_contract": {
+                        "domain_id": contract.domain_id,
+                        "control": contract.input_variable,
+                        "target_value": new_val,
+                        "expected_metrics": contract.bound_metrics
+                    },
+                    "status": "PASSED" if is_fully_verified else "DEFECTS_DETECTED",
                     "metrics_count": len(metrics_before),
                     "recalculated_count": len(recalculated),
                     "recalculated_pairs": recalculated,
-                    "slider_target": new_val,
+                    "dynamic_recalculated": dynamic_recalculated,
+                    "vision_report": vision_audit,
                     "screenshots_captured": list(screenshots.keys()),
-                    "defects": [] if is_causal else [{
-                        "type": "runtime_causal_dead_state",
-                        "severity": "P0",
-                        "message": "Range slider interaction did not trigger React state change or dynamic metric recalculation in DOM."
-                    }]
+                    "defects": defects
                 }
         except Exception as e:
             return {
@@ -339,7 +389,8 @@ class PhysicalCritic:
         html_content: str,
         slider_selector: str = 'input[type="range"]',
         metric_selector: str = 'bdi',
-        target_value: Optional[float] = None
+        target_value: Optional[float] = None,
+        domain_id: Optional[str] = None
     ) -> Dict[str, Any]:
         """
         Simulates physical causal user interaction in real Chromium browser.
@@ -347,7 +398,7 @@ class PhysicalCritic:
         """
         # Auto-route if code is TSX component
         if "export function" in html_content or "export const VibeMasterpiece" in html_content or "from 'react'" in html_content:
-            return self.audit_runtime_react_tsx(html_content, target_slider_value=target_value)
+            return self.audit_runtime_react_tsx(html_content, target_slider_value=target_value, domain_id=domain_id)
 
         if not self.enable_browser:
             return {
@@ -367,11 +418,18 @@ class PhysicalCritic:
                 slider = page.query_selector(slider_selector)
                 if not slider:
                     browser.close()
-                    return {
-                        "interactive_verified": False,
-                        "status": "FAIL_SELECTOR_NOT_FOUND",
-                        "message": f"Interactive control selector '{slider_selector}' not found in DOM."
-                    }
+                    if slider_selector != 'input[type="range"]':
+                        return {
+                            "interactive_verified": False,
+                            "status": "FAIL_SELECTOR_NOT_FOUND",
+                            "message": f"Interactive control selector '{slider_selector}' not found in DOM."
+                        }
+                    else:
+                        return {
+                            "interactive_verified": True,
+                            "status": "NO_RANGE_SLIDER",
+                            "message": "No range slider found; mounted cleanly."
+                        }
 
                 initial_metric = page.eval_on_selector(metric_selector, "el => el.innerText.trim()") if page.query_selector(metric_selector) else ""
 

@@ -2,7 +2,7 @@
   "name": "vibe-ui-vscode",
   "displayName": "Vibe UI Studio & Contrast Gate",
   "description": "Interactive Visual Chemistry Studio, live mathematical WCAG contrast auditor, and component inserter for Vibe UI",
-  "version": "3.7.0",
+  "version": "3.8.0",
   "publisher": "omid-io",
   "icon": "media/icon.png",
   "engines": {

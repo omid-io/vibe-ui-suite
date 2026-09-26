@@ -1,5 +1,5 @@
 """
-vibe_core.generator — Autonomous Component & Interface Generator (v3.6.0)
+vibe_core.generator — Autonomous Component & Interface Generator (v3.8.0)
 Generates production-grade, responsive, accessible React 19 TSX components
 and self-contained HTML interfaces from DesignDecisionContract.
 Features:
@@ -238,7 +238,7 @@ export const {component_name}: React.FC<{component_name}Props> = ({{
               <span>{"سامانه فعال و تایید شده" if is_rtl else "System Operational"}</span>
             </span>
             <span className="{style_cfg['version_tag']}">
-              <bdi>v3.7.0 • OKLCH AAA</bdi>
+              <bdi>v3.8.0 • OKLCH AAA</bdi>
             </span>
           </div>
 
@@ -329,7 +329,7 @@ export const {component_name}: React.FC<{component_name}Props> = ({{
                   <button
                     type="button"
                     onClick={{() => setIsLiveActive(prev => !prev)}}
-                    className={{`text-[11px] font-mono px-2 py-0.5 rounded border transition-colors ${{
+                    className={{`text-[11px] font-mono px-3 py-1.5 rounded border transition-colors min-h-[44px] inline-flex items-center justify-center ${{
                       isLiveActive 
                         ? "bg-emerald-500/10 text-emerald-600 border-emerald-500/20" 
                         : "bg-zinc-200 dark:bg-zinc-800 text-zinc-500 border-transparent"

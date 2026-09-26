@@ -435,13 +435,40 @@ def main():
         failures.append("Test 19 Failed: should_accept_patch accepted patch that broke runtime causal reactivity")
     print("  [PASS] Test 19: Rule 10 Runtime Causal Monotonicity Gate blocked interactive regression")
 
+    # Test 20: Rule 11 Visual Perception Monotonicity & Browser Truth Default
+    default_refiner = AutoRefiner()
+    if not default_refiner.enable_physical_browser or not default_refiner.verify_runtime_causal:
+        failures.append("Test 20 Failed: AutoRefiner should default to enable_physical_browser=True and verify_runtime_causal=True")
+
+    curr_runtime_good = {
+        "interactive_verified": True,
+        "vision_report": {"visual_score": 95.0, "defects": []}
+    }
+    collision_runtime = {
+        "interactive_verified": True,
+        "vision_report": {
+            "visual_score": 70.0,
+            "defects": [{"type": "card_overlap_collision", "severity": "P0", "message": "Collision detected"}]
+        }
+    }
+    vision_accepted = AutoRefiner.should_accept_patch(
+        curr_rep,
+        re_crit,
+        "<div>clean</div>",
+        current_runtime=curr_runtime_good,
+        patched_runtime=collision_runtime
+    )
+    if vision_accepted:
+        failures.append("Test 20 Failed: should_accept_patch accepted patch that introduced P0 vision collision")
+    print("  [PASS] Test 20: Rule 11 Visual Perception Monotonicity & Browser Truth Defaults verified")
+
     if failures:
         print("\n[FAIL] Critic/Refiner Test Failures:", file=sys.stderr)
         for f in failures:
             print(f"  - {f}", file=sys.stderr)
         return 1
 
-    print("\n[SUCCESS] All Design Critic and AutoRefiner unit tests passed (19/19).")
+    print("\n[SUCCESS] All Design Critic and AutoRefiner unit tests passed (20/20).")
     return 0
 
 if __name__ == "__main__":

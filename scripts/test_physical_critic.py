@@ -160,13 +160,29 @@ def main():
         failures.append(f"Test 6 Failed: Expected 3 multi-viewport screenshots, got {res6.get('screenshots_captured')}")
     print(f"  [PASS] Test 6: Real React 19 TSX component mounted in Chromium ({res6.get('recalculated_count')} metrics causally recalculated, 3 screenshots captured)")
 
+    # Test 7: InteractionContract Resolution and In-Browser VisionSensor Audit
+    from vibe_core.interaction_contract import get_interaction_contract, DOMAIN_INTERACTION_CONTRACTS
+    if len(DOMAIN_INTERACTION_CONTRACTS) != 24:
+        failures.append(f"Test 7 Failed: Expected 24 domain interaction contracts, got {len(DOMAIN_INTERACTION_CONTRACTS)}")
+
+    contract_fintech = get_interaction_contract("fintech_banking")
+    if contract_fintech.domain_id != "fintech_banking" or not contract_fintech.control_selector:
+        failures.append("Test 7 Failed: Fintech interaction contract malformed")
+
+    vision_rep = res6.get("vision_report", {})
+    if not vision_rep or "visual_score" not in vision_rep:
+        failures.append(f"Test 7 Failed: Expected vision_report with visual_score in React audit result, got {list(res6.keys())}")
+    if not res6.get("causal_contract_satisfied"):
+        failures.append("Test 7 Failed: Expected causal_contract_satisfied to be True")
+    print(f"  [PASS] Test 7: InteractionContract (24/24) & In-Browser VisionSensor (Score: {vision_rep.get('visual_score')}/100) verified")
+
     if failures:
         print("\n[FAIL] Physical Critic Suite Failures:", file=sys.stderr)
         for f in failures:
             print(f"  - {f}", file=sys.stderr)
         return 1
 
-    print("\n[SUCCESS] Headless Physical Viewport Critic passed all tests (6/6).")
+    print("\n[SUCCESS] Headless Physical Viewport Critic passed all tests (7/7).")
     return 0
 
 if __name__ == "__main__":

@@ -55,10 +55,17 @@ class RuntimeCompiler:
     def __init__(self):
         self.esbuild_cmd = find_esbuild_command()
 
-    def compile_tsx(self, tsx_code: str, component_name: str = "VibeMasterpiece") -> Tuple[str, Optional[str]]:
+    def compile_tsx(
+        self,
+        tsx_code: str,
+        component_name: str = "VibeMasterpiece",
+        bundle_local: bool = True
+    ) -> Tuple[str, Optional[str]]:
         """
         Compiles React TSX component into an executable ES module.
         Appends the React 19 root mounting logic to #root.
+        When bundle_local is True and local node_modules are present,
+        produces a 100% offline self-contained bundle with zero remote imports.
         Returns (compiled_js, error_message).
         """
         wrapper = f"""
@@ -73,14 +80,25 @@ if (rootEl) {{
   root.render(React.createElement({component_name}));
 }}
 """
-        cmd = f"{self.esbuild_cmd} --loader=tsx --format=esm --jsx=automatic"
+        starter_modules = ROOT_DIR / "examples" / "nextjs-starter" / "node_modules"
+        use_bundle = bundle_local and starter_modules.exists()
+
+        if use_bundle:
+            cmd = f"{self.esbuild_cmd} --bundle --loader=tsx --format=esm --minify"
+            env = os.environ.copy()
+            env["NODE_PATH"] = str(starter_modules)
+        else:
+            cmd = f"{self.esbuild_cmd} --loader=tsx --format=esm --jsx=automatic"
+            env = None
+
         try:
             p = subprocess.run(
                 cmd,
                 input=wrapper.encode("utf-8"),
                 capture_output=True,
                 cwd=str(ROOT_DIR),
-                shell=True
+                shell=True,
+                env=env
             )
             if p.returncode != 0:
                 err = p.stderr.decode("utf-8", errors="replace")
@@ -97,33 +115,50 @@ if (rootEl) {{
         is_rtl: bool = False
     ) -> str:
         """
-        Builds a self-contained HTML page that loads Tailwind CSS, React 19,
-        and executes the compiled component module inside #root.
+        Builds a self-contained HTML page that executes the compiled component module inside #root.
+        If compiled_js is bundled (contains React runtime), operates 100% offline without remote CDNs.
         """
         dir_attr = 'dir="rtl" lang="fa"' if is_rtl else 'dir="ltr" lang="en"'
+        is_bundled = ("esm.sh" not in compiled_js) and ("import " not in compiled_js[:500])
+
+        importmap_tag = "" if is_bundled else """<script type="importmap">
+  {
+    "imports": {
+      "react": "https://esm.sh/react@19",
+      "react/jsx-runtime": "https://esm.sh/react@19/jsx-runtime",
+      "react-dom": "https://esm.sh/react-dom@19",
+      "react-dom/client": "https://esm.sh/react-dom@19/client"
+    }
+  }
+  </script>"""
+
+        cdn_tw = '<script src="https://cdn.tailwindcss.com"></script>'
+
         return f"""<!DOCTYPE html>
 <html {dir_attr} class="h-full">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>{title}</title>
-  <script src="https://cdn.tailwindcss.com"></script>
-  <script type="importmap">
-  {{
-    "imports": {{
-      "react": "https://esm.sh/react@19",
-      "react/jsx-runtime": "https://esm.sh/react@19/jsx-runtime",
-      "react-dom": "https://esm.sh/react-dom@19",
-      "react-dom/client": "https://esm.sh/react-dom@19/client"
-    }}
-  }}
-  </script>
+  {cdn_tw}
+  {importmap_tag}
   <style>
+    /* Essential modern baseline styles for offline self-contained rendering */
+    *, ::before, ::after {{ box-sizing: border-box; margin: 0; padding: 0; }}
+    html, body {{ height: 100%; font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; }}
     bdi {{ direction: ltr !important; unicode-bidi: isolate; }}
+    [class*="min-h-[44px]"] {{ min-height: 44px !important; }}
+    [class*="min-w-[48px]"] {{ min-width: 48px !important; }}
+    [class*="h-11"] {{ height: 44px !important; }}
+    [class*="flex"] {{ display: flex; }}
+    [class*="inline-flex"] {{ display: inline-flex; }}
+    [class*="grid"] {{ display: grid; }}
     button:focus-visible, a:focus-visible, input:focus-visible {{
       outline: 2px solid #10b981;
       outline-offset: 2px;
     }}
+    .animate-pulse {{ animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite; }}
+    @keyframes pulse {{ 0%, 100% {{ opacity: 1; }} 50% {{ opacity: .5; }} }}
   </style>
 </head>
 <body class="min-h-full bg-white dark:bg-zinc-950 text-zinc-900 dark:text-zinc-100 antialiased p-4 sm:p-6">

@@ -79,7 +79,7 @@ def replace_clickable_divs(html: str) -> str:
 
 
 class AutoRefiner:
-    def __init__(self, enable_physical_browser: bool = False, verify_runtime_causal: bool = False):
+    def __init__(self, enable_physical_browser: bool = True, verify_runtime_causal: bool = True):
         self.critic = DesignCritic()
         self.visual_critic = VisualCritic()
         self.physical_critic = PhysicalCritic(enable_browser=enable_physical_browser)
@@ -166,8 +166,14 @@ class AutoRefiner:
             if len(introduced_phys_p0) > 0:
                 return False
 
+            curr_targets = current_physical.get("metrics", {}).get("total_touch_targets", 0)
             curr_phys_score = current_physical.get("physical_score", 0.0)
             patch_phys_score = patched_physical.get("physical_score", 0.0)
+            # If baseline had 0 touch targets, it held unearned 25pts for non-existent targets.
+            # When semantic interactive elements first appear, evaluate monotonicity on equal footing.
+            if curr_targets == 0 and patched_physical.get("metrics", {}).get("total_touch_targets", 0) > 0:
+                curr_phys_score -= 25.0
+
             if patch_phys_score < curr_phys_score - 2.0:
                 return False
 
@@ -177,6 +183,19 @@ class AutoRefiner:
             patch_runtime_ok = patched_runtime.get("interactive_verified", True)
             if curr_runtime_ok and not patch_runtime_ok:
                 return False
+
+            # 11. Visual Perception & Collision Invariant Gate (VisionSensor)
+            curr_vision = current_runtime.get("vision_report", {})
+            patch_vision = patched_runtime.get("vision_report", {})
+            if curr_vision and patch_vision:
+                curr_vis_score = curr_vision.get("visual_score", 100.0)
+                patch_vis_score = patch_vision.get("visual_score", 100.0)
+                if patch_vis_score < curr_vis_score - 2.0:
+                    return False
+                curr_p0_vision = sum(1 for d in curr_vision.get("defects", []) if d.get("severity") == "P0")
+                patch_p0_vision = sum(1 for d in patch_vision.get("defects", []) if d.get("severity") == "P0")
+                if patch_p0_vision > curr_p0_vision:
+                    return False
 
         return True
 
@@ -192,11 +211,12 @@ class AutoRefiner:
         Strictly enforces atomic Quad-Composite acceptance (DOM + Visual + Physical + Runtime Critics).
         """
         decision = decision or {}
+        domain_id = decision.get("genome", {}).get("domain") or decision.get("intent", {}).get("product_domain")
         current_html = html_content
         current_report = self.critic.critique(current_html, decision, iteration=1)
         current_visual = self.visual_critic.evaluate(current_html, decision)
         current_physical = self.physical_critic.audit_physical_layout(current_html)
-        current_runtime = self.physical_critic.audit_runtime_interaction(current_html) if self.verify_runtime_causal else {"interactive_verified": True}
+        current_runtime = self.physical_critic.audit_runtime_interaction(current_html, domain_id=domain_id) if self.verify_runtime_causal else {"interactive_verified": True}
         current_report["visual_critic"] = current_visual
         current_report["physical_critic"] = current_physical
         current_report["runtime_critic"] = current_runtime
@@ -401,9 +421,9 @@ class AutoRefiner:
             re_critique = self.critic.critique(patched_html, decision, iteration=iteration + 1)
             re_visual = self.visual_critic.evaluate(patched_html, decision)
             re_physical = self.physical_critic.audit_physical_layout(patched_html)
-            re_runtime = self.physical_critic.audit_runtime_interaction(patched_html) if self.verify_runtime_causal else {"interactive_verified": True}
+            re_runtime = self.physical_critic.audit_runtime_interaction(patched_html, domain_id=domain_id) if self.verify_runtime_causal else {"interactive_verified": True}
 
-            # Strict 10-Rule Quad-Composite Invariant Gate Check
+            # Strict 11-Rule Quad-Composite Invariant Gate Check
             accept_patch = self.should_accept_patch(
                 current_report,
                 re_critique,

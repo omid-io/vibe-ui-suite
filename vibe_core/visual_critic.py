@@ -1,5 +1,5 @@
 """
-vibe_core.visual_critic — Multi-Dimensional Visual & Aesthetic Review Engine (v3.7.0)
+vibe_core.visual_critic — Multi-Dimensional Visual & Aesthetic Review Engine (v3.8.0)
 Evaluates rendered UI interfaces beyond static DOM syntax to guarantee:
 - Clear Visual Focal Point & Hero Prominence
 - Primary CTA Elevation & Sizing (>= 44px)

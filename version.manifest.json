@@ -1,12 +1,12 @@
 {
   "$schema": "./schemas/version-manifest.schema.json",
-  "version": "3.7.0",
-  "codename": "The Browser Truth Pipeline",
+  "version": "3.8.0",
+  "codename": "Autonomous Closed-Loop Visual Vision & Browser Truth Engine",
   "release_channel": "stable",
   "packages": {
-    "@omid-io/tokens": "3.7.0",
-    "vibe-ui-vscode": "3.7.0",
-    "vibe-ui-nextjs-starter": "3.7.0"
+    "@omid-io/tokens": "3.8.0",
+    "vibe-ui-vscode": "3.8.0",
+    "vibe-ui-nextjs-starter": "3.8.0"
   },
   "schemas": {
     "intent_contract": "v1",
