@@ -39,7 +39,7 @@ const path = __importStar(require("path"));
 const readline = __importStar(require("readline"));
 const components_1 = require("./registry/components");
 const index_1 = require("./index");
-const VERSION = '3.1.0';
+const VERSION = '4.0.0';
 function printBanner() {
     console.log(`
 \x1b[35m  ▲ VIBE UI CLI v${VERSION}\x1b[0m
@@ -49,6 +49,7 @@ function printBanner() {
 function printHelp() {
     printBanner();
     console.log(`\x1b[1mUSAGE:\x1b[0m
+  npx vibe-ui-suite <command> [options]
   npx @omid-io/tokens <command> [options]
   vibe-ui <command> [options]
 
@@ -64,10 +65,10 @@ function printHelp() {
   -h, --help         Show help menu
 
 \x1b[1mEXAMPLES:\x1b[0m
-  npx @omid-io/tokens init
-  npx @omid-io/tokens init --dry-run
-  npx @omid-io/tokens add thinking-drawer
-  npx @omid-io/tokens add thinking-drawer --force
+  npx vibe-ui-suite init
+  npx vibe-ui-suite init --dry-run
+  npx vibe-ui-suite add thinking-drawer
+  npx vibe-ui-suite add thinking-drawer --force
 `);
 }
 function prompt(rl, query) {
@@ -94,7 +95,7 @@ function safeWriteFile(filePath, content, options) {
     return { written: true, skipped: false };
 }
 const CONTRACT_RULES = `# Vibe UI Design & Code Quality Contract
-# Generated via npx @omid-io/tokens init
+# Generated via npx vibe-ui-suite init
 
 Follow strict anti-slop guidelines:
 - Zero raw unicode emojis (use inline SVGs only)

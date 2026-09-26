@@ -1,0 +1,58 @@
+{
+  "name": "vibe-ui-suite",
+  "version": "4.0.0",
+  "description": "Deterministic design contracts, component recipes, and WCAG AA evaluation gates for AI coding agents (Cursor, Claude Code, Windsurf, Antigravity).",
+  "bin": {
+    "vibe-ui-suite": "./dist/cli.js",
+    "vibe-ui": "./dist/cli.js"
+  },
+  "main": "./dist/index.js",
+  "module": "./dist/index.mjs",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.mjs",
+      "require": "./dist/index.js"
+    },
+    "./tailwind": {
+      "types": "./dist/tailwind.d.ts",
+      "import": "./dist/tailwind.mjs",
+      "require": "./dist/tailwind.js"
+    },
+    "./v4": "./dist/v4.css",
+    "./v4.css": "./dist/v4.css"
+  },
+  "scripts": {
+    "build": "node build.js"
+  },
+  "keywords": [
+    "vibe-ui",
+    "vibe-ui-suite",
+    "vibe-coding",
+    "design-tokens",
+    "oklch",
+    "tailwind",
+    "tailwindcss",
+    "ai-agents",
+    "cursor",
+    "cursorrules",
+    "windsurf",
+    "claude-code",
+    "antigravity",
+    "accessibility",
+    "wcag",
+    "anti-slop"
+  ],
+  "author": "Omid Zaferi <https://github.com/omid-io>",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/omid-io/vibe-ui-suite.git",
+    "directory": "packages/vibe-ui-suite"
+  },
+  "bugs": {
+    "url": "https://github.com/omid-io/vibe-ui-suite/issues"
+  },
+  "homepage": "https://omid-io.github.io/vibe-ui-suite/"
+}

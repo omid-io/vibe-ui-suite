@@ -7,8 +7,8 @@
 **مهندسی قراردادمحور فرانت اند، قیدهای دیزاین سیستم و موتور اعتبارسنجی ران تایم برای دستیاران کدنویسی هوش مصنوعی.**
 
 [![CI Pipeline](https://github.com/omid-io/vibe-ui-suite/actions/workflows/ci.yml/badge.svg)](https://github.com/omid-io/vibe-ui-suite/actions/workflows/ci.yml)
-[![npm version](https://img.shields.io/npm/v/@omid-io/tokens.svg?color=cb3837&label=npm)](https://www.npmjs.com/package/@omid-io/tokens)
-[![npm downloads](https://img.shields.io/npm/dm/%40omid-io%2Ftokens?color=red&label=دانلودهای%20npm)](https://www.npmjs.com/package/@omid-io/tokens)
+[![npm version](https://img.shields.io/npm/v/vibe-ui-suite.svg?color=cb3837&label=npm)](https://www.npmjs.com/package/vibe-ui-suite)
+[![npm downloads](https://img.shields.io/npm/dm/vibe-ui-suite?color=red&label=دانلودهای%20npm)](https://www.npmjs.com/package/vibe-ui-suite)
 [![Open-VSX Downloads](https://img.shields.io/open-vsx/dt/omid-io/vibe-ui-vscode?color=green&logo=eclipseche&label=دانلودهای%20Open-VSX)](https://open-vsx.org/extension/omid-io/vibe-ui-vscode)
 [![VS Code Marketplace Installs](https://img.shields.io/visual-studio-marketplace/i/omid-io.vibe-ui-vscode?color=blue&logo=visual-studio-code&label=نصب%20مارکت%20پلیس)](https://marketplace.visualstudio.com/items?itemName=omid-io.vibe-ui-vscode)
 [![GitHub Stars](https://img.shields.io/github/stars/omid-io/vibe-ui-suite?style=social)](https://github.com/omid-io/vibe-ui-suite)
@@ -69,7 +69,7 @@
 خروجی تست شده یا گزارش دقیق خطاهای مهندسی
 ```
 
-> **شفافیت روز نخست:** این پروژه هم اکنون در نسخه `v3.9.0` (موتور حقیقت مرورگر خودکار و چرخه بسته کامل) است. مجهز به اجرای صددرصدی ارزیابی فیزیکی در مرورگر واقعی Chromium برای تمامی سناریوهای بنچمارک بدون رد کردن نمونه ای، استخر مرورگر پایدار جهت اجرای ۱۰۰ ماونت در کمتر از ۳۵ ثانیه، بسته بندی محلی کاملا آفلاین و مستقل از شبکه React 19 با زمان لود زیر ۸۰ میلی ثانیه، قراردادهای سفت و سخت انطباق جهت دار محاسبات در ۲۴ دامنه، نقاد بافر پیکسل های اسکرین شات (PixelCritic) بدون وابستگی جانبی، سنسور ادراک هندسی زنده (VisionSensor)، ۶ ساختار کلان چیدمان صفحه متناسب با حوزه های کاری، و حاکمیت دو سطحی کنتراست (هدف گذاری WCAG AAA بالای ۷:۱ و گیت سخت گیرانه WCAG AA بالای ۴.۵:۱). از نقدها، باگ ریپورت ها و مشارکت های مهندسان فرانت اند صمیمانه استقبال می کنیم.
+> **شفافیت روز نخست:** این پروژه هم اکنون در نسخه `v4.0.0` (موتور ارزیابی خودکار بسته و ثبت نهایی) است. مجهز به اجرای صددرصدی ارزیابی فیزیکی در مرورگر واقعی Chromium برای تمامی سناریوهای بنچمارک بدون رد کردن نمونه ای، استخر مرورگر پایدار جهت اجرای ۱۰۰ ماونت در کمتر از ۳۵ ثانیه، بسته بندی محلی کاملا آفلاین و مستقل از شبکه React 19 با زمان لود زیر ۸۰ میلی ثانیه، قراردادهای سفت و سخت انطباق جهت دار محاسبات در ۲۴ دامنه، نقاد بافر پیکسل های اسکرین شات (PixelCritic) بدون وابستگی جانبی، سنسور ادراک هندسی زنده (VisionSensor)، ۶ ساختار کلان چیدمان صفحه متناسب با حوزه های کاری، و حاکمیت دو سطحی کنتراست (هدف گذاری WCAG AAA بالای ۷:۱ و گیت سخت گیرانه WCAG AA بالای ۴.۵:۱). از نقدها، باگ ریپورت ها و مشارکت های مهندسان فرانت اند صمیمانه استقبال می کنیم.
 
 ---
 
@@ -90,7 +90,7 @@
 ### روش دوم: راه اندازی ۱-دستوره در ترمینال پروژه
 در ریشه پروژه خود دستور زیر را اجرا کنید:
 ```bash
-npx @omid-io/tokens init
+npx vibe-ui-suite init
 ```
 این دستور تعاملی:
 1. قوانین ادیتور هوش مصنوعی مورد نظر شما را می سازد (`.cursorrules`، `CLAUDE.md`، `.windsurfrules`).
@@ -104,7 +104,7 @@ npx @omid-io/tokens init
 در فایل `app/globals.css` یا استایل شیت اصلی پروژه:
 ```css
 @import "tailwindcss";
-@import "@omid-io/tokens/v4.css";
+@import "vibe-ui-suite/v4.css";
 ```
 بدون نیاز به نوشتن حتی یک خط فایل کانفیگ جاوااسکریپتی، کلاس های زیر فوراً فعال می شوند:
 - **رنگ های معنایی OKLCH:** `bg-vibe-canvas`, `bg-vibe-surface`, `text-vibe-primary`, `border-vibe-border`
@@ -118,17 +118,17 @@ npx @omid-io/tokens init
 کامپوننت های آماده و دسترسی پذیر را مستقیماً داخل پوشه `components/vibe-ui/` پروژه خود دریافت کنید:
 ```bash
 # دراور تاشوی استدلال هوش مصنوعی با ترنزیشن گرید و پالس رادار
-npx @omid-io/tokens add thinking-drawer
+npx vibe-ui-suite add thinking-drawer
 
 # هاد تله متری با ساختار ایزوله LTR برای نمایش لتنسی و توکن ها
-npx @omid-io/tokens add telemetry-hud
+npx vibe-ui-suite add telemetry-hud
 
 # بج اعتبارسنجی ریاضیاتی کنتراست WCAG 2.2 AA / AAA
-npx @omid-io/tokens add contrast-badge
+npx vibe-ui-suite add contrast-badge
 ```
 مشاهده فهرست تمام کامپوننت های موجود:
 ```bash
-npx @omid-io/tokens list
+npx vibe-ui-suite list
 ```
 
 ---

@@ -1,6 +1,6 @@
 {
   "$schema": "../../schemas/benchmark-result.v1.json",
-  "timestamp": "2026-09-26T22:18:37.805134+00:00",
+  "timestamp": "2026-09-26T23:45:59.644152+00:00",
   "suite_version": "4.0.0",
   "scenario_count": 100,
   "benchmark_type": "internal_deterministic_heuristic",
@@ -77,7 +77,7 @@
       "reduction_percent": 100.0
     },
     "avg_time_to_accept_ms": {
-      "candidate": 320.45
+      "candidate": 314.75
     },
     "visual_diversity_index": {
       "candidate": 66.7,
@@ -108,7 +108,7 @@
       "visual_quality_score": 89.1,
       "critic_score": 95.0,
       "verification_status": "PASS",
-      "elapsed_ms": 443.88
+      "elapsed_ms": 437.68
     },
     {
       "scenario_id": "sc-002",
@@ -130,7 +130,7 @@
       "visual_quality_score": 89.1,
       "critic_score": 95.0,
       "verification_status": "PASS",
-      "elapsed_ms": 350.19
+      "elapsed_ms": 333.16
     },
     {
       "scenario_id": "sc-003",
@@ -152,7 +152,7 @@
       "visual_quality_score": 89.1,
       "critic_score": 95.0,
       "verification_status": "PASS",
-      "elapsed_ms": 331.47
+      "elapsed_ms": 336.42
     },
     {
       "scenario_id": "sc-004",
@@ -174,7 +174,7 @@
       "visual_quality_score": 89.1,
       "critic_score": 95.0,
       "verification_status": "PASS",
-      "elapsed_ms": 319.88
+      "elapsed_ms": 331.06
     },
     {
       "scenario_id": "sc-005",
@@ -196,7 +196,7 @@
       "visual_quality_score": 89.1,
       "critic_score": 95.0,
       "verification_status": "PASS",
-      "elapsed_ms": 313.13
+      "elapsed_ms": 333.17
     },
     {
       "scenario_id": "sc-006",
@@ -218,7 +218,7 @@
       "visual_quality_score": 89.1,
       "critic_score": 95.0,
       "verification_status": "PASS",
-      "elapsed_ms": 318.81
+      "elapsed_ms": 318.94
     },
     {
       "scenario_id": "sc-007",
@@ -240,7 +240,7 @@
       "visual_quality_score": 89.1,
       "critic_score": 95.0,
       "verification_status": "PASS",
-      "elapsed_ms": 315.86
+      "elapsed_ms": 316.47
     },
     {
       "scenario_id": "sc-008",
@@ -262,7 +262,7 @@
       "visual_quality_score": 89.1,
       "critic_score": 95.0,
       "verification_status": "PASS",
-      "elapsed_ms": 318.65
+      "elapsed_ms": 317.88
     },
     {
       "scenario_id": "sc-009",
@@ -284,7 +284,7 @@
       "visual_quality_score": 89.1,
       "critic_score": 95.0,
       "verification_status": "PASS",
-      "elapsed_ms": 328.12
+      "elapsed_ms": 316.47
     },
     {
       "scenario_id": "sc-010",
@@ -306,7 +306,7 @@
       "visual_quality_score": 89.1,
       "critic_score": 95.0,
       "verification_status": "PASS",
-      "elapsed_ms": 321.84
+      "elapsed_ms": 350.01
     },
     {
       "scenario_id": "sc-011",
@@ -328,7 +328,7 @@
       "visual_quality_score": 89.1,
       "critic_score": 95.0,
       "verification_status": "PASS",
-      "elapsed_ms": 314.8
+      "elapsed_ms": 312.88
     },
     {
       "scenario_id": "sc-012",
@@ -350,7 +350,7 @@
       "visual_quality_score": 89.1,
       "critic_score": 95.0,
       "verification_status": "PASS",
-      "elapsed_ms": 349.56
+      "elapsed_ms": 321.11
     },
     {
       "scenario_id": "sc-013",
@@ -372,7 +372,7 @@
       "visual_quality_score": 89.1,
       "critic_score": 95.0,
       "verification_status": "PASS",
-      "elapsed_ms": 333.46
+      "elapsed_ms": 329.7
     },
     {
       "scenario_id": "sc-014",
@@ -394,7 +394,7 @@
       "visual_quality_score": 89.1,
       "critic_score": 95.0,
       "verification_status": "PASS",
-      "elapsed_ms": 314.7
+      "elapsed_ms": 314.94
     },
     {
       "scenario_id": "sc-015",
@@ -416,7 +416,7 @@
       "visual_quality_score": 89.1,
       "critic_score": 95.0,
       "verification_status": "PASS",
-      "elapsed_ms": 338.4
+      "elapsed_ms": 321.64
     },
     {
       "scenario_id": "sc-016",
@@ -438,7 +438,7 @@
       "visual_quality_score": 89.1,
       "critic_score": 95.0,
       "verification_status": "PASS",
-      "elapsed_ms": 328.47
+      "elapsed_ms": 310.5
     },
     {
       "scenario_id": "sc-017",
@@ -460,7 +460,7 @@
       "visual_quality_score": 89.1,
       "critic_score": 95.0,
       "verification_status": "PASS",
-      "elapsed_ms": 300.11
+      "elapsed_ms": 318.8
     },
     {
       "scenario_id": "sc-018",
@@ -482,7 +482,7 @@
       "visual_quality_score": 89.1,
       "critic_score": 95.0,
       "verification_status": "PASS",
-      "elapsed_ms": 315.42
+      "elapsed_ms": 318.67
     },
     {
       "scenario_id": "sc-019",
@@ -504,7 +504,7 @@
       "visual_quality_score": 89.1,
       "critic_score": 95.0,
       "verification_status": "PASS",
-      "elapsed_ms": 318.26
+      "elapsed_ms": 319.25
     },
     {
       "scenario_id": "sc-020",
@@ -526,7 +526,7 @@
       "visual_quality_score": 89.1,
       "critic_score": 95.0,
       "verification_status": "PASS",
-      "elapsed_ms": 339.08
+      "elapsed_ms": 310.93
     },
     {
       "scenario_id": "sc-021",
@@ -548,7 +548,7 @@
       "visual_quality_score": 89.1,
       "critic_score": 95.0,
       "verification_status": "PASS",
-      "elapsed_ms": 381.65
+      "elapsed_ms": 319.08
     },
     {
       "scenario_id": "sc-022",
@@ -570,7 +570,7 @@
       "visual_quality_score": 89.1,
       "critic_score": 95.0,
       "verification_status": "PASS",
-      "elapsed_ms": 365.31
+      "elapsed_ms": 317.58
     },
     {
       "scenario_id": "sc-023",
@@ -592,7 +592,7 @@
       "visual_quality_score": 92.4,
       "critic_score": 95.0,
       "verification_status": "PASS",
-      "elapsed_ms": 331.56
+      "elapsed_ms": 333.19
     },
     {
       "scenario_id": "sc-024",
@@ -614,7 +614,7 @@
       "visual_quality_score": 92.4,
       "critic_score": 95.0,
       "verification_status": "PASS",
-      "elapsed_ms": 317.31
+      "elapsed_ms": 331.16
     },
     {
       "scenario_id": "sc-025",
@@ -636,7 +636,7 @@
       "visual_quality_score": 89.1,
       "critic_score": 95.0,
       "verification_status": "PASS",
-      "elapsed_ms": 316.92
+      "elapsed_ms": 318.25
     },
     {
       "scenario_id": "sc-026",
@@ -658,7 +658,7 @@
       "visual_quality_score": 89.1,
       "critic_score": 95.0,
       "verification_status": "PASS",
-      "elapsed_ms": 298.74
+      "elapsed_ms": 317.12
     },
     {
       "scenario_id": "sc-027",
@@ -680,7 +680,7 @@
       "visual_quality_score": 89.1,
       "critic_score": 95.0,
       "verification_status": "PASS",
-      "elapsed_ms": 367.74
+      "elapsed_ms": 315.18
     },
     {
       "scenario_id": "sc-028",
@@ -702,7 +702,7 @@
       "visual_quality_score": 89.1,
       "critic_score": 95.0,
       "verification_status": "PASS",
-      "elapsed_ms": 337.26
+      "elapsed_ms": 317.36
     },
     {
       "scenario_id": "sc-029",
@@ -724,7 +724,7 @@
       "visual_quality_score": 89.1,
       "critic_score": 95.0,
       "verification_status": "PASS",
-      "elapsed_ms": 391.15
+      "elapsed_ms": 315.49
     },
     {
       "scenario_id": "sc-030",
@@ -746,7 +746,7 @@
       "visual_quality_score": 89.1,
       "critic_score": 95.0,
       "verification_status": "PASS",
-      "elapsed_ms": 340.84
+      "elapsed_ms": 333.4
     },
     {
       "scenario_id": "sc-031",
@@ -768,7 +768,7 @@
       "visual_quality_score": 89.1,
       "critic_score": 95.0,
       "verification_status": "PASS",
-      "elapsed_ms": 333.56
+      "elapsed_ms": 322.08
     },
     {
       "scenario_id": "sc-032",
@@ -790,7 +790,7 @@
       "visual_quality_score": 89.1,
       "critic_score": 95.0,
       "verification_status": "PASS",
-      "elapsed_ms": 311.28
+      "elapsed_ms": 310.8
     },
     {
       "scenario_id": "sc-033",
@@ -812,7 +812,7 @@
       "visual_quality_score": 89.1,
       "critic_score": 95.0,
       "verification_status": "PASS",
-      "elapsed_ms": 357.43
+      "elapsed_ms": 301.3
     },
     {
       "scenario_id": "sc-034",
@@ -834,7 +834,7 @@
       "visual_quality_score": 89.1,
       "critic_score": 95.0,
       "verification_status": "PASS",
-      "elapsed_ms": 377.42
+      "elapsed_ms": 314.76
     },
     {
       "scenario_id": "sc-035",
@@ -856,7 +856,7 @@
       "visual_quality_score": 89.1,
       "critic_score": 95.0,
       "verification_status": "PASS",
-      "elapsed_ms": 355.15
+      "elapsed_ms": 333.29
     },
     {
       "scenario_id": "sc-036",
@@ -878,7 +878,7 @@
       "visual_quality_score": 89.1,
       "critic_score": 95.0,
       "verification_status": "PASS",
-      "elapsed_ms": 344.74
+      "elapsed_ms": 318.52
     },
     {
       "scenario_id": "sc-037",
@@ -900,7 +900,7 @@
       "visual_quality_score": 89.1,
       "critic_score": 95.0,
       "verification_status": "PASS",
-      "elapsed_ms": 319.3
+      "elapsed_ms": 333.18
     },
     {
       "scenario_id": "sc-038",
@@ -922,7 +922,7 @@
       "visual_quality_score": 89.1,
       "critic_score": 95.0,
       "verification_status": "PASS",
-      "elapsed_ms": 317.02
+      "elapsed_ms": 322.07
     },
     {
       "scenario_id": "sc-039",
@@ -944,7 +944,7 @@
       "visual_quality_score": 89.1,
       "critic_score": 95.0,
       "verification_status": "PASS",
-      "elapsed_ms": 315.28
+      "elapsed_ms": 312.48
     },
     {
       "scenario_id": "sc-040",
@@ -966,7 +966,7 @@
       "visual_quality_score": 89.1,
       "critic_score": 95.0,
       "verification_status": "PASS",
-      "elapsed_ms": 330.04
+      "elapsed_ms": 318.8
     },
     {
       "scenario_id": "sc-041",
@@ -988,7 +988,7 @@
       "visual_quality_score": 89.1,
       "critic_score": 95.0,
       "verification_status": "PASS",
-      "elapsed_ms": 317.45
+      "elapsed_ms": 329.98
     },
     {
       "scenario_id": "sc-042",
@@ -1010,7 +1010,7 @@
       "visual_quality_score": 89.1,
       "critic_score": 95.0,
       "verification_status": "PASS",
-      "elapsed_ms": 317.22
+      "elapsed_ms": 317.96
     },
     {
       "scenario_id": "sc-043",
@@ -1032,7 +1032,7 @@
       "visual_quality_score": 89.1,
       "critic_score": 95.0,
       "verification_status": "PASS",
-      "elapsed_ms": 297.81
+      "elapsed_ms": 314.01
     },
     {
       "scenario_id": "sc-044",
@@ -1054,7 +1054,7 @@
       "visual_quality_score": 89.1,
       "critic_score": 95.0,
       "verification_status": "PASS",
-      "elapsed_ms": 298.94
+      "elapsed_ms": 339.74
     },
     {
       "scenario_id": "sc-045",
@@ -1076,7 +1076,7 @@
       "visual_quality_score": 89.1,
       "critic_score": 95.0,
       "verification_status": "PASS",
-      "elapsed_ms": 338.48
+      "elapsed_ms": 312.67
     },
     {
       "scenario_id": "sc-046",
@@ -1098,7 +1098,7 @@
       "visual_quality_score": 89.1,
       "critic_score": 95.0,
       "verification_status": "PASS",
-      "elapsed_ms": 333.19
+      "elapsed_ms": 318.85
     },
     {
       "scenario_id": "sc-047",
@@ -1120,7 +1120,7 @@
       "visual_quality_score": 89.1,
       "critic_score": 95.0,
       "verification_status": "PASS",
-      "elapsed_ms": 330.28
+      "elapsed_ms": 329.11
     },
     {
       "scenario_id": "sc-048",
@@ -1142,7 +1142,7 @@
       "visual_quality_score": 89.1,
       "critic_score": 95.0,
       "verification_status": "PASS",
-      "elapsed_ms": 320.54
+      "elapsed_ms": 318.05
     },
     {
       "scenario_id": "sc-049",
@@ -1164,7 +1164,7 @@
       "visual_quality_score": 89.1,
       "critic_score": 95.0,
       "verification_status": "PASS",
-      "elapsed_ms": 279.12
+      "elapsed_ms": 300.95
     },
     {
       "scenario_id": "sc-050",
@@ -1186,7 +1186,7 @@
       "visual_quality_score": 89.1,
       "critic_score": 95.0,
       "verification_status": "PASS",
-      "elapsed_ms": 281.76
+      "elapsed_ms": 305.97
     },
     {
       "scenario_id": "sc-051",
@@ -1208,7 +1208,7 @@
       "visual_quality_score": 89.1,
       "critic_score": 95.0,
       "verification_status": "PASS",
-      "elapsed_ms": 284.49
+      "elapsed_ms": 292.58
     },
     {
       "scenario_id": "sc-052",
@@ -1230,7 +1230,7 @@
       "visual_quality_score": 89.1,
       "critic_score": 95.0,
       "verification_status": "PASS",
-      "elapsed_ms": 282.7
+      "elapsed_ms": 300.32
     },
     {
       "scenario_id": "sc-053",
@@ -1252,7 +1252,7 @@
       "visual_quality_score": 89.1,
       "critic_score": 95.0,
       "verification_status": "PASS",
-      "elapsed_ms": 292.59
+      "elapsed_ms": 300.37
     },
     {
       "scenario_id": "sc-054",
@@ -1274,7 +1274,7 @@
       "visual_quality_score": 89.1,
       "critic_score": 95.0,
       "verification_status": "PASS",
-      "elapsed_ms": 296.93
+      "elapsed_ms": 302.62
     },
     {
       "scenario_id": "sc-055",
@@ -1296,7 +1296,7 @@
       "visual_quality_score": 89.1,
       "critic_score": 95.0,
       "verification_status": "PASS",
-      "elapsed_ms": 313.81
+      "elapsed_ms": 295.23
     },
     {
       "scenario_id": "sc-056",
@@ -1318,7 +1318,7 @@
       "visual_quality_score": 89.1,
       "critic_score": 95.0,
       "verification_status": "PASS",
-      "elapsed_ms": 319.38
+      "elapsed_ms": 301.57
     },
     {
       "scenario_id": "sc-057",
@@ -1340,7 +1340,7 @@
       "visual_quality_score": 89.1,
       "critic_score": 95.0,
       "verification_status": "PASS",
-      "elapsed_ms": 316.51
+      "elapsed_ms": 284.87
     },
     {
       "scenario_id": "sc-058",
@@ -1362,7 +1362,7 @@
       "visual_quality_score": 89.1,
       "critic_score": 95.0,
       "verification_status": "PASS",
-      "elapsed_ms": 317.06
+      "elapsed_ms": 296.49
     },
     {
       "scenario_id": "sc-059",
@@ -1384,7 +1384,7 @@
       "visual_quality_score": 89.1,
       "critic_score": 95.0,
       "verification_status": "PASS",
-      "elapsed_ms": 385.19
+      "elapsed_ms": 301.68
     },
     {
       "scenario_id": "sc-060",
@@ -1406,7 +1406,7 @@
       "visual_quality_score": 92.4,
       "critic_score": 95.0,
       "verification_status": "PASS",
-      "elapsed_ms": 446.55
+      "elapsed_ms": 297.97
     },
     {
       "scenario_id": "sc-061",
@@ -1428,7 +1428,7 @@
       "visual_quality_score": 89.1,
       "critic_score": 95.0,
       "verification_status": "PASS",
-      "elapsed_ms": 369.59
+      "elapsed_ms": 307.82
     },
     {
       "scenario_id": "sc-062",
@@ -1450,7 +1450,7 @@
       "visual_quality_score": 89.1,
       "critic_score": 95.0,
       "verification_status": "PASS",
-      "elapsed_ms": 352.75
+      "elapsed_ms": 302.41
     },
     {
       "scenario_id": "sc-063",
@@ -1472,7 +1472,7 @@
       "visual_quality_score": 89.1,
       "critic_score": 95.0,
       "verification_status": "PASS",
-      "elapsed_ms": 330.26
+      "elapsed_ms": 308.86
     },
     {
       "scenario_id": "sc-064",
@@ -1494,7 +1494,7 @@
       "visual_quality_score": 89.1,
       "critic_score": 95.0,
       "verification_status": "PASS",
-      "elapsed_ms": 331.95
+      "elapsed_ms": 292.62
     },
     {
       "scenario_id": "sc-065",
@@ -1516,7 +1516,7 @@
       "visual_quality_score": 89.1,
       "critic_score": 95.0,
       "verification_status": "PASS",
-      "elapsed_ms": 321.06
+      "elapsed_ms": 326.5
     },
     {
       "scenario_id": "sc-066",
@@ -1538,7 +1538,7 @@
       "visual_quality_score": 89.1,
       "critic_score": 95.0,
       "verification_status": "PASS",
-      "elapsed_ms": 329.37
+      "elapsed_ms": 315.64
     },
     {
       "scenario_id": "sc-067",
@@ -1560,7 +1560,7 @@
       "visual_quality_score": 89.1,
       "critic_score": 95.0,
       "verification_status": "PASS",
-      "elapsed_ms": 351.71
+      "elapsed_ms": 316.43
     },
     {
       "scenario_id": "sc-068",
@@ -1582,7 +1582,7 @@
       "visual_quality_score": 89.1,
       "critic_score": 95.0,
       "verification_status": "PASS",
-      "elapsed_ms": 352.36
+      "elapsed_ms": 283.03
     },
     {
       "scenario_id": "sc-069",
@@ -1604,7 +1604,7 @@
       "visual_quality_score": 89.1,
       "critic_score": 95.0,
       "verification_status": "PASS",
-      "elapsed_ms": 293.02
+      "elapsed_ms": 318.23
     },
     {
       "scenario_id": "sc-070",
@@ -1626,7 +1626,7 @@
       "visual_quality_score": 89.1,
       "critic_score": 95.0,
       "verification_status": "PASS",
-      "elapsed_ms": 303.53
+      "elapsed_ms": 299.58
     },
     {
       "scenario_id": "sc-071",
@@ -1648,7 +1648,7 @@
       "visual_quality_score": 89.1,
       "critic_score": 95.0,
       "verification_status": "PASS",
-      "elapsed_ms": 294.21
+      "elapsed_ms": 299.66
     },
     {
       "scenario_id": "sc-072",
@@ -1670,7 +1670,7 @@
       "visual_quality_score": 89.1,
       "critic_score": 95.0,
       "verification_status": "PASS",
-      "elapsed_ms": 301.97
+      "elapsed_ms": 341.23
     },
     {
       "scenario_id": "sc-073",
@@ -1692,7 +1692,7 @@
       "visual_quality_score": 89.1,
       "critic_score": 95.0,
       "verification_status": "PASS",
-      "elapsed_ms": 312.01
+      "elapsed_ms": 325.75
     },
     {
       "scenario_id": "sc-074",
@@ -1714,7 +1714,7 @@
       "visual_quality_score": 89.1,
       "critic_score": 95.0,
       "verification_status": "PASS",
-      "elapsed_ms": 305.22
+      "elapsed_ms": 296.97
     },
     {
       "scenario_id": "sc-075",
@@ -1736,7 +1736,7 @@
       "visual_quality_score": 89.1,
       "critic_score": 95.0,
       "verification_status": "PASS",
-      "elapsed_ms": 299.21
+      "elapsed_ms": 301.57
     },
     {
       "scenario_id": "sc-076",
@@ -1758,7 +1758,7 @@
       "visual_quality_score": 89.1,
       "critic_score": 95.0,
       "verification_status": "PASS",
-      "elapsed_ms": 280.35
+      "elapsed_ms": 299.75
     },
     {
       "scenario_id": "sc-077",
@@ -1780,7 +1780,7 @@
       "visual_quality_score": 89.1,
       "critic_score": 95.0,
       "verification_status": "PASS",
-      "elapsed_ms": 305.78
+      "elapsed_ms": 305.06
     },
     {
       "scenario_id": "sc-078",
@@ -1802,7 +1802,7 @@
       "visual_quality_score": 89.1,
       "critic_score": 95.0,
       "verification_status": "PASS",
-      "elapsed_ms": 315.13
+      "elapsed_ms": 296.68
     },
     {
       "scenario_id": "sc-079",
@@ -1824,7 +1824,7 @@
       "visual_quality_score": 89.1,
       "critic_score": 95.0,
       "verification_status": "PASS",
-      "elapsed_ms": 297.13
+      "elapsed_ms": 299.28
     },
     {
       "scenario_id": "sc-080",
@@ -1846,7 +1846,7 @@
       "visual_quality_score": 89.1,
       "critic_score": 95.0,
       "verification_status": "PASS",
-      "elapsed_ms": 283.17
+      "elapsed_ms": 317.22
     },
     {
       "scenario_id": "sc-081",
@@ -1868,7 +1868,7 @@
       "visual_quality_score": 89.1,
       "critic_score": 95.0,
       "verification_status": "PASS",
-      "elapsed_ms": 302.1
+      "elapsed_ms": 300.45
     },
     {
       "scenario_id": "sc-082",
@@ -1890,7 +1890,7 @@
       "visual_quality_score": 89.1,
       "critic_score": 95.0,
       "verification_status": "PASS",
-      "elapsed_ms": 299.02
+      "elapsed_ms": 338.94
     },
     {
       "scenario_id": "sc-083",
@@ -1912,7 +1912,7 @@
       "visual_quality_score": 89.1,
       "critic_score": 95.0,
       "verification_status": "PASS",
-      "elapsed_ms": 301.43
+      "elapsed_ms": 316.42
     },
     {
       "scenario_id": "sc-084",
@@ -1934,7 +1934,7 @@
       "visual_quality_score": 92.4,
       "critic_score": 95.0,
       "verification_status": "PASS",
-      "elapsed_ms": 297.62
+      "elapsed_ms": 309.51
     },
     {
       "scenario_id": "sc-085",
@@ -1956,7 +1956,7 @@
       "visual_quality_score": 89.1,
       "critic_score": 95.0,
       "verification_status": "PASS",
-      "elapsed_ms": 301.21
+      "elapsed_ms": 305.29
     },
     {
       "scenario_id": "sc-086",
@@ -1978,7 +1978,7 @@
       "visual_quality_score": 89.1,
       "critic_score": 95.0,
       "verification_status": "PASS",
-      "elapsed_ms": 297.39
+      "elapsed_ms": 294.13
     },
     {
       "scenario_id": "sc-087",
@@ -2000,7 +2000,7 @@
       "visual_quality_score": 89.1,
       "critic_score": 95.0,
       "verification_status": "PASS",
-      "elapsed_ms": 301.88
+      "elapsed_ms": 317.55
     },
     {
       "scenario_id": "sc-088",
@@ -2022,7 +2022,7 @@
       "visual_quality_score": 89.1,
       "critic_score": 95.0,
       "verification_status": "PASS",
-      "elapsed_ms": 286.48
+      "elapsed_ms": 301.0
     },
     {
       "scenario_id": "sc-089",
@@ -2044,7 +2044,7 @@
       "visual_quality_score": 89.1,
       "critic_score": 95.0,
       "verification_status": "PASS",
-      "elapsed_ms": 298.51
+      "elapsed_ms": 298.61
     },
     {
       "scenario_id": "sc-090",
@@ -2066,7 +2066,7 @@
       "visual_quality_score": 89.1,
       "critic_score": 95.0,
       "verification_status": "PASS",
-      "elapsed_ms": 296.2
+      "elapsed_ms": 299.03
     },
     {
       "scenario_id": "sc-091",
@@ -2088,7 +2088,7 @@
       "visual_quality_score": 89.1,
       "critic_score": 95.0,
       "verification_status": "PASS",
-      "elapsed_ms": 304.28
+      "elapsed_ms": 321.55
     },
     {
       "scenario_id": "sc-092",
@@ -2110,7 +2110,7 @@
       "visual_quality_score": 89.1,
       "critic_score": 95.0,
       "verification_status": "PASS",
-      "elapsed_ms": 299.22
+      "elapsed_ms": 296.18
     },
     {
       "scenario_id": "sc-093",
@@ -2132,7 +2132,7 @@
       "visual_quality_score": 89.1,
       "critic_score": 95.0,
       "verification_status": "PASS",
-      "elapsed_ms": 301.87
+      "elapsed_ms": 308.37
     },
     {
       "scenario_id": "sc-094",
@@ -2154,7 +2154,7 @@
       "visual_quality_score": 89.1,
       "critic_score": 95.0,
       "verification_status": "PASS",
-      "elapsed_ms": 297.12
+      "elapsed_ms": 309.24
     },
     {
       "scenario_id": "sc-095",
@@ -2176,7 +2176,7 @@
       "visual_quality_score": 89.1,
       "critic_score": 95.0,
       "verification_status": "PASS",
-      "elapsed_ms": 284.78
+      "elapsed_ms": 317.74
     },
     {
       "scenario_id": "sc-096",
@@ -2198,7 +2198,7 @@
       "visual_quality_score": 89.1,
       "critic_score": 95.0,
       "verification_status": "PASS",
-      "elapsed_ms": 300.72
+      "elapsed_ms": 320.98
     },
     {
       "scenario_id": "sc-097",
@@ -2220,7 +2220,7 @@
       "visual_quality_score": 89.1,
       "critic_score": 95.0,
       "verification_status": "PASS",
-      "elapsed_ms": 299.33
+      "elapsed_ms": 310.17
     },
     {
       "scenario_id": "sc-098",
@@ -2242,7 +2242,7 @@
       "visual_quality_score": 89.1,
       "critic_score": 95.0,
       "verification_status": "PASS",
-      "elapsed_ms": 282.81
+      "elapsed_ms": 318.61
     },
     {
       "scenario_id": "sc-099",
@@ -2264,7 +2264,7 @@
       "visual_quality_score": 89.1,
       "critic_score": 95.0,
       "verification_status": "PASS",
-      "elapsed_ms": 282.22
+      "elapsed_ms": 296.79
     },
     {
       "scenario_id": "sc-100",
@@ -2286,7 +2286,7 @@
       "visual_quality_score": 89.1,
       "critic_score": 95.0,
       "verification_status": "PASS",
-      "elapsed_ms": 286.9
+      "elapsed_ms": 304.3
     }
   ]
 }

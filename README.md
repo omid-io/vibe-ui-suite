@@ -7,8 +7,8 @@
 **Contract-driven frontend engineering, design-system constraints, and runtime verification for AI coding assistants.**
 
 [![CI Pipeline](https://github.com/omid-io/vibe-ui-suite/actions/workflows/ci.yml/badge.svg)](https://github.com/omid-io/vibe-ui-suite/actions/workflows/ci.yml)
-[![npm version](https://img.shields.io/npm/v/@omid-io/tokens.svg?color=cb3837&label=npm)](https://www.npmjs.com/package/@omid-io/tokens)
-[![npm downloads](https://img.shields.io/npm/dm/%40omid-io%2Ftokens?color=red&label=npm%20downloads)](https://www.npmjs.com/package/@omid-io/tokens)
+[![npm version](https://img.shields.io/npm/v/vibe-ui-suite.svg?color=cb3837&label=npm)](https://www.npmjs.com/package/vibe-ui-suite)
+[![npm downloads](https://img.shields.io/npm/dm/vibe-ui-suite?color=red&label=npm%20downloads)](https://www.npmjs.com/package/vibe-ui-suite)
 [![Open-VSX Downloads](https://img.shields.io/open-vsx/dt/omid-io/vibe-ui-vscode?color=green&logo=eclipseche&label=open-vsx%20downloads)](https://open-vsx.org/extension/omid-io/vibe-ui-vscode)
 [![VS Code Marketplace Installs](https://img.shields.io/visual-studio-marketplace/i/omid-io.vibe-ui-vscode?color=blue&logo=visual-studio-code&label=marketplace%20installs)](https://marketplace.visualstudio.com/items?itemName=omid-io.vibe-ui-vscode)
 [![GitHub Stars](https://img.shields.io/github/stars/omid-io/vibe-ui-suite?style=social)](https://github.com/omid-io/vibe-ui-suite)
@@ -90,7 +90,7 @@ Design and style this application using Vibe UI standards (https://github.com/om
 ### Option B: The 1-Command CLI Setup
 In your project directory, run:
 ```bash
-npx @omid-io/tokens init
+npx vibe-ui-suite init
 ```
 This interactive command:
 1. Configures your AI editor rules (`.cursorrules`, `CLAUDE.md`, `.windsurfrules`).
@@ -104,7 +104,7 @@ This interactive command:
 In your `app/globals.css` or main stylesheet:
 ```css
 @import "tailwindcss";
-@import "@omid-io/tokens/v4.css";
+@import "vibe-ui-suite/v4.css";
 ```
 Zero JavaScript configuration files needed. Instantly unlocks:
 - **Semantic OKLCH colors**: `bg-vibe-canvas`, `bg-vibe-surface`, `text-vibe-primary`, `border-vibe-border`
@@ -118,17 +118,17 @@ Zero JavaScript configuration files needed. Instantly unlocks:
 Add production-ready, accessible component templates directly into `components/vibe-ui/`:
 ```bash
 # Collapsible AI reasoning drawer with CSS grid zero-JS transition & status radar
-npx @omid-io/tokens add thinking-drawer
+npx vibe-ui-suite add thinking-drawer
 
 # LTR-isolated technical metric HUD for latency, tokens, and model status
-npx @omid-io/tokens add telemetry-hud
+npx vibe-ui-suite add telemetry-hud
 
 # Live mathematical WCAG AA / AAA contrast compliance indicator badge
-npx @omid-io/tokens add contrast-badge
+npx vibe-ui-suite add contrast-badge
 ```
 List all available registry components:
 ```bash
-npx @omid-io/tokens list
+npx vibe-ui-suite list
 ```
 
 ---

@@ -40,6 +40,14 @@ jobs:
         run: |
           npm publish --access public || echo "[INFO] Version already published on NPM, proceeding to extension build..."
 
+      - name: Build & Publish to NPM (vibe-ui-suite)
+        working-directory: packages/vibe-ui-suite
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+        run: |
+          node build.js
+          npm publish --access public || echo "[INFO] vibe-ui-suite already published on NPM, proceeding..."
+
       - name: Build VS Code & Cursor Extension
         working-directory: packages/vibe-ui-vscode
         run: |
