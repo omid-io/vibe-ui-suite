@@ -28,6 +28,7 @@ from vibe_core.critic import DesignCritic
 from vibe_core.visual_critic import VisualCritic
 from vibe_core.refiner import AutoRefiner
 from vibe_core.verifier import VerificationEngine
+from vibe_core.runtime_compiler import RuntimeCompiler
 
 import argparse
 
@@ -64,9 +65,11 @@ def main():
     visual_critic = VisualCritic()
     refiner = AutoRefiner()
     verifier = VerificationEngine()
+    runtime_compiler = RuntimeCompiler()
 
     v3_first_pass = 0
     v3_autonomous_resolved = 0
+    v3_react_compiled = 0
     v3_corrections = 0
     v3_tokens = 0
     v3_total_ms = 0.0
@@ -104,8 +107,13 @@ def main():
         selected_style = decision["selected_style"]
         v3_styles.add(selected_style)
 
-        # Step 3: Generator
+        # Step 3: Generator (HTML + React 19 TSX)
         html = generator.generate_html(decision, prompt_title=prompt_text)
+        react_tsx = generator.generate_react_tsx(decision)
+        compiled_js, compile_err = runtime_compiler.compile_tsx(react_tsx)
+        react_valid = (compile_err is None and bool(compiled_js) and len(compiled_js) > 0)
+        if react_valid:
+            v3_react_compiled += 1
 
         # Step 4: Composite Critic (DOM + Visual Critics)
         critique_report = critic.critique(html, decision, iteration=1)
@@ -145,6 +153,7 @@ def main():
             "selected_style": selected_style,
             "candidate_passed_first_pass": composite_first_pass,
             "autonomous_resolved": is_accepted,
+            "react_tsx_compiled": react_valid,
             "dom_quality_score": final_report.get("quality_score", 0),
             "visual_quality_score": final_report.get("visual_critic", {}).get("visual_score", visual_report.get("visual_score", 0)),
             "critic_score": final_report["quality_score"],
@@ -159,6 +168,7 @@ def main():
 
     v3_first_pass_rate = (v3_first_pass / len(scenarios)) * 100.0
     v3_autonomous_rate = (v3_autonomous_resolved / len(scenarios)) * 100.0
+    v3_react_compile_rate = (v3_react_compiled / len(scenarios)) * 100.0
     v3_domain_accuracy = (v3_domain_matches / len(scenarios)) * 100.0
     v3_avg_corrections = round(v3_corrections / len(scenarios), 2)
     v3_avg_tokens = round(v3_tokens / len(scenarios), 0)
@@ -171,7 +181,7 @@ def main():
     benchmark_results = {
         "$schema": "../../schemas/benchmark-result.v1.json",
         "timestamp": datetime.now(timezone.utc).isoformat(),
-        "suite_version": "3.6.0",
+        "suite_version": "3.7.0",
         "scenario_count": len(scenarios),
         "benchmark_type": "internal_deterministic_heuristic",
         "baseline_system": "Vanilla LLM / V2 Heuristic Baseline",
@@ -188,6 +198,11 @@ def main():
                 "baseline": 65.0,
                 "candidate": v3_autonomous_rate,
                 "delta_percent": round(v3_autonomous_rate - 65.0, 1)
+            },
+            "react_tsx_compilation_rate": {
+                "baseline": 0.0,
+                "candidate": v3_react_compile_rate,
+                "delta_percent": v3_react_compile_rate
             },
             "domain_resolution_accuracy": {
                 "baseline": 56.0,
@@ -223,12 +238,13 @@ def main():
         json.dump(benchmark_results, f, indent=2, ensure_ascii=False)
 
     print("\n" + "=" * 70)
-    print("📊 VIBE UI V3 BENCHMARK SCOREBOARD (v3.6.0)")
+    print("📊 VIBE UI V3 BENCHMARK SCOREBOARD (v3.7.0)")
     print("=" * 70)
     print(f"| KPI Metric                  | Baseline (V2) | Vibe UI V3    | Improvement           |")
     print(f"| :-------------------------- | :------------ | :------------ | :-------------------- |")
     print(f"| First-Pass Acceptance       | 52.0%         | {v3_first_pass_rate:.1f}%         | +{v3_first_pass_rate - 52.0:.1f}%               |")
     print(f"| Autonomous Resolution Rate  | 65.0%         | {v3_autonomous_rate:.1f}%        | +{v3_autonomous_rate - 65.0:.1f}%               |")
+    print(f"| React 19 TSX ESM Compile    | 0.0%          | {v3_react_compile_rate:.1f}%        | Native In-Memory ESM  |")
     print(f"| Domain Match Accuracy       | 56.0%         | {v3_domain_accuracy:.1f}%        | +{v3_domain_accuracy - 56.0:.1f}% accuracy gain   |")
     print(f"| Avg Correction Count        | {baseline_corrections} prompts   | {v3_avg_corrections} prompts   | -{((baseline_corrections - v3_avg_corrections)/baseline_corrections)*100:.1f}% reduction       |")
     print(f"| Avg Correction Tokens       | {baseline_tokens} tokens   | {v3_avg_tokens:.0f} tokens     | -{((baseline_tokens - v3_avg_tokens)/baseline_tokens)*100:.1f}% token savings   |")

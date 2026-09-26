@@ -238,7 +238,7 @@ export const {component_name}: React.FC<{component_name}Props> = ({{
               <span>{"سامانه فعال و تایید شده" if is_rtl else "System Operational"}</span>
             </span>
             <span className="{style_cfg['version_tag']}">
-              <bdi>v3.6.0 • OKLCH AAA</bdi>
+              <bdi>v3.7.0 • OKLCH AAA</bdi>
             </span>
           </div>
 
@@ -279,7 +279,7 @@ export const {component_name}: React.FC<{component_name}Props> = ({{
                   type="button"
                   role="switch"
                   aria-checked={{billingCycle === "annual"}}
-                  aria-label="{{"تغییر دوره پرداخت" if is_rtl else "Billing cycle toggle"}}"
+                  aria-label="{"تغییر دوره پرداخت" if is_rtl else "Billing cycle toggle"}"
                   onClick={{() => setBillingCycle(prev => prev === "annual" ? "monthly" : "annual")}}
                   className="relative inline-flex min-h-[44px] min-w-[48px] items-center justify-center p-2 rounded-full cursor-pointer focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:ring-offset-2"
                 >
@@ -353,7 +353,7 @@ export const {component_name}: React.FC<{component_name}Props> = ({{
             <div className="{style_cfg['telemetry_card']}">
               <div className="text-xs font-medium text-zinc-500">{metric1['label']}</div>
               <div className="text-2xl font-bold font-mono text-emerald-600 dark:text-emerald-400">
-                <bdi>{metric1['value']}</bdi>
+                <bdi>{{{json.dumps(metric1['value'], ensure_ascii=False)}}}</bdi>
               </div>
               <div className="text-xs text-zinc-400">{"شاخص عملکردی تایید شده حوزه" if is_rtl else "Verified production benchmark metric"}</div>
             </div>
@@ -361,7 +361,7 @@ export const {component_name}: React.FC<{component_name}Props> = ({{
             <div className="{style_cfg['telemetry_card']}">
               <div className="text-xs font-medium text-zinc-500">{metric2['label']}</div>
               <div className="text-2xl font-bold font-mono text-sky-600 dark:text-sky-400">
-                <bdi>{metric2['value']}</bdi>
+                <bdi>{{{json.dumps(metric2['value'], ensure_ascii=False)}}}</bdi>
               </div>
               <div className="text-xs text-zinc-400">{"پایش لحظه ای و تضمین سطح خدمت" if is_rtl else "Real-time telemetry and SLA assurance"}</div>
             </div>
@@ -369,7 +369,7 @@ export const {component_name}: React.FC<{component_name}Props> = ({{
             <div className="{style_cfg['telemetry_card']}">
               <div className="text-xs font-medium text-zinc-500">{metric3['label']}</div>
               <div className="text-2xl font-bold font-mono text-indigo-600 dark:text-indigo-400">
-                <bdi>{metric3['value']}</bdi>
+                <bdi>{{{json.dumps(metric3['value'], ensure_ascii=False)}}}</bdi>
               </div>
               <div className="text-xs text-zinc-400">{"بهینه سازی مداوم با رصد الگوریتمی رویدادها" if is_rtl else "Continuously optimized by invariant monitoring"}</div>
             </div>

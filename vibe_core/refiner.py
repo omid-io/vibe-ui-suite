@@ -79,10 +79,12 @@ def replace_clickable_divs(html: str) -> str:
 
 
 class AutoRefiner:
-    def __init__(self, enable_physical_browser: bool = False):
+    def __init__(self, enable_physical_browser: bool = False, verify_runtime_causal: bool = False):
         self.critic = DesignCritic()
         self.visual_critic = VisualCritic()
         self.physical_critic = PhysicalCritic(enable_browser=enable_physical_browser)
+        self.verify_runtime_causal = verify_runtime_causal
+        self.enable_physical_browser = enable_physical_browser
 
     replace_clickable_divs = staticmethod(replace_clickable_divs)
 
@@ -94,10 +96,12 @@ class AutoRefiner:
         current_visual: Optional[Dict[str, Any]] = None,
         patched_visual: Optional[Dict[str, Any]] = None,
         current_physical: Optional[Dict[str, Any]] = None,
-        patched_physical: Optional[Dict[str, Any]] = None
+        patched_physical: Optional[Dict[str, Any]] = None,
+        current_runtime: Optional[Dict[str, Any]] = None,
+        patched_runtime: Optional[Dict[str, Any]] = None
     ) -> bool:
         """
-        Enforces 9-Rule Triple Composite Invariant Gate (DOM + Visual + Physical Critics):
+        Enforces 10-Rule Quad-Composite Invariant Gate (DOM + Visual + Physical + Runtime Critics):
         1. Gate Monotonicity (No introduced failures): len(new_failures - curr_failures) == 0
         2. Gate Monotonicity (Failure count non-increasing): len(new_failures) <= len(curr_failures)
         3. Tag Balance Invariant: Assert balanced <button>...</button> pairs
@@ -107,6 +111,7 @@ class AutoRefiner:
         7. Visual Quality Non-Regression: Visual composite score maintained (within 2.0 tolerance)
         8. Physical Monotonicity: No new P0 physical layout defects introduced
         9. Physical Quality Non-Regression: Physical layout score maintained (within 2.0 tolerance)
+        10. Runtime Causal Monotonicity: Reactivity must not regress (interactive_verified must remain True)
         """
         # Extract failure sets
         curr_failures = {f["gate"] for f in current_report.get("hard_gate_failures", [])}
@@ -166,6 +171,13 @@ class AutoRefiner:
             if patch_phys_score < curr_phys_score - 2.0:
                 return False
 
+        # 10. Runtime Causal Reactivity Invariant Gate
+        if current_runtime is not None and patched_runtime is not None:
+            curr_runtime_ok = current_runtime.get("interactive_verified", True)
+            patch_runtime_ok = patched_runtime.get("interactive_verified", True)
+            if curr_runtime_ok and not patch_runtime_ok:
+                return False
+
         return True
 
     def refine(
@@ -177,25 +189,28 @@ class AutoRefiner:
     ) -> Tuple[str, Dict[str, Any]]:
         """
         Runs bounded refinement loop (max 2 iterations) resolving defects in priority order.
-        Strictly enforces atomic Triple Composite acceptance (DOM + Visual + Physical Critics).
+        Strictly enforces atomic Quad-Composite acceptance (DOM + Visual + Physical + Runtime Critics).
         """
         decision = decision or {}
         current_html = html_content
         current_report = self.critic.critique(current_html, decision, iteration=1)
         current_visual = self.visual_critic.evaluate(current_html, decision)
         current_physical = self.physical_critic.audit_physical_layout(current_html)
+        current_runtime = self.physical_critic.audit_runtime_interaction(current_html) if self.verify_runtime_causal else {"interactive_verified": True}
         current_report["visual_critic"] = current_visual
         current_report["physical_critic"] = current_physical
+        current_report["runtime_critic"] = current_runtime
 
         dom_accepted = (current_report.get("acceptance_status") == "ACCEPTED")
         vis_accepted = (current_visual.get("acceptance_status") == "ACCEPTED")
         phys_accepted = (current_physical.get("acceptance_status") == "ACCEPTED")
+        runtime_accepted = current_runtime.get("interactive_verified", True)
         current_report["acceptance_status"] = (
-            "ACCEPTED" if (dom_accepted and vis_accepted and phys_accepted)
+            "ACCEPTED" if (dom_accepted and vis_accepted and phys_accepted and runtime_accepted)
             else "REVISE_REQUIRED"
         )
 
-        if dom_accepted and vis_accepted and phys_accepted:
+        if dom_accepted and vis_accepted and phys_accepted and runtime_accepted:
             return current_html, current_report
 
         severity_map = {"P0": "critical", "P1": "high", "P2": "medium"}
@@ -382,12 +397,13 @@ class AutoRefiner:
                         if not re.search(r"min-h-\[(4[4-9]|[5-9]\d)px\]", patched_html):
                             patched_html = re.sub(r'(<button\b[^>]*class="[^"]*)(")', r'\1 min-h-[44px] px-6 py-3\2', patched_html)
 
-            # Re-Evaluation (Triple Composite: DOM + Visual + Physical)
+            # Re-Evaluation (Quad-Composite: DOM + Visual + Physical + Runtime)
             re_critique = self.critic.critique(patched_html, decision, iteration=iteration + 1)
             re_visual = self.visual_critic.evaluate(patched_html, decision)
             re_physical = self.physical_critic.audit_physical_layout(patched_html)
+            re_runtime = self.physical_critic.audit_runtime_interaction(patched_html) if self.verify_runtime_causal else {"interactive_verified": True}
 
-            # Strict 9-Rule Triple Composite Invariant Gate Check
+            # Strict 10-Rule Quad-Composite Invariant Gate Check
             accept_patch = self.should_accept_patch(
                 current_report,
                 re_critique,
@@ -395,7 +411,9 @@ class AutoRefiner:
                 current_visual=current_visual,
                 patched_visual=re_visual,
                 current_physical=current_physical,
-                patched_physical=re_physical
+                patched_physical=re_physical,
+                current_runtime=current_runtime,
+                patched_runtime=re_runtime
             )
 
             if accept_patch:
@@ -403,13 +421,16 @@ class AutoRefiner:
                 current_report = re_critique
                 current_visual = re_visual
                 current_physical = re_physical
+                current_runtime = re_runtime
                 dom_ok = (current_report.get("acceptance_status") == "ACCEPTED")
                 vis_ok = (current_visual.get("acceptance_status") == "ACCEPTED")
                 phys_ok = (current_physical.get("acceptance_status") == "ACCEPTED")
-                current_report["acceptance_status"] = "ACCEPTED" if (dom_ok and vis_ok and phys_ok) else "REVISE_REQUIRED"
+                runtime_ok = current_runtime.get("interactive_verified", True)
+                current_report["acceptance_status"] = "ACCEPTED" if (dom_ok and vis_ok and phys_ok and runtime_ok) else "REVISE_REQUIRED"
                 current_report["visual_critic"] = current_visual
                 current_report["physical_critic"] = current_physical
-                if dom_ok and vis_ok and phys_ok:
+                current_report["runtime_critic"] = current_runtime
+                if dom_ok and vis_ok and phys_ok and runtime_ok:
                     break
             else:
                 # Explicit rejection: discard patch, keep current_html
@@ -417,8 +438,10 @@ class AutoRefiner:
 
         current_report["visual_critic"] = current_visual
         current_report["physical_critic"] = current_physical
+        current_report["runtime_critic"] = current_runtime
         dom_ok = (current_report.get("acceptance_status") == "ACCEPTED")
         vis_ok = (current_visual.get("acceptance_status") == "ACCEPTED")
         phys_ok = (current_physical.get("acceptance_status") == "ACCEPTED")
-        current_report["acceptance_status"] = "ACCEPTED" if (dom_ok and vis_ok and phys_ok) else "REVISE_REQUIRED"
+        runtime_ok = current_runtime.get("interactive_verified", True)
+        current_report["acceptance_status"] = "ACCEPTED" if (dom_ok and vis_ok and phys_ok and runtime_ok) else "REVISE_REQUIRED"
         return current_html, current_report

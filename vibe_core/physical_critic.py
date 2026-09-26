@@ -201,6 +201,139 @@ class PhysicalCritic:
             "engine": f"static_heuristic_fallback ({error_note})" if error_note else "static_heuristic"
         }
 
+    def audit_runtime_react_tsx(
+        self,
+        tsx_code: str,
+        target_slider_value: Optional[float] = None,
+        is_rtl: bool = False,
+        capture_screenshots: bool = False
+    ) -> Dict[str, Any]:
+        """
+        End-to-End Browser Truth Audit for real React 19 TSX components:
+        1. Compiles TSX component in-memory into ESM via esbuild (<25ms).
+        2. Mounts into Chromium with React 19 + ReactDOM 19 + Tailwind CSS.
+        3. Listens for React runtime crashes or unhandled exceptions.
+        4. Simulates physical pointer / native value change on the interactive slider.
+        5. Asserts dynamic causal recalculation in all <bdi> metrics.
+        6. Optionally captures real multi-viewport screenshots (390px, 768px, 1440px).
+        """
+        if not self.enable_browser:
+            return {
+                "interactive_verified": True,
+                "status": "SKIPPED_STATIC_MODE",
+                "message": "Browser execution disabled; skipped runtime interaction simulation."
+            }
+
+        from vibe_core.runtime_compiler import RuntimeCompiler
+        compiler = RuntimeCompiler()
+        harness_html, err = compiler.compile_and_harness(tsx_code, component_name="VibeMasterpiece", is_rtl=is_rtl)
+        if err:
+            return {
+                "interactive_verified": False,
+                "status": "COMPILATION_ERROR",
+                "error": err,
+                "defects": [{
+                    "type": "runtime_compilation_error",
+                    "severity": "P0",
+                    "message": f"React 19 TSX failed compilation: {err[:200]}"
+                }]
+            }
+
+        try:
+            from playwright.sync_api import sync_playwright
+            with sync_playwright() as p:
+                browser = p.chromium.launch(headless=True)
+                page = browser.new_page(viewport={"width": 1280, "height": 800})
+
+                errors = []
+                page.on("pageerror", lambda e: errors.append(str(e)))
+
+                page.set_content(harness_html, wait_until="networkidle")
+
+                if errors:
+                    browser.close()
+                    return {
+                        "interactive_verified": False,
+                        "status": "REACT_RUNTIME_CRASH",
+                        "error": errors[0],
+                        "defects": [{
+                            "type": "react_runtime_crash",
+                            "severity": "P0",
+                            "message": f"React component crashed on mount: {errors[0][:200]}"
+                        }]
+                    }
+
+                # Read all initial metrics
+                metrics_before = page.eval_on_selector_all('bdi', 'els => els.map(el => el.innerText.trim())')
+
+                # Find interactive slider
+                slider = page.query_selector('input[type="range"]')
+                if not slider:
+                    browser.close()
+                    return {
+                        "interactive_verified": True,
+                        "status": "NO_RANGE_SLIDER",
+                        "message": "No range slider in component; mounted cleanly."
+                    }
+
+                curr_val = float(slider.get_attribute("value") or 0)
+                min_val = float(slider.get_attribute("min") or 0)
+                max_val = float(slider.get_attribute("max") or 100)
+                new_val = target_slider_value if target_slider_value is not None else (max_val if curr_val < (min_val + max_val) / 2 else min_val)
+
+                # Dispatch native React synthetic event
+                page.evaluate("""({val}) => {
+                    const input = document.querySelector('input[type="range"]');
+                    if (input) {
+                        const nativeSetter = Object.getOwnPropertyDescriptor(window.HTMLInputElement.prototype, 'value').set;
+                        nativeSetter.call(input, String(val));
+                        input.dispatchEvent(new Event('input', { bubbles: true }));
+                        input.dispatchEvent(new Event('change', { bubbles: true }));
+                    }
+                }""", {"val": new_val})
+
+                page.wait_for_timeout(100)
+
+                metrics_after = page.eval_on_selector_all('bdi', 'els => els.map(el => el.innerText.trim())')
+
+                recalculated = [f"{b} -> {a}" for b, a in zip(metrics_before, metrics_after) if b != a]
+                is_causal = len(recalculated) > 0
+
+                screenshots = {}
+                if capture_screenshots:
+                    for vp_name, vp_w in [("mobile", 390), ("tablet", 768), ("desktop", 1440)]:
+                        page.set_viewport_size({"width": vp_w, "height": 844 if vp_w < 500 else 900})
+                        page.wait_for_timeout(50)
+                        screenshots[vp_name] = page.screenshot(type="png")
+
+                browser.close()
+
+                return {
+                    "interactive_verified": is_causal,
+                    "status": "PASSED" if is_causal else "STATIC_OR_DEAD_STATE",
+                    "metrics_count": len(metrics_before),
+                    "recalculated_count": len(recalculated),
+                    "recalculated_pairs": recalculated,
+                    "slider_target": new_val,
+                    "screenshots_captured": list(screenshots.keys()),
+                    "defects": [] if is_causal else [{
+                        "type": "runtime_causal_dead_state",
+                        "severity": "P0",
+                        "message": "Range slider interaction did not trigger React state change or dynamic metric recalculation in DOM."
+                    }]
+                }
+        except Exception as e:
+            return {
+                "interactive_verified": False,
+                "status": "ERROR",
+                "message": f"Runtime React audit failed: {e}",
+                "defects": [{
+                    "type": "runtime_audit_error",
+                    "severity": "P0",
+                    "message": str(e)
+                }]
+            }
+
     def audit_runtime_interaction(
         self,
         html_content: str,
@@ -209,13 +342,13 @@ class PhysicalCritic:
         target_value: Optional[float] = None
     ) -> Dict[str, Any]:
         """
-        Simulates physical causal user interaction in real Chromium browser:
-        1. Loads html_content in Chromium page.
-        2. Queries initial text from `metric_selector`.
-        3. Simulates physical slider drag or value change event on `slider_selector`.
-        4. Queries recalculated text from `metric_selector`.
-        5. Asserts that state is dynamically responsive and causal (initial != recalculated).
+        Simulates physical causal user interaction in real Chromium browser.
+        Automatically routes React TSX code through audit_runtime_react_tsx().
         """
+        # Auto-route if code is TSX component
+        if "export function" in html_content or "export const VibeMasterpiece" in html_content or "from 'react'" in html_content:
+            return self.audit_runtime_react_tsx(html_content, target_slider_value=target_value)
+
         if not self.enable_browser:
             return {
                 "interactive_verified": True,

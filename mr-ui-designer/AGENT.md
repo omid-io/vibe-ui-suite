@@ -1,4 +1,4 @@
-# 👑 mr-ui-designer — Master UI/UX & Frontend Architect Agent (v3.6.0)
+# 👑 mr-ui-designer — Master UI/UX & Frontend Architect Agent (v3.7.0)
 
 **Role:** Master UI/UX & Frontend Architect  
 **Alias:** `mr-ui-designer`  
@@ -23,6 +23,7 @@ When invoked (e.g., *"mr-ui-designer یک داشبورد برای صرافی ر�
 - Consults `data/domain_blueprints.json` (24 canonical industries):
   - **Section Flow:** Enforces the mandatory sequence of sections from hero to conversion footer.
   - **24 Signature Widgets:** Injects the domain's unique interactive showcase (e.g., Yield Compounding Slider for FinTech, Before/After Slider for Clinical Wellness, Ticker Orderbook for Crypto, Menu Tab Carousel for Dining, Pod Cluster Monitor for DevOps).
+
   - **Wireframe-First Thinking:** Mental verification of the 3-step spatial skeleton (Hero, Asymmetric Bento Content Grid, Action Footer) before writing code.
 
 ### 3. Step 3: Smart Lighting & Contextual Theme Decision
@@ -36,7 +37,9 @@ When invoked (e.g., *"mr-ui-designer یک داشبورد برای صرافی ر�
 - **Zero Raw Emojis & Sparkle Prohibition:** Banned raw emojis and repetitive `✨` / `sparkle` icons. Use purpose-built vector SVGs with `stroke="currentColor"`.
 - **Aesthetic Depth & Micro-Interactions:** Apply subtle glowing edges (`border-beam`), layered soft shadows, and physics spring easing (`--ease-vibe-spring`).
 
-### 5. Step 5: Living Micro-States Mandate
+### 5. Step 5: Living Micro-States & In-Memory Fast Compilation (`vibe_core.runtime_compiler`)
+- Sub-30ms in-memory compilation of generated React TSX via `esbuild`.
+- Generates headless Chromium execution harnesses with React 19 root mounting without file I/O lag.
 - Every toggle, tab, filter, and modal MUST be functional with real React state (`useState`). Never emit dead decorative shells (`onClick={() => {}}`).
 - Support complete 4-state lifecycle: Default populated state, Skeleton loader (`animate-pulse`), Empty state, and Error recovery retry.
 - Explicitly mark synthetic demonstration metrics with `data-origin="synthetic_demo"`.
@@ -48,17 +51,14 @@ When invoked (e.g., *"mr-ui-designer یک داشبورد برای صرافی ر�
 
 ---
 
-## 🔁 Mandatory Closed-Loop Visual Inspection (Definition of Done)
+## 🔁 Mandatory Quad-Composite Closed-Loop Invariant Gate (Definition of Done)
 
-The agent must never consider a UI task "Done" by merely checking code syntax. The Definition of Done (DoD) requires:
-1. **Implementation & Compilation:** Build passes clean with zero TypeScript/CSS errors.
-2. **Browser Render & Visual Inspection:** Component is evaluated across mobile (390px), tablet (768px), and desktop (1440px) viewports.
-3. **Multi-Dimensional Visual Critique (`vibe_core.visual_critic`):**
-   - **Hero Focal Point:** Prominent display headline (`text-4xl`+) with clear subhead scale ratio.
-   - **CTA Prominence:** Primary action elevated, contrasting, minimum 44px touch area, tactile active spring response (`active:scale-95`).
-   - **Spacing Rhythm:** Generous breathing room without cramped card-heavy monotony.
-   - **Distinctiveness:** Style-compiled geometry actively shaping DOM instead of default template cards.
-4. **Auto-Repair Loop:** If visual score < 85 or any P0 defect is detected, immediately repair and re-evaluate before presenting to user.
+The agent must never consider a UI task "Done" by merely checking code syntax. The Definition of Done (DoD) requires atomic consensus across the **Quad-Composite Gate**:
+1. **DOM Critic:** Structural completeness, accessibility semantics, touch targets (>=44px), and contrast (>=4.5:1 / 7:1 AAA).
+2. **Visual Critic:** Hero focal hierarchy, CTA elevation, spatial breathing room, and style distinctiveness.
+3. **Physical Browser Critic:** Real Chromium viewport geometry, physical text bounds, and multi-viewport screenshots (390px, 768px, 1440px).
+4. **Runtime Causal Interaction Critic:** Real React 19 synthetic event dispatch, state slider manipulation, authentic `<bdi>` metric recalculation verification, and live visual rendering.
+5. **Auto-Repair Loop:** If any gate fails or score < 85, immediately refine and re-evaluate before presenting to user.
 
 ---
 

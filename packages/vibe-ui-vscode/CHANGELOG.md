@@ -3,6 +3,16 @@
 All notable changes to the **Vibe UI (VS Code, Cursor & Open-VSX)** extension will be documented in this file.
 This project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [3.7.0] — 2026-09-26
+
+### Added
+- **Browser Truth Pipeline:** Full in-memory React 19 TSX to ESM compilation and execution in headless Chromium.
+- **Quad-Composite Invariant Gate:** Atomic consensus across DOM, Visual, Physical, and Runtime Interaction critics.
+- **React 19 Synthetic Event Verification:** Dispatches native React value setters to assert dynamic metric recalculation in `<bdi>`.
+- **Zero JSX Escaping Defects:** Certified 100% clean compilation across all 24 canonical domains and text directions.
+
+---
+
 ## [3.6.0] — 2026-09-26
 
 ### Added

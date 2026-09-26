@@ -69,7 +69,7 @@ Headless Browser Evaluation (Playwright 375px mobile overflow)
 Verified Output or Actionable Failure Diagnostics
 ```
 
-> **Day-One Transparency**: Vibe UI Suite is at `v3.6.0` (The Triple Composite Autonomous Vision & Living Interaction Engine). Featuring triple composite critic veto gating (DOM + Visual + Physical Chromium), 24 domain-specific causal reactive widgets with WCAG 2.5.5 touch target guarantees (>= 44x44px), runtime causal interaction testing, intelligent Media & Asset Direction, render-affecting style compilers (Neobrutalism, Swiss, Luxury, Terminal, Glass, Stripe), deep design system inheritance (shadcn/ui), 100% blind holdout benchmark accuracy, and dual-tier contrast governance (Target: WCAG AAA >= 7:1 | Hard Gate: WCAG AA >= 4.5:1). Constructive criticism, issues, and contributions from frontend engineers and AI researchers are warmly welcomed.
+> **Day-One Transparency**: Vibe UI Suite is at `v3.7.0` (The Browser Truth Pipeline). Featuring sub-30ms in-memory React 19 TSX to ESM compilation via esbuild, quad-composite invariant gate (DOM + Visual + Physical Chromium + Runtime Interaction), authentic React 19 synthetic event testing and causal `<bdi>` metric recalculation verification, 24 domain-specific causal reactive widgets with WCAG 2.5.5 touch target guarantees (>= 44x44px), intelligent Media & Asset Direction, render-affecting style compilers (Neobrutalism, Swiss, Luxury, Terminal, Glass, Stripe), deep design system inheritance (shadcn/ui), 100% blind holdout benchmark accuracy, and dual-tier contrast governance (Target: WCAG AAA >= 7:1 | Hard Gate: WCAG AA >= 4.5:1). Constructive criticism, issues, and contributions from frontend engineers and AI researchers are warmly welcomed.
 
 ---
 

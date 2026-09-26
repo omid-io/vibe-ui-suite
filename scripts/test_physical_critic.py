@@ -131,13 +131,42 @@ def main():
         failures.append(f"Test 5 Failed: Expected updated metric to contain '85,000 USD', got '{res5.get('updated_metric')}'")
     print(f"  [PASS] Test 5: Runtime causal interaction verified in Chromium ({res5.get('initial_metric')} -> {res5.get('updated_metric')})")
 
+    # Test 6: Real React 19 TSX Living Component Mount & State Drag Audit
+    from vibe_core.generator import InterfaceGenerator
+    generator = InterfaceGenerator()
+    fintech_decision = {
+        "genome": {
+            "domain": "fintech_banking",
+            "platform": {"rtl_support": False}
+        },
+        "intent": {
+            "product_domain": "fintech_banking",
+            "language": ["en"]
+        },
+        "selected_style": "clean_stripe"
+    }
+    fintech_tsx = generator.generate_react_tsx(fintech_decision)
+
+    res6 = critic.audit_runtime_react_tsx(
+        fintech_tsx,
+        target_slider_value=175000,
+        capture_screenshots=True
+    )
+    if not res6.get("interactive_verified"):
+        failures.append(f"Test 6 Failed: Real React 19 component interaction not verified (result={res6})")
+    if res6.get("recalculated_count", 0) < 1:
+        failures.append(f"Test 6 Failed: Expected at least 1 recalculated metric in DOM, got {res6.get('recalculated_count')}")
+    if len(res6.get("screenshots_captured", [])) != 3:
+        failures.append(f"Test 6 Failed: Expected 3 multi-viewport screenshots, got {res6.get('screenshots_captured')}")
+    print(f"  [PASS] Test 6: Real React 19 TSX component mounted in Chromium ({res6.get('recalculated_count')} metrics causally recalculated, 3 screenshots captured)")
+
     if failures:
         print("\n[FAIL] Physical Critic Suite Failures:", file=sys.stderr)
         for f in failures:
             print(f"  - {f}", file=sys.stderr)
         return 1
 
-    print("\n[SUCCESS] Headless Physical Viewport Critic passed all tests (5/5).")
+    print("\n[SUCCESS] Headless Physical Viewport Critic passed all tests (6/6).")
     return 0
 
 if __name__ == "__main__":
