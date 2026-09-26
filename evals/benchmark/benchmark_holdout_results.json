@@ -1,7 +1,7 @@
 {
   "$schema": "../../schemas/benchmark-result.v1.json",
-  "timestamp": "2026-09-26T11:19:49.597773+00:00",
-  "suite_version": "3.3.0",
+  "timestamp": "2026-09-26T11:46:37.154551+00:00",
+  "suite_version": "3.4.0",
   "scenario_count": 50,
   "benchmark_type": "internal_deterministic_heuristic",
   "baseline_system": "Vanilla LLM / V2 Heuristic Baseline",
@@ -30,7 +30,7 @@
       "reduction_percent": 100.0
     },
     "avg_time_to_accept_ms": {
-      "candidate": 14.73
+      "candidate": 14.56
     },
     "visual_diversity_index": {
       "candidate": 66.7,
@@ -51,7 +51,7 @@
       "candidate_passed_first_pass": true,
       "critic_score": 95.0,
       "verification_status": "PASS",
-      "elapsed_ms": 29.03
+      "elapsed_ms": 27.29
     },
     {
       "scenario_id": "holdout_02",
@@ -63,7 +63,7 @@
       "candidate_passed_first_pass": true,
       "critic_score": 95.0,
       "verification_status": "PASS",
-      "elapsed_ms": 13.82
+      "elapsed_ms": 13.36
     },
     {
       "scenario_id": "holdout_03",
@@ -75,7 +75,7 @@
       "candidate_passed_first_pass": true,
       "critic_score": 95.0,
       "verification_status": "PASS",
-      "elapsed_ms": 14.07
+      "elapsed_ms": 13.95
     },
     {
       "scenario_id": "holdout_04",
@@ -87,7 +87,7 @@
       "candidate_passed_first_pass": true,
       "critic_score": 95.0,
       "verification_status": "PASS",
-      "elapsed_ms": 13.9
+      "elapsed_ms": 13.54
     },
     {
       "scenario_id": "holdout_05",
@@ -99,7 +99,7 @@
       "candidate_passed_first_pass": true,
       "critic_score": 95.0,
       "verification_status": "PASS",
-      "elapsed_ms": 13.84
+      "elapsed_ms": 13.54
     },
     {
       "scenario_id": "holdout_06",
@@ -111,7 +111,7 @@
       "candidate_passed_first_pass": true,
       "critic_score": 95.0,
       "verification_status": "PASS",
-      "elapsed_ms": 14.25
+      "elapsed_ms": 13.78
     },
     {
       "scenario_id": "holdout_07",
@@ -123,7 +123,7 @@
       "candidate_passed_first_pass": true,
       "critic_score": 95.0,
       "verification_status": "PASS",
-      "elapsed_ms": 14.85
+      "elapsed_ms": 13.39
     },
     {
       "scenario_id": "holdout_08",
@@ -135,7 +135,7 @@
       "candidate_passed_first_pass": true,
       "critic_score": 95.0,
       "verification_status": "PASS",
-      "elapsed_ms": 14.05
+      "elapsed_ms": 13.07
     },
     {
       "scenario_id": "holdout_09",
@@ -147,7 +147,7 @@
       "candidate_passed_first_pass": true,
       "critic_score": 95.0,
       "verification_status": "PASS",
-      "elapsed_ms": 14.6
+      "elapsed_ms": 14.05
     },
     {
       "scenario_id": "holdout_10",
@@ -159,7 +159,7 @@
       "candidate_passed_first_pass": true,
       "critic_score": 95.0,
       "verification_status": "PASS",
-      "elapsed_ms": 17.86
+      "elapsed_ms": 14.54
     },
     {
       "scenario_id": "holdout_11",
@@ -171,7 +171,7 @@
       "candidate_passed_first_pass": true,
       "critic_score": 97.0,
       "verification_status": "PASS",
-      "elapsed_ms": 13.47
+      "elapsed_ms": 13.56
     },
     {
       "scenario_id": "holdout_12",
@@ -183,7 +183,7 @@
       "candidate_passed_first_pass": true,
       "critic_score": 95.0,
       "verification_status": "PASS",
-      "elapsed_ms": 15.17
+      "elapsed_ms": 12.76
     },
     {
       "scenario_id": "holdout_13",
@@ -195,7 +195,7 @@
       "candidate_passed_first_pass": true,
       "critic_score": 97.0,
       "verification_status": "PASS",
-      "elapsed_ms": 13.87
+      "elapsed_ms": 12.97
     },
     {
       "scenario_id": "holdout_14",
@@ -207,7 +207,7 @@
       "candidate_passed_first_pass": true,
       "critic_score": 95.0,
       "verification_status": "PASS",
-      "elapsed_ms": 14.4
+      "elapsed_ms": 13.75
     },
     {
       "scenario_id": "holdout_15",
@@ -219,7 +219,7 @@
       "candidate_passed_first_pass": true,
       "critic_score": 95.0,
       "verification_status": "PASS",
-      "elapsed_ms": 15.44
+      "elapsed_ms": 14.13
     },
     {
       "scenario_id": "holdout_16",
@@ -231,7 +231,7 @@
       "candidate_passed_first_pass": true,
       "critic_score": 95.0,
       "verification_status": "PASS",
-      "elapsed_ms": 12.96
+      "elapsed_ms": 14.03
     },
     {
       "scenario_id": "holdout_17",
@@ -243,7 +243,7 @@
       "candidate_passed_first_pass": true,
       "critic_score": 95.0,
       "verification_status": "PASS",
-      "elapsed_ms": 13.57
+      "elapsed_ms": 12.76
     },
     {
       "scenario_id": "holdout_18",
@@ -255,7 +255,7 @@
       "candidate_passed_first_pass": true,
       "critic_score": 95.0,
       "verification_status": "PASS",
-      "elapsed_ms": 14.84
+      "elapsed_ms": 14.5
     },
     {
       "scenario_id": "holdout_19",
@@ -267,7 +267,7 @@
       "candidate_passed_first_pass": true,
       "critic_score": 95.0,
       "verification_status": "PASS",
-      "elapsed_ms": 16.63
+      "elapsed_ms": 16.67
     },
     {
       "scenario_id": "holdout_20",
@@ -279,7 +279,7 @@
       "candidate_passed_first_pass": true,
       "critic_score": 95.0,
       "verification_status": "PASS",
-      "elapsed_ms": 15.62
+      "elapsed_ms": 14.62
     },
     {
       "scenario_id": "holdout_21",
@@ -291,7 +291,7 @@
       "candidate_passed_first_pass": true,
       "critic_score": 95.0,
       "verification_status": "PASS",
-      "elapsed_ms": 15.16
+      "elapsed_ms": 13.16
     },
     {
       "scenario_id": "holdout_22",
@@ -303,7 +303,7 @@
       "candidate_passed_first_pass": true,
       "critic_score": 95.0,
       "verification_status": "PASS",
-      "elapsed_ms": 14.08
+      "elapsed_ms": 14.69
     },
     {
       "scenario_id": "holdout_23",
@@ -315,7 +315,7 @@
       "candidate_passed_first_pass": true,
       "critic_score": 95.0,
       "verification_status": "PASS",
-      "elapsed_ms": 13.41
+      "elapsed_ms": 13.25
     },
     {
       "scenario_id": "holdout_24",
@@ -327,7 +327,7 @@
       "candidate_passed_first_pass": true,
       "critic_score": 95.0,
       "verification_status": "PASS",
-      "elapsed_ms": 15.92
+      "elapsed_ms": 13.54
     },
     {
       "scenario_id": "holdout_25",
@@ -339,7 +339,7 @@
       "candidate_passed_first_pass": true,
       "critic_score": 95.0,
       "verification_status": "PASS",
-      "elapsed_ms": 14.86
+      "elapsed_ms": 13.62
     },
     {
       "scenario_id": "holdout_26",
@@ -351,7 +351,7 @@
       "candidate_passed_first_pass": true,
       "critic_score": 95.0,
       "verification_status": "PASS",
-      "elapsed_ms": 14.55
+      "elapsed_ms": 13.87
     },
     {
       "scenario_id": "holdout_27",
@@ -363,7 +363,7 @@
       "candidate_passed_first_pass": true,
       "critic_score": 95.0,
       "verification_status": "PASS",
-      "elapsed_ms": 14.34
+      "elapsed_ms": 14.01
     },
     {
       "scenario_id": "holdout_28",
@@ -375,7 +375,7 @@
       "candidate_passed_first_pass": true,
       "critic_score": 95.0,
       "verification_status": "PASS",
-      "elapsed_ms": 17.64
+      "elapsed_ms": 15.57
     },
     {
       "scenario_id": "holdout_29",
@@ -387,7 +387,7 @@
       "candidate_passed_first_pass": true,
       "critic_score": 95.0,
       "verification_status": "PASS",
-      "elapsed_ms": 13.16
+      "elapsed_ms": 13.58
     },
     {
       "scenario_id": "holdout_30",
@@ -399,7 +399,7 @@
       "candidate_passed_first_pass": true,
       "critic_score": 95.0,
       "verification_status": "PASS",
-      "elapsed_ms": 14.01
+      "elapsed_ms": 13.87
     },
     {
       "scenario_id": "holdout_31",
@@ -411,7 +411,7 @@
       "candidate_passed_first_pass": true,
       "critic_score": 95.0,
       "verification_status": "PASS",
-      "elapsed_ms": 13.38
+      "elapsed_ms": 13.22
     },
     {
       "scenario_id": "holdout_32",
@@ -423,7 +423,7 @@
       "candidate_passed_first_pass": true,
       "critic_score": 95.0,
       "verification_status": "PASS",
-      "elapsed_ms": 13.96
+      "elapsed_ms": 14.09
     },
     {
       "scenario_id": "holdout_33",
@@ -435,7 +435,7 @@
       "candidate_passed_first_pass": true,
       "critic_score": 95.0,
       "verification_status": "PASS",
-      "elapsed_ms": 13.99
+      "elapsed_ms": 13.32
     },
     {
       "scenario_id": "holdout_34",
@@ -447,7 +447,7 @@
       "candidate_passed_first_pass": true,
       "critic_score": 95.0,
       "verification_status": "PASS",
-      "elapsed_ms": 14.27
+      "elapsed_ms": 13.34
     },
     {
       "scenario_id": "holdout_35",
@@ -459,7 +459,7 @@
       "candidate_passed_first_pass": true,
       "critic_score": 95.0,
       "verification_status": "PASS",
-      "elapsed_ms": 14.08
+      "elapsed_ms": 14.31
     },
     {
       "scenario_id": "holdout_36",
@@ -471,7 +471,7 @@
       "candidate_passed_first_pass": true,
       "critic_score": 95.0,
       "verification_status": "PASS",
-      "elapsed_ms": 14.02
+      "elapsed_ms": 13.56
     },
     {
       "scenario_id": "holdout_37",
@@ -483,7 +483,7 @@
       "candidate_passed_first_pass": true,
       "critic_score": 97.0,
       "verification_status": "PASS",
-      "elapsed_ms": 16.61
+      "elapsed_ms": 16.0
     },
     {
       "scenario_id": "holdout_38",
@@ -495,7 +495,7 @@
       "candidate_passed_first_pass": true,
       "critic_score": 95.0,
       "verification_status": "PASS",
-      "elapsed_ms": 14.0
+      "elapsed_ms": 13.35
     },
     {
       "scenario_id": "holdout_39",
@@ -507,7 +507,7 @@
       "candidate_passed_first_pass": true,
       "critic_score": 97.0,
       "verification_status": "PASS",
-      "elapsed_ms": 13.66
+      "elapsed_ms": 28.84
     },
     {
       "scenario_id": "holdout_40",
@@ -519,7 +519,7 @@
       "candidate_passed_first_pass": true,
       "critic_score": 95.0,
       "verification_status": "PASS",
-      "elapsed_ms": 13.97
+      "elapsed_ms": 20.61
     },
     {
       "scenario_id": "holdout_41",
@@ -531,7 +531,7 @@
       "candidate_passed_first_pass": true,
       "critic_score": 95.0,
       "verification_status": "PASS",
-      "elapsed_ms": 14.28
+      "elapsed_ms": 15.33
     },
     {
       "scenario_id": "holdout_42",
@@ -543,7 +543,7 @@
       "candidate_passed_first_pass": true,
       "critic_score": 95.0,
       "verification_status": "PASS",
-      "elapsed_ms": 13.72
+      "elapsed_ms": 14.1
     },
     {
       "scenario_id": "holdout_43",
@@ -555,7 +555,7 @@
       "candidate_passed_first_pass": true,
       "critic_score": 95.0,
       "verification_status": "PASS",
-      "elapsed_ms": 14.12
+      "elapsed_ms": 13.16
     },
     {
       "scenario_id": "holdout_44",
@@ -567,7 +567,7 @@
       "candidate_passed_first_pass": true,
       "critic_score": 95.0,
       "verification_status": "PASS",
-      "elapsed_ms": 14.23
+      "elapsed_ms": 12.76
     },
     {
       "scenario_id": "holdout_45",
@@ -579,7 +579,7 @@
       "candidate_passed_first_pass": true,
       "critic_score": 95.0,
       "verification_status": "PASS",
-      "elapsed_ms": 13.96
+      "elapsed_ms": 12.9
     },
     {
       "scenario_id": "holdout_46",
@@ -591,7 +591,7 @@
       "candidate_passed_first_pass": true,
       "critic_score": 95.0,
       "verification_status": "PASS",
-      "elapsed_ms": 16.76
+      "elapsed_ms": 14.98
     },
     {
       "scenario_id": "holdout_47",
@@ -603,7 +603,7 @@
       "candidate_passed_first_pass": true,
       "critic_score": 95.0,
       "verification_status": "PASS",
-      "elapsed_ms": 13.31
+      "elapsed_ms": 13.63
     },
     {
       "scenario_id": "holdout_48",
@@ -615,7 +615,7 @@
       "candidate_passed_first_pass": true,
       "critic_score": 95.0,
       "verification_status": "PASS",
-      "elapsed_ms": 13.26
+      "elapsed_ms": 13.44
     },
     {
       "scenario_id": "holdout_49",
@@ -627,7 +627,7 @@
       "candidate_passed_first_pass": true,
       "critic_score": 95.0,
       "verification_status": "PASS",
-      "elapsed_ms": 14.0
+      "elapsed_ms": 13.81
     },
     {
       "scenario_id": "holdout_50",
@@ -639,7 +639,7 @@
       "candidate_passed_first_pass": true,
       "critic_score": 95.0,
       "verification_status": "PASS",
-      "elapsed_ms": 13.41
+      "elapsed_ms": 13.76
     }
   ]
 }

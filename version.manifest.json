@@ -1,12 +1,12 @@
 {
   "$schema": "./schemas/version-manifest.schema.json",
-  "version": "3.3.0",
-  "codename": "The Autonomous Closed-Loop Masterpiece Engine",
+  "version": "3.4.0",
+  "codename": "The True Vision & Dynamic Architecture Engine",
   "release_channel": "stable",
   "packages": {
-    "@omid-io/tokens": "3.3.0",
-    "vibe-ui-vscode": "3.3.0",
-    "vibe-ui-nextjs-starter": "3.3.0"
+    "@omid-io/tokens": "3.4.0",
+    "vibe-ui-vscode": "3.4.0",
+    "vibe-ui-nextjs-starter": "3.4.0"
   },
   "schemas": {
     "intent_contract": "v1",

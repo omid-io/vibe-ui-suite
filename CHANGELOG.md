@@ -7,6 +7,24 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ---
 
+## [3.4.0] - 2026-09-26
+
+### Added & Revolutionized — The True Vision & Dynamic Architecture Engine
+- **Visual Critic Veto Gate & Monotonicity in AutoRefiner (`vibe_core/refiner.py`)**:
+  - Gated composite acceptance status: both DOM Critic and Visual Critic must certify `ACCEPTED`.
+  - Injected visual defects into `AutoRefiner` priority defect queue with surgical repairs for substandard touch targets, missing H1, and cliché sparkles.
+  - Enforced 7-rule invariant gate with visual monotonicity and score non-regression.
+- **24 Distinct Causal Reactive Interactive Widgets (`vibe_core/generator.py`)**:
+  - Replaced decorative sliders with genuine reactive mathematical calculations connecting `simulatedValue` and `splitPos` to live domain outputs (e.g. EV battery range/charging ETA, crypto fill/slippage, clinical texture index, degustation pacing).
+- **Media & Asset Director (`vibe_core/asset_director.py`)**:
+  - Implemented intelligent media framing with domain-tailored aspect ratios (`aspect-[16/9]`, `aspect-[4/3]`, `aspect-square`, `aspect-[4/5]`), editorial overlays, and verified asset demarcation.
+- **Discriminative Visual Evaluation Rubric (`vibe_core/visual_critic.py`)**:
+  - Overhauled scoring rubric with positive signal rewards and strict defect penalties, eliminating score compression.
+- **Domain-Tailored Living Metrics & Blueprint Flow**:
+  - Embedded real domain metrics from `domain_blueprints.json` mock data directly into performance telemetry panels.
+
+---
+
 ## [3.3.0] - 2026-09-26
 
 ### Added & Revolutionized — The Autonomous Closed-Loop Masterpiece Engine

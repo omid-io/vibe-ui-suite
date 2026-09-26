@@ -304,13 +304,46 @@ def main():
         failures.append("Test 12 Failed: refiner.refine accepted mobile overflow patch")
     print("  [PASS] Test 12: Mobile Overflow Invariant Gate rejected fixed-width blowout")
 
+    # Test 13: Visual Critic Veto Gate (Composite Acceptance)
+    # When DOM passes hard gates, but visual critic has an unrepaired P0 defect (e.g. cliche sparkle), composite status must be REVISE_REQUIRED.
+    sparkle_html = """<!DOCTYPE html>
+<html>
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>button:focus-visible { outline: 2px solid blue; }</style>
+</head>
+<body>
+  <h1>Valid Header</h1>
+  <button type="button" class="min-h-[44px]">Valid Button ✨</button>
+</body>
+</html>"""
+    init_visual = refiner.visual_critic.evaluate(sparkle_html, {})
+    if init_visual["acceptance_status"] != "REVISE_REQUIRED":
+        failures.append("Test 13 Pre-check Failed: Visual critic did not flag cliche sparkle as REVISE_REQUIRED initially")
+    _, unrepaired_report = refiner.refine(sparkle_html, {}, patch_fn=lambda h, d: h)
+    if unrepaired_report["acceptance_status"] != "REVISE_REQUIRED":
+        failures.append("Test 13 Failed: Composite acceptance status must be REVISE_REQUIRED when visual critic rejects and defect remains unrepaired")
+    print("  [PASS] Test 13: Visual Critic Veto Gate enforced composite REVISE_REQUIRED")
+
+    # Test 14: Visual Monotonicity in should_accept_patch
+    curr_vis = {"visual_score": 90.0, "defects": []}
+    regressed_vis = {"visual_score": 75.0, "defects": [{"type": "cliche_ai_sparkle", "severity": "P0"}]}
+    accepted_regressed = AutoRefiner.should_accept_patch(
+        base_report, base_report, base_html,
+        current_visual=curr_vis,
+        patched_visual=regressed_vis
+    )
+    if accepted_regressed:
+        failures.append("Test 14 Failed: should_accept_patch permitted visual P0 regression and score drop")
+    print("  [PASS] Test 14: Visual Monotonicity Gate blocked visual defect regression")
+
     if failures:
         print("\n[FAIL] Critic/Refiner Test Failures:", file=sys.stderr)
         for f in failures:
             print(f"  - {f}", file=sys.stderr)
         return 1
 
-    print("\n[SUCCESS] All Design Critic and AutoRefiner unit tests passed.")
+    print("\n[SUCCESS] All Design Critic and AutoRefiner unit tests passed (14/14).")
     return 0
 
 if __name__ == "__main__":

@@ -154,7 +154,7 @@ def main():
     benchmark_results = {
         "$schema": "../../schemas/benchmark-result.v1.json",
         "timestamp": datetime.now(timezone.utc).isoformat(),
-        "suite_version": "3.3.0",
+        "suite_version": "3.4.0",
         "scenario_count": len(scenarios),
         "benchmark_type": "internal_deterministic_heuristic",
         "baseline_system": "Vanilla LLM / V2 Heuristic Baseline",
@@ -201,7 +201,7 @@ def main():
         json.dump(benchmark_results, f, indent=2, ensure_ascii=False)
 
     print("\n" + "=" * 70)
-    print("📊 VIBE UI V3 BENCHMARK SCOREBOARD (v3.3.0)")
+    print("📊 VIBE UI V3 BENCHMARK SCOREBOARD (v3.4.0)")
     print("=" * 70)
     print(f"| KPI Metric               | Baseline (V2) | Vibe UI V3    | Improvement           |")
     print(f"| :----------------------- | :------------ | :------------ | :-------------------- |")

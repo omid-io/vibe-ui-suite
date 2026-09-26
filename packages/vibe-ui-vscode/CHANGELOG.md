@@ -3,6 +3,15 @@
 All notable changes to the **Vibe UI (VS Code, Cursor & Open-VSX)** extension will be documented in this file.
 This project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [3.4.0] — 2026-09-26
+
+### Added
+- **Visual Critic Veto Gate:** Atomic composite acceptance requiring both DOM and visual critic approvals.
+- **Causal Interactive Widgets:** Dynamic reactive state calculations for all 24 canonical domains.
+- **Media & Asset Director:** Responsive aspect ratio containers and editorial framing presets.
+
+---
+
 ## [3.3.0] — 2026-09-26
 
 ### Added

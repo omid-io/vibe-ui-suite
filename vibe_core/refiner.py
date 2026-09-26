@@ -88,15 +88,19 @@ class AutoRefiner:
     def should_accept_patch(
         current_report: Dict[str, Any],
         re_critique: Dict[str, Any],
-        patched_html: str
+        patched_html: str,
+        current_visual: Optional[Dict[str, Any]] = None,
+        patched_visual: Optional[Dict[str, Any]] = None
     ) -> bool:
         """
-        Enforces 5-Rule Invariant Gate:
+        Enforces 7-Rule Invariant Gate (DOM + Visual Critics):
         1. Gate Monotonicity (No introduced failures): len(new_failures - curr_failures) == 0
         2. Gate Monotonicity (Failure count non-increasing): len(new_failures) <= len(curr_failures)
         3. Tag Balance Invariant: Assert balanced <button>...</button> pairs
         4. Mobile Overflow Invariant: Reject fixed-width blowout classes (>= 400px)
         5. Score Progression: Only accept if quality_score is maintained or improved
+        6. Visual Monotonicity: No new P0 visual defects introduced
+        7. Visual Quality Non-Regression: Visual composite score maintained (within 2.0 tolerance)
         """
         # Extract failure sets
         curr_failures = {f["gate"] for f in current_report.get("hard_gate_failures", [])}
@@ -120,13 +124,30 @@ class AutoRefiner:
         # 5. Score Progression Condition
         score_progression = re_critique.get("quality_score", 0) >= current_report.get("quality_score", 0)
 
-        # Strict Decision Condition: all 5 rules must hold
-        return (
+        base_ok = (
             not has_gate_regression
             and not tag_balance_violation
             and not overflow_violation
             and score_progression
         )
+
+        if not base_ok:
+            return False
+
+        # 6 & 7. Visual Invariant Gate
+        if current_visual is not None and patched_visual is not None:
+            curr_p0 = {d.get("type", d.get("id")) for d in current_visual.get("defects", []) if d.get("severity") == "P0"}
+            new_p0 = {d.get("type", d.get("id")) for d in patched_visual.get("defects", []) if d.get("severity") == "P0"}
+            introduced_p0 = new_p0 - curr_p0
+            if len(introduced_p0) > 0:
+                return False
+
+            curr_vis_score = current_visual.get("visual_score", current_visual.get("score", 0.0))
+            patch_vis_score = patched_visual.get("visual_score", patched_visual.get("score", 0.0))
+            if patch_vis_score < curr_vis_score - 2.0:
+                return False
+
+        return True
 
     def refine(
         self,
@@ -137,18 +158,36 @@ class AutoRefiner:
     ) -> Tuple[str, Dict[str, Any]]:
         """
         Runs bounded refinement loop (max 2 iterations) resolving defects in priority order.
-        Strictly rejects any patch that regresses hard gates, unbalances tags, or introduces mobile overflow.
+        Strictly enforces atomic composite acceptance (DOM Critic + Visual Critic).
         """
         decision = decision or {}
         current_html = html_content
         current_report = self.critic.critique(current_html, decision, iteration=1)
+        current_visual = self.visual_critic.evaluate(current_html, decision)
+        current_report["visual_critic"] = current_visual
 
-        current_report["visual_critic"] = self.visual_critic.evaluate(current_html, decision)
-        if current_report["acceptance_status"] == "ACCEPTED":
+        dom_accepted = (current_report.get("acceptance_status") == "ACCEPTED")
+        vis_accepted = (current_visual.get("acceptance_status") == "ACCEPTED")
+        current_report["acceptance_status"] = "ACCEPTED" if (dom_accepted and vis_accepted) else "REVISE_REQUIRED"
+
+        if dom_accepted and vis_accepted:
             return current_html, current_report
 
+        severity_map = {"P0": "critical", "P1": "high", "P2": "medium"}
+
         for iteration in range(1, max_iterations + 1):
-            defects = current_report.get("defects_ranked", [])
+            # Inject visual defects into defect queue
+            visual_defects = [
+                {
+                    "type": d.get("type", d.get("id")),
+                    "category": "visual_critic",
+                    "severity": severity_map.get(d.get("severity", "P2"), "low"),
+                    "message": d.get("message", ""),
+                    "prescription": d.get("prescription", "")
+                }
+                for d in current_visual.get("defects", [])
+            ]
+            defects = current_report.get("defects_ranked", []) + visual_defects
             if not defects:
                 break
 
@@ -185,11 +224,11 @@ class AutoRefiner:
                         patched_html = self.replace_clickable_divs(patched_html)
 
                     # 4. Raw emoji replacement
-                    elif d_type == "raw_emoji_detected":
-                        # Replace common emojis with SVG vector
+                    elif d_type in ["raw_emoji_detected", "cliche_ai_sparkle"]:
+                        # Replace common emojis and sparkles with SVG vector
                         svg_star = '<svg class="w-4 h-4 inline" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>'
                         patched_html = re.sub(
-                            r"[\U00010000-\U0010ffff]|[\u2600-\u27bf]|[\u2300-\u23ff]|[\u2b50-\u2b55]|[\u203c-\u2049]",
+                            r"[\U00010000-\U0010ffff]|[\u2600-\u27bf]|[\u2300-\u23ff]|[\u2b50-\u2b55]|[\u203c-\u2049]|✨",
                             svg_star,
                             patched_html
                         )
@@ -206,20 +245,43 @@ class AutoRefiner:
                     elif d_type == "generic_ai_purple_gradient":
                         patched_html = patched_html.replace("from-purple-600 to-indigo-600", "bg-[var(--surface-bg)] border border-[var(--border-subtle)]")
 
-            # Anti-Regression Re-Evaluation
-            re_critique = self.critic.critique(patched_html, decision, iteration=iteration + 1)
+                    # 7. Substandard touch target repair (ensure >= 44px)
+                    elif d_type == "substandard_touch_target":
+                        patched_html = re.sub(r'\b(h-6|h-7|h-8|py-1|py-2)\b', 'min-h-[44px] py-3', patched_html)
 
-            # Strict 5-Rule Invariant Gate Check
-            accept_patch = self.should_accept_patch(current_report, re_critique, patched_html)
+                    # 8. Excessive compositing blur
+                    elif d_type == "excessive_compositing_blur":
+                        patched_html = re.sub(r'backdrop-blur-(?:2xl|3xl)', 'backdrop-blur-md', patched_html)
+
+            # Re-Evaluation
+            re_critique = self.critic.critique(patched_html, decision, iteration=iteration + 1)
+            re_visual = self.visual_critic.evaluate(patched_html, decision)
+
+            # Strict 7-Rule Composite Invariant Gate Check
+            accept_patch = self.should_accept_patch(
+                current_report,
+                re_critique,
+                patched_html,
+                current_visual=current_visual,
+                patched_visual=re_visual
+            )
 
             if accept_patch:
                 current_html = patched_html
                 current_report = re_critique
-                if current_report["acceptance_status"] == "ACCEPTED":
+                current_visual = re_visual
+                dom_ok = (current_report.get("acceptance_status") == "ACCEPTED")
+                vis_ok = (current_visual.get("acceptance_status") == "ACCEPTED")
+                current_report["acceptance_status"] = "ACCEPTED" if (dom_ok and vis_ok) else "REVISE_REQUIRED"
+                current_report["visual_critic"] = current_visual
+                if dom_ok and vis_ok:
                     break
             else:
-                # Explicit rejection: discard patched_html, keep current_html
+                # Explicit rejection: discard patch, keep current_html
                 pass
 
-        current_report["visual_critic"] = self.visual_critic.evaluate(current_html, decision)
+        current_report["visual_critic"] = current_visual
+        dom_ok = (current_report.get("acceptance_status") == "ACCEPTED")
+        vis_ok = (current_visual.get("acceptance_status") == "ACCEPTED")
+        current_report["acceptance_status"] = "ACCEPTED" if (dom_ok and vis_ok) else "REVISE_REQUIRED"
         return current_html, current_report

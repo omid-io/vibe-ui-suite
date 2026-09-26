@@ -2,7 +2,7 @@
 
 ## 1. Executive Summary
 
-- **Evaluation Suite Version:** `v3.3.0`
+- **Evaluation Suite Version:** `v3.4.0`
 - **Master Quality Gates:** 11 of 11 Test Suites Passing (100% Clean)
 - **Local Test Execution Latency:** `~3600ms` (All gates combined)
 - **CI / GitHub Actions Pass Rate:** 100% Green across Ubuntu Runners (Python 3.10, Python 3.12, Node 20 / Next.js 15, Headless Chromium Playwright)
