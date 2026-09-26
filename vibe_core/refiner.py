@@ -195,17 +195,25 @@ class AutoRefiner:
             priority_order = {"critical": 0, "high": 1, "medium": 2, "low": 3}
             sorted_defects = sorted(defects, key=lambda d: priority_order.get(d.get("severity", "low"), 4))
 
+            # Canonical defect normalization map
+            CANONICAL_DEFECT_MAP = {
+                "missing_bidi_isolation": "missing_bdi_isolation",
+                "generic_ai_purple_gradient": "cliche_ai_gradient",
+                "raw_emoji_detected": "cliche_ai_sparkle",
+            }
+
             # Apply surgical patches
             if patch_fn is not None:
                 patched_html = patch_fn(current_html, sorted_defects)
             else:
                 patched_html = current_html
                 for defect in sorted_defects:
-                    d_type = defect.get("type")
+                    raw_type = defect.get("type", "")
+                    d_type = CANONICAL_DEFECT_MAP.get(raw_type, raw_type)
 
                     # 1. Missing viewport patch
                     if d_type == "missing_viewport":
-                        if "<head>" in patched_html:
+                        if "<head>" in patched_html and 'name="viewport"' not in patched_html:
                             patched_html = patched_html.replace(
                                 "<head>",
                                 "<head>\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">"
@@ -223,9 +231,8 @@ class AutoRefiner:
                     elif d_type == "non_semantic_clickable":
                         patched_html = self.replace_clickable_divs(patched_html)
 
-                    # 4. Raw emoji replacement
-                    elif d_type in ["raw_emoji_detected", "cliche_ai_sparkle"]:
-                        # Replace common emojis and sparkles with SVG vector
+                    # 4. Raw emoji / sparkle replacement
+                    elif d_type == "cliche_ai_sparkle":
                         svg_star = '<svg class="w-4 h-4 inline" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>'
                         patched_html = re.sub(
                             r"[\U00010000-\U0010ffff]|[\u2600-\u27bf]|[\u2300-\u23ff]|[\u2b50-\u2b55]|[\u203c-\u2049]|✨",
@@ -233,25 +240,97 @@ class AutoRefiner:
                             patched_html
                         )
 
-                    # 5. Missing bidi isolation
-                    elif d_type == "missing_bidi_isolation":
+                    # 5. Missing BDI bidirectional isolation
+                    elif d_type == "missing_bdi_isolation":
                         if "</style>" in patched_html:
                             patched_html = patched_html.replace(
                                 "</style>",
                                 "  body { unicode-bidi: plaintext; }\n    bdi { direction: ltr !important; unicode-bidi: isolate; }\n  </style>"
                             )
+                        # If no <bdi> exists, wrap numerical/metric tokens with <bdi>
+                        if "<bdi>" not in patched_html:
+                            patched_html = re.sub(
+                                r'(\$?\d+(?:\.\d+)?%?)(\s*(?:USD|EUR|ms|req/s|GB|TB|users|TPS)?)',
+                                r'<bdi class="tabular-nums">\1\2</bdi>',
+                                patched_html,
+                                count=5
+                            )
 
-                    # 6. Generic purple gradient replacement
-                    elif d_type == "generic_ai_purple_gradient":
-                        patched_html = patched_html.replace("from-purple-600 to-indigo-600", "bg-[var(--surface-bg)] border border-[var(--border-subtle)]")
+                    # 6. Cliche AI purple gradient replacement
+                    elif d_type == "cliche_ai_gradient":
+                        patched_html = re.sub(
+                            r'from-purple-\d+\s+to-(?:indigo|fuchsia|pink)-\d+',
+                            'bg-[var(--surface-bg,#0d1117)] border border-[var(--border-subtle,#30363d)] text-[var(--text-primary,#c9d1d9)]',
+                            patched_html
+                        )
+                        patched_html = patched_html.replace("from-purple-600 to-indigo-600", "bg-[var(--surface-bg,#0d1117)] border border-[var(--border-subtle,#30363d)]")
 
                     # 7. Substandard touch target repair (ensure >= 44px)
                     elif d_type == "substandard_touch_target":
-                        patched_html = re.sub(r'\b(h-6|h-7|h-8|py-1|py-2)\b', 'min-h-[44px] py-3', patched_html)
+                        patched_html = re.sub(r'\b(h-[5-8]|py-[12]|min-h-\[(?:3[0-9]|4[0-3])px\])\b', 'min-h-[44px] py-3 px-5', patched_html)
+                        # Ensure buttons have min-h-[44px]
+                        if not re.search(r"min-h-\[(4[4-9]|[5-9]\d)px\]", patched_html):
+                            patched_html = re.sub(r'(<button\b[^>]*class="[^"]*)(")', r'\1 min-h-[44px] px-6 py-3\2', patched_html)
 
-                    # 8. Excessive compositing blur
+                    # 8. Missing active spring physics
+                    elif d_type == "missing_active_spring":
+                        if not re.search(r"active:(?:scale-\d+|translate-)", patched_html):
+                            patched_html = re.sub(
+                                r'(<button\b[^>]*class="[^"]*)(")',
+                                r'\1 transition-all duration-150 active:scale-95\2',
+                                patched_html
+                            )
+
+                    # 9. Missing H1 focal point
+                    elif d_type == "missing_h1_focal_point":
+                        if not re.search(r"<h1\b", patched_html, re.IGNORECASE):
+                            if re.search(r"<h2\b", patched_html, re.IGNORECASE):
+                                # Upgrade first <h2> to <h1>
+                                patched_html = re.sub(
+                                    r'<h2(\b[^>]*)>(.*?)</h2>',
+                                    r'<h1\1 class="text-4xl sm:text-5xl font-extrabold tracking-tight mb-4">\2</h1>',
+                                    patched_html,
+                                    count=1,
+                                    flags=re.IGNORECASE | re.DOTALL
+                                )
+                            elif "<main>" in patched_html:
+                                patched_html = patched_html.replace("<main>", '<main>\n  <h1 class="text-4xl sm:text-5xl font-extrabold tracking-tight mb-4">Overview</h1>')
+                            elif "<body>" in patched_html:
+                                patched_html = patched_html.replace("<body>", '<body>\n  <h1 class="text-4xl sm:text-5xl font-extrabold tracking-tight mb-4">Overview</h1>')
+
+                    # 10. Weak hero scale
+                    elif d_type == "weak_hero_scale":
+                        if not re.search(r"text-(3xl|4xl|5xl|6xl|7xl|8xl)", patched_html):
+                            patched_html = re.sub(
+                                r'(<h1\b[^>]*class="[^"]*)(")',
+                                r'\1 text-5xl lg:text-7xl font-extrabold tracking-tight\2',
+                                patched_html,
+                                count=1
+                            )
+                            if not re.search(r"text-(3xl|4xl|5xl|6xl|7xl|8xl)", patched_html):
+                                # Fallback on any header
+                                patched_html = re.sub(r'class="([^"]*)\btext-(?:sm|base|lg|xl|2xl)\b([^"]*)"', r'class="\1text-5xl lg:text-7xl font-extrabold tracking-tight\2"', patched_html, count=1)
+
+                    # 11. Cramped spacing rhythm
+                    elif d_type == "cramped_spacing_rhythm":
+                        if not re.search(r"(?:p-[6-9]|py-[6-9]|py-1[0-6]|p-10|p-12)", patched_html):
+                            patched_html = re.sub(r'\b(p-[1-4]|py-[1-4])\b', 'p-6 sm:p-10', patched_html, count=2)
+                            if not re.search(r"(?:p-[6-9]|py-[6-9]|py-1[0-6]|p-10|p-12)", patched_html):
+                                patched_html = re.sub(r'(<section\b[^>]*class="[^"]*)(")', r'\1 p-8 sm:p-12\2', patched_html, count=1)
+
+                    # 12. Flat monolithic layout
+                    elif d_type == "flat_monolithic_layout":
+                        if not re.search(r"(?:grid-cols-12|col-span-7|col-span-5|col-span-8|col-span-4)", patched_html):
+                            patched_html = re.sub(
+                                r'(<div\b[^>]*class="[^"]*)\b(flex\s+flex-col|grid-cols-1)\b([^"]*")',
+                                r'\1grid grid-cols-1 lg:grid-cols-12 gap-8\3',
+                                patched_html,
+                                count=1
+                            )
+
+                    # 13. Excessive compositing blur
                     elif d_type == "excessive_compositing_blur":
-                        patched_html = re.sub(r'backdrop-blur-(?:2xl|3xl)', 'backdrop-blur-md', patched_html)
+                        patched_html = re.sub(r'backdrop-blur-(?:2xl|3xl|xl)', 'backdrop-blur-md', patched_html)
 
             # Re-Evaluation
             re_critique = self.critic.critique(patched_html, decision, iteration=iteration + 1)

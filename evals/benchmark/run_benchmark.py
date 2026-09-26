@@ -25,6 +25,7 @@ from vibe_core.director import DesignDirector
 from vibe_core.recommendation import RecommendationEngine
 from vibe_core.generator import InterfaceGenerator
 from vibe_core.critic import DesignCritic
+from vibe_core.visual_critic import VisualCritic
 from vibe_core.refiner import AutoRefiner
 from vibe_core.verifier import VerificationEngine
 
@@ -60,6 +61,7 @@ def main():
     engine = RecommendationEngine()
     generator = InterfaceGenerator()
     critic = DesignCritic()
+    visual_critic = VisualCritic()
     refiner = AutoRefiner()
     verifier = VerificationEngine()
 
@@ -104,11 +106,17 @@ def main():
         # Step 3: Generator
         html = generator.generate_html(decision, prompt_title=prompt_text)
 
-        # Step 4: Critic
+        # Step 4: Composite Critic (DOM + Visual Critics)
         critique_report = critic.critique(html, decision, iteration=1)
+        visual_report = visual_critic.evaluate(html, decision)
+        critique_report["visual_critic"] = visual_report
 
-        # Step 5: Refiner (if needed)
-        if critique_report["acceptance_status"] == "ACCEPTED":
+        dom_accepted = (critique_report.get("acceptance_status") == "ACCEPTED")
+        vis_accepted = (visual_report.get("acceptance_status") == "ACCEPTED")
+        composite_first_pass = (dom_accepted and vis_accepted)
+
+        # Step 5: Refiner (if either critic flags revision required)
+        if composite_first_pass:
             v3_first_pass += 1
             final_html = html
             final_report = critique_report
@@ -130,7 +138,9 @@ def main():
             "detected_domain": intent["product_domain"],
             "domain_match": is_domain_match,
             "selected_style": selected_style,
-            "candidate_passed_first_pass": critique_report["acceptance_status"] == "ACCEPTED",
+            "candidate_passed_first_pass": composite_first_pass,
+            "dom_quality_score": final_report.get("quality_score", 0),
+            "visual_quality_score": final_report.get("visual_critic", {}).get("visual_score", visual_report.get("visual_score", 0)),
             "critic_score": final_report["quality_score"],
             "verification_status": verify_report["overall_status"],
             "elapsed_ms": round(elapsed_ms, 2)
@@ -154,7 +164,7 @@ def main():
     benchmark_results = {
         "$schema": "../../schemas/benchmark-result.v1.json",
         "timestamp": datetime.now(timezone.utc).isoformat(),
-        "suite_version": "3.4.0",
+        "suite_version": "3.5.0",
         "scenario_count": len(scenarios),
         "benchmark_type": "internal_deterministic_heuristic",
         "baseline_system": "Vanilla LLM / V2 Heuristic Baseline",
@@ -201,7 +211,7 @@ def main():
         json.dump(benchmark_results, f, indent=2, ensure_ascii=False)
 
     print("\n" + "=" * 70)
-    print("📊 VIBE UI V3 BENCHMARK SCOREBOARD (v3.4.0)")
+    print("📊 VIBE UI V3 BENCHMARK SCOREBOARD (v3.5.0)")
     print("=" * 70)
     print(f"| KPI Metric               | Baseline (V2) | Vibe UI V3    | Improvement           |")
     print(f"| :----------------------- | :------------ | :------------ | :-------------------- |")

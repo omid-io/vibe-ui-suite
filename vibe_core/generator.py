@@ -15,6 +15,7 @@ from pathlib import Path
 import json
 from vibe_core.genome import DesignGenomeEngine
 from vibe_core.asset_director import AssetDirector
+from vibe_core.domain_widgets import render_domain_widget
 
 class InterfaceGenerator:
     def __init__(self):
@@ -104,12 +105,12 @@ class InterfaceGenerator:
                 "header_badge": "inline-flex items-center gap-1.5 px-2.5 py-0.5 font-mono text-[11px] font-bold uppercase bg-emerald-950/80 text-emerald-400 border border-emerald-500/40",
                 "version_tag": "text-[11px] font-mono text-emerald-600",
                 "tab_container": "inline-flex border border-emerald-900/80 bg-zinc-950 p-1 font-mono text-xs",
-                "tab_btn_active": "bg-emerald-950 text-emerald-300 font-mono border border-emerald-500 px-3 py-1",
-                "tab_btn_inactive": "text-emerald-700 hover:text-emerald-400 font-mono px-3 py-1",
+                "tab_btn_active": "bg-emerald-950 text-emerald-300 font-mono border border-emerald-500 px-3 py-2 min-h-[44px] inline-flex items-center",
+                "tab_btn_inactive": "text-emerald-700 hover:text-emerald-400 font-mono px-3 py-2 min-h-[44px] inline-flex items-center",
                 "headline": "text-2xl sm:text-3xl lg:text-4xl font-mono font-bold tracking-tight text-emerald-400 uppercase leading-snug",
                 "body_text": "text-sm sm:text-base font-mono text-emerald-500/80 leading-relaxed max-w-2xl",
-                "primary_cta": "inline-flex items-center justify-center px-4 py-2 font-mono text-xs uppercase bg-emerald-500 text-black font-bold border border-emerald-400 hover:bg-emerald-400 active:bg-emerald-600 transition-none min-h-[40px]",
-                "secondary_cta": "inline-flex items-center justify-center px-4 py-2 font-mono text-xs uppercase text-emerald-400 border border-emerald-800 hover:border-emerald-500 transition-none min-h-[40px]",
+                "primary_cta": "inline-flex items-center justify-center px-5 py-2.5 font-mono text-xs uppercase bg-emerald-500 text-black font-bold border border-emerald-400 hover:bg-emerald-400 active:bg-emerald-600 transition-none min-h-[44px]",
+                "secondary_cta": "inline-flex items-center justify-center px-5 py-2.5 font-mono text-xs uppercase text-emerald-400 border border-emerald-800 hover:border-emerald-500 transition-none min-h-[44px]",
                 "widget_card": "bg-zinc-950 border border-emerald-900/80 p-5 space-y-4 font-mono",
                 "telemetry_card": "p-5 bg-zinc-950 border border-emerald-900/80 space-y-2 font-mono",
                 "switch_bg": "bg-emerald-950 border border-emerald-600",
@@ -158,235 +159,11 @@ class InterfaceGenerator:
 
     def _render_domain_widget(self, domain_id: str, is_rtl: bool, style_cfg: Dict[str, str], blueprint: Dict[str, Any]) -> str:
         """
-        Renders rich, functional signature widget JSX tailored to the exact domain.
+        Renders rich, functional signature widget JSX tailored to the exact domain via canonical registry.
         Features real causal reactive calculations connecting simulatedValue and splitPos to business metrics.
-        Marking simulated values with data-origin="synthetic_demo" to prevent AI hallucination.
+        Guarantees zero generic fallbacks across all 24 canonical domains.
         """
-        # 1. Crypto / Trading / Web3
-        if domain_id == "crypto_trading_web3":
-            return f'''
-              <div className="space-y-3 font-mono text-xs" data-origin="synthetic_demo">
-                <div className="flex justify-between text-zinc-500 pb-1 border-b border-zinc-200/60 dark:border-zinc-800/60">
-                  <span>{"دفتر سفارشات زنده" if is_rtl else "LIVE ORDERBOOK"}</span>
-                  <span>{"حجم انتخابی" if is_rtl else "ORDER SIZE"}</span>
-                  <span>{"ارزش کل پر شده" if is_rtl else "EST. FILL"}</span>
-                </div>
-                <div className="flex justify-between items-center text-emerald-600 dark:text-emerald-400">
-                  <span>#BID-9921</span>
-                  <span><bdi>{{{{((simulatedValue % 20 || 3) * 0.85).toFixed(2)}}}} ETH</bdi></span>
-                  <span><bdi>${{{{(((simulatedValue % 20 || 3) * 0.85) * 3420.5).toLocaleString(undefined, {{maximumFractionDigits: 1}})}}}}</bdi></span>
-                </div>
-                <div className="flex justify-between items-center text-rose-500">
-                  <span>#ASK-9919</span>
-                  <span><bdi>{{{{((simulatedValue % 20 || 3) * 0.45).toFixed(2)}}}} ETH</bdi></span>
-                  <span><bdi>${{{{(((simulatedValue % 20 || 3) * 0.45) * 3421.2).toLocaleString(undefined, {{maximumFractionDigits: 1}})}}}}</bdi></span>
-                </div>
-                <div className="pt-2 flex justify-between text-[11px] text-zinc-400 border-t border-zinc-200/40">
-                  <span>{"لغزش نرخ (Slippage)" if is_rtl else "Slippage Estimate"}</span>
-                  <span className="font-bold text-emerald-600"><bdi>{{{{((simulatedValue % 20 || 3) > 8 ? 14 : 3)}}}} bps</bdi></span>
-                </div>
-              </div>'''
-
-        # 2. DevOps / Cloud / Terminal
-        elif domain_id == "devops_cloud_terminal":
-            return f'''
-              <div className="space-y-3 font-mono text-xs" data-origin="synthetic_demo">
-                <div className="flex justify-between text-zinc-500 pb-1 border-b border-zinc-200/60 dark:border-zinc-800/60">
-                  <span>{"کلاستر پاد" if is_rtl else "POD CLUSTER"}</span>
-                  <span>{"تعداد گره" if is_rtl else "REPLICAS"}</span>
-                  <span>{"توان پردازش" if is_rtl else "THROUGHPUT"}</span>
-                </div>
-                <div className="flex justify-between items-center text-emerald-600 dark:text-emerald-400">
-                  <span>core-api-prod</span>
-                  <span><bdi>{{{{(simulatedValue % 32 || 8)}}}} Nodes</bdi></span>
-                  <span><bdi>{{{{((simulatedValue % 32 || 8) * 450).toLocaleString()}}}} req/s</bdi></span>
-                </div>
-                <div className="pt-2 flex justify-between text-[11px] text-zinc-400 border-t border-zinc-200/40">
-                  <span>{"تاخیر زمانی شبکه (p99)" if is_rtl else "p99 Tail Latency"}</span>
-                  <span className="text-emerald-600 font-bold"><bdi>{{{{(18.2 / Math.max(1, (simulatedValue % 32 || 8))).toFixed(1)}}}} ms</bdi></span>
-                </div>
-              </div>'''
-
-        # 3. Clinical Wellness & Healthcare
-        elif domain_id in ["beauty_clinical_wellness", "healthcare_hospital_medical"]:
-            return f'''
-              <div className="space-y-3" data-origin="synthetic_demo">
-                <div className="relative h-28 rounded-xl overflow-hidden bg-zinc-200 dark:bg-zinc-800 flex items-center justify-center border border-zinc-300 dark:border-zinc-700">
-                  <div 
-                    className="absolute inset-y-0 left-0 bg-emerald-500/20 border-r-2 border-emerald-500 flex items-center justify-center transition-all duration-75"
-                    style={{{{ width: `${{splitPos}}%` }}}}
-                  >
-                    <span className="text-[10px] font-bold text-emerald-700 dark:text-emerald-300 px-1 py-0.5 bg-white/80 dark:bg-black/80 rounded shadow">
-                      {"قبل از درمان" if is_rtl else "BEFORE"}
-                    </span>
-                  </div>
-                  <div className="absolute right-3 text-[10px] font-bold text-zinc-600 dark:text-zinc-400 px-1 py-0.5 bg-white/80 dark:bg-black/80 rounded shadow">
-                    {"نتیجه درمان" if is_rtl else "AFTER"}
-                  </div>
-                </div>
-                <div className="flex items-center gap-2">
-                  <span className="text-xs text-zinc-500">{"مقایسه نتایج بالینی" if is_rtl else "Inspect Delta"}</span>
-                  <input
-                    type="range"
-                    min="0"
-                    max="100"
-                    value={{{{splitPos}}}}
-                    onChange={{{{(e) => setSplitPos(Number(e.target.value))}}}}
-                    className="flex-1 accent-emerald-500 cursor-pointer h-2 bg-zinc-200 dark:bg-zinc-700 rounded-lg"
-                  />
-                  <span className="text-xs font-mono font-bold"><bdi>{{{{splitPos}}}}%</bdi></span>
-                </div>
-                <div className="flex justify-between text-[11px] text-zinc-500 pt-1">
-                  <span>{"شاخص یکنواختی بافت پوست" if is_rtl else "Texture Uniformity Lift"}</span>
-                  <span className="font-mono font-bold text-emerald-600"><bdi>+{{{{(splitPos * 0.88).toFixed(1)}}}}%</bdi></span>
-                </div>
-              </div>'''
-
-        # 4. Food / Restaurant / Cafe
-        elif domain_id == "food_restaurant_cafe":
-            return f'''
-              <div className="space-y-3 text-xs" data-origin="synthetic_demo">
-                <div className="p-3 rounded-lg bg-amber-500/10 border border-amber-500/20 flex justify-between items-center">
-                  <div>
-                    <div className="font-bold text-amber-800 dark:text-amber-300">{"منوی سرآشپز اختصاصی" if is_rtl else "Chef's Tasting Degustation"}</div>
-                    <div className="text-[11px] text-zinc-500">
-                      <span>{"تعداد مهمانان: " if is_rtl else "Guest Count: "}</span>
-                      <bdi>{{{{(simulatedValue % 12 || 2)}}}} {"نفر" if is_rtl else "Guests"}</bdi>
-                    </div>
-                  </div>
-                  <div className="text-sm font-bold font-mono text-amber-700 dark:text-amber-400">
-                    <bdi>${{{{((simulatedValue % 12 || 2) * 85).toFixed(2)}}}}</bdi>
-                  </div>
-                </div>
-                <div className="flex justify-between items-center text-zinc-500 text-[11px] pt-1">
-                  <span>{"زمان تخمینی سرو و آماده سازی" if is_rtl else "Estimated Course Pacing"}</span>
-                  <span className="font-mono font-bold text-emerald-600"><bdi>{{{{((simulatedValue % 12 || 2) * 18) + 15}}}} mins</bdi></span>
-                </div>
-              </div>'''
-
-        # 5. Logistics / Supply Chain
-        elif domain_id == "logistics_supply_chain":
-            return f'''
-              <div className="space-y-2.5 font-mono text-xs" data-origin="synthetic_demo">
-                <div className="flex items-center justify-between text-emerald-600 dark:text-emerald-400">
-                  <div className="flex items-center gap-2">
-                    <div className="size-2 rounded-full bg-emerald-500 animate-ping" />
-                    <span>#TRK-88412 • {"در مسیر ترانزیت هوشمند" if is_rtl else "Smart Transit"}</span>
-                  </div>
-                  <span className="font-bold"><bdi>{{{{Math.min(99.6, 91.0 + ((simulatedValue % 100) * 0.08)).toFixed(1)}}}}% On-Time</bdi></span>
-                </div>
-                <div className="w-full bg-zinc-200 dark:bg-zinc-800 h-2 rounded-full overflow-hidden">
-                  <div className="bg-emerald-500 h-full rounded-full transition-all duration-300" style={{{{ width: `${{Math.min(100, Math.max(15, simulatedValue % 100 || 74))}}%` }}}} />
-                </div>
-                <div className="flex justify-between text-[11px] text-zinc-500">
-                  <span>{"مسیر بهینه سوخت" if is_rtl else "Optimized Route"}</span>
-                  <span><bdi>{{{{((simulatedValue % 100 || 45) * 1.8).toFixed(1)}}}}L saved</bdi></span>
-                </div>
-              </div>'''
-
-        # 6. Education / EdTech
-        elif domain_id == "education_edtech_lms":
-            return f'''
-              <div className="space-y-3 text-xs" data-origin="synthetic_demo">
-                <div className="flex justify-between items-center">
-                  <span className="font-semibold text-zinc-700 dark:text-zinc-300">{"پیشرفت دوره تسلط معماری" if is_rtl else "Mastery Curriculum Horizon"}</span>
-                  <span className="font-mono font-bold text-sky-600 dark:text-sky-400">
-                    <bdi>{{{{Math.min(100, Math.round((simulatedValue % 100 || 40) * 1.4))}}}}% Complete</bdi>
-                  </span>
-                </div>
-                <div className="w-full bg-zinc-200 dark:bg-zinc-800 h-2 rounded-full overflow-hidden">
-                  <div className="bg-sky-500 h-full rounded-full transition-all" style={{{{ width: `${{Math.min(100, Math.round((simulatedValue % 100 || 40) * 1.4))}}%` }}}} />
-                </div>
-                <div className="flex justify-between text-[11px] text-zinc-500">
-                  <span>{"صدک تسلط آموخته ها" if is_rtl else "Cohort Mastery Percentile"}</span>
-                  <span className="font-mono font-bold text-emerald-600"><bdi>Top {{{{Math.min(99, 65 + Math.round((simulatedValue % 100 || 40) * 0.3))}}}}%</bdi></span>
-                </div>
-              </div>'''
-
-        # 7. Automotive / EV
-        elif domain_id == "automotive_ev_mobility":
-            return f'''
-              <div className="space-y-3 text-xs" data-origin="synthetic_demo">
-                <div className="flex justify-between items-center">
-                  <span className="text-zinc-500">{"شارژ باتری و پیمایش فعال" if is_rtl else "Battery State & Real Range"}</span>
-                  <span className="font-mono font-bold text-emerald-600 dark:text-emerald-400">
-                    <bdi>{{{{(simulatedValue % 100 || 82)}}}}% • {{{{Math.round((simulatedValue % 100 || 82) * 5.4)}}}} km</bdi>
-                  </span>
-                </div>
-                <div className="w-full bg-zinc-200 dark:bg-zinc-800 h-2 rounded-full overflow-hidden">
-                  <div className="bg-emerald-500 h-full rounded-full transition-all" style={{{{ width: `${{simulatedValue % 100 || 82}}%` }}}} />
-                </div>
-                <div className="flex justify-between text-[11px] text-zinc-500">
-                  <span>{"زمان شارژ فوق سریع (تا ۸۰٪)" if is_rtl else "Supercharger 80% ETA"}</span>
-                  <span className="font-mono font-bold"><bdi>{{{{Math.max(6, Math.round((100 - (simulatedValue % 100 || 82)) * 0.35))}}}} mins</bdi></span>
-                </div>
-              </div>'''
-
-        # 8. Cybersecurity / Auth
-        elif domain_id == "cybersecurity_identity_auth":
-            return f'''
-              <div className="space-y-3 font-mono text-xs" data-origin="synthetic_demo">
-                <div className="flex justify-between items-center text-emerald-600 dark:text-emerald-400">
-                  <span>{"احراز هویت بدون گذرواژه FIDO2" if is_rtl else "FIDO2 Hardware Passkey"}</span>
-                  <span className="size-2 rounded-full bg-emerald-500 animate-pulse" />
-                </div>
-                <div className="p-2.5 rounded bg-zinc-100 dark:bg-zinc-800/80 border border-zinc-200 dark:border-zinc-700 space-y-1">
-                  <div className="flex justify-between text-zinc-500 text-[10px]">
-                    <span>{"پروتکل امنیتی" if is_rtl else "PROTOCOL"}</span>
-                    <span>{"شاخص تاب آوری حملات" if is_rtl else "RESILIENCE SCORE"}</span>
-                  </div>
-                  <div className="flex justify-between font-bold">
-                    <span>WebAuthn / Biometric</span>
-                    <span className="text-emerald-600 dark:text-emerald-400">
-                      <bdi>{{{{Math.min(99.9, 95.0 + ((simulatedValue % 100) * 0.04)).toFixed(1)}}}}%</bdi>
-                    </span>
-                  </div>
-                </div>
-              </div>'''
-
-        # 9. Real Estate / PropTech
-        elif domain_id in ["real_estate_architecture", "real_estate_proptech"]:
-            return f'''
-              <div className="space-y-3 text-xs" data-origin="synthetic_demo">
-                <div className="flex justify-between items-center text-zinc-700 dark:text-zinc-300">
-                  <span>{"پلان پنت هاوس ۲۴۰ متری" if is_rtl else "Penthouse Portfolio • 240 m²"}</span>
-                  <span className="font-mono font-bold text-stone-900 dark:text-stone-100"><bdi>$1,250,000</bdi></span>
-                </div>
-                <div className="p-2.5 rounded bg-stone-100 dark:bg-stone-900 border border-stone-300 dark:border-stone-800 flex justify-between items-center">
-                  <span>{"اقساط ماهانه برآورد شده" if is_rtl else "Est. Monthly Mortgage"}</span>
-                  <span className="font-mono font-bold text-emerald-600"><bdi>${{{{Math.round((simulatedValue || 1250000) * 0.0052).toLocaleString()}}}} / mo</bdi></span>
-                </div>
-              </div>'''
-
-        # 10. Default / FinTech / SaaS & All Other Domains (Causal Yield Simulator)
-        else:
-            return f'''
-              <div className="space-y-3" data-origin="synthetic_demo">
-                <div className="space-y-2">
-                  <div className="flex justify-between text-xs text-zinc-600 dark:text-zinc-400">
-                    <span>{"ظرفیت عملیاتی برآورد شده" if is_rtl else "Operational Capacity"}</span>
-                    <span className="font-mono font-bold text-zinc-900 dark:text-white">
-                      <bdi>${{{{simulatedValue.toLocaleString()}}}}</bdi>
-                    </span>
-                  </div>
-                  <input
-                    type="range"
-                    min="1000"
-                    max="100000"
-                    step="1000"
-                    value={{{{simulatedValue}}}}
-                    onChange={{{{(e) => setSimulatedValue(Number(e.target.value))}}}}
-                    className="w-full accent-emerald-500 cursor-pointer h-2 bg-zinc-200 dark:bg-zinc-800 rounded-lg"
-                  />
-                </div>
-
-                <div className="p-3 bg-white dark:bg-zinc-950 rounded-xl border border-zinc-200/80 dark:border-zinc-800/80 flex items-center justify-between">
-                  <div className="text-xs text-zinc-500">{"ضریب بهره وری سالانه" if is_rtl else "Annual Causal Yield"}</div>
-                  <div className="text-lg font-bold font-mono text-emerald-600 dark:text-emerald-400">
-                    <bdi>+{{{{(simulatedValue * (0.052 if billingCycle === "annual" else 0.041)).toFixed(1)}}}}</bdi>
-                  </div>
-                </div>
-              </div>'''
+        return render_domain_widget(domain_id, is_rtl, style_cfg, blueprint)
 
     def generate_react_tsx(self, decision: Dict[str, Any], component_name: str = "VibeMasterpiece") -> str:
         """
@@ -474,7 +251,7 @@ export const {component_name}: React.FC<{component_name}Props> = ({{
                 role="tab"
                 aria-selected={{activeTab === idx}}
                 onClick={{() => setActiveTab(idx)}}
-                className={{`transition-all duration-200 min-h-[36px] ${{
+                className={{`transition-all duration-200 min-h-[44px] ${{
                   activeTab === idx ? "{style_cfg['tab_btn_active']}" : "{style_cfg['tab_btn_inactive']}"
                 }}`}}
               >

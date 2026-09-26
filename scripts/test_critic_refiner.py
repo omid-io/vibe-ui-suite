@@ -337,15 +337,54 @@ def main():
         failures.append("Test 14 Failed: should_accept_patch permitted visual P0 regression and score drop")
     print("  [PASS] Test 14: Visual Monotonicity Gate blocked visual defect regression")
 
+    # Test 15: Surgical Auto-Repair of Visual Defects (H1, Scale, Spring, Gradient)
+    visual_flawed_html = """<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>button:focus-visible { outline: 2px solid blue; }</style>
+</head>
+<body class="from-purple-600 to-indigo-600">
+  <div class="flex flex-col p-2">
+    <h2 class="text-sm">Subdued Title</h2>
+    <p>Revenue is $45,000 USD</p>
+    <button type="button" class="h-6">Click Here</button>
+  </div>
+</body>
+</html>"""
+    repaired_vis_html, repaired_vis_rep = refiner.refine(visual_flawed_html, {}, max_iterations=2)
+    if "<h1" not in repaired_vis_html:
+        failures.append("Test 15 Failed: Missing H1 was not upgraded by refiner")
+    if "from-purple-600 to-indigo-600" in repaired_vis_html:
+        failures.append("Test 15 Failed: Cliche AI gradient was not replaced by refiner")
+    if "min-h-[44px]" not in repaired_vis_html:
+        failures.append("Test 15 Failed: Substandard touch target was not expanded to min-h-[44px]")
+    if "<bdi" not in repaired_vis_html:
+        failures.append("Test 15 Failed: Missing BDI isolation was not injected for numerical metric")
+    print(f"  [PASS] Test 15: Surgical Auto-Repair repaired visual defects (H1, touch targets, gradient, BDI)")
+
+    # Test 16: Defect ID Alias Normalization
+    alias_defect_list = [
+        {"type": "missing_bidi_isolation", "severity": "high"},
+        {"type": "generic_ai_purple_gradient", "severity": "critical"}
+    ]
+    # Verify that refiner can handle legacy defect aliases seamlessly
+    aliased_html = '<div class="from-purple-600 to-indigo-600">Metric: 100%</div>'
+    res_html, _ = refiner.refine(aliased_html, {}, max_iterations=1)
+    if "from-purple-600 to-indigo-600" in res_html:
+        failures.append("Test 16 Failed: Legacy defect alias generic_ai_purple_gradient was not resolved")
+    print("  [PASS] Test 16: Defect ID Alias Normalization resolved legacy defect types")
+
     if failures:
         print("\n[FAIL] Critic/Refiner Test Failures:", file=sys.stderr)
         for f in failures:
             print(f"  - {f}", file=sys.stderr)
         return 1
 
-    print("\n[SUCCESS] All Design Critic and AutoRefiner unit tests passed (14/14).")
+    print("\n[SUCCESS] All Design Critic and AutoRefiner unit tests passed (16/16).")
     return 0
 
 if __name__ == "__main__":
     sys.exit(main())
+
 
