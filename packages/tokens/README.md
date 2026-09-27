@@ -1,5 +1,12 @@
 # @omid-io/tokens
 
+> [!WARNING]
+> **Package Migrated to [`vibe-ui-suite`](https://www.npmjs.com/package/vibe-ui-suite)**  
+> This package has been superseded by the unified flagship package **`vibe-ui-suite`**. Please migrate your dependencies and CLI usage to:
+> ```bash
+> npx vibe-ui-suite init
+> ```
+
 > Typed OKLCH design tokens, physics curves, and zero-config Tailwind CSS preset for Vibe UI.
 
 ## Installation
