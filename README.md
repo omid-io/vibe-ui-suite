@@ -107,7 +107,7 @@ Just give your AI assistant (Antigravity, Cursor, Hermes, Claude Code) a single 
 - **WCAG AAA Contrast:** Background and foreground colors mathematically calibrated in OKLCH.
 - **BiDi / RTL Isolation:** Numbers, currencies, and technical metrics wrapped in `<bdi>` so English/Persian text never flips.
 - **Ergonomic Touch Targets:** Every button and interactive control meets the minimum 44x44px physical envelope.
-- **Living Spring Physics:** Smooth, critically damped spring transitions (`transition-vibe-spring`) with fast exits (<180ms).
+- **Living Spring Physics:** Smooth, critically damped spring transitions (`ease-vibe-spring`) with fast exits (<180ms).
 
 ---
 
@@ -171,7 +171,7 @@ In your `app/globals.css` or main stylesheet:
 ```
 Zero JavaScript configuration files needed. Instantly unlocks:
 - **Semantic OKLCH colors**: `bg-vibe-canvas`, `bg-vibe-surface`, `text-vibe-primary`, `border-vibe-border`
-- **Physics curves**: `transition-vibe-spring`, `transition-vibe-snap`, `transition-vibe-glide`
+- **Physics curves**: `ease-vibe-spring`, `ease-vibe-snap`, `ease-vibe-glide` (or utility `.vibe-spring`)
 - **Material shadows**: `shadow-vibe-brutal`, `shadow-vibe-glass`
 
 ---

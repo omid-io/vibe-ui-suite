@@ -5,7 +5,7 @@ const srcDistDir = path.resolve(__dirname, '../tokens/dist');
 const targetDistDir = path.resolve(__dirname, 'dist');
 
 if (!fs.existsSync(srcDistDir)) {
-  console.error('Error: ../tokens/dist does not exist. Please build @omid-io/tokens first.');
+  console.error('Error: ../tokens/dist does not exist. Please build packages/tokens first.');
   process.exit(1);
 }
 

@@ -64,7 +64,7 @@ In your global stylesheet (e.g. `app/globals.css`):
 
 Zero JavaScript configuration files needed. Instantly unlocks:
 - Semantic color utilities: `bg-vibe-canvas`, `bg-vibe-surface`, `text-vibe-primary`, `border-vibe-border`
-- Physics curves: `transition-vibe-spring`, `transition-vibe-snap`, `transition-vibe-glide`
+- Physics curves: `ease-vibe-spring`, `ease-vibe-snap`, `ease-vibe-glide` (or utility `.vibe-spring`)
 - Shadows: `shadow-vibe-brutal`, `shadow-vibe-glass`
 
 ### 3. Tailwind CSS v3 Legacy Plugin (Backward Compatible)

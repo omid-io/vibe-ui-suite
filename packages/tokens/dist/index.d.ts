@@ -27,6 +27,7 @@ export interface VisualChemistry {
     name: string;
     tagline: string;
     colors: ChemistryColors;
+    darkColors?: ChemistryColors;
     typography: ChemistryTypography;
     physics: ChemistryPhysics;
 }

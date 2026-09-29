@@ -788,13 +788,22 @@ export default {component_name};
             card_border = "border border-[var(--border-subtle)]"
 
         domain_id = decision.get("genome", {}).get("domain") or decision.get("intent", {}).get("product_domain", "")
+        blueprint = decision.get("intent", {}).get("blueprint") or self.blueprints.get("domains", {}).get(domain_id, {})
+        mock_data_all = blueprint.get("mock_data", {})
+        mock_data_dict = mock_data_all.get("fa" if is_rtl else "en", {}) if isinstance(mock_data_all.get("en"), dict) else mock_data_all
+        blueprint_headline = mock_data_dict.get("headline")
+
+        # Resolve clean display title: if prompt_title is a raw natural language prompt, prefer blueprint headline
+        raw_prompt_indicators = ["میخوام", "بساز", "طراحی", "سایت", "یک", "یه", "برای", "create", "build", "make", "want", "for a", "landing"]
+        is_raw_prompt = any(ind in prompt_title.lower() for ind in raw_prompt_indicators)
+        display_title = blueprint_headline if (blueprint_headline and is_raw_prompt) else prompt_title
 
         html = f"""<!DOCTYPE html>
 <html {dir_attr} data-domain="{domain_id}" class="h-full">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>{prompt_title}</title>
+  <title>{display_title}</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="{font_url}" rel="stylesheet">
@@ -843,7 +852,7 @@ export default {component_name};
           <polyline points="2 17 12 22 22 17"></polyline>
           <polyline points="2 12 12 17 22 12"></polyline>
         </svg>
-        <span class="text-xl font-bold tracking-tight display-font">{prompt_title}</span>
+        <span class="text-xl font-bold tracking-tight display-font">{display_title}</span>
       </div>
       <nav class="hidden md:flex items-center space-x-6 rtl:space-x-reverse" aria-label="Main Navigation">
         <a href="#features" class="text-sm font-medium hover:text-[var(--accent)] transition-colors min-h-[44px] inline-flex items-center">{"ویژگی ها" if is_rtl else "Features"}</a>
@@ -869,7 +878,7 @@ export default {component_name};
             {"مهندسی دقیق و اصیل" if is_rtl else "Vibe UI Verified"}
           </span>
           <h1 id="hero-title" class="text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight mb-4">
-            {prompt_title}
+            {display_title}
           </h1>
           <p class="text-[var(--text-muted)] text-base sm:text-lg leading-relaxed max-w-2xl mb-8">
             {"تجربه ای منحصربه فرد با معماری خودکار، دسترسی پذیری تضمین شده و هماهنگی کامل با نیازهای کسب وکار شما." if is_rtl else "Autonomous precision interface engineered with strict WCAG AA contrast, physics motion, and domain priors."}

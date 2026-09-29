@@ -37,6 +37,7 @@ export interface VisualChemistry {
   name: string;
   tagline: string;
   colors: ChemistryColors;
+  darkColors?: ChemistryColors;
   typography: ChemistryTypography;
   physics: ChemistryPhysics;
 }
@@ -47,6 +48,15 @@ export const VISUAL_CHEMISTRIES: Record<VisualChemistryId, VisualChemistry> = {
     name: 'Minimalist SaaS',
     tagline: 'High-signal B2B productivity with subtle borders and monochrome restraint',
     colors: {
+      canvas: 'oklch(0.985 0.002 264)',
+      surface: 'oklch(1 0 0)',
+      border: 'oklch(0.90 0.008 264)',
+      primaryAccent: 'oklch(0.55 0.22 260)',
+      textPrimary: 'oklch(0.14 0.005 264)',
+      textMuted: 'oklch(0.48 0.015 264)',
+      ring: 'oklch(0.55 0.22 260)',
+    },
+    darkColors: {
       canvas: 'oklch(0.14 0.005 264)',
       surface: 'oklch(0.18 0.008 264)',
       border: 'oklch(0.28 0.01 264)',
@@ -71,6 +81,15 @@ export const VISUAL_CHEMISTRIES: Record<VisualChemistryId, VisualChemistry> = {
     name: 'Luxury Glassmorphism 2.0',
     tagline: 'Deep dark substrates with specular highlights and gold accents',
     colors: {
+      canvas: 'oklch(0.97 0.01 85)',
+      surface: 'oklch(1 0 0 / 0.85)',
+      border: 'oklch(0.75 0.12 85 / 0.4)',
+      primaryAccent: 'oklch(0.65 0.18 85)',
+      textPrimary: 'oklch(0.16 0.02 85)',
+      textMuted: 'oklch(0.45 0.03 85)',
+      ring: 'oklch(0.65 0.18 85)',
+    },
+    darkColors: {
       canvas: 'oklch(0.12 0.015 280)',
       surface: 'oklch(0.18 0.02 280 / 0.75)',
       border: 'oklch(0.75 0.15 85 / 0.35)',
@@ -103,6 +122,15 @@ export const VISUAL_CHEMISTRIES: Record<VisualChemistryId, VisualChemistry> = {
       textMuted: 'oklch(0.35 0.02 95)',
       ring: 'oklch(0.15 0.01 95)',
     },
+    darkColors: {
+      canvas: 'oklch(0.15 0.01 95)',
+      surface: 'oklch(0.20 0.015 95)',
+      border: 'oklch(0.95 0.01 95)',
+      primaryAccent: 'oklch(0.82 0.20 135)',
+      textPrimary: 'oklch(0.96 0.01 95)',
+      textMuted: 'oklch(0.70 0.02 95)',
+      ring: 'oklch(0.82 0.20 135)',
+    },
     typography: {
       display: 'Space Grotesk, Syne, sans-serif',
       body: 'Space Grotesk, sans-serif',
@@ -127,6 +155,15 @@ export const VISUAL_CHEMISTRIES: Record<VisualChemistryId, VisualChemistry> = {
       textMuted: 'oklch(0.42 0.01 80)',
       ring: 'oklch(0.58 0.24 28)',
     },
+    darkColors: {
+      canvas: 'oklch(0.13 0.005 80)',
+      surface: 'oklch(0.17 0.008 80)',
+      border: 'oklch(0.35 0.005 80)',
+      primaryAccent: 'oklch(0.68 0.22 28)',
+      textPrimary: 'oklch(0.95 0.005 80)',
+      textMuted: 'oklch(0.65 0.01 80)',
+      ring: 'oklch(0.68 0.22 28)',
+    },
     typography: {
       display: 'Helvetica Neue, Arial, sans-serif',
       body: 'Newsreader, Georgia, serif',
@@ -150,6 +187,15 @@ export const VISUAL_CHEMISTRIES: Record<VisualChemistryId, VisualChemistry> = {
       textPrimary: 'oklch(0.20 0.02 265)',
       textMuted: 'oklch(0.50 0.02 265)',
       ring: 'oklch(0.55 0.22 265)',
+    },
+    darkColors: {
+      canvas: 'oklch(0.13 0.005 265)',
+      surface: 'oklch(0.17 0.008 265)',
+      border: 'oklch(0.26 0.01 265)',
+      primaryAccent: 'oklch(0.65 0.22 265)',
+      textPrimary: 'oklch(0.98 0 0)',
+      textMuted: 'oklch(0.65 0.01 265)',
+      ring: 'oklch(0.65 0.22 265)',
     },
     typography: {
       display: 'Inter, system-ui, sans-serif',

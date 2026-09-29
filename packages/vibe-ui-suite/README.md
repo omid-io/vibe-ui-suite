@@ -77,7 +77,7 @@ In your global stylesheet (e.g. `app/globals.css` or `src/index.css`):
 
 Zero JavaScript configuration files required. Instantly unlocks:
 - **Semantic Color Utilities:** `bg-vibe-canvas`, `bg-vibe-surface`, `text-vibe-primary`, `border-vibe-border`
-- **Physics Springs:** `transition-vibe-spring`, `transition-vibe-snap`, `transition-vibe-glide`
+- **Physics Springs:** `ease-vibe-spring`, `ease-vibe-snap`, `ease-vibe-glide` (or utility `.vibe-spring`)
 - **Surface Elevation:** `shadow-vibe-brutal`, `shadow-vibe-glass`
 
 ---

@@ -7,14 +7,14 @@
  */
 
 @theme {
-  /* OKLCH Perceptual Colors — Semantic Palette */
-  --color-vibe-canvas: var(--vibe-canvas, oklch(0.14 0.005 260));
-  --color-vibe-surface: var(--vibe-surface, oklch(0.18 0.008 260));
-  --color-vibe-border: var(--vibe-border, oklch(0.28 0.01 260));
-  --color-vibe-primary: var(--vibe-primary, oklch(0.65 0.22 265));
-  --color-vibe-text-primary: var(--vibe-text-primary, oklch(0.98 0 0));
-  --color-vibe-text-muted: var(--vibe-text-muted, oklch(0.70 0.01 260));
-  --color-vibe-ring: var(--vibe-ring, oklch(0.65 0.22 265));
+  /* OKLCH Perceptual Colors — Semantic Palette (Defaults to Light Mode) */
+  --color-vibe-canvas: var(--vibe-canvas, oklch(0.985 0.002 264));
+  --color-vibe-surface: var(--vibe-surface, oklch(1 0 0));
+  --color-vibe-border: var(--vibe-border, oklch(0.90 0.008 264));
+  --color-vibe-primary: var(--vibe-primary-accent, var(--vibe-primary, oklch(0.55 0.22 260)));
+  --color-vibe-text-primary: var(--vibe-text-primary, oklch(0.14 0.005 264));
+  --color-vibe-text-muted: var(--vibe-text-muted, oklch(0.48 0.015 264));
+  --color-vibe-ring: var(--vibe-ring, oklch(0.55 0.22 260));
 
   /* Spring & Snap Physics Curves */
   --ease-vibe-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
@@ -25,6 +25,18 @@
   --shadow-vibe-brutal: 4px 4px 0px #000000;
   --shadow-vibe-brutal-lg: 6px 6px 0px #000000;
   --shadow-vibe-glass: inset 0 1px 1px rgba(255, 255, 255, 0.15);
+}
+
+/* Fallback Dark Theme Variables when .dark or [data-theme="dark"] is applied */
+.dark, [data-theme="dark"] {
+  --vibe-canvas: oklch(0.14 0.005 264);
+  --vibe-surface: oklch(0.18 0.008 264);
+  --vibe-border: oklch(0.28 0.01 264);
+  --vibe-primary: oklch(0.65 0.22 260);
+  --vibe-primary-accent: oklch(0.65 0.22 260);
+  --vibe-text-primary: oklch(0.98 0 0);
+  --vibe-text-muted: oklch(0.65 0.015 264);
+  --vibe-ring: oklch(0.65 0.22 260);
 }
 
 /* BiDi Isolation Utility */

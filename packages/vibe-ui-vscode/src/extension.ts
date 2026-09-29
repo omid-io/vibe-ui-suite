@@ -20,7 +20,7 @@ export function activate(context: vscode.ExtensionContext) {
       const text = editor.document.getText();
       
       // Fast heuristic contrast and emoji check
-      const emojiRegex = /[\u{1F300}-\u{1F9FF}\u{2600}-\u{26FF}]/u;
+      const emojiRegex = /[\u{10000}-\u{10ffff}\u{2600}-\u{27bf}\u{2300}-\u{23ff}\u{2b50}-\u{2b55}\u{203c}-\u{2049}\u{2194}-\u{21aa}]/u;
       const hasEmoji = emojiRegex.test(text);
       const hasOklch = text.includes('oklch(');
       

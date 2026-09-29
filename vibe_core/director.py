@@ -192,7 +192,7 @@ class DesignDirector:
         tokens = set(text.split())
         stems = set(tokens)
         for t in tokens:
-            for suffix in ['های', 'ها', 'ان', 'ات', 'ی', 'ین', 'ترین', 'تر', 's', 'es', 'ing', 'ed']:
+            for suffix in ['های', 'ها', 'ان', 'ات', 'ی', 'ین', 'ترین', 'تر', 'مان', 'تان', 'شان', 'ام', 'ات', 'م', 'ت', 'ش', 's', 'es', 'ing', 'ed']:
                 if len(t) > len(suffix) + 2 and t.endswith(suffix):
                     stems.add(t[:-len(suffix)])
 
@@ -218,25 +218,34 @@ class DesignDirector:
             # 1. Strong multi-word or distinct signals
             for sig in domain.get("strong_signals", []):
                 norm_sig = normalize_text(sig)
-                if norm_sig in text:
-                    domain_score += 0.85
-                    matched_aliases.append(sig)
-                    break
-                sig_tokens = norm_sig.split()
-                if len(sig_tokens) > 1 and all(w in stems for w in sig_tokens):
-                    domain_score += 0.70
-                    matched_aliases.append(sig)
-                    break
+                sig_words = norm_sig.split()
+                if len(sig_words) == 1:
+                    if norm_sig in tokens or norm_sig in stems:
+                        domain_score += 0.85
+                        matched_aliases.append(sig)
+                        break
+                else:
+                    if norm_sig in text:
+                        domain_score += 0.85
+                        matched_aliases.append(sig)
+                        break
+                    if all(w in stems for w in sig_words):
+                        domain_score += 0.70
+                        matched_aliases.append(sig)
+                        break
 
             # 2. Aliases and secondary signals
             for alias in domain.get("aliases", []):
                 norm_alias = normalize_text(alias)
-                if norm_alias in text:
-                    domain_score += 0.35
-                    matched_aliases.append(alias)
-                elif norm_alias in stems:
-                    domain_score += 0.25
-                    matched_aliases.append(alias)
+                alias_words = norm_alias.split()
+                if len(alias_words) == 1:
+                    if norm_alias in tokens or norm_alias in stems:
+                        domain_score += 0.35
+                        matched_aliases.append(alias)
+                else:
+                    if norm_alias in text:
+                        domain_score += 0.35
+                        matched_aliases.append(alias)
 
             # Downweight generic SaaS fallback unless explicitly matched
             if domain["id"] == "general_modern_saas":

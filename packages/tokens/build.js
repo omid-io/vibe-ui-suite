@@ -7,7 +7,7 @@ try {
   try {
     ts = require('../../examples/nextjs-starter/node_modules/typescript');
   } catch (e2) {
-    console.error('Error: typescript is required to build @omid-io/tokens.');
+    console.error('Error: typescript is required to build packages/tokens.');
     process.exit(1);
   }
 }
@@ -99,4 +99,4 @@ if (fs.existsSync(v4CssSrc)) {
   fs.copyFileSync(v4CssSrc, path.join(distDir, 'v4.css'));
 }
 
-console.log('✅ @omid-io/tokens build complete: CLI, ESM, CJS, v4.css, and .d.ts generated in dist/');
+console.log('✅ tokens build complete: CLI, ESM, CJS, v4.css, and .d.ts generated in dist/');

@@ -58,6 +58,10 @@ NAMED_COLORS = {
     "slate-900": "#0f172a",
 }
 
+EMOJI_PATTERN = re.compile(
+    r"[\U00010000-\U0010ffff]|[\u2600-\u27bf]|[\u2300-\u23ff]|[\u2b50-\u2b55]|[\u203c-\u2049]|[\u2194-\u21aa]"
+)
+
 def srgb_to_linear(c_byte: float) -> float:
     """
     Transforms an 8-bit sRGB color channel (0-255) to linear sRGB [0.0, 1.0].
@@ -174,21 +178,59 @@ def extract_html_colors(content: str) -> tuple[str, str, str]:
         if c_m:
             body_color = resolve_var(c_m.group(1))
 
+    # Inspect <body ...> inline styles and Tailwind classes
+    body_tag_m = re.search(r"<body([^>]*)>", content, re.IGNORECASE)
+    if body_tag_m:
+        b_attrs = body_tag_m.group(1)
+        st_m = re.search(r'style=["\']([^"\']+)["\']', b_attrs)
+        if st_m:
+            styles = st_m.group(1)
+            if not canvas_color:
+                bg_m = re.search(r"background(?:-color)?\s*:\s*([^;]+)", styles)
+                if bg_m:
+                    canvas_color = resolve_var(bg_m.group(1))
+            if not body_color:
+                c_m = re.search(r"(?:^|\s|;)color\s*:\s*([^;]+)", styles)
+                if c_m:
+                    body_color = resolve_var(c_m.group(1))
+
+        cl_m = re.search(r'class=["\']([^"\']+)["\']', b_attrs)
+        if cl_m:
+            classes = cl_m.group(1)
+            if not canvas_color:
+                custom_bg = re.search(r"bg-\[([#\w(),.\s/]+)\]", classes)
+                if custom_bg:
+                    canvas_color = custom_bg.group(1)
+                else:
+                    for tok in classes.split():
+                        if tok.startswith("bg-"):
+                            cname = tok[3:]
+                            if cname in NAMED_COLORS:
+                                canvas_color = NAMED_COLORS[cname]
+                                break
+            if not body_color:
+                custom_text = re.search(r"text-\[([#\w(),.\s/]+)\]", classes)
+                if custom_text:
+                    body_color = custom_text.group(1)
+                else:
+                    for tok in classes.split():
+                        if tok.startswith("text-"):
+                            cname = tok[5:]
+                            if cname in NAMED_COLORS:
+                                body_color = NAMED_COLORS[cname]
+                                break
+
     if not canvas_color:
-        for c in ("--canvas", "--bg-paper", "--background"):
+        for c in ("--canvas", "--bg-paper", "--background", "--vibe-canvas", "--bg"):
             if c in css_vars:
                 canvas_color = resolve_var(css_vars[c])
                 break
-    if not canvas_color:
-        canvas_color = "#ffffff"
 
     if not body_color:
-        for c in ("--text-ink", "--foreground", "--text"):
+        for c in ("--text-ink", "--foreground", "--text", "--vibe-text-primary"):
             if c in css_vars:
                 body_color = resolve_var(css_vars[c])
                 break
-    if not body_color:
-        body_color = "#000000"
 
     header_color = None
     h1_m = re.search(r"<h1([^>]*)>(.*?)</h1>", content, re.DOTALL | re.IGNORECASE)
@@ -426,7 +468,8 @@ def audit_html_file(file_path: Path) -> dict:
         results["overall_status"] = "FAIL"
 
     # Pillar 4: Vector Iconography vs Raw Emojis
-    raw_emojis = re.findall(r'[\U0001F300-\U0001F9FF]', content)
+    clean_content = re.sub(r"<(script|style|svg)[^>]*>.*?</\1>", "", content, flags=re.DOTALL | re.IGNORECASE)
+    raw_emojis = EMOJI_PATTERN.findall(clean_content)
     svg_count = len(re.findall(r'<svg[^>]*>', content, re.IGNORECASE))
     if raw_emojis:
         results["checks"].append({
@@ -486,44 +529,54 @@ def audit_html_file(file_path: Path) -> dict:
 
     # Pillar 7: Exact Mathematical WCAG AA Relative Luminance Contrast
     canvas_color, body_color, header_color = extract_html_colors(content)
-    lum_canvas = parse_color_to_luminance(canvas_color)
-    lum_body = parse_color_to_luminance(body_color)
-    lum_header = parse_color_to_luminance(header_color)
-
-    body_cr = contrast_ratio(lum_canvas, lum_body)
-    header_cr = contrast_ratio(lum_canvas, lum_header)
-
-    if body_cr >= 4.5:
+    if not canvas_color or not body_color:
         results["checks"].append({
             "pillar": "WCAG AA Contrast",
-            "name": "Body Copy Contrast",
-            "status": "PASS",
-            "msg": f"Body contrast {body_cr:.2f}:1 exceeds WCAG AA threshold (>= 4.5:1) [bg: {canvas_color}, fg: {body_color}]"
+            "name": "Static Contrast Resolution",
+            "status": "WARN",
+            "msg": f"Static color tokens unresolved [canvas: {canvas_color or 'undefined'}, body: {body_color or 'undefined'}]. Run Playwright browser eval for physical computed contrast."
         })
+        if results["overall_status"] != "FAIL":
+            results["overall_status"] = "WARN"
     else:
-        results["checks"].append({
-            "pillar": "WCAG AA Contrast",
-            "name": "Body Copy Contrast",
-            "status": "FAIL",
-            "msg": f"Body contrast {body_cr:.2f}:1 fails WCAG AA threshold (>= 4.5:1) [bg: {canvas_color}, fg: {body_color}]"
-        })
-        results["overall_status"] = "FAIL"
+        lum_canvas = parse_color_to_luminance(canvas_color)
+        lum_body = parse_color_to_luminance(body_color)
+        lum_header = parse_color_to_luminance(header_color) if header_color else lum_body
 
-    if header_cr >= 3.0:
-        results["checks"].append({
-            "pillar": "WCAG AA Contrast",
-            "name": "Header / Large Text Contrast",
-            "status": "PASS",
-            "msg": f"Header contrast {header_cr:.2f}:1 exceeds WCAG AA threshold (>= 3.0:1) [bg: {canvas_color}, fg: {header_color}]"
-        })
-    else:
-        results["checks"].append({
-            "pillar": "WCAG AA Contrast",
-            "name": "Header / Large Text Contrast",
-            "status": "FAIL",
-            "msg": f"Header contrast {header_cr:.2f}:1 fails WCAG AA threshold (>= 3.0:1) [bg: {canvas_color}, fg: {header_color}]"
-        })
-        results["overall_status"] = "FAIL"
+        body_cr = contrast_ratio(lum_canvas, lum_body)
+        header_cr = contrast_ratio(lum_canvas, lum_header)
+
+        if body_cr >= 4.5:
+            results["checks"].append({
+                "pillar": "WCAG AA Contrast",
+                "name": "Body Copy Contrast",
+                "status": "PASS",
+                "msg": f"Body contrast {body_cr:.2f}:1 exceeds WCAG AA threshold (>= 4.5:1) [bg: {canvas_color}, fg: {body_color}]"
+            })
+        else:
+            results["checks"].append({
+                "pillar": "WCAG AA Contrast",
+                "name": "Body Copy Contrast",
+                "status": "FAIL",
+                "msg": f"Body contrast {body_cr:.2f}:1 fails WCAG AA threshold (>= 4.5:1) [bg: {canvas_color}, fg: {body_color}]"
+            })
+            results["overall_status"] = "FAIL"
+
+        if header_cr >= 3.0:
+            results["checks"].append({
+                "pillar": "WCAG AA Contrast",
+                "name": "Header / Large Text Contrast",
+                "status": "PASS",
+                "msg": f"Header contrast {header_cr:.2f}:1 exceeds WCAG AA threshold (>= 3.0:1) [bg: {canvas_color}, fg: {header_color}]"
+            })
+        else:
+            results["checks"].append({
+                "pillar": "WCAG AA Contrast",
+                "name": "Header / Large Text Contrast",
+                "status": "FAIL",
+                "msg": f"Header contrast {header_cr:.2f}:1 fails WCAG AA threshold (>= 3.0:1) [bg: {canvas_color}, fg: {header_color}]"
+            })
+            results["overall_status"] = "FAIL"
 
     return results
 
@@ -934,7 +987,7 @@ def audit_nextjs_starter(starter_dir: Path) -> dict:
     raw_emojis_found = 0
     for tsx_f in tsx_files:
         src = tsx_f.read_text(encoding="utf-8")
-        emojis = re.findall(r'[\U0001F300-\U0001F9FF]', src)
+        emojis = EMOJI_PATTERN.findall(src)
         if emojis:
             raw_emojis_found += len(emojis)
 

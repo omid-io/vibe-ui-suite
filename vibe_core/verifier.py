@@ -113,17 +113,17 @@ class VerificationEngine:
         # 3. Vector Icons vs Emojis Check
         # Strip script/style content before emoji search
         if soup:
-            # BS4: get text content outside <script>/<style>
-            for tag in soup.find_all(["script", "style"]):
+            # BS4: get text content outside <script>/<style>/<svg>
+            for tag in soup.find_all(["script", "style", "svg"]):
                 tag.decompose()
             clean_text = soup.get_text()
             svg_count = len(_BS4(html_content, "html.parser").find_all("svg"))
         else:
-            clean_text = re.sub(r"<(script|style)[^>]*>.*?</\1>", "", html_content, flags=re.DOTALL)
-            svg_count = len(re.findall(r"<svg", html_content))
+            clean_text = re.sub(r"<(script|style|svg)[^>]*>.*?</\1>", "", html_content, flags=re.DOTALL | re.IGNORECASE)
+            svg_count = len(re.findall(r"<svg", html_content, re.IGNORECASE))
 
         emoji_pattern = re.compile(
-            r"[\U00010000-\U0010ffff]|[\u2600-\u27bf]|[\u2300-\u23ff]|[\u2b50-\u2b55]|[\u203c-\u2049]"
+            r"[\U00010000-\U0010ffff]|[\u2600-\u27bf]|[\u2300-\u23ff]|[\u2b50-\u2b55]|[\u203c-\u2049]|[\u2194-\u21aa]"
         )
         has_emojis = bool(emoji_pattern.search(clean_text))
         if not has_emojis:

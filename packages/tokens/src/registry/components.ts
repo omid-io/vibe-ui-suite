@@ -227,4 +227,88 @@ export function ContrastBadge({ ratio, label = 'WCAG 2.2', className = '' }: Con
 }
 `,
   },
+  'theme-toggle': {
+    name: 'theme-toggle',
+    filename: 'ThemeToggle.tsx',
+    description: 'Accessible dual-theme switch (light/dark) with SVG vector icons, focus ring, and localStorage persistence',
+    code: `'use client';
+
+import React, { useEffect, useState } from 'react';
+
+export interface ThemeToggleProps {
+  className?: string;
+  defaultTheme?: 'light' | 'dark' | 'system';
+}
+
+export function ThemeToggle({ className = '', defaultTheme = 'system' }: ThemeToggleProps) {
+  const [theme, setTheme] = useState<'light' | 'dark'>('dark');
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    setMounted(true);
+    const stored = localStorage.getItem('vibe-theme');
+    if (stored === 'light' || stored === 'dark') {
+      setTheme(stored);
+      document.documentElement.classList.toggle('dark', stored === 'dark');
+      document.documentElement.setAttribute('data-theme', stored);
+    } else {
+      const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+      const initial = defaultTheme === 'system' ? (prefersDark ? 'dark' : 'light') : defaultTheme;
+      setTheme(initial);
+      document.documentElement.classList.toggle('dark', initial === 'dark');
+      document.documentElement.setAttribute('data-theme', initial);
+    }
+  }, [defaultTheme]);
+
+  const toggleTheme = () => {
+    const next = theme === 'dark' ? 'light' : 'dark';
+    setTheme(next);
+    localStorage.setItem('vibe-theme', next);
+    document.documentElement.classList.toggle('dark', next === 'dark');
+    document.documentElement.setAttribute('data-theme', next);
+  };
+
+  if (!mounted) {
+    return (
+      <button
+        type="button"
+        aria-label="Toggle theme"
+        className={\`inline-flex items-center justify-center min-h-[44px] min-w-[44px] p-2.5 rounded-lg border border-neutral-800 bg-neutral-900/50 text-neutral-400 opacity-60 \${className}\`}
+        disabled
+      >
+        <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <circle cx="12" cy="12" r="4" strokeWidth="2" />
+        </svg>
+      </button>
+    );
+  }
+
+  return (
+    <button
+      type="button"
+      onClick={toggleTheme}
+      aria-label={\`Switch to \${theme === 'dark' ? 'light' : 'dark'} mode\`}
+      className={\`inline-flex items-center justify-center min-h-[44px] min-w-[44px] p-2.5 rounded-lg border transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-indigo-500 \${
+        theme === 'dark'
+          ? 'border-neutral-800 bg-neutral-900/80 text-neutral-200 hover:bg-neutral-800 hover:text-white'
+          : 'border-neutral-200 bg-white text-neutral-700 hover:bg-neutral-100 hover:text-neutral-900'
+      } \${className}\`}
+    >
+      {theme === 'dark' ? (
+        /* Sun Icon for switching to light mode */
+        <svg className="w-5 h-5 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2" aria-hidden="true">
+          <circle cx="12" cy="12" r="4" />
+          <path strokeLinecap="round" d="M12 2v2m0 16v2M4.93 4.93l1.41 1.41m11.32 11.32l1.41 1.41M2 12h2m16 0h2M6.34 17.66l-1.41 1.41m14.14-14.14l-1.41 1.41" />
+        </svg>
+      ) : (
+        /* Moon Icon for switching to dark mode */
+        <svg className="w-5 h-5 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2" aria-hidden="true">
+          <path strokeLinecap="round" strokeLinejoin="round" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" />
+        </svg>
+      )}
+    </button>
+  );
+}
+`,
+  },
 };

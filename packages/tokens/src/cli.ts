@@ -11,6 +11,9 @@ const VERSION = '4.0.0';
 interface CliOptions {
   force: boolean;
   dryRun: boolean;
+  yes?: boolean;
+  chemistry?: string;
+  editor?: string;
 }
 
 function printBanner() {
@@ -33,14 +36,19 @@ function printHelp() {
 
 \x1b[1mOPTIONS:\x1b[0m
   -f, --force        Overwrite existing files (creates automated .bak backups)
+  -y, --yes          Non-interactive mode (use defaults without prompting)
+  --chemistry <1-5>  Select visual chemistry in non-interactive mode
+  --editor <1-4>     Select target AI editor in non-interactive mode (1: Cursor, 2: Claude, 3: Windsurf, 4: All)
   --dry-run          Preview file operations without making actual modifications
   -v, --version      Show CLI version
   -h, --help         Show help menu
 
 \x1b[1mEXAMPLES:\x1b[0m
   npx vibe-ui-suite init
+  npx vibe-ui-suite init -y
   npx vibe-ui-suite init --dry-run
   npx vibe-ui-suite add thinking-drawer
+  npx vibe-ui-suite add theme-toggle
   npx vibe-ui-suite add thinking-drawer --force
 `);
 }
@@ -87,70 +95,86 @@ async function handleInit(options: CliOptions) {
     console.log('\x1b[34m[DRY-RUN MODE ACTIVATED: No files will be modified on disk]\x1b[0m\n');
   }
 
-  const rl = readline.createInterface({
-    input: process.stdin,
-    output: process.stdout,
-  });
+  const isInteractive = !options.yes && Boolean(process.stdin.isTTY);
+  let chemChoice = options.chemistry || '1';
+  let editorChoice = options.editor || '4';
 
-  try {
-    console.log('\x1b[1mInitialize Vibe UI in current workspace:\x1b[0m\n');
+  const chemMap: Record<string, keyof typeof VISUAL_CHEMISTRIES> = {
+    '1': 'MINIMALIST_SAAS',
+    '2': 'LUXURY_GLASS_2',
+    '3': 'NEOBRUTALISM',
+    '4': 'SWISS_EDITORIAL',
+    '5': 'STRIPE_CRISP_LIGHT',
+  };
 
-    // 1. Select Visual Chemistry
-    console.log('\x1b[36m1. Select Visual Chemistry:\x1b[0m');
-    console.log('  [1] Minimalist SaaS (Monochrome restraint, high signal - Recommended)');
-    console.log('  [2] Luxury Glass 2.0 (Specular Fresnel, deep dark, gold accents)');
-    console.log('  [3] Neobrutalism (Hard 3px black offset shadows, bold high saturation)');
-    console.log('  [4] Swiss Editorial (Asymmetric grid, typography-first, high contrast)');
-    console.log('  [5] Stripe Crisp Light (Developer docs, precision micro-borders)');
+  if (isInteractive) {
+    const rl = readline.createInterface({
+      input: process.stdin,
+      output: process.stdout,
+    });
 
-    const chemChoice = (await prompt(rl, 'Choice [1-5] (default: 1): ')).trim() || '1';
-    const chemMap: Record<string, keyof typeof VISUAL_CHEMISTRIES> = {
-      '1': 'MINIMALIST_SAAS',
-      '2': 'LUXURY_GLASS_2',
-      '3': 'NEOBRUTALISM',
-      '4': 'SWISS_EDITORIAL',
-      '5': 'STRIPE_CRISP_LIGHT',
-    };
-    const selectedChemKey = chemMap[chemChoice] || 'MINIMALIST_SAAS';
-    const selectedChem = VISUAL_CHEMISTRIES[selectedChemKey];
+    try {
+      console.log('\x1b[1mInitialize Vibe UI in current workspace:\x1b[0m\n');
 
-    // 2. Select AI Editor
-    console.log('\n\x1b[36m2. Select AI Coding Environment:\x1b[0m');
-    console.log('  [1] Cursor (.cursorrules - Recommended)');
-    console.log('  [2] Claude Code (CLAUDE.md)');
-    console.log('  [3] Windsurf (.windsurfrules)');
-    console.log('  [4] All of the above');
+      // 1. Select Visual Chemistry
+      console.log('\x1b[36m1. Select Visual Chemistry:\x1b[0m');
+      console.log('  [1] Minimalist SaaS (Monochrome restraint, high signal - Recommended)');
+      console.log('  [2] Luxury Glass 2.0 (Specular Fresnel, deep dark, gold accents)');
+      console.log('  [3] Neobrutalism (Hard 3px black offset shadows, bold high saturation)');
+      console.log('  [4] Swiss Editorial (Asymmetric grid, typography-first, high contrast)');
+      console.log('  [5] Stripe Crisp Light (Developer docs, precision micro-borders)');
 
-    const editorChoice = (await prompt(rl, 'Choice [1-4] (default: 1): ')).trim() || '1';
+      chemChoice = (await prompt(rl, 'Choice [1-5] (default: 1): ')).trim() || '1';
 
-    // 3. Write contract rules safely
-    const cwd = process.cwd();
-    const createdFiles: string[] = [];
+      // 2. Select AI Editor
+      console.log('\n\x1b[36m2. Select AI Coding Environment:\x1b[0m');
+      console.log('  [1] Cursor (.cursorrules - Recommended)');
+      console.log('  [2] Claude Code (CLAUDE.md)');
+      console.log('  [3] Windsurf (.windsurfrules)');
+      console.log('  [4] All of the above');
 
-    if (editorChoice === '1' || editorChoice === '4') {
-      const res = safeWriteFile(path.join(cwd, '.cursorrules'), CONTRACT_RULES, options);
-      if (res.written) createdFiles.push('.cursorrules');
+      editorChoice = (await prompt(rl, 'Choice [1-4] (default: 1): ')).trim() || '1';
+    } finally {
+      rl.close();
     }
-    if (editorChoice === '2' || editorChoice === '4') {
-      const claudePath = path.join(cwd, 'CLAUDE.md');
-      if (options.dryRun) {
-        console.log('  \x1b[34m[dry-run]\x1b[0m Would update CLAUDE.md');
-      } else if (fs.existsSync(claudePath)) {
-        fs.appendFileSync(claudePath, `\n\n${CONTRACT_RULES}`, 'utf-8');
-        createdFiles.push('CLAUDE.md (appended)');
-      } else {
-        const res = safeWriteFile(claudePath, CONTRACT_RULES, options);
-        if (res.written) createdFiles.push('CLAUDE.md');
-      }
-    }
-    if (editorChoice === '3' || editorChoice === '4') {
-      const res = safeWriteFile(path.join(cwd, '.windsurfrules'), CONTRACT_RULES, options);
-      if (res.written) createdFiles.push('.windsurfrules');
-    }
+  } else {
+    console.log('\x1b[36m  [auto]\x1b[0m Non-interactive mode activated. Using defaults.');
+  }
 
-    // 4. Generate CSS Tokens file safely
-    const cssContent = `:root {
-  /* Vibe UI Chemistry: ${selectedChem.name} (${selectedChem.id}) */
+  const selectedChemKey = chemMap[chemChoice] || 'MINIMALIST_SAAS';
+  const selectedChem = VISUAL_CHEMISTRIES[selectedChemKey];
+  const darkColors = selectedChem.darkColors || selectedChem.colors;
+
+  console.log(`  \x1b[32m✔\x1b[0m Visual Chemistry: \x1b[1m${selectedChem.name}\x1b[0m (Dual Light & Dark Themes)`);
+
+  // 3. Write contract rules safely
+  const cwd = process.cwd();
+  const createdFiles: string[] = [];
+
+  if (editorChoice === '1' || editorChoice === '4') {
+    const res = safeWriteFile(path.join(cwd, '.cursorrules'), CONTRACT_RULES, options);
+    if (res.written) createdFiles.push('.cursorrules');
+  }
+  if (editorChoice === '2' || editorChoice === '4') {
+    const claudePath = path.join(cwd, 'CLAUDE.md');
+    if (options.dryRun) {
+      console.log('  \x1b[34m[dry-run]\x1b[0m Would update CLAUDE.md');
+    } else if (fs.existsSync(claudePath)) {
+      fs.appendFileSync(claudePath, `\n\n${CONTRACT_RULES}`, 'utf-8');
+      createdFiles.push('CLAUDE.md (appended)');
+    } else {
+      const res = safeWriteFile(claudePath, CONTRACT_RULES, options);
+      if (res.written) createdFiles.push('CLAUDE.md');
+    }
+  }
+  if (editorChoice === '3' || editorChoice === '4') {
+    const res = safeWriteFile(path.join(cwd, '.windsurfrules'), CONTRACT_RULES, options);
+    if (res.written) createdFiles.push('.windsurfrules');
+  }
+
+  // 4. Generate Dual-Theme CSS Tokens file safely
+  const cssContent = `:root {
+  /* Vibe UI Chemistry: ${selectedChem.name} (${selectedChem.id}) - Light Theme */
   --vibe-canvas: ${selectedChem.colors.canvas};
   --vibe-surface: ${selectedChem.colors.surface};
   --vibe-border: ${selectedChem.colors.border};
@@ -159,25 +183,34 @@ async function handleInit(options: CliOptions) {
   --vibe-text-muted: ${selectedChem.colors.textMuted};
   --vibe-ring: ${selectedChem.colors.ring};
 }
+
+.dark, [data-theme="dark"] {
+  /* Vibe UI Chemistry: ${selectedChem.name} (${selectedChem.id}) - Dark Theme */
+  --vibe-canvas: ${darkColors.canvas};
+  --vibe-surface: ${darkColors.surface};
+  --vibe-border: ${darkColors.border};
+  --vibe-primary-accent: ${darkColors.primaryAccent};
+  --vibe-text-primary: ${darkColors.textPrimary};
+  --vibe-text-muted: ${darkColors.textMuted};
+  --vibe-ring: ${darkColors.ring};
+}
 `;
-    const cssPath = path.join(cwd, 'vibe-tokens.css');
-    const cssRes = safeWriteFile(cssPath, cssContent, options);
-    if (cssRes.written) createdFiles.push('vibe-tokens.css');
+  const cssPath = path.join(cwd, 'vibe-tokens.css');
+  const cssRes = safeWriteFile(cssPath, cssContent, options);
+  if (cssRes.written) createdFiles.push('vibe-tokens.css');
 
-    console.log('\n\x1b[32m✔ Initialized successfully!\x1b[0m');
-    if (createdFiles.length > 0) {
-      console.log('\x1b[90mGenerated/Updated files:\x1b[0m');
-      createdFiles.forEach((f) => console.log(`  + ${f}`));
-    }
+  console.log('\n\x1b[32m✔ Initialized successfully!\x1b[0m');
+  if (createdFiles.length > 0) {
+    console.log('\x1b[90mGenerated/Updated files:\x1b[0m');
+    createdFiles.forEach((f) => console.log(`  + ${f}`));
+  }
 
-    console.log(`
+  console.log(`
 \x1b[1mNext Steps:\x1b[0m
 1. Import \x1b[35mvibe-tokens.css\x1b[0m into your layout or globals.css
 2. Run \x1b[32mnpx vibe-ui-suite add thinking-drawer\x1b[0m to add your first AI component
+3. Run \x1b[32mnpx vibe-ui-suite add theme-toggle\x1b[0m to add accessible Dark/Light theme switch
 `);
-  } finally {
-    rl.close();
-  }
 }
 
 function handleAdd(componentName?: string, options: CliOptions = { force: false, dryRun: false }) {
@@ -233,10 +266,21 @@ async function main() {
   const rawArgs = process.argv.slice(2);
   const force = rawArgs.includes('--force') || rawArgs.includes('-f');
   const dryRun = rawArgs.includes('--dry-run');
-  const filteredArgs = rawArgs.filter((a: string) => !['--force', '-f', '--dry-run'].includes(a));
+  const yes = rawArgs.includes('--yes') || rawArgs.includes('-y');
+
+  let chemistry: string | undefined;
+  let editor: string | undefined;
+  for (let i = 0; i < rawArgs.length; i++) {
+    if (rawArgs[i] === '--chemistry' && rawArgs[i + 1]) chemistry = rawArgs[i + 1];
+    if (rawArgs[i] === '--editor' && rawArgs[i + 1]) editor = rawArgs[i + 1];
+  }
+
+  const filteredArgs = rawArgs.filter(
+    (a: string) => !['--force', '-f', '--dry-run', '--yes', '-y', '--chemistry', '--editor'].includes(a) && a !== chemistry && a !== editor
+  );
   const cmd = filteredArgs[0]?.toLowerCase();
 
-  const options: CliOptions = { force, dryRun };
+  const options: CliOptions = { force, dryRun, yes, chemistry, editor };
 
   if (!cmd || cmd === '--help' || cmd === '-h') {
     printHelp();

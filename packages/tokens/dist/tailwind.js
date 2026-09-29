@@ -33,8 +33,17 @@ function createVibeUiPlugin(options = {}) {
                 '.vibe-spring': {
                     'transition-timing-function': index_1.MOTION_CURVES.naturalSpring,
                 },
+                '.ease-vibe-spring': {
+                    'transition-timing-function': index_1.MOTION_CURVES.naturalSpring,
+                },
                 '.vibe-snap': {
                     'transition-timing-function': index_1.MOTION_CURVES.responsiveSnap,
+                },
+                '.ease-vibe-snap': {
+                    'transition-timing-function': index_1.MOTION_CURVES.responsiveSnap,
+                },
+                '.ease-vibe-glide': {
+                    'transition-timing-function': 'cubic-bezier(0.25, 1, 0.5, 1)',
                 },
                 '.vibe-glass': {
                     'backdrop-filter': 'blur(12px)',
