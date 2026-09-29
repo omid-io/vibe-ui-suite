@@ -13,10 +13,25 @@ vsix_manifest = f"""<?xml version="1.0" encoding="utf-8"?>
 <PackageManifest Version="2.0.0" xmlns="http://schemas.microsoft.com/developer/vsx-schema/2011" xmlns:d="http://schemas.microsoft.com/developer/vsx-schema-design/2011">
   <Metadata>
     <Identity Id="vibe-ui-vscode" Version="{version}" Language="en-US" Publisher="omid-io"/>
-    <DisplayName>Vibe UI — Design Systems &amp; Contrast Linter</DisplayName>
-    <Description>Deterministic design contracts, visual chemistries, and WCAG contrast linter for VS Code, Cursor &amp; Windsurf</Description>
-    <Icon>extension/media/icon.png</Icon>
+    <DisplayName>Vibe UI Studio &amp; Contrast Gate</DisplayName>
+    <Description xml:space="preserve">Interactive Visual Chemistry Studio, live mathematical WCAG contrast auditor, and component inserter for Vibe UI</Description>
+    <Tags>vibe-ui,oklch,wcag,accessibility,cursor,design-system,tailwind</Tags>
     <Categories>Linters,Programming Languages,Other</Categories>
+    <GalleryFlags>Public</GalleryFlags>
+    <Properties>
+      <Property Id="Microsoft.VisualStudio.Code.Engine" Value="^1.85.0"/>
+      <Property Id="Microsoft.VisualStudio.Code.ExtensionKind" Value="workspace"/>
+      <Property Id="Microsoft.VisualStudio.Code.ExecutesCode" Value="true"/>
+      <Property Id="Microsoft.VisualStudio.Services.Links.Source" Value="https://github.com/omid-io/vibe-ui-suite.git"/>
+      <Property Id="Microsoft.VisualStudio.Services.Links.Getstarted" Value="https://github.com/omid-io/vibe-ui-suite.git"/>
+      <Property Id="Microsoft.VisualStudio.Services.Links.GitHub" Value="https://github.com/omid-io/vibe-ui-suite.git"/>
+      <Property Id="Microsoft.VisualStudio.Services.Links.Support" Value="https://github.com/omid-io/vibe-ui-suite/issues"/>
+      <Property Id="Microsoft.VisualStudio.Services.Links.Learn" Value="https://omid-io.github.io/vibe-ui-suite/"/>
+      <Property Id="Microsoft.VisualStudio.Services.GitHubFlavoredMarkdown" Value="true"/>
+      <Property Id="Microsoft.VisualStudio.Services.Content.Pricing" Value="Free"/>
+      <Property Id="Microsoft.VisualStudio.Services.CustomerQnALink" Value="https://github.com/omid-io/vibe-ui-suite/discussions"/>
+    </Properties>
+    <Icon>extension/media/icon.png</Icon>
   </Metadata>
   <Installation>
     <InstallationTarget Id="Microsoft.VisualStudio.Code"/>

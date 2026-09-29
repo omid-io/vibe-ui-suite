@@ -27,19 +27,6 @@ jobs:
         with:
           python-version: '3.10'
 
-      - name: Install dependencies & build tokens
-        working-directory: packages/tokens
-        run: |
-          npm ci || npm install
-          node build.js
-
-      - name: Publish to NPM (@omid-io/tokens)
-        working-directory: packages/tokens
-        env:
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
-        run: |
-          npm publish --access public || echo "[INFO] Version already published on NPM, proceeding to extension build..."
-
       - name: Build & Publish to NPM (vibe-ui-suite)
         working-directory: packages/vibe-ui-suite
         env:
