@@ -14,14 +14,21 @@ from vibe_core.stack_sensor import ProjectStackSensor
 ROOT_DIR = Path(__file__).resolve().parent.parent
 DATA_DIR = ROOT_DIR / "data"
 
+import unicodedata
+
 def normalize_text(text: str) -> str:
     """Normalizes Persian and English text for robust semantic matching."""
     if not text:
         return ""
+    # Unicode NFKC normalization
+    text = unicodedata.normalize("NFKC", text)
     text = text.strip().lower()
-    # Normalize Arabic/Persian characters
-    text = text.replace("ي", "ی").replace("ك", "ک").replace("ة", "ه").replace(" ", " ")
-    # Remove punctuation
+    # Normalize Arabic/Persian letter variants & eliminate tatweel / ZWNJ
+    text = text.replace("\u0640", "")  # remove tatweel
+    text = text.replace("\u200c", " ")  # convert ZWNJ to space for token separation
+    text = text.replace("ي", "ی").replace("ك", "ک").replace("ة", "ه")
+    text = text.replace("إ", "ا").replace("أ", "ا")
+    # Remove punctuation while preserving alphanumeric and Persian range
     text = re.sub(r"[^\w\s\u0600-\u06FF]", " ", text)
     return " ".join(text.split())
 
@@ -192,7 +199,7 @@ class DesignDirector:
         tokens = set(text.split())
         stems = set(tokens)
         for t in tokens:
-            for suffix in ['های', 'ها', 'ان', 'ات', 'ی', 'ین', 'ترین', 'تر', 'مان', 'تان', 'شان', 'ام', 'ات', 'م', 'ت', 'ش', 's', 'es', 'ing', 'ed']:
+            for suffix in ['های', 'ها', 'ان', 'ات', 'ی', 'ین', 'ترین', 'تر', 'مان', 'تان', 'شان', 'ام', 'ات', 'یم', 'ید', 'ند', 'م', 'ت', 'ش', 's', 'es', 'ing', 'ed']:
                 if len(t) > len(suffix) + 2 and t.endswith(suffix):
                     stems.add(t[:-len(suffix)])
 

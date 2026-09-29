@@ -365,7 +365,7 @@ class DesignCritic:
         quality_score = round(float(sum(scorecard.values())), 1)
         hard_gates_pass = len(hard_gate_failures) == 0
 
-        if hard_gates_pass and quality_score >= 80.0:
+        if hard_gates_pass and quality_score >= 85.0:
             acceptance_status = "ACCEPTED"
         elif not hard_gates_pass:
             acceptance_status = "REJECTED_CRITICAL"

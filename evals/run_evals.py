@@ -19,7 +19,7 @@ if hasattr(sys.stdout, "reconfigure"):
 if hasattr(sys.stderr, "reconfigure"):
     sys.stderr.reconfigure(encoding="utf-8", errors="replace")
 
-SUITE_VERSION = "4.1.0"
+SUITE_VERSION = "4.1.1"
 
 # ==============================================================================
 # Mathematical WCAG Relative Luminance & Contrast Engine
@@ -850,6 +850,51 @@ def audit_repo_integrity(root_dir: Path) -> dict:
             "name": "JSON Design Schema",
             "status": "FAIL",
             "msg": "Missing schemas/design-spec.v1.schema.json"
+        })
+        results["overall_status"] = "FAIL"
+
+    # 6. Adversarial Bilingual Disambiguation & Semantic Stemming Suite
+    try:
+        sys.path.insert(0, str(root_dir))
+        from vibe_core.director import DesignDirector
+        director = DesignDirector(root_dir / "data")
+        adversarial_cases = [
+            ("میخوام یه منو برای کافه رستورانم بزنم", "food_restaurant_cafe", "Colloquial 'میخوام' vs food menu"),
+            ("شرایط دریافت وام قرض الحسنه آنلاین", "fintech_banking", "Genuine loan request vs fintech"),
+            ("قوام دهنده سس و خوراک سنتی", "food_restaurant_cafe", "Substring 'قوام' ingredient vs food"),
+            ("میخوام کلینیک دندانپزشکیم نوبت دهی آنلاین داشته باشه", "healthcare_hospital_medical", "Possessive suffix 'یم' vs healthcare"),
+            ("رزرو نوبت دکتر متخصص قلب", "healthcare_hospital_medical", "Doctor appointment booking vs healthcare"),
+        ]
+        all_cases_passed = True
+        failed_case_details = []
+        for prompt, expected_domain, desc in adversarial_cases:
+            res = director.infer_intent(prompt)
+            detected = res.get("product_domain")
+            if detected != expected_domain:
+                all_cases_passed = False
+                failed_case_details.append(f"{desc} (got {detected}, expected {expected_domain})")
+
+        if all_cases_passed:
+            results["checks"].append({
+                "pillar": "Autonomous Director",
+                "name": "Adversarial Bilingual Disambiguation",
+                "status": "PASS",
+                "msg": f"Passed {len(adversarial_cases)}/{len(adversarial_cases)} adversarial bilingual token boundary tests"
+            })
+        else:
+            results["checks"].append({
+                "pillar": "Autonomous Director",
+                "name": "Adversarial Bilingual Disambiguation",
+                "status": "FAIL",
+                "msg": f"Failed adversarial cases: {'; '.join(failed_case_details)}"
+            })
+            results["overall_status"] = "FAIL"
+    except Exception as e:
+        results["checks"].append({
+            "pillar": "Autonomous Director",
+            "name": "Adversarial Bilingual Disambiguation",
+            "status": "FAIL",
+            "msg": f"Failed to run director disambiguation suite: {e}"
         })
         results["overall_status"] = "FAIL"
 

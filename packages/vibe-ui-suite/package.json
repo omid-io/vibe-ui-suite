@@ -1,6 +1,6 @@
 {
   "name": "vibe-ui-suite",
-  "version": "4.1.0",
+  "version": "4.1.1",
   "description": "Deterministic design contracts, component recipes, and WCAG AA evaluation gates for AI coding agents (Cursor, Claude Code, Windsurf, Antigravity).",
   "bin": {
     "vibe-ui-suite": "./dist/cli.js",

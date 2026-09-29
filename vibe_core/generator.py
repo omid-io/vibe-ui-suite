@@ -792,11 +792,37 @@ export default {component_name};
         mock_data_all = blueprint.get("mock_data", {})
         mock_data_dict = mock_data_all.get("fa" if is_rtl else "en", {}) if isinstance(mock_data_all.get("en"), dict) else mock_data_all
         blueprint_headline = mock_data_dict.get("headline")
+        blueprint_subheadline = mock_data_dict.get("subheadline")
+        blueprint_cta_primary = mock_data_dict.get("cta_primary")
+        blueprint_cta_secondary = mock_data_dict.get("cta_secondary")
+        blueprint_metrics = mock_data_dict.get("metrics")
 
         # Resolve clean display title: if prompt_title is a raw natural language prompt, prefer blueprint headline
         raw_prompt_indicators = ["میخوام", "بساز", "طراحی", "سایت", "یک", "یه", "برای", "create", "build", "make", "want", "for a", "landing"]
         is_raw_prompt = any(ind in prompt_title.lower() for ind in raw_prompt_indicators)
         display_title = blueprint_headline if (blueprint_headline and is_raw_prompt) else prompt_title
+        hero_headline = blueprint_headline or display_title
+        hero_subheadline = blueprint_subheadline or ("تجربه ای منحصربه فرد با معماری مدرن، سرعت بالا و هماهنگی کامل با نیازهای کسب وکار شما." if is_rtl else "Autonomous precision interface engineered with strict accessibility, responsive geometry, and domain priors.")
+        cta_primary_label = blueprint_cta_primary or ("شروع همکاری" if is_rtl else "Get Started")
+        cta_secondary_label = blueprint_cta_secondary or ("مشاهده خدمات" if is_rtl else "Explore Services")
+
+        # Prepare domain metrics cards
+        if not blueprint_metrics:
+            blueprint_metrics = [
+                {"label": "شاخص اعتماد مشتریان" if is_rtl else "Customer Trust", "value": "۹۹.۴٪" if is_rtl else "99.4%"},
+                {"label": "سرعت پاسخگویی" if is_rtl else "Response Speed", "value": "< ۵ دقیقه" if is_rtl else "< 5 mins"},
+                {"label": "کیفیت خدمات" if is_rtl else "Service Rating", "value": "۴.۹ از ۵" if is_rtl else "4.9 / 5"}
+            ]
+
+        metrics_html_items = []
+        for m in blueprint_metrics[:3]:
+            lbl = m.get("label", "")
+            val = m.get("value", "")
+            metrics_html_items.append(f"""            <div class="p-3.5 bg-[var(--canvas-bg)] rounded-[var(--radius-base)] border border-[var(--border-subtle)]">
+              <div class="text-xs text-[var(--text-muted)] mb-1">{lbl}</div>
+              <div class="text-2xl font-bold text-[var(--accent)]"><bdi>{val}</bdi></div>
+            </div>""")
+        metrics_block_html = "\n".join(metrics_html_items)
 
         html = f"""<!DOCTYPE html>
 <html {dir_attr} data-domain="{domain_id}" class="h-full">
@@ -856,12 +882,12 @@ export default {component_name};
       </div>
       <nav class="hidden md:flex items-center space-x-6 rtl:space-x-reverse" aria-label="Main Navigation">
         <a href="#features" class="text-sm font-medium hover:text-[var(--accent)] transition-colors min-h-[44px] inline-flex items-center">{"ویژگی ها" if is_rtl else "Features"}</a>
-        <a href="#pricing" class="text-sm font-medium hover:text-[var(--accent)] transition-colors min-h-[44px] inline-flex items-center">{"تعرفه ها" if is_rtl else "Pricing"}</a>
-        <a href="#contact" class="text-sm font-medium hover:text-[var(--accent)] transition-colors min-h-[44px] inline-flex items-center">{"تماس" if is_rtl else "Contact"}</a>
+        <a href="#services" class="text-sm font-medium hover:text-[var(--accent)] transition-colors min-h-[44px] inline-flex items-center">{"خدمات و تعرفه ها" if is_rtl else "Services"}</a>
+        <a href="#contact" class="text-sm font-medium hover:text-[var(--accent)] transition-colors min-h-[44px] inline-flex items-center">{"ارتباط با ما" if is_rtl else "Contact"}</a>
       </nav>
       <div class="flex items-center space-x-3 rtl:space-x-reverse">
         <button type="button" class="inline-flex items-center justify-center px-4 py-2.5 text-sm font-medium rounded-[var(--radius-button)] text-white bg-[var(--accent)] hover:opacity-90 min-h-[44px] min-w-[44px] transition-all">
-          {"شروع همکاری" if is_rtl else "Get Started"}
+          {cta_primary_label}
         </button>
       </div>
     </div>
@@ -878,48 +904,37 @@ export default {component_name};
             {"مهندسی دقیق و اصیل" if is_rtl else "Vibe UI Verified"}
           </span>
           <h1 id="hero-title" class="text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight mb-4">
-            {display_title}
+            {hero_headline}
           </h1>
           <p class="text-[var(--text-muted)] text-base sm:text-lg leading-relaxed max-w-2xl mb-8">
-            {"تجربه ای منحصربه فرد با معماری خودکار، دسترسی پذیری تضمین شده و هماهنگی کامل با نیازهای کسب وکار شما." if is_rtl else "Autonomous precision interface engineered with strict WCAG AA contrast, physics motion, and domain priors."}
+            {hero_subheadline}
           </p>
         </div>
 
         <div class="flex flex-wrap gap-4 items-center pt-4 border-t border-[var(--border-subtle)]">
           <button type="button" class="inline-flex items-center justify-center px-6 py-3 text-base font-semibold rounded-[var(--radius-button)] text-white bg-[var(--accent)] min-h-[44px] transition-transform active:scale-95">
-            {"مشاوره تخصصی" if is_rtl else "Explore System"}
+            {cta_primary_label}
           </button>
           <button type="button" class="inline-flex items-center justify-center px-6 py-3 text-base font-semibold rounded-[var(--radius-button)] text-[var(--text-primary)] border border-[var(--border-subtle)] bg-[var(--canvas-bg)] hover:bg-[var(--surface-bg)] min-h-[44px] transition-colors">
-            {"مشاهده دمو" if is_rtl else "View Live Demo"}
+            {cta_secondary_label}
           </button>
         </div>
       </section>
 
-      <!-- Secondary Telemetry / Metrics Card -->
-      <aside class="bg-[var(--surface-bg)] {card_border} {card_shadow} rounded-[var(--radius-container)] p-6 flex flex-col justify-between" aria-label="System Metrics">
+      <!-- Secondary Domain Highlights & Metrics Card -->
+      <aside class="bg-[var(--surface-bg)] {card_border} {card_shadow} rounded-[var(--radius-container)] p-6 flex flex-col justify-between" aria-label="Domain Highlights">
         <div>
           <h2 class="text-lg font-bold mb-4 flex items-center space-x-2 rtl:space-x-reverse">
             <svg class="w-5 h-5 text-[var(--accent)]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M22 12h-4l-3 9L9 3l-3 9H2"></path></svg>
-            <span>{"شاخص های کلیدی" if is_rtl else "Core Telemetry"}</span>
+            <span>{"شاخص های کلیدی و وضعیت" if is_rtl else "Highlights & Status"}</span>
           </h2>
           <div class="space-y-4">
-            <div class="p-3.5 bg-[var(--canvas-bg)] rounded-[var(--radius-base)] border border-[var(--border-subtle)]">
-              <div class="text-xs text-[var(--text-muted)] mb-1">{"معیار انطباق کنتراست" if is_rtl else "Contrast Invariant Target"}</div>
-              <div class="text-2xl font-bold text-[var(--accent)]">&ge; 4.5 : 1 (AA)</div>
-            </div>
-            <div class="p-3.5 bg-[var(--canvas-bg)] rounded-[var(--radius-base)] border border-[var(--border-subtle)]">
-              <div class="text-xs text-[var(--text-muted)] mb-1">{"سقف انحراف چیدمان" if is_rtl else "Layout Shift Target"}</div>
-              <div class="text-2xl font-bold">&lt; 0.1 (CLS)</div>
-            </div>
-            <div class="p-3.5 bg-[var(--canvas-bg)] rounded-[var(--radius-base)] border border-[var(--border-subtle)]">
-              <div class="text-xs text-[var(--text-muted)] mb-1">{"سبک معماری" if is_rtl else "Style Family"}</div>
-              <div class="text-sm font-semibold">{decision.get("selected_style", "clean_stripe")}</div>
-            </div>
+{metrics_block_html}
           </div>
         </div>
-        <div class="mt-6 text-xs text-[var(--text-muted)] flex items-center space-x-1.5 rtl:space-x-reverse" data-verification-status="declared">
-          <svg class="w-4 h-4 text-amber-500" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="8" x2="12" y2="12"></line><line x1="12" y1="16" x2="12.01" y2="16"></line></svg>
-          <span>{"وضعیت: منطبق بر قرارداد (در انتظار راستی آزمایی ران تایم)" if is_rtl else "Status: Contract Declared (Awaiting Runtime Audit)"}</span>
+        <div class="mt-6 text-xs text-[var(--text-muted)] flex items-center space-x-1.5 rtl:space-x-reverse">
+          <svg class="w-4 h-4 text-emerald-500" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>
+          <span>{"سرویس آنلاین و آماده پذیرش" if is_rtl else "Active & Ready"}</span>
         </div>
       </aside>
     </div>

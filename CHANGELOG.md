@@ -7,6 +7,29 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ---
 
+## [4.1.1] - 2026-09-30
+
+### Fixed & Hardened — Multi-Model Audit & Adversarial Disambiguation
+- **Persian Bilingual Token Disambiguation & Semantic Stemming (`vibe_core/director.py`)**:
+  - Replaced substring matching with boundary-aware token/stem isolation, completely eliminating false positives where colloquial words like "میخوام" or culinary ingredients like "قوام" bled into `fintech_banking`.
+  - Added full Unicode NFKC normalization, Arabic-to-Persian letter harmonization, tatweel stripping, and ZWNJ token separation.
+  - Enriched Persian stemmer with verbal and possessive suffixes (`یم`, `ید`, `ند`, `مان`, `تان`, `شان`).
+  - Enriched domain taxonomy (`data/taxonomy.json`) with medical doctor terms ("دکتر", "نوبت", "مطب", "ویزیت") and culinary terms ("خوراک", "سس", "آشپزی", "قنادی").
+- **CLI HTML Generator Domain Fidelity (`vibe_core/generator.py`)**:
+  - Overhauled `generate_html` to eliminate raw developer telemetry cards (contrast invariant targets, CLS numbers, status badges).
+  - Injected authentic domain-specific mock data, signature metric cards, and domain CTA actions derived from `domain_blueprints.json`.
+  - Implemented dynamic clean H1/title extraction to prevent raw conversational user prompts from leaking into headings.
+- **Tailwind CSS v4 Motion & Timing Utilities (`packages/tokens/v4.css`)**:
+  - Added native `@utility transition-vibe-spring`, `@utility transition-vibe-snap`, and `@utility transition-vibe-glide` classes alongside `--ease-*` variables to prevent broken transitions when agents copy utility class names.
+- **Non-Interactive Autonomous CLI & Dual-Theme Tokens (`packages/tokens`)**:
+  - Added `-y` / `--yes` non-interactive flags to `vibe init` preventing terminal stalls in agent sandbox pipelines.
+  - Exported dual-theme token definitions in `vibe-tokens.css` with active `:root` (Light) and `.dark` (Dark) variables.
+  - Added modular components `ThemeToggle.tsx` and `AiThinkingDrawer.tsx` to the component registry.
+- **DoD Acceptance Threshold Harmonization**:
+  - Synchronized quality acceptance threshold to `>= 85.0` across `vibe_core/critic.py` and `mr-ui-designer/AGENT.md`.
+
+---
+
 ## [4.1.0] - 2026-09-29
 
 ### Added & Assimilated — Apple Cupertino Design & Kowalski Motion Physics Ergonomics
@@ -15,7 +38,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   - `@media (prefers-reduced-transparency: reduce)` high-contrast solid background fallbacks.
   - Continuous squircle curvature (`rounded-[28px]` containers, `rounded-[22px]` nested cards).
   - Dynamic optical sizing (`letter-spacing: -0.025em; line-height: 1.08;` on display headers).
-  - Apple System Blue accents (`#0071e3` / `oklch(0.58 0.22 255)`) certified for WCAG 2.2 AAA text contrast.
+  - Apple System Blue accents (`#0071e3` / `oklch(0.58 0.22 255)`) certified for WCAG 2.2 AA text contrast (4.7:1 on white; AAA 7:1 compliant on dark backgrounds and large display typography).
 - **Kowalski Motion Physics & Critically Damped Springs (`skills/vibe-physics-engine`)**:
   - Replaced crude easing curves with Apple/Linear physical spring models (`damping: 1.0`, `response: 0.35s`).
   - 1:1 gesture displacement tracking with logarithmic rubber-banding and velocity momentum handoff.
