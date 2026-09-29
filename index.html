@@ -1017,6 +1017,290 @@
     }
 
     /* =========================================================================
+       6.5 NEUMORPHIC TACTILE AUDIO & HARDWARE DECK
+       ========================================================================= */
+    .nm-deck-card {
+      border-radius: var(--radius-lg);
+      padding: clamp(24px, 4vw, 40px);
+      transition: all var(--duration-enter) var(--ease-spring);
+      position: relative;
+      overflow: hidden;
+      margin-bottom: 24px;
+    }
+
+    body.theme-specular_glass .nm-deck-card,
+    body.theme-terminal_hud .nm-deck-card {
+      --nm-bg: #111827;
+      --nm-surface: #151d2e;
+      --nm-shadow-dark: rgba(0, 0, 0, 0.75);
+      --nm-shadow-light: rgba(255, 255, 255, 0.06);
+      --nm-inset-dark: rgba(0, 0, 0, 0.85);
+      --nm-inset-light: rgba(255, 255, 255, 0.05);
+      --nm-text: #f3f4f6;
+      --nm-text-muted: #9ca3af;
+      --nm-border: rgba(255, 255, 255, 0.1);
+      --nm-led-glow: #00f2fe;
+    }
+
+    body:not(.theme-specular_glass):not(.theme-terminal_hud) .nm-deck-card {
+      --nm-bg: #e6ecf4;
+      --nm-surface: #edf2f9;
+      --nm-shadow-dark: rgba(163, 177, 198, 0.65);
+      --nm-shadow-light: rgba(255, 255, 255, 0.90);
+      --nm-inset-dark: rgba(163, 177, 198, 0.70);
+      --nm-inset-light: rgba(255, 255, 255, 0.95);
+      --nm-text: #1e293b;
+      --nm-text-muted: #64748b;
+      --nm-border: rgba(255, 255, 255, 0.6);
+      --nm-led-glow: #0071e3;
+    }
+
+    .nm-deck-card {
+      background: var(--nm-bg);
+      border: 1px solid var(--nm-border);
+      box-shadow: 14px 14px 28px var(--nm-shadow-dark),
+                  -14px -14px 28px var(--nm-shadow-light);
+      color: var(--nm-text);
+    }
+
+    .nm-controls-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(min(100%, 250px), 1fr));
+      gap: 22px;
+      margin-top: 24px;
+    }
+
+    .nm-module {
+      background: var(--nm-surface);
+      border-radius: var(--radius-md);
+      padding: 20px;
+      box-shadow: 7px 7px 16px var(--nm-shadow-dark),
+                  -7px -7px 16px var(--nm-shadow-light);
+      border: 1px solid var(--nm-border);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    .nm-module-title {
+      font-size: 0.8rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--nm-text-muted);
+      margin-bottom: 16px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    /* Neumorphic Push Button */
+    .nm-buttons-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+    }
+
+    .nm-push-btn {
+      background: var(--nm-surface);
+      border: 1px solid var(--nm-border);
+      border-radius: var(--radius-sm);
+      padding: 12px 14px;
+      color: var(--nm-text);
+      font-family: inherit;
+      font-size: 0.825rem;
+      font-weight: 700;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+      min-height: 48px;
+      box-shadow: 6px 6px 14px var(--nm-shadow-dark),
+                  -6px -6px 14px var(--nm-shadow-light);
+      transition: all 160ms cubic-bezier(0.16, 1, 0.3, 1);
+      user-select: none;
+    }
+
+    .nm-push-btn:hover {
+      box-shadow: 8px 8px 18px var(--nm-shadow-dark),
+                  -8px -8px 18px var(--nm-shadow-light);
+    }
+
+    .nm-push-btn.active {
+      box-shadow: inset 4px 4px 8px var(--nm-inset-dark),
+                  inset -4px -4px 8px var(--nm-inset-light);
+      transform: scale(0.97);
+    }
+
+    .nm-led {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--nm-text-muted);
+      box-shadow: inset 1px 1px 2px rgba(0,0,0,0.4);
+      transition: all 160ms ease;
+    }
+
+    .nm-push-btn.active .nm-led {
+      background: #10b981;
+      box-shadow: 0 0 10px #10b981, 0 0 4px #10b981;
+    }
+
+    /* Rotary Knobs */
+    .nm-knobs-row {
+      display: flex;
+      justify-content: space-around;
+      align-items: center;
+      padding: 8px 0;
+    }
+
+    .nm-knob-wrap {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .nm-knob {
+      width: 76px;
+      height: 76px;
+      border-radius: 50%;
+      background: var(--nm-surface);
+      border: 1px solid var(--nm-border);
+      box-shadow: 6px 6px 14px var(--nm-shadow-dark),
+                  -6px -6px 14px var(--nm-shadow-light);
+      cursor: pointer;
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      user-select: none;
+      transition: box-shadow 160ms ease;
+    }
+
+    .nm-knob:active {
+      box-shadow: inset 3px 3px 6px var(--nm-inset-dark),
+                  inset -3px -3px 6px var(--nm-inset-light);
+    }
+
+    .nm-knob-indicator {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      border-radius: 50%;
+      display: flex;
+      justify-content: center;
+      padding-top: 6px;
+      transition: transform 200ms cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .nm-knob-pip {
+      width: 6px;
+      height: 12px;
+      background: var(--nm-led-glow);
+      border-radius: 9999px;
+      box-shadow: 0 0 6px var(--nm-led-glow);
+    }
+
+    .nm-knob-center {
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      background: var(--nm-bg);
+      box-shadow: inset 2px 2px 4px var(--nm-inset-dark),
+                  inset -2px -2px 4px var(--nm-inset-light);
+    }
+
+    .nm-knob-label {
+      font-size: 0.78rem;
+      font-weight: 700;
+      color: var(--nm-text-muted);
+      text-transform: uppercase;
+    }
+
+    .nm-knob-readout {
+      font-family: var(--font-mono);
+      font-size: 0.85rem;
+      font-weight: 700;
+      color: var(--nm-text);
+    }
+
+    /* Debossed Slider Track */
+    .nm-slider-wrap {
+      padding: 8px 0;
+    }
+
+    .nm-slider-track {
+      position: relative;
+      width: 100%;
+      height: 20px;
+      border-radius: 9999px;
+      background: var(--nm-surface);
+      box-shadow: inset 4px 4px 8px var(--nm-inset-dark),
+                  inset -4px -4px 8px var(--nm-inset-light);
+      display: flex;
+      align-items: center;
+      padding: 0 6px;
+      margin: 14px 0 10px;
+    }
+
+    .nm-range-input {
+      -webkit-appearance: none;
+      appearance: none;
+      width: 100%;
+      background: transparent;
+      outline: none;
+      cursor: pointer;
+      z-index: 2;
+    }
+
+    .nm-range-input::-webkit-slider-thumb {
+      -webkit-appearance: none;
+      appearance: none;
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      background: var(--nm-surface);
+      border: 1px solid var(--nm-border);
+      box-shadow: 4px 4px 10px var(--nm-shadow-dark),
+                  -4px -4px 10px var(--nm-shadow-light);
+      cursor: pointer;
+      transition: transform 120ms ease;
+    }
+
+    .nm-range-input::-webkit-slider-thumb:active {
+      transform: scale(1.15);
+      box-shadow: 2px 2px 5px var(--nm-shadow-dark),
+                  -2px -2px 5px var(--nm-shadow-light);
+    }
+
+    /* Debossed VU Bezel & Equalizer */
+    .nm-vu-bezel {
+      background: var(--nm-surface);
+      box-shadow: inset 5px 5px 12px var(--nm-inset-dark),
+                  inset -5px -5px 12px var(--nm-inset-light);
+      border-radius: var(--radius-sm);
+      padding: 16px;
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-between;
+      gap: 6px;
+      height: 110px;
+      margin-bottom: 12px;
+    }
+
+    .vu-bar {
+      flex: 1;
+      background: var(--nm-led-glow);
+      border-radius: 3px 3px 0 0;
+      min-height: 8px;
+      transition: height 120ms ease-out;
+      box-shadow: 0 0 8px var(--nm-led-glow);
+      opacity: 0.85;
+    }
+
+    /* =========================================================================
        7. CAPABILITIES & SERVICES BENTO GRID
        ========================================================================= */
     .bento-grid {
@@ -1364,6 +1648,7 @@
         <ul class="nav-links">
           <li><a href="#work" class="nav-link" id="navWork">Showcase</a></li>
           <li><a href="#lab" class="nav-link" id="navLab">Interactive Lab</a></li>
+          <li><a href="#neumorphism" class="nav-link" id="navNeumorphism">Neumorphism</a></li>
           <li><a href="#bento" class="nav-link" id="navBento">Architecture</a></li>
           <li><a href="#studio" class="nav-link" id="navStudio">AI Studio</a></li>
           <li><a href="#estimator" class="nav-link" id="navEstimator">Estimator</a></li>
@@ -1735,6 +2020,124 @@
           </div>
         </div>
 
+      </div>
+    </section>
+
+    <!-- 5.5 NEUMORPHIC TACTILE AUDIO & HARDWARE DECK -->
+    <section class="section-block" id="neumorphism">
+      <div class="section-header">
+        <span class="section-badge" id="nmBadge">Tactile Hardware Deck</span>
+        <h2 class="section-title text-reading-center" id="nmHeading">Neumorphic Audio & Hardware Deck</h2>
+        <p class="section-subtitle text-reading-center" id="nmDesc">Dual soft shadows and debossed grooves engineered with WCAG AAA contrast and tactile physical feedback.</p>
+      </div>
+
+      <div class="nm-deck-card">
+        <div style="display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid var(--nm-border); padding-bottom: 16px; flex-wrap: wrap; gap: 12px;">
+          <div style="display: flex; align-items: center; gap: 10px;">
+            <div style="width: 12px; height: 12px; border-radius: 50%; background: #10b981; box-shadow: 0 0 10px #10b981;"></div>
+            <span style="font-weight: 800; font-size: 1.05rem; letter-spacing: -0.01em;" id="nmDeckTitle">ANALOG HARMONIC PROCESSOR &bull; MODEL V-4</span>
+          </div>
+          <div style="font-family: var(--font-mono); font-size: 0.8rem; background: var(--nm-surface); padding: 6px 14px; border-radius: 9999px; border: 1px solid var(--nm-border); box-shadow: inset 2px 2px 4px var(--nm-inset-dark);">
+            <bdi dir="ltr">CALIBRATED: 96.0 kHz &bull; 32-BIT FLOAT</bdi>
+          </div>
+        </div>
+
+        <div class="nm-controls-grid">
+          
+          <!-- Module 1: Push Buttons -->
+          <div class="nm-module">
+            <div class="nm-module-title">
+              <span id="nmMod1Title">Tactile Channel Switches</span>
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="m10 15 5-3-5-3v6Z"/></svg>
+            </div>
+            <div class="nm-buttons-row">
+              <button class="nm-push-btn active" onclick="toggleNmBtn(this, 'power')" id="nmBtnPower">
+                <span id="nmBtnPowerText">MASTER POWER</span>
+                <span class="nm-led"></span>
+              </button>
+              <button class="nm-push-btn active" onclick="toggleNmBtn(this, 'filter')" id="nmBtnFilter">
+                <span id="nmBtnFilterText">ANALOG FILTER</span>
+                <span class="nm-led"></span>
+              </button>
+              <button class="nm-push-btn" onclick="toggleNmBtn(this, 'spatial')" id="nmBtnSpatial">
+                <span id="nmBtnSpatialText">SPATIAL HARMONY</span>
+                <span class="nm-led"></span>
+              </button>
+              <button class="nm-push-btn" onclick="toggleNmBtn(this, 'boost')" id="nmBtnBoost">
+                <span id="nmBtnBoostText">HIGH GAIN BOOST</span>
+                <span class="nm-led"></span>
+              </button>
+            </div>
+            <div style="margin-top: 14px; font-size: 0.78rem; color: var(--nm-text-muted);" id="nmMod1Hint">
+              Click buttons to toggle convex extrusion vs concave inset depth.
+            </div>
+          </div>
+
+          <!-- Module 2: Rotary Knobs -->
+          <div class="nm-module">
+            <div class="nm-module-title">
+              <span id="nmMod2Title">Tactile Rotary Dials</span>
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 2a10 10 0 0 1 10 10"/></svg>
+            </div>
+            <div class="nm-knobs-row">
+              <div class="nm-knob-wrap">
+                <div class="nm-knob" onclick="rotateNmKnob('freqKnob')" id="freqKnob">
+                  <div class="nm-knob-indicator" id="freqKnobInd" style="transform: rotate(35deg);">
+                    <div class="nm-knob-pip"></div>
+                  </div>
+                  <div class="nm-knob-center"></div>
+                </div>
+                <div class="nm-knob-label" id="lblFreqKnob">Cutoff Freq</div>
+                <div class="nm-knob-readout" id="freqKnobVal"><bdi dir="ltr">14.2 kHz</bdi></div>
+              </div>
+
+              <div class="nm-knob-wrap">
+                <div class="nm-knob" onclick="rotateNmKnob('panKnob')" id="panKnob">
+                  <div class="nm-knob-indicator" id="panKnobInd" style="transform: rotate(-25deg);">
+                    <div class="nm-knob-pip"></div>
+                  </div>
+                  <div class="nm-knob-center"></div>
+                </div>
+                <div class="nm-knob-label" id="lblPanKnob">Resonance Q</div>
+                <div class="nm-knob-readout" id="panKnobVal"><bdi dir="ltr">+4.5 dB</bdi></div>
+              </div>
+            </div>
+            <div style="margin-top: 10px; font-size: 0.78rem; color: var(--nm-text-muted); text-align: center;" id="nmMod2Hint">
+              Click knobs to cycle through analog rotational steps.
+            </div>
+          </div>
+
+          <!-- Module 3: Debossed Slider & VU Equalizer -->
+          <div class="nm-module">
+            <div class="nm-module-title">
+              <span id="nmMod3Title">Equalizer VU & Debossed Fader</span>
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>
+            </div>
+            
+            <div class="nm-vu-bezel" id="vuBezel">
+              <div class="vu-bar" style="height: 45%;"></div>
+              <div class="vu-bar" style="height: 65%;"></div>
+              <div class="vu-bar" style="height: 85%;"></div>
+              <div class="vu-bar" style="height: 70%;"></div>
+              <div class="vu-bar" style="height: 90%;"></div>
+              <div class="vu-bar" style="height: 60%;"></div>
+              <div class="vu-bar" style="height: 75%;"></div>
+              <div class="vu-bar" style="height: 50%;"></div>
+              <div class="vu-bar" style="height: 40%;"></div>
+            </div>
+
+            <div class="nm-slider-wrap">
+              <div style="display: flex; justify-content: space-between; font-size: 0.8rem; font-weight: 700;">
+                <span id="lblFader">Master Level Fader:</span>
+                <span style="color: var(--nm-led-glow);" id="faderValDisplay"><bdi dir="ltr">82%</bdi></span>
+              </div>
+              <div class="nm-slider-track">
+                <input type="range" min="0" max="100" value="82" class="nm-range-input" id="nmFaderInput" oninput="updateNmFader(this.value)">
+              </div>
+            </div>
+          </div>
+
+        </div>
       </div>
     </section>
 
@@ -2253,6 +2656,69 @@
       springBox.addEventListener('pointercancel', releaseSpring);
     }
 
+    // 7.5 Neumorphic Deck Interactions
+    const nmFreqSteps = [
+      { angle: -90, val: '4.8 kHz' },
+      { angle: -20, val: '9.6 kHz' },
+      { angle: 35, val: '14.2 kHz' },
+      { angle: 95, val: '22.0 kHz' }
+    ];
+    const nmPanSteps = [
+      { angle: -70, val: '-1.5 dB' },
+      { angle: -25, val: '+4.5 dB' },
+      { angle: 30, val: '+8.0 dB' },
+      { angle: 85, val: '+12.0 dB' }
+    ];
+    let nmStepIdx = { freqKnob: 2, panKnob: 1 };
+
+    function toggleNmBtn(btn, type) {
+      btn.classList.toggle('active');
+      triggerVuFluctuation();
+    }
+
+    function rotateNmKnob(knobId) {
+      if (knobId === 'freqKnob') {
+        nmStepIdx.freqKnob = (nmStepIdx.freqKnob + 1) % nmFreqSteps.length;
+        const step = nmFreqSteps[nmStepIdx.freqKnob];
+        document.getElementById('freqKnobInd').style.transform = `rotate(${step.angle}deg)`;
+        document.getElementById('freqKnobVal').innerHTML = `<bdi dir="ltr">${step.val}</bdi>`;
+      } else {
+        nmStepIdx.panKnob = (nmStepIdx.panKnob + 1) % nmPanSteps.length;
+        const step = nmPanSteps[nmStepIdx.panKnob];
+        document.getElementById('panKnobInd').style.transform = `rotate(${step.angle}deg)`;
+        document.getElementById('panKnobVal').innerHTML = `<bdi dir="ltr">${step.val}</bdi>`;
+      }
+      triggerVuFluctuation();
+    }
+
+    function updateNmFader(val) {
+      document.getElementById('faderValDisplay').innerHTML = `<bdi dir="ltr">${val}%</bdi>`;
+      triggerVuFluctuation(parseInt(val, 10));
+    }
+
+    function triggerVuFluctuation(gainLevel) {
+      const bars = document.querySelectorAll('#vuBezel .vu-bar');
+      const isPowerOn = document.getElementById('nmBtnPower')?.classList.contains('active');
+      const baseGain = (gainLevel !== undefined ? gainLevel : parseInt(document.getElementById('nmFaderInput')?.value || 82, 10)) / 100;
+      
+      bars.forEach(bar => {
+        if (!isPowerOn) {
+          bar.style.height = '6px';
+          bar.style.opacity = '0.25';
+        } else {
+          const rand = Math.random() * 0.4 + 0.6;
+          const h = Math.min(100, Math.max(12, Math.round(baseGain * rand * 100)));
+          bar.style.height = `${h}%`;
+          bar.style.opacity = '0.9';
+        }
+      });
+    }
+
+    // Auto-bouncing Equalizer Loop (every 380ms)
+    setInterval(() => {
+      triggerVuFluctuation();
+    }, 380);
+
     // 8. mr-ui-designer Studio Scenarios
     const scenarios = {
       dental: {
@@ -2411,6 +2877,7 @@
       // Navbar
       document.getElementById('navWork').innerText = isFa ? 'پورتفولیو' : 'Showcase';
       document.getElementById('navLab').innerText = isFa ? 'آزمایشگاه زنده' : 'Interactive Lab';
+      document.getElementById('navNeumorphism').innerText = isFa ? 'نئومورفیسم' : 'Neumorphism';
       document.getElementById('navBento').innerText = isFa ? 'معماری' : 'Architecture';
       document.getElementById('navStudio').innerText = isFa ? 'استودیو AI' : 'AI Studio';
       document.getElementById('navEstimator').innerText = isFa ? 'برآورد هزینه' : 'Estimator';
@@ -2485,6 +2952,34 @@
       document.getElementById('compareHint').innerText = isFa 
         ? 'دستگیره اسلایدر میانی را به چپ و راست بکشید تا تفاوت طراحی مهندسی با کدهای کلیشه ای را ببینید.'
         : 'Drag the center slider left and right to inspect the anti-slop visual difference';
+
+      // Neumorphic Tactile Deck
+      document.getElementById('nmBadge').innerText = isFa ? 'کنسول سخت افزاری لمسی' : 'Tactile Hardware Deck';
+      document.getElementById('nmHeading').innerText = isFa ? 'کنسول صوتی و المان های نئومورفیک لمسی' : 'Neumorphic Audio & Hardware Deck';
+      document.getElementById('nmDesc').innerText = isFa 
+        ? 'ترکیب سایه های ملایم برجسته و فرورفته با کنتراست بالای WCAG AAA و المان های کنترل سخت افزاری تعاملی.'
+        : 'Dual soft shadows and debossed grooves engineered with WCAG AAA contrast and tactile physical feedback.';
+      document.getElementById('nmDeckTitle').innerHTML = isFa 
+        ? 'پردازنده هارمونیک آنالوگ &bull; مدل V-4' 
+        : 'ANALOG HARMONIC PROCESSOR &bull; MODEL V-4';
+      document.getElementById('nmMod1Title').innerText = isFa ? 'سوئیچ های کنترل کانال' : 'Tactile Channel Switches';
+      document.getElementById('nmBtnPowerText').innerText = isFa ? 'پاور اصلی' : 'MASTER POWER';
+      document.getElementById('nmBtnFilterText').innerText = isFa ? 'فیلتر آنالوگ' : 'ANALOG FILTER';
+      document.getElementById('nmBtnSpatialText').innerText = isFa ? 'هارمونی فضایی' : 'SPATIAL HARMONY';
+      document.getElementById('nmBtnBoostText').innerText = isFa ? 'تقویت گین بالا' : 'HIGH GAIN BOOST';
+      document.getElementById('nmMod1Hint').innerText = isFa 
+        ? 'برای تغییر وضعیت بین برجستگی محدب و فرورفتگی مقعر، روی دکمه ها کلیک کنید.'
+        : 'Click buttons to toggle convex extrusion vs concave inset depth.';
+
+      document.getElementById('nmMod2Title').innerText = isFa ? 'ناب های چرخشی سخت افزاری' : 'Tactile Rotary Dials';
+      document.getElementById('lblFreqKnob').innerText = isFa ? 'فرکانس کات آف' : 'Cutoff Freq';
+      document.getElementById('lblPanKnob').innerText = isFa ? 'رزونانس باند Q' : 'Resonance Q';
+      document.getElementById('nmMod2Hint').innerText = isFa 
+        ? 'روی پیچ های چرخشی کلیک کنید تا در زوایای مختلف آنالوگ گردش کنند.'
+        : 'Click knobs to cycle through analog rotational steps.';
+
+      document.getElementById('nmMod3Title').innerText = isFa ? 'اکولایزر VU و فیدر شیاردار' : 'Equalizer VU & Debossed Fader';
+      document.getElementById('lblFader').innerText = isFa ? 'فیدر صدای خروجی:' : 'Master Level Fader:';
 
       // Bento
       document.getElementById('bentoBadge').innerText = isFa ? 'قابلیت های معماری' : 'Architectural Capabilities';
