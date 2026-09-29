@@ -176,6 +176,25 @@ class InterfaceGenerator:
                 "switch_dot": "bg-white shadow-lg",
                 "style_badge": "border-sky-500/20 bg-sky-500/10 text-sky-600"
             }
+        elif selected_style in ["apple_cupertino", "cupertino_fluid", "apple_design"]:
+            return {
+                "container": "relative overflow-hidden rounded-[28px] border border-black/5 dark:border-white/10 bg-white/75 dark:bg-zinc-900/75 backdrop-blur-2xl p-6 sm:p-10 shadow-[0_20px_50px_rgba(0,0,0,0.08)] dark:shadow-[0_20px_50px_rgba(0,0,0,0.4)] transition-all",
+                "border_beam": "",
+                "header_badge": "inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold bg-blue-500/10 text-blue-600 dark:text-blue-400 border border-blue-500/20 backdrop-blur-md",
+                "version_tag": "text-xs text-zinc-500 font-mono tracking-tight",
+                "tab_container": "inline-flex rounded-full bg-zinc-200/60 dark:bg-zinc-800/60 backdrop-blur-md p-1 border border-black/5 dark:border-white/5",
+                "tab_btn_active": "px-4 py-1.5 text-xs font-semibold rounded-full bg-white dark:bg-zinc-700 text-zinc-900 dark:text-white shadow-sm transition-all",
+                "tab_btn_inactive": "px-4 py-1.5 text-xs font-medium rounded-full text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-white transition-all",
+                "headline": "text-3xl sm:text-4xl lg:text-5xl font-sans font-bold tracking-[-0.025em] text-zinc-900 dark:text-white leading-[1.08]",
+                "body_text": "text-base sm:text-lg text-zinc-600 dark:text-zinc-300 leading-relaxed max-w-2xl font-normal",
+                "primary_cta": "inline-flex items-center justify-center px-6 py-3 text-sm font-semibold rounded-full text-white bg-[#0071e3] hover:bg-[#0077ed] active:scale-[0.98] transition-all shadow-md min-h-[44px]",
+                "secondary_cta": "inline-flex items-center justify-center px-6 py-3 text-sm font-semibold rounded-full text-zinc-800 dark:text-zinc-200 border border-black/10 dark:border-white/10 hover:bg-black/5 dark:hover:bg-white/5 active:scale-[0.98] backdrop-blur-md transition-all min-h-[44px]",
+                "widget_card": "bg-white/60 dark:bg-zinc-800/60 backdrop-blur-xl border border-black/5 dark:border-white/10 rounded-[22px] p-6 shadow-sm space-y-4",
+                "telemetry_card": "p-6 rounded-[22px] bg-white/60 dark:bg-zinc-800/60 backdrop-blur-xl border border-black/5 dark:border-white/10 space-y-2",
+                "switch_bg": "bg-zinc-300 dark:bg-zinc-700",
+                "switch_dot": "bg-white shadow-md",
+                "style_badge": "border-blue-500/20 bg-blue-500/10 text-[#0071e3]"
+            }
         else: # Default Clean Corporate SaaS (clean_stripe / linear_dark fallback)
             bg_card = "bg-zinc-950 text-zinc-100 border-zinc-800" if is_dark else "bg-white text-zinc-900 border-zinc-200"
             return {

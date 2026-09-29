@@ -10,7 +10,7 @@ The `visual-chemistry-engine` serves as the primary aesthetic and visual archite
 
 ---
 
-## 🎨 The 5 Master Visual Chemistries
+## 🎨 The 6 Master Visual Chemistries
 
 The agent autonomously detects the domain or explicit user request and selects the matching chemistry:
 
@@ -19,7 +19,8 @@ The agent autonomously detects the domain or explicit user request and selects t
                   ├─► 2. Luxury Obsidian & Glassmorphism 2.0 (AI Flagships / Web3 / Luxury)
 PROMPT / DOMAIN ──┼─► 3. Neobrutalism & Playful High-Contrast (Creative / Gumroad / Notion)
                   ├─► 4. Swiss Editorial & Paper Craft (Portfolios / Journalism / Architecture)
-                  └─► 5. Modern Crisp Light (Stripe / Apple / Fintech)
+                  ├─► 5. Modern Crisp Light (Stripe / Enterprise Fintech)
+                  └─► 6. Apple Cupertino Fluid & Human Interface (WWDC Craft / Native Web)
 ```
 
 ---
@@ -61,12 +62,26 @@ PROMPT / DOMAIN ──┼─► 3. Neobrutalism & Playful High-Contrast (Creativ
 
 ---
 
-### 5. ☀️ Modern Crisp Light (Stripe / Apple Style)
+### 5. ☀️ Modern Crisp Light (Stripe Style)
 *Best for: Fintech, Enterprise SaaS, Trust-heavy platforms, Global consumer products.*
 - **Canvas:** Crisp Porcelain Snow (`#ffffff` / `#f8fafc`)
 - **Surfaces:** Pure white floating cards with multi-stage ambient diffuse shadows (`box-shadow: 0 1px 3px rgba(0,0,0,0.05), 0 10px 25px rgba(0,0,0,0.03)`).
 - **Accents:** Electric Sapphire Blue (`#2563eb`), Emerald Mint, or Violet with strict 4.5:1 text contrast compliance.
 - **Crispness:** High-contrast data tables, subtle badge chips, and refined micro-borders (`#e2e8f0`).
+
+---
+
+### 6. 🍏 Apple Cupertino Fluid & Human Interface (WWDC Craft Style)
+*Best for: Consumer utilities, Creative production tools, Productivity suites, Apple ecosystem web apps.*
+- **Canvas:** Natural Tinted Canvas (`light: oklch(0.975 0.005 250)`, `dark: oklch(0.12 0.008 250)`)
+- **Translucent Chrome:** Multi-layer frosted navigation bars and floating toolbars with content scrolling underneath (`backdrop-filter: blur(20px) saturate(180%)`).
+- **Surface Resilience:** Explicit `@media (prefers-reduced-transparency: reduce)` fallback with opaque high-contrast background.
+- **Continuous Curvature (Squircle):** Smooth Apple-style corner squircle radii (`border-radius: 20px` to `28px` with proportional inner child nested radii: $R_{inner} = R_{outer} - padding$).
+- **Optical Typography:** Dynamic tracking & leading hierarchy:
+  - Display / Hero Headings: `letter-spacing: -0.025em; line-height: 1.05;`
+  - Body Text: `letter-spacing: -0.005em; line-height: 1.5;`
+  - System font priority: `-apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text", system-ui, sans-serif`.
+- **System Accents:** High-fidelity Apple System Blue (`oklch(0.58 0.22 255)`), System Indigo, or Natural Graphite with rigorous WCAG 2.2 AAA contrast verification.
 
 ---
 

@@ -57,6 +57,54 @@ When implementing components in Persian, Arabic, or Bilingual LTR/RTL views:
 
 ---
 
+## 📱 Mobile-Native Resilience & Touch Polish
+
+To ensure web interfaces feel as polished and responsive as native iOS and Android apps, enforce the following ergonomic invariants:
+
+1. **Dynamic Viewport Height (`100dvh`):**
+   - Never use static `height: 100vh` for full-screen modals, sheets, or mobile heroes. Mobile browser address bars collapse/expand on scroll, causing jarring layout jumps.
+   - Use `min-height: 100dvh;` with graceful fallback:
+     ```css
+     min-height: 100vh;
+     min-height: 100dvh;
+     ```
+
+2. **iOS Safari Input Auto-Zoom Guard:**
+   - In iOS Safari, any `<input>`, `<select>`, or `<textarea>` with `font-size < 16px` triggers an involuntary, disruptive zoom on touch focus.
+   - Always ensure base font size for form controls on mobile is at least `16px` (`text-base` in Tailwind):
+     ```css
+     @media (max-width: 640px) {
+       input, select, textarea {
+         font-size: 16px !important;
+       }
+     }
+     ```
+
+3. **Tap Highlight Suppression:**
+   - Remove default WebKit gray rectangular tap flash on clickable elements:
+     ```css
+     button, a, [role="button"] {
+       -webkit-tap-highlight-color: transparent;
+       touch-action: manipulation; /* Eliminates 300ms tap delay */
+     }
+     ```
+
+4. **Sticky Hover State Elimination:**
+   - Touch devices emulate mouse hover upon touch tap, leaving buttons permanently stuck in their hover visual state after the finger lifts.
+   - Strictly encapsulate all hover pseudo-classes in fine pointer media queries:
+     ```css
+     @media (hover: hover) and (pointer: fine) {
+       .interactive-element:hover {
+         /* Hover transformation/glow here */
+       }
+     }
+     ```
+
+5. **Physical Touch Target Dimensions (WCAG 2.5.8):**
+   - All interactive touch targets (buttons, icon triggers, pills) must provide an active bounding box of at least **44px × 44px** on touch viewports, even if the visible icon is smaller (use transparent hit padding or pseudo-elements).
+
+---
+
 ## 📜 Provenance, Adaptation & Legal Licensing
 
 - **Clean-Room Implementation:** All 70+ components in this encyclopedia are clean-room adaptations, re-written from scratch as portable semantic Tailwind CSS / HTML / React recipes.

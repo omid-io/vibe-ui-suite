@@ -248,6 +248,12 @@ class AutoRefiner:
                 for d in current_visual.get("defects", [])
             ]
             # Inject physical layout defects into defect queue
+            raw_phys_defects = list(current_physical.get("defects", []))
+            motion_defects = current_physical.get("metrics", {}).get("motion_ergonomics", {}).get("defects", [])
+            for md in motion_defects:
+                if md not in raw_phys_defects:
+                    raw_phys_defects.append(md)
+
             physical_defects = [
                 {
                     "type": d.get("type"),
@@ -256,7 +262,7 @@ class AutoRefiner:
                     "message": d.get("message", ""),
                     "prescription": d.get("prescription", "")
                 }
-                for d in current_physical.get("defects", [])
+                for d in raw_phys_defects
             ]
             defects = current_report.get("defects_ranked", []) + visual_defects + physical_defects
             if not defects:
@@ -416,6 +422,40 @@ class AutoRefiner:
                         patched_html = re.sub(r'\b(h-[1-8]|py-[12]|min-h-\[(?:3[0-9]|4[0-3])px\])\b', 'min-h-[44px] py-3 px-5', patched_html)
                         if not re.search(r"min-h-\[(4[4-9]|[5-9]\d)px\]", patched_html):
                             patched_html = re.sub(r'(<button\b[^>]*class="[^"]*)(")', r'\1 min-h-[44px] px-6 py-3\2', patched_html)
+
+                    # 16. Motion transition all anti-pattern
+                    elif d_type == "motion_transition_all_anti_pattern":
+                        patched_html = re.sub(
+                            r'\btransition:\s*all\b',
+                            'transition: transform 200ms cubic-bezier(0.16, 1, 0.3, 1), opacity 200ms ease-out',
+                            patched_html
+                        )
+                        patched_html = re.sub(
+                            r'\btransition-all\b',
+                            'transition-transform duration-200 ease-out',
+                            patched_html
+                        )
+
+                    # 17. Motion scale zero entry anti-pattern
+                    elif d_type == "motion_scale_zero_entry_anti_pattern":
+                        patched_html = re.sub(
+                            r'\bscale\(\s*0(?:\.0+)?\s*\)',
+                            'scale(0.96)',
+                            patched_html
+                        )
+                        patched_html = re.sub(
+                            r'\bscale:\s*0\b',
+                            'scale: 0.96',
+                            patched_html
+                        )
+
+                    # 18. Motion missing reduced motion guard
+                    elif d_type == "motion_missing_reduced_motion_guard":
+                        reduced_motion_css = "\n    @media (prefers-reduced-motion: reduce) { *, ::before, ::after { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; } }\n"
+                        if "</style>" in patched_html:
+                            patched_html = patched_html.replace("</style>", f"{reduced_motion_css}  </style>")
+                        elif "<head>" in patched_html:
+                            patched_html = patched_html.replace("<head>", f"<head>\n  <style>{reduced_motion_css}</style>")
 
             # Re-Evaluation (Quad-Composite: DOM + Visual + Physical + Runtime)
             re_critique = self.critic.critique(patched_html, decision, iteration=iteration + 1)

@@ -22,6 +22,7 @@ MANIFEST_PATH = ROOT_DIR / "version.manifest.json"
 VERSION_JSON_PATH = ROOT_DIR / "version.json"
 
 PACKAGE_FILES = [
+    ROOT_DIR / "packages" / "vibe-ui-suite" / "package.json",
     ROOT_DIR / "packages" / "tokens" / "package.json",
     ROOT_DIR / "packages" / "vibe-ui-vscode" / "package.json",
     ROOT_DIR / "examples" / "nextjs-starter" / "package.json",

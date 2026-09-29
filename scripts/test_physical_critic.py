@@ -176,13 +176,77 @@ def main():
         failures.append("Test 7 Failed: Expected causal_contract_satisfied to be True")
     print(f"  [PASS] Test 7: InteractionContract (24/24) & In-Browser VisionSensor (Score: {vision_rep.get('visual_score')}/100) verified")
 
+    # Test 8: Motion Ergonomics and Anti-Slop Animation Audit
+    bad_motion_html = """<!DOCTYPE html>
+<html>
+<head>
+  <style>
+    .slop-box {
+      transition: all 500ms ease-in;
+      transform: scale(0);
+    }
+    .slop-box:hover {
+      background: blue;
+    }
+  </style>
+</head>
+<body>
+  <div class="slop-box">Bad motion</div>
+</body>
+</html>"""
+    motion_res = critic.audit_motion_ergonomics(bad_motion_html)
+    if motion_res["is_ergonomic"]:
+        failures.append("Test 8 Failed: Bad motion HTML was marked as ergonomic")
+    defect_types = {d["type"] for d in motion_res["defects"]}
+    expected_defects = {
+        "motion_transition_all_anti_pattern",
+        "motion_scale_zero_entry_anti_pattern",
+        "motion_excessive_duration",
+        "motion_missing_reduced_motion_guard",
+        "motion_sticky_touch_hover"
+    }
+    missing = expected_defects - defect_types
+    if missing:
+        failures.append(f"Test 8 Failed: Missing expected motion defects: {missing}")
+
+    # Good motion check
+    good_motion_html = """<!DOCTYPE html>
+<html>
+<head>
+  <style>
+    .clean-box {
+      transition: transform 200ms ease-out, opacity 200ms ease-out;
+      transform: scale(0.96);
+      opacity: 0;
+    }
+    @media (hover: hover) and (pointer: fine) {
+      .clean-box:hover {
+        transform: translateY(-2px);
+      }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .clean-box {
+        transition: opacity 150ms ease;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="clean-box">Good motion</div>
+</body>
+</html>"""
+    good_res = critic.audit_motion_ergonomics(good_motion_html)
+    if not good_res["is_ergonomic"] or good_res["motion_score"] < 100.0:
+        failures.append(f"Test 8 Failed: Good motion was not accepted with 100 score, got {good_res}")
+    print(f"  [PASS] Test 8: Motion Ergonomics Audit caught 5/5 anti-slop defects and verified clean Apple/Linear motion (100.0/100)")
+
     if failures:
         print("\n[FAIL] Physical Critic Suite Failures:", file=sys.stderr)
         for f in failures:
             print(f"  - {f}", file=sys.stderr)
         return 1
 
-    print("\n[SUCCESS] Headless Physical Viewport Critic passed all tests (7/7).")
+    print("\n[SUCCESS] Headless Physical Viewport Critic passed all tests (8/8).")
     return 0
 
 if __name__ == "__main__":

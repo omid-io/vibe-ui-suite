@@ -119,9 +119,26 @@ class DesignDirector:
             "suggested_query": f"{matched_domain.get('name_en', 'Modern Web')} UI UX trends 2026 Dribbble Mobbin"
         }
 
+        # Explicit style override detection
+        style_override = None
+        lower_prompt = prompt.lower()
+        if any(w in lower_prompt for w in ["apple", "cupertino", "ios", "macos", "اپل"]):
+            style_override = "apple_cupertino"
+        elif any(w in lower_prompt for w in ["neobrutalism", "brutalist", "نئوبروتالیسم"]):
+            style_override = "neobrutalism"
+        elif any(w in lower_prompt for w in ["swiss", "editorial", "سوئیس"]):
+            style_override = "minimal_swiss"
+        elif any(w in lower_prompt for w in ["luxury", "obsidian", "لاکچری"]):
+            style_override = "quiet_luxury"
+        elif any(w in lower_prompt for w in ["glass", "glassmorphism", "شیشه"]):
+            style_override = "specular_glass"
+
+        chosen_style = user_overrides.get("selected_style") or style_override or matched_domain.get("recommended_styles", ["clean_stripe"])[0]
+
         # Construct Comprehensive DesignIntentContract
         intent = {
             "product_domain": user_overrides.get("product_domain") or domain_id,
+            "selected_style": chosen_style,
             "audience": {
                 "type": matched_domain.get("name_en", "General Audience"),
                 "technical_level": "expert" if "terminal" in domain_id or "devops" in domain_id else "general",
@@ -155,7 +172,7 @@ class DesignDirector:
             "stack_profile": stack_profile,
             "soft_preferences": [
                 f"Prioritize {theme_bias} mode based on domain psychology",
-                f"Recommended style family: {matched_domain.get('recommended_styles', ['clean_stripe'])[0]}",
+                f"Recommended style family: {chosen_style}",
                 f"Format output as {stack_profile['recommendation']['file_extension']} ({stack_profile['recommendation']['tailwind_syntax']})"
             ],
             "provenance": {

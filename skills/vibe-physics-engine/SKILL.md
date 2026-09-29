@@ -1,84 +1,169 @@
 ---
 name: vibe-physics-engine
-description: Physics-based UI motion, anti-template visual architecture, Lenis momentum scrolling, GPU-accelerated glassmorphism, OKLCH perceptual tokens, and custom SVG vector styling without Unicode emojis.
-triggers: ["vibe coding", "add physics", "animate", "smooth UI", "framer motion", "gsap", "fluid motion", "lenis", "oklch"]
+description: Physics-based UI motion, anti-template visual architecture, Apple/Linear spring dynamics, velocity handoff, GPU-accelerated compositing, OKLCH perceptual tokens, and strict anti-slop animation rules.
+triggers: ["vibe coding", "add physics", "animate", "smooth UI", "framer motion", "gsap", "fluid motion", "lenis", "oklch", "spring physics", "motion review"]
 ---
 
-# ⚡ Vibe Motion & Compositing Engine
+# ⚡ Vibe Motion & Physics Engine (v2026 Core)
 
 ## 🎯 Purpose
-The `vibe-physics-engine` powers bespoke, high-framerate visual and interactive experiences. It mandates mathematical motion curves, GPU-accelerated layer compositing, refresh-rate-aware interpolation, OKLCH perceptual color science, and strict anti-template aesthetics.
+The `vibe-physics-engine` powers bespoke, high-framerate visual and interactive experiences. It mandates mathematical motion curves, critically damped spring mechanics, GPU-accelerated layer compositing, refresh-rate-aware interpolation, OKLCH perceptual color science, and strict anti-slop animation ergonomics.
 
 ---
 
-## 🎨 1. Perceptual OKLCH Token Systems (Multi-Chemistry)
+## 🏎️ 1. Critically Damped Springs & Natural Dynamics
 
-Avoid hardcoding a single dark theme. Adapt OKLCH tokens to the target visual chemistry:
+Natural interface motion derives from physical spring equations rather than artificial linear or ease-in curves.
 
-### A. Luxury Obsidian (Dark Velvet)
-- **Canvas Base:** `oklch(0.12 0.012 260)`
-- **Glass Surface:** `oklch(0.16 0.015 260 / 0.65)` with `backdrop-filter: blur(24px) saturate(180%)`
-- **Fresnel Inset Border:** `inset 0 1px 1px 0 rgba(255, 255, 255, 0.16)`
-- **Primary Accent:** `oklch(0.72 0.145 85)` (Champagne Gold)
+### A. Core Spring Constants
+- **Default UI Element (Popovers, Tooltips, Menus):** Critically damped with zero overshoot:
+  - `damping: 1.0`, `response: 0.3s - 0.4s`
+  - Eliminates distracting bounce while maintaining organic responsiveness.
+- **Dynamic Flick / Momentum (Drawers, Swipe Gestures):** Slightly under-damped with subtle organic settle:
+  - `damping: 0.82`, `response: 0.35s`
+- **Reversal & Interruption:** When an ongoing animation is interrupted or reversed, NEVER restart from zero or hit a sudden stop. Retain current velocity and retarget smoothly:
+  - Read live presentation value via `getBoundingClientRect()` or continuous CSS transitions.
 
-### B. Minimalist Technical SaaS (Pitch Linear)
-- **Canvas Base:** `oklch(0.14 0.005 260)`
-- **Surface:** `oklch(0.18 0.008 260)` with crisp 1px borders `oklch(0.24 0.01 260)`
-- **Primary Accent:** `oklch(0.92 0.01 260)` (High-contrast pure white) or `oklch(0.65 0.22 265)` (Electric Indigo)
-
-### C. Clean Architectural Light (Stripe / Apple)
-- **Canvas Base:** `oklch(0.985 0.002 90)`
-- **Surface:** `oklch(1.0 0 0)` with diffuse multi-layer drop shadow
-- **Primary Accent:** `oklch(0.55 0.22 260)` (Deep Sapphire)
+### B. Touch Gestures & Velocity Handoff (1:1 Direct Manipulation)
+- Maintain an exact 1:1 displacement ratio with the user pointer during drag (`setPointerCapture`).
+- Upon release, hand off the user gesture release velocity into the spring motion equation:
+  $$v_{release} = \frac{\Delta x}{\Delta t}$$
+- **Boundary Resistance (Rubber-banding):** Never hard-stop at boundary edges. Apply progressive logarithmic resistance:
+  $$x_{rubber} = x_{bound} + (x_{raw} - x_{bound}) \cdot 0.35$$
 
 ---
 
-## 🕹️ 2. Smooth Scrolling: Native Zero-Dep & Progressive Lenis
+## ⏱️ 2. Asymmetric Enter/Exit Timing Protocol
 
-### Option A: 100% Zero-Dependency Native Smooth Scroll (Default)
-No external npm dependencies required:
+Human perception interprets entering elements and exiting elements fundamentally differently:
+- **Enter Transitions (Informative & Deliberate):**
+  - Duration: `200ms - 300ms`
+  - Curve: `cubic-bezier(0.16, 1, 0.3, 1)` (snappy ease-out) or critically damped spring.
+  - Initial State: Must start from `scale(0.95)` with `opacity: 0`. **NEVER start from `scale(0)`**.
+- **Exit Transitions (Instant & Non-Blocking):**
+  - Duration: `120ms - 180ms` (30% to 50% faster than enter).
+  - Curve: `ease-out` or `cubic-bezier(0.7, 0, 0.84, 0)`.
+  - The user has finished the interaction; the UI must get out of the way immediately.
+- **Active Press vs. Release:**
+  - Active Press: Can be deliberate (`200ms` or linear hold-to-confirm).
+  - Release Action: Must be instant (`100ms - 150ms ease-out`).
+- **Keyboard Shortcuts (⌘K, Escape, Tabs):**
+  - **Zero Animation Delay:** Must open and close with zero latency (instant rendering or ultra-fast ≤80ms fade). Never make keyboard-driven power users wait on motion.
+
+---
+
+## ⚡ 3. Off-Main-Thread GPU Acceleration & WAAPI
+
+Main thread congestion during page loads or heavy React re-renders drops frames in JavaScript-driven animation loops (`requestAnimationFrame`).
+
+### A. Framer Motion Performance Rules
+```jsx
+// ❌ WRONG: Animates layout properties on main thread, drops frames during loads
+<motion.div animate={{ x: 100, width: 300 }} />
+
+// ✅ CORRECT: Pure compositor layer, GPU-accelerated off-main-thread
+<motion.div animate={{ transform: "translateX(100px)" }} />
+```
+
+### B. High-Performance Web Animations API (WAAPI)
+For dynamic programmatic control without bulky external library overhead:
+```javascript
+element.animate(
+  [
+    { opacity: 0, transform: 'translateY(8px) scale(0.96)' },
+    { opacity: 1, transform: 'translateY(0) scale(1)' }
+  ],
+  {
+    duration: 220,
+    easing: 'cubic-bezier(0.16, 1, 0.3, 1)',
+    fill: 'forwards'
+  }
+);
+```
+
+---
+
+## 🌊 4. Stagger Delay Protocol (Cascading Entrances)
+
+When rendering lists, bento grids, or card collections:
+- Apply a tight stagger interval of **30ms to 60ms** between items.
+- **Maximum Stagger Cap:** Total stagger cycle must never exceed `300ms`, regardless of item count (batch remaining items together).
+- Never block user interaction or clicks while stagger animations are active.
 ```css
-html {
-  scroll-behavior: smooth;
+.stagger-item {
+  opacity: 0;
+  transform: translateY(8px);
+  animation: vibeEntrance 240ms cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }
+.stagger-item:nth-child(1) { animation-delay: 0ms; }
+.stagger-item:nth-child(2) { animation-delay: 40ms; }
+.stagger-item:nth-child(3) { animation-delay: 80ms; }
+.stagger-item:nth-child(4) { animation-delay: 120ms; }
+```
+
+---
+
+## ♿ 5. Accessibility & Environmental Adaptability
+
+### A. `prefers-reduced-motion`
+Respect vestibular disorders. Reduce does not mean zero visual feedback; replace position/scale translations with instantaneous or gentle opacity cross-fades:
+```css
 @media (prefers-reduced-motion: reduce) {
-  html {
-    scroll-behavior: auto;
+  *, ::before, ::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+  .vibe-sheet, .vibe-dialog {
+    transition: opacity 150ms ease !important;
+    transform: none !important;
   }
 }
 ```
 
-### Option B: Progressive Enhancement with Modern Lenis
-When momentum-based inertial scrolling is explicitly desired, use the official modern `lenis` package (never deprecated `@studio-freight/lenis`):
-```javascript
-import Lenis from 'lenis';
-
-// Check user reduced-motion preference first
-const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-
-if (!prefersReducedMotion) {
-  const lenis = new Lenis({
-    duration: 1.2,
-    easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
-    smoothWheel: true,
-    wheelMultiplier: 1.0,
-    touchMultiplier: 1.5,
-  });
-
-  function raf(time) {
-    lenis.raf(time);
-    requestAnimationFrame(raf);
+### B. `prefers-reduced-transparency`
+For high-contrast glassmorphism surfaces:
+```css
+@media (prefers-reduced-transparency: reduce) {
+  .vibe-glass {
+    backdrop-filter: none !important;
+    background: oklch(0.14 0.005 260) !important; /* Fully opaque surface */
   }
-  requestAnimationFrame(raf);
+}
+```
+
+### C. Touch Device Hover Guard
+Touchscreens trigger hover states on tap, causing sticky hover artifacts on iOS Safari and Android Chrome. Always gate hover effects:
+```css
+@media (hover: hover) and (pointer: fine) {
+  .vibe-button:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  }
 }
 ```
 
 ---
 
-## 🏎️ 3. Frame-Rate-Independent DeltaTime Physics (Sub-Pixel Precision)
-For interactive elements (e.g. before/after comparison sliders, magnetic cursors, spring cards):
+## 🚫 6. Motion Anti-Patterns Checklist (Anti-Slop Hard Gates)
+
+| Anti-Pattern Violation | Consequence | Mandated Vibe UI Fix |
+| :--- | :--- | :--- |
+| `transition: all` | Recalculates all layout props, causes severe jank | Specify exact targets: `transition: transform 200ms ease-out, opacity 200ms` |
+| `scale(0)` entrance | Looks comical and unnatural (balloon popping in) | Start at `scale(0.95)` with `opacity: 0` |
+| `ease-in` on enter | Sluggish start, gives impression of software latency | Use `ease-out` or `cubic-bezier(0.16, 1, 0.3, 1)` |
+| Duration > 300ms on UI | Interface feels unresponsive and bloated | Cap UI micro-interactions at `150ms - 250ms` |
+| Keyframes for rapid UI | Restarts abruptly upon re-trigger | Use interruptible CSS transitions or springs |
+| Sticky touch hover | Mobile button looks active after tap finishes | Wrap hover rules in `@media (hover: hover) and (pointer: fine)` |
+| Raw Unicode emojis in UI | Degrades visual craft into generic template slop | Use custom inline SVG vectors with `currentColor` |
+
+---
+
+## 🏎️ 7. Frame-Rate-Independent DeltaTime Physics
+
+For custom canvas simulations, magnetic cursors, or interactive comparison sliders:
 ```javascript
-// DeltaTime-based exponential decay ensuring identical motion across 60Hz, 120Hz, and 144Hz displays
 let currentX = 0;
 let targetX = 0;
 let lastTime = performance.now();
@@ -90,16 +175,10 @@ function updatePosition(currentTime) {
   
   const alpha = 1 - Math.exp(-lambda * dt);
   currentX += (targetX - currentX) * alpha;
-  sliderElement.style.transform = `translate3d(${currentX.toFixed(2)}px, 0, 0)`;
+  element.style.transform = `translate3d(${currentX.toFixed(2)}px, 0, 0)`;
   
   if (Math.abs(targetX - currentX) > 0.05) {
     requestAnimationFrame(updatePosition);
   }
 }
 ```
-
----
-
-## 🚫 4. Strict Zero-Emoji Rule & SVG Vector Standard
-- **Forbidden:** Any Unicode emoji character (e.g., 💉, 👑, ✨, 📍, ⭐).
-- **Mandatory:** Bespoke inline or sprite SVG vectors with `stroke="currentColor"`, `fill="none"`, and precision stroke widths (1.5px - 2.0px).

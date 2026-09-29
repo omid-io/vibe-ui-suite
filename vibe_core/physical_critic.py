@@ -156,7 +156,8 @@ class PhysicalCritic:
                     "total_touch_targets": total_touch_targets,
                     "compliant_touch_targets": compliant_touch_targets,
                     "horizontal_overflow": has_overflow,
-                    "viewport_details": viewport_results
+                    "viewport_details": viewport_results,
+                    "motion_ergonomics": self.audit_motion_ergonomics(html_content)
                 },
                 "engine": "playwright_headless_chromium"
             }
@@ -218,9 +219,90 @@ class PhysicalCritic:
             "defects": defects,
             "metrics": {
                 "horizontal_overflow": has_fixed_blowout,
-                "static_mode": True
+                "static_mode": True,
+                "motion_ergonomics": self.audit_motion_ergonomics(html_content)
             },
             "engine": f"static_heuristic_fallback ({error_note})" if error_note else "static_heuristic"
+        }
+
+    def audit_motion_ergonomics(self, code_content: str) -> Dict[str, Any]:
+        """
+        Audits UI motion and animation patterns against Anti-Slop physical invariants:
+        - transition: all or transition-all anti-pattern detection
+        - scale(0) entry pop-in detection
+        - Missing @media (prefers-reduced-motion) for animated interfaces
+        - Excessive micro-interaction transition duration (> 300ms)
+        - Sticky mobile touch hover (:hover without pointer: fine media query)
+        """
+        import re
+        defects = []
+        score = 100.0
+
+        # 1. transition: all or transition-all
+        has_transition_all = bool(re.search(r'\btransition(?::\s*all|-all)\b', code_content))
+        if has_transition_all:
+            defects.append({
+                "type": "motion_transition_all_anti_pattern",
+                "severity": "P1",
+                "message": "Found 'transition: all' or 'transition-all'. Mandate explicit animated properties (e.g. transform, opacity) to prevent layout recalculation jank."
+            })
+            score -= 15.0
+
+        # 2. scale(0) or scale(0.0) initial entry state
+        has_scale_zero = bool(re.search(r'\bscale\(\s*0(?:\.0+)?\s*\)|\bscale:\s*0\b', code_content))
+        if has_scale_zero:
+            defects.append({
+                "type": "motion_scale_zero_entry_anti_pattern",
+                "severity": "P1",
+                "message": "Detected 'scale(0)' entry state. Mandate initial scale >= 0.95 with opacity: 0 for natural, non-comical pop-in."
+            })
+            score -= 20.0
+
+        # 3. Excessive micro-interaction duration (> 300ms on interactive controls)
+        has_excessive_duration = bool(re.search(r'\bduration-(?:500|700|1000)\b|transition:\s*[^;]*?(?:[4-9]\d\d|\d{4,})ms', code_content))
+        if has_excessive_duration:
+            defects.append({
+                "type": "motion_excessive_duration",
+                "severity": "P2",
+                "message": "Detected animation duration > 300ms on UI controls. Interactive transitions should complete within 150ms - 250ms."
+            })
+            score -= 10.0
+
+        # 4. Check for animations/transitions without prefers-reduced-motion
+        has_motion = bool(re.search(r'(@keyframes|\banimate-|\btransition:|\btransition-)', code_content))
+        has_reduced_motion = bool(re.search(r'prefers-reduced-motion|useReducedMotion', code_content))
+        if has_motion and not has_reduced_motion:
+            defects.append({
+                "type": "motion_missing_reduced_motion_guard",
+                "severity": "P2",
+                "message": "Animated UI elements detected without 'prefers-reduced-motion' accessibility guard."
+            })
+            score -= 10.0
+
+        # 5. Check for raw CSS :hover without fine pointer media query
+        has_raw_hover = bool(re.search(r'[^{}@]+\b:hover\b\s*\{', code_content))
+        has_hover_guard = bool(re.search(r'@media\s*\(\s*hover:\s*hover\s*\)\s*and\s*\(\s*pointer:\s*fine\s*\)', code_content))
+        if has_raw_hover and not has_hover_guard:
+            defects.append({
+                "type": "motion_sticky_touch_hover",
+                "severity": "P2",
+                "message": "Detected raw CSS ':hover' rule without '@media (hover: hover) and (pointer: fine)'. Causes sticky hover states on mobile touchscreens."
+            })
+            score -= 10.0
+
+        score = max(0.0, score)
+        return {
+            "motion_score": score,
+            "acceptance_status": "ACCEPTED" if score >= 80.0 else "REVISE_REQUIRED",
+            "is_ergonomic": score >= 80.0,
+            "defects": defects,
+            "metrics": {
+                "has_transition_all": has_transition_all,
+                "has_scale_zero": has_scale_zero,
+                "has_excessive_duration": has_excessive_duration,
+                "has_reduced_motion_guard": has_reduced_motion if has_motion else True,
+                "has_hover_guard": has_hover_guard if has_raw_hover else True
+            }
         }
 
     def audit_runtime_react_tsx(

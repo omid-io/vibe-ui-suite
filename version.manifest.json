@@ -1,13 +1,13 @@
 {
   "$schema": "./schemas/version-manifest.schema.json",
-  "version": "4.0.0",
-  "codename": "Endgame / Closed-Loop Autonomy & Feature Freeze",
+  "version": "4.1.0",
+  "codename": "Apple Cupertino Design Assimilation & Kowalski Motion Physics Ergonomics",
   "release_channel": "stable",
   "packages": {
-    "vibe-ui-suite": "4.0.0",
-    "@omid-io/tokens": "4.0.0",
-    "vibe-ui-vscode": "4.0.0",
-    "vibe-ui-nextjs-starter": "4.0.0"
+    "vibe-ui-suite": "4.1.0",
+    "@omid-io/tokens": "4.1.0",
+    "vibe-ui-vscode": "4.1.0",
+    "vibe-ui-nextjs-starter": "4.1.0"
   },
   "schemas": {
     "intent_contract": "v1",
@@ -24,5 +24,5 @@
     "nextjs": ">=15.0.0",
     "react": ">=19.0.0"
   },
-  "last_updated": "2026-09-27"
+  "last_updated": "2026-09-29"
 }

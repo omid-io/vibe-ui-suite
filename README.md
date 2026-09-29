@@ -69,7 +69,7 @@ Headless Browser Evaluation (Playwright 375px mobile overflow)
 Verified Output or Actionable Failure Diagnostics
 ```
 
-> **Day-One Transparency**: Vibe UI Suite is at `v3.9.0` (The True Closed-Loop Autonomous Browser Engine). Featuring 100% live headless Chromium browser truth and causal verification across all benchmark scenarios with zero sampling skips, persistent browser pooling running 100 mounts in <35s, sub-80ms offline zero-network React 19 local bundling, strict directional invariant contracts across all 24 canonical domains, pure in-browser PixelCritic screenshot buffer inspection, in-browser VisionSensor perceptual geometry analysis, domain-adaptive macro page architectures (6 distinct compositions), and dual-tier contrast governance (Target: WCAG AAA >= 7:1 | Hard Gate: WCAG AA >= 4.5:1). Constructive criticism, issues, and contributions from frontend engineers and AI researchers are warmly welcomed.
+> **Day-One Transparency**: Vibe UI Suite is at `v4.1.0` (Apple Cupertino Design & Kowalski Motion Physics Ergonomics). Featuring 100% live headless Chromium browser truth and causal verification across all benchmark scenarios with zero sampling skips, 6 canonical visual chemistries (including the new Apple Cupertino Fluid & Human Interface archetype), critically damped physical spring mechanics, mobile-native touch resilience, automated motion ergonomics auditing in PhysicalCritic, persistent browser pooling running 100 mounts in <35s, sub-80ms offline zero-network React 19 local bundling, strict directional invariant contracts across all 24 canonical domains, pure in-browser PixelCritic screenshot buffer inspection, in-browser VisionSensor perceptual geometry analysis, domain-adaptive macro page architectures, and dual-tier contrast governance (Target: WCAG AAA >= 7:1 | Hard Gate: WCAG AA >= 4.5:1). Constructive criticism, issues, and contributions from frontend engineers and AI researchers are warmly welcomed.
 
 ---
 
@@ -94,7 +94,7 @@ npx vibe-ui-suite init
 ```
 This interactive command:
 1. Configures your AI editor rules (`.cursorrules`, `CLAUDE.md`, `.windsurfrules`).
-2. Selects your Visual Chemistry (`Minimalist SaaS`, `Luxury Glass`, `Neobrutalism`, `Swiss Editorial`, `Stripe Crisp Light`).
+2. Selects your Visual Chemistry (`Minimalist SaaS`, `Luxury Glass`, `Neobrutalism`, `Swiss Editorial`, `Stripe Crisp Light`, `Apple Cupertino Fluid`).
 3. Injects OKLCH design variables into your project.
 
 ---
