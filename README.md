@@ -73,50 +73,49 @@ Verified Output or Actionable Failure Diagnostics
 
 ---
 
-## 🤖 Agent-Driven Workflow Prompts (Antigravity, Hermes, Cursor, Claude Code)
+## 👑 Autonomous AI Lead Architect: `mr-ui-designer` (Lazy Prompting)
 
-Modern developers do not manually execute terminal commands or wire stylesheet imports by hand; they delegate directly to their AI assistant. Copy and paste any of these 3 battle-tested prompts directly into your agent's chat interface:
+Users should never be forced to understand color theory, OKLCH math, CSS physics formulas, or memorizing 6 design styles. That cognitive burden belongs entirely to the agent.
 
-### Workflow 1: Hands-Free Setup & Installation (Let the Agent Do the Work)
-Hand this prompt to your agent in any new or existing frontend project:
+Vibe UI Suite includes a dedicated master architect agent: **`mr-ui-designer`** ([AGENT.md](mr-ui-designer/AGENT.md)). Equipped with an autonomous **Stack Sensor** (<1ms) and **Domain Director**, it reads your project's `package.json`, existing Tailwind configuration, and folder structure, automatically deducing the optimal design archetype, color harmony, and component flow without asking tedious setup questions.
+
+### 1. The 1-Line Lazy Greenfield Prompt (Build From Scratch)
+Just give your AI assistant (Antigravity, Cursor, Hermes, Claude Code) a single lazy sentence:
+
 ```text
-Install and configure the vibe-ui-suite design system in this project:
-1. Run `npm install vibe-ui-suite` in the terminal.
-2. In the main stylesheet (e.g. `app/globals.css` or `src/index.css`), add `@import "vibe-ui-suite/v4.css";` right after Tailwind imports.
-3. Save the core Vibe UI rules into the project's agent instructions file (`.cursorrules`, `CLAUDE.md`, or `AGENTS.md`):
-   - Strict OKLCH colors and WCAG AAA (>= 7:1) / AA (>= 4.5:1) mathematical contrast.
-   - Zero raw emojis in UI — use inline SVG vector icons with currentColor.
-   - Fixed-structure semantic RTL with <bdi> isolation for metrics, numbers, and badges.
-   - Minimum 44x44px mobile touch targets and critically damped spring physics.
+@mr-ui-designer build a modern, high-conversion landing page for my project.
 ```
+*(Or specify only your domain: `@mr-ui-designer build a dashboard for a crypto trading platform` or `@mr-ui-designer design a booking screen for a dental clinic`)*
+
+**What `mr-ui-designer` does behind the scenes:**
+1. **Scans Project Stack (<1ms):** Auto-detects React 18/19, Tailwind v3/v4 (`@theme`), existing UI libraries (shadcn/ui), and brand colors.
+2. **Autonomous Style Deduction:** Picks the best-in-class visual archetype (e.g. Clean Editorial Light for healthcare, Cyber Terminal Dark for crypto, Apple Cupertino for SaaS) without interrogating you.
+3. **Automated Anti-Slop Enforcement:** Injects inline SVG icons (zero raw emojis), wraps numbers in `<bdi>` for pristine RTL/LTR alignment, and enforces 44px mobile touch targets.
+4. **Self-Healing Closed Loop:** Mounts the UI in headless Chromium, verifies WCAG AAA contrast, and auto-repairs defects before showing you the code.
 
 ---
 
-### Workflow 2: Greenfield Generation (Build from Scratch with Style Selection)
-Use this prompt when building a new screen, dashboard, or component from scratch. Select one of the 6 canonical visual styles:
-*(Styles: `Minimalist SaaS` | `Apple Cupertino Fluid` | `Specular Glass Luxury` | `Neobrutalism` | `Swiss Editorial` | `Terminal HUD`)*
+### 2. The 1-Line Lazy Redesign Prompt (Fix Ugly AI UI)
+When an existing screen or component looks like generic, cheap "AI slop":
 
 ```text
-Build a high-performance, accessible UI for [DESCRIBE FEATURE, e.g. Analytics Billing Dashboard] using Vibe UI Suite standards:
-1. Visual Chemistry: Apply the [SELECT STYLE: e.g. Apple Cupertino Fluid / Minimalist SaaS / Neobrutalism] archetype with semantic OKLCH tokens (`bg-vibe-canvas`, `text-vibe-primary`, `border-vibe-border`).
-2. Typography & Icons: Never use raw emojis. Use crisp inline SVG vector icons with `currentColor`. Maintain tight typographic rhythm.
-3. Bidirectional Isolation: Wrap all dynamic numbers, currency figures, status tags, and technical metrics inside `<bdi>` tags so RTL/LTR text never scrambles.
-4. Touch Ergonomics: Ensure every clickable button and interactive control meets the minimum 44x44px physical touch envelope.
-5. Living Physics: Apply spring-based physical motion (`transition-vibe-spring`) with deliberate entry and fast exit (<180ms).
+@mr-ui-designer this UI looks ugly and generic. Elevate and polish it using Vibe UI standards.
 ```
+
+**What `mr-ui-designer` does:**
+- Sweeps away emojis, purple gradients, and floating unbordered blur boxes.
+- Recalculates contrast mathematically in OKLCH to certify WCAG AAA compliance.
+- Fixes scrambled bidirectional text and adds snappy spring physics transitions.
 
 ---
 
-### Workflow 3: Surgical Refactoring & Anti-Slop Cleanup (Fix Ugly AI-Generated UI)
-Use this prompt when an existing interface suffers from cheap AI tropes, poor readability, broken RTL, or clunky styling:
+### 3. Hands-Free Agent Installation
+If you are starting a fresh project and want the agent to wire up the entire ecosystem for you:
 
 ```text
-Refactor and elevate this UI using Vibe UI Suite anti-slop engineering standards:
-1. Anti-Slop Sanitation: Strip out all raw emojis, clichéd purple/indigo AI gradients, and excessive compositing blurs. Replace with clean SVG icons and structured semantic surfaces.
-2. Contrast Governance: Mathematically recalculate background and foreground colors in the OKLCH space to satisfy WCAG 2.2 AA (>= 4.5:1) minimum and AAA (>= 7:1) target.
-3. RTL & Number Guard: Isolate all metrics, numbers, and Latin identifiers inside `<bdi>` tags to permanently prevent bidirectional text corruption in Persian/Arabic.
-4. Mobile & Motion Polish: Enforce dynamic viewport units (`100dvh`), minimum 44px touch targets, and replace linear/sluggish transitions with snappy spring physics.
+Install and configure vibe-ui-suite in this project and activate mr-ui-designer rules.
 ```
+The agent automatically executes `npm install vibe-ui-suite`, injects `@import "vibe-ui-suite/v4.css";` into your stylesheet, and writes `.cursorrules` / `CLAUDE.md`.
 
 ---
 
