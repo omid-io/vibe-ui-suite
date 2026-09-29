@@ -73,29 +73,59 @@ Verified Output or Actionable Failure Diagnostics
 
 ---
 
-## 🤖 30-Second Quick Start for AI Assistants (Cursor, Claude Code, Windsurf)
+## 🤖 Agent-Driven Workflow Prompts (Antigravity, Hermes, Cursor, Claude Code)
 
-Whether you are a beginner building your first app or a senior engineer designing enterprise software, you can equip your AI assistant with Vibe UI in one of two ways:
+Modern developers do not manually execute terminal commands or wire stylesheet imports by hand; they delegate directly to their AI assistant. Copy and paste any of these 3 battle-tested prompts directly into your agent's chat interface:
 
-### Option A: The Prompt (Zero Install)
-Copy and paste this single prompt directly into **Cursor, Claude Code, Windsurf, or Copilot**:
+### Workflow 1: Hands-Free Setup & Installation (Let the Agent Do the Work)
+Hand this prompt to your agent in any new or existing frontend project:
 ```text
-Design and style this application using Vibe UI standards (https://github.com/omid-io/vibe-ui-suite):
-- Use OKLCH color palettes & native Tailwind CSS v4 (@theme)
-- Enforce dual-tier contrast standards: Target WCAG 2.2 AAA (>= 7:1), with invariant hard-gate at WCAG 2.2 AA (>= 4.5:1)
-- Never use raw emojis in UI — use inline SVG vector icons with currentColor
-- Use fixed-structure semantic RTL with <bdi> isolation and pure LTR metrics
+Install and configure the vibe-ui-suite design system in this project:
+1. Run `npm install vibe-ui-suite` in the terminal.
+2. In the main stylesheet (e.g. `app/globals.css` or `src/index.css`), add `@import "vibe-ui-suite/v4.css";` right after Tailwind imports.
+3. Save the core Vibe UI rules into the project's agent instructions file (`.cursorrules`, `CLAUDE.md`, or `AGENTS.md`):
+   - Strict OKLCH colors and WCAG AAA (>= 7:1) / AA (>= 4.5:1) mathematical contrast.
+   - Zero raw emojis in UI — use inline SVG vector icons with currentColor.
+   - Fixed-structure semantic RTL with <bdi> isolation for metrics, numbers, and badges.
+   - Minimum 44x44px mobile touch targets and critically damped spring physics.
 ```
 
-### Option B: The 1-Command CLI Setup
-In your project directory, run:
+---
+
+### Workflow 2: Greenfield Generation (Build from Scratch with Style Selection)
+Use this prompt when building a new screen, dashboard, or component from scratch. Select one of the 6 canonical visual styles:
+*(Styles: `Minimalist SaaS` | `Apple Cupertino Fluid` | `Specular Glass Luxury` | `Neobrutalism` | `Swiss Editorial` | `Terminal HUD`)*
+
+```text
+Build a high-performance, accessible UI for [DESCRIBE FEATURE, e.g. Analytics Billing Dashboard] using Vibe UI Suite standards:
+1. Visual Chemistry: Apply the [SELECT STYLE: e.g. Apple Cupertino Fluid / Minimalist SaaS / Neobrutalism] archetype with semantic OKLCH tokens (`bg-vibe-canvas`, `text-vibe-primary`, `border-vibe-border`).
+2. Typography & Icons: Never use raw emojis. Use crisp inline SVG vector icons with `currentColor`. Maintain tight typographic rhythm.
+3. Bidirectional Isolation: Wrap all dynamic numbers, currency figures, status tags, and technical metrics inside `<bdi>` tags so RTL/LTR text never scrambles.
+4. Touch Ergonomics: Ensure every clickable button and interactive control meets the minimum 44x44px physical touch envelope.
+5. Living Physics: Apply spring-based physical motion (`transition-vibe-spring`) with deliberate entry and fast exit (<180ms).
+```
+
+---
+
+### Workflow 3: Surgical Refactoring & Anti-Slop Cleanup (Fix Ugly AI-Generated UI)
+Use this prompt when an existing interface suffers from cheap AI tropes, poor readability, broken RTL, or clunky styling:
+
+```text
+Refactor and elevate this UI using Vibe UI Suite anti-slop engineering standards:
+1. Anti-Slop Sanitation: Strip out all raw emojis, clichéd purple/indigo AI gradients, and excessive compositing blurs. Replace with clean SVG icons and structured semantic surfaces.
+2. Contrast Governance: Mathematically recalculate background and foreground colors in the OKLCH space to satisfy WCAG 2.2 AA (>= 4.5:1) minimum and AAA (>= 7:1) target.
+3. RTL & Number Guard: Isolate all metrics, numbers, and Latin identifiers inside `<bdi>` tags to permanently prevent bidirectional text corruption in Persian/Arabic.
+4. Mobile & Motion Polish: Enforce dynamic viewport units (`100dvh`), minimum 44px touch targets, and replace linear/sluggish transitions with snappy spring physics.
+```
+
+---
+
+### Alternative: 1-Command Interactive CLI Setup
+If you prefer running a guided interactive wizard in your terminal:
 ```bash
 npx vibe-ui-suite init
 ```
-This interactive command:
-1. Configures your AI editor rules (`.cursorrules`, `CLAUDE.md`, `.windsurfrules`).
-2. Selects your Visual Chemistry (`Minimalist SaaS`, `Luxury Glass`, `Neobrutalism`, `Swiss Editorial`, `Stripe Crisp Light`, `Apple Cupertino Fluid`).
-3. Injects OKLCH design variables into your project.
+This wizard automatically scaffolds agent rule files, selects your preferred visual chemistry archetype, and configures project stylesheets.
 
 ---
 
