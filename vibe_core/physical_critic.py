@@ -187,7 +187,7 @@ class PhysicalCritic:
         import re
         defects = []
         has_fixed_blowout = bool(re.search(
-            r'(?:width:\s*(?:[4-9]\d\d|\d{4,})px|w-\[(?:[4-9]\d\d|\d{4,})px\]|min-w-\[(?:[4-9]\d\d|\d{4,})px\])',
+            r'(?:(?<![a-zA-Z-])width:\s*(?:[4-9]\d\d|\d{4,})px|w-\[(?:[4-9]\d\d|\d{4,})px\]|min-w-\[(?:[4-9]\d\d|\d{4,})px\])',
             html_content
         ))
         has_substandard = bool(re.search(r'\b(h-[5-8]|py-[12]|min-h-\[(?:3[0-9]|4[0-3])px\])\b', html_content))
