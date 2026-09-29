@@ -73,49 +73,84 @@ Verified Output or Actionable Failure Diagnostics
 
 ---
 
-## 👑 Autonomous AI Lead Architect: `mr-ui-designer` (Lazy Prompting)
+## 👑 Autonomous AI Lead Architect: `mr-ui-designer`
 
-Users should never be forced to understand color theory, OKLCH math, CSS physics formulas, or memorizing 6 design styles. That cognitive burden belongs entirely to the agent.
+Frontend design should not require developers to study color contrast mathematics, OKLCH formulas, CSS spring physics, or memorizing style taxonomies. That cognitive burden belongs entirely to the agent.
 
-Vibe UI Suite includes a dedicated master architect agent: **`mr-ui-designer`** ([AGENT.md](mr-ui-designer/AGENT.md)). Equipped with an autonomous **Stack Sensor** (<1ms) and **Domain Director**, it reads your project's `package.json`, existing Tailwind configuration, and folder structure, automatically deducing the optimal design archetype, color harmony, and component flow without asking tedious setup questions.
+Vibe UI Suite includes a dedicated master architect agent: **`mr-ui-designer`** ([AGENT.md](mr-ui-designer/AGENT.md)). Powered by an autonomous **Stack Sensor** (<1ms) and **Domain Director**, it reads your project's `package.json`, existing Tailwind configuration, and component libraries, autonomously deciding the optimal design archetype, color harmony, and component flow without asking tedious setup questions.
 
-### 1. The 1-Line Lazy Greenfield Prompt (Build From Scratch)
-Just give your AI assistant (Antigravity, Cursor, Hermes, Claude Code) a single lazy sentence:
+```mermaid
+flowchart LR
+    User["User Prompt<br/>'@mr-ui-designer ...'"] --> Sensor["Stack Sensor &lt;1ms<br/>(Framework, Tailwind v4, Icons)"]
+    Sensor --> Director["Autonomous Director<br/>(Domain, Light/Dark, Archetype)"]
+    Director --> AntiSlop["Anti-Slop Compiler<br/>(OKLCH, No Emojis, &lt;bdi&gt; RTL)"]
+    AntiSlop --> ClosedLoop["Closed-Loop Critic<br/>(Headless Chromium &amp; Touch Gate)"]
+    ClosedLoop --> Output["Production-Grade UI<br/>(Zero Prompt Grind)"]
+```
+
+---
+
+### Workflow 1: Build from Scratch (1-Line Lazy Greenfield)
+Just give your AI assistant (Antigravity, Cursor, Hermes, Claude Code) a single sentence describing what you need:
 
 ```text
 @mr-ui-designer build a modern, high-conversion landing page for my project.
 ```
-*(Or specify only your domain: `@mr-ui-designer build a dashboard for a crypto trading platform` or `@mr-ui-designer design a booking screen for a dental clinic`)*
 
-**What `mr-ui-designer` does behind the scenes:**
-1. **Scans Project Stack (<1ms):** Auto-detects React 18/19, Tailwind v3/v4 (`@theme`), existing UI libraries (shadcn/ui), and brand colors.
-2. **Autonomous Style Deduction:** Picks the best-in-class visual archetype (e.g. Clean Editorial Light for healthcare, Cyber Terminal Dark for crypto, Apple Cupertino for SaaS) without interrogating you.
-3. **Automated Anti-Slop Enforcement:** Injects inline SVG icons (zero raw emojis), wraps numbers in `<bdi>` for pristine RTL/LTR alignment, and enforces 44px mobile touch targets.
-4. **Self-Healing Closed Loop:** Mounts the UI in headless Chromium, verifies WCAG AAA contrast, and auto-repairs defects before showing you the code.
+**Optional Domain or Vibe Hints (Never Required):**
+- `@mr-ui-designer build an analytics billing dashboard with Apple Cupertino fluid style`
+- `@mr-ui-designer design a crypto staking interface with dark terminal HUD aesthetic`
+- `@mr-ui-designer create a patient booking screen for an aesthetic dental clinic`
+
+**What `mr-ui-designer` guarantees automatically:**
+- **Zero Raw Emojis:** Replaced with crisp, accessible inline SVG vector icons with `currentColor`.
+- **WCAG AAA Contrast:** Background and foreground colors mathematically calibrated in OKLCH.
+- **BiDi / RTL Isolation:** Numbers, currencies, and technical metrics wrapped in `<bdi>` so English/Persian text never flips.
+- **Ergonomic Touch Targets:** Every button and interactive control meets the minimum 44x44px physical envelope.
+- **Living Spring Physics:** Smooth, critically damped spring transitions (`transition-vibe-spring`) with fast exits (<180ms).
 
 ---
 
-### 2. The 1-Line Lazy Redesign Prompt (Fix Ugly AI UI)
-When an existing screen or component looks like generic, cheap "AI slop":
+### Workflow 2: Surgical Redesign & Anti-Slop Rescue (Fix Ugly Existing UI)
+When an existing screen or component looks like generic, cheap "AI slop" (clichéd purple gradients, yellow emojis, poor contrast, or broken RTL):
 
 ```text
-@mr-ui-designer this UI looks ugly and generic. Elevate and polish it using Vibe UI standards.
+@mr-ui-designer this UI looks ugly and generic. Elevate and polish it using Vibe UI anti-slop standards.
 ```
 
-**What `mr-ui-designer` does:**
-- Sweeps away emojis, purple gradients, and floating unbordered blur boxes.
-- Recalculates contrast mathematically in OKLCH to certify WCAG AAA compliance.
-- Fixes scrambled bidirectional text and adds snappy spring physics transitions.
+**What gets fixed in seconds:**
+1. Strips all emojis and replaces them with tailored inline SVGs.
+2. Recalculates color contrast to enforce WCAG 2.2 AA (>= 4.5:1) minimum and AAA (>= 7:1) target.
+3. Isolates all numbers and badges inside `<bdi>` tags to permanently prevent bidirectional text corruption.
+4. Upgrades stiff linear CSS transitions to natural, critically damped spring physics.
 
 ---
 
-### 3. Hands-Free Agent Installation
-If you are starting a fresh project and want the agent to wire up the entire ecosystem for you:
+### Workflow 3: Zero-Touch Project Setup (Let the Agent Install Everything)
+When starting a new project or onboarding Vibe UI Suite without touching the terminal:
 
 ```text
 Install and configure vibe-ui-suite in this project and activate mr-ui-designer rules.
 ```
-The agent automatically executes `npm install vibe-ui-suite`, injects `@import "vibe-ui-suite/v4.css";` into your stylesheet, and writes `.cursorrules` / `CLAUDE.md`.
+
+**The agent autonomously:**
+1. Runs `npm install vibe-ui-suite` in your project terminal.
+2. Injects `@import "vibe-ui-suite/v4.css";` into your main stylesheet (`app/globals.css` or `src/index.css`).
+3. Creates your editor rule file (`.cursorrules`, `CLAUDE.md`, or `AGENTS.md`) with the full `mr-ui-designer` protocol.
+
+---
+
+### 🎨 The 6 Canonical Visual Archetypes (Autonomous or User-Specified)
+You never need to choose a style—`mr-ui-designer` automatically selects the ideal archetype based on your domain. However, you can explicitly request any archetype:
+
+| Archetype | Visual Philosophy | Best Suited For |
+| :--- | :--- | :--- |
+| **`Apple Cupertino Fluid`** | Frosted glass (`backdrop-filter`), squircles, critically damped spring motion | Modern SaaS, mobile-first web, productivity |
+| **`Minimalist SaaS`** | Stripe-clean layout, neutral tones, high-density data tables | B2B platforms, developer tools, CRM |
+| **`Specular Glass Luxury`** | Deep dark canvases, ambient glowing edge borders (`border-beam`) | Web3, crypto trading, gaming, high-end entertainment |
+| **`Neobrutalism`** | High-contrast black borders, bold retro drop-shadows, vivid accents | Creator tools, fintech, consumer youth apps |
+| **`Swiss Editorial`** | Typography-driven asymmetric grid, high editorial elegance, calm white space | Media publications, fashion, luxury real estate |
+| **`Terminal HUD`** | High-density telemetry, monospaced data grids, cybernetic green/cyan | DevOps, cybersecurity, infrastructure monitoring |
 
 ---
 
@@ -124,7 +159,6 @@ If you prefer running a guided interactive wizard in your terminal:
 ```bash
 npx vibe-ui-suite init
 ```
-This wizard automatically scaffolds agent rule files, selects your preferred visual chemistry archetype, and configures project stylesheets.
 
 ---
 
