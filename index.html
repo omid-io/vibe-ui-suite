@@ -1048,48 +1048,22 @@
     /* =========================================================================
        6.5 NEUMORPHIC TACTILE AUDIO & HARDWARE DECK
        ========================================================================= */
+    /* =========================================================================
+       6.5 ADAPTIVE CHAMELEON AUDIO & HARDWARE DECK (7 VISUAL ARCHETYPES)
+       ========================================================================= */
     .nm-deck-card {
+      background: var(--bg-surface);
+      backdrop-filter: var(--card-blur);
+      -webkit-backdrop-filter: var(--card-blur);
+      border: var(--border-width) solid var(--border-subtle);
       border-radius: var(--radius-lg);
       padding: clamp(24px, 4vw, 40px);
+      box-shadow: var(--shadow-ambient);
+      color: var(--text-primary);
       transition: all var(--duration-enter) var(--ease-spring);
       position: relative;
       overflow: hidden;
       margin-bottom: 24px;
-    }
-
-    body.theme-specular_glass .nm-deck-card,
-    body.theme-terminal_hud .nm-deck-card {
-      --nm-bg: #111827;
-      --nm-surface: #151d2e;
-      --nm-shadow-dark: rgba(0, 0, 0, 0.75);
-      --nm-shadow-light: rgba(255, 255, 255, 0.06);
-      --nm-inset-dark: rgba(0, 0, 0, 0.85);
-      --nm-inset-light: rgba(255, 255, 255, 0.05);
-      --nm-text: #f3f4f6;
-      --nm-text-muted: #9ca3af;
-      --nm-border: rgba(255, 255, 255, 0.1);
-      --nm-led-glow: #00f2fe;
-    }
-
-    body:not(.theme-specular_glass):not(.theme-terminal_hud) .nm-deck-card {
-      --nm-bg: #e6ecf4;
-      --nm-surface: #edf2f9;
-      --nm-shadow-dark: rgba(163, 177, 198, 0.65);
-      --nm-shadow-light: rgba(255, 255, 255, 0.90);
-      --nm-inset-dark: rgba(163, 177, 198, 0.70);
-      --nm-inset-light: rgba(255, 255, 255, 0.95);
-      --nm-text: #1e293b;
-      --nm-text-muted: #64748b;
-      --nm-border: rgba(255, 255, 255, 0.6);
-      --nm-led-glow: #0071e3;
-    }
-
-    .nm-deck-card {
-      background: var(--nm-bg);
-      border: 1px solid var(--nm-border);
-      box-shadow: 14px 14px 28px var(--nm-shadow-dark),
-                  -14px -14px 28px var(--nm-shadow-light);
-      color: var(--nm-text);
     }
 
     .nm-controls-grid {
@@ -1100,15 +1074,15 @@
     }
 
     .nm-module {
-      background: var(--nm-surface);
+      background: var(--bg-surface-elevated);
       border-radius: var(--radius-md);
       padding: 20px;
-      box-shadow: 7px 7px 16px var(--nm-shadow-dark),
-                  -7px -7px 16px var(--nm-shadow-light);
-      border: 1px solid var(--nm-border);
+      box-shadow: var(--shadow-ambient);
+      border: var(--border-width) solid var(--border-subtle);
       display: flex;
       flex-direction: column;
       justify-content: space-between;
+      transition: all var(--duration-exit) var(--ease-spring);
     }
 
     .nm-module-title {
@@ -1116,14 +1090,14 @@
       font-weight: 700;
       text-transform: uppercase;
       letter-spacing: 0.06em;
-      color: var(--nm-text-muted);
+      color: var(--text-secondary);
       margin-bottom: 16px;
       display: flex;
       align-items: center;
       justify-content: space-between;
     }
 
-    /* Neumorphic Push Button */
+    /* Push Button Controls */
     .nm-buttons-row {
       display: grid;
       grid-template-columns: 1fr 1fr;
@@ -1131,11 +1105,11 @@
     }
 
     .nm-push-btn {
-      background: var(--nm-surface);
-      border: 1px solid var(--nm-border);
+      background: var(--bg-surface);
+      border: var(--border-width) solid var(--border-subtle);
       border-radius: var(--radius-sm);
       padding: 12px 14px;
-      color: var(--nm-text);
+      color: var(--text-primary);
       font-family: inherit;
       font-size: 0.825rem;
       font-weight: 700;
@@ -1145,35 +1119,33 @@
       justify-content: space-between;
       gap: 8px;
       min-height: 48px;
-      box-shadow: 6px 6px 14px var(--nm-shadow-dark),
-                  -6px -6px 14px var(--nm-shadow-light);
-      transition: all 160ms cubic-bezier(0.16, 1, 0.3, 1);
+      box-shadow: var(--shadow-ambient);
+      transition: all var(--duration-exit) var(--ease-spring);
       user-select: none;
     }
 
     .nm-push-btn:hover {
-      box-shadow: 8px 8px 18px var(--nm-shadow-dark),
-                  -8px -8px 18px var(--nm-shadow-light);
+      border-color: var(--accent-brand);
+      box-shadow: var(--shadow-hover);
     }
 
     .nm-push-btn.active {
-      box-shadow: inset 4px 4px 8px var(--nm-inset-dark),
-                  inset -4px -4px 8px var(--nm-inset-light);
-      transform: scale(0.97);
+      background: var(--accent-brand-subtle);
+      color: var(--accent-brand);
+      border-color: var(--accent-brand);
     }
 
     .nm-led {
       width: 8px;
       height: 8px;
       border-radius: 50%;
-      background: var(--nm-text-muted);
-      box-shadow: inset 1px 1px 2px rgba(0,0,0,0.4);
+      background: var(--text-muted);
       transition: all 160ms ease;
     }
 
     .nm-push-btn.active .nm-led {
-      background: #10b981;
-      box-shadow: 0 0 10px #10b981, 0 0 4px #10b981;
+      background: var(--accent-brand);
+      box-shadow: 0 0 10px var(--accent-brand), 0 0 4px var(--accent-brand);
     }
 
     /* Rotary Knobs */
@@ -1195,22 +1167,21 @@
       width: 76px;
       height: 76px;
       border-radius: 50%;
-      background: var(--nm-surface);
-      border: 1px solid var(--nm-border);
-      box-shadow: 6px 6px 14px var(--nm-shadow-dark),
-                  -6px -6px 14px var(--nm-shadow-light);
+      background: var(--bg-surface);
+      border: var(--border-width) solid var(--border-subtle);
+      box-shadow: var(--shadow-ambient);
       cursor: pointer;
       position: relative;
       display: flex;
       align-items: center;
       justify-content: center;
       user-select: none;
-      transition: box-shadow 160ms ease;
+      transition: all var(--duration-exit) var(--ease-spring);
     }
 
-    .nm-knob:active {
-      box-shadow: inset 3px 3px 6px var(--nm-inset-dark),
-                  inset -3px -3px 6px var(--nm-inset-light);
+    .nm-knob:hover {
+      border-color: var(--accent-brand);
+      box-shadow: var(--shadow-hover);
     }
 
     .nm-knob-indicator {
@@ -1227,24 +1198,23 @@
     .nm-knob-pip {
       width: 6px;
       height: 12px;
-      background: var(--nm-led-glow);
+      background: var(--accent-brand);
       border-radius: 9999px;
-      box-shadow: 0 0 6px var(--nm-led-glow);
+      box-shadow: 0 0 6px var(--accent-brand);
     }
 
     .nm-knob-center {
       width: 32px;
       height: 32px;
       border-radius: 50%;
-      background: var(--nm-bg);
-      box-shadow: inset 2px 2px 4px var(--nm-inset-dark),
-                  inset -2px -2px 4px var(--nm-inset-light);
+      background: var(--bg-canvas);
+      border: var(--border-width) solid var(--border-subtle);
     }
 
     .nm-knob-label {
       font-size: 0.78rem;
       font-weight: 700;
-      color: var(--nm-text-muted);
+      color: var(--text-secondary);
       text-transform: uppercase;
     }
 
@@ -1252,7 +1222,7 @@
       font-family: var(--font-mono);
       font-size: 0.85rem;
       font-weight: 700;
-      color: var(--nm-text);
+      color: var(--text-primary);
     }
 
     /* Debossed Slider Track */
@@ -1265,9 +1235,8 @@
       width: 100%;
       height: 20px;
       border-radius: 9999px;
-      background: var(--nm-surface);
-      box-shadow: inset 4px 4px 8px var(--nm-inset-dark),
-                  inset -4px -4px 8px var(--nm-inset-light);
+      background: var(--bg-canvas);
+      border: var(--border-width) solid var(--border-subtle);
       display: flex;
       align-items: center;
       padding: 0 6px;
@@ -1287,28 +1256,25 @@
     .nm-range-input::-webkit-slider-thumb {
       -webkit-appearance: none;
       appearance: none;
-      width: 32px;
-      height: 32px;
+      width: 30px;
+      height: 30px;
       border-radius: 50%;
-      background: var(--nm-surface);
-      border: 1px solid var(--nm-border);
-      box-shadow: 4px 4px 10px var(--nm-shadow-dark),
-                  -4px -4px 10px var(--nm-shadow-light);
+      background: var(--accent-brand);
+      border: 2px solid #ffffff;
+      box-shadow: var(--shadow-ambient);
       cursor: pointer;
       transition: transform 120ms ease;
     }
 
     .nm-range-input::-webkit-slider-thumb:active {
       transform: scale(1.15);
-      box-shadow: 2px 2px 5px var(--nm-shadow-dark),
-                  -2px -2px 5px var(--nm-shadow-light);
+      box-shadow: var(--shadow-hover);
     }
 
-    /* Debossed VU Bezel & Equalizer */
+    /* Equalizer Screen */
     .nm-vu-bezel {
-      background: var(--nm-surface);
-      box-shadow: inset 5px 5px 12px var(--nm-inset-dark),
-                  inset -5px -5px 12px var(--nm-inset-light);
+      background: var(--bg-canvas);
+      border: var(--border-width) solid var(--border-subtle);
       border-radius: var(--radius-sm);
       padding: 16px;
       display: flex;
@@ -1321,12 +1287,126 @@
 
     .vu-bar {
       flex: 1;
-      background: var(--nm-led-glow);
+      background: var(--accent-brand);
       border-radius: 3px 3px 0 0;
       min-height: 8px;
       transition: height 120ms ease-out;
-      box-shadow: 0 0 8px var(--nm-led-glow);
+      box-shadow: 0 0 8px var(--accent-brand-subtle);
       opacity: 0.85;
+    }
+
+    /* --- ARCHETYPE SPECIFIC OVERRIDES FOR AUDIO DECK --- */
+
+    /* 1. Neumorphic Soft Overrides */
+    body.theme-neumorphic .nm-deck-card {
+      box-shadow: 14px 14px 28px rgba(163, 177, 198, 0.65), -14px -14px 28px rgba(255, 255, 255, 0.90);
+      border-color: rgba(255, 255, 255, 0.6);
+    }
+    body.theme-neumorphic .nm-module {
+      box-shadow: 7px 7px 16px rgba(163, 177, 198, 0.65), -7px -7px 16px rgba(255, 255, 255, 0.90);
+      border-color: rgba(255, 255, 255, 0.6);
+    }
+    body.theme-neumorphic .nm-push-btn {
+      box-shadow: 6px 6px 14px rgba(163, 177, 198, 0.65), -6px -6px 14px rgba(255, 255, 255, 0.90);
+      border-color: rgba(255, 255, 255, 0.5);
+    }
+    body.theme-neumorphic .nm-push-btn.active {
+      box-shadow: inset 4px 4px 8px rgba(163, 177, 198, 0.70), inset -4px -4px 8px rgba(255, 255, 255, 0.95);
+      background: var(--bg-surface);
+      color: var(--accent-brand);
+    }
+    body.theme-neumorphic .nm-knob {
+      box-shadow: 6px 6px 14px rgba(163, 177, 198, 0.65), -6px -6px 14px rgba(255, 255, 255, 0.90);
+      border-color: rgba(255, 255, 255, 0.6);
+    }
+    body.theme-neumorphic .nm-slider-track {
+      box-shadow: inset 4px 4px 8px rgba(163, 177, 198, 0.70), inset -4px -4px 8px rgba(255, 255, 255, 0.95);
+      border: none;
+    }
+    body.theme-neumorphic .nm-range-input::-webkit-slider-thumb {
+      background: var(--bg-surface);
+      box-shadow: 4px 4px 10px rgba(163, 177, 198, 0.65), -4px -4px 10px rgba(255, 255, 255, 0.90);
+      border: 1px solid rgba(255, 255, 255, 0.6);
+    }
+    body.theme-neumorphic .nm-vu-bezel {
+      box-shadow: inset 5px 5px 12px rgba(163, 177, 198, 0.70), inset -5px -5px 12px rgba(255, 255, 255, 0.95);
+      border: none;
+    }
+
+    /* 2. Neobrutalism Overrides */
+    body.theme-neobrutalism .nm-deck-card,
+    body.theme-neobrutalism .nm-module {
+      border: 3px solid #000000;
+      box-shadow: 6px 6px 0px #000000;
+      border-radius: 0px;
+    }
+    body.theme-neobrutalism .nm-push-btn {
+      border: 2px solid #000000;
+      border-radius: 0px;
+      box-shadow: 3px 3px 0px #000000;
+    }
+    body.theme-neobrutalism .nm-push-btn.active {
+      transform: translate(2px, 2px);
+      box-shadow: 1px 1px 0px #000000;
+      background: var(--accent-brand);
+      color: #000000;
+    }
+    body.theme-neobrutalism .nm-knob {
+      border: 3px solid #000000;
+      box-shadow: 4px 4px 0px #000000;
+    }
+    body.theme-neobrutalism .nm-slider-track,
+    body.theme-neobrutalism .nm-vu-bezel {
+      border: 2px solid #000000;
+      border-radius: 0px;
+    }
+
+    /* 3. Terminal HUD Overrides */
+    body.theme-terminal_hud .nm-deck-card,
+    body.theme-terminal_hud .nm-module {
+      border-color: rgba(0, 255, 102, 0.4);
+      box-shadow: 0 0 20px rgba(0, 255, 102, 0.15);
+    }
+    body.theme-terminal_hud .nm-push-btn {
+      border-color: rgba(0, 255, 102, 0.3);
+      font-family: var(--font-mono);
+    }
+    body.theme-terminal_hud .nm-push-btn.active {
+      background: rgba(0, 255, 102, 0.2);
+      color: #00ff66;
+      border-color: #00ff66;
+      box-shadow: 0 0 10px rgba(0, 255, 102, 0.3);
+    }
+    body.theme-terminal_hud .nm-knob {
+      border-color: #00ff66;
+      box-shadow: 0 0 14px rgba(0, 255, 102, 0.25);
+    }
+    body.theme-terminal_hud .vu-bar {
+      background: #00ff66;
+      box-shadow: 0 0 10px #00ff66;
+    }
+
+    /* 4. Specular Glass Luxury Overrides */
+    body.theme-specular_glass .nm-deck-card {
+      border-color: rgba(255, 255, 255, 0.15);
+      box-shadow: 0 16px 48px rgba(0, 0, 0, 0.6), 0 0 24px rgba(168, 85, 247, 0.18);
+    }
+    body.theme-specular_glass .nm-module {
+      border-color: rgba(255, 255, 255, 0.12);
+    }
+    body.theme-specular_glass .nm-push-btn.active {
+      background: rgba(168, 85, 247, 0.22);
+      color: #c084fc;
+      border-color: #a855f7;
+      box-shadow: 0 0 14px rgba(168, 85, 247, 0.3);
+    }
+    body.theme-specular_glass .nm-knob {
+      border-color: rgba(168, 85, 247, 0.4);
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.5);
+    }
+    body.theme-specular_glass .vu-bar {
+      background: #a855f7;
+      box-shadow: 0 0 10px #a855f7;
     }
 
     /* =========================================================================
@@ -2059,9 +2139,9 @@
     <!-- 5.5 NEUMORPHIC TACTILE AUDIO & HARDWARE DECK -->
     <section class="section-block" id="neumorphism">
       <div class="section-header">
-        <span class="section-badge" id="nmBadge">Tactile Hardware Deck</span>
-        <h2 class="section-title text-reading-center" id="nmHeading">Neumorphic Audio & Hardware Deck</h2>
-        <p class="section-subtitle text-reading-center" id="nmDesc">Dual soft shadows and debossed grooves engineered with WCAG AAA contrast and tactile physical feedback.</p>
+        <span class="section-badge" id="nmBadge">Adaptive Audio Deck</span>
+        <h2 class="section-title text-reading-center" id="nmHeading">Adaptive Audio & Hardware Deck (7 Styles)</h2>
+        <p class="section-subtitle text-reading-center" id="nmDesc">This hardware deck morphs seamlessly with each theme: switch between Apple Cupertino, Neumorphic Soft, Neobrutalism, Terminal HUD, and Specular Glass.</p>
       </div>
 
       <div class="nm-deck-card">
@@ -2987,12 +3067,12 @@
         ? 'دستگیره اسلایدر میانی را به چپ و راست بکشید تا تفاوت طراحی مهندسی با کدهای کلیشه ای را ببینید.'
         : 'Drag the center slider left and right to inspect the anti-slop visual difference';
 
-      // Neumorphic Tactile Deck
-      document.getElementById('nmBadge').innerText = isFa ? 'کنسول سخت افزاری لمسی' : 'Tactile Hardware Deck';
-      document.getElementById('nmHeading').innerText = isFa ? 'کنسول صوتی و المان های نئومورفیک لمسی' : 'Neumorphic Audio & Hardware Deck';
+      // Adaptive Audio Deck
+      document.getElementById('nmBadge').innerText = isFa ? 'کنسول سخت افزاری تطبیق پذیر' : 'Adaptive Audio Deck';
+      document.getElementById('nmHeading').innerText = isFa ? 'کنسول صوتی چندآرکتایپی (سازگار با هر ۷ سبک)' : 'Adaptive Audio & Hardware Deck (7 Styles)';
       document.getElementById('nmDesc').innerText = isFa 
-        ? 'ترکیب سایه های ملایم برجسته و فرورفته با کنتراست بالای WCAG AAA و المان های کنترل سخت افزاری تعاملی.'
-        : 'Dual soft shadows and debossed grooves engineered with WCAG AAA contrast and tactile physical feedback.';
+        ? 'این سخت افزار صوتی با هر بار تعویض سبک بصری، ظاهر همان تم را به خود می گیرد: سبک اپل، نئومورفیک سافت، نئوبروتالیسم، ترمینال هاد و گلس.'
+        : 'This hardware deck morphs seamlessly with each theme: switch between Apple Cupertino, Neumorphic Soft, Neobrutalism, Terminal HUD, and Specular Glass.';
       document.getElementById('nmDeckTitle').innerHTML = isFa 
         ? 'پردازنده هارمونیک آنالوگ &bull; مدل V-4' 
         : 'ANALOG HARMONIC PROCESSOR &bull; MODEL V-4';
