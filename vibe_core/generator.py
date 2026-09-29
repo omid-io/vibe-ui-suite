@@ -797,11 +797,15 @@ export default {component_name};
         blueprint_cta_secondary = mock_data_dict.get("cta_secondary")
         blueprint_metrics = mock_data_dict.get("metrics")
 
-        # Resolve clean display title: if prompt_title is a raw natural language prompt, prefer blueprint headline
-        raw_prompt_indicators = ["میخوام", "بساز", "طراحی", "سایت", "یک", "یه", "برای", "create", "build", "make", "want", "for a", "landing"]
-        is_raw_prompt = any(ind in prompt_title.lower() for ind in raw_prompt_indicators)
+        # Resolve clean display title and navbar brand name
+        raw_prompt_indicators = [
+            "میخوام", "بساز", "طراحی", "سایت", "یک", "یه", "برای", "رزرو", "خرید", "سفارش",
+            "نوبت", "سامانه", "اپلیکیشن", "create", "build", "make", "want", "for a", "landing", "app", "book"
+        ]
+        is_raw_prompt = any(ind in prompt_title.lower() for ind in raw_prompt_indicators) or len(prompt_title.split()) > 3
         display_title = blueprint_headline if (blueprint_headline and is_raw_prompt) else prompt_title
         hero_headline = blueprint_headline or display_title
+        brand_name = (decision.get("intent", {}).get("audience", {}).get("type") or ("پلتفرم تخصصی" if is_rtl else "Vibe Studio")) if is_raw_prompt else prompt_title
         hero_subheadline = blueprint_subheadline or ("تجربه ای منحصربه فرد با معماری مدرن، سرعت بالا و هماهنگی کامل با نیازهای کسب وکار شما." if is_rtl else "Autonomous precision interface engineered with strict accessibility, responsive geometry, and domain priors.")
         cta_primary_label = blueprint_cta_primary or ("شروع همکاری" if is_rtl else "Get Started")
         cta_secondary_label = blueprint_cta_secondary or ("مشاهده خدمات" if is_rtl else "Explore Services")
@@ -878,7 +882,7 @@ export default {component_name};
           <polyline points="2 17 12 22 22 17"></polyline>
           <polyline points="2 12 12 17 22 12"></polyline>
         </svg>
-        <span class="text-xl font-bold tracking-tight display-font">{display_title}</span>
+        <span class="text-xl font-bold tracking-tight display-font">{brand_name}</span>
       </div>
       <nav class="hidden md:flex items-center space-x-6 rtl:space-x-reverse" aria-label="Main Navigation">
         <a href="#features" class="text-sm font-medium hover:text-[var(--accent)] transition-colors min-h-[44px] inline-flex items-center">{"ویژگی ها" if is_rtl else "Features"}</a>
