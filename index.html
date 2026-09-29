@@ -56,7 +56,36 @@
       --spotlight-color: rgba(0, 113, 227, 0.12);
     }
 
-    /* THEME 2: MINIMALIST SAAS (Stripe Crisp Clean) */
+    /* THEME 2: NEUMORPHIC SOFT (TACTILE DUAL-SHADOW UI) */
+    body.theme-neumorphic {
+      --bg-canvas: #e0e5ec;
+      --bg-surface: #e0e5ec;
+      --bg-surface-elevated: #e8eef6;
+      --text-primary: #1e293b;
+      --text-secondary: #475569;
+      --text-muted: #64748b;
+      --border-subtle: rgba(255, 255, 255, 0.6);
+      --border-strong: rgba(163, 177, 198, 0.6);
+      --accent-brand: #3182ce;
+      --accent-brand-subtle: rgba(49, 130, 206, 0.12);
+      --radius-sm: 12px;
+      --radius-md: 18px;
+      --radius-lg: 24px;
+      --shadow-ambient: 8px 8px 18px rgba(163, 177, 198, 0.65), -8px -8px 18px rgba(255, 255, 255, 0.85);
+      --shadow-hover: 12px 12px 24px rgba(163, 177, 198, 0.75), -12px -12px 24px rgba(255, 255, 255, 0.95);
+      --card-blur: none;
+      --border-width: 1px;
+      --spotlight-color: rgba(49, 130, 206, 0.14);
+    }
+
+    body.theme-neumorphic .btn-primary:active,
+    body.theme-neumorphic .btn-secondary:active,
+    body.theme-neumorphic .nav-btn:active {
+      box-shadow: inset 4px 4px 8px rgba(163, 177, 198, 0.7), inset -4px -4px 8px rgba(255, 255, 255, 0.9);
+      transform: scale(0.98);
+    }
+
+    /* THEME 3: MINIMALIST SAAS (Stripe Crisp Clean) */
     body.theme-minimalist_saas {
       --bg-canvas: #fafbfc;
       --bg-surface: #ffffff;
@@ -1680,6 +1709,10 @@
         <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20.94c1.5 0 2.75 1.06 4 1.06 3 0 6-8 6-12.22A4.91 4.91 0 0 0 17 5c-2.22 0-4 1.44-5 2-1-.56-2.78-2-5-2a4.9 4.9 0 0 0-5 4.78C2 14 5 22 8 22c1.25 0 2.5-1.06 4-1.06Z"/><path d="M10 2c1 .5 2 2 2 5"/></svg>
         <span>Apple Cupertino (Default)</span>
       </button>
+      <button class="arch-btn" onclick="setTheme('neumorphic', this)" id="archBtnNeumorphic">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="4"/><path d="M12 3v2"/><path d="M12 19v2"/></svg>
+        <span id="archBtnNeumorphicText">Neumorphic Soft</span>
+      </button>
       <button class="arch-btn" onclick="setTheme('minimalist_saas', this)">
         <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="18" height="18" x="3" y="3" rx="2"/><path d="M3 9h18"/><path d="M9 21V9"/></svg>
         <span>Minimalist SaaS</span>
@@ -1731,7 +1764,7 @@
       <!-- Quick Telemetry HUD Stats -->
       <div class="hero-stats-row">
         <div class="stat-pill">
-          <div class="stat-val"><bdi dir="ltr">6</bdi></div>
+          <div class="stat-val"><bdi dir="ltr">7</bdi></div>
           <div class="stat-lbl" id="lblStat1">Visual Chemistries</div>
         </div>
         <div class="stat-pill">
@@ -1754,7 +1787,7 @@
       <div class="section-header">
         <span class="section-badge" id="workBadge">Featured Portfolio</span>
         <h2 class="section-title text-reading-center" id="workHeading">Engineered Digital Products & Dashboards</h2>
-        <p class="section-subtitle text-reading-center" id="workDesc">Each product is autonomously styled across all 6 archetypes with 3D tilt physics and mouse-tracking spotlight reflections.</p>
+        <p class="section-subtitle text-reading-center" id="workDesc">Each product is autonomously styled across all 7 archetypes with 3D tilt physics and mouse-tracking spotlight reflections.</p>
       </div>
 
       <div class="portfolio-filters">
@@ -2883,6 +2916,7 @@
       document.getElementById('navEstimator').innerText = isFa ? 'برآورد هزینه' : 'Estimator';
       document.getElementById('navContact').innerText = isFa ? 'ثبت درخواست' : 'Inquiry';
       document.getElementById('navMarketplaceText').innerText = isFa ? 'مارکت پلیس' : 'Marketplace';
+      document.getElementById('archBtnNeumorphicText').innerText = isFa ? 'نئومورفیک سافت' : 'Neumorphic Soft';
 
       // Hero
       document.getElementById('heroBadgeText').innerText = isFa 
@@ -2906,7 +2940,7 @@
       // Portfolio Section
       document.getElementById('workBadge').innerText = isFa ? 'پورتفولیو شاخص' : 'Featured Portfolio';
       document.getElementById('workHeading').innerText = isFa ? 'محصولات دیجیتال و داشبوردهای مهندسی شده' : 'Engineered Digital Products & Dashboards';
-      document.getElementById('workDesc').innerText = isFa ? 'هر محصول در تمام ۶ آرکتایپ به صورت خودکار تغییر سبک داده و از فیزیک سه بعدی و نور متحرک موس بهره می برد.' : 'Each product is autonomously styled across all 6 archetypes with 3D tilt physics and mouse-tracking spotlight reflections.';
+      document.getElementById('workDesc').innerText = isFa ? 'هر محصول در تمام ۷ آرکتایپ به صورت خودکار تغییر سبک داده و از فیزیک سه بعدی و نور متحرک موس بهره می برد.' : 'Each product is autonomously styled across all 7 archetypes with 3D tilt physics and mouse-tracking spotlight reflections.';
       
       document.getElementById('filterAll').innerText = isFa ? 'همه سیستم ها' : 'All Systems';
       document.getElementById('filterFintech').innerText = isFa ? 'فین تک و SaaS' : 'FinTech SaaS';
