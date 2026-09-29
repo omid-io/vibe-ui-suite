@@ -3,7 +3,21 @@
 All notable changes to the **Vibe UI (VS Code, Cursor & Open-VSX)** extension will be documented in this file.
 This project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## [3.9.0] — 2026-09-27
+## [4.1.0] — 2026-09-29
+
+### Added
+- **Apple Cupertino Fluid & Human Interface:** Added 6th visual chemistry to sidebar studio with translucent frosted cards, continuous squircles, and 1-click token copy.
+- **Kowalski Motion Physics & Critically Damped Springs:** Spring physics guidelines and anti-slop rules integrated into extension contracts.
+- **Mobile-Native Touch Resilience:** Touch guidelines and viewport standards added to quick adapters.
+
+---
+
+## [4.0.0] — 2026-09-27
+
+### Added
+- **Flagship Multi-Registry Release:** Unified package integration and synchronized release.
+
+---
 
 ### Added
 - **True Closed-Loop Autonomous Browser Engine:** 100% of benchmark scenarios audited in headless Chromium with zero sampling skips.

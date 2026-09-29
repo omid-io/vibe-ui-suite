@@ -241,6 +241,11 @@ class ChemistrySidebarProvider {
       <div class="desc">Developer-first documentation layout with micro-borders.</div>
       <button class="btn" onclick="copyTokens('STRIPE_CRISP_LIGHT')">Copy Color Tokens</button>
     </div>
+    <div class="card">
+      <div class="card-title">Apple Cupertino Fluid <span class="tag">Native</span></div>
+      <div class="desc">Translucent frosted chrome, continuous squircles, and optical typography.</div>
+      <button class="btn" onclick="copyTokens('APPLE_CUPERTINO')">Copy Color Tokens</button>
+    </div>
   </div>
 
   <!-- Pane 2: WCAG Contrast Calculator -->
@@ -315,7 +320,8 @@ class ChemistrySidebarProvider {
       LUXURY_GLASS_2: \`:root {\\n  --vibe-canvas: oklch(0.08 0.02 270);\\n  --vibe-surface: oklch(0.12 0.02 270);\\n  --vibe-border: oklch(0.28 0.04 270);\\n  --vibe-text-primary: oklch(0.98 0.01 270);\\n  --vibe-accent-primary: oklch(0.78 0.16 75);\\n}\`,
       NEOBRUTALISM: \`:root {\\n  --vibe-canvas: oklch(0.98 0.02 95);\\n  --vibe-surface: oklch(1.0 0 0);\\n  --vibe-border: oklch(0 0 0);\\n  --vibe-text-primary: oklch(0 0 0);\\n  --vibe-accent-primary: oklch(0.85 0.24 135);\\n}\`,
       SWISS_EDITORIAL: \`:root {\\n  --vibe-canvas: oklch(0.97 0.005 80);\\n  --vibe-surface: oklch(0.94 0.008 80);\\n  --vibe-border: oklch(0.15 0.01 80);\\n  --vibe-text-primary: oklch(0.12 0.01 80);\\n  --vibe-accent-primary: oklch(0.55 0.24 25);\\n}\`,
-      STRIPE_CRISP_LIGHT: \`:root {\\n  --vibe-canvas: oklch(0.99 0.002 250);\\n  --vibe-surface: oklch(1.0 0 0);\\n  --vibe-border: oklch(0.90 0.01 250);\\n  --vibe-text-primary: oklch(0.18 0.02 260);\\n  --vibe-accent-primary: oklch(0.55 0.20 270);\\n}\`
+      STRIPE_CRISP_LIGHT: \`:root {\\n  --vibe-canvas: oklch(0.99 0.002 250);\\n  --vibe-surface: oklch(1.0 0 0);\\n  --vibe-border: oklch(0.90 0.01 250);\\n  --vibe-text-primary: oklch(0.18 0.02 260);\\n  --vibe-accent-primary: oklch(0.55 0.20 270);\\n}\`,
+      APPLE_CUPERTINO: \`:root {\\n  --vibe-canvas: oklch(0.975 0.005 250);\\n  --vibe-surface: oklch(0.99 0.002 250 / 0.75);\\n  --vibe-border: oklch(0.88 0.005 250);\\n  --vibe-text-primary: oklch(0.15 0.01 250);\\n  --vibe-accent-primary: oklch(0.58 0.22 255);\\n}\`
     };
 
     function copyTokens(id) {

@@ -5,7 +5,7 @@
   "release_channel": "stable",
   "packages": {
     "vibe-ui-suite": "4.1.0",
-    "@omid-io/tokens": "4.1.0",
+    "@omid-io/tokens": "4.0.0",
     "vibe-ui-vscode": "4.1.0",
     "vibe-ui-nextjs-starter": "4.1.0"
   },
