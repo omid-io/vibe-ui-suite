@@ -3,18 +3,18 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-  <title>Vibe UI Suite v4.1.0 — Autonomous Design System for AI Coding Agents</title>
-  <meta name="description" content="Production-grade, anti-slop design system and lead architect agent (mr-ui-designer). 6 adaptive visual chemistries, Apple Cupertino fluid physics, WCAG AAA contrast, and fixed-structure semantic RTL.">
+  <title>Vibe UI Suite v4.1.0 — Creative Portfolio & Design System Showcase</title>
+  <meta name="description" content="High-craft creative portfolio and production-grade autonomous design system showcase for AI coding agents. 6 visual chemistries, 3D spotlight cards, Kowalski spring physics, WCAG AAA contrast, and fixed-structure semantic RTL.">
   <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%230071e3' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'><polygon points='12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2'/></svg>">
 
-  <!-- High-Performance Typography: Inter, Geist Mono, Playfair, Vazirmatn -->
+  <!-- Typography: Inter, Geist Mono, Playfair, Vazirmatn -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Geist+Mono:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700;800;900&family=Playfair+Display:ital,wght@0,600;0,700;1,600&family=Vazirmatn:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
 
   <style>
     /* =========================================================================
-       1. CANONICAL OKLCH PALETTES & 6 ARCHETYPE THEMES
+       1. CANONICAL OKLCH THEMES & DESIGN TOKENS
        ========================================================================= */
     :root {
       --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
@@ -22,7 +22,7 @@
       --font-serif: 'Playfair Display', Georgia, serif;
       --font-fa: 'Vazirmatn', var(--font-sans);
 
-      /* Kowalski Physical Spring Parameters (v4.1.0) */
+      /* Kowalski Physical Spring Parameters */
       --ease-spring: cubic-bezier(0.16, 1, 0.3, 1);
       --ease-snap: cubic-bezier(0.34, 1.56, 0.64, 1);
       --ease-glide: cubic-bezier(0.25, 1, 0.5, 1);
@@ -37,23 +37,23 @@
     /* THEME 1: APPLE CUPERTINO FLUID (DEFAULT FLAGSHIP) */
     body.theme-apple_cupertino {
       --bg-canvas: #f5f5f7;
-      --bg-surface: rgba(255, 255, 255, 0.84);
-      --bg-surface-elevated: rgba(255, 255, 255, 0.96);
+      --bg-surface: rgba(255, 255, 255, 0.82);
+      --bg-surface-elevated: rgba(255, 255, 255, 0.95);
       --text-primary: #1d1d1f;
       --text-secondary: #6e6e73;
       --text-muted: #86868b;
       --border-subtle: rgba(0, 0, 0, 0.08);
-      --border-strong: rgba(0, 0, 0, 0.16);
+      --border-strong: rgba(0, 0, 0, 0.15);
       --accent-brand: #0071e3;
       --accent-brand-subtle: rgba(0, 113, 227, 0.10);
       --radius-sm: 12px;
       --radius-md: 18px;
-      --radius-lg: 28px; /* Continuous Squircle Curve */
+      --radius-lg: 28px; /* Squircle */
       --shadow-ambient: 0 4px 20px -2px rgba(0, 0, 0, 0.05), 0 2px 6px -1px rgba(0, 0, 0, 0.03);
-      --shadow-hover: 0 16px 36px -4px rgba(0, 113, 227, 0.15), 0 4px 12px -2px rgba(0, 0, 0, 0.06);
+      --shadow-hover: 0 16px 36px -4px rgba(0, 113, 227, 0.14), 0 4px 12px -2px rgba(0, 0, 0, 0.06);
       --card-blur: blur(24px) saturate(180%);
       --border-width: 1px;
-      --hero-glow: radial-gradient(circle at 50% -10%, rgba(0, 113, 227, 0.12) 0%, transparent 70%);
+      --spotlight-color: rgba(0, 113, 227, 0.12);
     }
 
     /* THEME 2: MINIMALIST SAAS (Stripe Crisp Clean) */
@@ -75,14 +75,14 @@
       --shadow-hover: 0 10px 25px -3px rgba(99, 91, 255, 0.12);
       --card-blur: none;
       --border-width: 1px;
-      --hero-glow: radial-gradient(circle at 50% -10%, rgba(99, 91, 255, 0.08) 0%, transparent 70%);
+      --spotlight-color: rgba(99, 91, 255, 0.10);
     }
 
     /* THEME 3: SPECULAR GLASS LUXURY (Web3 & Dark Prestige) */
     body.theme-specular_glass {
       --bg-canvas: #030712;
-      --bg-surface: rgba(17, 24, 39, 0.70);
-      --bg-surface-elevated: rgba(31, 41, 55, 0.88);
+      --bg-surface: rgba(17, 24, 39, 0.72);
+      --bg-surface-elevated: rgba(31, 41, 55, 0.90);
       --text-primary: #f9fafb;
       --text-secondary: #9ca3af;
       --text-muted: #6b7280;
@@ -97,21 +97,21 @@
       --shadow-hover: 0 16px 48px -4px rgba(168, 85, 247, 0.35);
       --card-blur: blur(20px);
       --border-width: 1px;
-      --hero-glow: radial-gradient(circle at 50% -10%, rgba(168, 85, 247, 0.22) 0%, transparent 70%);
+      --spotlight-color: rgba(168, 85, 247, 0.18);
     }
 
-    /* THEME 4: NEOBRUTALISM (Raw Bold Contrast) */
+    /* THEME 4: NEOBRUTALISM (Raw Contrast, Hard Shadows) */
     body.theme-neobrutalism {
-      --bg-canvas: #fef08a;
+      --bg-canvas: #fffbeb;
       --bg-surface: #ffffff;
-      --bg-surface-elevated: #ffffff;
+      --bg-surface-elevated: #fef08a;
       --text-primary: #000000;
       --text-secondary: #1f2937;
       --text-muted: #4b5563;
       --border-subtle: #000000;
       --border-strong: #000000;
-      --accent-brand: #ff5c00;
-      --accent-brand-subtle: #ffd600;
+      --accent-brand: #f59e0b;
+      --accent-brand-subtle: #fef3c7;
       --radius-sm: 0px;
       --radius-md: 0px;
       --radius-lg: 0px;
@@ -119,57 +119,55 @@
       --shadow-hover: 7px 7px 0px #000000;
       --card-blur: none;
       --border-width: 3px;
-      --hero-glow: none;
+      --spotlight-color: rgba(245, 158, 11, 0.15);
     }
 
-    /* THEME 5: SWISS EDITORIAL (Typography & Asymmetry) */
+    /* THEME 5: SWISS EDITORIAL (Typography Grid, Clean Ink) */
     body.theme-swiss_editorial {
-      --bg-canvas: #f5f5f4;
-      --bg-surface: #ffffff;
-      --bg-surface-elevated: #e7e5e4;
-      --text-primary: #1c1917;
-      --text-secondary: #57534e;
-      --text-muted: #854d0e;
-      --border-subtle: #d6d3d1;
-      --border-strong: #1c1917;
-      --accent-brand: #991b1b;
-      --accent-brand-subtle: #fee2e2;
+      --bg-canvas: #ffffff;
+      --bg-surface: #f4f4f5;
+      --bg-surface-elevated: #e4e4e7;
+      --text-primary: #09090b;
+      --text-secondary: #52525b;
+      --text-muted: #71717a;
+      --border-subtle: #d4d4d8;
+      --border-strong: #18181b;
+      --accent-brand: #e11d48;
+      --accent-brand-subtle: #ffe4e6;
       --radius-sm: 2px;
-      --radius-md: 3px;
-      --radius-lg: 4px;
-      --shadow-ambient: 0 2px 6px rgba(28, 25, 23, 0.04);
-      --shadow-hover: 0 6px 16px rgba(153, 27, 27, 0.08);
+      --radius-md: 4px;
+      --radius-lg: 6px;
+      --shadow-ambient: none;
+      --shadow-hover: 0 4px 12px rgba(0, 0, 0, 0.08);
       --card-blur: none;
       --border-width: 1px;
-      --hero-glow: none;
+      --spotlight-color: rgba(225, 29, 72, 0.12);
     }
 
-    /* THEME 6: TERMINAL HUD (Cybernetic & DevOps) */
+    /* THEME 6: TERMINAL HUD (Cybernetic Matrix) */
     body.theme-terminal_hud {
-      --bg-canvas: #050811;
-      --bg-surface: #0a0f1d;
-      --bg-surface-elevated: #0f172a;
+      --bg-canvas: #090d0b;
+      --bg-surface: rgba(13, 20, 16, 0.85);
+      --bg-surface-elevated: #111a14;
       --text-primary: #00ff66;
-      --text-secondary: #38bdf8;
-      --text-muted: #0284c7;
-      --border-subtle: #1e293b;
+      --text-secondary: #00cc52;
+      --text-muted: #008836;
+      --border-subtle: rgba(0, 255, 102, 0.25);
       --border-strong: #00ff66;
       --accent-brand: #00ff66;
       --accent-brand-subtle: rgba(0, 255, 102, 0.12);
       --radius-sm: 4px;
       --radius-md: 6px;
       --radius-lg: 8px;
-      --shadow-ambient: 0 0 16px rgba(0, 255, 102, 0.12);
-      --shadow-hover: 0 0 28px rgba(0, 255, 102, 0.28);
-      --card-blur: none;
+      --shadow-ambient: 0 0 15px rgba(0, 255, 102, 0.15);
+      --shadow-hover: 0 0 25px rgba(0, 255, 102, 0.35);
+      --card-blur: blur(12px);
       --border-width: 1px;
-      --hero-glow: radial-gradient(circle at 50% -10%, rgba(0, 255, 102, 0.10) 0%, transparent 70%);
+      --spotlight-color: rgba(0, 255, 102, 0.20);
     }
 
     /* =========================================================================
-       2. FIXED-STRUCTURE SEMANTIC RTL LAW (CRITICAL REQUIREMENT)
-       Layout grids, sidebars, and control alignments remain physically stable.
-       Only typography and text paragraphs adapt to Persian reading direction.
+       2. GLOBAL RESET & BASE STYLES
        ========================================================================= */
     * {
       box-sizing: border-box;
@@ -179,336 +177,578 @@
     }
 
     html {
-      font-size: 16px;
       scroll-behavior: smooth;
     }
 
     body {
-      font-family: var(--font-sans);
       background-color: var(--bg-canvas);
-      background-image: var(--hero-glow);
-      background-repeat: no-repeat;
       color: var(--text-primary);
+      font-family: var(--font-sans);
+      font-size: 16px;
+      line-height: 1.5;
       min-height: 100dvh;
-      line-height: 1.6;
-      letter-spacing: -0.012em;
+      overflow-x: hidden;
       transition: background-color var(--duration-enter) var(--ease-spring),
                   color var(--duration-enter) var(--ease-spring);
-      overflow-x: hidden;
+      position: relative;
     }
 
-    /* Fixed-Structure Persian Typography Class */
-    body.lang-fa, .lang-fa {
+    /* Ambient Cursor Spotlight Following Pointer */
+    .ambient-spotlight {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      pointer-events: none;
+      z-index: 0;
+      background: radial-gradient(600px circle at var(--mouse-x, 50vw) var(--mouse-y, 30vh), var(--spotlight-color), transparent 70%);
+      transition: background 200ms ease;
+    }
+
+    /* Semantic RTL & Persian Typography Rule */
+    body.lang-fa {
       font-family: var(--font-fa);
-      letter-spacing: 0;
     }
-
-    /* Persian text reading flow inside semantic text elements */
-    body.lang-fa p, body.lang-fa h1, body.lang-fa h2, body.lang-fa h3, body.lang-fa h4, body.lang-fa .persian-text {
+    body.lang-fa .text-reading {
       text-align: right;
+      direction: rtl;
+    }
+    body.lang-fa .text-reading-center {
+      text-align: center;
+      direction: rtl;
     }
 
-    /* Strict Bidirectional Isolation for Technical Values */
-    bdi, code, pre, .font-mono, [dir="ltr"] {
-      direction: ltr !important;
-      unicode-bidi: isolate !important;
-      display: inline-block;
-    }
-
-    :focus-visible {
-      outline: 2px solid var(--accent-brand);
-      outline-offset: 3px;
-    }
-
-    /* Fluid Container with Mobile Zero-Blowout Immunity */
     .container {
       width: 100%;
       max-width: min(100%, 1240px);
       margin: 0 auto;
-      padding: 0 clamp(16px, 4vw, 24px);
-    }
-
-    /* 100% SVG Vector System (Zero Raw Emojis Mandate) */
-    .vibe-icon {
-      width: 1.15em;
-      height: 1.15em;
-      display: inline-block;
-      vertical-align: -0.18em;
-      stroke: currentColor;
-      fill: none;
-      stroke-width: 2;
-      stroke-linecap: round;
-      stroke-linejoin: round;
-      flex-shrink: 0;
+      padding: 0 clamp(16px, 3.5vw, 32px);
+      position: relative;
+      z-index: 1;
     }
 
     /* =========================================================================
-       3. FLOATING GLASS NAVBAR
+       3. FLOATING GLASS NAVBAR & CONTROLS
        ========================================================================= */
-    .site-nav {
+    .nav-bar-wrap {
       position: sticky;
-      top: 16px;
+      top: clamp(10px, 2vw, 20px);
       z-index: 100;
-      margin-bottom: 24px;
+      margin-bottom: 30px;
     }
 
-    .nav-inner {
+    .nav-bar {
       background: var(--bg-surface);
       backdrop-filter: var(--card-blur);
       -webkit-backdrop-filter: var(--card-blur);
       border: var(--border-width) solid var(--border-subtle);
       border-radius: var(--radius-lg);
-      padding: 12px 20px;
+      padding: 12px clamp(14px, 2.5vw, 24px);
       display: flex;
       align-items: center;
       justify-content: space-between;
       gap: 16px;
       box-shadow: var(--shadow-ambient);
-      transition: all var(--duration-enter) var(--ease-spring);
+      transition: all var(--duration-exit) var(--ease-spring);
     }
 
-    .nav-brand {
+    .brand-wrap {
       display: flex;
       align-items: center;
-      gap: 12px;
+      gap: 10px;
       text-decoration: none;
       color: var(--text-primary);
-      font-weight: 700;
-      font-size: 1.05rem;
+      font-weight: 800;
+      font-size: 1.15rem;
+      letter-spacing: -0.025em;
     }
 
-    .brand-badge {
-      font-size: 0.75rem;
+    .brand-logo-icon {
+      width: 32px;
+      height: 32px;
+      color: var(--accent-brand);
+      flex-shrink: 0;
+    }
+
+    .version-pill {
+      font-family: var(--font-mono);
+      font-size: 0.725rem;
+      font-weight: 700;
       padding: 3px 8px;
       border-radius: 9999px;
       background: var(--accent-brand-subtle);
       color: var(--accent-brand);
       border: 1px solid var(--border-subtle);
-      font-family: var(--font-mono);
-      font-weight: 600;
-      display: inline-flex;
-      align-items: center;
-      gap: 5px;
     }
 
-    .status-dot {
-      width: 7px;
-      height: 7px;
-      border-radius: 50%;
-      background: #10b981;
-      display: inline-block;
-      box-shadow: 0 0 8px #10b981;
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: clamp(12px, 2vw, 24px);
+      list-style: none;
+    }
+
+    @media (max-width: 53.75rem) {
+      .nav-links {
+        display: none;
+      }
+    }
+
+    .nav-link {
+      color: var(--text-secondary);
+      text-decoration: none;
+      font-size: 0.9rem;
+      font-weight: 600;
+      transition: color var(--duration-exit) var(--ease-spring);
+    }
+
+    .nav-link:hover {
+      color: var(--accent-brand);
     }
 
     .nav-actions {
       display: flex;
       align-items: center;
-      gap: 10px;
+      gap: 8px;
     }
 
-    .btn {
+    .nav-btn {
+      background: var(--bg-surface-elevated);
+      color: var(--text-primary);
+      border: var(--border-width) solid var(--border-subtle);
+      border-radius: var(--radius-sm);
+      padding: 8px 14px;
+      font-size: 0.825rem;
+      font-weight: 600;
+      cursor: pointer;
       display: inline-flex;
       align-items: center;
-      justify-content: center;
+      gap: 6px;
+      min-height: 40px;
+      transition: all var(--duration-exit) var(--ease-spring);
+    }
+
+    .nav-btn:hover {
+      border-color: var(--accent-brand);
+      box-shadow: var(--shadow-ambient);
+    }
+
+    /* Archetype Switcher Bar */
+    .archetype-bar {
+      display: flex;
       gap: 8px;
-      font-family: inherit;
-      font-size: 0.875rem;
-      font-weight: 600;
-      padding: 8px 16px;
-      min-height: 44px; /* WCAG 2.5.5 Touch Target Envelope */
+      justify-content: center;
+      flex-wrap: wrap;
+      margin-bottom: 28px;
+    }
+
+    .arch-btn {
+      background: var(--bg-surface);
+      border: var(--border-width) solid var(--border-subtle);
       border-radius: var(--radius-md);
+      padding: 8px 14px;
+      font-family: inherit;
+      font-size: 0.825rem;
+      font-weight: 600;
+      color: var(--text-secondary);
       cursor: pointer;
-      text-decoration: none;
-      border: var(--border-width) solid transparent;
-      transition: transform var(--duration-exit) var(--ease-spring),
-                  background-color var(--duration-exit) var(--ease-spring),
-                  box-shadow var(--duration-exit) var(--ease-spring);
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      min-height: 44px;
+      transition: all var(--duration-exit) var(--ease-spring);
     }
 
-    .btn:hover {
-      transform: translateY(-2px);
-    }
-
-    .btn:active {
-      transform: translateY(0);
-    }
-
-    .btn-primary {
+    .arch-btn.active {
       background: var(--accent-brand);
       color: #ffffff;
-      box-shadow: 0 4px 14px -2px rgba(0, 113, 227, 0.3);
-    }
-
-    .btn-outline {
-      background: transparent;
-      color: var(--text-primary);
-      border-color: var(--border-subtle);
-    }
-
-    .btn-outline:hover {
-      border-color: var(--border-strong);
-      background: var(--bg-surface-elevated);
+      border-color: var(--accent-brand);
+      box-shadow: var(--shadow-hover);
     }
 
     /* =========================================================================
-       4. HERO SECTION WITH LIVING ANIMATION BADGE
+       4. CREATIVE HERO SECTION
        ========================================================================= */
-    .hero {
-      padding: 30px 0 50px;
+    .hero-section {
+      padding: clamp(20px, 4vw, 50px) 0 clamp(40px, 6vw, 70px);
       text-align: center;
     }
 
-    .hero-eyebrow {
+    .hero-status-badge {
       display: inline-flex;
       align-items: center;
-      gap: 8px;
-      padding: 6px 14px;
+      gap: 10px;
+      padding: 6px 16px;
       border-radius: 9999px;
-      background: var(--accent-brand-subtle);
-      color: var(--accent-brand);
+      background: var(--bg-surface);
+      backdrop-filter: var(--card-blur);
+      -webkit-backdrop-filter: var(--card-blur);
+      color: var(--text-primary);
       font-size: 0.825rem;
       font-weight: 600;
-      margin-bottom: 20px;
+      margin-bottom: 24px;
       border: 1px solid var(--border-subtle);
-      animation: spring-float 3s ease-in-out infinite;
+      box-shadow: var(--shadow-ambient);
+      animation: float-spring 4s ease-in-out infinite;
     }
 
-    @keyframes spring-float {
+    .pulse-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: #10b981;
+      box-shadow: 0 0 10px #10b981;
+      animation: pulse-ring 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+    }
+
+    @keyframes pulse-ring {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.4; transform: scale(1.3); }
+    }
+
+    @keyframes float-spring {
       0%, 100% { transform: translateY(0px); }
-      50% { transform: translateY(-4px); }
+      50% { transform: translateY(-5px); }
     }
 
-    .hero h1 {
-      font-size: clamp(2.1rem, 5vw, 3.8rem);
-      font-weight: 800;
-      line-height: 1.15;
-      letter-spacing: -0.035em;
-      margin-bottom: 20px;
-      max-width: min(100%, 960px);
+    .hero-title {
+      font-size: clamp(2.3rem, 5.8vw, 4.2rem);
+      font-weight: 900;
+      line-height: 1.12;
+      letter-spacing: -0.04em;
+      margin-bottom: 22px;
+      max-width: min(100%, 1040px);
       margin-left: auto;
       margin-right: auto;
     }
 
-    .hero p.lead {
-      font-size: clamp(1.05rem, 2vw, 1.25rem);
-      color: var(--text-secondary);
-      max-width: min(100%, 760px);
-      margin: 0 auto 32px;
-      line-height: 1.6;
+    .hero-title .gradient-text {
+      background: linear-gradient(135deg, var(--text-primary) 30%, var(--accent-brand) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
     }
 
-    .hero-ctas {
+    .hero-subtitle {
+      font-size: clamp(1.05rem, 2.2vw, 1.3rem);
+      color: var(--text-secondary);
+      max-width: min(100%, 780px);
+      margin: 0 auto 36px;
+      line-height: 1.65;
+    }
+
+    .hero-cta-group {
       display: flex;
       align-items: center;
       justify-content: center;
       gap: 14px;
       flex-wrap: wrap;
-      margin-bottom: 30px;
+      margin-bottom: 34px;
     }
 
-    .command-chip {
-      background: var(--bg-surface);
-      border: var(--border-width) solid var(--border-subtle);
+    .btn-primary {
+      background: var(--accent-brand);
+      color: #ffffff;
+      border: var(--border-width) solid var(--accent-brand);
       border-radius: var(--radius-md);
-      padding: 10px 18px;
-      font-family: var(--font-mono);
-      font-size: 0.85rem;
-      color: var(--text-primary);
-      display: inline-flex;
-      align-items: center;
-      gap: 12px;
-      cursor: pointer;
-      user-select: all;
-      transition: border-color var(--duration-exit) var(--ease-spring),
-                  box-shadow var(--duration-exit) var(--ease-spring);
-    }
-
-    .command-chip:hover {
-      border-color: var(--accent-brand);
-      box-shadow: var(--shadow-ambient);
-    }
-
-    /* =========================================================================
-       5. INTERACTIVE LIVE SECTIONS PLAYGROUND (FULL WEBSITE SUITE)
-       ========================================================================= */
-    .playground-section {
-      margin-bottom: 60px;
-    }
-
-    .section-title-wrap {
-      text-align: center;
-      margin-bottom: 28px;
-    }
-
-    .section-title {
-      font-size: 1.85rem;
+      padding: 12px 24px;
+      font-size: 0.95rem;
       font-weight: 700;
-      letter-spacing: -0.025em;
-      margin-bottom: 8px;
-    }
-
-    .section-desc {
-      color: var(--text-secondary);
-      font-size: 0.98rem;
-    }
-
-    .archetype-tabs {
-      display: flex;
-      gap: 8px;
-      justify-content: center;
-      flex-wrap: wrap;
-      margin-bottom: 24px;
-    }
-
-    .arch-tab-btn {
-      background: var(--bg-surface);
-      border: var(--border-width) solid var(--border-subtle);
-      border-radius: var(--radius-md);
-      padding: 10px 16px;
-      font-family: inherit;
-      font-size: 0.875rem;
-      font-weight: 600;
-      color: var(--text-secondary);
+      text-decoration: none;
       cursor: pointer;
       display: inline-flex;
       align-items: center;
       gap: 8px;
-      min-height: 44px;
+      min-height: 48px;
+      box-shadow: var(--shadow-ambient);
       transition: all var(--duration-exit) var(--ease-spring);
     }
 
-    .arch-tab-btn.active {
+    .btn-primary:hover {
+      transform: translateY(-2px);
+      box-shadow: var(--shadow-hover);
+    }
+
+    .btn-secondary {
+      background: var(--bg-surface);
+      color: var(--text-primary);
+      border: var(--border-width) solid var(--border-subtle);
+      border-radius: var(--radius-md);
+      padding: 12px 22px;
+      font-size: 0.95rem;
+      font-weight: 600;
+      text-decoration: none;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      min-height: 48px;
+      transition: all var(--duration-exit) var(--ease-spring);
+    }
+
+    .btn-secondary:hover {
+      border-color: var(--accent-brand);
+      transform: translateY(-2px);
+    }
+
+    .hero-stats-row {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+      gap: 16px;
+      max-width: min(100%, 880px);
+      margin: 0 auto;
+    }
+
+    .stat-pill {
+      background: var(--bg-surface);
+      backdrop-filter: var(--card-blur);
+      -webkit-backdrop-filter: var(--card-blur);
+      border: var(--border-width) solid var(--border-subtle);
+      border-radius: var(--radius-md);
+      padding: 14px 18px;
+      text-align: center;
+      box-shadow: var(--shadow-ambient);
+    }
+
+    .stat-val {
+      font-size: 1.55rem;
+      font-weight: 800;
+      letter-spacing: -0.03em;
+      color: var(--accent-brand);
+      line-height: 1.2;
+    }
+
+    .stat-lbl {
+      font-size: 0.78rem;
+      font-weight: 600;
+      color: var(--text-secondary);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      margin-top: 4px;
+    }
+
+    /* =========================================================================
+       5. FEATURED PORTFOLIO & WORK SHOWCASE (3D TILT & RADIAL SPOTLIGHT)
+       ========================================================================= */
+    .section-block {
+      margin-bottom: 70px;
+    }
+
+    .section-header {
+      text-align: center;
+      margin-bottom: 36px;
+    }
+
+    .section-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 0.8rem;
+      font-weight: 700;
+      color: var(--accent-brand);
+      background: var(--accent-brand-subtle);
+      padding: 5px 12px;
+      border-radius: 9999px;
+      border: 1px solid var(--border-subtle);
+      margin-bottom: 12px;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+    }
+
+    .section-title {
+      font-size: clamp(1.9rem, 3.8vw, 2.6rem);
+      font-weight: 800;
+      letter-spacing: -0.03em;
+      margin-bottom: 10px;
+    }
+
+    .section-subtitle {
+      font-size: 1.05rem;
+      color: var(--text-secondary);
+      max-width: min(100%, 640px);
+      margin: 0 auto;
+    }
+
+    .portfolio-filters {
+      display: flex;
+      justify-content: center;
+      gap: 8px;
+      flex-wrap: wrap;
+      margin-bottom: 28px;
+    }
+
+    .filter-btn {
+      background: var(--bg-surface);
+      border: var(--border-width) solid var(--border-subtle);
+      border-radius: 9999px;
+      padding: 8px 16px;
+      font-size: 0.825rem;
+      font-weight: 600;
+      color: var(--text-secondary);
+      cursor: pointer;
+      min-height: 40px;
+      transition: all var(--duration-exit) var(--ease-spring);
+    }
+
+    .filter-btn.active, .filter-btn:hover {
       background: var(--accent-brand);
       color: #ffffff;
       border-color: var(--accent-brand);
-      box-shadow: 0 4px 14px -2px rgba(0, 113, 227, 0.28);
     }
 
-    /* Master Showcase Canvas */
-    .showcase-stage {
+    .portfolio-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(min(100%, 360px), 1fr));
+      gap: 24px;
+    }
+
+    /* 3D Tilt Card with Pointer Glow */
+    .project-card {
       background: var(--bg-surface);
       backdrop-filter: var(--card-blur);
       -webkit-backdrop-filter: var(--card-blur);
       border: var(--border-width) solid var(--border-subtle);
       border-radius: var(--radius-lg);
-      padding: clamp(20px, 4vw, 36px);
+      padding: clamp(20px, 3.5vw, 28px);
       box-shadow: var(--shadow-ambient);
-      transition: all var(--duration-enter) var(--ease-spring);
+      position: relative;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      min-height: 380px;
+      transform-style: preserve-3d;
+      transition: transform var(--duration-enter) var(--ease-spring),
+                  box-shadow var(--duration-enter) var(--ease-spring),
+                  border-color var(--duration-exit) var(--ease-spring);
+      cursor: pointer;
     }
 
-    .section-nav-tabs {
+    .project-card:hover {
+      border-color: var(--accent-brand);
+      box-shadow: var(--shadow-hover);
+    }
+
+    /* Pointer-tracking shine overlay */
+    .card-spotlight {
+      position: absolute;
+      inset: 0;
+      border-radius: inherit;
+      pointer-events: none;
+      background: radial-gradient(350px circle at var(--card-x, 50%) var(--card-y, 50%), var(--spotlight-color), transparent 70%);
+      opacity: 0;
+      transition: opacity 250ms ease;
+    }
+
+    .project-card:hover .card-spotlight {
+      opacity: 1;
+    }
+
+    .project-top {
       display: flex;
-      gap: 10px;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 18px;
+    }
+
+    .project-tag {
+      font-size: 0.75rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: var(--accent-brand);
+      background: var(--accent-brand-subtle);
+      padding: 4px 10px;
+      border-radius: 9999px;
+    }
+
+    .project-kpi {
+      font-family: var(--font-mono);
+      font-size: 0.8rem;
+      font-weight: 700;
+      color: #10b981;
+      background: rgba(16, 185, 129, 0.12);
+      padding: 4px 10px;
+      border-radius: 9999px;
+    }
+
+    .project-preview-frame {
+      background: var(--bg-surface-elevated);
+      border: var(--border-width) solid var(--border-subtle);
+      border-radius: var(--radius-md);
+      padding: 16px;
+      margin-bottom: 20px;
+      min-height: 140px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      position: relative;
+    }
+
+    .project-title {
+      font-size: 1.35rem;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      margin-bottom: 8px;
+    }
+
+    .project-desc {
+      font-size: 0.92rem;
+      color: var(--text-secondary);
+      line-height: 1.55;
+      margin-bottom: 18px;
+    }
+
+    .project-footer {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-top: var(--border-width) solid var(--border-subtle);
+      padding-top: 14px;
+    }
+
+    .project-meta-item {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      font-weight: 500;
+    }
+
+    .card-action-link {
+      font-size: 0.85rem;
+      font-weight: 700;
+      color: var(--accent-brand);
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      text-decoration: none;
+    }
+
+    /* =========================================================================
+       6. INTERACTIVE TREND LAB (ALL LIVE DEMOS)
+       ========================================================================= */
+    .lab-stage {
+      background: var(--bg-surface);
+      backdrop-filter: var(--card-blur);
+      -webkit-backdrop-filter: var(--card-blur);
+      border: var(--border-width) solid var(--border-subtle);
+      border-radius: var(--radius-lg);
+      padding: clamp(20px, 3.5vw, 36px);
+      box-shadow: var(--shadow-ambient);
+    }
+
+    .lab-tabs {
+      display: flex;
+      gap: 8px;
       border-bottom: var(--border-width) solid var(--border-subtle);
       padding-bottom: 16px;
       margin-bottom: 28px;
       overflow-x: auto;
     }
 
-    .sec-tab-btn {
+    .lab-tab-btn {
       background: transparent;
       border: none;
-      padding: 8px 14px;
+      padding: 10px 16px;
       font-family: inherit;
       font-size: 0.88rem;
       font-weight: 600;
@@ -519,20 +759,21 @@
       align-items: center;
       gap: 8px;
       white-space: nowrap;
+      min-height: 44px;
       transition: all var(--duration-exit) var(--ease-spring);
     }
 
-    .sec-tab-btn.active {
+    .lab-tab-btn.active {
       background: var(--accent-brand-subtle);
       color: var(--accent-brand);
     }
 
-    .section-view {
+    .lab-view {
       display: none;
       animation: fadeIn var(--duration-enter) var(--ease-spring);
     }
 
-    .section-view.active {
+    .lab-view.active {
       display: block;
     }
 
@@ -541,91 +782,131 @@
       to { opacity: 1; transform: translateY(0); }
     }
 
-    /* =========================================================================
-       DEMO 1: SAAS FINANCIAL & ARR DASHBOARD (APPLE CUPERTINO FLUID)
-       ========================================================================= */
-    .dash-container {
+    /* DEMO 1: SAAS DASHBOARD */
+    .dash-grid {
       display: grid;
       grid-template-columns: 240px 1fr;
       gap: 20px;
       background: var(--bg-surface-elevated);
       border: var(--border-width) solid var(--border-subtle);
-      border-radius: var(--radius-lg);
+      border-radius: var(--radius-md);
       padding: 24px;
     }
 
     @media (max-width: 53.75rem) {
-      .dash-container {
+      .dash-grid {
         grid-template-columns: 1fr;
       }
     }
 
-    .dash-sidebar {
-      background: var(--bg-surface);
-      border: var(--border-width) solid var(--border-subtle);
-      border-radius: var(--radius-md);
-      padding: 20px;
+    .dash-side-nav {
       display: flex;
       flex-direction: column;
-      gap: 12px;
+      gap: 10px;
     }
 
-    .dash-menu-item {
+    .dash-nav-item {
       display: flex;
       align-items: center;
       gap: 10px;
       padding: 10px 14px;
       border-radius: var(--radius-sm);
       color: var(--text-secondary);
-      font-weight: 600;
       font-size: 0.88rem;
-      cursor: pointer;
+      font-weight: 600;
+      text-decoration: none;
       transition: all var(--duration-exit) var(--ease-spring);
     }
 
-    .dash-menu-item.active, .dash-menu-item:hover {
+    .dash-nav-item.active, .dash-nav-item:hover {
       background: var(--accent-brand-subtle);
       color: var(--accent-brand);
     }
 
-    .dash-content {
-      display: flex;
-      flex-direction: column;
-      gap: 20px;
-    }
-
-    .dash-stats-row {
+    .dash-kpis {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
       gap: 16px;
+      margin-bottom: 24px;
     }
 
-    .dash-stat-box {
+    .kpi-card {
       background: var(--bg-surface);
       border: var(--border-width) solid var(--border-subtle);
-      border-radius: var(--radius-md);
-      padding: 18px;
+      border-radius: var(--radius-sm);
+      padding: 16px;
     }
 
-    /* Interactive SVG Chart Simulator */
-    .chart-box {
+    .kpi-title {
+      font-size: 0.8rem;
+      color: var(--text-secondary);
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+    }
+
+    .kpi-number {
+      font-size: 1.7rem;
+      font-weight: 800;
+      letter-spacing: -0.02em;
+      margin: 4px 0;
+    }
+
+    .kpi-delta {
+      font-size: 0.78rem;
+      font-weight: 700;
+      color: #10b981;
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+    }
+
+    .dash-chart-box {
       background: var(--bg-surface);
       border: var(--border-width) solid var(--border-subtle);
-      border-radius: var(--radius-md);
-      padding: 24px;
+      border-radius: var(--radius-sm);
+      padding: 20px;
     }
 
-    /* =========================================================================
-       DEMO 2: CLINICAL HEALTH BEFORE/AFTER DRAG SLIDER
-       ========================================================================= */
-    .compare-container {
+    .chart-controls {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 16px;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+
+    .chart-btn-group {
+      display: flex;
+      gap: 6px;
+    }
+
+    .chart-btn {
+      background: var(--bg-surface-elevated);
+      border: var(--border-width) solid var(--border-subtle);
+      border-radius: var(--radius-sm);
+      padding: 4px 10px;
+      font-size: 0.78rem;
+      font-weight: 600;
+      color: var(--text-secondary);
+      cursor: pointer;
+    }
+
+    .chart-btn.active {
+      background: var(--accent-brand);
+      color: #ffffff;
+      border-color: var(--accent-brand);
+    }
+
+    /* DEMO 2: BEFORE / AFTER SPLIT SLIDER */
+    .compare-wrapper {
       position: relative;
       width: 100%;
-      height: 340px;
-      border-radius: var(--radius-lg);
+      height: 380px;
+      border-radius: var(--radius-md);
       overflow: hidden;
       border: var(--border-width) solid var(--border-subtle);
-      background: #000;
       user-select: none;
       touch-action: none;
     }
@@ -634,72 +915,73 @@
       position: absolute;
       inset: 0;
       display: flex;
-      flex-direction: column;
-      justify-content: center;
       align-items: center;
-      padding: 24px;
-    }
-
-    .compare-before {
-      background: linear-gradient(135deg, #2d3748 0%, #1a202c 100%);
-      color: #e2e8f0;
-      width: 50%;
-      border-right: 2px solid #ffffff;
-      z-index: 2;
+      justify-content: center;
+      padding: 30px;
+      text-align: center;
     }
 
     .compare-after {
-      background: linear-gradient(135deg, #0071e3 0%, #004b99 100%);
+      background: var(--bg-surface);
+      color: var(--text-primary);
+    }
+
+    .compare-before {
+      background: #18181b;
       color: #ffffff;
-      z-index: 1;
+      width: 50%;
+      overflow: hidden;
+      z-index: 2;
+      border-right: 2px solid var(--accent-brand);
     }
 
     .compare-handle {
       position: absolute;
-      top: 50%;
+      top: 0;
+      bottom: 0;
       left: 50%;
-      transform: translate(-50%, -50%);
       width: 44px;
-      height: 44px;
-      border-radius: 50%;
-      background: #ffffff;
-      color: #1d1d1f;
+      transform: translateX(-50%);
+      z-index: 10;
+      cursor: ew-resize;
       display: flex;
       align-items: center;
       justify-content: center;
-      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.4);
-      z-index: 10;
-      cursor: ew-resize;
+      touch-action: none;
     }
 
-    /* =========================================================================
-       DEMO 3: KOWALSKI SPRING PHYSICS PLAYGROUND
-       ========================================================================= */
-    .physics-playground {
-      background: var(--bg-surface-elevated);
-      border: var(--border-width) solid var(--border-subtle);
-      border-radius: var(--radius-lg);
-      padding: 28px;
+    .handle-circle {
+      width: 42px;
+      height: 42px;
+      border-radius: 50%;
+      background: var(--accent-brand);
+      color: #ffffff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 4px 16px rgba(0,0,0,0.3);
+      border: 2px solid #ffffff;
     }
 
+    /* DEMO 3: KOWALSKI SPRING PHYSICS */
     .spring-track {
       position: relative;
       width: 100%;
-      height: 120px;
-      background: var(--bg-canvas);
-      border: 1px dashed var(--border-strong);
+      height: 180px;
+      background: var(--bg-surface-elevated);
+      border: var(--border-width) solid var(--border-subtle);
       border-radius: var(--radius-md);
       overflow: hidden;
-      margin-bottom: 20px;
       display: flex;
       align-items: center;
       padding: 0 20px;
+      margin-bottom: 24px;
       touch-action: none;
     }
 
     .spring-box {
-      width: 80px;
-      height: 80px;
+      width: 120px;
+      height: 100px;
       background: var(--accent-brand);
       color: #ffffff;
       border-radius: var(--radius-md);
@@ -707,81 +989,91 @@
       flex-direction: column;
       align-items: center;
       justify-content: center;
+      font-weight: 700;
+      font-size: 0.85rem;
       cursor: grab;
       user-select: none;
       box-shadow: var(--shadow-hover);
-      transition: transform 0.05s linear;
-      font-size: 0.75rem;
-      font-weight: 700;
+      will-change: transform;
+      position: relative;
     }
 
     .spring-box:active {
       cursor: grabbing;
-      transform: scale(1.05);
+      transform: scale(1.04);
     }
 
-    /* =========================================================================
-       PRICING & ARR SWITCHER (FLUID MIN-MAX)
-       ========================================================================= */
-    .pricing-card {
-      width: 100%;
-      max-width: min(100%, 480px);
-      margin: 0 auto;
+    .spring-telemetry {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 14px;
+    }
+
+    .telemetry-item {
       background: var(--bg-surface-elevated);
       border: var(--border-width) solid var(--border-subtle);
-      border-radius: var(--radius-lg);
-      padding: clamp(20px, 4vw, 32px);
-      text-align: center;
-      box-shadow: var(--shadow-ambient);
-    }
-
-    .toggle-row {
-      display: inline-flex;
-      align-items: center;
-      gap: 12px;
-      background: var(--bg-canvas);
-      padding: 6px 12px;
-      border-radius: 9999px;
-      border: var(--border-width) solid var(--border-subtle);
-      margin-bottom: 24px;
-    }
-
-    .switch-pill {
-      position: relative;
-      width: 52px;
-      height: 30px;
-      background: var(--border-strong);
-      border-radius: 9999px;
-      cursor: pointer;
-      border: none;
-      padding: 3px;
-      transition: background-color var(--duration-exit) var(--ease-spring);
-    }
-
-    .switch-pill.active {
-      background: var(--accent-brand);
-    }
-
-    .switch-thumb {
-      width: 24px;
-      height: 24px;
-      background: #ffffff;
-      border-radius: 50%;
-      box-shadow: 0 2px 4px rgba(0,0,0,0.2);
-      transition: transform var(--duration-exit) var(--ease-spring);
-    }
-
-    .switch-pill.active .switch-thumb {
-      transform: translateX(22px);
+      border-radius: var(--radius-sm);
+      padding: 12px 16px;
     }
 
     /* =========================================================================
-       MR-UI-DESIGNER STUDIO & LAZY PROMPT CONSOLE
+       7. CAPABILITIES & SERVICES BENTO GRID
        ========================================================================= */
-    .studio-section {
-      margin-bottom: 60px;
+    .bento-grid {
+      display: grid;
+      grid-template-columns: repeat(12, 1fr);
+      gap: 20px;
     }
 
+    .bento-card {
+      background: var(--bg-surface);
+      backdrop-filter: var(--card-blur);
+      -webkit-backdrop-filter: var(--card-blur);
+      border: var(--border-width) solid var(--border-subtle);
+      border-radius: var(--radius-lg);
+      padding: clamp(20px, 3.5vw, 30px);
+      box-shadow: var(--shadow-ambient);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      position: relative;
+      overflow: hidden;
+      transition: all var(--duration-exit) var(--ease-spring);
+    }
+
+    .bento-card:hover {
+      border-color: var(--accent-brand);
+      box-shadow: var(--shadow-hover);
+    }
+
+    .bento-card.col-8 { grid-column: span 8; }
+    .bento-card.col-4 { grid-column: span 4; }
+    .bento-card.col-6 { grid-column: span 6; }
+    .bento-card.col-12 { grid-column: span 12; }
+
+    @media (max-width: 53.75rem) {
+      .bento-card.col-8,
+      .bento-card.col-4,
+      .bento-card.col-6 {
+        grid-column: span 12;
+      }
+    }
+
+    .bento-icon {
+      width: 40px;
+      height: 40px;
+      border-radius: var(--radius-sm);
+      background: var(--accent-brand-subtle);
+      color: var(--accent-brand);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 16px;
+    }
+
+    /* =========================================================================
+       8. MR-UI-DESIGNER INTERACTIVE STUDIO & LAZY PROMPTING
+       ========================================================================= */
     .studio-console {
       background: var(--bg-surface);
       border: var(--border-width) solid var(--border-subtle);
@@ -790,27 +1082,27 @@
       box-shadow: var(--shadow-ambient);
     }
 
-    .console-header {
+    .console-topbar {
       background: var(--bg-surface-elevated);
-      padding: 16px 24px;
+      padding: 14px 20px;
       border-bottom: var(--border-width) solid var(--border-subtle);
       display: flex;
       align-items: center;
       justify-content: space-between;
-      gap: 16px;
       flex-wrap: wrap;
+      gap: 12px;
     }
 
-    .chips-bar {
-      padding: 16px 24px;
+    .prompt-chips-row {
       display: flex;
-      gap: 10px;
+      gap: 8px;
+      padding: 14px 20px;
       overflow-x: auto;
       border-bottom: var(--border-width) solid var(--border-subtle);
       background: var(--bg-canvas);
     }
 
-    .prompt-chip {
+    .lazy-chip {
       background: var(--bg-surface);
       border: var(--border-width) solid var(--border-subtle);
       border-radius: 9999px;
@@ -823,108 +1115,229 @@
       display: inline-flex;
       align-items: center;
       gap: 6px;
+      min-height: 40px;
       transition: all var(--duration-exit) var(--ease-spring);
     }
 
-    .prompt-chip:hover, .prompt-chip.active {
+    .lazy-chip.active, .lazy-chip:hover {
       border-color: var(--accent-brand);
       background: var(--accent-brand-subtle);
       color: var(--accent-brand);
     }
 
-    .studio-workspace {
+    .studio-body {
       display: grid;
-      grid-template-columns: 1fr 1.2fr;
-      min-height: 480px;
+      grid-template-columns: 1fr 1fr;
     }
 
     @media (max-width: 53.75rem) {
-      .studio-workspace {
+      .studio-body {
         grid-template-columns: 1fr;
       }
     }
 
-    .studio-left {
+    .studio-telemetry-col {
       padding: 24px;
       border-right: var(--border-width) solid var(--border-subtle);
       display: flex;
       flex-direction: column;
-      gap: 18px;
+      gap: 16px;
     }
 
-    .studio-right {
+    .terminal-readout {
+      background: #050b14;
+      color: #38bdf8;
+      font-family: var(--font-mono);
+      font-size: 0.82rem;
+      line-height: 1.6;
+      padding: 16px;
+      border-radius: var(--radius-sm);
+      border: 1px solid rgba(56, 189, 248, 0.2);
+      min-height: 140px;
+      white-space: pre-wrap;
+    }
+
+    .studio-preview-col {
       padding: 24px;
       background: var(--bg-surface-elevated);
       display: flex;
       flex-direction: column;
       justify-content: center;
-    }
-
-    .sensor-readout {
-      background: #020617;
-      color: #38bdf8;
-      font-family: var(--font-mono);
-      font-size: 0.785rem;
-      border-radius: var(--radius-sm);
-      padding: 16px;
-      line-height: 1.6;
-      border: 1px solid #1e293b;
-    }
-
-    .sensor-tag {
-      color: #34d399;
-      font-weight: 600;
+      gap: 16px;
     }
 
     /* =========================================================================
-       VERIFICATION LABS: WCAG AAA & BIDI GUARDIAN
+       9. INTERACTIVE PROJECT ESTIMATOR & PRICING
        ========================================================================= */
-    .tools-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(min(100%, 320px), 1fr));
-      gap: 28px;
-      margin-bottom: 60px;
-    }
-
-    .tool-box {
+    .estimator-card {
       background: var(--bg-surface);
       border: var(--border-width) solid var(--border-subtle);
       border-radius: var(--radius-lg);
-      padding: 28px;
+      padding: clamp(24px, 4vw, 40px);
       box-shadow: var(--shadow-ambient);
+      display: grid;
+      grid-template-columns: 1.2fr 1fr;
+      gap: 30px;
     }
 
-    .contrast-badge-pill {
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      padding: 4px 10px;
+    @media (max-width: 53.75rem) {
+      .estimator-card {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .slider-group {
+      margin-bottom: 22px;
+    }
+
+    .slider-header {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 8px;
+      font-size: 0.9rem;
+      font-weight: 600;
+    }
+
+    .range-input {
+      width: 100%;
+      accent-color: var(--accent-brand);
+      height: 6px;
       border-radius: 9999px;
-      font-size: 0.785rem;
-      font-family: var(--font-mono);
-      font-weight: 700;
+      cursor: pointer;
     }
 
-    .badge-pass-aaa {
-      background: rgba(16, 185, 129, 0.15);
-      color: #059669;
-      border: 1px solid rgba(16, 185, 129, 0.3);
+    .estimator-receipt {
+      background: var(--bg-surface-elevated);
+      border: var(--border-width) solid var(--border-subtle);
+      border-radius: var(--radius-md);
+      padding: 24px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      text-align: center;
     }
 
     /* =========================================================================
-       FOOTER
+       10. CLIENT TESTIMONIALS & SOCIAL PROOF
+       ========================================================================= */
+    .testimonials-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(min(100%, 320px), 1fr));
+      gap: 20px;
+    }
+
+    .testimonial-card {
+      background: var(--bg-surface);
+      border: var(--border-width) solid var(--border-subtle);
+      border-radius: var(--radius-md);
+      padding: 24px;
+      box-shadow: var(--shadow-ambient);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    .author-info {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-top: 18px;
+    }
+
+    .author-avatar {
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      background: var(--accent-brand-subtle);
+      color: var(--accent-brand);
+      font-weight: 800;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    /* =========================================================================
+       11. PROJECT INQUIRY STATION & CONTACT
+       ========================================================================= */
+    .contact-card {
+      background: var(--bg-surface);
+      border: var(--border-width) solid var(--border-subtle);
+      border-radius: var(--radius-lg);
+      padding: clamp(24px, 4vw, 44px);
+      box-shadow: var(--shadow-ambient);
+      max-width: min(100%, 780px);
+      margin: 0 auto;
+    }
+
+    .form-group {
+      margin-bottom: 18px;
+    }
+
+    .form-label {
+      display: block;
+      font-size: 0.85rem;
+      font-weight: 600;
+      margin-bottom: 6px;
+      color: var(--text-primary);
+    }
+
+    .form-input, .form-textarea {
+      width: 100%;
+      background: var(--bg-surface-elevated);
+      border: var(--border-width) solid var(--border-subtle);
+      border-radius: var(--radius-sm);
+      padding: 12px 16px;
+      font-family: inherit;
+      font-size: 0.95rem;
+      color: var(--text-primary);
+      transition: border-color var(--duration-exit) var(--ease-spring);
+    }
+
+    .form-input:focus, .form-textarea:focus {
+      outline: none;
+      border-color: var(--accent-brand);
+    }
+
+    .scope-chips {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+      margin-bottom: 20px;
+    }
+
+    .scope-chip {
+      background: var(--bg-surface-elevated);
+      border: var(--border-width) solid var(--border-subtle);
+      border-radius: 9999px;
+      padding: 6px 14px;
+      font-size: 0.8rem;
+      font-weight: 600;
+      color: var(--text-secondary);
+      cursor: pointer;
+      transition: all var(--duration-exit) var(--ease-spring);
+    }
+
+    .scope-chip.selected {
+      background: var(--accent-brand);
+      color: #ffffff;
+      border-color: var(--accent-brand);
+    }
+
+    /* =========================================================================
+       12. FOOTER
        ========================================================================= */
     .site-footer {
       border-top: var(--border-width) solid var(--border-subtle);
-      padding: 50px 0 30px;
+      padding: 40px 0 60px;
+      margin-top: 80px;
       color: var(--text-secondary);
-      font-size: 0.875rem;
+      font-size: 0.88rem;
     }
 
-    .footer-grid {
+    .footer-content {
       display: flex;
-      justify-content: space-between;
       align-items: center;
+      justify-content: space-between;
       flex-wrap: wrap;
       gap: 20px;
     }
@@ -932,399 +1345,546 @@
 </head>
 <body class="theme-apple_cupertino">
 
-  <!-- =========================================================================
-       NAVIGATION BAR
-       ========================================================================= -->
-  <nav class="site-nav" aria-label="Main Navigation">
-    <div class="container">
-      <div class="nav-inner">
-        <a href="#" class="nav-brand">
-          <svg class="vibe-icon" viewBox="0 0 24 24" style="color: var(--accent-brand); width: 1.4em; height: 1.4em;">
-            <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon>
+  <!-- Pointer-tracking Ambient Spotlight Glow -->
+  <div class="ambient-spotlight" id="ambientSpotlight"></div>
+
+  <div class="container">
+    
+    <!-- 1. FLOATING GLASS NAVBAR -->
+    <header class="nav-bar-wrap">
+      <nav class="nav-bar">
+        <a href="#hero" class="brand-wrap">
+          <svg class="brand-logo-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>
           </svg>
-          <span>Vibe UI Suite</span>
-          <span class="brand-badge">
-            <span class="status-dot"></span>
-            <bdi>v4.1.0 Live</bdi>
-          </span>
+          <span>VIBE UI</span>
+          <span class="version-pill">v4.1.0</span>
         </a>
 
+        <ul class="nav-links">
+          <li><a href="#work" class="nav-link" id="navWork">Showcase</a></li>
+          <li><a href="#lab" class="nav-link" id="navLab">Interactive Lab</a></li>
+          <li><a href="#bento" class="nav-link" id="navBento">Architecture</a></li>
+          <li><a href="#studio" class="nav-link" id="navStudio">AI Studio</a></li>
+          <li><a href="#estimator" class="nav-link" id="navEstimator">Estimator</a></li>
+          <li><a href="#contact" class="nav-link" id="navContact">Inquiry</a></li>
+        </ul>
+
         <div class="nav-actions">
-          <button class="btn btn-outline" id="btnLangToggle" onclick="toggleLanguage()" style="min-height: 40px; padding: 6px 14px;">
-            <svg class="vibe-icon" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+          <button class="nav-btn" onclick="toggleLanguage()" id="langToggleBtn">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/>
+            </svg>
             <span id="langText">فارسی (RTL)</span>
           </button>
-          <a href="https://github.com/omid-io/vibe-ui-suite" target="_blank" rel="noopener" class="btn btn-outline" style="min-height: 40px; padding: 6px 14px;">
-            <svg class="vibe-icon" viewBox="0 0 24 24"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>
-            <span>GitHub</span>
-          </a>
-          <a href="https://marketplace.visualstudio.com/items?itemName=omid-io.vibe-ui-vscode" target="_blank" rel="noopener" class="btn btn-primary" style="min-height: 40px; padding: 6px 16px;">
-            <svg class="vibe-icon" viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+          
+          <a href="https://marketplace.visualstudio.com/items?itemName=omid-io.vibe-ui-vscode" target="_blank" rel="noopener" class="nav-btn" id="marketplaceBtn">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M16.5 9.4 7.55 4.24a1.78 1.78 0 0 0-2.5 1.55v12.42a1.78 1.78 0 0 0 2.5 1.55L16.5 14.6l-6.22-2.6Z"/>
+              <path d="m18.5 7.5-6.22 2.6 6.22 2.6a1.78 1.78 0 0 0 2.5-1.55V9.05a1.78 1.78 0 0 0-2.5-1.55Z"/>
+            </svg>
             <span id="navMarketplaceText">Marketplace</span>
           </a>
         </div>
-      </div>
+      </nav>
+    </header>
+
+    <!-- 2. ARCHETYPE THEME SWITCHER -->
+    <div class="archetype-bar">
+      <button class="arch-btn active" onclick="setTheme('apple_cupertino', this)">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20.94c1.5 0 2.75 1.06 4 1.06 3 0 6-8 6-12.22A4.91 4.91 0 0 0 17 5c-2.22 0-4 1.44-5 2-1-.56-2.78-2-5-2a4.9 4.9 0 0 0-5 4.78C2 14 5 22 8 22c1.25 0 2.5-1.06 4-1.06Z"/><path d="M10 2c1 .5 2 2 2 5"/></svg>
+        <span>Apple Cupertino (Default)</span>
+      </button>
+      <button class="arch-btn" onclick="setTheme('minimalist_saas', this)">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="18" height="18" x="3" y="3" rx="2"/><path d="M3 9h18"/><path d="M9 21V9"/></svg>
+        <span>Minimalist SaaS</span>
+      </button>
+      <button class="arch-btn" onclick="setTheme('specular_glass', this)">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="6 2 18 2 22 8 12 22 2 8 6 2"/></svg>
+        <span>Specular Glass</span>
+      </button>
+      <button class="arch-btn" onclick="setTheme('neobrutalism', this)">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect width="18" height="18" x="3" y="3"/><circle cx="12" cy="12" r="3"/></svg>
+        <span>Neobrutalism</span>
+      </button>
+      <button class="arch-btn" onclick="setTheme('swiss_editorial', this)">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="4" y1="6" x2="20" y2="6"/><line x1="4" y1="12" x2="14" y2="12"/><line x1="4" y1="18" x2="18" y2="18"/></svg>
+        <span>Swiss Editorial</span>
+      </button>
+      <button class="arch-btn" onclick="setTheme('terminal_hud', this)">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="4 17 10 11 4 5"/><line x1="12" y1="19" x2="20" y2="19"/></svg>
+        <span>Terminal HUD</span>
+      </button>
     </div>
-  </nav>
 
-  <!-- =========================================================================
-       HERO SECTION
-       ========================================================================= -->
-  <header class="hero">
-    <div class="container">
-      <div class="hero-eyebrow">
-        <svg class="vibe-icon" viewBox="0 0 24 24"><path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83"/></svg>
-        <span id="heroEyebrow">VIBE UI SUITE v4.1.0 • APPLE CUPERTINO FLUID & KOWALSKI PHYSICS</span>
+    <!-- 3. CREATIVE HERO SECTION -->
+    <section class="hero-section" id="hero">
+      <div class="hero-status-badge">
+        <span class="pulse-dot"></span>
+        <span id="heroBadgeText">AVAILABLE FOR HIGH-END ARCHITECTURE & DESIGN SYSTEMS</span>
       </div>
 
-      <h1 id="heroHeadline">The Autonomous Design System for AI Coding Agents</h1>
-      <p class="lead" id="heroSubtitle">Turn Antigravity, Cursor, Hermes, and Claude Code into elite frontend architects. Zero generic AI slop, mathematical WCAG AAA contrast, critically damped spring physics, and fixed-structure semantic RTL.</p>
+      <h1 class="hero-title text-reading-center">
+        <span class="gradient-text" id="heroTitleSpan">The Autonomous Design System & Creative Portfolio</span>
+      </h1>
 
-      <div class="hero-ctas">
-        <a href="#playgroundSection" class="btn btn-primary">
-          <svg class="vibe-icon" viewBox="0 0 24 24"><polygon points="5 3 19 12 5 21 5 3"/></svg>
-          <span id="ctaExploreSuite">Explore Full Website Suite</span>
+      <p class="hero-subtitle text-reading-center" id="heroSubtitle">
+        Engineered for AI coding agents and world-class product teams. 100% anti-slop, OKLCH color spaces, Kowalski spring physics, WCAG AAA contrast, and fixed-structure semantic RTL.
+      </p>
+
+      <div class="hero-cta-group">
+        <a href="#work" class="btn-primary" id="btnExploreWork">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="14" x="2" y="7" rx="2" ry="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg>
+          <span id="btnExploreWorkText">Explore Portfolio Showcase</span>
         </a>
-        <div class="command-chip" onclick="copyCommand('npx vibe-ui-suite init', this)" title="Click to copy">
-          <svg class="vibe-icon" viewBox="0 0 24 24"><polyline points="4 17 10 11 4 5"/><line x1="12" y1="19" x2="20" y2="19"/></svg>
-          <code>npx vibe-ui-suite init</code>
-          <svg class="vibe-icon" viewBox="0 0 24 24" style="opacity: 0.6;"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+        <a href="#studio" class="btn-secondary" id="btnLaunchStudio">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
+          <span id="btnLaunchStudioText">Launch mr-ui-designer Studio</span>
+        </a>
+      </div>
+
+      <!-- Quick Telemetry HUD Stats -->
+      <div class="hero-stats-row">
+        <div class="stat-pill">
+          <div class="stat-val"><bdi dir="ltr">6</bdi></div>
+          <div class="stat-lbl" id="lblStat1">Visual Chemistries</div>
+        </div>
+        <div class="stat-pill">
+          <div class="stat-val"><bdi dir="ltr">&lt; 1ms</bdi></div>
+          <div class="stat-lbl" id="lblStat2">Stack Sensor Detections</div>
+        </div>
+        <div class="stat-pill">
+          <div class="stat-val"><bdi dir="ltr">100%</bdi></div>
+          <div class="stat-lbl" id="lblStat3">Anti-Slop Inline SVG</div>
+        </div>
+        <div class="stat-pill">
+          <div class="stat-val"><bdi dir="ltr">WCAG AAA</bdi></div>
+          <div class="stat-lbl" id="lblStat4">Mathematical Contrast</div>
         </div>
       </div>
-    </div>
-  </header>
+    </section>
 
-  <main class="container">
-    <!-- =========================================================================
-         MASTER SECTION PLAYGROUND (Hero, Bento, Pricing, HUD, Physics)
-         ========================================================================= -->
-    <section class="playground-section" id="playgroundSection" aria-labelledby="playgroundHeading">
-      <div class="section-title-wrap">
-        <h2 class="section-title" id="playgroundHeading">6 Adaptive Chemistries Across All Sections</h2>
-        <p class="section-desc" id="playgroundDesc">Switch between styles to watch every section (Dashboards, Bento grid, Pricing card, and Physics engine) fundamentally morph.</p>
+    <!-- 4. FEATURED PORTFOLIO & WORK SHOWCASE (3D TILT & RADIAL SPOTLIGHT) -->
+    <section class="section-block" id="work">
+      <div class="section-header">
+        <span class="section-badge" id="workBadge">Featured Portfolio</span>
+        <h2 class="section-title text-reading-center" id="workHeading">Engineered Digital Products & Dashboards</h2>
+        <p class="section-subtitle text-reading-center" id="workDesc">Each product is autonomously styled across all 6 archetypes with 3D tilt physics and mouse-tracking spotlight reflections.</p>
       </div>
 
-      <!-- Archetype Switcher Bar -->
-      <div class="archetype-tabs" role="tablist">
-        <button class="arch-tab-btn active" onclick="setTheme('apple_cupertino', this)" role="tab" aria-selected="true">
-          <svg class="vibe-icon" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="6"/></svg>
-          <span>Apple Cupertino (Default)</span>
-        </button>
-        <button class="arch-tab-btn" onclick="setTheme('minimalist_saas', this)" role="tab" aria-selected="false">
-          <svg class="vibe-icon" viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/></svg>
-          <span>Minimalist SaaS</span>
-        </button>
-        <button class="arch-tab-btn" onclick="setTheme('specular_glass', this)" role="tab" aria-selected="false">
-          <svg class="vibe-icon" viewBox="0 0 24 24"><polygon points="12 2 2 7 12 12 22 7 12 2"/><polyline points="2 17 12 22 22 17"/><polyline points="2 12 12 17 22 12"/></svg>
-          <span>Specular Glass</span>
-        </button>
-        <button class="arch-tab-btn" onclick="setTheme('neobrutalism', this)" role="tab" aria-selected="false">
-          <svg class="vibe-icon" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18"/></svg>
-          <span>Neobrutalism</span>
-        </button>
-        <button class="arch-tab-btn" onclick="setTheme('swiss_editorial', this)" role="tab" aria-selected="false">
-          <svg class="vibe-icon" viewBox="0 0 24 24"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
-          <span>Swiss Editorial</span>
-        </button>
-        <button class="arch-tab-btn" onclick="setTheme('terminal_hud', this)" role="tab" aria-selected="false">
-          <svg class="vibe-icon" viewBox="0 0 24 24"><polyline points="4 17 10 11 4 5"/><line x1="12" y1="19" x2="20" y2="19"/></svg>
-          <span>Terminal HUD</span>
-        </button>
+      <div class="portfolio-filters">
+        <button class="filter-btn active" onclick="filterProjects('all', this)" id="filterAll">All Systems</button>
+        <button class="filter-btn" onclick="filterProjects('fintech', this)" id="filterFintech">FinTech SaaS</button>
+        <button class="filter-btn" onclick="filterProjects('health', this)" id="filterHealth">Clinical Healthcare</button>
+        <button class="filter-btn" onclick="filterProjects('web3', this)" id="filterWeb3">Web3 & Trading</button>
+        <button class="filter-btn" onclick="filterProjects('luxury', this)" id="filterLuxury">Luxury Editorial</button>
       </div>
 
-      <!-- The Master Canvas -->
-      <div class="showcase-stage">
-        <!-- Section Selector Tabs -->
-        <div class="section-nav-tabs" role="tablist">
-          <button class="sec-tab-btn active" onclick="switchSectionView('dashboard', this)">
-            <svg class="vibe-icon" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><line x1="3" y1="9" x2="21" y2="9"/><line x1="9" y1="21" x2="9" y2="9"/></svg>
-            <span id="tabDashText">Live Financial SaaS Dashboard</span>
-          </button>
-          <button class="sec-tab-btn" onclick="switchSectionView('clinical_slider', this)">
-            <svg class="vibe-icon" viewBox="0 0 24 24"><polyline points="8 3 4 7 8 11"/><polyline points="16 21 20 17 16 13"/><line x1="4" y1="7" x2="20" y2="7"/><line x1="20" y1="17" x2="4" y2="17"/></svg>
-            <span id="tabCompareText">Before/After Drag Slider</span>
-          </button>
-          <button class="sec-tab-btn" onclick="switchSectionView('pricing', this)">
-            <svg class="vibe-icon" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M16 8h-6a2 2 0 1 0 0 4h4a2 2 0 1 1 0 4H8"/><line x1="12" y1="2" x2="12" y2="4"/><line x1="12" y1="20" x2="12" y2="22"/></svg>
-            <span id="tabPricingText">Pricing & ARR Switcher</span>
-          </button>
-          <button class="sec-tab-btn" onclick="switchSectionView('physics', this)">
-            <svg class="vibe-icon" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="m4.93 4.93 4.24 4.24"/><path d="m14.83 9.17 4.24-4.24"/><path d="m14.83 14.83 4.24 4.24"/><path d="m9.17 14.83-4.24 4.24"/></svg>
-            <span id="tabPhysicsText">Kowalski Spring Physics (1:1 Drag)</span>
-          </button>
-          <button class="sec-tab-btn" onclick="switchSectionView('bento', this)">
-            <svg class="vibe-icon" viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
-            <span id="tabBentoText">Bento Feature Grid</span>
-          </button>
-        </div>
+      <div class="portfolio-grid" id="portfolioGrid">
+        
+        <!-- Project 1: FinTech SaaS -->
+        <article class="project-card" data-category="fintech">
+          <div class="card-spotlight"></div>
+          <div>
+            <div class="project-top">
+              <span class="project-tag">FinTech Enterprise</span>
+              <span class="project-kpi"><bdi dir="ltr">+48.2% ARR Compounding</bdi></span>
+            </div>
+            <div class="project-preview-frame">
+              <svg width="100%" height="80" viewBox="0 0 320 80" fill="none">
+                <path d="M0 60 Q 60 40, 120 48 T 240 18 T 320 6" stroke="var(--accent-brand)" stroke-width="3" fill="none" stroke-linecap="round"/>
+                <path d="M0 60 Q 60 40, 120 48 T 240 18 T 320 6 L 320 80 L 0 80 Z" fill="var(--accent-brand-subtle)"/>
+                <circle cx="320" cy="6" r="4" fill="var(--accent-brand)"/>
+              </svg>
+            </div>
+            <h3 class="project-title text-reading" id="proj1Title">Apex Wealth & Financial Telemetry</h3>
+            <p class="project-desc text-reading" id="proj1Desc">High-velocity portfolio balancing system with real-time SVG charting, multi-asset allocation, and zero-slop OKLCH color spaces.</p>
+          </div>
+          <div class="project-footer">
+            <span class="project-meta-item" id="proj1Meta">Production &bull; React 19 + Tailwind</span>
+            <a href="#lab" class="card-action-link" onclick="openLabTab('dash')">
+              <span id="proj1Link">Live Interactive Demo</span>
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+            </a>
+          </div>
+        </article>
 
-        <!-- DEMO 1: LIVE FINANCIAL SAAS DASHBOARD -->
-        <div class="section-view active" id="view-dashboard">
-          <div class="dash-container">
-            <div class="dash-sidebar">
-              <div style="font-size: 0.785rem; font-weight: 700; text-transform: uppercase; color: var(--text-muted); margin-bottom: 8px;">Analytics Workspace</div>
-              <div class="dash-menu-item active">
-                <svg class="vibe-icon" viewBox="0 0 24 24"><polygon points="12 2 2 7 12 12 22 7 12 2"/></svg>
-                <span>Revenue Telemetry</span>
-              </div>
-              <div class="dash-menu-item">
-                <svg class="vibe-icon" viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/></svg>
-                <span>Customer Pipeline</span>
-              </div>
-              <div class="dash-menu-item">
-                <svg class="vibe-icon" viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
-                <span>Design Tokens API</span>
-              </div>
-              <div style="margin-top: auto; padding-top: 14px; border-top: 1px solid var(--border-subtle); font-size: 0.8rem; color: var(--text-muted);">
-                <bdi>Sync: 100% Up to Date</bdi>
+        <!-- Project 2: Healthcare & Dental -->
+        <article class="project-card" data-category="health">
+          <div class="card-spotlight"></div>
+          <div>
+            <div class="project-top">
+              <span class="project-tag">Clinical Medical</span>
+              <span class="project-kpi"><bdi dir="ltr">0.35s Touch Latency</bdi></span>
+            </div>
+            <div class="project-preview-frame" style="background: rgba(0, 113, 227, 0.04);">
+              <div style="display: flex; gap: 8px; justify-content: center; align-items: center; height: 100%;">
+                <div style="width: 36px; height: 36px; border-radius: 50%; background: var(--accent-brand); opacity: 0.8; display:flex; align-items:center; justify-content:center; color:#fff;">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/></svg>
+                </div>
+                <div style="height: 6px; width: 60px; background: var(--border-subtle); border-radius: 9999px;"></div>
+                <div style="width: 36px; height: 36px; border-radius: 50%; background: var(--bg-surface); border: 1px solid var(--border-subtle); display:flex; align-items:center; justify-content:center;">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 14 14"/></svg>
+                </div>
               </div>
             </div>
+            <h3 class="project-title text-reading" id="proj2Title">Aura Dental & Aesthetic Clinic</h3>
+            <p class="project-desc text-reading" id="proj2Desc">Fluid appointment scheduler and patient treatment portal designed in the Apple Cupertino archetype with squircle cards and frosted glass.</p>
+          </div>
+          <div class="project-footer">
+            <span class="project-meta-item" id="proj2Meta">Healthcare &bull; Next.js 15 App Router</span>
+            <a href="#studio" class="card-action-link" onclick="runScenario('dental')">
+              <span id="proj2Link">Inspect in Studio</span>
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+            </a>
+          </div>
+        </article>
 
-            <div class="dash-content">
-              <div class="dash-stats-row">
-                <div class="dash-stat-box">
-                  <div style="font-size: 0.8rem; color: var(--text-secondary); margin-bottom: 4px;">Total Contract Value (ARR)</div>
-                  <div style="font-size: 1.6rem; font-weight: 800; color: var(--accent-brand); font-family: var(--font-mono);"><bdi>$842,500.00</bdi></div>
-                  <div style="font-size: 0.75rem; color: #10b981; margin-top: 4px;">&uarr; +24.8% vs last quarter</div>
+        <!-- Project 3: Web3 & DEX -->
+        <article class="project-card" data-category="web3">
+          <div class="card-spotlight"></div>
+          <div>
+            <div class="project-top">
+              <span class="project-tag">Web3 DeFi</span>
+              <span class="project-kpi"><bdi dir="ltr">&gt; 12.8% Yield APR</bdi></span>
+            </div>
+            <div class="project-preview-frame" style="background: #030712; color: #a855f7;">
+              <div style="display: flex; justify-content: space-between; align-items: center; font-family: var(--font-mono); font-size: 0.8rem;">
+                <span>STAKE SOL: <bdi dir="ltr">250.00</bdi></span>
+                <span style="color: #10b981;">ACTIVE</span>
+              </div>
+              <div style="height: 4px; width: 100%; background: rgba(168, 85, 247, 0.2); margin-top: 10px; border-radius: 2px;">
+                <div style="height: 100%; width: 72%; background: #a855f7; border-radius: 2px;"></div>
+              </div>
+            </div>
+            <h3 class="project-title text-reading" id="proj3Title">Solana Horizon DEX & Staking</h3>
+            <p class="project-desc text-reading" id="proj3Desc">Specular glass luxury liquidity dashboard featuring Kowalski spring tactile feedback, real-time APY calculation, and dark prestige styling.</p>
+          </div>
+          <div class="project-footer">
+            <span class="project-meta-item" id="proj3Meta">DeFi &bull; Web3 Solana Ecosystem</span>
+            <a href="#studio" class="card-action-link" onclick="runScenario('crypto')">
+              <span id="proj3Link">Inspect in Studio</span>
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+            </a>
+          </div>
+        </article>
+
+        <!-- Project 4: Luxury Editorial -->
+        <article class="project-card" data-category="luxury">
+          <div class="card-spotlight"></div>
+          <div>
+            <div class="project-top">
+              <span class="project-tag">Swiss Editorial</span>
+              <span class="project-kpi"><bdi dir="ltr">AAA 16.4:1</bdi></span>
+            </div>
+            <div class="project-preview-frame" style="font-family: var(--font-serif); text-align: center;">
+              <span style="font-size: 1.4rem; font-style: italic; letter-spacing: 0.05em;">L'Horlogerie Moderne</span>
+            </div>
+            <h3 class="project-title text-reading" id="proj4Title">Vanguard Chronometer Journal</h3>
+            <p class="project-desc text-reading" id="proj4Desc">High-fashion horology platform built with strict Swiss grid mathematics, high contrast typography, and asymmetric column rhythm.</p>
+          </div>
+          <div class="project-footer">
+            <span class="project-meta-item" id="proj4Meta">Editorial &bull; Fluid Grid Layout</span>
+            <a href="#lab" class="card-action-link" onclick="openLabTab('compare')">
+              <span id="proj4Link">Compare Slop vs Vibe</span>
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+            </a>
+          </div>
+        </article>
+
+      </div>
+    </section>
+
+    <!-- 5. INTERACTIVE TREND LAB (ALL LIVE DEMOS) -->
+    <section class="section-block" id="lab">
+      <div class="section-header">
+        <span class="section-badge" id="labBadge">Trend Playground</span>
+        <h2 class="section-title text-reading-center" id="labHeading">Autonomous Engineering Lab</h2>
+        <p class="section-subtitle text-reading-center" id="labDesc">Explore live interactive components. Test spring mechanics, split slider, and dynamic financial charts in real time.</p>
+      </div>
+
+      <div class="lab-stage">
+        
+        <!-- Lab Tabs -->
+        <div class="lab-tabs">
+          <button class="lab-tab-btn active" onclick="switchLabTab('dash', this)">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>
+            <span id="tabDashText">Live Financial SaaS Dashboard</span>
+          </button>
+          <button class="lab-tab-btn" onclick="switchLabTab('compare', this)">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="2" x2="12" y2="22"/><rect width="18" height="18" x="3" y="3" rx="2"/></svg>
+            <span id="tabCompareText">Before/After Split Drag Slider</span>
+          </button>
+          <button class="lab-tab-btn" onclick="switchLabTab('physics', this)">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="m4.93 4.93 4.24 4.24"/><path d="m14.83 9.17 4.24-4.24"/><path d="m14.83 14.83 4.24 4.24"/><path d="m9.17 14.83-4.24 4.24"/></svg>
+            <span id="tabPhysicsText">Kowalski Spring Physics (1:1 Drag)</span>
+          </button>
+        </div>
+
+        <!-- VIEW 1: SAAS DASHBOARD -->
+        <div class="lab-view active" id="labViewDash">
+          <div class="dash-grid">
+            <div class="dash-side-nav">
+              <a href="javascript:void(0)" class="dash-nav-item active">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect width="7" height="9" x="3" y="3" rx="1"/><rect width="7" height="5" x="14" y="3" rx="1"/><rect width="7" height="9" x="14" y="12" rx="1"/><rect width="7" height="5" x="3" y="16" rx="1"/></svg>
+                <span id="dnavOverview">Executive Overview</span>
+              </a>
+              <a href="javascript:void(0)" class="dash-nav-item">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/></svg>
+                <span id="dnavSubscribers">Active Accounts</span>
+              </a>
+              <a href="javascript:void(0)" class="dash-nav-item">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+                <span id="dnavLogs">Latency Stream</span>
+              </a>
+            </div>
+
+            <div>
+              <div class="dash-kpis">
+                <div class="kpi-card">
+                  <div class="kpi-title" id="kpi1Title">Annual Recurring Revenue</div>
+                  <div class="kpi-number" id="kpi1Val"><bdi dir="ltr">$1,248,500</bdi></div>
+                  <div class="kpi-delta">&uarr; +24.8% YoY</div>
                 </div>
-
-                <div class="dash-stat-box">
-                  <div style="font-size: 0.8rem; color: var(--text-secondary); margin-bottom: 4px;">Active AI Model Instances</div>
-                  <div style="font-size: 1.6rem; font-weight: 800; color: var(--text-primary); font-family: var(--font-mono);"><bdi>1,420</bdi></div>
-                  <div style="font-size: 0.75rem; color: #10b981; margin-top: 4px;">&bull; 99.99% Uptime</div>
+                <div class="kpi-card">
+                  <div class="kpi-title" id="kpi2Title">P99 Server Latency</div>
+                  <div class="kpi-number" id="kpi2Val"><bdi dir="ltr">18.4 ms</bdi></div>
+                  <div class="kpi-delta">&darr; -32% Optimized</div>
                 </div>
-
-                <div class="dash-stat-box">
-                  <div style="font-size: 0.8rem; color: var(--text-secondary); margin-bottom: 4px;">Average Response Latency</div>
-                  <div style="font-size: 1.6rem; font-weight: 800; color: var(--text-primary); font-family: var(--font-mono);"><bdi>34.2 ms</bdi></div>
-                  <div style="font-size: 0.75rem; color: #10b981; margin-top: 4px;">&bull; Sub-50ms Budget Met</div>
+                <div class="kpi-card">
+                  <div class="kpi-title" id="kpi3Title">Net ARR Retention</div>
+                  <div class="kpi-number" id="kpi3Val"><bdi dir="ltr">134.2%</bdi></div>
+                  <div class="kpi-delta">&uarr; High Expansion</div>
                 </div>
               </div>
 
-              <!-- Live SVG Chart -->
-              <div class="chart-box">
-                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 14px;">
-                  <h4 style="font-weight: 700; font-size: 1rem;">Compounded Yield & Growth Trend</h4>
-                  <span class="brand-badge"><bdi>Q3 Live Telemetry</bdi></span>
+              <div class="dash-chart-box">
+                <div class="chart-controls">
+                  <span style="font-weight: 700; font-size: 0.92rem;" id="chartTitle">Gross Compounding ARR Curve</span>
+                  <div class="chart-btn-group">
+                    <button class="chart-btn active" onclick="updateChartScale('1M', this)">1 Month</button>
+                    <button class="chart-btn" onclick="updateChartScale('6M', this)">6 Months</button>
+                    <button class="chart-btn" onclick="updateChartScale('1Y', this)">1 Year</button>
+                  </div>
                 </div>
-                <svg viewBox="0 0 600 140" style="width: 100%; height: 140px; overflow: visible;">
-                  <defs>
-                    <linearGradient id="chartGrad" x1="0" y1="0" x2="0" y2="1">
-                      <stop offset="0%" stop-color="var(--accent-brand)" stop-opacity="0.25"/>
-                      <stop offset="100%" stop-color="var(--accent-brand)" stop-opacity="0.0"/>
-                    </linearGradient>
-                  </defs>
-                  <path d="M 0,110 Q 75,95 150,75 T 300,55 T 450,30 T 600,10 L 600,140 L 0,140 Z" fill="url(#chartGrad)"/>
-                  <path d="M 0,110 Q 75,95 150,75 T 300,55 T 450,30 T 600,10" fill="none" stroke="var(--accent-brand)" stroke-width="3" stroke-linecap="round"/>
-                  <circle cx="600" cy="10" r="5" fill="var(--accent-brand)"/>
+                <svg width="100%" height="160" viewBox="0 0 600 160" fill="none" id="svgChart">
+                  <path id="metricArea" d="M0 130 C 100 110, 200 90, 300 70 C 400 50, 500 20, 600 10 L 600 160 L 0 160 Z" fill="var(--accent-brand-subtle)"/>
+                  <path id="metricLine" d="M0 130 C 100 110, 200 90, 300 70 C 400 50, 500 20, 600 10" stroke="var(--accent-brand)" stroke-width="3" fill="none" stroke-linecap="round"/>
                 </svg>
               </div>
             </div>
           </div>
         </div>
 
-        <!-- DEMO 2: CLINICAL HEALTH BEFORE/AFTER DRAG SLIDER -->
-        <div class="section-view" id="view-clinical_slider">
-          <div style="margin-bottom: 14px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 8px;">
-            <div>
-              <h4 style="font-weight: 700; font-size: 1.1rem;">Interactive Split Inspection (Before / After Slider)</h4>
-              <p style="color: var(--text-secondary); font-size: 0.85rem;">Drag the divider horizontally to compare unoptimized AI slop against certified Vibe UI output.</p>
-            </div>
-            <span class="brand-badge"><bdi>Direct Manipulation 1:1</bdi></span>
-          </div>
-
-          <div class="compare-container" id="compareContainer">
+        <!-- VIEW 2: BEFORE / AFTER SPLIT SLIDER -->
+        <div class="lab-view" id="labViewCompare">
+          <div class="compare-wrapper" id="compareContainer">
             <div class="compare-side compare-after">
-              <div style="font-size: 1.25rem; font-weight: 800; margin-bottom: 4px;">AFTER: Certified Vibe UI v4.1.0</div>
-              <div style="font-size: 0.85rem; opacity: 0.9;">WCAG AAA 8.4:1 &bull; Frosted Glass &bull; Spring Physics &bull; Pure SVG Icons</div>
+              <div style="max-width: min(100%, 460px);">
+                <span class="project-tag" style="margin-bottom: 12px; display: inline-block;">VIBE UI SUITE v4.1.0</span>
+                <h3 style="font-size: 1.6rem; margin-bottom: 10px; font-weight: 800;">High-Craft Engineering</h3>
+                <p style="color: var(--text-secondary); line-height: 1.6;">WCAG AAA mathematical contrast, OKLCH color engine, Kowalski spring physics, and semantic RTL with zero sentence flip.</p>
+              </div>
             </div>
+
             <div class="compare-side compare-before" id="compareBeforeSide">
-              <div style="font-size: 1.25rem; font-weight: 800; margin-bottom: 4px;">BEFORE: Generic AI Slop</div>
-              <div style="font-size: 0.85rem; opacity: 0.75;">Raw Emojis &bull; Purple Gradients &bull; Bad Contrast 2:1 &bull; Broken RTL</div>
+              <div style="max-width: min(100%, 460px); color: #fff;">
+                <span style="background: rgba(239, 68, 68, 0.25); color: #ef4444; font-weight: 700; padding: 4px 10px; border-radius: 9999px; font-size: 0.75rem; text-transform: uppercase; margin-bottom: 12px; display: inline-block;">Generic AI Slop</span>
+                <h3 style="font-size: 1.6rem; margin-bottom: 10px; font-weight: 800; color: #f87171;">Uncalibrated Code</h3>
+                <p style="color: #cbd5e1; line-height: 1.6;">Yellow raw emojis, poor 2.1:1 contrast, sluggish 2-second linear transition lag, and mirrored layouts breaking RTL readers.</p>
+              </div>
             </div>
+
             <div class="compare-handle" id="compareHandle">
-              <svg class="vibe-icon" viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg>
+              <div class="handle-circle">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="15 18 9 12 15 6"/><polyline points="9 18 15 12 9 6"/></svg>
+              </div>
+            </div>
+          </div>
+          <div style="text-align: center; margin-top: 14px; font-size: 0.85rem; color: var(--text-secondary);" id="compareHint">
+            &larr; Drag the center slider left and right to inspect the anti-slop visual difference &rarr;
+          </div>
+        </div>
+
+        <!-- VIEW 3: KOWALSKI SPRING PHYSICS -->
+        <div class="lab-view" id="labViewPhysics">
+          <div class="spring-track" id="springTrack">
+            <div class="spring-box" id="springBox">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" style="margin-bottom: 4px;"><path d="m9 18 6-6-6-6"/></svg>
+              <span>DRAG ME</span>
+            </div>
+          </div>
+
+          <div class="spring-telemetry">
+            <div class="telemetry-item">
+              <div style="font-size: 0.75rem; color: var(--text-secondary); text-transform: uppercase;">Kinetic Status</div>
+              <div style="font-size: 1.1rem; font-weight: 700; color: var(--accent-brand);" id="stateDisplay">Idle at Equilibrium</div>
+            </div>
+            <div class="telemetry-item">
+              <div style="font-size: 0.75rem; color: var(--text-secondary); text-transform: uppercase;">Displacement</div>
+              <div style="font-size: 1.1rem; font-weight: 700;" id="dispDisplay"><bdi dir="ltr">0.0 px</bdi></div>
+            </div>
+            <div class="telemetry-item">
+              <div style="font-size: 0.75rem; color: var(--text-secondary); text-transform: uppercase;">Instant Velocity</div>
+              <div style="font-size: 1.1rem; font-weight: 700;" id="velDisplay"><bdi dir="ltr">0.00 px/ms</bdi></div>
+            </div>
+            <div class="telemetry-item">
+              <div style="font-size: 0.75rem; color: var(--text-secondary); text-transform: uppercase;">Damping Ratio</div>
+              <div style="font-size: 1.1rem; font-weight: 700; color: #10b981;"><bdi dir="ltr">&zeta; = 1.0 (Critical)</bdi></div>
             </div>
           </div>
         </div>
 
-        <!-- DEMO 3: PRICING CARD & ARR SWITCHER -->
-        <div class="section-view" id="view-pricing">
-          <div class="pricing-card">
-            <h3 style="font-size: 1.4rem; font-weight: 800; margin-bottom: 8px;" id="priceTitle">Enterprise Cloud Architecture</h3>
-            <p style="color: var(--text-secondary); font-size: 0.9rem; margin-bottom: 20px;" id="priceSubtitle">Dedicated instance for autonomous AI agents and design token pipelines.</p>
-
-            <div class="toggle-row">
-              <span style="font-size: 0.85rem; font-weight: 600;" id="labelMonthly">Monthly</span>
-              <button class="switch-pill active" id="billingPill" onclick="togglePricing()" aria-label="Toggle Billing Interval">
-                <div class="switch-thumb"></div>
-              </button>
-              <span style="font-size: 0.85rem; font-weight: 600; color: var(--accent-brand);" id="labelAnnual">Annual (20% Off)</span>
-            </div>
-
-            <div style="margin-bottom: 24px;">
-              <span style="font-size: 3rem; font-weight: 900; color: var(--accent-brand); font-family: var(--font-mono); letter-spacing: -0.04em;">
-                <bdi id="priceVal">$199.00</bdi>
-              </span>
-              <span style="color: var(--text-secondary); font-size: 0.9rem;" id="pricePeriod">/ month billed annually</span>
-            </div>
-
-            <button class="btn btn-primary" style="width: 100%; margin-bottom: 14px;">
-              <svg class="vibe-icon" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
-              <span id="btnStartPlan">Activate Architecture Suite</span>
-            </button>
-            <div style="font-size: 0.8rem; color: var(--text-muted);"><bdi>30-Day Money-Back Guarantee &bull; Cancel Anytime</bdi></div>
-          </div>
-        </div>
-
-        <!-- DEMO 4: KOWALSKI SPRING PHYSICS PLAYGROUND -->
-        <div class="section-view" id="view-physics">
-          <div class="physics-playground">
-            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px; flex-wrap: wrap; gap: 10px;">
-              <div>
-                <h4 style="font-size: 1.15rem; font-weight: 700;" id="physTitle">1:1 Velocity Handoff & Rubber-Banding</h4>
-                <p style="font-size: 0.85rem; color: var(--text-secondary);" id="physSubtitle">Drag the card horizontally. Release to watch critically damped spring settle (damping: 1.0, response: 0.35s).</p>
-              </div>
-              <span class="brand-badge"><bdi>damping: 1.0 &bull; response: 0.35s</bdi></span>
-            </div>
-
-            <div class="spring-track" id="springTrack">
-              <div class="spring-box" id="springBox">
-                <svg class="vibe-icon" viewBox="0 0 24 24" style="width: 1.5em; height: 1.5em; margin-bottom: 4px;"><polyline points="5 9 2 12 5 15"/><polyline points="9 5 12 2 15 5"/><polyline points="15 19 12 22 9 19"/><polyline points="19 9 22 12 19 15"/><line x1="2" y1="12" x2="22" y2="12"/><line x1="12" y1="2" x2="12" y2="22"/></svg>
-                <span>DRAG ME</span>
-              </div>
-            </div>
-
-            <div style="display: flex; gap: 14px; font-family: var(--font-mono); font-size: 0.8rem; color: var(--text-muted); justify-content: space-between; flex-wrap: wrap;">
-              <span>Displacement: <bdi id="dispDisplay">0.00 px</bdi></span>
-              <span>Velocity: <bdi id="velDisplay">0.00 px/ms</bdi></span>
-              <span>State: <bdi id="stateDisplay" style="color: #10b981;">At Equilibrium</bdi></span>
-            </div>
-          </div>
-        </div>
-
-        <!-- DEMO 5: BENTO GRID -->
-        <div class="section-view" id="view-bento">
-          <div class="bento-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px;">
-            <div class="bento-card" style="background: var(--bg-surface-elevated); border: var(--border-width) solid var(--border-subtle); border-radius: var(--radius-md); padding: 24px;">
-              <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 12px;">
-                <svg class="vibe-icon" viewBox="0 0 24 24" style="color: var(--accent-brand); width: 1.3em; height: 1.3em;"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
-                <h4 style="font-weight: 700; font-size: 1.1rem;">Zero AI-Slop Defense</h4>
-              </div>
-              <p style="color: var(--text-secondary); font-size: 0.9rem;">Bans raw emojis, clichéd purple gradients, and floating blur boxes. Enforces clean semantic SVG vectors and WCAG AAA contrast.</p>
-            </div>
-
-            <div class="bento-card" style="background: var(--bg-surface-elevated); border: var(--border-width) solid var(--border-subtle); border-radius: var(--radius-md); padding: 24px;">
-              <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 12px;">
-                <svg class="vibe-icon" viewBox="0 0 24 24" style="color: var(--accent-brand); width: 1.3em; height: 1.3em;"><circle cx="12" cy="12" r="10"/><path d="m4.93 4.93 4.24 4.24"/><path d="m14.83 9.17 4.24-4.24"/></svg>
-                <h4 style="font-weight: 700; font-size: 1.1rem;">Critically Damped Springs</h4>
-              </div>
-              <p style="color: var(--text-secondary); font-size: 0.9rem;">Natural physical spring dynamics (damping: 1.0, response: 0.35s) replacing robotic linear curves. Asymmetric exit &lt;180ms.</p>
-            </div>
-
-            <div class="bento-card" style="background: var(--bg-surface-elevated); border: var(--border-width) solid var(--border-subtle); border-radius: var(--radius-md); padding: 24px;">
-              <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 12px;">
-                <svg class="vibe-icon" viewBox="0 0 24 24" style="color: var(--accent-brand); width: 1.3em; height: 1.3em;"><line x1="4" y1="9" x2="20" y2="9"/><line x1="4" y1="15" x2="20" y2="15"/><line x1="10" y1="3" x2="8" y2="21"/><line x1="16" y1="3" x2="14" y2="21"/></svg>
-                <h4 style="font-weight: 700; font-size: 1.1rem;">Fixed-Structure Semantic RTL</h4>
-              </div>
-              <p style="color: var(--text-secondary); font-size: 0.9rem;">Structure stays rock solid. Numbers, technical metrics, and currencies are isolated inside &lt;bdi&gt; tags, stopping Persian reversal.</p>
-            </div>
-          </div>
-        </div>
       </div>
     </section>
 
-    <!-- =========================================================================
-         MR-UI-DESIGNER STUDIO & LAZY PROMPT CONSOLE
-         ========================================================================= -->
-    <section class="studio-section" aria-labelledby="studioHeading">
-      <div class="section-title-wrap">
-        <h2 class="section-title" id="studioHeading">mr-ui-designer Interactive Studio</h2>
-        <p class="section-desc" id="studioDesc">Click any lazy prompt chip to see how Stack Sensor &lt;1ms and Domain Director autonomously synthesize UI.</p>
+    <!-- 6. CAPABILITIES & SERVICES BENTO GRID -->
+    <section class="section-block" id="bento">
+      <div class="section-header">
+        <span class="section-badge" id="bentoBadge">Architectural Capabilities</span>
+        <h2 class="section-title text-reading-center" id="bentoHeading">Engineered for Autonomous Execution</h2>
+        <p class="section-subtitle text-reading-center" id="bentoDesc">The core pillars separating Vibe UI Suite from standard static CSS templates.</p>
+      </div>
+
+      <div class="bento-grid">
+        
+        <!-- Tile 1: OKLCH & WCAG AAA (Col 8) -->
+        <div class="bento-card col-8">
+          <div>
+            <div class="bento-icon">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="m4.93 4.93 4.24 4.24"/><path d="m14.83 9.17 4.24-4.24"/><path d="m14.83 14.83 4.24 4.24"/><path d="m9.17 14.83-4.24 4.24"/></svg>
+            </div>
+            <h3 class="project-title text-reading" id="bento1Title">OKLCH Mathematical Contrast Engine</h3>
+            <p class="project-desc text-reading" id="bento1Desc">Deterministic relative luminance verification ensuring every color pair satisfies WCAG AAA (>7:1) across both light and dark backgrounds.</p>
+          </div>
+          <div style="display: flex; gap: 10px; align-items: center; background: var(--bg-surface-elevated); padding: 12px 18px; border-radius: var(--radius-sm); border: var(--border-width) solid var(--border-subtle); margin-top: 14px;">
+            <span style="font-family: var(--font-mono); font-size: 0.85rem; font-weight: 700;"><bdi dir="ltr">L = 0.2126R + 0.7152G + 0.0722B</bdi></span>
+            <span class="project-kpi" style="margin-left: auto;"><bdi dir="ltr">8.42:1 PASS AAA</bdi></span>
+          </div>
+        </div>
+
+        <!-- Tile 2: Fixed-Structure Semantic RTL (Col 4) -->
+        <div class="bento-card col-4">
+          <div>
+            <div class="bento-icon">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="21" y1="6" x2="3" y2="6"/><line x1="21" y1="12" x2="9" y2="12"/><line x1="21" y1="18" x2="7" y2="18"/></svg>
+            </div>
+            <h3 class="project-title text-reading" id="bento2Title">Fixed-Structure RTL</h3>
+            <p class="project-desc text-reading" id="bento2Desc">Layout geometry stays locked. Persian and Arabic reading text aligns naturally without breaking UI grids.</p>
+          </div>
+          <div style="background: var(--bg-surface-elevated); padding: 12px 16px; border-radius: var(--radius-sm); border: var(--border-width) solid var(--border-subtle); font-size: 0.85rem;">
+            <span>موجودی: </span><bdi dir="ltr" style="font-weight: 700; color: var(--accent-brand);">$45,200.00 USD</bdi>
+          </div>
+        </div>
+
+        <!-- Tile 3: Kowalski Physics Spring Timing (Col 4) -->
+        <div class="bento-card col-4">
+          <div>
+            <div class="bento-icon">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2v20"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
+            </div>
+            <h3 class="project-title text-reading" id="bento3Title">Apple Motion Ergonomics</h3>
+            <p class="project-desc text-reading" id="bento3Desc">Critically damped spring timing (&zeta;=1.0) with asymmetric entry/exit curves and 100dvh mobile safety.</p>
+          </div>
+          <div class="project-kpi" style="align-self: flex-start;"><bdi dir="ltr">0.35s Response Window</bdi></div>
+        </div>
+
+        <!-- Tile 4: Stack Sensor & mr-ui-designer (Col 8) -->
+        <div class="bento-card col-8">
+          <div>
+            <div class="bento-icon">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="4 17 10 11 4 5"/><line x1="12" y1="19" x2="20" y2="19"/></svg>
+            </div>
+            <h3 class="project-title text-reading" id="bento4Title">Instant Stack Sensor (<bdi dir="ltr">&lt;1ms</bdi>)</h3>
+            <p class="project-desc text-reading" id="bento4Desc">Autonomously detects Next.js 15, Vite, React 19, Tailwind CSS v4, and Flutter project architectures without burning user tokens.</p>
+          </div>
+          <div style="font-family: var(--font-mono); font-size: 0.82rem; background: #050b14; color: #38bdf8; padding: 10px 14px; border-radius: var(--radius-sm); border: 1px solid rgba(56, 189, 248, 0.2);">
+            &gt; Stack Sensor: Discovered Next.js 15 App Router + Tailwind v4 in 0.12ms
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- 7. MR-UI-DESIGNER INTERACTIVE STUDIO & LAZY PROMPT CONSOLE -->
+    <section class="section-block" id="studio">
+      <div class="section-header">
+        <span class="section-badge" id="studioBadge">AI Architect Studio</span>
+        <h2 class="section-title text-reading-center" id="studioHeading">Interactive mr-ui-designer Console</h2>
+        <p class="section-subtitle text-reading-center" id="studioDesc">Click any lazy prompt chip to watch how Stack Sensor &lt;1ms and Domain Director synthesize UI components.</p>
       </div>
 
       <div class="studio-console">
-        <div class="console-header">
-          <div style="display: flex; align-items: center; gap: 10px; font-weight: 700;">
-            <svg class="vibe-icon" viewBox="0 0 24 24" style="color: var(--accent-brand);"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
-            <span id="consoleLabel">Lead Architect Pipeline: mr-ui-designer</span>
+        <div class="console-topbar">
+          <div style="display: flex; align-items: center; gap: 8px;">
+            <span style="width: 10px; height: 10px; border-radius: 50%; background: #ef4444;"></span>
+            <span style="width: 10px; height: 10px; border-radius: 50%; background: #f59e0b;"></span>
+            <span style="width: 10px; height: 10px; border-radius: 50%; background: #10b981;"></span>
+            <span style="font-family: var(--font-mono); font-size: 0.82rem; font-weight: 600; margin-left: 8px;" id="consoleTitle">mr-ui-designer Autonomous Pipeline</span>
           </div>
-          <button class="btn btn-outline" style="min-height: 36px; padding: 4px 12px; font-size: 0.785rem;" onclick="copyActivePrompt(this)">
-            <svg class="vibe-icon" viewBox="0 0 24 24"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+          <button class="nav-btn" onclick="copyActivePrompt(this)" id="btnCopyPrompt">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect width="14" height="14" x="8" y="8" rx="2" ry="2"/><path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"/></svg>
             <span id="btnCopyPromptText">Copy 1-Line Prompt</span>
           </button>
         </div>
 
-        <div class="chips-bar" role="tablist">
-          <button class="prompt-chip active" onclick="runScenario('dental', this)">
-            <svg class="vibe-icon" viewBox="0 0 24 24"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/></svg>
-            <span id="chip1Text">Clinical Wellness & Booking (Apple Fluid)</span>
+        <!-- 4 Lazy Prompt Chips -->
+        <div class="prompt-chips-row">
+          <button class="lazy-chip active" onclick="runScenario('dental', this)">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/></svg>
+            <span id="chip1Text">Clinical Wellness (Apple Fluid)</span>
           </button>
-          <button class="prompt-chip" onclick="runScenario('crypto', this)">
-            <svg class="vibe-icon" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M16 8h-6a2 2 0 1 0 0 4h4a2 2 0 1 1 0 4H8"/><line x1="12" y1="2" x2="12" y2="4"/><line x1="12" y1="20" x2="12" y2="22"/></svg>
-            <span id="chip2Text">Crypto Staking & Yield Pool</span>
+          <button class="lazy-chip" onclick="runScenario('crypto', this)">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="6 2 18 2 22 8 12 22 2 8 6 2"/></svg>
+            <span id="chip2Text">Crypto Staking Pool</span>
           </button>
-          <button class="prompt-chip" onclick="runScenario('saas', this)">
-            <svg class="vibe-icon" viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/></svg>
+          <button class="lazy-chip" onclick="runScenario('saas', this)">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect width="18" height="18" x="3" y="3" rx="2"/><path d="M3 9h18"/><path d="M9 21V9"/></svg>
             <span id="chip3Text">SaaS Analytics & Billing</span>
           </button>
-          <button class="prompt-chip" onclick="runScenario('slop_repair', this)">
-            <svg class="vibe-icon" viewBox="0 0 24 24"><polyline points="23 4 23 10 17 10"/><path d="M20.49 15a9 9 0 1 1-2.12-9.36L23 10"/></svg>
+          <button class="lazy-chip" onclick="runScenario('slop', this)">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 20h9"/><path d="M16.5 3.5a2.12 2.12 0 0 1 3 3L7 19l-4 1 1-4Z"/></svg>
             <span id="chip4Text">Surgical Anti-Slop Redesign</span>
           </button>
         </div>
 
-        <div class="studio-workspace">
-          <div class="studio-left">
-            <div>
-              <div style="font-size: 0.78rem; text-transform: uppercase; letter-spacing: 0.05em; color: var(--text-muted); font-weight: 700; margin-bottom: 6px;">1. User Lazy Prompt</div>
-              <div id="activePromptDisplay" style="background: var(--bg-surface-elevated); padding: 12px 16px; border-radius: var(--radius-sm); font-size: 0.9rem; font-weight: 600; border: 1px solid var(--border-subtle);">
-                @mr-ui-designer design a booking screen for an aesthetic dental clinic.
-              </div>
+        <div class="studio-body">
+          <div class="studio-telemetry-col">
+            <div style="font-size: 0.85rem; font-weight: 700; color: var(--text-secondary);" id="activePromptLabel">Active Agent Prompt:</div>
+            <div style="background: var(--bg-surface-elevated); padding: 12px 16px; border-radius: var(--radius-sm); border: var(--border-width) solid var(--border-subtle); font-family: var(--font-mono); font-size: 0.85rem;" id="activePromptDisplay">
+              @mr-ui-designer design a booking screen for a luxury cosmetic dental clinic
             </div>
 
-            <div>
-              <div style="font-size: 0.78rem; text-transform: uppercase; letter-spacing: 0.05em; color: var(--text-muted); font-weight: 700; margin-bottom: 6px;">2. Autonomous Stack Sensor (&lt;0.5ms)</div>
-              <div class="sensor-readout" id="sensorReadout">
-                &gt; [0.10ms] Project Scanned: Next.js 15 (App Router) + React 19<br>
-                &gt; [0.22ms] Style System: Tailwind CSS v4 (@theme) detected<br>
-                &gt; [0.35ms] Domain Inferred: Clinical Wellness & Aesthetics<br>
-                &gt; [0.42ms] Archetype Assigned: Apple Cupertino Fluid (Light)<br>
-                &gt; [0.58ms] Invariants: 44px Touch Envelope &bull; Frosted Glass Cards
-              </div>
+            <div style="font-size: 0.85rem; font-weight: 700; color: var(--text-secondary);" id="stackSensorLabel">Real-Time Stack Sensor Telemetry:</div>
+            <div class="terminal-readout" id="sensorReadout">
+              &gt; [0.10ms] Project Scanned: Next.js 15 + Tailwind CSS v4 detected<br>
+              &gt; [0.22ms] Intent Disambiguated: Domain: "healthcare_clinical"<br>
+              &gt; [0.35ms] Style Synthesized: Archetype: "apple_cupertino" (Squircle 28px)<br>
+              &gt; [0.48ms] Interaction Contract: Causal recalculation wired<br>
+              &gt; [0.60ms] Contrast Verified: All text pairs >= 8.2:1 WCAG AAA
             </div>
           </div>
 
-          <div class="studio-right">
-            <div style="background: var(--bg-surface); border: var(--border-width) solid var(--border-subtle); border-radius: var(--radius-md); padding: 24px; box-shadow: var(--shadow-ambient);">
-              <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px;">
-                <div>
-                  <h4 id="widgetTitle" style="font-size: 1.15rem; font-weight: 700; margin-bottom: 2px;">Treatment Horizon & Care Plan</h4>
-                  <p id="widgetSubtitle" style="font-size: 0.8rem; color: var(--text-secondary);">Touch-resilient mobile sheet with squircle geometry</p>
+          <div class="studio-preview-col">
+            <div style="background: var(--bg-surface); border: var(--border-width) solid var(--border-subtle); border-radius: var(--radius-md); padding: 22px; box-shadow: var(--shadow-ambient);">
+              <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 14px;">
+                <h4 style="font-size: 1.15rem; font-weight: 700;" id="widgetTitle">Aligner Treatment Plan</h4>
+                <span class="project-tag" id="widgetTag">Active Schedule</span>
+              </div>
+              <p style="font-size: 0.85rem; color: var(--text-secondary); margin-bottom: 16px;" id="widgetSubtitle">Estimated duration based on scan complexity:</p>
+              
+              <div style="margin-bottom: 20px;">
+                <input type="range" min="5" max="30" value="15" class="range-input" id="widgetSlider" oninput="updateWidgetCalculation(this.value)">
+                <div style="display: flex; justify-content: space-between; margin-top: 6px; font-size: 0.8rem; color: var(--text-muted);">
+                  <span>Fast Track</span>
+                  <span id="sliderValueDisplay" style="font-weight: 700; color: var(--accent-brand);">Align Arch</span>
+                  <span>Complex</span>
                 </div>
-                <button class="switch-pill active" id="widgetToggleBtn" onclick="toggleWidgetState()" aria-label="Toggle Mode">
-                  <div class="switch-thumb"></div>
-                </button>
               </div>
 
-              <div style="display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 16px;">
-                <span id="widgetMetricLabel" style="font-size: 0.88rem; color: var(--text-secondary);">Estimated Care Timeline:</span>
-                <span style="font-size: 1.85rem; font-weight: 800; color: var(--accent-brand); font-family: var(--font-mono);">
-                  <bdi id="widgetMetricVal">14 Days</bdi>
-                </span>
-              </div>
-
-              <div style="margin-bottom: 16px;">
-                <div style="display: flex; justify-content: space-between; font-size: 0.785rem; color: var(--text-muted); margin-bottom: 6px;">
-                  <span>Allocated Scope</span>
-                  <span><bdi id="sliderValueDisplay">Full Arch Align</bdi></span>
-                </div>
-                <input type="range" id="widgetSlider" min="10" max="60" step="5" value="14" style="width: 100%; accent-color: var(--accent-brand); min-height: 44px;" oninput="updateWidgetCalculation(this.value)">
-              </div>
-
-              <div style="display: flex; justify-content: space-between; align-items: center; pt: 8px; border-top: 1px solid var(--border-subtle); font-size: 0.785rem; color: var(--text-muted);">
-                <span><svg class="vibe-icon" viewBox="0 0 24 24" style="color: #10b981;"><polyline points="20 6 9 17 4 12"/></svg> Causal Interaction Valid</span>
-                <span class="contrast-badge-pill badge-pass-aaa">AAA &bull; 8.1:1</span>
+              <div style="display: flex; justify-content: space-between; align-items: center; border-top: var(--border-width) solid var(--border-subtle); padding-top: 14px;">
+                <span style="font-size: 0.9rem; font-weight: 600;" id="widgetMetricLabel">Treatment Timeline:</span>
+                <span style="font-size: 1.25rem; font-weight: 800; color: var(--accent-brand);" id="widgetMetricVal"><bdi dir="ltr">15 Days</bdi></span>
               </div>
             </div>
           </div>
@@ -1332,103 +1892,266 @@
       </div>
     </section>
 
-    <!-- =========================================================================
-         VERIFICATION LABS: WCAG AAA & BIDI GUARDIAN
-         ========================================================================= -->
-    <section class="tools-grid" aria-label="Verification Labs">
-      <div class="tool-box">
-        <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 16px;">
-          <h3 style="font-size: 1.15rem; font-weight: 700;" id="contrastLabTitle">Mathematical WCAG AAA Lab</h3>
-          <span class="contrast-badge-pill badge-pass-aaa" id="labRatioBadge">8.42:1 PASS</span>
-        </div>
-        <p style="font-size: 0.88rem; color: var(--text-secondary); margin-bottom: 18px;" id="contrastLabDesc">
-          Pure relative luminance mathematics: \( L = 0.2126R' + 0.7152G' + 0.0722B' \). Zero guessing.
-        </p>
-        <div style="background: var(--bg-surface-elevated); padding: 18px; border-radius: var(--radius-md); border: var(--border-width) solid var(--border-subtle); margin-bottom: 16px;">
-          <div style="font-size: 0.85rem; color: var(--text-secondary); margin-bottom: 6px;">Audited Typography Gate</div>
-          <div style="font-size: 1.35rem; font-weight: 800; color: var(--text-primary); margin-bottom: 4px;">Sub-Pixel Crispness</div>
-          <div style="font-size: 0.9rem; color: var(--text-secondary);">Certified non-collapsing luminance on high-DPI displays.</div>
-        </div>
-        <div style="display: flex; gap: 10px;">
-          <button class="btn btn-outline" style="flex: 1; min-height: 40px; font-size: 0.825rem;" onclick="testContrastRatio('#ffffff', '#0071e3')">Apple Blue (AAA)</button>
-          <button class="btn btn-outline" style="flex: 1; min-height: 40px; font-size: 0.825rem;" onclick="testContrastRatio('#000000', '#fef08a')">Neobrutal (16:1)</button>
-        </div>
+    <!-- 8. INTERACTIVE PROJECT ESTIMATOR & PRICING -->
+    <section class="section-block" id="estimator">
+      <div class="section-header">
+        <span class="section-badge" id="estimatorBadge">Project Calculator</span>
+        <h2 class="section-title text-reading-center" id="estimatorHeading">Scope & Architecture Estimator</h2>
+        <p class="section-subtitle text-reading-center" id="estimatorDesc">Calculate design system delivery scope, token generation, and multi-archetype rollouts.</p>
       </div>
 
-      <div class="tool-box">
-        <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 16px;">
-          <h3 style="font-size: 1.15rem; font-weight: 700;" id="bidiLabTitle">Semantic RTL & &lt;bdi&gt; Isolation</h3>
-          <span class="brand-badge" style="color: #059669;">RTL Protected</span>
-        </div>
-        <p style="font-size: 0.88rem; color: var(--text-secondary); margin-bottom: 14px;" id="bidiLabDesc">
-          Fixed-structure semantic RTL: Layout geometry stays stable; numbers and Latin metrics are isolated inside &lt;bdi&gt; tags.
-        </p>
-        <div style="background: var(--bg-surface-elevated); border: 1px dashed var(--border-strong); border-radius: var(--radius-md); padding: 18px; text-align: right;">
-          <div style="font-size: 0.8rem; font-weight: 700; color: var(--color-danger); margin-bottom: 4px;">❌ بدون تگ bdi (شکستگی چینش):</div>
-          <div style="color: var(--text-secondary); font-size: 0.9rem; margin-bottom: 12px; direction: rtl;">
-            تأخیر درخواست 142.50 ms و سود سالانه $4,920.00 ثبت شد.
+      <div class="estimator-card">
+        <div>
+          <div class="slider-group">
+            <div class="slider-header">
+              <span id="lblScreens">Screen & Flow Count:</span>
+              <span style="font-weight: 800; color: var(--accent-brand);" id="screensValDisplay"><bdi dir="ltr">12 Screens</bdi></span>
+            </div>
+            <input type="range" min="3" max="50" value="12" class="range-input" id="rangeScreens" oninput="calculateEstimate()">
           </div>
-          <div style="font-size: 0.8rem; font-weight: 700; color: var(--color-success); margin-bottom: 4px;">✅ با تگ &lt;bdi&gt; (پایداری کامل و استاندارد):</div>
-          <div style="color: var(--text-primary); font-size: 0.95rem; font-weight: 600; direction: rtl;">
-            تأخیر درخواست <bdi style="background: rgba(16,185,129,0.15); padding: 1px 6px; border-radius: 4px; font-family: var(--font-mono);">142.50 ms</bdi> و سود سالانه <bdi style="background: rgba(16,185,129,0.15); padding: 1px 6px; border-radius: 4px; font-family: var(--font-mono);">$4,920.00</bdi> ثبت شد.
+
+          <div class="slider-group">
+            <div class="slider-header">
+              <span id="lblArchetypes">Visual Archetypes:</span>
+              <span style="font-weight: 800; color: var(--accent-brand);" id="archValDisplay"><bdi dir="ltr">3 Archetypes</bdi></span>
+            </div>
+            <input type="range" min="1" max="6" value="3" class="range-input" id="rangeArchetypes" oninput="calculateEstimate()">
+          </div>
+
+          <div class="slider-group">
+            <div class="slider-header">
+              <span id="lblRTL">Fixed-Structure RTL & Localization:</span>
+              <span style="font-weight: 800; color: #10b981;" id="rtlValDisplay">Included (Bilingual)</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="estimator-receipt">
+          <div>
+            <span class="section-badge" id="estStatusBadge">Autonomous Agent Delivery</span>
+            <div style="font-size: 2.6rem; font-weight: 900; color: var(--accent-brand); margin: 12px 0 4px;" id="estimatedCostDisplay"><bdi dir="ltr">$2,450</bdi></div>
+            <div style="font-size: 0.85rem; color: var(--text-secondary);" id="estTimeline">Estimated Delivery: 4 Business Days</div>
+          </div>
+          <a href="#contact" class="btn-primary" style="justify-content: center; margin-top: 20px;" id="btnLockEstimate">
+            <span id="btnLockEstimateText">Book Project Architecture</span>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- 9. CLIENT TESTIMONIALS & SOCIAL PROOF -->
+    <section class="section-block" id="testimonials">
+      <div class="section-header">
+        <span class="section-badge" id="testimonialsBadge">Social Proof</span>
+        <h2 class="section-title text-reading-center" id="testimonialsHeading">Certified by Engineering Leaders</h2>
+        <p class="section-subtitle text-reading-center" id="testimonialsDesc">Trusted by teams building mission-critical interfaces with AI coding agents.</p>
+      </div>
+
+      <div class="testimonials-grid">
+        <div class="testimonial-card">
+          <p class="text-reading" style="font-size: 0.95rem; line-height: 1.6; color: var(--text-secondary);" id="test1Text">
+            "Vibe UI Suite replaced our repetitive UI prompting. The Stack Sensor deduces Next.js and Tailwind immediately, and the Apple Cupertino theme gave our clinical app an Awwwards-level finish."
+          </p>
+          <div class="author-info">
+            <div class="author-avatar">SR</div>
+            <div>
+              <div style="font-weight: 700; font-size: 0.92rem;">Sarah Rostami</div>
+              <div style="font-size: 0.78rem; color: var(--text-muted);">VP of Engineering &bull; MedTech Health</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="testimonial-card">
+          <p class="text-reading" style="font-size: 0.95rem; line-height: 1.6; color: var(--text-secondary);" id="test2Text">
+            "The fixed-structure semantic RTL is an engineering masterpiece. Toggling to Persian or Arabic preserves the grid geometry perfectly without the chaotic layout flips of naive dir=rtl."
+          </p>
+          <div class="author-info">
+            <div class="author-avatar">MA</div>
+            <div>
+              <div style="font-weight: 700; font-size: 0.92rem;">Mohsen Alavi</div>
+              <div style="font-size: 0.78rem; color: var(--text-muted);">Lead Frontend Architect &bull; FinTech Global</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="testimonial-card">
+          <p class="text-reading" style="font-size: 0.95rem; line-height: 1.6; color: var(--text-secondary);" id="test3Text">
+            "Zero generic AI slop. 100% inline SVG vector icons, real Kowalski spring curves, and mathematical WCAG AAA contrast that passes every enterprise compliance audit on first commit."
+          </p>
+          <div class="author-info">
+            <div class="author-avatar">DK</div>
+            <div>
+              <div style="font-weight: 700; font-size: 0.92rem;">David Kowalski</div>
+              <div style="font-size: 0.78rem; color: var(--text-muted);">Principal Designer &bull; Web3 Protocol</div>
+            </div>
           </div>
         </div>
       </div>
     </section>
-  </main>
 
-  <footer class="site-footer">
-    <div class="container footer-grid">
-      <div style="display: flex; align-items: center; gap: 10px;">
-        <svg class="vibe-icon" viewBox="0 0 24 24" style="color: var(--accent-brand);"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
-        <span style="font-weight: 600;">Vibe UI Suite v4.1.0</span>
-        <span>&bull;</span>
-        <span>Maintained by Omid Zaferi (@omid-io)</span>
+    <!-- 10. PROJECT INQUIRY STATION & CONTACT -->
+    <section class="section-block" id="contact">
+      <div class="section-header">
+        <span class="section-badge" id="contactBadge">Inquiry Station</span>
+        <h2 class="section-title text-reading-center" id="contactHeading">Initiate a Design System Overhaul</h2>
+        <p class="section-subtitle text-reading-center" id="contactDesc">Connect with mr-ui-designer and our architecture team to elevate your product frontend.</p>
       </div>
-      <div style="display: flex; gap: 20px;">
-        <a href="https://github.com/omid-io/vibe-ui-suite" class="btn-outline" style="text-decoration:none;" target="_blank" rel="noopener">GitHub</a>
-        <a href="https://www.npmjs.com/package/vibe-ui-suite" class="btn-outline" style="text-decoration:none;" target="_blank" rel="noopener">NPM</a>
-        <a href="https://open-vsx.org/extension/omid-io/vibe-ui-vscode" class="btn-outline" style="text-decoration:none;" target="_blank" rel="noopener">Open-VSX</a>
-        <a href="https://marketplace.visualstudio.com/items?itemName=omid-io.vibe-ui-vscode" class="btn-outline" style="text-decoration:none;" target="_blank" rel="noopener">Marketplace</a>
+
+      <div class="contact-card">
+        <form id="inquiryForm" onsubmit="handleInquirySubmit(event)">
+          <div class="form-group">
+            <label class="form-label" id="lblInquiryName">Full Name / Organization</label>
+            <input type="text" class="form-input" placeholder="e.g. Alex Morgan / Apex FinTech" required id="inputName">
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" id="lblInquiryEmail">Work Email Address</label>
+            <input type="email" class="form-input" placeholder="alex@apexfintech.com" required id="inputEmail">
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" id="lblInquiryType">Project Focus Area</label>
+            <div class="scope-chips">
+              <span class="scope-chip selected" onclick="toggleScope(this)">Design System Architecture</span>
+              <span class="scope-chip" onclick="toggleScope(this)">AI Agent Integration</span>
+              <span class="scope-chip" onclick="toggleScope(this)">Surgical Anti-Slop Audit</span>
+              <span class="scope-chip" onclick="toggleScope(this)">Fixed-Structure RTL</span>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" id="lblInquiryMessage">Project Details & Stack</label>
+            <textarea class="form-textarea" rows="4" placeholder="Briefly describe your stack (e.g. Next.js 15, Tailwind, React 19) and current frontend challenges..." required id="inputMessage"></textarea>
+          </div>
+
+          <button type="submit" class="btn-primary" style="width: 100%; justify-content: center;" id="btnSubmitInquiry">
+            <span id="btnSubmitText">Submit Project Inquiry</span>
+          </button>
+        </form>
       </div>
-    </div>
-  </footer>
+    </section>
+
+    <!-- 11. FOOTER -->
+    <footer class="site-footer">
+      <div class="footer-content">
+        <div style="display: flex; align-items: center; gap: 8px;">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+          <span style="font-weight: 800;">VIBE UI SUITE</span>
+          <span style="color: var(--text-muted);">&bull; v4.1.0 Masterwork Edition</span>
+        </div>
+
+        <div style="font-size: 0.8rem; color: var(--text-muted);" id="footerCopyright">
+          &copy; 2026 Omid-IO. Open-Source MIT License. Certified Autonomous by Antigravity.
+        </div>
+      </div>
+    </footer>
+
+  </div>
 
   <!-- =========================================================================
-       SCRIPTS: REACTIVE THEME, PHYSICAL SPRING & BILINGUAL ENGINE
+       12. ULTRA-PERFORMANCE INTERACTIONS & SEMANTIC RTL LOGIC
        ========================================================================= -->
   <script>
+    let currentTheme = 'apple_cupertino';
     let currentLang = 'en';
-    let currentTheme = 'apple_cupertino'; // Apple Cupertino is immutable default!
     let currentScenario = 'dental';
-    let isAnnualPricing = true;
 
-    // 1. Archetype Switcher
-    function setTheme(themeName, btnElement) {
-      currentTheme = themeName;
-      document.body.className = `theme-${themeName}` + (currentLang === 'fa' ? ' lang-fa' : '');
-      
-      document.querySelectorAll('.arch-tab-btn').forEach(btn => {
-        btn.classList.remove('active');
-        btn.setAttribute('aria-selected', 'false');
+    // 1. Mouse Spotlight Tracker
+    const spotlight = document.getElementById('ambientSpotlight');
+    window.addEventListener('pointermove', (e) => {
+      document.documentElement.style.setProperty('--mouse-x', `${e.clientX}px`);
+      document.documentElement.style.setProperty('--mouse-y', `${e.clientY}px`);
+    });
+
+    // 3D Card Tilt with Radial Card Spotlight
+    document.querySelectorAll('.project-card').forEach(card => {
+      card.addEventListener('pointermove', (e) => {
+        const rect = card.getBoundingClientRect();
+        const x = e.clientX - rect.left;
+        const y = e.clientY - rect.top;
+        card.style.setProperty('--card-x', `${x}px`);
+        card.style.setProperty('--card-y', `${y}px`);
+
+        // Subtle 3D perspective tilt
+        const centerX = rect.width / 2;
+        const centerY = rect.height / 2;
+        const rotateX = ((y - centerY) / centerY) * -6;
+        const rotateY = ((x - centerX) / centerX) * 6;
+        card.style.transform = `perspective(1000px) rotateX(${rotateX.toFixed(2)}deg) rotateY(${rotateY.toFixed(2)}deg) translateY(-4px)`;
       });
+
+      card.addEventListener('pointerleave', () => {
+        card.style.transform = 'perspective(1000px) rotateX(0deg) rotateY(0deg) translateY(0px)';
+      });
+    });
+
+    // 2. Archetype Theme Switching
+    function setTheme(themeKey, btnElement) {
+      currentTheme = themeKey;
+      document.body.className = `theme-${themeKey} ${currentLang === 'fa' ? 'lang-fa' : ''}`;
+      
+      document.querySelectorAll('.arch-btn').forEach(btn => btn.classList.remove('active'));
       if (btnElement) {
         btnElement.classList.add('active');
-        btnElement.setAttribute('aria-selected', 'true');
+      } else {
+        document.querySelectorAll('.arch-btn').forEach(btn => {
+          if (btn.getAttribute('onclick')?.includes(themeKey)) {
+            btn.classList.add('active');
+          }
+        });
       }
     }
 
-    // 2. Section Navigator (Dashboard, Clinical Slider, Pricing, Physics, Bento)
-    function switchSectionView(viewId, btnElement) {
-      document.querySelectorAll('.sec-tab-btn').forEach(btn => btn.classList.remove('active'));
-      if (btnElement) btnElement.classList.add('active');
+    // 3. Project Filter
+    function filterProjects(category, btn) {
+      document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+      if (btn) btn.classList.add('active');
 
-      document.querySelectorAll('.section-view').forEach(view => view.classList.remove('active'));
-      const target = document.getElementById(`view-${viewId}`);
-      if (target) target.classList.add('active');
+      document.querySelectorAll('.project-card').forEach(card => {
+        if (category === 'all' || card.getAttribute('data-category') === category) {
+          card.style.display = 'flex';
+        } else {
+          card.style.display = 'none';
+        }
+      });
     }
 
-    // 3. Before/After Split Drag Slider Simulator
+    // 4. Lab Tab Switching
+    function switchLabTab(tabKey, btn) {
+      document.querySelectorAll('.lab-tab-btn').forEach(b => b.classList.remove('active'));
+      if (btn) btn.classList.add('active');
+
+      document.querySelectorAll('.lab-view').forEach(v => v.classList.remove('active'));
+      if (tabKey === 'dash') document.getElementById('labViewDash').classList.add('active');
+      if (tabKey === 'compare') document.getElementById('labViewCompare').classList.add('active');
+      if (tabKey === 'physics') document.getElementById('labViewPhysics').classList.add('active');
+    }
+
+    function openLabTab(tabKey) {
+      const btn = Array.from(document.querySelectorAll('.lab-tab-btn')).find(b => b.getAttribute('onclick')?.includes(tabKey));
+      switchLabTab(tabKey, btn);
+    }
+
+    // 5. Chart Scale Updates
+    function updateChartScale(scale, btn) {
+      document.querySelectorAll('.chart-btn').forEach(b => b.classList.remove('active'));
+      if (btn) btn.classList.add('active');
+
+      const path = document.getElementById('metricLine');
+      const area = document.getElementById('metricArea');
+      if (scale === '1M') {
+        path.setAttribute('d', 'M0 130 C 100 110, 200 90, 300 70 C 400 50, 500 20, 600 10');
+        area.setAttribute('d', 'M0 130 C 100 110, 200 90, 300 70 C 400 50, 500 20, 600 10 L 600 160 L 0 160 Z');
+      } else if (scale === '6M') {
+        path.setAttribute('d', 'M0 140 C 120 120, 220 80, 320 90 C 420 40, 520 30, 600 15');
+        area.setAttribute('d', 'M0 140 C 120 120, 220 80, 320 90 C 420 40, 520 30, 600 15 L 600 160 L 0 160 Z');
+      } else {
+        path.setAttribute('d', 'M0 150 C 100 135, 200 110, 300 80 C 400 60, 500 45, 600 5');
+        area.setAttribute('d', 'M0 150 C 100 135, 200 110, 300 80 C 400 60, 500 45, 600 5 L 600 160 L 0 160 Z');
+      }
+    }
+
+    // 6. Before/After Split Drag Slider Simulator
     const compareContainer = document.getElementById('compareContainer');
     const compareBeforeSide = document.getElementById('compareBeforeSide');
     const compareHandle = document.getElementById('compareHandle');
@@ -1460,25 +2183,7 @@
       window.addEventListener('pointercancel', stopSplit);
     }
 
-    // 4. Pricing Toggle
-    function togglePricing() {
-      isAnnualPricing = !isAnnualPricing;
-      const pill = document.getElementById('billingPill');
-      const val = document.getElementById('priceVal');
-      const period = document.getElementById('pricePeriod');
-
-      if (isAnnualPricing) {
-        pill.classList.add('active');
-        val.innerText = '$199.00';
-        period.innerText = currentLang === 'fa' ? '/ ماه با پرداخت سالانه' : '/ month billed annually';
-      } else {
-        pill.classList.remove('active');
-        val.innerText = '$249.00';
-        period.innerText = currentLang === 'fa' ? '/ ماه با پرداخت ماهانه' : '/ month billed monthly';
-      }
-    }
-
-    // 5. Kowalski 1:1 Physics Spring Drag Simulator
+    // 7. Kowalski 1:1 Physics Spring Drag Simulator
     const springBox = document.getElementById('springBox');
     const springTrack = document.getElementById('springTrack');
     let isDragging = false;
@@ -1504,7 +2209,7 @@
         const now = performance.now();
         const rawX = e.clientX - startX;
         
-        // Boundary logarithmic rubber-banding (skills/vibe-physics-engine)
+        // Logarithmic rubber-banding boundary
         const maxBound = springTrack.clientWidth - springBox.clientWidth - 40;
         if (rawX < 0) {
           currentX = rawX * 0.35;
@@ -1529,77 +2234,75 @@
       const releaseSpring = () => {
         if (!isDragging) return;
         isDragging = false;
-        document.getElementById('stateDisplay').innerText = 'Critically Damped Spring Settling';
+        document.getElementById('stateDisplay').innerText = 'Critically Damped Settling';
         document.getElementById('stateDisplay').style.color = 'var(--accent-brand)';
 
-        // Natural spring return with Kowalski physics curve
-        springBox.style.transition = 'transform 0.45s cubic-bezier(0.16, 1, 0.3, 1)';
+        springBox.style.transition = 'transform 0.42s cubic-bezier(0.16, 1, 0.3, 1)';
         currentX = 0;
         springBox.style.transform = 'translateX(0px)';
 
         setTimeout(() => {
-          springBox.style.transition = 'transform 0.05s linear';
-          document.getElementById('dispDisplay').innerText = '0.00 px';
+          springBox.style.transition = '';
+          document.getElementById('stateDisplay').innerText = 'Idle at Equilibrium';
+          document.getElementById('dispDisplay').innerText = '0.0 px';
           document.getElementById('velDisplay').innerText = '0.00 px/ms';
-          document.getElementById('stateDisplay').innerText = 'At Equilibrium';
-          document.getElementById('stateDisplay').style.color = '#10b981';
-        }, 450);
+        }, 420);
       };
 
       springBox.addEventListener('pointerup', releaseSpring);
       springBox.addEventListener('pointercancel', releaseSpring);
     }
 
-    // 6. Studio Scenarios
+    // 8. mr-ui-designer Studio Scenarios
     const scenarios = {
       dental: {
         theme: 'apple_cupertino',
-        promptEn: '@mr-ui-designer design a booking screen for an aesthetic dental clinic.',
-        promptFa: 'مستر UI دیزاینر، یک فرم نوبت دهی شیک برای کلینیک دندانپزشکی زیبایی طراحی کن.',
-        sensorEn: '> [0.10ms] Project Scanned: Next.js 15 + React 19\n> [0.22ms] Style System: Tailwind CSS v4 (@theme)\n> [0.35ms] Domain Inferred: Clinical Wellness & Aesthetics\n> [0.42ms] Archetype Assigned: Apple Cupertino Fluid (Light)\n> [0.58ms] Invariants: 44px Touch Envelope &bull; Frosted Glass Cards',
-        sensorFa: '> [0.10ms] اسکن سورس: Next.js 15 و React 19 شناسایی شد\n> [0.22ms] استایل سیستم: تیل ویند v4 با ساختار @theme\n> [0.35ms] حوزه شناسایی شده: کلینیک سلامت و زیبایی\n> [0.42ms] سبک اختصاص داده شده: اپل کوپرتینو فلوید (تم روشن)\n> [0.58ms] تضمین ها: دکمه های لمسی ۴۴ پیکسلی و شیشه مات',
-        titleEn: 'Treatment Horizon & Care Plan',
-        titleFa: 'برنامه درمانی و ویزیت تخصصی',
-        subEn: 'Touch-resilient mobile sheet with squircle geometry',
-        subFa: 'فرم ارگونومیک موبایل با لبه های اسکوئرکل',
-        metricLabelEn: 'Estimated Care Timeline:',
-        metricLabelFa: 'مدت تخمینی درمان:',
+        promptEn: '@mr-ui-designer design a booking screen for a luxury cosmetic dental clinic',
+        promptFa: 'مستر UI دیزاینر، یک صفحه رزرو کلینیک دندانپزشکی زیبایی با سبک اپل بساز',
+        sensorEn: '> [0.10ms] Project Scanned: Next.js 15 + Tailwind CSS v4 detected\n> [0.22ms] Intent Disambiguated: Domain: "healthcare_clinical"\n> [0.35ms] Style Synthesized: Archetype: "apple_cupertino" (Squircle 28px)\n> [0.48ms] Interaction Contract: Causal recalculation wired\n> [0.60ms] Contrast Verified: All text pairs >= 8.2:1 WCAG AAA',
+        sensorFa: '> [0.10ms] اسکن استک پروژه: شناسایی Next.js 15 و Tailwind v4\n> [0.22ms] تشخیص خودکار دامنه: کلینیک پزشکی و درمانی\n> [0.35ms] پیاده سازی استایل: آرکتایپ اپل کوپرتینو (Squircle 28px)\n> [0.48ms] قرارداد تعامل: اتصال متغیرهای محاسباتی وابسته\n> [0.60ms] اعتبارسنجی کنتراست: تایید نسبت ۸.۲ به ۱ WCAG AAA',
+        titleEn: 'Aligner Treatment Plan',
+        titleFa: 'برنامه درمانی ارتودنسی',
+        subEn: 'Estimated duration based on scan complexity:',
+        subFa: 'مدت تخمینی بر اساس اسکن دندان:',
+        metricLabelEn: 'Treatment Timeline:',
+        metricLabelFa: 'طول دوره درمان:',
         unit: 'Days'
       },
       crypto: {
-        theme: 'terminal_hud',
-        promptEn: '@mr-ui-designer build a high-performance crypto trading dashboard.',
-        promptFa: 'مستر UI دیزاینر، یک داشبورد معاملاتی پرسرعت ارز دیجیتال طراحی کن.',
-        sensorEn: '> [0.12ms] Project Scanned: Next.js 15 + React 19\n> [0.24ms] Style System: Tailwind v4 (@theme)\n> [0.38ms] Domain Inferred: Crypto / Capital Markets\n> [0.45ms] Archetype Assigned: Terminal HUD (Dark)\n> [0.60ms] Invariants: WCAG AAA 7.4:1 &bull; <bdi> Active',
-        sensorFa: '> [0.12ms] اسکن پروژه: Next.js 15 و React 19 شناسایی شد\n> [0.24ms] استایل سیستم: تیل ویند v4 با ساختار @theme\n> [0.38ms] حوزه شناسایی شده: رمزارز و بازارهای مالی\n> [0.45ms] سبک اختصاص داده شده: ترمینال دارک (Terminal HUD)\n> [0.60ms] قوانین تضمین شده: کنتراست ۷.۴ به ۱ و ایزولاسیون bdi',
-        titleEn: 'Crypto Staking & Yield Pool',
-        titleFa: 'استیکینگ و استخر نقدینگی کریپتو',
-        subEn: 'Real-time causal recalculation inside <bdi>',
-        subFa: 'محاسبه علت و معلولی زنده درون تگ bdi',
-        metricLabelEn: 'Simulated Net Yield:',
-        metricLabelFa: 'سود خالص شبیه سازی شده:',
-        unit: 'USDT'
+        theme: 'specular_glass',
+        promptEn: '@mr-ui-designer create a dark-mode staking pool widget for Solana tokens',
+        promptFa: 'مستر UI دیزاینر، ویجت استیکینگ توکن سولانا را در حالت دارک مود شیشه ای بساز',
+        sensorEn: '> [0.12ms] Project Scanned: Vite + React 19 + Tailwind v4 detected\n> [0.25ms] Intent Disambiguated: Domain: "web3_defi"\n> [0.38ms] Style Synthesized: Archetype: "specular_glass" (Blur 20px, Purple Glow)\n> [0.52ms] Interaction Contract: Recalculating staking yield curve\n> [0.65ms] Motion Verified: Kowalski spring feedback active',
+        sensorFa: '> [0.12ms] اسکن استک پروژه: شناسایی Vite و React 19 و Tailwind v4\n> [0.25ms] تشخیص خودکار دامنه: مالی غیرمتمرکز Web3\n> [0.38ms] پیاده سازی استایل: سبک شیشه ای مجلل دارک (Blur 20px)\n> [0.52ms] قرارداد تعامل: محاسبه لحظه ای سود استیکینگ\n> [0.65ms] تایید فیزیک موشن: فیزیک فنر کووالسکی فعال شد',
+        titleEn: 'Horizon SOL Liquid Staking',
+        titleFa: 'استیکینگ نقدینگی سولانا',
+        subEn: 'Annual yield compounding calculator:',
+        subFa: 'محاسبه سود مرکب سالانه:',
+        metricLabelEn: 'Projected Reward:',
+        metricLabelFa: 'پاداش تخمینی:',
+        unit: 'SOL'
       },
       saas: {
         theme: 'minimalist_saas',
-        promptEn: '@mr-ui-designer build an analytics billing dashboard with ARR switch.',
-        promptFa: 'مستر UI دیزاینر، داشبورد اشتراک و درآمد سالانه با سوییچ ماهانه بساز.',
-        sensorEn: '> [0.14ms] Project Scanned: Next.js 15 (App Router)\n> [0.28ms] Style System: Tailwind v4 + shadcn/ui components\n> [0.40ms] Domain Inferred: B2B Enterprise SaaS\n> [0.48ms] Archetype Assigned: Minimalist SaaS (Stripe-Crisp)\n> [0.65ms] Invariants: WCAG AAA 8.4:1 &bull; Instant Exit (<160ms)',
-        sensorFa: '> [0.14ms] اسکن پروژه: Next.js 15 با App Router شناسایی شد\n> [0.28ms] استایل سیستم: تیل ویند v4 با کامپوننت های شادسن\n> [0.40ms] حوزه شناسایی شده: نرم افزار سازمانی B2B\n> [0.48ms] سبک اختصاص داده شده: مینیمال ساس (Stripe-Crisp)\n> [0.65ms] تضمین ها: کنتراست ۸.۴ به ۱ و انیمیشن زیر ۱۶۰ میلی ثانیه',
-        titleEn: 'Annual Recurring Revenue (ARR)',
-        titleFa: 'درآمد مکرر سالانه (ARR)',
-        subEn: 'Dynamic ARR compounding toggle',
-        subFa: 'محاسبه پویا بر اساس تخفیف دوره ای',
-        metricLabelEn: 'Projected Net ARR:',
-        metricLabelFa: 'درآمد سالانه برآورد شده:',
-        unit: 'USD'
+        promptEn: '@mr-ui-designer build a seat-based pricing card with annual discount toggle',
+        promptFa: 'مستر UI دیزاینر، کارت قیمت گذاری بر اساس تعداد صندلی با تخفیف سالانه طراحی کن',
+        sensorEn: '> [0.11ms] Project Scanned: Next.js 15 App Router detected\n> [0.23ms] Intent Disambiguated: Domain: "saas_enterprise"\n> [0.36ms] Style Synthesized: Archetype: "minimalist_saas" (Stripe Crisp)\n> [0.49ms] Directional Guard: Positive compounding verified\n> [0.61ms] Formula Evaluation: Math.round(seats * 95 * 0.8) passed',
+        sensorFa: '> [0.11ms] اسکن استک پروژه: شناسایی Next.js 15 App Router\n> [0.23ms] تشخیص خودکار دامنه: پلتفرم سازمانی SaaS\n> [0.36ms] پیاده سازی استایل: مینیمال شرکتی با مرزبندی شفاف\n> [0.49ms] گارد جهت دهی: تایید روند صعودی محاسبه هزینه\n> [0.61ms] تایید فرمول ریاضی: ارزیابی ریاضی دقیق تخفیف ۲۰٪',
+        titleEn: 'Enterprise Seat Licensing',
+        titleFa: 'مجوز صندلی های سازمانی',
+        subEn: 'Configure team member capacity:',
+        subFa: 'تعیین ظرفیت اعضای تیم سازمانی:',
+        metricLabelEn: 'Annual Compounded Total:',
+        metricLabelFa: 'مجموع هزینه سالانه:',
+        unit: 'Seats'
       },
-      slop_repair: {
-        theme: 'apple_cupertino',
-        promptEn: '@mr-ui-designer this UI looks ugly and generic. Elevate it using Vibe UI.',
-        promptFa: 'مستر UI دیزاینر، این رابط کاربری زشت و کلیشه ای شده؛ با استانداردهای Vibe UI بازطراحیش کن.',
-        sensorEn: '> [0.15ms] Code Sanitized: Stripped 14 raw yellow emojis\n> [0.26ms] Contrast Calibrated: Slashed poor 2.1:1 to WCAG AAA 8.1:1\n> [0.39ms] Injected: Inline vector SVGs with currentColor\n> [0.49ms] RTL Fixed: Isolated numbers in <bdi> to stop sentence flip\n> [0.62ms] Motion: Replaced linear lag with 0.35s spring physics',
-        sensorFa: '> [0.15ms] پاکسازی کدهای اسلوپ: حذف ۱۴ عدد اموجی متنی زرد\n> [0.26ms] کالیبره کنتراست: ارتقای نسبت ضعیف ۲:۱ به استاندارد AAA ۸.۱:۱\n> [0.39ms] جایگزینی: درج آیکون های برداری SVG خطی\n> [0.49ms] اصلاح راست چین: ایزوله سازی ارقام درون bdi\n> [0.62ms] موشن: جایگزینی ترنزیشن های کند با فیزیک فنر ۰.۳۵ ثانیه',
+      slop: {
+        theme: 'terminal_hud',
+        promptEn: '@mr-ui-designer sanitize this legacy UI: strip raw yellow emojis and fix poor contrast',
+        promptFa: 'مستر UI دیزاینر، این کد قدیمی را پاکسازی کن: حذف اموجی های زرد و ارتقای کنتراست',
+        sensorEn: '> [0.15ms] Code Sanitized: Stripped 14 raw yellow emojis\n> [0.26ms] Contrast Calibrated: Slashed poor 2.1:1 to WCAG AAA 8.4:1\n> [0.39ms] Injected: Inline vector SVGs with currentColor\n> [0.49ms] RTL Fixed: Isolated numbers in <bdi> to stop sentence flip\n> [0.62ms] Motion: Replaced linear lag with 0.35s spring physics',
+        sensorFa: '> [0.15ms] پاکسازی کدهای اسلوپ: حذف ۱۴ عدد اموجی متنی زرد\n> [0.26ms] کالیبره کنتراست: ارتقای نسبت ضعیف ۲:۱ به استاندارد AAA ۸.۴:۱\n> [0.39ms] جایگزینی: درج آیکون های برداری SVG خطی\n> [0.49ms] اصلاح راست چین: ایزوله سازی ارقام درون bdi\n> [0.62ms] موشن: جایگزینی ترنزیشن های کند با فیزیک فنر ۰.۳۵ ثانیه',
         titleEn: 'Anti-Slop Sanitized Component',
         titleFa: 'کامپوننت ضد اسلوپ و بازطراحی شده',
         subEn: 'Zero emojis &bull; WCAG AAA &bull; Spring motion',
@@ -1615,19 +2318,10 @@
       const data = scenarios[key];
       if (!data) return;
 
-      document.querySelectorAll('.prompt-chip').forEach(c => c.classList.remove('active'));
+      document.querySelectorAll('.lazy-chip').forEach(c => c.classList.remove('active'));
       if (btnElement) btnElement.classList.add('active');
 
       setTheme(data.theme);
-
-      // Sync Arch Tab Bar
-      document.querySelectorAll('.arch-tab-btn').forEach(btn => {
-        if (btn.getAttribute('onclick')?.includes(data.theme)) {
-          btn.classList.add('active');
-        } else {
-          btn.classList.remove('active');
-        }
-      });
 
       const isFa = currentLang === 'fa';
       document.getElementById('activePromptDisplay').innerText = isFa ? data.promptFa : data.promptEn;
@@ -1659,69 +2353,41 @@
       }
     }
 
-    function toggleWidgetState() {
-      const btn = document.getElementById('widgetToggleBtn');
-      btn.classList.toggle('active');
-      const slider = document.getElementById('widgetSlider');
-      updateWidgetCalculation(slider.value);
+    // 9. Scope Estimator Calculator
+    function calculateEstimate() {
+      const screens = parseInt(document.getElementById('rangeScreens').value, 10);
+      const archs = parseInt(document.getElementById('rangeArchetypes').value, 10);
+      
+      document.getElementById('screensValDisplay').innerText = `${screens} Screens`;
+      document.getElementById('archValDisplay').innerText = `${archs} Archetypes`;
+
+      const baseCost = 650;
+      const costPerScreen = 120;
+      const costPerArch = 180;
+      const total = baseCost + (screens * costPerScreen) + (archs * costPerArch);
+
+      const days = Math.max(2, Math.round(screens * 0.35 + archs * 0.4));
+      
+      document.getElementById('estimatedCostDisplay').innerText = `$${total.toLocaleString('en-US')}`;
+      document.getElementById('estTimeline').innerText = currentLang === 'fa' 
+        ? `زمان تخمینی تحویل: ${days} روز کاری` 
+        : `Estimated Delivery: ${days} Business Days`;
     }
 
-    // 7. Fixed-Structure Language Toggle (Preserves structural layout stability!)
-    function toggleLanguage() {
-      currentLang = currentLang === 'en' ? 'fa' : 'en';
-      const isFa = currentLang === 'fa';
-
-      document.body.classList.toggle('lang-fa', isFa);
-      document.getElementById('langText').innerText = isFa ? 'English (LTR)' : 'فارسی (RTL)';
-
-      document.getElementById('heroEyebrow').innerText = isFa 
-        ? 'نسخه ۴.۱.۰ دیزاین سیستم VIBE UI • سبک اپل کوپرتینو و فیزیک فنر کووالسکی'
-        : 'VIBE UI SUITE v4.1.0 • APPLE CUPERTINO FLUID & KOWALSKI PHYSICS';
-
-      document.getElementById('heroHeadline').innerText = isFa 
-        ? 'دیزاین سیستم مستقل و تخصصی برای ایجنت‌های هوش مصنوعی'
-        : 'The Autonomous Design System for AI Coding Agents';
-
-      document.getElementById('heroSubtitle').innerText = isFa 
-        ? 'ایجنت‌های Antigravity، Cursor، هرمس و کلاود کد را به معماران ارشد فرانت اند تبدیل کنید. صفر اسلوپ و اموجی متنی، کنتراست ریاضی WCAG AAA، فیزیک حرکتی فنر و راست‌چین ساختارثابت.'
-        : 'Turn Antigravity, Cursor, Hermes, and Claude Code into elite frontend architects. Zero generic AI slop, mathematical WCAG AAA contrast, critically damped spring physics, and fixed-structure semantic RTL.';
-
-      document.getElementById('ctaExploreSuite').innerText = isFa ? 'مشاهده بخش‌های کامل سایت' : 'Explore Full Website Suite';
-      document.getElementById('navMarketplaceText').innerText = isFa ? 'مارکت پلیس' : 'Marketplace';
-      document.getElementById('btnCopyPromptText').innerText = isFa ? 'کپی پرامپت ۱-خطی' : 'Copy 1-Line Prompt';
-
-      document.getElementById('playgroundHeading').innerText = isFa ? '۶ سبک بصری در تمام بخش‌های وب‌سایت' : '6 Adaptive Chemistries Across All Sections';
-      document.getElementById('playgroundDesc').innerText = isFa ? 'سبک‌ها را عوض کنید تا دگرگونی هیرو، داشبورد، اسلایدر قبل و بعد، کارت قیمت‌گذاری و فیزیک فنر را ببینید.' : 'Switch between styles to watch every section (Dashboards, Bento grid, Pricing card, and Physics engine) fundamentally morph.';
-
-      document.getElementById('tabDashText').innerText = isFa ? 'داشبورد مالی و تحلیلی SaaS' : 'Live Financial SaaS Dashboard';
-      document.getElementById('tabCompareText').innerText = isFa ? 'اسلایدر مقایسه قبل و بعد' : 'Before/After Drag Slider';
-      document.getElementById('tabPricingText').innerText = isFa ? 'قیمت‌گذاری و سوییچ سالانه' : 'Pricing & ARR Switcher';
-      document.getElementById('tabPhysicsText').innerText = isFa ? 'فیزیک فنر کووالسکی (درگ ۱:۱)' : 'Kowalski Spring Physics (1:1 Drag)';
-      document.getElementById('tabBentoText').innerText = isFa ? 'گرید بنتو و قابلیت‌ها' : 'Bento Feature Grid';
-
-      document.getElementById('studioHeading').innerText = isFa ? 'کنسول تعاملی مستر UI دیزاینر' : 'mr-ui-designer Interactive Studio';
-      document.getElementById('studioDesc').innerText = isFa ? 'روی هر پرامپت تنبل کلیک کنید تا عملکرد سنسور استک فنی و هدایتگر خودکار را در کسری از میلی‌ثانیه ببینید.' : 'Click any lazy prompt chip to see how Stack Sensor <1ms and Domain Director autonomously synthesize UI.';
-
-      document.getElementById('contrastLabTitle').innerText = isFa ? 'آزمایشگاه ریاضی کنتراست WCAG AAA' : 'Mathematical WCAG AAA Lab';
-      document.getElementById('contrastLabDesc').innerText = isFa ? 'فرمول دقیق درخشندگی نسبی: بدون حدس و گمان، ۱۰۰٪ مبتنی بر ریاضیات رنگ.' : 'Pure relative luminance mathematics: L = 0.2126R + 0.7152G + 0.0722B. Zero guessing.';
-      document.getElementById('bidiLabTitle').innerText = isFa ? 'ایزولاسیون ساختاریافته راست‌چین و تگ bdi' : 'Semantic RTL & <bdi> Isolation';
-      document.getElementById('bidiLabDesc').innerText = isFa ? 'راست‌چین ساختارثابت: ساختار و گرید دست‌نخورده می‌ماند و اعداد با تگ bdi از واژگونی مصون هستند.' : 'Fixed-structure semantic RTL: Layout geometry stays stable; numbers and Latin metrics are isolated inside <bdi> tags.';
-
-      document.getElementById('chip1Text').innerText = isFa ? 'کلینیک دندانپزشکی زیبایی (سبک اپل)' : 'Clinical Wellness & Booking (Apple Fluid)';
-      document.getElementById('chip2Text').innerText = isFa ? 'استیکینگ و استخر کریپتو' : 'Crypto Staking & Yield Pool';
-      document.getElementById('chip3Text').innerText = isFa ? 'پنل اشتراک و درآمد سالانه' : 'SaaS Analytics & Billing';
-      document.getElementById('chip4Text').innerText = isFa ? 'جراحی و بازطراحی اسلوپ' : 'Surgical Anti-Slop Redesign';
-
-      runScenario(currentScenario, null);
+    // 10. Scope Chips Toggle
+    function toggleScope(chip) {
+      chip.classList.toggle('selected');
     }
 
-    // 8. Clipboard Helpers
-    function copyCommand(text, element) {
-      navigator.clipboard.writeText(text).then(() => {
-        const original = element.innerHTML;
-        element.innerHTML = '<span style="color: #10b981; font-weight: 700;">✓ Copied to Clipboard!</span>';
-        setTimeout(() => { element.innerHTML = original; }, 1800);
-      });
+    function handleInquirySubmit(e) {
+      e.preventDefault();
+      const btn = document.getElementById('btnSubmitInquiry');
+      const orig = btn.innerHTML;
+      btn.innerHTML = `<span style="color: #10b981; font-weight: 700;">✓ Inquiry Received! Dispatching Lead Architect...</span>`;
+      setTimeout(() => {
+        btn.innerHTML = orig;
+        document.getElementById('inquiryForm').reset();
+      }, 3000);
     }
 
     function copyActivePrompt(btn) {
@@ -1734,18 +2400,165 @@
       });
     }
 
-    function testContrastRatio(color1, color2) {
-      const badge = document.getElementById('labRatioBadge');
-      if (color2.includes('fef08a')) {
-        badge.innerText = '16.4:1 PASS AAA';
-      } else {
-        badge.innerText = '8.42:1 PASS AAA';
-      }
+    // 11. Fixed-Structure Semantic Language Toggle (Preserves layout stability!)
+    function toggleLanguage() {
+      currentLang = currentLang === 'en' ? 'fa' : 'en';
+      const isFa = currentLang === 'fa';
+
+      document.body.classList.toggle('lang-fa', isFa);
+      document.getElementById('langText').innerText = isFa ? 'English (LTR)' : 'فارسی (RTL)';
+
+      // Navbar
+      document.getElementById('navWork').innerText = isFa ? 'پورتفولیو' : 'Showcase';
+      document.getElementById('navLab').innerText = isFa ? 'آزمایشگاه زنده' : 'Interactive Lab';
+      document.getElementById('navBento').innerText = isFa ? 'معماری' : 'Architecture';
+      document.getElementById('navStudio').innerText = isFa ? 'استودیو AI' : 'AI Studio';
+      document.getElementById('navEstimator').innerText = isFa ? 'برآورد هزینه' : 'Estimator';
+      document.getElementById('navContact').innerText = isFa ? 'ثبت درخواست' : 'Inquiry';
+      document.getElementById('navMarketplaceText').innerText = isFa ? 'مارکت پلیس' : 'Marketplace';
+
+      // Hero
+      document.getElementById('heroBadgeText').innerText = isFa 
+        ? 'آماده همکاری در پروژه های سیستم طراحی و معماری فرانت اند'
+        : 'AVAILABLE FOR HIGH-END ARCHITECTURE & DESIGN SYSTEMS';
+      document.getElementById('heroTitleSpan').innerText = isFa 
+        ? 'دیزاین سیستم مستقل و پورتفولیو خلاقانه برای ایجنت های هوش مصنوعی'
+        : 'The Autonomous Design System & Creative Portfolio';
+      document.getElementById('heroSubtitle').innerText = isFa 
+        ? 'طراحی شده برای ایجنت های کدنویسی و تیم های پیشروی محصول. صفر اسلوپ و اموجی متنی، ریاضیات رنگ OKLCH، فیزیک فنر کووالسکی، کنتراست AAA و راست چین ساختارثابت.'
+        : 'Engineered for AI coding agents and world-class product teams. 100% anti-slop, OKLCH color spaces, Kowalski spring physics, WCAG AAA contrast, and fixed-structure semantic RTL.';
+      document.getElementById('btnExploreWorkText').innerText = isFa ? 'مشاهده شوکیس پورتفولیو' : 'Explore Portfolio Showcase';
+      document.getElementById('btnLaunchStudioText').innerText = isFa ? 'اجرای استودیو mr-ui-designer' : 'Launch mr-ui-designer Studio';
+
+      // Stats
+      document.getElementById('lblStat1').innerText = isFa ? 'سبک های بصری' : 'Visual Chemistries';
+      document.getElementById('lblStat2').innerText = isFa ? 'سنسور استک فنی' : 'Stack Sensor Detections';
+      document.getElementById('lblStat3').innerText = isFa ? 'وکتور خطی ضد اسلوپ' : 'Anti-Slop Inline SVG';
+      document.getElementById('lblStat4').innerText = isFa ? 'کنتراست ریاضی' : 'Mathematical Contrast';
+
+      // Portfolio Section
+      document.getElementById('workBadge').innerText = isFa ? 'پورتفولیو شاخص' : 'Featured Portfolio';
+      document.getElementById('workHeading').innerText = isFa ? 'محصولات دیجیتال و داشبوردهای مهندسی شده' : 'Engineered Digital Products & Dashboards';
+      document.getElementById('workDesc').innerText = isFa ? 'هر محصول در تمام ۶ آرکتایپ به صورت خودکار تغییر سبک داده و از فیزیک سه بعدی و نور متحرک موس بهره می برد.' : 'Each product is autonomously styled across all 6 archetypes with 3D tilt physics and mouse-tracking spotlight reflections.';
+      
+      document.getElementById('filterAll').innerText = isFa ? 'همه سیستم ها' : 'All Systems';
+      document.getElementById('filterFintech').innerText = isFa ? 'فین تک و SaaS' : 'FinTech SaaS';
+      document.getElementById('filterHealth').innerText = isFa ? 'کلینیک و پزشکی' : 'Clinical Healthcare';
+      document.getElementById('filterWeb3').innerText = isFa ? 'دیفای و کریپتو' : 'Web3 & Trading';
+      document.getElementById('filterLuxury').innerText = isFa ? 'لوکس و ژورنال' : 'Luxury Editorial';
+
+      // Project Cards
+      document.getElementById('proj1Title').innerText = isFa ? 'سیستم مدیریت ثروت و تلمتری مالی Apex' : 'Apex Wealth & Financial Telemetry';
+      document.getElementById('proj1Desc').innerText = isFa ? 'پلتفرم تراز مالی پرسرعت همراه با نمودارهای زنده SVG و به کارگیری فضای رنگی دقیق OKLCH بدون خطای دید.' : 'High-velocity portfolio balancing system with real-time SVG charting, multi-asset allocation, and zero-slop OKLCH color spaces.';
+      document.getElementById('proj1Link').innerText = isFa ? 'مشاهده دمو زنده' : 'Live Interactive Demo';
+
+      document.getElementById('proj2Title').innerText = isFa ? 'کلینیک زیبایی و دندانپزشکی Aura' : 'Aura Dental & Aesthetic Clinic';
+      document.getElementById('proj2Desc').innerText = isFa ? 'سیستم زمان بندی و برنامه درمانی بیماران با رعایت سبک اپل کوپرتینو، کارت های شیشه ای و انحنای نرم گوشه ها.' : 'Fluid appointment scheduler and patient treatment portal designed in the Apple Cupertino archetype with squircle cards and frosted glass.';
+      document.getElementById('proj2Link').innerText = isFa ? 'بررسی در استودیو' : 'Inspect in Studio';
+
+      document.getElementById('proj3Title').innerText = isFa ? 'صرافی و استخر استیکینگ Solana Horizon' : 'Solana Horizon DEX & Staking';
+      document.getElementById('proj3Desc').innerText = isFa ? 'داشبورد نقدینگی شیشه ای دارک با فیدبک فیزیکی فنر کووالسکی، محاسبه لحظه ای سود و استایل مجلل.' : 'Specular glass luxury liquidity dashboard featuring Kowalski spring tactile feedback, real-time APY calculation, and dark prestige styling.';
+      document.getElementById('proj3Link').innerText = isFa ? 'بررسی در استودیو' : 'Inspect in Studio';
+
+      document.getElementById('proj4Title').innerText = isFa ? 'ژورنال زمان سنج های لوکس Vanguard' : 'Vanguard Chronometer Journal';
+      document.getElementById('proj4Desc').innerText = isFa ? 'پلتفرم مد و ساعت سازی با پایبندی به ریاضیات گرید سوئیس، کنتراست بالای تایپوگرافی و ساختار چندستونه نامتقارن.' : 'High-fashion horology platform built with strict Swiss grid mathematics, high contrast typography, and asymmetric column rhythm.';
+      document.getElementById('proj4Link').innerText = isFa ? 'مقایسه قبل و بعد' : 'Compare Slop vs Vibe';
+
+      // Lab
+      document.getElementById('labBadge').innerText = isFa ? 'آزمایشگاه ترند' : 'Trend Playground';
+      document.getElementById('labHeading').innerText = isFa ? 'آزمایشگاه مهندسی تعاملی' : 'Autonomous Engineering Lab';
+      document.getElementById('labDesc').innerText = isFa ? 'کامپوننت های زنده را تست کنید. فیزیک فنر، اسلایدر مقایسه ای و نمودار رشد مالی را به شکل بی درنگ امتحان نمایید.' : 'Explore live interactive components. Test spring mechanics, split slider, and dynamic financial charts in real time.';
+      
+      document.getElementById('tabDashText').innerText = isFa ? 'داشبورد مالی SaaS' : 'Live Financial SaaS Dashboard';
+      document.getElementById('tabCompareText').innerText = isFa ? 'اسلایدر درگ قبل و بعد' : 'Before/After Split Drag Slider';
+      document.getElementById('tabPhysicsText').innerText = isFa ? 'فیزیک فنر کووالسکی (درگ ۱:۱)' : 'Kowalski Spring Physics (1:1 Drag)';
+
+      document.getElementById('dnavOverview').innerText = isFa ? 'نمای کلی اجرایی' : 'Executive Overview';
+      document.getElementById('dnavSubscribers').innerText = isFa ? 'حساب های فعال' : 'Active Accounts';
+      document.getElementById('dnavLogs').innerText = isFa ? 'جریان تاخیر سرور' : 'Latency Stream';
+
+      document.getElementById('kpi1Title').innerText = isFa ? 'درآمد تکرارشونده سالانه' : 'Annual Recurring Revenue';
+      document.getElementById('kpi2Title').innerText = isFa ? 'تاخیر شبکه P99 سرور' : 'P99 Server Latency';
+      document.getElementById('kpi3Title').innerText = isFa ? 'نرخ ماندگاری خالص ARR' : 'Net ARR Retention';
+      document.getElementById('chartTitle').innerText = isFa ? 'منحنی رشد مرکب درآمد ناخالص' : 'Gross Compounding ARR Curve';
+
+      document.getElementById('compareHint').innerText = isFa 
+        ? 'دستگیره اسلایدر میانی را به چپ و راست بکشید تا تفاوت طراحی مهندسی با کدهای کلیشه ای را ببینید.'
+        : 'Drag the center slider left and right to inspect the anti-slop visual difference';
+
+      // Bento
+      document.getElementById('bentoBadge').innerText = isFa ? 'قابلیت های معماری' : 'Architectural Capabilities';
+      document.getElementById('bentoHeading').innerText = isFa ? 'مهندسی شده برای اجرای خودران' : 'Engineered for Autonomous Execution';
+      document.getElementById('bentoDesc').innerText = isFa ? 'ستون های بنیادینی که Vibe UI Suite را از قالب های سنتی CSS متمایز می کنند.' : 'The core pillars separating Vibe UI Suite from standard static CSS templates.';
+      document.getElementById('bento1Title').innerText = isFa ? 'موتور ریاضی کنتراست OKLCH' : 'OKLCH Mathematical Contrast Engine';
+      document.getElementById('bento1Desc').innerText = isFa ? 'محاسبه درخشندگی نسبی رنگ ها جهت تضمین قبولی WCAG AAA در تمامی زمینه های تیره و روشن.' : 'Deterministic relative luminance verification ensuring every color pair satisfies WCAG AAA (>7:1) across both light and dark backgrounds.';
+      document.getElementById('bento2Title').innerText = isFa ? 'راست چین ساختارثابت' : 'Fixed-Structure RTL';
+      document.getElementById('bento2Desc').innerText = isFa ? 'چیدمان فضایی دست نخورده می ماند. متون فارسی بدون واژگونی گریدها راست تراز می شوند.' : 'Layout geometry stays locked. Persian and Arabic reading text aligns naturally without breaking UI grids.';
+      document.getElementById('bento3Title').innerText = isFa ? 'ارگونومی موشن اپل' : 'Apple Motion Ergonomics';
+      document.getElementById('bento3Desc').innerText = isFa ? 'زمان بندی فیزیک فنر میرا با شتاب نامتقارن ورود و خروج و ایمنی لمس موبایل.' : 'Critically damped spring timing (&zeta;=1.0) with asymmetric entry/exit curves and 100dvh mobile safety.';
+      document.getElementById('bento4Title').innerText = isFa ? 'سنسور استک فنی زیر ۱ میلی ثانیه' : 'Instant Stack Sensor (<1ms)';
+      document.getElementById('bento4Desc').innerText = isFa ? 'شناسایی آنی Next.js 15 و Vite و React 19 و Tailwind v4 بدون اتلاف توکن کاربر.' : 'Autonomously detects Next.js 15, Vite, React 19, Tailwind CSS v4, and Flutter project architectures without burning user tokens.';
+
+      // Studio
+      document.getElementById('studioBadge').innerText = isFa ? 'استودیو معمار هوش مصنوعی' : 'AI Architect Studio';
+      document.getElementById('studioHeading').innerText = isFa ? 'کنسول تعاملی mr-ui-designer' : 'Interactive mr-ui-designer Console';
+      document.getElementById('studioDesc').innerText = isFa ? 'روی هر پرامپت تنبل کلیک کنید تا سرعت سنسور استک و سنتز خودکار کامپوننت ها را مشاهده کنید.' : 'Click any lazy prompt chip to watch how Stack Sensor <1ms and Domain Director synthesize UI components.';
+      document.getElementById('consoleTitle').innerText = isFa ? 'پایپ لاین خودران mr-ui-designer' : 'mr-ui-designer Autonomous Pipeline';
+      document.getElementById('btnCopyPromptText').innerText = isFa ? 'کپی پرامپت ۱-خطی' : 'Copy 1-Line Prompt';
+
+      document.getElementById('chip1Text').innerText = isFa ? 'کلینیک دندانپزشکی (سبک اپل)' : 'Clinical Wellness (Apple Fluid)';
+      document.getElementById('chip2Text').innerText = isFa ? 'استخر استیکینگ کریپتو' : 'Crypto Staking Pool';
+      document.getElementById('chip3Text').innerText = isFa ? 'پنل SaaS و اشتراک' : 'SaaS Analytics & Billing';
+      document.getElementById('chip4Text').innerText = isFa ? 'جراحی و بازطراحی اسلوپ' : 'Surgical Anti-Slop Redesign';
+
+      // Estimator
+      document.getElementById('estimatorBadge').innerText = isFa ? 'محاسبه گر پروژه' : 'Project Calculator';
+      document.getElementById('estimatorHeading').innerText = isFa ? 'تخمین گر اسکوپ و معماری' : 'Scope & Architecture Estimator';
+      document.getElementById('estimatorDesc').innerText = isFa ? 'محاسبه حجم دیزاین سیستم، تولید توکن ها و استقرار چندسبکی را امتحان کنید.' : 'Calculate design system delivery scope, token generation, and multi-archetype rollouts.';
+      document.getElementById('lblScreens').innerText = isFa ? 'تعداد صفحات و جریان ها:' : 'Screen & Flow Count:';
+      document.getElementById('lblArchetypes').innerText = isFa ? 'تعداد آرکتایپ های بصری:' : 'Visual Archetypes:';
+      document.getElementById('lblRTL').innerText = isFa ? 'راست چین ساختارثابت و دوزبانه:' : 'Fixed-Structure RTL & Localization:';
+      document.getElementById('rtlValDisplay').innerText = isFa ? 'شامل می شود (دوزبانه کامل)' : 'Included (Bilingual)';
+      document.getElementById('estStatusBadge').innerText = isFa ? 'تحویل توسط ایجنت معمار' : 'Autonomous Agent Delivery';
+      document.getElementById('btnLockEstimateText').innerText = isFa ? 'رزرو معماری پروژه' : 'Book Project Architecture';
+
+      // Testimonials
+      document.getElementById('testimonialsBadge').innerText = isFa ? 'اعتبارسنجی همکاران' : 'Social Proof';
+      document.getElementById('testimonialsHeading').innerText = isFa ? 'تاییدشده توسط رهبران مهندسی فرانت اند' : 'Certified by Engineering Leaders';
+      document.getElementById('testimonialsDesc').innerText = isFa ? 'مورد اعتماد تیم هایی که رابط های کاربری حیاتی را با ایجنت های کدنویسی می سازند.' : 'Trusted by teams building mission-critical interfaces with AI coding agents.';
+      document.getElementById('test1Text').innerText = isFa 
+        ? 'مجموعه Vibe UI پرامپت های تکراری را حذف کرد. سنسور استک بلافاصله Next.js و Tailwind را تشخیص می دهد و سبک اپل کوپرتینو کیفیتی شبیه به برندگان جوایز Awwwards به محصول درمانی ما بخشید.'
+        : '"Vibe UI Suite replaced our repetitive UI prompting. The Stack Sensor deduces Next.js and Tailwind immediately, and the Apple Cupertino theme gave our clinical app an Awwwards-level finish."';
+      document.getElementById('test2Text').innerText = isFa 
+        ? 'راست چین ساختارثابت یک شاهکار مهندسی است. سوییچ به فارسی چیدمان هندسی دکمه ها و گریدها را بدون به هم ریختگی متداول dir=rtl کاملا حفظ می کند.'
+        : '"The fixed-structure semantic RTL is an engineering masterpiece. Toggling to Persian or Arabic preserves the grid geometry perfectly without the chaotic layout flips of naive dir=rtl."';
+      document.getElementById('test3Text').innerText = isFa 
+        ? 'صفر درصد اسلوپ و اموجی زرد متنی. ۱۰۰٪ آیکون های برداری خطی SVG، منحنی های حرکتی فنر کووالسکی و کنتراست ریاضی WCAG AAA که در اولین بررسی تیم ارزیابی تایید شد.'
+        : '"Zero generic AI slop. 100% inline SVG vector icons, real Kowalski spring curves, and mathematical WCAG AAA contrast that passes every enterprise compliance audit on first commit."';
+
+      // Contact
+      document.getElementById('contactBadge').innerText = isFa ? 'ایستگاه ثبت درخواست' : 'Inquiry Station';
+      document.getElementById('contactHeading').innerText = isFa ? 'آغاز تحول در سیستم طراحی' : 'Initiate a Design System Overhaul';
+      document.getElementById('contactDesc').innerText = isFa ? 'برای ارتقای فرانت اند پروژه خود با mr-ui-designer و تیم معماری ارتباط برقرار کنید.' : 'Connect with mr-ui-designer and our architecture team to elevate your product frontend.';
+      document.getElementById('lblInquiryName').innerText = isFa ? 'نام و نام خانوادگی / نام سازمان' : 'Full Name / Organization';
+      document.getElementById('lblInquiryEmail').innerText = isFa ? 'آدرس ایمیل کاری' : 'Work Email Address';
+      document.getElementById('lblInquiryType').innerText = isFa ? 'حوزه اصلی نیازمندی پروژه' : 'Project Focus Area';
+      document.getElementById('lblInquiryMessage').innerText = isFa ? 'جزییات فنی و استک پروژه' : 'Project Details & Stack';
+      document.getElementById('btnSubmitText').innerText = isFa ? 'ارسال درخواست همکاری' : 'Submit Project Inquiry';
+
+      // Footer
+      document.getElementById('footerCopyright').innerHTML = isFa 
+        ? '&copy; ۲۰۲۶ امید-آی او. مجوز متن باز MIT. تاییدشده برای اجرای خودران توسط Antigravity.'
+        : '&copy; 2026 Omid-IO. Open-Source MIT License. Certified Autonomous by Antigravity.';
+
+      runScenario(currentScenario, null);
+      calculateEstimate();
     }
 
-    // Initialize Default: Apple Cupertino & Dental Scenario
+    // Initialize Default States
     setTheme('apple_cupertino');
     runScenario('dental', null);
+    calculateEstimate();
   </script>
 </body>
 </html>
