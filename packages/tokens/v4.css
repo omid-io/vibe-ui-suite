@@ -1,9 +1,9 @@
 /**
- * @omid-io/tokens/v4.css — Native Tailwind CSS v4 Theme Preset
+ * vibe-ui-suite/v4.css — Native Tailwind CSS v4 Theme Preset
  * Provides zero-config @theme tokens with perceptual OKLCH color spaces and physics curves.
  * Usage:
  *   @import "tailwindcss";
- *   @import "@omid-io/tokens/v4.css";
+ *   @import "vibe-ui-suite/v4.css";
  */
 
 @theme {

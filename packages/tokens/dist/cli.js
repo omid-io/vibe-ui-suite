@@ -50,7 +50,6 @@ function printHelp() {
     printBanner();
     console.log(`\x1b[1mUSAGE:\x1b[0m
   npx vibe-ui-suite <command> [options]
-  npx @omid-io/tokens <command> [options]
   vibe-ui <command> [options]
 
 \x1b[1mCOMMANDS:\x1b[0m
@@ -191,7 +190,7 @@ async function handleInit(options) {
         console.log(`
 \x1b[1mNext Steps:\x1b[0m
 1. Import \x1b[35mvibe-tokens.css\x1b[0m into your layout or globals.css
-2. Run \x1b[32mnpx @omid-io/tokens add thinking-drawer\x1b[0m to add your first AI component
+2. Run \x1b[32mnpx vibe-ui-suite add thinking-drawer\x1b[0m to add your first AI component
 `);
     }
     finally {
@@ -202,7 +201,7 @@ function handleAdd(componentName, options = { force: false, dryRun: false }) {
     if (!componentName) {
         console.log('\x1b[33mError: Please specify a component to add.\x1b[0m\n');
         handleList();
-        console.log('\nUsage: npx @omid-io/tokens add <component> [--force]');
+        console.log('\nUsage: npx vibe-ui-suite add <component> [--force]');
         process.exit(1);
         return;
     }
@@ -223,7 +222,7 @@ function handleAdd(componentName, options = { force: false, dryRun: false }) {
     if (writeRes.skipped) {
         console.log(`\n\x1b[33mWarning: Component already exists at components/vibe-ui/${comp.filename}\x1b[0m`);
         console.log(`To overwrite with automated .bak backup, re-run with:`);
-        console.log(`  \x1b[32mnpx @omid-io/tokens add ${componentName} --force\x1b[0m\n`);
+        console.log(`  \x1b[32mnpx vibe-ui-suite add ${componentName} --force\x1b[0m\n`);
         return;
     }
     if (writeRes.written) {

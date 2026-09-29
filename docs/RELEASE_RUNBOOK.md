@@ -8,7 +8,7 @@
 
 با ایجاد هر Release جدید در گیت هاب (یا اجرای دستی اکشن):
 پایپ لاین `.github/workflows/publish.yml` به صورت خودکار موارد زیر را انجام می دهد:
-1. **پکیج NPM (`@omid-io/tokens`):** کامپایل سورس های TypeScript، بیلد باندل های ESM و CJS، و انتشار خودکار در NPM با سکرت `NPM_TOKEN`.
+1. **پکیج NPM (`vibe-ui-suite`):** کامپایل سورس های TypeScript، بیلد باندل های ESM و CJS، و انتشار خودکار در NPM با سکرت `NPM_TOKEN`.
 2. **رجیستری Open-VSX (`omid-io.vibe-ui-vscode`):** ساخت افزونه، تولید باینری VSIX با آیکون رسمی، و انتشار خودکار با سکرت `OPENVSX_TOKEN`.
 3. **فایل باینری در گیت هاب:** الصاق فایل `vibe-ui-vscode-X.Y.Z.vsix` به عنوان Asset رسمی در ریلیز گیت هاب.
 

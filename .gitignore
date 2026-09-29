@@ -46,6 +46,7 @@ htmlcov/
 
 # Internal Project Tracking
 PROJECT_STATE.md
+AUDIT_BACKLOG.md
 scratch/
 scratch_*
 temp_*

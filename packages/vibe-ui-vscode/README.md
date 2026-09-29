@@ -4,7 +4,7 @@
 [![Open-VSX Version](https://img.shields.io/open-vsx/v/omid-io/vibe-ui-vscode?color=blue&style=flat-square)](https://open-vsx.org/extension/omid-io/vibe-ui-vscode)
 [![Open-VSX Downloads](https://img.shields.io/open-vsx/dt/omid-io/vibe-ui-vscode?color=green&style=flat-square&logo=eclipseche)](https://open-vsx.org/extension/omid-io/vibe-ui-vscode)
 [![VS Code Marketplace Installs](https://img.shields.io/visual-studio-marketplace/i/omid-io.vibe-ui-vscode?color=blue&style=flat-square&logo=visual-studio-code)](https://marketplace.visualstudio.com/items?itemName=omid-io.vibe-ui-vscode)
-[![NPM Downloads](https://img.shields.io/npm/dm/%40omid-io%2Ftokens?color=red&style=flat-square&logo=npm)](https://www.npmjs.com/package/@omid-io/tokens)
+[![NPM Downloads](https://img.shields.io/npm/dm/vibe-ui-suite?color=red&style=flat-square&logo=npm)](https://www.npmjs.com/package/vibe-ui-suite)
 [![GitHub Stars](https://img.shields.io/github/stars/omid-io/vibe-ui-suite?style=flat-square&logo=github&color=ffb400)](https://github.com/omid-io/vibe-ui-suite)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg?style=flat-square)](https://github.com/omid-io/vibe-ui-suite/blob/main/LICENSE)
 
@@ -19,7 +19,7 @@ When AI agents generate frontend code, they almost always converge on the same g
 **Vibe UI solves this deterministically inside your editor:**
 1. **26 Orthogonal Style Genomes:** Structured machine-checkable contracts spanning Monospace Terminal HUDs, Neo-Brutalism, Minimal Swiss Editorial, Specular Glassmorphism 2.0, and Quiet Luxury.
 2. **Pure Mathematical Luminance Gates:** Enforces WCAG AA contrast ($L = 0.2126 R' + 0.7152 G' + 0.0722 B'$) in perceptual OKLCH color space.
-3. **Tailwind CSS v4 Native:** Zero-config `@theme` token distribution via NPM (`@omid-io/tokens`).
+3. **Tailwind CSS v4 Native:** Zero-config `@theme` token distribution via NPM (`vibe-ui-suite`).
 4. **1-Click AI Workspace Injection:** Immediately injects `.cursorrules`, `CLAUDE.md`, or `.windsurfrules` into your active repository.
 
 ---
@@ -82,7 +82,7 @@ code --install-extension vibe-ui-vscode-3.1.1.vsix
 
 ## 🧩 Complete Ecosystem
 
-* **CLI & Design Tokens (NPM):** [`@omid-io/tokens`](https://www.npmjs.com/package/@omid-io/tokens) (`npx @omid-io/tokens init`)
+* **CLI & Design Tokens (NPM):** [`vibe-ui-suite`](https://www.npmjs.com/package/vibe-ui-suite) (`npx vibe-ui-suite init`)
 * **Live Design Studio:** [https://omid-io.github.io/vibe-ui-suite/](https://omid-io.github.io/vibe-ui-suite/)
 * **GitHub Repository:** [https://github.com/omid-io/vibe-ui-suite](https://github.com/omid-io/vibe-ui-suite)
 

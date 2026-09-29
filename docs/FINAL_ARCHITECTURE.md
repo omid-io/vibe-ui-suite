@@ -61,7 +61,7 @@ To eliminate supply-chain vulnerabilities and build coupling, Vibe UI strictly i
 | **Data & Taxonomy** | `data/` | Canonical JSON (13 datasets) | Single source of truth. Zero code dependencies. |
 | **JSON Schemas** | `schemas/` | Draft-07 JSON Schema (8 schemas) | Fail-closed validation contract with combinators. |
 | **Vibe Core** | `vibe_core/` | Python 3.10+ stdlib | Zero external dependencies for core inference. |
-| **Design Tokens** | `packages/tokens` | TypeScript 5 / Node 20+ | Independent NPM package `@omid-io/tokens`. |
+| **Design Tokens & Suite** | `packages/vibe-ui-suite` | TypeScript 5 / Node 20+ | Flagship NPM package `vibe-ui-suite`. |
 | **VS Code Extension** | `packages/vibe-ui-vscode` | TypeScript 5 / VS Code API | Independent extension packaging without examples coupling. |
 | **Evaluation Engine** | `evals/` | Python + Playwright | Independent test runner with headless Chromium runtime. |
 | **Showcase & Studio** | `showcase/` & `index.html` | Client-side Vanilla JS | 100% zero-server interactive studio on GitHub Pages. |
