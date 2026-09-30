@@ -1,0 +1,790 @@
+{
+  "clinic-rtl": {
+    "intent": {
+      "product_domain": "beauty_clinical_wellness",
+      "selected_style": "quiet_luxury",
+      "audience": {
+        "type": "Beauty, Dermatology & Clinical Wellness",
+        "technical_level": "general",
+        "primary_device": "mobile"
+      },
+      "product_mode": "experience",
+      "business_goal": "Deliver high-conversion, masterpiece experience for Beauty, Dermatology & Clinical Wellness",
+      "visual_energy": "calm_restrained",
+      "density": "airy",
+      "theme_strategy": "light",
+      "platform": [
+        "mobile",
+        "tablet",
+        "desktop"
+      ],
+      "language": [
+        "fa",
+        "en"
+      ],
+      "confidence": {
+        "overall": 0.7,
+        "domain": 0.7,
+        "audience": 0.85,
+        "product_mode": 0.9
+      },
+      "ambiguity_status": "medium_ambiguity",
+      "clarification_needed": false,
+      "candidate_directions": [
+        {
+          "id": "quiet_luxury",
+          "label": "A (Recommended): Editorial Prestige & Calm Restraint",
+          "description": "Focuses on high trust and understated elegance",
+          "tradeoff": "Applies quiet_luxury visual geometry with optimized domain priors."
+        },
+        {
+          "id": "soft_humanist",
+          "label": "B: Crisp Corporate & Structured SaaS",
+          "description": "Focuses on clarity, metrics, and conversion speed",
+          "tradeoff": "Applies soft_humanist visual geometry with optimized domain priors."
+        },
+        {
+          "id": "editorial_magazine",
+          "label": "C: Approachable Humanist & Friendly Warmth",
+          "description": "Focuses on warmth, empathy, and accessibility",
+          "tradeoff": "Applies editorial_magazine visual geometry with optimized domain priors."
+        }
+      ],
+      "hard_constraints": [
+        "WCAG AA contrast >= 4.5:1 (Target AAA >= 7:1 for text)",
+        "Zero horizontal overflow on 320px/375px/390px",
+        "Touch targets >= 44px (Minimum accessible tap area)",
+        "Zero raw unicode emojis in UI (Inline SVGs with stroke='currentColor' only)",
+        "Interactive buttons and switches must have real functional React state",
+        "RTL punctuation and numerical isolation via <bdi>",
+        "Vazirmatn / Shabnam Persian web font integration"
+      ],
+      "blueprint": {
+        "signature_widget": {
+          "name": "Clinical Before/After Visualizer & Slot Picker",
+          "type": "slider_with_calendar",
+          "props": {
+            "interactive_slider": true,
+            "drag_physics": "smooth_lerp",
+            "default_comparison_tag": "Laser Rejuvenation - 4 Weeks Post",
+            "slot_picker_active": true
+          }
+        },
+        "layout_flavors": [
+          {
+            "flavor_id": "luxury_warm_light",
+            "name": "Quiet Warm Luxury",
+            "hero_layout": "asymmetric_split",
+            "card_style": "subtle_border_sand"
+          },
+          {
+            "flavor_id": "editorial_spa",
+            "name": "Editorial Spa & Wellness",
+            "hero_layout": "centered_curated",
+            "card_style": "minimal_frame"
+          },
+          {
+            "flavor_id": "clinical_high_tech",
+            "name": "Dermatology High Precision",
+            "hero_layout": "bento_compact",
+            "card_style": "glass_card_white"
+          }
+        ],
+        "ambient_motion": {
+          "type": "spotlight_cursor_soft",
+          "bg_gradient": "radial-gradient(circle at center, oklch(0.97 0.015 85) 0%, oklch(0.94 0.01 75) 100%)",
+          "motion_hint": "subtle floating botanical or soft light refraction",
+          "lcp_safe": true
+        },
+        "mock_data": {
+          "headline": "مراقبت پیشرفته پوست، زیبایی و جوانسازی بالینی",
+          "subheadline": "متخصصان دارای بورد با پروتکل های تایید شده بین المللی برای نتایج طبیعی و درخشان.",
+          "cta_primary": "رزرو وقت مشاوره تخصصی",
+          "cta_secondary": "مشاهده تعرفه و لیست خدمات",
+          "metrics": [
+            {
+              "label": "رضایت مراجعین",
+              "value": "۹۹.۴٪"
+            },
+            {
+              "label": "پزشک متخصص بورد",
+              "value": "۱۲"
+            },
+            {
+              "label": "پرونده موفق بالینی",
+              "value": "+۱۸,۰۰۰"
+            }
+          ]
+        }
+      },
+      "wireframe_skeleton": [
+        "Aesthetic Serenity Hero",
+        "Treatment Carousel & Menu",
+        "Before/After Slider & Doctor Credentials",
+        "Verified Patient Testimonials",
+        "VIP Concierge Booking & Location"
+      ],
+      "research_hook": {
+        "should_research": false,
+        "suggested_query": "Beauty, Dermatology & Clinical Wellness UI UX trends 2026 Dribbble Mobbin"
+      },
+      "stack_profile": {
+        "target_dir": "/home/user/vibe-ui-suite",
+        "framework": "standard_web",
+        "react_version": null,
+        "tailwind_version": null,
+        "icons_library": "inline_svg",
+        "typescript": false,
+        "inherited_theme": {
+          "has_existing_tokens": false,
+          "detected_variables_sample": [],
+          "detected_font_family": null
+        },
+        "existing_design_system": {
+          "has_shadcn": false,
+          "shadcn_style": null,
+          "shadcn_tailwind_base_color": null,
+          "has_radix": false,
+          "radix_primitives_count": 0,
+          "has_theme_provider": false,
+          "detected_primitives": []
+        },
+        "recommendation": {
+          "file_extension": ".jsx",
+          "export_format": "react_component",
+          "tailwind_syntax": "v3_config",
+          "icons_strategy": "inline_svg",
+          "inheritance_strategy": "standalone_vibe_tokens",
+          "instructions": "Generate modular React 19 component with v3_config Tailwind and inline_svg icons."
+        }
+      },
+      "soft_preferences": [
+        "Prioritize light mode based on domain psychology",
+        "Recommended style family: quiet_luxury",
+        "Format output as .jsx (v3_config)"
+      ],
+      "provenance": {
+        "product_domain": "inferred",
+        "product_mode": "inferred",
+        "confidence": "system_policy_v3_2"
+      }
+    },
+    "decision": {
+      "decision_id": "dec-beauty_clinical_wellness-quiet_luxury",
+      "intent_id": "int-beauty_clinical_wellness",
+      "timestamp": "2026-09-03T12:00:00Z",
+      "selected_style": "quiet_luxury",
+      "composite_score": 88.7,
+      "confidence": 0.7,
+      "genome": {
+        "style_family": "Prestige Heritage",
+        "is_hybrid": false,
+        "hybrid_components": [
+          "quiet_luxury"
+        ],
+        "mood": "calm",
+        "domain": "beauty_clinical_wellness",
+        "audience": {
+          "type": "Beauty, Dermatology & Clinical Wellness",
+          "technical_level": "general",
+          "primary_device": "mobile"
+        },
+        "product_mode": "experience",
+        "brand_personality": [
+          "calm",
+          "expensive",
+          "understated",
+          "exclusive"
+        ],
+        "typography": {
+          "display_family": "Playfair Display",
+          "body_family": "Inter",
+          "mono_family": "JetBrains Mono",
+          "persian_family": "Vazirmatn",
+          "scale_ratio": 1.333,
+          "line_height_body": 1.7
+        },
+        "color": {
+          "canvas": "oklch(0.98 0.005 85)",
+          "surface": "oklch(0.95 0.01 85)",
+          "accent": "oklch(0.65 0.09 75)",
+          "border": "oklch(0.88 0.01 85)",
+          "text": "oklch(0.20 0.015 60)",
+          "muted_text": "oklch(0.48 0.015 60)",
+          "color_space": "oklch"
+        },
+        "layout": {
+          "grid_type": "asymmetric_bento",
+          "container_max_width": "max-w-7xl",
+          "whitespace_cadence": "generous"
+        },
+        "density": "airy",
+        "radius": {
+          "base": "4px",
+          "container": "12px",
+          "button": "8px"
+        },
+        "depth": "diffused_soft",
+        "motion": {
+          "time_constant_lambda": 10,
+          "duration_ms": 200,
+          "respect_reduced_motion": true
+        },
+        "texture": "solid_clean",
+        "iconography": "svg_geometric",
+        "interaction": {
+          "touch_target_min_px": 44
+        },
+        "platform": {
+          "mobile_first": true,
+          "rtl_support": true
+        },
+        "accessibility": {
+          "target_contrast": "WCAG_AA",
+          "focus_visible_required": true
+        },
+        "states": {
+          "skeleton_loading": true,
+          "empty_state": true,
+          "error_retry": true
+        }
+      },
+      "decision_trace": {
+        "scoring_breakdown": {
+          "domain_fit": 15.0,
+          "audience_fit": 13.0,
+          "mode_fit": 15.0,
+          "tone_fit": 12.0,
+          "platform_fit": 9.0,
+          "a11y_fit": 12.5,
+          "penalty": 0.0
+        },
+        "rationale": [
+          "Selected 'Quiet Luxury' based on optimal domain fit for Beauty, Dermatology & Clinical Wellness.",
+          "Typography matched with 'Playfair Display' and guaranteed Persian Vazirmatn web font.",
+          "Palette 'Stone & Warm Clinical Gold' calibrated in OKLCH space with verified contrast ratio of 14.8:1."
+        ],
+        "alternatives_considered": [
+          {
+            "style": "editorial_magazine",
+            "score": 82.0,
+            "rejection_reason": "Lower composite fit score (82.0) compared to 88.7"
+          },
+          {
+            "style": "soft_humanist",
+            "score": 78.7,
+            "rejection_reason": "Lower composite fit score (78.7) compared to 88.7"
+          },
+          {
+            "style": "modern_glass_2",
+            "score": 77.0,
+            "rejection_reason": "Lower composite fit score (77.0) compared to 88.7"
+          }
+        ],
+        "conflict_resolutions": []
+      },
+      "hard_constraints_verified": [
+        "WCAG AA contrast >= 4.5:1 (Target AAA >= 7:1 for text)",
+        "Zero horizontal overflow on 320px/375px/390px",
+        "Touch targets >= 44px (Minimum accessible tap area)",
+        "Zero raw unicode emojis in UI (Inline SVGs with stroke='currentColor' only)",
+        "Interactive buttons and switches must have real functional React state",
+        "RTL punctuation and numerical isolation via <bdi>",
+        "Vazirmatn / Shabnam Persian web font integration"
+      ]
+    },
+    "critic": {
+      "timestamp": "2026-09-30T00:25:37.038835+00:00",
+      "iteration": 1,
+      "evaluated_style": "quiet_luxury",
+      "hard_gates_pass": true,
+      "hard_gate_failures": [],
+      "quality_score": 89.0,
+      "scorecard": {
+        "visual_hierarchy": 15,
+        "anti_slop_distinctiveness": 15,
+        "domain_fit": 13,
+        "usability": 10,
+        "typography": 10,
+        "responsive": 10,
+        "state_completeness": 2,
+        "brand_coherence": 9,
+        "performance_budget": 5
+      },
+      "defects_ranked": [
+        {
+          "severity": "medium",
+          "type": "missing_skeleton_state",
+          "message": "No skeleton loading placeholder detected.",
+          "suggested_patch": "Add skeleton state with animate-pulse."
+        },
+        {
+          "severity": "low",
+          "type": "missing_empty_state",
+          "message": "No empty state UI container detected.",
+          "suggested_patch": "Add empty state with vector icon and helper text."
+        },
+        {
+          "severity": "medium",
+          "type": "missing_error_state",
+          "message": "No error and retry recovery state detected.",
+          "suggested_patch": "Add error container with retry button."
+        }
+      ],
+      "acceptance_status": "ACCEPTED"
+    },
+    "verifier_fast": {
+      "timestamp": "2026-09-30T00:25:37.039338+00:00",
+      "target_artifact": "clinic-rtl.html",
+      "overall_status": "PASS",
+      "runtime_mode": "static_dom_eval",
+      "ast_parser": "regex_fallback",
+      "pillars_evaluated": [
+        "Responsive",
+        "Accessibility",
+        "Visual Anti-Slop",
+        "Performance Budget",
+        "Motion & Physics",
+        "Semantic RTL"
+      ],
+      "checks_summary": {
+        "total": 6,
+        "passed": 6,
+        "failed": 0
+      },
+      "evidence_records": [
+        {
+          "pillar": "Responsive",
+          "check_name": "Mobile Viewport Meta",
+          "status": "PASS",
+          "evidence": "Found standard viewport tag: width=device-width, initial-scale=1.0",
+          "threshold": "present"
+        },
+        {
+          "pillar": "Accessibility",
+          "check_name": "Keyboard Focus-Visible Rings",
+          "status": "PASS",
+          "evidence": "Verified :focus-visible rules declared with contrast ring",
+          "threshold": "focus-visible declared"
+        },
+        {
+          "pillar": "Visual Anti-Slop",
+          "check_name": "Zero Raw Emojis",
+          "status": "PASS",
+          "evidence": "0 raw emojis detected; verified 7 crisp SVG vector icons",
+          "measured_value": "0 emojis",
+          "threshold": "0 emojis"
+        },
+        {
+          "pillar": "Performance Budget",
+          "check_name": "GPU Composite Backdrop Blur",
+          "status": "PASS",
+          "evidence": "0 blur layer(s) within GPU composite budget (<= 3)",
+          "measured_value": "0",
+          "threshold": "<= 3"
+        },
+        {
+          "pillar": "Motion & Physics",
+          "check_name": "Reduced Motion Override Gate",
+          "status": "PASS",
+          "evidence": "No motion tokens (transition/animation/lenis) declared — gate not applicable",
+          "threshold": "prefers-reduced-motion required when motion present"
+        },
+        {
+          "pillar": "Semantic RTL",
+          "check_name": "BiDi Punctuation Isolation",
+          "status": "PASS",
+          "evidence": "Verified <bdi> or unicode-bidi plaintext isolation",
+          "threshold": "present"
+        }
+      ]
+    }
+  },
+  "observability": {
+    "intent": {
+      "product_domain": "general_modern_saas",
+      "selected_style": "clean_stripe",
+      "audience": {
+        "type": "General Modern Software & Digital Products",
+        "technical_level": "general",
+        "primary_device": "cross_platform"
+      },
+      "product_mode": "operate",
+      "business_goal": "Deliver high-conversion, masterpiece experience for General Modern Software & Digital Products",
+      "visual_energy": "calm_restrained",
+      "density": "balanced",
+      "theme_strategy": "light",
+      "platform": [
+        "mobile",
+        "tablet",
+        "desktop"
+      ],
+      "language": [
+        "en"
+      ],
+      "confidence": {
+        "overall": 0.48999999999999994,
+        "domain": 0.48999999999999994,
+        "audience": 0.85,
+        "product_mode": 0.9
+      },
+      "ambiguity_status": "autonomous_best_in_class_fallback",
+      "clarification_needed": false,
+      "candidate_directions": [
+        {
+          "id": "clean_stripe",
+          "label": "A (Recommended): Editorial Prestige & Calm Restraint",
+          "description": "Focuses on high trust and understated elegance",
+          "tradeoff": "Applies clean_stripe visual geometry with optimized domain priors."
+        },
+        {
+          "id": "minimal_swiss",
+          "label": "B: Crisp Corporate & Structured SaaS",
+          "description": "Focuses on clarity, metrics, and conversion speed",
+          "tradeoff": "Applies minimal_swiss visual geometry with optimized domain priors."
+        },
+        {
+          "id": "linear_dark",
+          "label": "C: Approachable Humanist & Friendly Warmth",
+          "description": "Focuses on warmth, empathy, and accessibility",
+          "tradeoff": "Applies linear_dark visual geometry with optimized domain priors."
+        }
+      ],
+      "hard_constraints": [
+        "WCAG AA contrast >= 4.5:1 (Target AAA >= 7:1 for text)",
+        "Zero horizontal overflow on 320px/375px/390px",
+        "Touch targets >= 44px (Minimum accessible tap area)",
+        "Zero raw unicode emojis in UI (Inline SVGs with stroke='currentColor' only)",
+        "Interactive buttons and switches must have real functional React state"
+      ],
+      "blueprint": {
+        "signature_widget": {
+          "name": "Interactive Modern High-Velocity Software Platform Showcase",
+          "type": "interactive_tabs_widget",
+          "props": {
+            "interactive": true,
+            "domain": "general_modern_saas"
+          }
+        },
+        "layout_flavors": [
+          {
+            "flavor_id": "general_modern_saas_clean",
+            "name": "Clean Modern High-Velocity Software Platform",
+            "hero_layout": "split_hero",
+            "card_style": "subtle_card"
+          },
+          {
+            "flavor_id": "general_modern_saas_bento",
+            "name": "Bento Modern High-Velocity Software Platform",
+            "hero_layout": "asymmetric_bento",
+            "card_style": "modern_bento_card"
+          },
+          {
+            "flavor_id": "general_modern_saas_bold",
+            "name": "Bold Modern High-Velocity Software Platform",
+            "hero_layout": "bold_centered",
+            "card_style": "contrast_border_card"
+          }
+        ],
+        "ambient_motion": {
+          "type": "subtle_gradient_wash",
+          "bg_gradient": "linear-gradient(180deg, oklch(0.98 0.005 240) 0%, oklch(0.94 0.01 240) 100%)",
+          "motion_hint": "subtle stagger and zero-lag CSS transitions",
+          "lcp_safe": true
+        },
+        "mock_data": {
+          "headline": "Next-Generation Modern High-Velocity Software Platform Platform",
+          "subheadline": "Engineered for reliability, velocity, and seamless user experience.",
+          "cta_primary": "Get Started Immediately",
+          "cta_secondary": "Explore Live Demo",
+          "metrics": [
+            {
+              "label": "Active Users",
+              "value": "100k+"
+            },
+            {
+              "label": "Uptime",
+              "value": "99.99%"
+            },
+            {
+              "label": "Customer Rating",
+              "value": "4.9/5"
+            }
+          ]
+        }
+      },
+      "wireframe_skeleton": [
+        "Modern High-Velocity Software Platform Hero Section",
+        "Interactive Modern High-Velocity Software Platform Core Engine",
+        "Key Pillars & Architecture",
+        "Audited Results & Testimonials",
+        "Complete Navigation & Legal Hub"
+      ],
+      "research_hook": {
+        "should_research": true,
+        "suggested_query": "General Modern Software & Digital Products UI UX trends 2026 Dribbble Mobbin"
+      },
+      "stack_profile": {
+        "target_dir": "/home/user/vibe-ui-suite",
+        "framework": "standard_web",
+        "react_version": null,
+        "tailwind_version": null,
+        "icons_library": "inline_svg",
+        "typescript": false,
+        "inherited_theme": {
+          "has_existing_tokens": false,
+          "detected_variables_sample": [],
+          "detected_font_family": null
+        },
+        "existing_design_system": {
+          "has_shadcn": false,
+          "shadcn_style": null,
+          "shadcn_tailwind_base_color": null,
+          "has_radix": false,
+          "radix_primitives_count": 0,
+          "has_theme_provider": false,
+          "detected_primitives": []
+        },
+        "recommendation": {
+          "file_extension": ".jsx",
+          "export_format": "react_component",
+          "tailwind_syntax": "v3_config",
+          "icons_strategy": "inline_svg",
+          "inheritance_strategy": "standalone_vibe_tokens",
+          "instructions": "Generate modular React 19 component with v3_config Tailwind and inline_svg icons."
+        }
+      },
+      "soft_preferences": [
+        "Prioritize light mode based on domain psychology",
+        "Recommended style family: clean_stripe",
+        "Format output as .jsx (v3_config)"
+      ],
+      "provenance": {
+        "product_domain": "inferred",
+        "product_mode": "inferred",
+        "confidence": "system_policy_v3_2"
+      }
+    },
+    "decision": {
+      "decision_id": "dec-general_modern_saas-clean_stripe",
+      "intent_id": "int-general_modern_saas",
+      "timestamp": "2026-09-03T12:00:00Z",
+      "selected_style": "clean_stripe",
+      "composite_score": 90.3,
+      "confidence": 0.48999999999999994,
+      "genome": {
+        "style_family": "Modern Corporate SaaS",
+        "is_hybrid": false,
+        "hybrid_components": [
+          "clean_stripe"
+        ],
+        "mood": "calm",
+        "domain": "general_modern_saas",
+        "audience": {
+          "type": "General Modern Software & Digital Products",
+          "technical_level": "general",
+          "primary_device": "cross_platform"
+        },
+        "product_mode": "operate",
+        "brand_personality": [
+          "reliable",
+          "friendly",
+          "convertible",
+          "polished"
+        ],
+        "typography": {
+          "display_family": "Plus Jakarta Sans",
+          "body_family": "Inter",
+          "mono_family": "JetBrains Mono",
+          "persian_family": "Vazirmatn",
+          "scale_ratio": 1.25,
+          "line_height_body": 1.6
+        },
+        "color": {
+          "canvas": "oklch(0.99 0.003 250)",
+          "surface": "oklch(0.97 0.008 250)",
+          "accent": "oklch(0.55 0.22 260)",
+          "border": "oklch(0.90 0.01 250)",
+          "text": "oklch(0.18 0.02 260)",
+          "muted_text": "oklch(0.45 0.02 260)",
+          "color_space": "oklch"
+        },
+        "layout": {
+          "grid_type": "standard_columns",
+          "container_max_width": "max-w-7xl",
+          "whitespace_cadence": "balanced"
+        },
+        "density": "balanced",
+        "radius": {
+          "base": "6px",
+          "container": "12px",
+          "button": "8px"
+        },
+        "depth": "micro_shadow",
+        "motion": {
+          "time_constant_lambda": 14,
+          "duration_ms": 200,
+          "respect_reduced_motion": true
+        },
+        "texture": "solid_clean",
+        "iconography": "svg_geometric",
+        "interaction": {
+          "touch_target_min_px": 44
+        },
+        "platform": {
+          "mobile_first": true,
+          "rtl_support": false
+        },
+        "accessibility": {
+          "target_contrast": "WCAG_AA",
+          "focus_visible_required": true
+        },
+        "states": {
+          "skeleton_loading": true,
+          "empty_state": true,
+          "error_retry": true
+        }
+      },
+      "decision_trace": {
+        "scoring_breakdown": {
+          "domain_fit": 15.0,
+          "audience_fit": 13.0,
+          "mode_fit": 15.0,
+          "tone_fit": 12.0,
+          "platform_fit": 9.0,
+          "a11y_fit": 15.0,
+          "penalty": 0.0
+        },
+        "rationale": [
+          "Selected 'Clean Stripe SaaS' based on optimal domain fit for General Modern Software & Digital Products.",
+          "Typography matched with 'Plus Jakarta Sans' and guaranteed Persian Vazirmatn web font.",
+          "Palette 'Stripe Crisp Luminous Blue' calibrated in OKLCH space with verified contrast ratio of 15.2:1."
+        ],
+        "alternatives_considered": [
+          {
+            "style": "linear_dark",
+            "score": 82.0,
+            "rejection_reason": "Lower composite fit score (82.0) compared to 90.3"
+          },
+          {
+            "style": "minimal_swiss",
+            "score": 80.3,
+            "rejection_reason": "Lower composite fit score (80.3) compared to 90.3"
+          },
+          {
+            "style": "neobrutalism",
+            "score": 72.0,
+            "rejection_reason": "Lower composite fit score (72.0) compared to 90.3"
+          }
+        ],
+        "conflict_resolutions": []
+      },
+      "hard_constraints_verified": [
+        "WCAG AA contrast >= 4.5:1 (Target AAA >= 7:1 for text)",
+        "Zero horizontal overflow on 320px/375px/390px",
+        "Touch targets >= 44px (Minimum accessible tap area)",
+        "Zero raw unicode emojis in UI (Inline SVGs with stroke='currentColor' only)",
+        "Interactive buttons and switches must have real functional React state"
+      ]
+    },
+    "critic": {
+      "timestamp": "2026-09-30T00:25:37.043013+00:00",
+      "iteration": 1,
+      "evaluated_style": "clean_stripe",
+      "hard_gates_pass": true,
+      "hard_gate_failures": [],
+      "quality_score": 89.0,
+      "scorecard": {
+        "visual_hierarchy": 15,
+        "anti_slop_distinctiveness": 15,
+        "domain_fit": 13,
+        "usability": 10,
+        "typography": 10,
+        "responsive": 10,
+        "state_completeness": 2,
+        "brand_coherence": 9,
+        "performance_budget": 5
+      },
+      "defects_ranked": [
+        {
+          "severity": "medium",
+          "type": "missing_skeleton_state",
+          "message": "No skeleton loading placeholder detected.",
+          "suggested_patch": "Add skeleton state with animate-pulse."
+        },
+        {
+          "severity": "low",
+          "type": "missing_empty_state",
+          "message": "No empty state UI container detected.",
+          "suggested_patch": "Add empty state with vector icon and helper text."
+        },
+        {
+          "severity": "medium",
+          "type": "missing_error_state",
+          "message": "No error and retry recovery state detected.",
+          "suggested_patch": "Add error container with retry button."
+        }
+      ],
+      "acceptance_status": "ACCEPTED"
+    },
+    "verifier_fast": {
+      "timestamp": "2026-09-30T00:25:37.043198+00:00",
+      "target_artifact": "observability.html",
+      "overall_status": "PASS",
+      "runtime_mode": "static_dom_eval",
+      "ast_parser": "regex_fallback",
+      "pillars_evaluated": [
+        "Responsive",
+        "Accessibility",
+        "Visual Anti-Slop",
+        "Performance Budget",
+        "Motion & Physics",
+        "Semantic RTL"
+      ],
+      "checks_summary": {
+        "total": 5,
+        "passed": 5,
+        "failed": 0
+      },
+      "evidence_records": [
+        {
+          "pillar": "Responsive",
+          "check_name": "Mobile Viewport Meta",
+          "status": "PASS",
+          "evidence": "Found standard viewport tag: width=device-width, initial-scale=1.0",
+          "threshold": "present"
+        },
+        {
+          "pillar": "Accessibility",
+          "check_name": "Keyboard Focus-Visible Rings",
+          "status": "PASS",
+          "evidence": "Verified :focus-visible rules declared with contrast ring",
+          "threshold": "focus-visible declared"
+        },
+        {
+          "pillar": "Visual Anti-Slop",
+          "check_name": "Zero Raw Emojis",
+          "status": "PASS",
+          "evidence": "0 raw emojis detected; verified 7 crisp SVG vector icons",
+          "measured_value": "0 emojis",
+          "threshold": "0 emojis"
+        },
+        {
+          "pillar": "Performance Budget",
+          "check_name": "GPU Composite Backdrop Blur",
+          "status": "PASS",
+          "evidence": "0 blur layer(s) within GPU composite budget (<= 3)",
+          "measured_value": "0",
+          "threshold": "<= 3"
+        },
+        {
+          "pillar": "Motion & Physics",
+          "check_name": "Reduced Motion Override Gate",
+          "status": "PASS",
+          "evidence": "No motion tokens (transition/animation/lenis) declared — gate not applicable",
+          "threshold": "prefers-reduced-motion required when motion present"
+        }
+      ]
+    }
+  }
+}

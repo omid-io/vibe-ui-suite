@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html dir="rtl" lang="fa" data-domain="beauty_clinical_wellness" class="h-full">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>مراقبت پیشرفته پوست، زیبایی و جوانسازی بالینی</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Playfair+Display:ital,wght@0,600;1,400&family=Vazirmatn:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+:root {
+  --canvas-bg: oklch(0.98 0.005 85);
+  --surface-bg: oklch(0.95 0.01 85);
+  --accent: oklch(0.65 0.09 75);
+  --border-subtle: oklch(0.88 0.01 85);
+  --text-primary: oklch(0.20 0.015 60);
+  --text-muted: oklch(0.48 0.015 60);
+  --radius-base: 4px;
+  --radius-container: 12px;
+  --radius-button: 8px;
+  --font-display: 'Playfair Display', 'Vazirmatn', sans-serif;
+  --font-body: 'Inter', 'Vazirmatn', sans-serif;
+  --motion-lambda: 10;
+  --transition-duration: 200ms;
+}
+
+    body {
+      background-color: var(--canvas-bg);
+      color: var(--text-primary);
+      font-family: var(--font-body);
+      overflow-x: hidden;
+      unicode-bidi: plaintext;
+    }
+
+    bdi, .ltr-code {
+      direction: ltr !important;
+      unicode-bidi: isolate;
+    }
+
+    h1, h2, h3, .display-font {
+      font-family: var(--font-display);
+    }
+
+    button:focus-visible, a:focus-visible, input:focus-visible {
+      outline: 2px solid var(--accent);
+      outline-offset: 2px;
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, ::before, ::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+      }
+    }
+  </style>
+</head>
+<body class="min-h-full flex flex-col antialiased">
+  <!-- Top Navigation Bar -->
+  <header class="w-full border-b border-[var(--border-subtle)] bg-[var(--surface-bg)] sticky top-0 z-30">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
+      <div class="flex items-center space-x-3 rtl:space-x-reverse">
+        <svg class="w-8 h-8 text-[var(--accent)]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <polygon points="12 2 2 7 12 12 22 7 12 2"></polygon>
+          <polyline points="2 17 12 22 22 17"></polyline>
+          <polyline points="2 12 12 17 22 12"></polyline>
+        </svg>
+        <span class="text-xl font-bold tracking-tight display-font">پلتفرم تخصصی</span>
+      </div>
+      <nav class="hidden md:flex items-center space-x-6 rtl:space-x-reverse" aria-label="Main Navigation">
+        <a href="#features" class="text-sm font-medium hover:text-[var(--accent)] transition-colors min-h-[44px] inline-flex items-center">ویژگی ها</a>
+        <a href="#services" class="text-sm font-medium hover:text-[var(--accent)] transition-colors min-h-[44px] inline-flex items-center">خدمات و تعرفه ها</a>
+        <a href="#contact" class="text-sm font-medium hover:text-[var(--accent)] transition-colors min-h-[44px] inline-flex items-center">ارتباط با ما</a>
+      </nav>
+      <div class="flex items-center space-x-3 rtl:space-x-reverse">
+        <button type="button" class="inline-flex items-center justify-center px-4 py-2.5 text-sm font-medium rounded-[var(--radius-button)] text-white bg-[var(--accent)] hover:opacity-90 min-h-[44px] min-w-[44px] transition-all">
+          رزرو وقت مشاوره تخصصی
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main Hero & Content Section -->
+  <main class="flex-1 max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-12 lg:py-16">
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-6 lg:gap-8">
+      <!-- Main Bento Hero Card with Asymmetric Layout -->
+      <section class="md:col-span-2 bg-[var(--surface-bg)] border border-[var(--border-subtle)] shadow-sm hover:shadow-md transition-shadow rounded-[var(--radius-container)] p-6 sm:p-8 lg:p-10 flex flex-col justify-between" aria-labelledby="hero-title">
+        <div>
+          <span class="inline-flex items-center px-3 py-1 rounded-full text-xs font-semibold bg-[var(--accent)]/10 text-[var(--accent)] mb-4">
+            <svg class="w-3.5 h-3.5 inline mr-1.5 rtl:ml-1.5 rtl:mr-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 14 14"></polyline></svg>
+            مهندسی دقیق و اصیل
+          </span>
+          <h1 id="hero-title" class="text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight mb-4">
+            مراقبت پیشرفته پوست، زیبایی و جوانسازی بالینی
+          </h1>
+          <p class="text-[var(--text-muted)] text-base sm:text-lg leading-relaxed max-w-2xl mb-8">
+            متخصصان دارای بورد با پروتکل های تایید شده بین المللی برای نتایج طبیعی و درخشان.
+          </p>
+        </div>
+
+        <div class="flex flex-wrap gap-4 items-center pt-4 border-t border-[var(--border-subtle)]">
+          <button type="button" class="inline-flex items-center justify-center px-6 py-3 text-base font-semibold rounded-[var(--radius-button)] text-white bg-[var(--accent)] min-h-[44px] transition-transform active:scale-95">
+            رزرو وقت مشاوره تخصصی
+          </button>
+          <button type="button" class="inline-flex items-center justify-center px-6 py-3 text-base font-semibold rounded-[var(--radius-button)] text-[var(--text-primary)] border border-[var(--border-subtle)] bg-[var(--canvas-bg)] hover:bg-[var(--surface-bg)] min-h-[44px] transition-colors">
+            مشاهده تعرفه و لیست خدمات
+          </button>
+        </div>
+      </section>
+
+      <!-- Secondary Domain Highlights & Metrics Card -->
+      <aside class="bg-[var(--surface-bg)] border border-[var(--border-subtle)] shadow-sm hover:shadow-md transition-shadow rounded-[var(--radius-container)] p-6 flex flex-col justify-between" aria-label="Domain Highlights">
+        <div>
+          <h2 class="text-lg font-bold mb-4 flex items-center space-x-2 rtl:space-x-reverse">
+            <svg class="w-5 h-5 text-[var(--accent)]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M22 12h-4l-3 9L9 3l-3 9H2"></path></svg>
+            <span>شاخص های کلیدی و وضعیت</span>
+          </h2>
+          <div class="space-y-4">
+            <div class="p-3.5 bg-[var(--canvas-bg)] rounded-[var(--radius-base)] border border-[var(--border-subtle)]">
+              <div class="text-xs text-[var(--text-muted)] mb-1">رضایت مراجعین</div>
+              <div class="text-2xl font-bold text-[var(--accent)]"><bdi>۹۹.۴٪</bdi></div>
+            </div>
+            <div class="p-3.5 bg-[var(--canvas-bg)] rounded-[var(--radius-base)] border border-[var(--border-subtle)]">
+              <div class="text-xs text-[var(--text-muted)] mb-1">پزشک متخصص بورد</div>
+              <div class="text-2xl font-bold text-[var(--accent)]"><bdi>۱۲</bdi></div>
+            </div>
+            <div class="p-3.5 bg-[var(--canvas-bg)] rounded-[var(--radius-base)] border border-[var(--border-subtle)]">
+              <div class="text-xs text-[var(--text-muted)] mb-1">پرونده موفق بالینی</div>
+              <div class="text-2xl font-bold text-[var(--accent)]"><bdi>+۱۸,۰۰۰</bdi></div>
+            </div>
+          </div>
+        </div>
+        <div class="mt-6 text-xs text-[var(--text-muted)] flex items-center space-x-1.5 rtl:space-x-reverse">
+          <svg class="w-4 h-4 text-emerald-500" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>
+          <span>سرویس آنلاین و آماده پذیرش</span>
+        </div>
+      </aside>
+    </div>
+
+    <!-- Core Value Props & Feature Highlights -->
+    <section class="mt-12 pt-8 border-t border-[var(--border-subtle)]" aria-labelledby="features-heading">
+      <h2 id="features-heading" class="text-xl font-bold mb-6">
+        استانداردها و تعهدات کلیدی
+      </h2>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <!-- Feature 1 -->
+        <div class="p-6 bg-[var(--surface-bg)] border border-[var(--border-subtle)] rounded-[var(--radius-container)] shadow-sm hover:shadow-md transition-shadow flex flex-col justify-between">
+          <div>
+            <div class="w-10 h-10 rounded-lg bg-[var(--accent)]/10 text-[var(--accent)] flex items-center justify-center mb-4">
+              <svg class="w-5 h-5 text-[var(--accent)]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>
+            </div>
+            <h3 class="text-base font-bold mb-2">تضمین کیفیت و اصالت</h3>
+            <p class="text-xs text-[var(--text-muted)] leading-relaxed">
+              پایبندی به بالاترین معیارهای تخصصی، استانداردهای دسترسی پذیری و بهینه سازی ساختار یافته.
+            </p>
+          </div>
+        </div>
+
+        <!-- Feature 2 -->
+        <div class="p-6 bg-[var(--surface-bg)] border border-[var(--border-subtle)] rounded-[var(--radius-container)] shadow-sm hover:shadow-md transition-shadow flex flex-col justify-between">
+          <div>
+            <div class="w-10 h-10 rounded-lg bg-[var(--accent)]/10 text-[var(--accent)] flex items-center justify-center mb-4">
+              <svg class="w-5 h-5 text-[var(--accent)]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon></svg>
+            </div>
+            <h3 class="text-base font-bold mb-2">سرعت و سهولت کاربری</h3>
+            <p class="text-xs text-[var(--text-muted)] leading-relaxed">
+              طراحی شده برای بیشترین سرعت بارگذاری، سازگاری کامل با دستگاه های موبایل و رابط کاربری روان.
+            </p>
+          </div>
+        </div>
+
+        <!-- Feature 3 -->
+        <div class="p-6 bg-[var(--surface-bg)] border border-[var(--border-subtle)] rounded-[var(--radius-container)] shadow-sm hover:shadow-md transition-shadow flex flex-col justify-between">
+          <div>
+            <div class="w-10 h-10 rounded-lg bg-[var(--accent)]/10 text-[var(--accent)] flex items-center justify-center mb-4">
+              <svg class="w-5 h-5 text-[var(--accent)]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 14 14"></polyline></svg>
+            </div>
+            <h3 class="text-base font-bold mb-2">پشتیبانی و شفافیت کامل</h3>
+            <p class="text-xs text-[var(--text-muted)] leading-relaxed">
+              فرآیند پیگیری شفاف، پشتیبانی فعال و همراهی در تمامی مراحل استفاده از خدمات.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="w-full border-t border-[var(--border-subtle)] bg-[var(--surface-bg)] py-6 mt-12">
+    <div class="max-w-7xl mx-auto px-4 text-center text-xs text-[var(--text-muted)]">
+      &copy; 2026 Vibe UI Design Intelligence. All rights reserved.
+    </div>
+  </footer>
+</body>
+</html>
