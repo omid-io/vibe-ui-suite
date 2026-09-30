@@ -179,7 +179,7 @@ class InterfaceGenerator:
         elif selected_style in ["apple_cupertino", "cupertino_fluid", "apple_design"]:
             return {
                 "container": "relative overflow-hidden rounded-[28px] border border-black/5 dark:border-white/10 bg-white/75 dark:bg-zinc-900/75 backdrop-blur-2xl p-6 sm:p-10 shadow-[0_20px_50px_rgba(0,0,0,0.08)] dark:shadow-[0_20px_50px_rgba(0,0,0,0.4)] transition-all",
-                "border_beam": "",
+                "border_beam": '<div aria-hidden="true" className="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-white/25 to-transparent z-10" />',
                 "header_badge": "inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold bg-blue-500/10 text-blue-600 dark:text-blue-400 border border-blue-500/20 backdrop-blur-md",
                 "version_tag": "text-xs text-zinc-500 font-mono tracking-tight",
                 "tab_container": "inline-flex rounded-full bg-zinc-200/60 dark:bg-zinc-800/60 backdrop-blur-md p-1 border border-black/5 dark:border-white/5",
@@ -199,7 +199,7 @@ class InterfaceGenerator:
             bg_card = "bg-zinc-950 text-zinc-100 border-zinc-800" if is_dark else "bg-white text-zinc-900 border-zinc-200"
             return {
                 "container": f"relative overflow-hidden rounded-2xl border {bg_card} p-6 sm:p-10 shadow-xl transition-all",
-                "border_beam": "",
+                "border_beam": '<div aria-hidden="true" className="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-white/20 to-transparent z-10" />',
                 "header_badge": "inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold bg-blue-500/10 text-blue-600 dark:text-blue-400 border border-blue-500/20",
                 "version_tag": "text-xs text-zinc-500 font-mono",
                 "tab_container": "inline-flex rounded-lg bg-zinc-100 dark:bg-zinc-900 p-1 border border-zinc-200 dark:border-zinc-800",
@@ -922,17 +922,17 @@ export default {component_name};
     <section id="latency" class="mt-12 pt-8 border-t border-[var(--border-subtle)]" aria-labelledby="latency-heading">
       <h2 id="latency-heading" class="text-2xl font-bold tracking-tight mb-6">Throughput & Latency Profiling</h2>
       <div class="grid grid-cols-1 md:grid-cols-3 gap-6 font-mono">
-        <div class="p-6 bg-[var(--surface-bg)] {card_border} rounded-[var(--radius-container)] {card_shadow} space-y-2">
+        <div class="vibe-spotlight-card p-6 bg-[var(--surface-bg)] {card_border} rounded-[var(--radius-container)] {card_shadow} space-y-2">
           <div class="text-xs text-[var(--text-muted)] uppercase tracking-wider">Median Latency (p50)</div>
           <div class="text-3xl font-extrabold text-[var(--accent)]"><bdi>12.4 ms</bdi></div>
-          <div class="text-xs text-emerald-500">✔ -4.2% vs 7-day average</div>
+          <div class="text-xs text-emerald-500 flex items-center gap-1.5"><svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><polyline points="20 6 9 17 4 12"></polyline></svg><span>-4.2% vs 7-day average</span></div>
         </div>
-        <div class="p-6 bg-[var(--surface-bg)] {card_border} rounded-[var(--radius-container)] {card_shadow} space-y-2">
+        <div class="vibe-spotlight-card p-6 bg-[var(--surface-bg)] {card_border} rounded-[var(--radius-container)] {card_shadow} space-y-2">
           <div class="text-xs text-[var(--text-muted)] uppercase tracking-wider">Tail Latency (p95)</div>
           <div class="text-3xl font-extrabold text-[var(--accent)]"><bdi>38.2 ms</bdi></div>
-          <div class="text-xs text-emerald-500">✔ Well within 50ms SLO threshold</div>
+          <div class="text-xs text-emerald-500 flex items-center gap-1.5"><svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><polyline points="20 6 9 17 4 12"></polyline></svg><span>Well within 50ms SLO threshold</span></div>
         </div>
-        <div class="p-6 bg-[var(--surface-bg)] {card_border} rounded-[var(--radius-container)] {card_shadow} space-y-2">
+        <div class="vibe-spotlight-card p-6 bg-[var(--surface-bg)] {card_border} rounded-[var(--radius-container)] {card_shadow} space-y-2">
           <div class="text-xs text-[var(--text-muted)] uppercase tracking-wider">Peak Latency (p99)</div>
           <div class="text-3xl font-extrabold text-amber-500"><bdi>84.1 ms</bdi></div>
           <div class="text-xs text-[var(--text-muted)]">SLO target: &lt; 100ms</div>
@@ -1176,25 +1176,67 @@ export default {component_name};
 """
         else:
             domain_sections_html = f"""
-    <!-- General Section 1: Features -->
+    <!-- General Section 1: Asymmetric Bento Grid Features -->
     <section id="features" class="mt-12 pt-8 border-t border-[var(--border-subtle)]" aria-labelledby="features-heading">
-      <h2 id="features-heading" class="text-xl font-bold mb-6">
-        {"استانداردها و تعهدات کلیدی" if is_rtl else "Core Standards & Commitments"}
-      </h2>
+      <div class="flex items-center justify-between mb-8">
+        <div>
+          <h2 id="features-heading" class="text-2xl font-bold tracking-tight">
+            {"معماری نوین و قابلیت های بنیادین" if is_rtl else "Engineered Capabilities & Bento Architecture"}
+          </h2>
+          <p class="text-xs text-[var(--text-muted)] mt-1">
+            {"طراحی شده با استانداردهای مدرن فرانت اند، دسترسی پذیری کامل و سرعت بارگذاری آنی." if is_rtl else "Built with strict WCAG standards, fluid physics, and sub-millisecond execution."}
+          </p>
+        </div>
+        <span class="hidden sm:inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold bg-[var(--accent)]/10 text-[var(--accent)] border border-[var(--accent)]/20">
+          <span class="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse"></span>
+          {"تاییدیه کیفی Vibe UI" if is_rtl else "Vibe UI 4.1.1 Certified"}
+        </span>
+      </div>
+
       <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-        <div class="p-6 bg-[var(--surface-bg)] {card_border} rounded-[var(--radius-container)] {card_shadow} flex flex-col justify-between">
+        <!-- Tile 1: Hero Bento Feature (Span 2) -->
+        <div class="vibe-spotlight-card md:col-span-2 p-6 sm:p-8 bg-[var(--surface-bg)] {card_border} rounded-[var(--radius-container)] {card_shadow} flex flex-col justify-between">
           <div>
-            <div class="w-10 h-10 rounded-lg bg-[var(--accent)]/10 text-[var(--accent)] flex items-center justify-center mb-4">
-              <svg class="w-5 h-5 text-[var(--accent)]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>
+            <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-semibold bg-[var(--accent)]/10 text-[var(--accent)] mb-4">
+              <svg class="w-4 h-4 text-[var(--accent)]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>
+              <span>{"تضمین کیفیت و اصالت مهندسی" if is_rtl else "Quality Guarantee & Core Engine"}</span>
             </div>
-            <h3 class="text-base font-bold mb-2">{"تضمین کیفیت و اصالت" if is_rtl else "Quality Guarantee"}</h3>
-            <p class="text-xs text-[var(--text-muted)] leading-relaxed">
-              {"پایبندی به بالاترین معیارهای تخصصی، استانداردهای دسترسی پذیری و بهینه سازی ساختار یافته." if is_rtl else "Engineered with strict accessibility, responsive geometry, and proven industry standards."}
+            <h3 class="text-xl font-bold mb-3">{"معماری استاندارد بدون کلیشه های هوش مصنوعی" if is_rtl else "Deterministic Architecture Free of AI-Slop"}</h3>
+            <p class="text-xs sm:text-sm text-[var(--text-muted)] leading-relaxed max-w-xl">
+              {"پایبندی به بالاترین معیارهای تخصصی، استانداردهای دسترسی پذیری نوری WCAG AAA و بهینه سازی ساختار یافته با حذف کدهای اضافه و انیمیشن های مزاحم." if is_rtl else "Engineered with strict accessibility, responsive geometry, zero inline CSS, and mathematically proven contrast ratios across light and dark modes."}
             </p>
+          </div>
+          <div class="mt-6 pt-4 border-t border-[var(--border-subtle)] flex flex-wrap items-center gap-3 text-xs text-[var(--text-muted)]">
+            <span class="px-2.5 py-1 rounded-md bg-[var(--canvas-bg)] border border-[var(--border-subtle)] font-mono">OKLCH Palette</span>
+            <span class="px-2.5 py-1 rounded-md bg-[var(--canvas-bg)] border border-[var(--border-subtle)] font-mono">BiDi Isolation</span>
+            <span class="px-2.5 py-1 rounded-md bg-[var(--canvas-bg)] border border-[var(--border-subtle)] font-mono">0.01ms Motion Guards</span>
           </div>
         </div>
 
-        <div class="p-6 bg-[var(--surface-bg)] {card_border} rounded-[var(--radius-container)] {card_shadow} flex flex-col justify-between">
+        <!-- Tile 2: Vital Metric KPI with Inline Sparkline (Span 1) -->
+        <div class="vibe-spotlight-card p-6 bg-[var(--surface-bg)] {card_border} rounded-[var(--radius-container)] {card_shadow} flex flex-col justify-between">
+          <div>
+            <div class="text-xs font-semibold text-[var(--text-muted)] uppercase tracking-wider mb-2">{"پایداری و در دسترس بودن" if is_rtl else "Uptime & Reliability"}</div>
+            <div class="text-3xl font-extrabold text-emerald-500 mb-2"><bdi>99.98%</bdi></div>
+            <p class="text-xs text-[var(--text-muted)] leading-relaxed">
+              {"پایش مداوم وضعیت سرویس و تضمین پایداری بدون وقفه در مقیاس بالا." if is_rtl else "Real-time health verification with automated self-healing resilience."}
+            </p>
+          </div>
+          <!-- Inline Vector Sparkline -->
+          <div class="mt-4 pt-4 border-t border-[var(--border-subtle)]">
+            <svg class="w-full h-10 text-emerald-500" viewBox="0 0 120 30" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="M0 25 L20 22 L40 24 L60 14 L80 16 L100 8 L120 6"></path>
+              <circle cx="120" cy="6" r="3" fill="currentColor"></circle>
+            </svg>
+            <div class="flex justify-between text-[10px] text-[var(--text-muted)] mt-1 font-mono">
+              <span>-30d</span>
+              <span>Today: 100%</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Tile 3: Live Latency & Pulse Indicator (Span 1) -->
+        <div class="vibe-spotlight-card p-6 bg-[var(--surface-bg)] {card_border} rounded-[var(--radius-container)] {card_shadow} flex flex-col justify-between">
           <div>
             <div class="w-10 h-10 rounded-lg bg-[var(--accent)]/10 text-[var(--accent)] flex items-center justify-center mb-4">
               <svg class="w-5 h-5 text-[var(--accent)]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon></svg>
@@ -1204,17 +1246,28 @@ export default {component_name};
               {"طراحی شده برای بیشترین سرعت بارگذاری، سازگاری کامل با دستگاه های موبایل و رابط کاربری روان." if is_rtl else "Optimized for lightning-fast delivery, mobile ergonomics, and seamless user interaction."}
             </p>
           </div>
+          <div class="mt-4 pt-3 border-t border-[var(--border-subtle)] flex items-center justify-between text-xs">
+            <span class="text-[var(--text-muted)]">Response Time</span>
+            <span class="font-mono font-bold text-[var(--accent)]">&lt; 0.4s</span>
+          </div>
         </div>
 
-        <div class="p-6 bg-[var(--surface-bg)] {card_border} rounded-[var(--radius-container)] {card_shadow} flex flex-col justify-between">
+        <!-- Tile 4: Governance & Certifications Bento Card (Span 2) -->
+        <div class="vibe-spotlight-card md:col-span-2 p-6 bg-[var(--surface-bg)] {card_border} rounded-[var(--radius-container)] {card_shadow} flex flex-col justify-between">
           <div>
             <div class="w-10 h-10 rounded-lg bg-[var(--accent)]/10 text-[var(--accent)] flex items-center justify-center mb-4">
               <svg class="w-5 h-5 text-[var(--accent)]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 14 14"></polyline></svg>
             </div>
-            <h3 class="text-base font-bold mb-2">{"پشتیبانی و شفافیت کامل" if is_rtl else "Transparent Support"}</h3>
+            <h3 class="text-base font-bold mb-2">{"شفافیت و استاندارد سازمانی" if is_rtl else "Enterprise Governance & Security"}</h3>
             <p class="text-xs text-[var(--text-muted)] leading-relaxed">
-              {"فرآیند پیگیری شفاف، پشتیبانی فعال و همراهی در تمامی مراحل استفاده از خدمات." if is_rtl else "Clear workflows, active responsiveness, and end-to-end guidance across all touchpoints."}
+              {"فرآیند پیگیری شفاف، پشتیبانی فعال و همراهی در تمامی مراحل استفاده از خدمات مطابق با بالاترین توافق نامه های سطح خدمات." if is_rtl else "Strict data retention policies, zero secrets leakage compliance, and verified enterprise security baselines."}
             </p>
+          </div>
+          <div class="mt-6 pt-4 border-t border-[var(--border-subtle)] grid grid-cols-2 sm:grid-cols-4 gap-2 text-[11px] font-medium text-[var(--text-muted)]">
+            <div class="flex items-center gap-1.5"><svg class="w-3.5 h-3.5 text-emerald-500" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"></polyline></svg><span>WCAG AAA</span></div>
+            <div class="flex items-center gap-1.5"><svg class="w-3.5 h-3.5 text-emerald-500" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"></polyline></svg><span>BiDi Isolated</span></div>
+            <div class="flex items-center gap-1.5"><svg class="w-3.5 h-3.5 text-emerald-500" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"></polyline></svg><span>Zero Slop</span></div>
+            <div class="flex items-center gap-1.5"><svg class="w-3.5 h-3.5 text-emerald-500" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"></polyline></svg><span>100% SVG</span></div>
           </div>
         </div>
       </div>
@@ -1309,11 +1362,89 @@ export default {component_name};
         transition-duration: 0.01ms !important;
       }}
     }}
+
+    /* Masterpiece Visual Engine: Atmospheric Lighting & Specular Physics */
+    .vibe-gradient-heading {{
+      background: linear-gradient(180deg, var(--text-primary) 0%, color-mix(in oklch, var(--text-primary) 72%, transparent) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }}
+
+    .vibe-spotlight-card {{
+      position: relative;
+      overflow: hidden;
+      transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+    }}
+
+    .vibe-spotlight-card::before {{
+      content: '';
+      position: absolute;
+      inset: 0;
+      top: 0;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.22), transparent);
+      z-index: 10;
+      pointer-events: none;
+    }}
+
+    .vibe-spotlight-card::after {{
+      content: '';
+      position: absolute;
+      inset: 0;
+      border-radius: inherit;
+      background: radial-gradient(450px circle at var(--mouse-x, 50%) var(--mouse-y, 50%), color-mix(in oklch, var(--accent) 10%, transparent), transparent 75%);
+      pointer-events: none;
+      opacity: 0;
+      transition: opacity 0.35s ease;
+      z-index: 5;
+    }}
+
+    .vibe-spotlight-card:hover::after {{
+      opacity: 1;
+    }}
+
+    .vibe-shimmer-btn {{
+      position: relative;
+      overflow: hidden;
+      transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+    }}
+
+    .vibe-shimmer-btn:hover {{
+      box-shadow: 0 0 25px -4px var(--accent);
+    }}
+
+    .vibe-shimmer-btn:active {{
+      transform: scale(0.98);
+    }}
+
+    .vibe-shimmer-btn::after {{
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 60%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.28), transparent);
+      transform: skewX(-20deg);
+      transition: none;
+      pointer-events: none;
+    }}
+
+    .vibe-shimmer-btn:hover::after {{
+      left: 140%;
+      transition: left 0.75s ease-in-out;
+    }}
   </style>
 </head>
-<body class="min-h-full flex flex-col antialiased">
+<body class="min-h-full flex flex-col antialiased relative">
+  <!-- Atmospheric Canvas Background: Ambient Lighting & Grid System -->
+  <div class="fixed inset-0 pointer-events-none z-0 overflow-hidden" aria-hidden="true">
+    <div class="absolute inset-0 bg-[linear-gradient(to_right,rgba(128,128,128,0.06)_1px,transparent_1px),linear-gradient(to_bottom,rgba(128,128,128,0.06)_1px,transparent_1px)] bg-[size:36px_36px] [mask-image:radial-gradient(ellipse_60%_50%_at_50%_0%,#000_70%,transparent_100%)]"></div>
+    <div class="absolute -top-32 start-1/2 -translate-x-1/2 rtl:translate-x-1/2 w-[760px] h-[520px] bg-[var(--accent)]/[0.08] blur-[140px] rounded-full"></div>
+  </div>
+
   <!-- Top Navigation Bar -->
-  <header class="w-full border-b border-[var(--border-subtle)] bg-[var(--surface-bg)] sticky top-0 z-30">
+  <header class="w-full border-b border-[var(--border-subtle)] bg-[var(--surface-bg)]/85 backdrop-blur-md sticky top-0 z-30">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
       <div class="flex items-center space-x-3 rtl:space-x-reverse">
         <svg class="w-8 h-8 text-[var(--accent)]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
@@ -1335,16 +1466,19 @@ export default {component_name};
   </header>
 
   <!-- Main Hero & Content Section -->
-  <main class="flex-1 max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-12 lg:py-16">
-    <div class="grid grid-cols-1 md:grid-cols-3 gap-6 lg:gap-8">
+  <main class="flex-1 max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-12 lg:py-16 relative z-10">
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-stretch">
       <!-- Main Bento Hero Card with Asymmetric Layout -->
-      <section class="md:col-span-2 bg-[var(--surface-bg)] {card_border} {card_shadow} rounded-[var(--radius-container)] p-6 sm:p-8 lg:p-10 flex flex-col justify-between" aria-labelledby="hero-title">
+      <section class="vibe-spotlight-card lg:col-span-7 bg-[var(--surface-bg)] {card_border} {card_shadow} rounded-[var(--radius-container)] p-6 sm:p-8 lg:p-10 flex flex-col justify-between" aria-labelledby="hero-title">
         <div>
-          <span class="inline-flex items-center px-3 py-1 rounded-full text-xs font-semibold bg-[var(--accent)]/10 text-[var(--accent)] mb-4">
-            <svg class="w-3.5 h-3.5 inline mr-1.5 rtl:ml-1.5 rtl:mr-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 14 14"></polyline></svg>
-            {"مهندسی دقیق و اصیل" if is_rtl else "Vibe UI Verified"}
-          </span>
-          <h1 id="hero-title" class="text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight mb-4">
+          <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-semibold bg-[var(--accent)]/10 text-[var(--accent)] border border-[var(--accent)]/20 mb-4 shadow-sm">
+            <span class="relative flex h-2 w-2">
+              <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+              <span class="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
+            </span>
+            <span>{"مهندسی دقیق و اصیل" if is_rtl else "Vibe UI Verified"}</span>
+          </div>
+          <h1 id="hero-title" class="text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight mb-4 vibe-gradient-heading">
             {hero_headline}
           </h1>
           <p class="text-[var(--text-muted)] text-base sm:text-lg leading-relaxed max-w-2xl mb-8">
@@ -1353,29 +1487,51 @@ export default {component_name};
         </div>
 
         <div class="flex flex-wrap gap-4 items-center pt-4 border-t border-[var(--border-subtle)]">
-          <button type="button" id="hero-primary-btn" class="inline-flex items-center justify-center px-6 py-3 text-base font-semibold rounded-[var(--radius-button)] text-[var(--vibe-on-primary,#fff)] bg-[var(--accent)] min-h-[44px] transition-transform active:scale-95">
+          <button type="button" id="hero-primary-btn" class="vibe-shimmer-btn inline-flex items-center justify-center px-6 py-3 text-base font-semibold rounded-[var(--radius-button)] text-[var(--vibe-on-primary,#fff)] bg-[var(--accent)] min-h-[44px]">
             {cta_primary_label}
           </button>
-          <button type="button" id="hero-secondary-btn" class="inline-flex items-center justify-center px-6 py-3 text-base font-semibold rounded-[var(--radius-button)] text-[var(--text-primary)] border border-[var(--border-subtle)] bg-[var(--canvas-bg)] hover:bg-[var(--surface-bg)] min-h-[44px] transition-colors">
+          <button type="button" id="hero-secondary-btn" class="inline-flex items-center justify-center px-6 py-3 text-base font-semibold rounded-[var(--radius-button)] text-[var(--text-primary)] border border-[var(--border-subtle)] bg-[var(--canvas-bg)] hover:bg-[var(--surface-bg)] min-h-[44px] transition-all hover:scale-[1.02] active:scale-[0.98]">
             {cta_secondary_label}
           </button>
         </div>
       </section>
 
-      <!-- Secondary Domain Highlights & Metrics Card -->
-      <aside class="bg-[var(--surface-bg)] {card_border} {card_shadow} rounded-[var(--radius-container)] p-6 flex flex-col justify-between" aria-label="Domain Highlights">
-        <div>
-          <h2 class="text-lg font-bold mb-4 flex items-center space-x-2 rtl:space-x-reverse">
-            <svg class="w-5 h-5 text-[var(--accent)]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M22 12h-4l-3 9L9 3l-3 9H2"></path></svg>
-            <span>{"شاخص های کلیدی و وضعیت" if is_rtl else "Highlights & Status"}</span>
-          </h2>
-          <div class="space-y-4">
-{metrics_block_html}
+      <!-- Secondary Domain Highlights: Ultra-Crisp macOS Window Chrome Mockup -->
+      <aside class="vibe-spotlight-card lg:col-span-5 bg-[var(--surface-bg)] {card_border} {card_shadow} rounded-[var(--radius-container)] overflow-hidden flex flex-col justify-between" aria-label="Domain Highlights">
+        <!-- Window Chrome Titlebar -->
+        <div class="px-4 py-3 bg-[var(--canvas-bg)]/80 border-b border-[var(--border-subtle)] flex items-center justify-between backdrop-blur-md">
+          <div class="flex items-center space-x-2 rtl:space-x-reverse">
+            <span class="w-3 h-3 rounded-full bg-rose-500/80 inline-block border border-rose-600/40"></span>
+            <span class="w-3 h-3 rounded-full bg-amber-500/80 inline-block border border-amber-600/40"></span>
+            <span class="w-3 h-3 rounded-full bg-emerald-500/80 inline-block border border-emerald-600/40"></span>
+          </div>
+          <div class="text-[11px] font-mono text-[var(--text-muted)] flex items-center gap-1.5 opacity-80">
+            <svg class="w-3.5 h-3.5 text-[var(--accent)]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg>
+            <span>{domain_id}.vibe // live</span>
+          </div>
+          <div class="flex items-center space-x-1.5 rtl:space-x-reverse">
+            <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-ping"></span>
+            <span class="text-[10px] font-mono text-emerald-500 font-semibold uppercase">SECURE</span>
           </div>
         </div>
-        <div class="mt-6 text-xs text-[var(--text-muted)] flex items-center space-x-1.5 rtl:space-x-reverse">
-          <svg class="w-4 h-4 text-emerald-500" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>
-          <span>{"سرویس آنلاین و آماده پذیرش" if is_rtl else "Active & Ready"}</span>
+
+        <div class="p-6 flex-1 flex flex-col justify-between">
+          <div>
+            <h2 class="text-base font-bold mb-4 flex items-center space-x-2 rtl:space-x-reverse">
+              <svg class="w-4 h-4 text-[var(--accent)]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M22 12h-4l-3 9L9 3l-3 9H2"></path></svg>
+              <span>{"شاخص های کلیدی و وضعیت" if is_rtl else "Highlights & Status"}</span>
+            </h2>
+            <div class="space-y-3">
+{metrics_block_html}
+            </div>
+          </div>
+          <div class="mt-6 pt-4 border-t border-[var(--border-subtle)] text-xs text-[var(--text-muted)] flex items-center justify-between">
+            <div class="flex items-center space-x-1.5 rtl:space-x-reverse">
+              <span class="w-2 h-2 rounded-full bg-emerald-500"></span>
+              <span>{"سرویس آنلاین و آماده پذیرش" if is_rtl else "Active & Ready"}</span>
+            </div>
+            <span class="font-mono text-[10px] opacity-70"><bdi>99.99% SLO</bdi></span>
+          </div>
         </div>
       </aside>
     </div>
@@ -1523,6 +1679,19 @@ export default {component_name};
           e.preventDefault();
           showToast('درخواست شما با موفقیت ارسال شد. کارشناسان ما به زودی با شما تماس می گیرند.');
           contactForm.reset();
+        }});
+      }}
+
+      // 9. Mouse-tracking Spotlight Cards (Guarded for Mobile Performance)
+      if (window.matchMedia('(hover: hover) and (pointer: fine)').matches) {{
+        document.querySelectorAll('.vibe-spotlight-card').forEach(function(card) {{
+          card.addEventListener('mousemove', function(e) {{
+            var rect = card.getBoundingClientRect();
+            var x = e.clientX - rect.left;
+            var y = e.clientY - rect.top;
+            card.style.setProperty('--mouse-x', x + 'px');
+            card.style.setProperty('--mouse-y', y + 'px');
+          }});
         }});
       }}
     }})();
