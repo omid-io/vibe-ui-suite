@@ -56,3 +56,5 @@ scripts/build_upload_action.py
 scripts/generate_playwright_snippet.py
 
 
+
+*.bak
