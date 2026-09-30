@@ -4,15 +4,8 @@
 
 ---
 
-## 🏛️ Immutable Package Architecture & Deprecation Rules
-
-### 1. `@omid-io/tokens` is Permanently Frozen at `4.0.0`
-- **Deprecation Status**: As of milestone R42, the scoped package `@omid-io/tokens` was formally deprecated on NPM in favor of the flagship un-scoped package **`vibe-ui-suite`**.
-- **Absolute Rule**: **NEVER bump the version of `@omid-io/tokens`**. It must remain frozen at `4.0.0` with `"deprecated"` notice.
-- **Manifest Invariant**: In `version.manifest.json`, `@omid-io/tokens` is pinned to `"4.0.0"`. `scripts/validate_versions.py` enforces this invariant.
-
-### 2. Flagship Package: `vibe-ui-suite`
-- All design tokens, CLI binaries (`vibe-ui-suite` and `vibe-ui`), Tailwind CSS v4 `@theme` integrations, and React 19 recipes are published under `vibe-ui-suite`.
+## 🏛️ Immutable Package Architecture: Flagship `vibe-ui-suite`
+- All design tokens, CLI binaries (`vibe-ui-suite` and `vibe-ui`), Tailwind CSS v4 `@theme` integrations, and React 19 recipes are published exclusively under **`vibe-ui-suite`**.
 - Published to NPM via:
   ```bash
   cd packages/vibe-ui-suite

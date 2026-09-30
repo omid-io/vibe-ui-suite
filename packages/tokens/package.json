@@ -1,7 +1,7 @@
 {
-  "name": "@omid-io/tokens",
+  "name": "vibe-ui-tokens-internal",
+  "private": true,
   "version": "4.1.1",
-  "deprecated": "This package is deprecated in favor of vibe-ui-suite. Please use vibe-ui-suite instead.",
   "description": "Typed OKLCH design tokens, physics curves, and zero-config Tailwind plugin for Vibe UI (Deprecated in favor of vibe-ui-suite)",
   "bin": {
     "vibe-ui": "./dist/cli.js",

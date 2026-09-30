@@ -1,4 +1,4 @@
-# @omid-io/tokens
+# vibe-ui-suite
 
 > [!WARNING]
 > **Package Migrated to [`vibe-ui-suite`](https://www.npmjs.com/package/vibe-ui-suite)**  
@@ -12,7 +12,7 @@
 ## Installation
 
 ```bash
-npm install @omid-io/tokens
+npm install vibe-ui-suite
 ```
 
 ## Quick Start with CLI
@@ -22,7 +22,7 @@ npm install @omid-io/tokens
 Scaffold AI editor contracts (`.cursorrules`, `CLAUDE.md`, `.windsurfrules`) and OKLCH CSS variables in 3 seconds:
 
 ```bash
-npx @omid-io/tokens init
+npx vibe-ui-suite init
 ```
 
 ### 2. Add AI-Native Components (`add`)
@@ -30,15 +30,15 @@ npx @omid-io/tokens init
 Add accessible, zero-emoji, verified React 19 component templates directly into your project (`components/vibe-ui/`):
 
 ```bash
-npx @omid-io/tokens add thinking-drawer
-npx @omid-io/tokens add telemetry-hud
-npx @omid-io/tokens add contrast-badge
+npx vibe-ui-suite add thinking-drawer
+npx vibe-ui-suite add telemetry-hud
+npx vibe-ui-suite add contrast-badge
 ```
 
 ### 3. List Registry Components (`list`)
 
 ```bash
-npx @omid-io/tokens list
+npx vibe-ui-suite list
 ```
 
 ## Programmatic Usage
@@ -46,7 +46,7 @@ npx @omid-io/tokens list
 ### 1. Direct Token Imports
 
 ```typescript
-import { VISUAL_CHEMISTRIES, MOTION_CURVES, getContrastRatio } from '@omid-io/tokens';
+import { VISUAL_CHEMISTRIES, MOTION_CURVES, getContrastRatio } from 'vibe-ui-suite';
 
 // Access typed OKLCH color spaces
 const saasColors = VISUAL_CHEMISTRIES.MINIMALIST_SAAS.colors;
@@ -59,7 +59,7 @@ In your global stylesheet (e.g. `app/globals.css`):
 
 ```css
 @import "tailwindcss";
-@import "@omid-io/tokens/v4.css";
+@import "vibe-ui-suite/v4.css";
 ```
 
 Zero JavaScript configuration files needed. Instantly unlocks:
@@ -72,7 +72,7 @@ Zero JavaScript configuration files needed. Instantly unlocks:
 In your `tailwind.config.js` or `tailwind.config.ts`:
 
 ```javascript
-import vibeUiPlugin from '@omid-io/tokens/tailwind';
+import vibeUiPlugin from 'vibe-ui-suite/tailwind';
 
 export default {
   content: ['./app/**/*.{js,ts,jsx,tsx}', './components/**/*.{js,ts,jsx,tsx}'],
