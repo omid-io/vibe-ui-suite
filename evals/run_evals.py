@@ -864,6 +864,7 @@ def audit_repo_integrity(root_dir: Path) -> dict:
             ("قوام دهنده سس و خوراک سنتی", "food_restaurant_cafe", "Substring 'قوام' ingredient vs food"),
             ("میخوام کلینیک دندانپزشکیم نوبت دهی آنلاین داشته باشه", "healthcare_hospital_medical", "Possessive suffix 'یم' vs healthcare"),
             ("رزرو نوبت دکتر متخصص قلب", "healthcare_hospital_medical", "Doctor appointment booking vs healthcare"),
+            ("Design a real-time system observability and infrastructure monitoring dashboard", "devops_cloud_terminal", "Observability dashboard vs DevOps"),
         ]
         all_cases_passed = True
         failed_case_details = []
@@ -887,6 +888,51 @@ def audit_repo_integrity(root_dir: Path) -> dict:
                 "name": "Adversarial Bilingual Disambiguation",
                 "status": "FAIL",
                 "msg": f"Failed adversarial cases: {'; '.join(failed_case_details)}"
+            })
+            results["overall_status"] = "FAIL"
+
+        # 7. Production HTML Generator Zero Broken Anchors & Domain Integrity
+        from vibe_core.generator import InterfaceGenerator
+        from bs4 import BeautifulSoup
+        generator = InterfaceGenerator()
+        gen_tests = [
+            ("Design a real-time system observability and infrastructure monitoring dashboard", "devops_cloud_terminal", ["#cluster", "#latency", "#services", "#logs"], False),
+            ("یک لندینگ پیج برای کلینیک دندانپزشکی و زیبایی با نوبت دهی و نمونه کار", "healthcare_hospital_medical", ["#services", "#portfolio", "#doctors", "#booking"], True)
+        ]
+        gen_failed = []
+        for p, d_id, expected_anchors, is_fa in gen_tests:
+            dec = {"intent": director.infer_intent(p), "genome": {"color": {"accent": "oklch(0.65 0.22 260)"}, "platform": {"rtl_support": is_fa}}}
+            html_out = generator.generate_html(dec, "Test Interface")
+            soup = BeautifulSoup(html_out, "html.parser")
+            # Verify 0 broken anchors
+            for a in soup.find_all("a", href=True):
+                href = a["href"].strip()
+                if href.startswith("#") and len(href) > 1:
+                    target_id = href[1:]
+                    if not soup.find(id=target_id):
+                        gen_failed.append(f"Broken anchor {href} in {d_id}")
+            # Verify expected section anchors exist
+            for anchor in expected_anchors:
+                sec_id = anchor[1:]
+                if not soup.find(id=sec_id):
+                    gen_failed.append(f"Missing required section {anchor} in {d_id}")
+            # Verify interactive script exists
+            if "showToast" not in html_out or "quick-booking-form" not in html_out and is_fa:
+                gen_failed.append(f"Missing interactive script/form in {d_id}")
+
+        if not gen_failed:
+            results["checks"].append({
+                "pillar": "Production Generator",
+                "name": "Zero Broken Anchors & Domain Integrity",
+                "status": "PASS",
+                "msg": "Verified 0 broken anchors, dynamic domain sections, and interactive scripts across test outputs"
+            })
+        else:
+            results["checks"].append({
+                "pillar": "Production Generator",
+                "name": "Zero Broken Anchors & Domain Integrity",
+                "status": "FAIL",
+                "msg": f"Generator defects: {'; '.join(gen_failed)}"
             })
             results["overall_status"] = "FAIL"
     except Exception as e:

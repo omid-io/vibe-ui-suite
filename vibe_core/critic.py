@@ -230,6 +230,37 @@ class DesignCritic:
                 "suggested_patch": "@media (prefers-reduced-motion: reduce) { *, *::before, *::after { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; scroll-behavior: auto !important; } }"
             })
 
+        # 9. Hard Gate: Zero Broken Internal Anchors
+        # Every <a href="#id"> must resolve to an existing element with that id in the page.
+        broken_anchors = []
+        if _BS4_AVAILABLE:
+            _soup_anchors = soup if "soup" in locals() and soup else _BS4(html_content, "html.parser")
+            for a in _soup_anchors.find_all("a", href=True):
+                href = a["href"].strip()
+                if href.startswith("#") and len(href) > 1:
+                    target_id = href[1:]
+                    if not _soup_anchors.find(id=target_id):
+                        broken_anchors.append(href)
+        else:
+            href_matches = re.findall(r'<a[^>]+href=["\']#([a-zA-Z0-9_-]+)["\']', html_content)
+            for target_id in href_matches:
+                if not re.search(r'id=["\']' + re.escape(target_id) + r'["\']', html_content):
+                    broken_anchors.append("#" + target_id)
+
+        if broken_anchors:
+            unique_broken = sorted(list(set(broken_anchors)))
+            hard_gate_failures.append({
+                "gate": "Zero Broken Anchors",
+                "message": f"Found {len(unique_broken)} broken anchor link(s) targeting non-existent sections: {', '.join(unique_broken)}",
+                "evidence": f"Missing section IDs: {', '.join(unique_broken)}"
+            })
+            defects_ranked.append({
+                "severity": "critical",
+                "type": "broken_internal_anchors",
+                "message": f"Anchor link(s) point to non-existent section IDs: {', '.join(unique_broken)}",
+                "suggested_patch": "Ensure every <a href='#section'> corresponds to an element with id='section'."
+            })
+
         # 9. Component States Matrix Check
         has_skeleton = "skeleton" in html_content.lower() or "animate-pulse" in html_content
         has_empty = "empty" in html_content.lower() or "یافت نشد" in html_content or "no records" in html_content.lower()
@@ -317,8 +348,13 @@ class DesignCritic:
         domain_term_matches = sum(1 for tok in domain_id.split("_") if len(tok) > 2 and tok.lower() in html_content.lower()) if domain_id else 0
         domain_fit = min(15, 6 + min(3, css_var_count // 3) + (2 if has_signature_widget else 0) + (2 if html_domain_match else 0) + min(2, domain_term_matches))
 
-        # Usability: evidence — presence of interactive semantic elements and absence of div-onclick violations
-        usability = 10 if not div_onclick else 6
+        # Usability: evidence — presence of interactive semantic elements and absence of div-onclick / broken anchors
+        usability = 10
+        if div_onclick:
+            usability -= 4
+        if broken_anchors:
+            usability -= 4
+        usability = max(2, usability)
 
         # Typography: evidence — character-rich font-family declarations beyond generic Inter
         has_font_family = bool(re.search(r"font-family\s*:", html_content) or "display-font" in html_content)

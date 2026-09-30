@@ -21,11 +21,22 @@ class DesignGenomeEngine:
         motion = genome.get("motion", {})
         typography = genome.get("typography", {})
 
+        accent_color = color.get('accent', 'oklch(0.65 0.09 75)')
+        on_primary = "oklch(0.99 0 0)"
+        import re
+        oklch_match = re.search(r"oklch\(\s*([\d.]+%?)\s+([\d.]+)\s+([\d.]+)", str(accent_color).lower())
+        if oklch_match:
+            l_str = oklch_match.group(1)
+            l_val = float(l_str[:-1]) / 100.0 if l_str.endswith("%") else float(l_str)
+            if l_val > 0.62:
+                on_primary = "oklch(0.12 0.02 85)"
+
         css_lines = [
             ":root {",
             f"  --canvas-bg: {color.get('canvas', 'oklch(0.98 0.005 85)')};",
             f"  --surface-bg: {color.get('surface', 'oklch(0.95 0.01 85)')};",
-            f"  --accent: {color.get('accent', 'oklch(0.65 0.09 75)')};",
+            f"  --accent: {accent_color};",
+            f"  --vibe-on-primary: {on_primary};",
             f"  --border-subtle: {color.get('border', 'oklch(0.88 0.01 85)')};",
             f"  --text-primary: {color.get('text', 'oklch(0.20 0.015 60)')};",
             f"  --text-muted: {color.get('muted_text', 'oklch(0.48 0.015 60)')};",
