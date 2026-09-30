@@ -15,6 +15,8 @@ export interface ChemistryColors {
   surface: string;
   border: string;
   primaryAccent: string;
+  /** Text color on primary accent guaranteeing >= 4.5:1 (AA) or >= 7:1 (AAA) contrast */
+  onPrimaryAccent: string;
   textPrimary: string;
   textMuted: string;
   ring: string;
@@ -52,6 +54,7 @@ export const VISUAL_CHEMISTRIES: Record<VisualChemistryId, VisualChemistry> = {
       surface: 'oklch(1 0 0)',
       border: 'oklch(0.90 0.008 264)',
       primaryAccent: 'oklch(0.55 0.22 260)',
+      onPrimaryAccent: 'oklch(0.99 0 0)',
       textPrimary: 'oklch(0.14 0.005 264)',
       textMuted: 'oklch(0.48 0.015 264)',
       ring: 'oklch(0.55 0.22 260)',
@@ -61,13 +64,14 @@ export const VISUAL_CHEMISTRIES: Record<VisualChemistryId, VisualChemistry> = {
       surface: 'oklch(0.18 0.008 264)',
       border: 'oklch(0.28 0.01 264)',
       primaryAccent: 'oklch(0.65 0.22 260)',
+      onPrimaryAccent: 'oklch(0.99 0 0)',
       textPrimary: 'oklch(0.98 0.002 264)',
       textMuted: 'oklch(0.65 0.015 264)',
       ring: 'oklch(0.65 0.22 260)',
     },
     typography: {
-      display: 'Inter, system-ui, sans-serif',
-      body: 'Inter, system-ui, sans-serif',
+      display: 'Vazirmatn, Inter, system-ui, sans-serif',
+      body: 'Vazirmatn, Inter, system-ui, sans-serif',
       mono: 'JetBrains Mono, Menlo, monospace',
     },
     physics: {
@@ -85,6 +89,7 @@ export const VISUAL_CHEMISTRIES: Record<VisualChemistryId, VisualChemistry> = {
       surface: 'oklch(1 0 0 / 0.85)',
       border: 'oklch(0.75 0.12 85 / 0.4)',
       primaryAccent: 'oklch(0.65 0.18 85)',
+      onPrimaryAccent: 'oklch(0.12 0.02 85)',
       textPrimary: 'oklch(0.16 0.02 85)',
       textMuted: 'oklch(0.45 0.03 85)',
       ring: 'oklch(0.65 0.18 85)',
@@ -94,13 +99,14 @@ export const VISUAL_CHEMISTRIES: Record<VisualChemistryId, VisualChemistry> = {
       surface: 'oklch(0.18 0.02 280 / 0.75)',
       border: 'oklch(0.75 0.15 85 / 0.35)',
       primaryAccent: 'oklch(0.78 0.16 85)',
+      onPrimaryAccent: 'oklch(0.12 0.02 85)',
       textPrimary: 'oklch(0.98 0.005 85)',
       textMuted: 'oklch(0.70 0.03 85)',
       ring: 'oklch(0.78 0.16 85)',
     },
     typography: {
-      display: 'Cinzel, Playfair Display, serif',
-      body: 'Plus Jakarta Sans, sans-serif',
+      display: 'Cinzel, Playfair Display, Vazirmatn, serif',
+      body: 'Vazirmatn, Plus Jakarta Sans, sans-serif',
       mono: 'JetBrains Mono, monospace',
     },
     physics: {
@@ -118,6 +124,7 @@ export const VISUAL_CHEMISTRIES: Record<VisualChemistryId, VisualChemistry> = {
       surface: 'oklch(0.99 0.002 95)',
       border: 'oklch(0.15 0.01 95)',
       primaryAccent: 'oklch(0.82 0.20 135)',
+      onPrimaryAccent: 'oklch(0.10 0.01 95)',
       textPrimary: 'oklch(0.12 0.01 95)',
       textMuted: 'oklch(0.35 0.02 95)',
       ring: 'oklch(0.15 0.01 95)',
@@ -127,13 +134,14 @@ export const VISUAL_CHEMISTRIES: Record<VisualChemistryId, VisualChemistry> = {
       surface: 'oklch(0.20 0.015 95)',
       border: 'oklch(0.95 0.01 95)',
       primaryAccent: 'oklch(0.82 0.20 135)',
+      onPrimaryAccent: 'oklch(0.10 0.01 95)',
       textPrimary: 'oklch(0.96 0.01 95)',
       textMuted: 'oklch(0.70 0.02 95)',
       ring: 'oklch(0.82 0.20 135)',
     },
     typography: {
-      display: 'Space Grotesk, Syne, sans-serif',
-      body: 'Space Grotesk, sans-serif',
+      display: 'Space Grotesk, Syne, Vazirmatn, sans-serif',
+      body: 'Vazirmatn, Space Grotesk, sans-serif',
       mono: 'Space Mono, monospace',
     },
     physics: {
@@ -151,6 +159,7 @@ export const VISUAL_CHEMISTRIES: Record<VisualChemistryId, VisualChemistry> = {
       surface: 'oklch(0.93 0.008 80)',
       border: 'oklch(0.20 0.005 80)',
       primaryAccent: 'oklch(0.58 0.24 28)',
+      onPrimaryAccent: 'oklch(0.99 0 0)',
       textPrimary: 'oklch(0.15 0.005 80)',
       textMuted: 'oklch(0.42 0.01 80)',
       ring: 'oklch(0.58 0.24 28)',
@@ -160,13 +169,14 @@ export const VISUAL_CHEMISTRIES: Record<VisualChemistryId, VisualChemistry> = {
       surface: 'oklch(0.17 0.008 80)',
       border: 'oklch(0.35 0.005 80)',
       primaryAccent: 'oklch(0.68 0.22 28)',
+      onPrimaryAccent: 'oklch(0.12 0.005 80)',
       textPrimary: 'oklch(0.95 0.005 80)',
       textMuted: 'oklch(0.65 0.01 80)',
       ring: 'oklch(0.68 0.22 28)',
     },
     typography: {
-      display: 'Helvetica Neue, Arial, sans-serif',
-      body: 'Newsreader, Georgia, serif',
+      display: 'Helvetica Neue, Arial, Vazirmatn, sans-serif',
+      body: 'Newsreader, Georgia, Vazirmatn, serif',
       mono: 'Courier New, monospace',
     },
     physics: {
@@ -184,6 +194,7 @@ export const VISUAL_CHEMISTRIES: Record<VisualChemistryId, VisualChemistry> = {
       surface: 'oklch(1 0 0)',
       border: 'oklch(0.90 0.008 247.8)',
       primaryAccent: 'oklch(0.55 0.22 265)',
+      onPrimaryAccent: 'oklch(0.99 0 0)',
       textPrimary: 'oklch(0.20 0.02 265)',
       textMuted: 'oklch(0.50 0.02 265)',
       ring: 'oklch(0.55 0.22 265)',
@@ -193,13 +204,14 @@ export const VISUAL_CHEMISTRIES: Record<VisualChemistryId, VisualChemistry> = {
       surface: 'oklch(0.17 0.008 265)',
       border: 'oklch(0.26 0.01 265)',
       primaryAccent: 'oklch(0.65 0.22 265)',
+      onPrimaryAccent: 'oklch(0.99 0 0)',
       textPrimary: 'oklch(0.98 0 0)',
       textMuted: 'oklch(0.65 0.01 265)',
       ring: 'oklch(0.65 0.22 265)',
     },
     typography: {
-      display: 'Inter, system-ui, sans-serif',
-      body: 'Inter, system-ui, sans-serif',
+      display: 'Vazirmatn, Inter, system-ui, sans-serif',
+      body: 'Vazirmatn, Inter, system-ui, sans-serif',
       mono: 'Fira Code, monospace',
     },
     physics: {

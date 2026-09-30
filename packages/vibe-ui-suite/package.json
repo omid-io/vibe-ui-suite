@@ -23,6 +23,10 @@
     "./v4": "./dist/v4.css",
     "./v4.css": "./dist/v4.css"
   },
+  "files": [
+    "dist",
+    "README.md"
+  ],
   "scripts": {
     "build": "node build.js"
   },

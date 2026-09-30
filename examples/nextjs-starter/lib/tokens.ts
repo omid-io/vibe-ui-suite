@@ -19,6 +19,8 @@ export interface ChemistryColors {
   border: string;
   /** Primary brand / interactive accent in OKLCH */
   primaryAccent: string;
+  /** Text color on primary accent guaranteeing >= 4.5:1 (AA) or >= 7:1 (AAA) contrast */
+  onPrimaryAccent: string;
   /** Primary text color guaranteeing >= 4.5:1 contrast against canvas & surface */
   textPrimary: string;
   /** Muted secondary text color guaranteeing >= 3:1 contrast against canvas */
@@ -55,13 +57,14 @@ export const VISUAL_CHEMISTRIES: Record<VisualChemistryId, ChemistryMetadata> = 
       surface: 'oklch(0.18 0.008 260)',
       border: 'oklch(0.28 0.01 260)',
       primaryAccent: 'oklch(0.65 0.22 265)',
+      onPrimaryAccent: 'oklch(0.99 0 0)',
       textPrimary: 'oklch(0.98 0 0)',
       textMuted: 'oklch(0.70 0.01 260)',
       ring: 'oklch(0.65 0.22 265)',
     },
     typography: {
-      display: 'Inter, system-ui, -apple-system, sans-serif',
-      body: 'Inter, system-ui, -apple-system, sans-serif',
+      display: 'Vazirmatn, Inter, system-ui, -apple-system, sans-serif',
+      body: 'Vazirmatn, Inter, system-ui, -apple-system, sans-serif',
       mono: 'JetBrains Mono, ui-monospace, monospace',
     },
   },
@@ -76,13 +79,14 @@ export const VISUAL_CHEMISTRIES: Record<VisualChemistryId, ChemistryMetadata> = 
       surface: 'oklch(0.16 0.018 265)',
       border: 'oklch(0.32 0.03 265)',
       primaryAccent: 'oklch(0.78 0.16 75)',
+      onPrimaryAccent: 'oklch(0.12 0.02 85)',
       textPrimary: 'oklch(0.98 0.005 75)',
       textMuted: 'oklch(0.68 0.02 260)',
       ring: 'oklch(0.78 0.16 75)',
     },
     typography: {
-      display: 'Playfair Display, Georgia, serif',
-      body: 'Inter, system-ui, -apple-system, sans-serif',
+      display: 'Playfair Display, Vazirmatn, Georgia, serif',
+      body: 'Vazirmatn, Inter, system-ui, -apple-system, sans-serif',
       mono: 'JetBrains Mono, ui-monospace, monospace',
     },
   },
@@ -97,13 +101,14 @@ export const VISUAL_CHEMISTRIES: Record<VisualChemistryId, ChemistryMetadata> = 
       surface: 'oklch(1.00 0 0)',
       border: 'oklch(0.00 0 0)',
       primaryAccent: 'oklch(0.55 0.24 25)',
+      onPrimaryAccent: 'oklch(0.99 0 0)',
       textPrimary: 'oklch(0.00 0 0)',
       textMuted: 'oklch(0.35 0.01 0)',
       ring: 'oklch(0.00 0 0)',
     },
     typography: {
-      display: 'Space Grotesk, system-ui, sans-serif',
-      body: 'Space Grotesk, system-ui, sans-serif',
+      display: 'Space Grotesk, Vazirmatn, system-ui, sans-serif',
+      body: 'Vazirmatn, Space Grotesk, system-ui, sans-serif',
       mono: 'Space Mono, ui-monospace, monospace',
     },
   },
@@ -118,13 +123,14 @@ export const VISUAL_CHEMISTRIES: Record<VisualChemistryId, ChemistryMetadata> = 
       surface: 'oklch(0.95 0.008 80)',
       border: 'oklch(0.85 0.01 80)',
       primaryAccent: 'oklch(0.52 0.22 28)',
+      onPrimaryAccent: 'oklch(0.99 0 0)',
       textPrimary: 'oklch(0.12 0.01 50)',
       textMuted: 'oklch(0.45 0.01 60)',
       ring: 'oklch(0.52 0.22 28)',
     },
     typography: {
-      display: 'Instrument Serif, Bodoni MT, serif',
-      body: 'Inter, system-ui, -apple-system, sans-serif',
+      display: 'Instrument Serif, Vazirmatn, Bodoni MT, serif',
+      body: 'Vazirmatn, Inter, system-ui, -apple-system, sans-serif',
       mono: 'JetBrains Mono, ui-monospace, monospace',
     },
   },
@@ -139,13 +145,14 @@ export const VISUAL_CHEMISTRIES: Record<VisualChemistryId, ChemistryMetadata> = 
       surface: 'oklch(1.00 0 0)',
       border: 'oklch(0.90 0.01 240)',
       primaryAccent: 'oklch(0.56 0.21 255)',
+      onPrimaryAccent: 'oklch(0.99 0 0)',
       textPrimary: 'oklch(0.15 0.02 260)',
       textMuted: 'oklch(0.48 0.02 260)',
       ring: 'oklch(0.56 0.21 255)',
     },
     typography: {
-      display: 'Inter, system-ui, -apple-system, sans-serif',
-      body: 'Inter, system-ui, -apple-system, sans-serif',
+      display: 'Vazirmatn, Inter, system-ui, -apple-system, sans-serif',
+      body: 'Vazirmatn, Inter, system-ui, -apple-system, sans-serif',
       mono: 'JetBrains Mono, ui-monospace, monospace',
     },
   },

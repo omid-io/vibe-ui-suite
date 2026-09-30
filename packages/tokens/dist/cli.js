@@ -39,7 +39,7 @@ const path = __importStar(require("path"));
 const readline = __importStar(require("readline"));
 const components_1 = require("./registry/components");
 const index_1 = require("./index");
-const VERSION = '4.0.0';
+const VERSION = '4.1.1';
 function printBanner() {
     console.log(`
 \x1b[35m  ▲ VIBE UI CLI v${VERSION}\x1b[0m
@@ -192,6 +192,7 @@ async function handleInit(options) {
   --vibe-surface: ${selectedChem.colors.surface};
   --vibe-border: ${selectedChem.colors.border};
   --vibe-primary-accent: ${selectedChem.colors.primaryAccent};
+  --vibe-on-primary: ${selectedChem.colors.onPrimaryAccent};
   --vibe-text-primary: ${selectedChem.colors.textPrimary};
   --vibe-text-muted: ${selectedChem.colors.textMuted};
   --vibe-ring: ${selectedChem.colors.ring};
@@ -203,6 +204,7 @@ async function handleInit(options) {
   --vibe-surface: ${darkColors.surface};
   --vibe-border: ${darkColors.border};
   --vibe-primary-accent: ${darkColors.primaryAccent};
+  --vibe-on-primary: ${darkColors.onPrimaryAccent};
   --vibe-text-primary: ${darkColors.textPrimary};
   --vibe-text-muted: ${darkColors.textMuted};
   --vibe-ring: ${darkColors.ring};

@@ -12,6 +12,7 @@ export function createVibeUiPlugin(options = {}) {
             '--vibe-surface': chem.colors.surface,
             '--vibe-border': chem.colors.border,
             '--vibe-primary': chem.colors.primaryAccent,
+            '--vibe-on-primary': chem.colors.onPrimaryAccent,
             '--vibe-text-primary': chem.colors.textPrimary,
             '--vibe-text-muted': chem.colors.textMuted,
             '--vibe-ring': chem.colors.ring,

@@ -132,7 +132,7 @@ export function HeroSection({
               <button
                 type="button"
                 onClick={onDeployClick}
-                className="inline-flex items-center justify-center gap-2 rounded-lg bg-accent px-5 py-2.5 text-sm font-semibold text-white shadow-sm transition-all duration-150 hover:opacity-90 active:scale-[0.98] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring min-h-[44px] cursor-pointer"
+                className="inline-flex items-center justify-center gap-2 rounded-lg bg-accent px-5 py-2.5 text-sm font-semibold text-onAccent shadow-sm transition-all duration-150 hover:opacity-90 active:scale-[0.98] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring min-h-[44px] cursor-pointer"
               >
                 {/* Pure SVG Rocket / Deploy Icon */}
                 <svg

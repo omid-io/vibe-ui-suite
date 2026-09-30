@@ -6,7 +6,7 @@ import * as readline from 'readline';
 import { COMPONENT_REGISTRY } from './registry/components';
 import { VISUAL_CHEMISTRIES } from './index';
 
-const VERSION = '4.0.0';
+const VERSION = '4.1.1';
 
 interface CliOptions {
   force: boolean;
@@ -179,6 +179,7 @@ async function handleInit(options: CliOptions) {
   --vibe-surface: ${selectedChem.colors.surface};
   --vibe-border: ${selectedChem.colors.border};
   --vibe-primary-accent: ${selectedChem.colors.primaryAccent};
+  --vibe-on-primary: ${selectedChem.colors.onPrimaryAccent};
   --vibe-text-primary: ${selectedChem.colors.textPrimary};
   --vibe-text-muted: ${selectedChem.colors.textMuted};
   --vibe-ring: ${selectedChem.colors.ring};
@@ -190,6 +191,7 @@ async function handleInit(options: CliOptions) {
   --vibe-surface: ${darkColors.surface};
   --vibe-border: ${darkColors.border};
   --vibe-primary-accent: ${darkColors.primaryAccent};
+  --vibe-on-primary: ${darkColors.onPrimaryAccent};
   --vibe-text-primary: ${darkColors.textPrimary};
   --vibe-text-muted: ${darkColors.textMuted};
   --vibe-ring: ${darkColors.ring};

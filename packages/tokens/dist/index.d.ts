@@ -8,6 +8,8 @@ export interface ChemistryColors {
     surface: string;
     border: string;
     primaryAccent: string;
+    /** Text color on primary accent guaranteeing >= 4.5:1 (AA) or >= 7:1 (AAA) contrast */
+    onPrimaryAccent: string;
     textPrimary: string;
     textMuted: string;
     ring: string;
