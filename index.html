@@ -291,18 +291,18 @@
             </div>
 
             <!-- Kubectl Live Stream Console Terminal -->
-            <div class="rounded-[var(--radius-card)] bg-zinc-950 text-cyan-400 font-mono text-xs p-4 border border-zinc-800 shadow-inner space-y-2">
+            <div class="rounded-[var(--radius-card)] bg-zinc-950 text-cyan-400 font-mono text-xs p-4 border border-zinc-800 shadow-inner space-y-2" dir="ltr">
               <div class="flex items-center justify-between border-b border-zinc-800 pb-2 text-[11px] text-zinc-400">
-                <div class="flex items-center space-x-2 rtl:space-x-reverse">
+                <div class="flex items-center space-x-2">
                   <span class="w-2 h-2 rounded-full bg-cyan-400 animate-ping"></span>
                   <span id="logTerminalHeader">kubectl logs -f deployment/vibe-gateway-v42 -n prod</span>
                 </div>
-                <div class="flex items-center space-x-2 rtl:space-x-reverse">
+                <div class="flex items-center space-x-2">
                   <button onclick="toggleLogPause(this)" id="btnPauseLogs" class="px-2 py-0.5 rounded bg-zinc-800 hover:bg-zinc-700 text-zinc-300 transition-colors">Pause</button>
                   <button onclick="copyLogSnippet(this)" id="btnCopyLogs" class="px-2 py-0.5 rounded bg-zinc-800 hover:bg-zinc-700 text-zinc-300 transition-colors">Copy</button>
                 </div>
               </div>
-              <div id="logStreamContent" class="space-y-1 leading-relaxed text-zinc-300 font-mono">
+              <div id="logStreamContent" class="space-y-1 leading-relaxed text-zinc-300 font-mono text-left">
                 <div>[2026-09-30T02:35:10Z] <span class="text-emerald-400 font-bold">INFO</span> route=/vibe/api/v4 status=200 latency=1.2ms downstream=oklch-engine</div>
                 <div>[2026-09-30T02:35:11Z] <span class="text-emerald-400 font-bold">INFO</span> verified mathematical contrast: WCAG AAA compliance confirmed (17.8:1)</div>
                 <div>[2026-09-30T02:35:12Z] <span class="text-sky-400 font-bold">DEBUG</span> cluster cache hit: 99.4% (zero memory page evictions across 64 pods)</div>
@@ -395,63 +395,63 @@
 
       <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
         <!-- 1. Linear Dev HUD -->
-        <div class="vibe-spotlight-card p-6 rounded-[var(--radius-card)] bg-[var(--surface-bg)] border border-[var(--border-subtle)] space-y-3">
+        <div class="vibe-spotlight-card p-6 rounded-[var(--radius-card)] bg-[var(--surface-bg)] border border-[var(--border-subtle)] space-y-3 text-start">
           <div class="flex items-center justify-between">
-            <span class="text-xs font-mono font-bold px-2 py-0.5 rounded bg-cyan-500/10 text-cyan-500 border border-cyan-500/20">Obsidian HUD</span>
-            <span class="text-xs text-[var(--text-muted)]">Cloud & Infra</span>
+            <span id="arch1Badge" class="text-xs font-mono font-bold px-2 py-0.5 rounded bg-cyan-500/10 text-cyan-500 border border-cyan-500/20">Obsidian HUD</span>
+            <span id="arch1Domain" class="text-xs text-[var(--text-muted)]">Cloud & Infra</span>
           </div>
-          <h3 class="text-lg font-bold text-[var(--text-primary)]">Linear Dev HUD</h3>
-          <p class="text-xs text-[var(--text-secondary)] leading-relaxed">Micro-terminal telemetry, monospace typography, cyan/emerald status pulses, and live K8s sparklines.</p>
+          <h3 id="arch1Title" class="text-lg font-bold text-[var(--text-primary)]">Linear Dev HUD</h3>
+          <p id="arch1Desc" class="text-xs text-[var(--text-secondary)] leading-relaxed">Micro-terminal telemetry, monospace typography, cyan/emerald status pulses, and live K8s sparklines.</p>
         </div>
 
         <!-- 2. Swiss Editorial -->
-        <div class="vibe-spotlight-card p-6 rounded-[var(--radius-card)] bg-[var(--surface-bg)] border border-[var(--border-subtle)] space-y-3">
+        <div class="vibe-spotlight-card p-6 rounded-[var(--radius-card)] bg-[var(--surface-bg)] border border-[var(--border-subtle)] space-y-3 text-start">
           <div class="flex items-center justify-between">
-            <span class="text-xs font-mono font-bold px-2 py-0.5 rounded bg-stone-500/10 text-stone-500 border border-stone-500/20">Editorial</span>
-            <span class="text-xs text-[var(--text-muted)]">Media & Luxury</span>
+            <span id="arch2Badge" class="text-xs font-mono font-bold px-2 py-0.5 rounded bg-stone-500/10 text-stone-500 border border-stone-500/20">Editorial</span>
+            <span id="arch2Domain" class="text-xs text-[var(--text-muted)]">Media & Luxury</span>
           </div>
-          <h3 class="text-lg font-bold text-[var(--text-primary)]">Swiss Editorial</h3>
-          <p class="text-xs text-[var(--text-secondary)] leading-relaxed">Asymmetric typographic grid, calm white space, crisp hairline borders, and international typographic hierarchy.</p>
+          <h3 id="arch2Title" class="text-lg font-bold text-[var(--text-primary)]">Swiss Editorial</h3>
+          <p id="arch2Desc" class="text-xs text-[var(--text-secondary)] leading-relaxed">Asymmetric typographic grid, calm white space, crisp hairline borders, and international typographic hierarchy.</p>
         </div>
 
         <!-- 3. Cupertino Glass -->
-        <div class="vibe-spotlight-card p-6 rounded-[var(--radius-card)] bg-[var(--surface-bg)] border border-[var(--border-subtle)] space-y-3">
+        <div class="vibe-spotlight-card p-6 rounded-[var(--radius-card)] bg-[var(--surface-bg)] border border-[var(--border-subtle)] space-y-3 text-start">
           <div class="flex items-center justify-between">
-            <span class="text-xs font-mono font-bold px-2 py-0.5 rounded bg-sky-500/10 text-sky-500 border border-sky-500/20">Squircle Fluid</span>
-            <span class="text-xs text-[var(--text-muted)]">Consumer & Health</span>
+            <span id="arch3Badge" class="text-xs font-mono font-bold px-2 py-0.5 rounded bg-sky-500/10 text-sky-500 border border-sky-500/20">Squircle Fluid</span>
+            <span id="arch3Domain" class="text-xs text-[var(--text-muted)]">Consumer & Health</span>
           </div>
-          <h3 class="text-lg font-bold text-[var(--text-primary)]">Cupertino Glass</h3>
-          <p class="text-xs text-[var(--text-secondary)] leading-relaxed">Multi-layer frosted glass, squircle border radii (28px), critically damped Kowalski spring motion, and tactile feedback.</p>
+          <h3 id="arch3Title" class="text-lg font-bold text-[var(--text-primary)]">Cupertino Glass</h3>
+          <p id="arch3Desc" class="text-xs text-[var(--text-secondary)] leading-relaxed">Multi-layer frosted glass, squircle border radii (28px), critically damped Kowalski spring motion, and tactile feedback.</p>
         </div>
 
         <!-- 4. Full-Bleed Bento -->
-        <div class="vibe-spotlight-card p-6 rounded-[var(--radius-card)] bg-[var(--surface-bg)] border border-[var(--border-subtle)] space-y-3">
+        <div class="vibe-spotlight-card p-6 rounded-[var(--radius-card)] bg-[var(--surface-bg)] border border-[var(--border-subtle)] space-y-3 text-start">
           <div class="flex items-center justify-between">
-            <span class="text-xs font-mono font-bold px-2 py-0.5 rounded bg-indigo-500/10 text-indigo-500 border border-indigo-500/20">Asymmetric Bento</span>
-            <span class="text-xs text-[var(--text-muted)]">AI & Analytics</span>
+            <span id="arch4Badge" class="text-xs font-mono font-bold px-2 py-0.5 rounded bg-indigo-500/10 text-indigo-500 border border-indigo-500/20">Asymmetric Bento</span>
+            <span id="arch4Domain" class="text-xs text-[var(--text-muted)]">AI & Analytics</span>
           </div>
-          <h3 class="text-lg font-bold text-[var(--text-primary)]">Full-Bleed Bento</h3>
-          <p class="text-xs text-[var(--text-secondary)] leading-relaxed">4-tile asymmetric grid with variable visual weights, top specular hairline highlights, and mousemove-following radiance.</p>
+          <h3 id="arch4Title" class="text-lg font-bold text-[var(--text-primary)]">Full-Bleed Bento</h3>
+          <p id="arch4Desc" class="text-xs text-[var(--text-secondary)] leading-relaxed">4-tile asymmetric grid with variable visual weights, top specular hairline highlights, and mousemove-following radiance.</p>
         </div>
 
         <!-- 5. Quiet Luxury -->
-        <div class="vibe-spotlight-card p-6 rounded-[var(--radius-card)] bg-[var(--surface-bg)] border border-[var(--border-subtle)] space-y-3">
+        <div class="vibe-spotlight-card p-6 rounded-[var(--radius-card)] bg-[var(--surface-bg)] border border-[var(--border-subtle)] space-y-3 text-start">
           <div class="flex items-center justify-between">
-            <span class="text-xs font-mono font-bold px-2 py-0.5 rounded bg-amber-500/10 text-amber-600 dark:text-amber-400 border border-amber-500/20">Warm Minimalist</span>
-            <span class="text-xs text-[var(--text-muted)]">Aesthetics & Medical</span>
+            <span id="arch5Badge" class="text-xs font-mono font-bold px-2 py-0.5 rounded bg-amber-500/10 text-amber-600 dark:text-amber-400 border border-amber-500/20">Warm Minimalist</span>
+            <span id="arch5Domain" class="text-xs text-[var(--text-muted)]">Aesthetics & Medical</span>
           </div>
-          <h3 class="text-lg font-bold text-[var(--text-primary)]">Quiet Luxury & Clinical</h3>
-          <p class="text-xs text-[var(--text-secondary)] leading-relaxed">Warm champagne and stone palettes, interactive Before/After drag split sliders, and certified board seals.</p>
+          <h3 id="arch5Title" class="text-lg font-bold text-[var(--text-primary)]">Quiet Luxury & Clinical</h3>
+          <p id="arch5Desc" class="text-xs text-[var(--text-secondary)] leading-relaxed">Warm champagne and stone palettes, interactive Before/After drag split sliders, and certified board seals.</p>
         </div>
 
         <!-- 6. Cyber Terminal -->
-        <div class="vibe-spotlight-card p-6 rounded-[var(--radius-card)] bg-[var(--surface-bg)] border border-[var(--border-subtle)] space-y-3">
+        <div class="vibe-spotlight-card p-6 rounded-[var(--radius-card)] bg-[var(--surface-bg)] border border-[var(--border-subtle)] space-y-3 text-start">
           <div class="flex items-center justify-between">
-            <span class="text-xs font-mono font-bold px-2 py-0.5 rounded bg-emerald-500/10 text-emerald-500 border border-emerald-500/20">Phosphor Matrix</span>
-            <span class="text-xs text-[var(--text-muted)]">Web3 & Security</span>
+            <span id="arch6Badge" class="text-xs font-mono font-bold px-2 py-0.5 rounded bg-emerald-500/10 text-emerald-500 border border-emerald-500/20">Phosphor Matrix</span>
+            <span id="arch6Domain" class="text-xs text-[var(--text-muted)]">Web3 & Security</span>
           </div>
-          <h3 class="text-lg font-bold text-[var(--text-primary)]">Cyber Terminal</h3>
-          <p class="text-xs text-[var(--text-secondary)] leading-relaxed">Retro-futuristic phosphor green/amber accents, scanline telemetry, and dense monospace data structures.</p>
+          <h3 id="arch6Title" class="text-lg font-bold text-[var(--text-primary)]">Cyber Terminal</h3>
+          <p id="arch6Desc" class="text-xs text-[var(--text-secondary)] leading-relaxed">Retro-futuristic phosphor green/amber accents, scanline telemetry, and dense monospace data structures.</p>
         </div>
       </div>
     </section>
@@ -465,9 +465,9 @@
 
       <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
         <!-- Terminal Box -->
-        <div class="rounded-[var(--radius-container)] bg-zinc-950 text-zinc-100 p-6 border border-zinc-800 shadow-2xl font-mono text-xs space-y-4">
+        <div class="rounded-[var(--radius-container)] bg-zinc-950 text-zinc-100 p-6 border border-zinc-800 shadow-2xl font-mono text-xs space-y-4" dir="ltr">
           <div class="flex items-center justify-between border-b border-zinc-800 pb-3 text-zinc-400">
-            <div class="flex items-center space-x-2 rtl:space-x-reverse">
+            <div class="flex items-center space-x-2">
               <span class="w-2.5 h-2.5 rounded-full bg-rose-500/80"></span>
               <span class="w-2.5 h-2.5 rounded-full bg-amber-500/80"></span>
               <span class="w-2.5 h-2.5 rounded-full bg-emerald-500/80"></span>
@@ -669,6 +669,38 @@
       // Archetypes & Features
       document.getElementById('archetypesHeading').textContent = isFa ? '۷ کهن الگوی کلان دیزاین' : 'The 7 Macro Visual Archetypes';
       document.getElementById('archetypesSub').textContent = isFa ? 'سیستم های دیزاین کالیبره شده برای حوزه های تخصصی محصول، با تضمین صفر پرش ساختار.' : 'Engineered design systems calibrated for specific product domains. Switch archetypes dynamically with guaranteed zero layout shift.';
+      
+      // Archetype Cards Dynamic Translation
+      document.getElementById('arch1Badge').textContent = isFa ? 'HUD آبسیدین' : 'Obsidian HUD';
+      document.getElementById('arch1Domain').textContent = isFa ? 'ابری و زیرساخت' : 'Cloud & Infra';
+      document.getElementById('arch1Title').textContent = isFa ? 'تله متری Linear Dev HUD' : 'Linear Dev HUD';
+      document.getElementById('arch1Desc').textContent = isFa ? 'تله متری میکرودستور، تایپوگرافی مونو، وضعیت های زنده و اسپارک لاین های زنده K8s.' : 'Micro-terminal telemetry, monospace typography, cyan/emerald status pulses, and live K8s sparklines.';
+
+      document.getElementById('arch2Badge').textContent = isFa ? 'تحریریه' : 'Editorial';
+      document.getElementById('arch2Domain').textContent = isFa ? 'رسانه و لوکس' : 'Media & Luxury';
+      document.getElementById('arch2Title').textContent = isFa ? 'تحریریه سوئیسی' : 'Swiss Editorial';
+      document.getElementById('arch2Desc').textContent = isFa ? 'سیستم گرید تایپوگرافیک نامتقارن، فضای سفید آرام، خطوط مرزی مویی بسیار دقیق.' : 'Asymmetric typographic grid, calm white space, crisp hairline borders, and international typographic hierarchy.';
+
+      document.getElementById('arch3Badge').textContent = isFa ? 'سیال اسکویرکل' : 'Squircle Fluid';
+      document.getElementById('arch3Domain').textContent = isFa ? 'سلامت و درمان' : 'Consumer & Health';
+      document.getElementById('arch3Title').textContent = isFa ? 'شیشه کوپرتینو' : 'Cupertino Glass';
+      document.getElementById('arch3Desc').textContent = isFa ? 'شیشه مات چند لایه، شعاع نرم اسکویرکل (28px)، فیزیک جهش کووالسکی و بازخورد لمسی.' : 'Multi-layer frosted glass, squircle border radii (28px), critically damped Kowalski spring motion, and tactile feedback.';
+
+      document.getElementById('arch4Badge').textContent = isFa ? 'بنتو نامتقارن' : 'Asymmetric Bento';
+      document.getElementById('arch4Domain').textContent = isFa ? 'هوش مصنوعی و داده' : 'AI & Analytics';
+      document.getElementById('arch4Title').textContent = isFa ? 'بنتو فول بلید' : 'Full-Bleed Bento';
+      document.getElementById('arch4Desc').textContent = isFa ? 'شبکه نامتقارن با اوزان بصری متغیر، حاشیه های درخشان بازتابی و نور دنبال کننده ماوس.' : '4-tile asymmetric grid with variable visual weights, top specular hairline highlights, and mousemove-following radiance.';
+
+      document.getElementById('arch5Badge').textContent = isFa ? 'مینیمالیست گرم' : 'Warm Minimalist';
+      document.getElementById('arch5Domain').textContent = isFa ? 'پزشکی و زیبایی' : 'Aesthetics & Medical';
+      document.getElementById('arch5Title').textContent = isFa ? 'لوکس آرام و کلینیکال' : 'Quiet Luxury & Clinical';
+      document.getElementById('arch5Desc').textContent = isFa ? 'پالت آرام و لوکس شامپاینی، اسلایدر مقایسه قبل و بعد تعاملی و نشان های معتبر درمانی.' : 'Warm champagne and stone palettes, interactive Before/After drag split sliders, and certified board seals.';
+
+      document.getElementById('arch6Badge').textContent = isFa ? 'ماتریکس فسفر' : 'Phosphor Matrix';
+      document.getElementById('arch6Domain').textContent = isFa ? 'امنیت و وب ۳' : 'Web3 & Security';
+      document.getElementById('arch6Title').textContent = isFa ? 'ترمینال سایبرنتیک' : 'Cyber Terminal';
+      document.getElementById('arch6Desc').textContent = isFa ? 'جلوه های مدرن سبز فسفری و کهربایی، تله متری خطوط پویشی و ساختارهای متراکم مونو اسپس.' : 'Retro-futuristic phosphor green/amber accents, scanline telemetry, and dense monospace data structures.';
+
       document.getElementById('cliHeading').textContent = isFa ? 'تولید فوری از ترمینال و کدهای React 19' : 'Instant CLI & React 19 Generation';
       document.getElementById('cliSub').textContent = isFa ? 'تولید اپلیکیشن های کامل وب یا کامپوننت های ماژولار React 19 مستقیم از خط فرمان شما.' : 'Generate standalone HTML applications or stateful React 19 / TypeScript components directly from your command line.';
       document.getElementById('feat1Title').textContent = isFa ? 'هوک های زنده React 19' : 'Living React 19 Hooks';
