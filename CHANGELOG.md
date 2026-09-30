@@ -13,7 +13,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **Persian Bilingual Token Disambiguation & Semantic Stemming (`vibe_core/director.py`)**:
   - Replaced substring matching with boundary-aware token/stem isolation, completely eliminating false positives where colloquial words like "میخوام" or culinary ingredients like "قوام" bled into `fintech_banking`.
   - Added full Unicode NFKC normalization, Arabic-to-Persian letter harmonization, tatweel stripping, and ZWNJ token separation.
-  - Enriched Persian stemmer with verbal and possessive suffixes (`یم`, `ید`, `ند`, `مان`, `تان`, `شان`).
+  - Enriched Persian stemmer with verbal endings (`یم`, `ید`, `ند`) and possessive/pronominal suffixes (`مان`, `تان`, `شان`).
   - Enriched domain taxonomy (`data/taxonomy.json`) with medical doctor terms ("دکتر", "نوبت", "مطب", "ویزیت") and culinary terms ("خوراک", "سس", "آشپزی", "قنادی").
 - **CLI HTML Generator Domain Fidelity (`vibe_core/generator.py`)**:
   - Overhauled `generate_html` to eliminate raw developer telemetry cards (contrast invariant targets, CLS numbers, status badges).
@@ -26,7 +26,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   - Exported dual-theme token definitions in `vibe-tokens.css` with active `:root` (Light) and `.dark` (Dark) variables.
   - Added modular components `ThemeToggle.tsx` and `AiThinkingDrawer.tsx` to the component registry.
 - **DoD Acceptance Threshold Harmonization**:
-  - Synchronized quality acceptance threshold to `>= 85.0` across `vibe_core/critic.py` and `mr-ui-designer/AGENT.md`.
+  - Harmonized design specification quality score threshold in `vibe_core/critic.py` to `>= 85.0` to match `mr-ui-designer/AGENT.md` DoD (while browser physical runtime tolerance in `physical_critic.py` maintains `>= 80.0` with strict 0 P0 defects).
 
 ---
 
@@ -38,7 +38,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   - `@media (prefers-reduced-transparency: reduce)` high-contrast solid background fallbacks.
   - Continuous squircle curvature (`rounded-[28px]` containers, `rounded-[22px]` nested cards).
   - Dynamic optical sizing (`letter-spacing: -0.025em; line-height: 1.08;` on display headers).
-  - Apple System Blue accents (`#0071e3` / `oklch(0.58 0.22 255)`) certified for WCAG 2.2 AA text contrast (4.7:1 on white; AAA 7:1 compliant on dark backgrounds and large display typography).
+  - Apple System Blue accents (`#0071e3` / `oklch(0.58 0.22 255)`) certified for WCAG 2.2 AA text contrast (4.7:1 on white, and AAA for large display typography). In dark mode, lighter blue accents (`#2997ff` / `oklch(0.72 0.18 250)`) are required for WCAG AA/AAA compliance against dark canvases.
 - **Kowalski Motion Physics & Critically Damped Springs (`skills/vibe-physics-engine`)**:
   - Replaced crude easing curves with Apple/Linear physical spring models (`damping: 1.0`, `response: 0.35s`).
   - 1:1 gesture displacement tracking with logarithmic rubber-banding and velocity momentum handoff.

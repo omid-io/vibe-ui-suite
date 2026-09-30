@@ -810,6 +810,30 @@ export default {component_name};
         cta_primary_label = blueprint_cta_primary or ("شروع همکاری" if is_rtl else "Get Started")
         cta_secondary_label = blueprint_cta_secondary or ("مشاهده خدمات" if is_rtl else "Explore Services")
 
+        # Smart sub-intent adaptation for loans and credit in fintech domain
+        lower_prompt = prompt_title.lower()
+        if domain_id == "fintech_banking" and any(k in lower_prompt for k in ["وام", "قرض", "تسهیلات", "loan", "credit"]):
+            if is_rtl:
+                hero_headline = "سامانه دریافت آنلاین تسهیلات و وام قرض الحسنه"
+                hero_subheadline = "محاسبه هوشمند اقساط، اعتبارسنجی دیجیتال و واریز سریع تسهیلات بدون ضامن با حداقل کارمزد بانکی."
+                cta_primary_label = "درخواست آنلاین تسهیلات"
+                cta_secondary_label = "محاسبه اقساط و شرایط"
+                blueprint_metrics = [
+                    {"label": "سقف تسهیلات آنلاین", "value": "تا ۵۰۰ میلیون تومان"},
+                    {"label": "مدت زمان اعتبارسنجی", "value": "< ۲۴ ساعت"},
+                    {"label": "کارمزد تسهیلات", "value": "۴٪ سالانه"}
+                ]
+            else:
+                hero_headline = "Fast Digital Loans & Personal Credit Financing"
+                hero_subheadline = "Instant credit scoring, transparent terms, and rapid disbursement directly to your account."
+                cta_primary_label = "Apply for Loan"
+                cta_secondary_label = "Calculate Payments"
+                blueprint_metrics = [
+                    {"label": "Max Loan Amount", "value": "$50,000"},
+                    {"label": "Approval Time", "value": "< 24 Hours"},
+                    {"label": "Starting APR", "value": "4.2% Fixed"}
+                ]
+
         # Prepare domain metrics cards
         if not blueprint_metrics:
             blueprint_metrics = [
@@ -820,8 +844,8 @@ export default {component_name};
 
         metrics_html_items = []
         for m in blueprint_metrics[:3]:
-            lbl = m.get("label", "")
-            val = m.get("value", "")
+            lbl = str(m.get("label", "")).replace("<", "&lt;").replace(">", "&gt;")
+            val = str(m.get("value", "")).replace("<", "&lt;").replace(">", "&gt;")
             metrics_html_items.append(f"""            <div class="p-3.5 bg-[var(--canvas-bg)] rounded-[var(--radius-base)] border border-[var(--border-subtle)]">
               <div class="text-xs text-[var(--text-muted)] mb-1">{lbl}</div>
               <div class="text-2xl font-bold text-[var(--accent)]"><bdi>{val}</bdi></div>
@@ -833,7 +857,7 @@ export default {component_name};
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>{display_title}</title>
+  <title>{hero_headline}</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="{font_url}" rel="stylesheet">
@@ -943,40 +967,49 @@ export default {component_name};
       </aside>
     </div>
 
-    <!-- Component States Preview: Skeleton, Empty, Error -->
-    <section class="mt-12 pt-8 border-t border-[var(--border-subtle)]" aria-labelledby="states-heading">
-      <h2 id="states-heading" class="text-xl font-bold mb-6">
-        {"ماتریس وضعیت های رابط کاربری (States Matrix)" if is_rtl else "Component States Matrix"}
+    <!-- Core Value Props & Feature Highlights -->
+    <section class="mt-12 pt-8 border-t border-[var(--border-subtle)]" aria-labelledby="features-heading">
+      <h2 id="features-heading" class="text-xl font-bold mb-6">
+        {"استانداردها و تعهدات کلیدی" if is_rtl else "Core Standards & Commitments"}
       </h2>
       <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-        <!-- Skeleton Loading State -->
-        <div class="p-5 bg-[var(--surface-bg)] {card_border} rounded-[var(--radius-container)]" aria-busy="true" aria-label="Loading State">
-          <div class="text-xs font-semibold text-[var(--text-muted)] mb-3">SKELETON LOADING</div>
-          <div class="animate-pulse space-y-3">
-            <div class="h-4 bg-zinc-300 dark:bg-zinc-700 rounded w-3/4"></div>
-            <div class="h-8 bg-zinc-300 dark:bg-zinc-700 rounded"></div>
-            <div class="h-3 bg-zinc-200 dark:bg-zinc-800 rounded w-1/2"></div>
-          </div>
-        </div>
-
-        <!-- Empty State -->
-        <div class="p-5 bg-[var(--surface-bg)] {card_border} rounded-[var(--radius-container)] text-center flex flex-col items-center justify-center">
-          <div class="text-xs font-semibold text-[var(--text-muted)] mb-2 self-start">EMPTY STATE</div>
-          <svg class="w-8 h-8 text-[var(--text-muted)] mb-2" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect><circle cx="8.5" cy="8.5" r="1.5"></circle><polyline points="21 15 16 10 5 21"></polyline></svg>
-          <div class="text-sm font-medium">{"موردی یافت نشد" if is_rtl else "No records found"}</div>
-          <div class="text-xs text-[var(--text-muted)] mt-1">{"داده ای برای نمایش در این بخش موجود نیست." if is_rtl else "Add items to populate."}</div>
-        </div>
-
-        <!-- Error & Retry State -->
-        <div class="p-5 bg-[var(--surface-bg)] {card_border} rounded-[var(--radius-container)] flex flex-col justify-between">
+        <!-- Feature 1 -->
+        <div class="p-6 bg-[var(--surface-bg)] {card_border} rounded-[var(--radius-container)] {card_shadow} flex flex-col justify-between">
           <div>
-            <div class="text-xs font-semibold text-rose-500 mb-2">ERROR & RETRY</div>
-            <div class="text-sm font-semibold text-rose-600 dark:text-rose-400">{"خطا در برقراری ارتباط" if is_rtl else "Network Timeout"}</div>
-            <div class="text-xs text-[var(--text-muted)] mt-1">{"امکان دریافت اطلاعات وجود ندارد. لطفا مجددا تلاش کنید." if is_rtl else "Failed to synchronize remote telemetry."}</div>
+            <div class="w-10 h-10 rounded-lg bg-[var(--accent)]/10 text-[var(--accent)] flex items-center justify-center mb-4">
+              <svg class="w-5 h-5 text-[var(--accent)]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>
+            </div>
+            <h3 class="text-base font-bold mb-2">{"تضمین کیفیت و اصالت" if is_rtl else "Quality Guarantee"}</h3>
+            <p class="text-xs text-[var(--text-muted)] leading-relaxed">
+              {"پایبندی به بالاترین معیارهای تخصصی، استانداردهای دسترسی پذیری و بهینه سازی ساختار یافته." if is_rtl else "Engineered with strict accessibility, responsive geometry, and proven industry standards."}
+            </p>
           </div>
-          <button type="button" class="mt-4 inline-flex items-center justify-center px-3 py-1.5 text-xs font-medium rounded-[var(--radius-button)] border border-rose-300 text-rose-600 hover:bg-rose-50 min-h-[44px]">
-            {"تلاش مجدد" if is_rtl else "Retry Connection"}
-          </button>
+        </div>
+
+        <!-- Feature 2 -->
+        <div class="p-6 bg-[var(--surface-bg)] {card_border} rounded-[var(--radius-container)] {card_shadow} flex flex-col justify-between">
+          <div>
+            <div class="w-10 h-10 rounded-lg bg-[var(--accent)]/10 text-[var(--accent)] flex items-center justify-center mb-4">
+              <svg class="w-5 h-5 text-[var(--accent)]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon></svg>
+            </div>
+            <h3 class="text-base font-bold mb-2">{"سرعت و سهولت کاربری" if is_rtl else "Speed & Precision"}</h3>
+            <p class="text-xs text-[var(--text-muted)] leading-relaxed">
+              {"طراحی شده برای بیشترین سرعت بارگذاری، سازگاری کامل با دستگاه های موبایل و رابط کاربری روان." if is_rtl else "Optimized for lightning-fast delivery, mobile ergonomics, and seamless user interaction."}
+            </p>
+          </div>
+        </div>
+
+        <!-- Feature 3 -->
+        <div class="p-6 bg-[var(--surface-bg)] {card_border} rounded-[var(--radius-container)] {card_shadow} flex flex-col justify-between">
+          <div>
+            <div class="w-10 h-10 rounded-lg bg-[var(--accent)]/10 text-[var(--accent)] flex items-center justify-center mb-4">
+              <svg class="w-5 h-5 text-[var(--accent)]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 14 14"></polyline></svg>
+            </div>
+            <h3 class="text-base font-bold mb-2">{"پشتیبانی و شفافیت کامل" if is_rtl else "Transparent Support"}</h3>
+            <p class="text-xs text-[var(--text-muted)] leading-relaxed">
+              {"فرآیند پیگیری شفاف، پشتیبانی فعال و همراهی در تمامی مراحل استفاده از خدمات." if is_rtl else "Clear workflows, active responsiveness, and end-to-end guidance across all touchpoints."}
+            </p>
+          </div>
         </div>
       </div>
     </section>
