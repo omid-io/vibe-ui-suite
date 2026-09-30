@@ -852,6 +852,61 @@ export default {component_name};
             </div>""")
         metrics_block_html = "\n".join(metrics_html_items)
 
+        # Assemble Domain-Specific macOS Window Chrome Canvas
+        if domain_id == "devops_cloud_terminal":
+            window_chrome_content_html = f"""            <div class="space-y-3 font-mono">
+              <div class="flex items-center justify-between p-3 bg-[var(--canvas-bg)] rounded-[var(--radius-base)] border border-[var(--border-subtle)]">
+                <div class="flex items-center gap-2">
+                  <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
+                  <span class="text-xs text-[var(--text-muted)]">Ingress Telemetry</span>
+                </div>
+                <span class="text-xs font-bold text-emerald-500"><bdi>12.4 ms (p50)</bdi></span>
+              </div>
+              <div class="p-3 bg-[var(--canvas-bg)] rounded-[var(--radius-base)] border border-[var(--border-subtle)]">
+                <div class="flex justify-between text-[11px] text-[var(--text-muted)] mb-1">
+                  <span>Pod Mesh Throughput</span>
+                  <span class="text-[var(--accent)] font-bold"><bdi>3.2k req/s</bdi></span>
+                </div>
+                <svg class="w-full h-8 text-[var(--accent)]" viewBox="0 0 100 25" fill="none" stroke="currentColor" stroke-width="1.75">
+                  <path d="M0 20 Q 20 5, 40 18 T 80 10 T 100 6" />
+                </svg>
+              </div>
+              <div class="p-3 bg-black/90 rounded-[var(--radius-base)] border border-emerald-900/40 text-[11px] text-emerald-400 font-mono space-y-1">
+                <div class="text-zinc-500"># kubectl get mesh --namespace=prod</div>
+                <div>[OK] 12/12 microservices healthy</div>
+                <div class="text-emerald-300">&gt; telemetry stream synchronized</div>
+              </div>
+            </div>"""
+        elif domain_id in ["beauty_clinical_wellness", "healthcare_clinical_dental", "health_medical_clinic", "healthcare_hospital_medical"]:
+            window_chrome_content_html = f"""            <div class="space-y-3">
+              <div class="p-3.5 bg-[var(--canvas-bg)] rounded-[var(--radius-base)] border border-[var(--border-subtle)] flex items-center justify-between">
+                <div>
+                  <div class="text-xs text-[var(--text-muted)]">{"وضعیت پذیرش امروز" if is_rtl else "Today's Clinic Availability"}</div>
+                  <div class="text-sm font-bold text-emerald-500 flex items-center gap-1.5 mt-0.5">
+                    <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
+                    <span>{"۳ نوبت مشاوره خالی" if is_rtl else "3 VIP Consultations Open"}</span>
+                  </div>
+                </div>
+                <span class="px-2.5 py-1 rounded-full text-[11px] font-bold bg-[var(--accent)]/10 text-[var(--accent)] border border-[var(--accent)]/20">{"پذیرش فوری" if is_rtl else "Express"}</span>
+              </div>
+              <div class="p-3.5 bg-[var(--canvas-bg)] rounded-[var(--radius-base)] border border-[var(--border-subtle)]">
+                <div class="text-xs text-[var(--text-muted)] mb-2">{"نزدیک ترین ساعات قابل رزرو" if is_rtl else "Next Available Slots"}</div>
+                <div class="grid grid-cols-3 gap-2">
+                  <span class="px-2 py-1 text-center text-xs font-semibold rounded bg-[var(--surface-bg)] border border-[var(--border-subtle)] text-[var(--text-primary)]"><bdi>۱۰:۳۰</bdi></span>
+                  <span class="px-2 py-1 text-center text-xs font-semibold rounded bg-[var(--accent)] text-[var(--vibe-on-primary,#fff)]"><bdi>۱۲:۰۰</bdi></span>
+                  <span class="px-2 py-1 text-center text-xs font-semibold rounded bg-[var(--surface-bg)] border border-[var(--border-subtle)] text-[var(--text-primary)]"><bdi>۱۶:۳۰</bdi></span>
+                </div>
+              </div>
+              <div class="p-3 bg-[var(--surface-bg)] rounded-[var(--radius-base)] border border-amber-500/20 text-xs text-amber-600 dark:text-amber-400 flex items-center gap-2">
+                <svg class="w-4 h-4 text-amber-500 flex-shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>
+                <span>{"ویزیت و اسکن سه بعدی دندان با گارانتی رسمی کلینیک" if is_rtl else "Includes 3D digital scan & specialist warranty"}</span>
+              </div>
+            </div>"""
+        else:
+            window_chrome_content_html = f"""            <div class="space-y-3">
+{metrics_block_html}
+            </div>"""
+
         # Determine domain-specific navigation and sections
         if domain_id == "devops_cloud_terminal":
             nav_links = [
@@ -1076,23 +1131,52 @@ export default {component_name};
         </div>
       </div>
       <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-        <div class="p-6 bg-[var(--surface-bg)] {card_border} rounded-[var(--radius-container)] {card_shadow} space-y-4">
-          <div class="aspect-video w-full rounded-[var(--radius-base)] bg-[var(--canvas-bg)] flex items-center justify-center border border-[var(--border-subtle)] relative overflow-hidden">
-            <div id="portfolio-display-1" class="text-center p-6">
-              <span class="inline-flex px-2 py-1 rounded text-xs font-bold bg-emerald-500/10 text-emerald-500 mb-2">{"۱۰ واحد ونیر سرامیکی E-Max" if is_rtl else "10 Units E-Max Veneers"}</span>
-              <p class="text-sm font-semibold text-[var(--text-primary)]">{"اصلاح کامل خط لبخند و بستن فاصله دندانی (بیمار ۲۸ ساله)" if is_rtl else "Full smile makeover & diastema closure (Patient age 28)"}</p>
-              <div class="text-xs text-[var(--text-muted)] mt-2">{"رضایت ۱۰۰٪ پس از ۱۸ ماه پیگیری دوره ای" if is_rtl else "100% satisfaction after 18-month follow-up"}</div>
+        <!-- Interactive Drag Slider Card 1 -->
+        <div class="vibe-spotlight-card p-6 bg-[var(--surface-bg)] {card_border} rounded-[var(--radius-container)] {card_shadow} space-y-4">
+          <div class="flex justify-between items-center text-xs font-semibold">
+            <span>{"۱۰ واحد ونیر سرامیکی E-Max" if is_rtl else "10 Units E-Max Veneers"}</span>
+            <span class="px-2 py-0.5 rounded-full bg-emerald-500/10 text-emerald-500 font-mono text-[10px] font-bold"><bdi>98.4% Match</bdi></span>
+          </div>
+          <!-- Interactive Before / After Split Slider -->
+          <div class="relative h-48 w-full rounded-[var(--radius-base)] overflow-hidden border border-[var(--border-subtle)] bg-[var(--canvas-bg)] select-none">
+            <div class="absolute inset-0 bg-gradient-to-r from-stone-300 to-amber-100 dark:from-stone-800 dark:to-amber-950/40 flex items-center justify-start p-4">
+              <span class="text-xs font-bold text-stone-500 uppercase tracking-widest">{"قبل از درمان" if is_rtl else "Baseline"}</span>
+            </div>
+            <div id="before-after-layer-1" class="absolute inset-y-0 end-0 bg-gradient-to-l from-emerald-100 to-rose-50 dark:from-emerald-950/40 dark:to-rose-950/20 border-s-2 border-emerald-500 flex items-center justify-end p-4 transition-all duration-75" style="width: 50%">
+              <span class="text-xs font-bold text-emerald-700 dark:text-emerald-400 uppercase tracking-widest">{"نتیجه درمان" if is_rtl else "After Result"}</span>
+            </div>
+            <input type="range" min="0" max="100" value="50" class="before-after-range absolute inset-0 opacity-0 cursor-ew-resize w-full h-full z-20" data-target="before-after-layer-1" data-divider="divider-line-1" aria-label="Before and After Comparison Slider">
+            <div id="divider-line-1" class="absolute inset-y-0 w-1 bg-white shadow-[0_0_10px_rgba(0,0,0,0.4)] pointer-events-none z-10 flex items-center justify-center" style="left: 50%">
+              <div class="w-6 h-6 rounded-full bg-white dark:bg-zinc-900 border border-zinc-300 dark:border-zinc-700 shadow-md flex items-center justify-center">
+                <svg class="w-3.5 h-3.5 text-zinc-500" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><polyline points="7 17 2 12 7 7"></polyline><polyline points="17 7 22 12 17 17"></polyline><line x1="2" y1="12" x2="22" y2="12"></line></svg>
+              </div>
             </div>
           </div>
+          <p class="text-xs text-[var(--text-muted)] text-center">{"دستگیره را بکشید تا تغییرات قبل و بعد از درمان را به صورت زنده مقایسه کنید." if is_rtl else "Drag the slider to compare baseline versus clinical post-treatment result."}</p>
         </div>
-        <div class="p-6 bg-[var(--surface-bg)] {card_border} rounded-[var(--radius-container)] {card_shadow} space-y-4">
-          <div class="aspect-video w-full rounded-[var(--radius-base)] bg-[var(--canvas-bg)] flex items-center justify-center border border-[var(--border-subtle)] relative overflow-hidden">
-            <div id="portfolio-display-2" class="text-center p-6">
-              <span class="inline-flex px-2 py-1 rounded text-xs font-bold bg-sky-500/10 text-sky-500 mb-2">{"ایمپلنت فوری دندان جلو" if is_rtl else "Immediate Anterior Implant"}</span>
-              <p class="text-sm font-semibold text-[var(--text-primary)]">{"کاشت بدون درد همراه با پیوند لثه و روکش تمام سرامیک زیرکونیا" if is_rtl else "Painless placement with soft tissue graft & zirconia crown"}</p>
-              <div class="text-xs text-[var(--text-muted)] mt-2">{"پایداری بافت لثه و تقارن بی نقص با دندان های مجاور" if is_rtl else "Optimal tissue contour and perfect bilateral symmetry"}</div>
+
+        <!-- Interactive Drag Slider Card 2 -->
+        <div class="vibe-spotlight-card p-6 bg-[var(--surface-bg)] {card_border} rounded-[var(--radius-container)] {card_shadow} space-y-4">
+          <div class="flex justify-between items-center text-xs font-semibold">
+            <span>{"ایمپلنت فوری دندان جلو" if is_rtl else "Immediate Anterior Implant"}</span>
+            <span class="px-2 py-0.5 rounded-full bg-sky-500/10 text-sky-500 font-mono text-[10px] font-bold"><bdi>100% Titanium Bond</bdi></span>
+          </div>
+          <!-- Interactive Before / After Split Slider -->
+          <div class="relative h-48 w-full rounded-[var(--radius-base)] overflow-hidden border border-[var(--border-subtle)] bg-[var(--canvas-bg)] select-none">
+            <div class="absolute inset-0 bg-gradient-to-r from-zinc-300 to-sky-100 dark:from-zinc-800 dark:to-sky-950/40 flex items-center justify-start p-4">
+              <span class="text-xs font-bold text-zinc-500 uppercase tracking-widest">{"وضعیت اولیه" if is_rtl else "Baseline"}</span>
+            </div>
+            <div id="before-after-layer-2" class="absolute inset-y-0 end-0 bg-gradient-to-l from-sky-100 to-indigo-50 dark:from-sky-950/40 dark:to-indigo-950/20 border-s-2 border-sky-500 flex items-center justify-end p-4 transition-all duration-75" style="width: 50%">
+              <span class="text-xs font-bold text-sky-700 dark:text-sky-400 uppercase tracking-widest">{"کاشت نهایی" if is_rtl else "Final Crown"}</span>
+            </div>
+            <input type="range" min="0" max="100" value="50" class="before-after-range absolute inset-0 opacity-0 cursor-ew-resize w-full h-full z-20" data-target="before-after-layer-2" data-divider="divider-line-2" aria-label="Before and After Comparison Slider">
+            <div id="divider-line-2" class="absolute inset-y-0 w-1 bg-white shadow-[0_0_10px_rgba(0,0,0,0.4)] pointer-events-none z-10 flex items-center justify-center" style="left: 50%">
+              <div class="w-6 h-6 rounded-full bg-white dark:bg-zinc-900 border border-zinc-300 dark:border-zinc-700 shadow-md flex items-center justify-center">
+                <svg class="w-3.5 h-3.5 text-zinc-500" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><polyline points="7 17 2 12 7 7"></polyline><polyline points="17 7 22 12 17 17"></polyline><line x1="2" y1="12" x2="22" y2="12"></line></svg>
+              </div>
             </div>
           </div>
+          <p class="text-xs text-[var(--text-muted)] text-center">{"پایداری بی نقص بافت نرم لثه و انطباق کامل رنگ با دندان های مجاور." if is_rtl else "Painless placement with soft tissue graft and certified zirconia crown."}</p>
         </div>
       </div>
     </section>
@@ -1521,9 +1605,7 @@ export default {component_name};
               <svg class="w-4 h-4 text-[var(--accent)]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M22 12h-4l-3 9L9 3l-3 9H2"></path></svg>
               <span>{"شاخص های کلیدی و وضعیت" if is_rtl else "Highlights & Status"}</span>
             </h2>
-            <div class="space-y-3">
-{metrics_block_html}
-            </div>
+{window_chrome_content_html}
           </div>
           <div class="mt-6 pt-4 border-t border-[var(--border-subtle)] text-xs text-[var(--text-muted)] flex items-center justify-between">
             <div class="flex items-center space-x-1.5 rtl:space-x-reverse">
@@ -1643,6 +1725,19 @@ export default {component_name};
           }});
           tab.className = 'portfolio-tab px-3 py-1.5 text-xs font-semibold rounded-[var(--radius-button)] bg-[var(--accent)] text-[var(--vibe-on-primary,#fff)] min-h-[44px]';
           showToast(view === 'before' ? 'نمایش تصاویر قبل از درمان' : 'نمایش نتایج نهایی پس از اتمام درمان');
+        }});
+      }});
+
+      // 6.5. Interactive Before/After Split Comparison Sliders
+      document.querySelectorAll('.before-after-range').forEach(function(slider) {{
+        slider.addEventListener('input', function(e) {{
+          var targetId = slider.getAttribute('data-target');
+          var dividerId = slider.getAttribute('data-divider');
+          var targetEl = document.getElementById(targetId);
+          var dividerEl = document.getElementById(dividerId);
+          var val = e.target.value;
+          if (targetEl) targetEl.style.width = (100 - val) + '%';
+          if (dividerEl) dividerEl.style.left = val + '%';
         }});
       }});
 

@@ -1,0 +1,83 @@
+{
+  "version": "4.2.0",
+  "generated_at": "2026-09-30T05:41:30Z",
+  "macro_archetypes": {
+    "dense_telemetry_hud": {
+      "name": "Linear Dev HUD",
+      "domains": ["devops_cloud_terminal", "crypto_trading_web3", "cybersecurity_identity_auth", "logistics_supply_chain"],
+      "canvas_background": "bg-[#090a0f] text-emerald-400",
+      "grid_pattern": "bg-[linear-gradient(to_right,rgba(16,185,129,0.05)_1px,transparent_1px),linear-gradient(to_bottom,rgba(16,185,129,0.05)_1px,transparent_1px)] bg-[size:28px_28px]",
+      "glow_color": "rgba(16, 185, 129, 0.12)",
+      "container_class": "rounded-xl border border-emerald-900/50 bg-black/90 backdrop-blur-xl shadow-[0_0_50px_-12px_rgba(16,185,129,0.25)]",
+      "hero_layout": "split_terminal_telemetry",
+      "typography": "font-mono",
+      "status_badge": "bg-emerald-950/80 text-emerald-400 border border-emerald-500/40"
+    },
+    "swiss_editorial": {
+      "name": "Swiss Minimalist Editorial",
+      "domains": ["media_editorial_magazine", "ecommerce_luxury_fashion", "real_estate_architecture"],
+      "canvas_background": "bg-[#fcfbf9] dark:bg-[#111110] text-zinc-900 dark:text-zinc-50",
+      "grid_pattern": "bg-[linear-gradient(to_right,rgba(0,0,0,0.03)_1px,transparent_1px),linear-gradient(to_bottom,rgba(0,0,0,0.03)_1px,transparent_1px)] bg-[size:40px_40px]",
+      "glow_color": "rgba(0, 0, 0, 0.04)",
+      "container_class": "rounded-none border border-zinc-900/15 dark:border-zinc-100/15 bg-white dark:bg-zinc-950 shadow-none",
+      "hero_layout": "asymmetric_editorial_spread",
+      "typography": "font-sans tracking-tight",
+      "status_badge": "bg-zinc-900 text-white dark:bg-white dark:text-zinc-900 text-xs uppercase font-bold tracking-widest"
+    },
+    "cupertino_glass": {
+      "name": "Apple Cupertino Glass",
+      "domains": ["ai_developer_platform", "automotive_ev_mobility", "gaming_entertainment_streaming"],
+      "canvas_background": "bg-gradient-to-b from-zinc-50 to-zinc-100 dark:from-zinc-950 dark:to-zinc-900 text-zinc-900 dark:text-zinc-100",
+      "grid_pattern": "bg-[linear-gradient(to_right,rgba(59,130,246,0.04)_1px,transparent_1px),linear-gradient(to_bottom,rgba(59,130,246,0.04)_1px,transparent_1px)] bg-[size:36px_36px]",
+      "glow_color": "rgba(59, 130, 246, 0.15)",
+      "container_class": "rounded-[32px] border border-black/5 dark:border-white/10 bg-white/75 dark:bg-zinc-900/75 backdrop-blur-2xl shadow-[0_20px_60px_-15px_rgba(0,0,0,0.15)]",
+      "hero_layout": "centered_floating_stage",
+      "typography": "font-sans tracking-tight",
+      "status_badge": "bg-blue-500/10 text-blue-600 dark:text-blue-400 border border-blue-500/20 backdrop-blur-md rounded-full"
+    },
+    "full_bleed_bento": {
+      "name": "Full-Bleed Bento Canvas",
+      "domains": ["saas_b2b_enterprise", "general_modern_saas", "energy_greentech_sustainability"],
+      "canvas_background": "bg-[#0b0d13] text-zinc-100",
+      "grid_pattern": "bg-[linear-gradient(to_right,rgba(99,102,241,0.06)_1px,transparent_1px),linear-gradient(to_bottom,rgba(99,102,241,0.06)_1px,transparent_1px)] bg-[size:32px_32px]",
+      "glow_color": "rgba(99, 102, 241, 0.14)",
+      "container_class": "rounded-2xl border border-white/10 bg-zinc-900/80 backdrop-blur-xl shadow-2xl",
+      "hero_layout": "asymmetric_bento_grid",
+      "typography": "font-sans",
+      "status_badge": "bg-indigo-500/10 text-indigo-400 border border-indigo-500/30 rounded-full"
+    },
+    "quiet_luxury": {
+      "name": "Quiet Luxury & Clinical Wellness",
+      "domains": ["beauty_clinical_wellness", "healthcare_hospital_medical"],
+      "canvas_background": "bg-[#faf8f5] dark:bg-[#141312] text-stone-900 dark:text-stone-100",
+      "grid_pattern": "bg-[linear-gradient(to_right,rgba(180,140,80,0.04)_1px,transparent_1px),linear-gradient(to_bottom,rgba(180,140,80,0.04)_1px,transparent_1px)] bg-[size:36px_36px]",
+      "glow_color": "rgba(217, 119, 6, 0.08)",
+      "container_class": "rounded-xl border border-stone-200 dark:border-stone-800 bg-white/90 dark:bg-stone-900/90 backdrop-blur-xl shadow-lg",
+      "hero_layout": "split_studio_before_after",
+      "typography": "font-serif italic",
+      "status_badge": "bg-amber-500/10 text-amber-700 dark:text-amber-400 border border-amber-500/20 rounded-full"
+    },
+    "cyber_terminal": {
+      "name": "Cybernetic HUD & Matrix",
+      "domains": ["cybersecurity_identity_auth", "crypto_trading_web3"],
+      "canvas_background": "bg-[#05080c] text-cyan-400",
+      "grid_pattern": "bg-[linear-gradient(to_right,rgba(6,182,212,0.08)_1px,transparent_1px),linear-gradient(to_bottom,rgba(6,182,212,0.08)_1px,transparent_1px)] bg-[size:24px_24px]",
+      "glow_color": "rgba(6, 182, 212, 0.18)",
+      "container_class": "rounded-lg border border-cyan-900/60 bg-black/95 shadow-[0_0_40px_-10px_rgba(6,182,212,0.3)]",
+      "hero_layout": "split_cyber_hud",
+      "typography": "font-mono uppercase",
+      "status_badge": "bg-cyan-950 text-cyan-300 border border-cyan-500/50"
+    },
+    "centered_stage": {
+      "name": "Centered Floating Product Stage",
+      "domains": ["fintech_banking", "travel_hospitality_tourism", "food_restaurant_cafe", "education_edtech_lms", "legal_compliance_law", "nonprofit_charity_social"],
+      "canvas_background": "bg-[#0d0f17] text-zinc-100",
+      "grid_pattern": "bg-[linear-gradient(to_right,rgba(147,51,234,0.06)_1px,transparent_1px),linear-gradient(to_bottom,rgba(147,51,234,0.06)_1px,transparent_1px)] bg-[size:32px_32px]",
+      "glow_color": "rgba(147, 51, 234, 0.15)",
+      "container_class": "rounded-2xl border border-white/10 bg-zinc-900/85 backdrop-blur-xl shadow-2xl",
+      "hero_layout": "centered_product_stage",
+      "typography": "font-sans",
+      "status_badge": "bg-purple-500/10 text-purple-400 border border-purple-500/30 rounded-full"
+    }
+  }
+}

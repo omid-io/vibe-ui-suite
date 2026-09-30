@@ -218,18 +218,28 @@
               <span>شاخص های کلیدی و وضعیت</span>
             </h2>
             <div class="space-y-3">
-            <div class="p-3.5 bg-[var(--canvas-bg)] rounded-[var(--radius-base)] border border-[var(--border-subtle)]">
-              <div class="text-xs text-[var(--text-muted)] mb-1">رضایت مراجعین</div>
-              <div class="text-2xl font-bold text-[var(--accent)]"><bdi>۹۹.۴٪</bdi></div>
-            </div>
-            <div class="p-3.5 bg-[var(--canvas-bg)] rounded-[var(--radius-base)] border border-[var(--border-subtle)]">
-              <div class="text-xs text-[var(--text-muted)] mb-1">پزشک متخصص بورد</div>
-              <div class="text-2xl font-bold text-[var(--accent)]"><bdi>۱۲</bdi></div>
-            </div>
-            <div class="p-3.5 bg-[var(--canvas-bg)] rounded-[var(--radius-base)] border border-[var(--border-subtle)]">
-              <div class="text-xs text-[var(--text-muted)] mb-1">پرونده موفق بالینی</div>
-              <div class="text-2xl font-bold text-[var(--accent)]"><bdi>+۱۸,۰۰۰</bdi></div>
-            </div>
+              <div class="p-3.5 bg-[var(--canvas-bg)] rounded-[var(--radius-base)] border border-[var(--border-subtle)] flex items-center justify-between">
+                <div>
+                  <div class="text-xs text-[var(--text-muted)]">وضعیت پذیرش امروز</div>
+                  <div class="text-sm font-bold text-emerald-500 flex items-center gap-1.5 mt-0.5">
+                    <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
+                    <span>۳ نوبت مشاوره خالی</span>
+                  </div>
+                </div>
+                <span class="px-2.5 py-1 rounded-full text-[11px] font-bold bg-[var(--accent)]/10 text-[var(--accent)] border border-[var(--accent)]/20">پذیرش فوری</span>
+              </div>
+              <div class="p-3.5 bg-[var(--canvas-bg)] rounded-[var(--radius-base)] border border-[var(--border-subtle)]">
+                <div class="text-xs text-[var(--text-muted)] mb-2">نزدیک ترین ساعات قابل رزرو</div>
+                <div class="grid grid-cols-3 gap-2">
+                  <span class="px-2 py-1 text-center text-xs font-semibold rounded bg-[var(--surface-bg)] border border-[var(--border-subtle)] text-[var(--text-primary)]"><bdi>۱۰:۳۰</bdi></span>
+                  <span class="px-2 py-1 text-center text-xs font-semibold rounded bg-[var(--accent)] text-[var(--vibe-on-primary,#fff)]"><bdi>۱۲:۰۰</bdi></span>
+                  <span class="px-2 py-1 text-center text-xs font-semibold rounded bg-[var(--surface-bg)] border border-[var(--border-subtle)] text-[var(--text-primary)]"><bdi>۱۶:۳۰</bdi></span>
+                </div>
+              </div>
+              <div class="p-3 bg-[var(--surface-bg)] rounded-[var(--radius-base)] border border-amber-500/20 text-xs text-amber-600 dark:text-amber-400 flex items-center gap-2">
+                <svg class="w-4 h-4 text-amber-500 flex-shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>
+                <span>ویزیت و اسکن سه بعدی دندان با گارانتی رسمی کلینیک</span>
+              </div>
             </div>
           </div>
           <div class="mt-6 pt-4 border-t border-[var(--border-subtle)] text-xs text-[var(--text-muted)] flex items-center justify-between">
@@ -314,23 +324,52 @@
         </div>
       </div>
       <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-        <div class="p-6 bg-[var(--surface-bg)] border border-[var(--border-subtle)] rounded-[var(--radius-container)] shadow-sm hover:shadow-md transition-shadow space-y-4">
-          <div class="aspect-video w-full rounded-[var(--radius-base)] bg-[var(--canvas-bg)] flex items-center justify-center border border-[var(--border-subtle)] relative overflow-hidden">
-            <div id="portfolio-display-1" class="text-center p-6">
-              <span class="inline-flex px-2 py-1 rounded text-xs font-bold bg-emerald-500/10 text-emerald-500 mb-2">۱۰ واحد ونیر سرامیکی E-Max</span>
-              <p class="text-sm font-semibold text-[var(--text-primary)]">اصلاح کامل خط لبخند و بستن فاصله دندانی (بیمار ۲۸ ساله)</p>
-              <div class="text-xs text-[var(--text-muted)] mt-2">رضایت ۱۰۰٪ پس از ۱۸ ماه پیگیری دوره ای</div>
+        <!-- Interactive Drag Slider Card 1 -->
+        <div class="vibe-spotlight-card p-6 bg-[var(--surface-bg)] border border-[var(--border-subtle)] rounded-[var(--radius-container)] shadow-sm hover:shadow-md transition-shadow space-y-4">
+          <div class="flex justify-between items-center text-xs font-semibold">
+            <span>۱۰ واحد ونیر سرامیکی E-Max</span>
+            <span class="px-2 py-0.5 rounded-full bg-emerald-500/10 text-emerald-500 font-mono text-[10px] font-bold"><bdi>98.4% Match</bdi></span>
+          </div>
+          <!-- Interactive Before / After Split Slider -->
+          <div class="relative h-48 w-full rounded-[var(--radius-base)] overflow-hidden border border-[var(--border-subtle)] bg-[var(--canvas-bg)] select-none">
+            <div class="absolute inset-0 bg-gradient-to-r from-stone-300 to-amber-100 dark:from-stone-800 dark:to-amber-950/40 flex items-center justify-start p-4">
+              <span class="text-xs font-bold text-stone-500 uppercase tracking-widest">قبل از درمان</span>
+            </div>
+            <div id="before-after-layer-1" class="absolute inset-y-0 end-0 bg-gradient-to-l from-emerald-100 to-rose-50 dark:from-emerald-950/40 dark:to-rose-950/20 border-s-2 border-emerald-500 flex items-center justify-end p-4 transition-all duration-75" style="width: 50%">
+              <span class="text-xs font-bold text-emerald-700 dark:text-emerald-400 uppercase tracking-widest">نتیجه درمان</span>
+            </div>
+            <input type="range" min="0" max="100" value="50" class="before-after-range absolute inset-0 opacity-0 cursor-ew-resize w-full h-full z-20" data-target="before-after-layer-1" data-divider="divider-line-1" aria-label="Before and After Comparison Slider">
+            <div id="divider-line-1" class="absolute inset-y-0 w-1 bg-white shadow-[0_0_10px_rgba(0,0,0,0.4)] pointer-events-none z-10 flex items-center justify-center" style="left: 50%">
+              <div class="w-6 h-6 rounded-full bg-white dark:bg-zinc-900 border border-zinc-300 dark:border-zinc-700 shadow-md flex items-center justify-center">
+                <svg class="w-3.5 h-3.5 text-zinc-500" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><polyline points="7 17 2 12 7 7"></polyline><polyline points="17 7 22 12 17 17"></polyline><line x1="2" y1="12" x2="22" y2="12"></line></svg>
+              </div>
             </div>
           </div>
+          <p class="text-xs text-[var(--text-muted)] text-center">دستگیره را بکشید تا تغییرات قبل و بعد از درمان را به صورت زنده مقایسه کنید.</p>
         </div>
-        <div class="p-6 bg-[var(--surface-bg)] border border-[var(--border-subtle)] rounded-[var(--radius-container)] shadow-sm hover:shadow-md transition-shadow space-y-4">
-          <div class="aspect-video w-full rounded-[var(--radius-base)] bg-[var(--canvas-bg)] flex items-center justify-center border border-[var(--border-subtle)] relative overflow-hidden">
-            <div id="portfolio-display-2" class="text-center p-6">
-              <span class="inline-flex px-2 py-1 rounded text-xs font-bold bg-sky-500/10 text-sky-500 mb-2">ایمپلنت فوری دندان جلو</span>
-              <p class="text-sm font-semibold text-[var(--text-primary)]">کاشت بدون درد همراه با پیوند لثه و روکش تمام سرامیک زیرکونیا</p>
-              <div class="text-xs text-[var(--text-muted)] mt-2">پایداری بافت لثه و تقارن بی نقص با دندان های مجاور</div>
+
+        <!-- Interactive Drag Slider Card 2 -->
+        <div class="vibe-spotlight-card p-6 bg-[var(--surface-bg)] border border-[var(--border-subtle)] rounded-[var(--radius-container)] shadow-sm hover:shadow-md transition-shadow space-y-4">
+          <div class="flex justify-between items-center text-xs font-semibold">
+            <span>ایمپلنت فوری دندان جلو</span>
+            <span class="px-2 py-0.5 rounded-full bg-sky-500/10 text-sky-500 font-mono text-[10px] font-bold"><bdi>100% Titanium Bond</bdi></span>
+          </div>
+          <!-- Interactive Before / After Split Slider -->
+          <div class="relative h-48 w-full rounded-[var(--radius-base)] overflow-hidden border border-[var(--border-subtle)] bg-[var(--canvas-bg)] select-none">
+            <div class="absolute inset-0 bg-gradient-to-r from-zinc-300 to-sky-100 dark:from-zinc-800 dark:to-sky-950/40 flex items-center justify-start p-4">
+              <span class="text-xs font-bold text-zinc-500 uppercase tracking-widest">وضعیت اولیه</span>
+            </div>
+            <div id="before-after-layer-2" class="absolute inset-y-0 end-0 bg-gradient-to-l from-sky-100 to-indigo-50 dark:from-sky-950/40 dark:to-indigo-950/20 border-s-2 border-sky-500 flex items-center justify-end p-4 transition-all duration-75" style="width: 50%">
+              <span class="text-xs font-bold text-sky-700 dark:text-sky-400 uppercase tracking-widest">کاشت نهایی</span>
+            </div>
+            <input type="range" min="0" max="100" value="50" class="before-after-range absolute inset-0 opacity-0 cursor-ew-resize w-full h-full z-20" data-target="before-after-layer-2" data-divider="divider-line-2" aria-label="Before and After Comparison Slider">
+            <div id="divider-line-2" class="absolute inset-y-0 w-1 bg-white shadow-[0_0_10px_rgba(0,0,0,0.4)] pointer-events-none z-10 flex items-center justify-center" style="left: 50%">
+              <div class="w-6 h-6 rounded-full bg-white dark:bg-zinc-900 border border-zinc-300 dark:border-zinc-700 shadow-md flex items-center justify-center">
+                <svg class="w-3.5 h-3.5 text-zinc-500" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><polyline points="7 17 2 12 7 7"></polyline><polyline points="17 7 22 12 17 17"></polyline><line x1="2" y1="12" x2="22" y2="12"></line></svg>
+              </div>
             </div>
           </div>
+          <p class="text-xs text-[var(--text-muted)] text-center">پایداری بی نقص بافت نرم لثه و انطباق کامل رنگ با دندان های مجاور.</p>
         </div>
       </div>
     </section>
@@ -518,6 +557,19 @@
           });
           tab.className = 'portfolio-tab px-3 py-1.5 text-xs font-semibold rounded-[var(--radius-button)] bg-[var(--accent)] text-[var(--vibe-on-primary,#fff)] min-h-[44px]';
           showToast(view === 'before' ? 'نمایش تصاویر قبل از درمان' : 'نمایش نتایج نهایی پس از اتمام درمان');
+        });
+      });
+
+      // 6.5. Interactive Before/After Split Comparison Sliders
+      document.querySelectorAll('.before-after-range').forEach(function(slider) {
+        slider.addEventListener('input', function(e) {
+          var targetId = slider.getAttribute('data-target');
+          var dividerId = slider.getAttribute('data-divider');
+          var targetEl = document.getElementById(targetId);
+          var dividerEl = document.getElementById(dividerId);
+          var val = e.target.value;
+          if (targetEl) targetEl.style.width = (100 - val) + '%';
+          if (dividerEl) dividerEl.style.left = val + '%';
         });
       });
 
