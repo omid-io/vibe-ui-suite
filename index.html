@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-  <title>Vibe UI Suite v4.1.1 — Creative Portfolio & Design System Showcase</title>
-  <meta name="description" content="High-craft creative portfolio and production-grade autonomous design system showcase for AI coding agents. 6 visual chemistries, 3D spotlight cards, Kowalski spring physics, WCAG AAA contrast, and fixed-structure semantic RTL.">
+  <title>Vibe UI Suite v4.2.0 — Masterpiece Visual Engine & Creative Portfolio Showcase</title>
+  <meta name="description" content="High-craft creative portfolio and production-grade autonomous design system showcase for AI coding agents. 7 visual archetypes, macOS window chrome mockup, interactive Before/After drag sliders, 3D spotlight cards, Kowalski spring physics, WCAG AAA contrast, and fixed-structure semantic RTL.">
   <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%230071e3' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'><polygon points='12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2'/></svg>">
 
   <!-- Typography: Inter, Geist Mono, Playfair, Vazirmatn -->
@@ -32,6 +32,14 @@
       --color-success: oklch(0.72 0.17 155);
       --color-warning: oklch(0.78 0.16 75);
       --color-danger: oklch(0.63 0.22 25);
+
+      --glass-blur: blur(var(--blur-amount, 20px));
+      --mesh-glow-filter: blur(var(--mesh-blur, 85px));
+    }
+
+    :focus-visible {
+      outline: 2px solid var(--accent-brand);
+      outline-offset: 2px;
     }
 
     /* THEME 1: APPLE CUPERTINO FLUID (DEFAULT FLAGSHIP) */
@@ -51,7 +59,8 @@
       --radius-lg: 28px; /* Squircle */
       --shadow-ambient: 0 4px 20px -2px rgba(0, 0, 0, 0.05), 0 2px 6px -1px rgba(0, 0, 0, 0.03);
       --shadow-hover: 0 16px 36px -4px rgba(0, 113, 227, 0.14), 0 4px 12px -2px rgba(0, 0, 0, 0.06);
-      --card-blur: blur(24px) saturate(180%);
+      --blur-amount: 24px;
+      --card-blur: var(--glass-blur) saturate(180%);
       --border-width: 1px;
       --spotlight-color: rgba(0, 113, 227, 0.12);
     }
@@ -124,7 +133,8 @@
       --radius-lg: 24px;
       --shadow-ambient: 0 8px 32px 0 rgba(0, 0, 0, 0.45);
       --shadow-hover: 0 16px 48px -4px rgba(168, 85, 247, 0.35);
-      --card-blur: blur(20px);
+      --blur-amount: 20px;
+      --card-blur: var(--glass-blur);
       --border-width: 1px;
       --spotlight-color: rgba(168, 85, 247, 0.18);
     }
@@ -190,7 +200,8 @@
       --radius-lg: 8px;
       --shadow-ambient: 0 0 15px rgba(0, 255, 102, 0.15);
       --shadow-hover: 0 0 25px rgba(0, 255, 102, 0.35);
-      --card-blur: blur(12px);
+      --blur-amount: 12px;
+      --card-blur: var(--glass-blur);
       --border-width: 1px;
       --spotlight-color: rgba(0, 255, 102, 0.20);
     }
@@ -588,11 +599,242 @@
       text-transform: uppercase;
       letter-spacing: 0.05em;
       margin-top: 4px;
+    /* =========================================================================
+       4.5. MASTERPIECE 2.0: ATMOSPHERIC LIGHTING & MACOS WINDOW CHROME MOCKUP
+       ========================================================================= */
+    .hero-relative-wrapper {
+      position: relative;
+      margin-top: 36px;
+      margin-bottom: 28px;
+      width: 100%;
+      max-width: 1020px;
+      margin-left: auto;
+      margin-right: auto;
     }
 
-    /* =========================================================================
-       5. FEATURED PORTFOLIO & WORK SHOWCASE (3D TILT & RADIAL SPOTLIGHT)
-       ========================================================================= */
+    .atmospheric-mesh-cone {
+      position: absolute;
+      top: -50px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: min(100%, 820px);
+      height: 340px;
+      background: radial-gradient(ellipse at center, var(--accent-brand-subtle) 0%, transparent 70%);
+      filter: var(--mesh-glow-filter);
+      pointer-events: none;
+      z-index: 0;
+      opacity: 0.85;
+    }
+
+    .macos-window-chrome {
+      position: relative;
+      z-index: 1;
+      background: var(--bg-surface-elevated);
+      backdrop-filter: var(--card-blur);
+      -webkit-backdrop-filter: var(--card-blur);
+      border: var(--border-width) solid var(--border-strong);
+      border-radius: var(--radius-lg);
+      box-shadow: 0 24px 60px -12px rgba(0, 0, 0, 0.18), var(--shadow-ambient);
+      overflow: hidden;
+      text-align: left;
+    }
+
+    body.lang-fa .macos-window-chrome {
+      text-align: right;
+    }
+
+    .macos-titlebar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 12px 18px;
+      border-bottom: var(--border-width) solid var(--border-subtle);
+      background: var(--bg-surface);
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    .macos-traffic-lights {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .traffic-dot {
+      width: 11px;
+      height: 11px;
+      border-radius: 50%;
+      display: inline-block;
+    }
+    .traffic-close { background: #ff5f56; border: 1px solid #e0443e; }
+    .traffic-min { background: #ffbd2e; border: 1px solid #dea123; }
+    .traffic-max { background: #27c93f; border: 1px solid #1aab29; }
+
+    .macos-tabs {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      background: var(--bg-canvas);
+      padding: 4px;
+      border-radius: var(--radius-sm);
+      border: var(--border-width) solid var(--border-subtle);
+    }
+
+    .macos-tab-btn {
+      background: transparent;
+      border: none;
+      color: var(--text-secondary);
+      font-size: 0.78rem;
+      font-weight: 600;
+      padding: 6px 12px;
+      border-radius: 6px;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      transition: background var(--duration-exit) var(--ease-spring), color var(--duration-exit) var(--ease-spring);
+    }
+
+    .macos-tab-btn.active {
+      background: var(--bg-surface);
+      color: var(--accent-brand);
+      box-shadow: 0 2px 6px rgba(0,0,0,0.06);
+    }
+
+    .macos-status-chip {
+      font-family: var(--font-mono);
+      font-size: 0.72rem;
+      color: var(--text-muted);
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .macos-canvas-body {
+      padding: 22px;
+      min-height: 250px;
+    }
+
+    .macos-panel {
+      display: none;
+    }
+
+    .macos-panel.active {
+      display: block;
+      animation: fadeIn var(--duration-enter) var(--ease-spring);
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(6px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* Before/After Drag Slider */
+    .split-slider-container {
+      position: relative;
+      height: 200px;
+      width: 100%;
+      border-radius: var(--radius-md);
+      overflow: hidden;
+      border: var(--border-width) solid var(--border-subtle);
+      user-select: none;
+      -webkit-user-select: none;
+    }
+
+    .split-layer-base {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(135deg, #e2e8f0 0%, #cbd5e1 100%);
+      display: flex;
+      align-items: center;
+      justify-content: flex-start;
+      padding: 20px;
+      color: #475569;
+      font-weight: 800;
+      font-size: 0.85rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    body.theme-specular_glass .split-layer-base,
+    body.theme-terminal_hud .split-layer-base {
+      background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
+      color: #94a3b8;
+    }
+
+    .split-layer-overlay {
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      right: 0;
+      width: 50%;
+      background: linear-gradient(135deg, rgba(16, 185, 129, 0.25) 0%, rgba(14, 165, 233, 0.25) 100%), var(--bg-surface);
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+      padding: 20px;
+      border-left: 2px solid var(--accent-brand);
+      color: var(--accent-brand);
+      font-weight: 800;
+      font-size: 0.85rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      transition: width 40ms linear;
+    }
+
+    body.lang-fa .split-layer-overlay {
+      left: 0;
+      right: auto;
+      border-left: none;
+      border-right: 2px solid var(--accent-brand);
+      justify-content: flex-start;
+    }
+
+    .split-range-input {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      opacity: 0;
+      cursor: ew-resize;
+      z-index: 20;
+    }
+
+    .split-divider-handle {
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      left: 50%;
+      width: 2px;
+      background: #ffffff;
+      box-shadow: 0 0 10px rgba(0,0,0,0.5);
+      pointer-events: none;
+      z-index: 10;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: left 40ms linear;
+    }
+
+    .split-handle-circle {
+      width: 30px;
+      height: 30px;
+      border-radius: 50%;
+      background: #ffffff;
+      border: 1px solid rgba(0,0,0,0.15);
+      box-shadow: 0 4px 12px rgba(0,0,0,0.25);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #0f172a;
+    }
+
+    body.theme-specular_glass .split-handle-circle,
+    body.theme-terminal_hud .split-handle-circle {
+      background: #18181b;
+      border-color: #3f3f46;
+      color: #fafafa;
+    }
     .section-block {
       margin-bottom: 70px;
     }
@@ -1888,6 +2130,129 @@
         </a>
       </div>
 
+      <!-- MASTERPIECE 2.0 LIVING CANVAS & MACOS WINDOW CHROME MOCKUP -->
+      <div class="hero-relative-wrapper">
+        <div class="atmospheric-mesh-cone"></div>
+        <div class="macos-window-chrome" id="heroMacWindow">
+          <!-- Window Titlebar -->
+          <div class="macos-titlebar">
+            <div class="macos-traffic-lights">
+              <span class="traffic-dot traffic-close" title="Close Window"></span>
+              <span class="traffic-dot traffic-min" title="Minimize Window"></span>
+              <span class="traffic-dot traffic-max" title="Expand Fullscreen"></span>
+            </div>
+            <!-- Domain Switcher Tabs -->
+            <div class="macos-tabs" role="tablist">
+              <button class="macos-tab-btn active" onclick="switchMacTab('devops', this)" id="tabDevops" role="tab" aria-selected="true">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="4 17 10 11 4 5"/><line x1="12" y1="19" x2="20" y2="19"/></svg>
+                <span id="tabDevopsText">DevOps Observability</span>
+              </button>
+              <button class="macos-tab-btn" onclick="switchMacTab('clinic', this)" id="tabClinic" role="tab" aria-selected="false">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/></svg>
+                <span id="tabClinicText">Clinical Split Slider</span>
+              </button>
+              <button class="macos-tab-btn" onclick="switchMacTab('bento', this)" id="tabBento" role="tab" aria-selected="false">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect width="7" height="9" x="3" y="3" rx="1"/><rect width="7" height="5" x="14" y="3" rx="1"/><rect width="7" height="9" x="14" y="12" rx="1"/><rect width="7" height="5" x="3" y="16" rx="1"/></svg>
+                <span id="tabBentoText">AI Intelligence Bento</span>
+              </button>
+            </div>
+            <!-- Titlebar Live Status -->
+            <div class="macos-status-chip">
+              <span class="pulse-dot"></span>
+              <span id="macWindowStatusText"><bdi>SLO: 99.99% • PRODUCTION ACTIVE</bdi></span>
+            </div>
+          </div>
+
+          <!-- Window Canvas Body -->
+          <div class="macos-canvas-body">
+            <!-- PANEL 1: DEVOPS OBSERVABILITY -->
+            <div class="macos-panel active" id="macPanelDevops">
+              <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 14px; margin-bottom: 16px;">
+                <div style="background: var(--bg-surface); padding: 12px 16px; border-radius: var(--radius-sm); border: var(--border-width) solid var(--border-subtle);">
+                  <div style="font-size: 0.72rem; color: var(--text-muted); font-weight: 600; text-transform: uppercase;" id="lblMacLat">p99 Gateway Latency</div>
+                  <div style="font-size: 1.35rem; font-weight: 800; color: #10b981; font-family: var(--font-mono);"><bdi>1.8 ms</bdi></div>
+                  <div style="font-size: 0.7rem; color: var(--text-muted);"><bdi>- 0.4ms vs SLA budget</bdi></div>
+                </div>
+                <div style="background: var(--bg-surface); padding: 12px 16px; border-radius: var(--radius-sm); border: var(--border-width) solid var(--border-subtle);">
+                  <div style="font-size: 0.72rem; color: var(--text-muted); font-weight: 600; text-transform: uppercase;" id="lblMacPods">Cluster Pods Ready</div>
+                  <div style="font-size: 1.35rem; font-weight: 800; color: var(--accent-brand); font-family: var(--font-mono);"><bdi>64 / 64</bdi></div>
+                  <div style="font-size: 0.7rem; color: #10b981;"><bdi>100% Ingress Health</bdi></div>
+                </div>
+                <div style="background: var(--bg-surface); padding: 12px 16px; border-radius: var(--radius-sm); border: var(--border-width) solid var(--border-subtle);">
+                  <div style="font-size: 0.72rem; color: var(--text-muted); font-weight: 600; text-transform: uppercase;" id="lblMacThroughput">Throughput Sparkline</div>
+                  <div style="font-size: 1.35rem; font-weight: 800; color: var(--text-primary); font-family: var(--font-mono);"><bdi>142.8k req/s</bdi></div>
+                  <div style="font-size: 0.7rem; color: var(--text-muted);"><bdi>Peak: 168k req/s</bdi></div>
+                </div>
+              </div>
+              <!-- Kubectl Live Stream Terminal -->
+              <div style="background: #090d16; color: #38bdf8; font-family: var(--font-mono); font-size: 0.75rem; border-radius: var(--radius-sm); padding: 12px 16px; border: 1px solid rgba(255,255,255,0.1); line-height: 1.6;">
+                <div style="display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid rgba(255,255,255,0.08); padding-bottom: 8px; margin-bottom: 8px; color: #94a3b8;">
+                  <span id="macTerminalTitle">LIVE KUBECTL LOG STREAM: pod/vibe-gateway-7f8d9b</span>
+                  <div style="display: flex; gap: 8px;">
+                    <button onclick="toggleLogStream(this)" style="background: rgba(255,255,255,0.08); border: none; color: #f8fafc; font-size: 0.7rem; padding: 2px 8px; border-radius: 4px; cursor: pointer;" id="btnLogPause">Pause</button>
+                    <button onclick="copyLogStream(this)" style="background: rgba(255,255,255,0.08); border: none; color: #f8fafc; font-size: 0.7rem; padding: 2px 8px; border-radius: 4px; cursor: pointer;" id="btnLogCopy">Copy</button>
+                  </div>
+                </div>
+                <div id="macLogStreamContent">
+                  <div>[2026-09-30T02:18:42Z] <span style="color: #4ade80;">INFO</span> ingress routing verified: route=/vibe/v4.2 status=200 latency=1.2ms</div>
+                  <div>[2026-09-30T02:18:43Z] <span style="color: #4ade80;">INFO</span> telemetry exporter synced 100% metrics across multi-region cluster</div>
+                  <div>[2026-09-30T02:18:44Z] <span style="color: #38bdf8;">DEBUG</span> memory pool cache hit rate: 99.4% (zero page evictions)</div>
+                </div>
+              </div>
+            </div>
+
+            <!-- PANEL 2: CLINICAL SPLIT DRAG SLIDER -->
+            <div class="macos-panel" id="macPanelClinic">
+              <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
+                <div>
+                  <h4 style="font-size: 0.95rem; font-weight: 700; margin: 0;" id="macClinicTitle">10 Units E-Max Veneers — Interactive Split Comparison</h4>
+                  <p style="font-size: 0.78rem; color: var(--text-muted); margin: 2px 0 0;" id="macClinicDesc">Drag the slider horizontally to compare baseline condition versus post-clinical restoration.</p>
+                </div>
+                <span style="background: rgba(16, 185, 129, 0.12); color: #10b981; font-size: 0.72rem; font-weight: 700; padding: 4px 10px; border-radius: 20px;"><bdi>98.4% Match</bdi></span>
+              </div>
+              <!-- Draggable Slider -->
+              <div class="split-slider-container">
+                <div class="split-layer-base">
+                  <span id="macLabelBefore">BASELINE (BEFORE)</span>
+                </div>
+                <div class="split-layer-overlay" id="macSplitOverlay">
+                  <span id="macLabelAfter">POST-TREATMENT (AFTER)</span>
+                </div>
+                <input type="range" min="0" max="100" value="50" class="split-range-input" id="macSplitInput" oninput="updateMacSplit(this.value)" aria-label="Before/After Comparison Slider">
+                <div class="split-divider-handle" id="macSplitDivider">
+                  <div class="split-handle-circle">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="7 17 2 12 7 7"></polyline><polyline points="17 7 22 12 17 17"></polyline><line x1="2" y1="12" x2="22" y2="12"></line></svg>
+                  </div>
+                </div>
+              </div>
+              <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 10px; font-size: 0.75rem; color: var(--text-muted);">
+                <span id="macClinicSub">Certified by Medical Dental Board • Non-Invasive Ceramic Bond</span>
+                <span style="font-family: var(--font-mono); font-weight: 600;" id="macSplitVal">Position: 50%</span>
+              </div>
+            </div>
+
+            <!-- PANEL 3: AI INTELLIGENCE BENTO -->
+            <div class="macos-panel" id="macPanelBento">
+              <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 14px;">
+                <div style="background: var(--bg-surface); padding: 18px; border-radius: var(--radius-sm); border: var(--border-width) solid var(--border-subtle);">
+                  <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
+                    <span style="font-size: 0.72rem; font-weight: 700; color: var(--accent-brand); text-transform: uppercase;">Autonomous Stack Sensor</span>
+                    <span style="font-size: 0.72rem; color: var(--text-muted); font-family: var(--font-mono);">Detection: &lt;1ms</span>
+                  </div>
+                  <h4 style="font-size: 1.05rem; font-weight: 800; margin: 0 0 6px;" id="macBentoTitle">Deterministic Zero-Prompt Compiler</h4>
+                  <p style="font-size: 0.8rem; color: var(--text-secondary); line-height: 1.5; margin: 0;" id="macBentoDesc">Transforms vague prompts into machine-checked design specifications with strict WCAG AAA color math and responsive physics.</p>
+                </div>
+                <div style="background: var(--bg-surface); padding: 18px; border-radius: var(--radius-sm); border: var(--border-width) solid var(--border-subtle); text-align: center;">
+                  <div style="font-size: 0.72rem; color: var(--text-muted); font-weight: 600; text-transform: uppercase;">WCAG Contrast Ratio</div>
+                  <div style="font-size: 1.8rem; font-weight: 900; color: #10b981; font-family: var(--font-mono); margin: 6px 0;"><bdi>17.8 : 1</bdi></div>
+                  <div style="font-size: 0.72rem; color: var(--text-secondary);">Exceeds AAA Standard (>7:1)</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
       <!-- Quick Telemetry HUD Stats -->
       <div class="hero-stats-row">
         <div class="stat-pill">
@@ -2695,6 +3060,48 @@
       switchLabTab(tabKey, btn);
     }
 
+    // 4.6. macOS Window Chrome Tab Switcher & Interactive Controls
+    function switchMacTab(tabName, btn) {
+      document.querySelectorAll('.macos-tab-btn').forEach(b => {
+        b.classList.remove('active');
+        b.setAttribute('aria-selected', 'false');
+      });
+      if (btn) {
+        btn.classList.add('active');
+        btn.setAttribute('aria-selected', 'true');
+      }
+
+      document.querySelectorAll('.macos-panel').forEach(p => p.classList.remove('active'));
+      if (tabName === 'devops') document.getElementById('macPanelDevops').classList.add('active');
+      if (tabName === 'clinic') document.getElementById('macPanelClinic').classList.add('active');
+      if (tabName === 'bento') document.getElementById('macPanelBento').classList.add('active');
+    }
+
+    function updateMacSplit(val) {
+      const isFa = currentLang === 'fa';
+      const overlay = document.getElementById('macSplitOverlay');
+      const divider = document.getElementById('macSplitDivider');
+      const valDisplay = document.getElementById('macSplitVal');
+      if (overlay) overlay.style.width = isFa ? `${val}%` : `${100 - val}%`;
+      if (divider) divider.style.left = `${val}%`;
+      if (valDisplay) valDisplay.innerText = isFa ? `موقعیت: ${val}٪` : `Position: ${val}%`;
+    }
+
+    let isLogStreaming = true;
+    function toggleLogStream(btn) {
+      isLogStreaming = !isLogStreaming;
+      btn.innerText = isLogStreaming ? (currentLang === 'fa' ? 'مکث' : 'Pause') : (currentLang === 'fa' ? 'ادامه' : 'Resume');
+    }
+
+    function copyLogStream(btn) {
+      const text = document.getElementById('macLogStreamContent').innerText;
+      navigator.clipboard.writeText(text).then(() => {
+        const orig = btn.innerText;
+        btn.innerText = currentLang === 'fa' ? 'کپی شد!' : 'Copied!';
+        setTimeout(() => { btn.innerText = orig; }, 1800);
+      });
+    }
+
     // 5. Chart Scale Updates
     function updateChartScale(scale, btn) {
       document.querySelectorAll('.chart-btn').forEach(b => b.classList.remove('active'));
@@ -3057,6 +3464,27 @@
         : 'Engineered for AI coding agents and world-class product teams. 100% anti-slop, OKLCH color spaces, Kowalski spring physics, WCAG AAA contrast, and fixed-structure semantic RTL.';
       document.getElementById('btnExploreWorkText').innerText = isFa ? 'مشاهده شوکیس پورتفولیو' : 'Explore Portfolio Showcase';
       document.getElementById('btnLaunchStudioText').innerText = isFa ? 'اجرای استودیو mr-ui-designer' : 'Launch mr-ui-designer Studio';
+
+      // macOS Window Chrome Labels
+      document.getElementById('tabDevopsText').innerText = isFa ? 'رصد و تلمتری DevOps' : 'DevOps Observability';
+      document.getElementById('tabClinicText').innerText = isFa ? 'اسلایدر قبل و بعد کلینیک' : 'Clinical Split Slider';
+      document.getElementById('tabBentoText').innerText = isFa ? 'بنتو هوش مصنوعی' : 'AI Intelligence Bento';
+      document.getElementById('macWindowStatusText').innerHTML = isFa 
+        ? '<bdi>وضعیت فعال پروداکشن • SLO: ۹۹.۹۹٪</bdi>' 
+        : '<bdi>SLO: 99.99% • PRODUCTION ACTIVE</bdi>';
+      document.getElementById('lblMacLat').innerText = isFa ? 'تاخیر گیت وی P99' : 'p99 Gateway Latency';
+      document.getElementById('lblMacPods').innerText = isFa ? 'پادهای فعال کلاستر' : 'Cluster Pods Ready';
+      document.getElementById('lblMacThroughput').innerText = isFa ? 'اسپارک لاین ترافیک' : 'Throughput Sparkline';
+      document.getElementById('macTerminalTitle').innerText = isFa ? 'استریم زنده لاگ کوبرنتیز: pod/vibe-gateway-7f8d9b' : 'LIVE KUBECTL LOG STREAM: pod/vibe-gateway-7f8d9b';
+      document.getElementById('btnLogPause').innerText = isFa ? (isLogStreaming ? 'مکث' : 'ادامه') : (isLogStreaming ? 'Pause' : 'Resume');
+      document.getElementById('btnLogCopy').innerText = isFa ? 'کپی' : 'Copy';
+      document.getElementById('macClinicTitle').innerText = isFa ? '۱۰ واحد ونیر سرامیکی E-Max — مقایسه تعاملی دو لایه' : '10 Units E-Max Veneers — Interactive Split Comparison';
+      document.getElementById('macClinicDesc').innerText = isFa ? 'دستگیره را بکشید تا تغییرات قبل و بعد از درمان را به صورت زنده مقایسه کنید.' : 'Drag the slider horizontally to compare baseline condition versus post-clinical restoration.';
+      document.getElementById('macLabelBefore').innerText = isFa ? 'قبل از درمان (پایه)' : 'BASELINE (BEFORE)';
+      document.getElementById('macLabelAfter').innerText = isFa ? 'نتیجه پس از درمان' : 'POST-TREATMENT (AFTER)';
+      document.getElementById('macClinicSub').innerText = isFa ? 'دارای تاییدیه سازمان نظام پزشکی • پیوند سرامیکی محافظه کارانه' : 'Certified by Medical Dental Board • Non-Invasive Ceramic Bond';
+      document.getElementById('macBentoTitle').innerText = isFa ? 'کامپایلر قطعی بدون نیاز به پرامپت های طولانی' : 'Deterministic Zero-Prompt Compiler';
+      document.getElementById('macBentoDesc').innerText = isFa ? 'تبدیل پرامپت های کلی به مشخصات دقیق مهندسی دیزاین با ریاضیات کنتراست WCAG AAA و فیزیک تعاملات پاسخگو.' : 'Transforms vague prompts into machine-checked design specifications with strict WCAG AAA color math and responsive physics.';
 
       // Stats
       document.getElementById('lblStat1').innerText = isFa ? 'سبک های بصری' : 'Visual Chemistries';

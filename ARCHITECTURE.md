@@ -1,6 +1,6 @@
 # 🏛️ Vibe UI Suite — System Architecture & Data Contract Specification
 
-**Version:** 4.1.1 (Multi-Model Audit Hardening & Production Domain Fidelity)  
+**Version:** 4.2.0 (Masterpiece Visual Engine 2.0 & Living Interfaces)  
 **Status:** Feature Freeze (Production Certified)  
 **Document Type:** Core Architectural Specification  
 **Machine Contract Reference:** [`schemas/design-spec.v1.schema.json`](schemas/design-spec.v1.schema.json)  

@@ -26,19 +26,19 @@
 
 ---
 
-## ⚖️ Visual Impact: Vanilla AI Slop vs. Vibe UI V3
+## ⚖️ Visual Impact: Vanilla AI Slop vs. Vibe UI v4.2 Masterpiece
 
-What happens when you ask an AI assistant to generate a frontend component?
+What happens when you ask a standard AI assistant to generate a frontend component?
 
 ```text
 ┌──────────────────────────────────────┐  vs  ┌──────────────────────────────────────┐
-│ ❌ VANILLA AI SLOP                   │      │ ✨ VIBE UI V3 COMPILED               │
+│ ❌ VANILLA AI SLOP                   │      │ ✨ VIBE UI v4.2 MASTERPIECE          │
 ├──────────────────────────────────────┤      ├──────────────────────────────────────┤
-│ • Generic purple gradient buttons    │      │ • Orthogonal Style DNA (26 families) │
+│ • Generic purple gradient buttons    │      │ • Atmospheric Canvas Vector & Glow   │
 │ • Low contrast text (3.2:1 FAILS AA) │      │ • Mathematical WCAG 2.2 AAA (17.8:1) │
-│ • Broken mobile overflow (375px)     │      │ • Zero layout shift, mobile audited  │
-│ • Hallucinated raw emojis            │      │ • Deterministic inline vector icons  │
-│ • No loading / empty / error states  │      │ • Full 4-state lifecycle baked in    │
+│ • Broken mobile overflow (375px)     │      │ • macOS Window Chrome & Live Canvas  │
+│ • Hallucinated raw emojis            │      │ • Interactive Before/After Sliders   │
+│ • Dead toggle cards & static mockups │      │ • Living React 19 TSX + State Hooks  │
 │ • Mixed direction text / numbers     │      │ • Strict LTR metrics & BiDi isolation│
 └──────────────────────────────────────┘      └──────────────────────────────────────┘
 ```
@@ -58,9 +58,9 @@ Intent Expansion (30-parameter design contract)
     ↓
 Machine-Readable Schema (design-spec.v1.schema.json)
     ↓
-Visual System + Component Recipe Selection
+Macro Archetype Selection (7 Visual Archetypes Vault)
     ↓
-Code Implementation (Next.js 15 / React 19 / Tailwind OKLCH)
+Code Implementation (Next.js 15 / React 19 TSX / Tailwind OKLCH)
     ↓
 Static Evaluation (Schema, luminance math, negative fixtures)
     ↓
@@ -69,7 +69,7 @@ Headless Browser Evaluation (Playwright 375px mobile overflow)
 Verified Output or Actionable Failure Diagnostics
 ```
 
-> **Day-One Transparency**: Vibe UI Suite is at `v4.1.1` (Apple Cupertino Design & Kowalski Motion Physics Ergonomics). Featuring 100% live headless Chromium browser truth and causal verification across all benchmark scenarios with zero sampling skips, 7 canonical visual chemistries (including Apple Cupertino Fluid & Human Interface and Neumorphic Soft), critically damped physical spring mechanics, mobile-native touch resilience, automated motion ergonomics auditing in PhysicalCritic, persistent browser pooling running 100 mounts in <35s, sub-80ms offline zero-network React 19 local bundling, strict directional invariant contracts across all 24 canonical domains, pure in-browser PixelCritic screenshot buffer inspection, in-browser VisionSensor perceptual geometry analysis, domain-adaptive macro page architectures, and dual-tier contrast governance (Target: WCAG AAA >= 7:1 | Hard Gate: WCAG AA >= 4.5:1). Constructive criticism, issues, and contributions from frontend engineers and AI researchers are warmly welcomed.
+> **Day-One Transparency**: Vibe UI Suite is at `v4.2.0` (**Masterpiece Visual Engine 2.0 & Living Interfaces**). Featuring 7 Canonical Visual Archetypes (Linear Dev HUD, Swiss Editorial, Cupertino Glass, Full-Bleed Bento, Quiet Luxury, Cyber Terminal, and Centered Stage), Atmospheric Canvas Lighting (subtle 36px vector background grid + radial mesh glow spotlight cone), macOS Window Chrome mockup with live domain telemetry (p99 latency sparklines, real-time kubectl logs, clinical slots), interactive Before/After drag split sliders with inline SVG controls, living React 19 TSX generation (`-f tsx`), specular micro-surfaces (`.vibe-spotlight-card::before` and mouse-following spotlight radiance with 60FPS mobile touch guards), 100% live headless Chromium browser truth across all benchmark scenarios with zero sampling skips, and dual-tier contrast governance (Target: WCAG AAA >= 7:1 | Hard Gate: WCAG AA >= 4.5:1). Constructive criticism, issues, and contributions from frontend engineers and AI researchers are warmly welcomed.
 
 ---
 
@@ -140,17 +140,34 @@ Install and configure vibe-ui-suite in this project and activate mr-ui-designer 
 
 ---
 
-### 🎨 The 6 Canonical Visual Archetypes (Autonomous or User-Specified)
-You never need to choose a style—`mr-ui-designer` automatically selects the ideal archetype based on your domain. However, you can explicitly request any archetype:
+### 🎨 The 7 Canonical Visual Archetypes (Autonomous or User-Specified)
+You never need to choose a style—`mr-ui-designer` automatically selects the ideal archetype based on your domain. However, you can explicitly request any archetype from the **Design Vault** (`data/design_vault/archetypes.json`):
 
-| Archetype | Visual Philosophy | Best Suited For |
-| :--- | :--- | :--- |
-| **`Apple Cupertino Fluid`** | Frosted glass (`backdrop-filter`), squircles, critically damped spring motion | Modern SaaS, mobile-first web, productivity |
-| **`Minimalist SaaS`** | Stripe-clean layout, neutral tones, high-density data tables | B2B platforms, developer tools, CRM |
-| **`Specular Glass Luxury`** | Deep dark canvases, ambient glowing edge borders (`border-beam`) | Web3, crypto trading, gaming, high-end entertainment |
-| **`Neobrutalism`** | High-contrast black borders, bold retro drop-shadows, vivid accents | Creator tools, fintech, consumer youth apps |
-| **`Swiss Editorial`** | Typography-driven asymmetric grid, high editorial elegance, calm white space | Media publications, fashion, luxury real estate |
-| **`Terminal HUD`** | High-density telemetry, monospaced data grids, cybernetic green/cyan | DevOps, cybersecurity, infrastructure monitoring |
+| Macro Archetype | Visual Philosophy | Key Surface & Lighting Physics | Best Suited For |
+| :--- | :--- | :--- | :--- |
+| **`Linear Dev HUD`** | Obsidian dark canvases, micro-terminal telemetry, monospace metrics | Cyan/Emerald radiance, hairline specular borders, live K8s sparklines | Cloud infra, dev tools, observability, APM |
+| **`Swiss Editorial`** | Asymmetric typographic hierarchy, high editorial elegance, calm negative space | Crisp monochrome contrast, subtle hairlines, serif/sans harmonic balance | Media publications, architecture, luxury studios |
+| **`Cupertino Glass`** | Multi-layer frosted glass, organic squircle curves, fluid spring physics | Ambient depth, liquid glass surfaces, tactile responsive states | Consumer SaaS, health, mobile-first web apps |
+| **`Full-Bleed Bento`** | Asymmetric 4-tile bento grid, variable visual weights, dynamic sparklines | Hairline specular top highlights, mousemove spotlight radiance | AI intelligence platforms, creative tools, enterprise |
+| **`Quiet Luxury`** | Warm champagne/stone palettes, tactile serif accents, clinical precision | Interactive Before/After drag split sliders, certified badge seals | Aesthetic healthcare, dental clinics, bespoke commerce |
+| **`Cyber Terminal`** | Retro-futuristic phosphor green/amber, scanline telemetry, high density | Monospace HUD matrices, live status indicators, zero fluff | Web3, security auditing, hardware interfaces |
+| **`Centered Stage`** | Single focal product presentation, large bold typography, floating 3D stage | Radial mesh glow cone (`blur-[140px]`), atmospheric canvas vector grid | High-conversion landing pages, product debuts |
+
+---
+
+### Autonomous CLI Interface Generation (`vibe_cli.py`)
+Generate complete, production-grade standalone web applications or React 19 components directly from your terminal:
+
+```bash
+# 1. Generate autonomous masterpiece HTML with interactive sliders & macOS chrome:
+python vibe_cli.py generate "یک سایت کلینیک زیبایی با رزرو آنلاین و نمونه کارهای قبل و بعد" -o clinic.html
+
+# 2. Generate living React 19 / TypeScript component (.tsx) with stateful hooks:
+python vibe_cli.py generate "A modern developer observability dashboard with latency metrics" -f tsx -o DevDashboard.tsx
+
+# 3. Verify any generated artifact against all 6 production audit gates:
+python vibe_cli.py verify clinic.html
+```
 
 ---
 

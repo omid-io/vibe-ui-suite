@@ -1,7 +1,7 @@
 {
   "name": "vibe-ui-tokens-internal",
   "private": true,
-  "version": "4.1.1",
+  "version": "4.2.0",
   "description": "Typed OKLCH design tokens, physics curves, and zero-config Tailwind plugin for Vibe UI (Deprecated in favor of vibe-ui-suite)",
   "bin": {
     "vibe-ui": "./dist/cli.js",

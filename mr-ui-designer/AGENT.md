@@ -1,4 +1,4 @@
-# 👑 mr-ui-designer — Master UI/UX & Frontend Architect Agent (v4.1.1)
+# 👑 mr-ui-designer — Master UI/UX & Frontend Architect Agent (v4.2.0)
 
 **Role:** Master UI/UX & Frontend Architect  
 **Alias:** `mr-ui-designer`  

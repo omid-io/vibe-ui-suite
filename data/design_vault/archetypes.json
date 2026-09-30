@@ -59,7 +59,7 @@
     },
     "cyber_terminal": {
       "name": "Cybernetic HUD & Matrix",
-      "domains": ["cybersecurity_identity_auth", "crypto_trading_web3"],
+      "domains": ["cybersecurity_identity_auth", "crypto_dex_web3"],
       "canvas_background": "bg-[#05080c] text-cyan-400",
       "grid_pattern": "bg-[linear-gradient(to_right,rgba(6,182,212,0.08)_1px,transparent_1px),linear-gradient(to_bottom,rgba(6,182,212,0.08)_1px,transparent_1px)] bg-[size:24px_24px]",
       "glow_color": "rgba(6, 182, 212, 0.18)",

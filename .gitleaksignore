@@ -1,0 +1,2 @@
+# Gitleaks ignore list
+599049577a5bd5c06a765febd08c2e45a3cd5c61:data/design_vault/archetypes.json:generic-api-key:62

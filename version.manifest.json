@@ -1,12 +1,12 @@
 {
   "$schema": "./schemas/version-manifest.schema.json",
-  "version": "4.1.1",
-  "codename": "Multi-Model Audit Hardening & Production Domain Fidelity",
+  "version": "4.2.0",
+  "codename": "Masterpiece Visual Engine 2.0 & Living Interfaces",
   "release_channel": "stable",
   "packages": {
-    "vibe-ui-suite": "4.1.1",
-    "vibe-ui-vscode": "4.1.1",
-    "vibe-ui-nextjs-starter": "4.1.1"
+    "vibe-ui-suite": "4.2.0",
+    "vibe-ui-vscode": "4.2.0",
+    "vibe-ui-nextjs-starter": "4.2.0"
   },
   "schemas": {
     "intent_contract": "v1",
@@ -23,5 +23,5 @@
     "nextjs": ">=15.0.0",
     "react": ">=19.0.0"
   },
-  "last_updated": "2026-09-29"
+  "last_updated": "2026-09-30"
 }
