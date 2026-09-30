@@ -890,8 +890,17 @@ def audit_repo_integrity(root_dir: Path) -> dict:
                 "msg": f"Failed adversarial cases: {'; '.join(failed_case_details)}"
             })
             results["overall_status"] = "FAIL"
+    except Exception as e:
+        results["checks"].append({
+            "pillar": "Autonomous Director",
+            "name": "Adversarial Bilingual Disambiguation",
+            "status": "FAIL",
+            "msg": f"Failed to run director disambiguation suite: {e}"
+        })
+        results["overall_status"] = "FAIL"
 
-        # 7. Production HTML Generator Zero Broken Anchors & Domain Integrity
+    # 7. Production HTML Generator Zero Broken Anchors & Domain Integrity
+    try:
         from vibe_core.generator import InterfaceGenerator
         from bs4 import BeautifulSoup
         generator = InterfaceGenerator()
@@ -937,10 +946,10 @@ def audit_repo_integrity(root_dir: Path) -> dict:
             results["overall_status"] = "FAIL"
     except Exception as e:
         results["checks"].append({
-            "pillar": "Autonomous Director",
-            "name": "Adversarial Bilingual Disambiguation",
+            "pillar": "Production Generator",
+            "name": "Zero Broken Anchors & Domain Integrity",
             "status": "FAIL",
-            "msg": f"Failed to run director disambiguation suite: {e}"
+            "msg": f"Failed to run generator anchor suite: {e}"
         })
         results["overall_status"] = "FAIL"
 
