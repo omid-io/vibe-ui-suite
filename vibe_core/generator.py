@@ -1385,7 +1385,7 @@ export default {component_name};
 
   <footer class="w-full border-t border-[var(--border-subtle)] bg-[var(--surface-bg)] py-6 mt-12">
     <div class="max-w-7xl mx-auto px-4 text-center text-xs text-[var(--text-muted)]">
-      &copy; 2026 Vibe UI Design Intelligence. All rights reserved.
+      &copy; 2026 {brand_name}. {"تمامی حقوق محفوظ است." if is_rtl else "All rights reserved."}
     </div>
   </footer>
 

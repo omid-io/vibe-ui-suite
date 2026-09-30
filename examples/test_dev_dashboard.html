@@ -1,0 +1,413 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en" data-domain="devops_cloud_terminal" class="h-full">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Zero-Config Kubernetes Ingress & Edge Orchestration</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Playfair+Display:ital,wght@0,600;1,400&family=Vazirmatn:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+:root {
+  --canvas-bg: oklch(0.13 0.006 260);
+  --surface-bg: oklch(0.18 0.008 260);
+  --accent: oklch(0.70 0.18 260);
+  --vibe-on-primary: oklch(0.12 0.02 85);
+  --border-subtle: oklch(0.28 0.01 260);
+  --text-primary: oklch(0.96 0.005 260);
+  --text-muted: oklch(0.68 0.01 260);
+  --radius-base: 2px;
+  --radius-container: 12px;
+  --radius-button: 8px;
+  --font-display: 'JetBrains Mono', 'Vazirmatn', sans-serif;
+  --font-body: 'JetBrains Mono', 'Vazirmatn', sans-serif;
+  --motion-lambda: 20;
+  --transition-duration: 200ms;
+}
+
+    body {
+      background-color: var(--canvas-bg);
+      color: var(--text-primary);
+      font-family: var(--font-body);
+      overflow-x: hidden;
+      unicode-bidi: plaintext;
+    }
+
+    bdi, .ltr-code {
+      direction: ltr !important;
+      unicode-bidi: isolate;
+    }
+
+    h1, h2, h3, .display-font {
+      font-family: var(--font-display);
+    }
+
+    button:focus-visible, a:focus-visible, input:focus-visible {
+      outline: 2px solid var(--accent);
+      outline-offset: 2px;
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, ::before, ::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+      }
+    }
+  </style>
+</head>
+<body class="min-h-full flex flex-col antialiased">
+  <!-- Top Navigation Bar -->
+  <header class="w-full border-b border-[var(--border-subtle)] bg-[var(--surface-bg)] sticky top-0 z-30">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
+      <div class="flex items-center space-x-3 rtl:space-x-reverse">
+        <svg class="w-8 h-8 text-[var(--accent)]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <polygon points="12 2 2 7 12 12 22 7 12 2"></polygon>
+          <polyline points="2 17 12 22 22 17"></polyline>
+          <polyline points="2 12 12 17 22 12"></polyline>
+        </svg>
+        <span class="text-xl font-bold tracking-tight display-font">Vibe Studio</span>
+      </div>
+      <nav class="hidden md:flex items-center space-x-6 rtl:space-x-reverse" aria-label="Main Navigation">
+        <a href="#cluster" class="text-sm font-medium hover:text-[var(--accent)] transition-colors min-h-[44px] inline-flex items-center">Cluster Health</a>
+        <a href="#latency" class="text-sm font-medium hover:text-[var(--accent)] transition-colors min-h-[44px] inline-flex items-center">P95/P99 Latency</a>
+        <a href="#services" class="text-sm font-medium hover:text-[var(--accent)] transition-colors min-h-[44px] inline-flex items-center">Services Mesh</a>
+        <a href="#logs" class="text-sm font-medium hover:text-[var(--accent)] transition-colors min-h-[44px] inline-flex items-center">Live Terminal</a>
+      </nav>
+      <div class="flex items-center space-x-3 rtl:space-x-reverse">
+        <button type="button" id="header-cta-btn" class="inline-flex items-center justify-center px-4 py-2.5 text-sm font-medium rounded-[var(--radius-button)] text-[var(--vibe-on-primary,#fff)] bg-[var(--accent)] hover:opacity-90 min-h-[44px] min-w-[44px] transition-transform duration-200 ease-out">
+          Deploy In 30 Seconds
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main Hero & Content Section -->
+  <main class="flex-1 max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-12 lg:py-16">
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-6 lg:gap-8">
+      <!-- Main Bento Hero Card with Asymmetric Layout -->
+      <section class="md:col-span-2 bg-[var(--surface-bg)] border border-[var(--border-subtle)] shadow-none rounded-[var(--radius-container)] p-6 sm:p-8 lg:p-10 flex flex-col justify-between" aria-labelledby="hero-title">
+        <div>
+          <span class="inline-flex items-center px-3 py-1 rounded-full text-xs font-semibold bg-[var(--accent)]/10 text-[var(--accent)] mb-4">
+            <svg class="w-3.5 h-3.5 inline mr-1.5 rtl:ml-1.5 rtl:mr-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 14 14"></polyline></svg>
+            Vibe UI Verified
+          </span>
+          <h1 id="hero-title" class="text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight mb-4">
+            Zero-Config Kubernetes Ingress & Edge Orchestration
+          </h1>
+          <p class="text-[var(--text-muted)] text-base sm:text-lg leading-relaxed max-w-2xl mb-8">
+            Deploy global container clusters in seconds with automatic TLS, wireguard mesh, and sub-10ms P99 latency.
+          </p>
+        </div>
+
+        <div class="flex flex-wrap gap-4 items-center pt-4 border-t border-[var(--border-subtle)]">
+          <button type="button" id="hero-primary-btn" class="inline-flex items-center justify-center px-6 py-3 text-base font-semibold rounded-[var(--radius-button)] text-[var(--vibe-on-primary,#fff)] bg-[var(--accent)] min-h-[44px] transition-transform active:scale-95">
+            Deploy In 30 Seconds
+          </button>
+          <button type="button" id="hero-secondary-btn" class="inline-flex items-center justify-center px-6 py-3 text-base font-semibold rounded-[var(--radius-button)] text-[var(--text-primary)] border border-[var(--border-subtle)] bg-[var(--canvas-bg)] hover:bg-[var(--surface-bg)] min-h-[44px] transition-colors">
+            Read Architecture RFC
+          </button>
+        </div>
+      </section>
+
+      <!-- Secondary Domain Highlights & Metrics Card -->
+      <aside class="bg-[var(--surface-bg)] border border-[var(--border-subtle)] shadow-none rounded-[var(--radius-container)] p-6 flex flex-col justify-between" aria-label="Domain Highlights">
+        <div>
+          <h2 class="text-lg font-bold mb-4 flex items-center space-x-2 rtl:space-x-reverse">
+            <svg class="w-5 h-5 text-[var(--accent)]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M22 12h-4l-3 9L9 3l-3 9H2"></path></svg>
+            <span>Highlights & Status</span>
+          </h2>
+          <div class="space-y-4">
+            <div class="p-3.5 bg-[var(--canvas-bg)] rounded-[var(--radius-base)] border border-[var(--border-subtle)]">
+              <div class="text-xs text-[var(--text-muted)] mb-1">P99 Edge Latency</div>
+              <div class="text-2xl font-bold text-[var(--accent)]"><bdi>8.4ms</bdi></div>
+            </div>
+            <div class="p-3.5 bg-[var(--canvas-bg)] rounded-[var(--radius-base)] border border-[var(--border-subtle)]">
+              <div class="text-xs text-[var(--text-muted)] mb-1">Global PoPs</div>
+              <div class="text-2xl font-bold text-[var(--accent)]"><bdi>120+</bdi></div>
+            </div>
+            <div class="p-3.5 bg-[var(--canvas-bg)] rounded-[var(--radius-base)] border border-[var(--border-subtle)]">
+              <div class="text-xs text-[var(--text-muted)] mb-1">SLA Uptime</div>
+              <div class="text-2xl font-bold text-[var(--accent)]"><bdi>99.999%</bdi></div>
+            </div>
+          </div>
+        </div>
+        <div class="mt-6 text-xs text-[var(--text-muted)] flex items-center space-x-1.5 rtl:space-x-reverse">
+          <svg class="w-4 h-4 text-emerald-500" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>
+          <span>Active & Ready</span>
+        </div>
+      </aside>
+    </div>
+
+
+    <!-- DevOps Section 1: Cluster Health -->
+    <section id="cluster" class="mt-12 pt-8 border-t border-[var(--border-subtle)]" aria-labelledby="cluster-heading">
+      <div class="flex items-center justify-between mb-6">
+        <div>
+          <h2 id="cluster-heading" class="text-2xl font-bold tracking-tight">Kubernetes Cluster Status</h2>
+          <p class="text-xs text-[var(--text-muted)] mt-1">Real-time health telemetry across active worker nodes and pods.</p>
+        </div>
+        <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-mono font-semibold bg-emerald-500/10 text-emerald-500 border border-emerald-500/20">
+          <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
+          All Systems Operational (99.99%)
+        </span>
+      </div>
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 font-mono text-xs">
+        <div class="p-4 bg-[var(--surface-bg)] border border-[var(--border-subtle)] rounded-[var(--radius-container)] shadow-none space-y-2">
+          <div class="flex justify-between text-[var(--text-muted)]"><span>ingress-nginx</span><span class="text-emerald-500 font-bold">READY</span></div>
+          <div class="text-base font-bold text-[var(--text-primary)]">6/6 Pods Running</div>
+          <div class="w-full bg-[var(--canvas-bg)] rounded-full h-1.5"><div class="bg-emerald-500 h-1.5 rounded-full" style="width: 100%"></div></div>
+        </div>
+        <div class="p-4 bg-[var(--surface-bg)] border border-[var(--border-subtle)] rounded-[var(--radius-container)] shadow-none space-y-2">
+          <div class="flex justify-between text-[var(--text-muted)]"><span>api-gateway-mesh</span><span class="text-emerald-500 font-bold">READY</span></div>
+          <div class="text-base font-bold text-[var(--text-primary)]">12/12 Pods Running</div>
+          <div class="w-full bg-[var(--canvas-bg)] rounded-full h-1.5"><div class="bg-emerald-500 h-1.5 rounded-full" style="width: 100%"></div></div>
+        </div>
+        <div class="p-4 bg-[var(--surface-bg)] border border-[var(--border-subtle)] rounded-[var(--radius-container)] shadow-none space-y-2">
+          <div class="flex justify-between text-[var(--text-muted)]"><span>auth-worker-daemon</span><span class="text-amber-500 font-bold">SYNCING</span></div>
+          <div class="text-base font-bold text-[var(--text-primary)]">4/4 Pods (88% CPU)</div>
+          <div class="w-full bg-[var(--canvas-bg)] rounded-full h-1.5"><div class="bg-amber-500 h-1.5 rounded-full" style="width: 88%"></div></div>
+        </div>
+        <div class="p-4 bg-[var(--surface-bg)] border border-[var(--border-subtle)] rounded-[var(--radius-container)] shadow-none space-y-2">
+          <div class="flex justify-between text-[var(--text-muted)]"><span>redis-cluster-cache</span><span class="text-emerald-500 font-bold">READY</span></div>
+          <div class="text-base font-bold text-[var(--text-primary)]">3 Master / 3 Replica</div>
+          <div class="w-full bg-[var(--canvas-bg)] rounded-full h-1.5"><div class="bg-emerald-500 h-1.5 rounded-full" style="width: 100%"></div></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- DevOps Section 2: P95/P99 Latency & SLO -->
+    <section id="latency" class="mt-12 pt-8 border-t border-[var(--border-subtle)]" aria-labelledby="latency-heading">
+      <h2 id="latency-heading" class="text-2xl font-bold tracking-tight mb-6">Throughput & Latency Profiling</h2>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6 font-mono">
+        <div class="p-6 bg-[var(--surface-bg)] border border-[var(--border-subtle)] rounded-[var(--radius-container)] shadow-none space-y-2">
+          <div class="text-xs text-[var(--text-muted)] uppercase tracking-wider">Median Latency (p50)</div>
+          <div class="text-3xl font-extrabold text-[var(--accent)]"><bdi>12.4 ms</bdi></div>
+          <div class="text-xs text-emerald-500"><svg class="w-4 h-4 inline" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg> -4.2% vs 7-day average</div>
+        </div>
+        <div class="p-6 bg-[var(--surface-bg)] border border-[var(--border-subtle)] rounded-[var(--radius-container)] shadow-none space-y-2">
+          <div class="text-xs text-[var(--text-muted)] uppercase tracking-wider">Tail Latency (p95)</div>
+          <div class="text-3xl font-extrabold text-[var(--accent)]"><bdi>38.2 ms</bdi></div>
+          <div class="text-xs text-emerald-500"><svg class="w-4 h-4 inline" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg> Well within 50ms SLO threshold</div>
+        </div>
+        <div class="p-6 bg-[var(--surface-bg)] border border-[var(--border-subtle)] rounded-[var(--radius-container)] shadow-none space-y-2">
+          <div class="text-xs text-[var(--text-muted)] uppercase tracking-wider">Peak Latency (p99)</div>
+          <div class="text-3xl font-extrabold text-amber-500"><bdi>84.1 ms</bdi></div>
+          <div class="text-xs text-[var(--text-muted)]">SLO target: &lt; 100ms</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- DevOps Section 3: Services Mesh -->
+    <section id="services" class="mt-12 pt-8 border-t border-[var(--border-subtle)]" aria-labelledby="services-mesh-heading">
+      <h2 id="services-mesh-heading" class="text-2xl font-bold tracking-tight mb-6">Microservices Mesh Health</h2>
+      <div class="overflow-x-auto border border-[var(--border-subtle)] rounded-[var(--radius-container)] bg-[var(--surface-bg)] shadow-none">
+        <table class="w-full text-start text-xs font-mono">
+          <thead class="bg-[var(--canvas-bg)] text-[var(--text-muted)] uppercase border-b border-[var(--border-subtle)]">
+            <tr>
+              <th scope="col" class="px-6 py-3 text-start">Service Name</th>
+              <th scope="col" class="px-6 py-3 text-start">Protocol</th>
+              <th scope="col" class="px-6 py-3 text-start">HTTP Status</th>
+              <th scope="col" class="px-6 py-3 text-start">Uptime</th>
+              <th scope="col" class="px-6 py-3 text-start">Action</th>
+            </tr>
+          </thead>
+          <tbody class="divide-y divide-[var(--border-subtle)]">
+            <tr>
+              <td class="px-6 py-4 font-bold text-[var(--text-primary)]">edge-ingress-proxy</td>
+              <td class="px-6 py-4 text-[var(--text-muted)]">HTTP/3 QUIC</td>
+              <td class="px-6 py-4"><span class="px-2 py-0.5 rounded-full bg-emerald-500/10 text-emerald-500 font-bold">200 OK</span></td>
+              <td class="px-6 py-4"><bdi>99.999%</bdi></td>
+              <td class="px-6 py-4"><button type="button" class="btn-action text-xs text-[var(--accent)] hover:underline min-h-[44px] inline-flex items-center">Inspect Traces</button></td>
+            </tr>
+            <tr>
+              <td class="px-6 py-4 font-bold text-[var(--text-primary)]">billing-event-worker</td>
+              <td class="px-6 py-4 text-[var(--text-muted)]">gRPC / TLS</td>
+              <td class="px-6 py-4"><span class="px-2 py-0.5 rounded-full bg-emerald-500/10 text-emerald-500 font-bold">200 OK</span></td>
+              <td class="px-6 py-4"><bdi>99.985%</bdi></td>
+              <td class="px-6 py-4"><button type="button" class="btn-action text-xs text-[var(--accent)] hover:underline min-h-[44px] inline-flex items-center">Inspect Traces</button></td>
+            </tr>
+            <tr>
+              <td class="px-6 py-4 font-bold text-[var(--text-primary)]">telemetry-aggregator</td>
+              <td class="px-6 py-4 text-[var(--text-muted)]">Kafka / TCP</td>
+              <td class="px-6 py-4"><span class="px-2 py-0.5 rounded-full bg-emerald-500/10 text-emerald-500 font-bold">200 OK</span></td>
+              <td class="px-6 py-4"><bdi>99.994%</bdi></td>
+              <td class="px-6 py-4"><button type="button" class="btn-action text-xs text-[var(--accent)] hover:underline min-h-[44px] inline-flex items-center">Inspect Traces</button></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- DevOps Section 4: Live Terminal & Log Stream -->
+    <section id="logs" class="mt-12 pt-8 border-t border-[var(--border-subtle)]" aria-labelledby="logs-heading">
+      <div class="flex items-center justify-between mb-4">
+        <h2 id="logs-heading" class="text-2xl font-bold tracking-tight">Live Kubectl Telemetry Console</h2>
+        <div class="flex gap-2">
+          <button type="button" id="toggle-log-stream" class="px-3 py-1.5 text-xs font-mono font-bold rounded-[var(--radius-button)] bg-[var(--canvas-bg)] border border-[var(--border-subtle)] hover:bg-[var(--surface-bg)] min-h-[44px] transition-colors">
+            Pause Stream
+          </button>
+          <button type="button" id="copy-curl-btn" class="px-3 py-1.5 text-xs font-mono font-bold rounded-[var(--radius-button)] bg-[var(--accent)] text-[var(--vibe-on-primary,#fff)] min-h-[44px] transition-colors">
+            Copy Curl Snippet
+          </button>
+        </div>
+      </div>
+      <div class="p-5 bg-black border border-emerald-900/60 rounded-[var(--radius-container)] font-mono text-xs text-emerald-400 space-y-1.5 overflow-x-auto shadow-inner">
+        <div class="text-zinc-500"># Connected to cluster: us-east-prod-k8s-mesh [Active Context]</div>
+        <div>[2026-09-30T04:00:12Z] INFO  ingress-controller: sync service target 10.244.2.14:8080 (healthy)</div>
+        <div>[2026-09-30T04:00:15Z] INFO  auth-worker: Token verification latency p95=8.2ms, status=AUTHORIZED</div>
+        <div>[2026-09-30T04:00:18Z] DEBUG redis-cache: Cache hit ratio: 98.4% (3.2k ops/sec)</div>
+        <div>[2026-09-30T04:00:22Z] WARN  worker-node-4: Memory saturation approaching 82% threshold; auto-scaler standing by</div>
+        <div class="text-emerald-300 font-bold animate-pulse">&gt; tail -f /var/log/syslog --follow [LIVE STREAMING]</div>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="w-full border-t border-[var(--border-subtle)] bg-[var(--surface-bg)] py-6 mt-12">
+    <div class="max-w-7xl mx-auto px-4 text-center text-xs text-[var(--text-muted)]">
+      &copy; 2026 Vibe Studio. All rights reserved.
+    </div>
+  </footer>
+
+  <!-- Interactive Client-side Script (Zero Dead Buttons & Zero Broken Anchors) -->
+  <script>
+    (function() {
+      // 1. Toast Notification Utility
+      function showToast(message) {
+        let toast = document.getElementById('vibe-toast');
+        if (!toast) {
+          toast = document.createElement('div');
+          toast.id = 'vibe-toast';
+          toast.setAttribute('role', 'status');
+          toast.setAttribute('aria-live', 'polite');
+          toast.className = 'fixed bottom-5 end-5 z-50 px-5 py-3 rounded-lg shadow-xl text-xs font-semibold transition-transform duration-200 ease-out transform duration-300 opacity-0 translate-y-2 pointer-events-none border';
+          document.body.appendChild(toast);
+        }
+        toast.style.backgroundColor = 'var(--surface-bg)';
+        toast.style.color = 'var(--text-primary)';
+        toast.style.borderColor = 'var(--accent)';
+        toast.textContent = message;
+        toast.classList.remove('opacity-0', 'translate-y-2', 'pointer-events-none');
+        setTimeout(function() {
+          toast.classList.add('opacity-0', 'translate-y-2', 'pointer-events-none');
+        }, 3500);
+      }
+
+      // 2. Smooth Scrolling for all Internal Anchors
+      document.querySelectorAll('a[href^="#"]').forEach(function(anchor) {
+        anchor.addEventListener('click', function(e) {
+          var targetId = anchor.getAttribute('href');
+          var targetEl = document.querySelector(targetId);
+          if (targetEl) {
+            e.preventDefault();
+            targetEl.scrollIntoView({ behavior: 'smooth' });
+          }
+        });
+      });
+
+      // 3. Header & Hero CTAs
+      var headerCta = document.getElementById('header-cta-btn');
+      var heroPrimary = document.getElementById('hero-primary-btn');
+      var heroSecondary = document.getElementById('hero-secondary-btn');
+
+      if (headerCta) {
+        headerCta.addEventListener('click', function() {
+          var bookingEl = document.getElementById('booking') || document.getElementById('services') || document.getElementById('contact');
+          if (bookingEl) bookingEl.scrollIntoView({ behavior: 'smooth' });
+          else showToast('Deploy In 30 Seconds - Active');
+        });
+      }
+      if (heroPrimary) {
+        heroPrimary.addEventListener('click', function() {
+          var bookingEl = document.getElementById('booking') || document.getElementById('services') || document.getElementById('contact');
+          if (bookingEl) bookingEl.scrollIntoView({ behavior: 'smooth' });
+          else showToast('Deploy In 30 Seconds - Started');
+        });
+      }
+      if (heroSecondary) {
+        heroSecondary.addEventListener('click', function() {
+          var targetEl = document.getElementById('portfolio') || document.getElementById('services') || document.getElementById('features') || document.getElementById('cluster');
+          if (targetEl) targetEl.scrollIntoView({ behavior: 'smooth' });
+          else showToast('Read Architecture RFC');
+        });
+      }
+
+      // 4. Interactive Action Buttons
+      document.querySelectorAll('.btn-action').forEach(function(btn) {
+        btn.addEventListener('click', function() {
+          showToast('Telemetry traces inspection opened.');
+        });
+      });
+
+      // 5. Booking Day & Time Slot Selection
+      document.querySelectorAll('.day-slot-btn').forEach(function(btn) {
+        btn.addEventListener('click', function() {
+          document.querySelectorAll('.day-slot-btn').forEach(function(b) {
+            b.className = 'day-slot-btn px-4 py-2 text-xs font-bold rounded-[var(--radius-button)] bg-[var(--canvas-bg)] border border-[var(--border-subtle)] hover:bg-[var(--surface-bg)] min-h-[44px]';
+          });
+          btn.className = 'day-slot-btn px-4 py-2 text-xs font-bold rounded-[var(--radius-button)] bg-[var(--accent)] text-[var(--vibe-on-primary,#fff)] min-h-[44px]';
+        });
+      });
+
+      document.querySelectorAll('.time-slot-btn').forEach(function(btn) {
+        btn.addEventListener('click', function() {
+          document.querySelectorAll('.time-slot-btn').forEach(function(b) {
+            b.className = 'time-slot-btn px-4 py-2 text-xs font-bold rounded-[var(--radius-button)] bg-[var(--canvas-bg)] border border-[var(--border-subtle)] hover:bg-[var(--surface-bg)] min-h-[44px]';
+          });
+          btn.className = 'time-slot-btn px-4 py-2 text-xs font-bold rounded-[var(--radius-button)] bg-[var(--accent)] text-[var(--vibe-on-primary,#fff)] min-h-[44px]';
+        });
+      });
+
+      // 6. Portfolio Before/After Tab Switching
+      document.querySelectorAll('.portfolio-tab').forEach(function(tab) {
+        tab.addEventListener('click', function() {
+          var view = tab.getAttribute('data-view');
+          document.querySelectorAll('.portfolio-tab').forEach(function(t) {
+            t.className = 'portfolio-tab px-3 py-1.5 text-xs font-semibold rounded-[var(--radius-button)] bg-[var(--canvas-bg)] border border-[var(--border-subtle)] hover:bg-[var(--surface-bg)] min-h-[44px]';
+          });
+          tab.className = 'portfolio-tab px-3 py-1.5 text-xs font-semibold rounded-[var(--radius-button)] bg-[var(--accent)] text-[var(--vibe-on-primary,#fff)] min-h-[44px]';
+          showToast(view === 'before' ? 'نمایش تصاویر قبل از درمان' : 'نمایش نتایج نهایی پس از اتمام درمان');
+        });
+      });
+
+      // 7. DevOps Log Stream Toggle & Copy
+      var streamToggle = document.getElementById('toggle-log-stream');
+      if (streamToggle) {
+        var isStreaming = true;
+        streamToggle.addEventListener('click', function() {
+          isStreaming = !isStreaming;
+          streamToggle.textContent = isStreaming ? 'Pause Stream' : 'Resume Stream';
+          showToast(isStreaming ? 'Live log telemetry resumed' : 'Log stream paused for inspection');
+        });
+      }
+      var copyCurlBtn = document.getElementById('copy-curl-btn');
+      if (copyCurlBtn) {
+        copyCurlBtn.addEventListener('click', function() {
+          showToast('curl command copied to clipboard');
+        });
+      }
+
+      // 8. Forms Submission with Feedback
+      var bookingForm = document.getElementById('quick-booking-form');
+      if (bookingForm) {
+        bookingForm.addEventListener('submit', function(e) {
+          e.preventDefault();
+          showToast('درخواست نوبت شما با موفقیت ثبت شد. مشاوران کلینیک به زودی با شما تماس خواهند گرفت.');
+          bookingForm.reset();
+        });
+      }
+
+      var contactForm = document.getElementById('contact-form');
+      if (contactForm) {
+        contactForm.addEventListener('submit', function(e) {
+          e.preventDefault();
+          showToast('درخواست شما با موفقیت ارسال شد. کارشناسان ما به زودی با شما تماس می گیرند.');
+          contactForm.reset();
+        });
+      }
+    })();
+  </script>
+</body>
+</html>

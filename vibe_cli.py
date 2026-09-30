@@ -66,6 +66,27 @@ def cmd_generate(args):
     decision = engine.recommend(intent, user_style_preference=args.style)
     print(f"      Style: {decision['selected_style']} (Score: {decision['composite_score']})")
 
+    out_format = getattr(args, "format", None)
+    if not out_format:
+        if args.output and (args.output.endswith(".tsx") or args.output.endswith(".jsx")):
+            out_format = "tsx"
+        else:
+            out_format = "html"
+
+    if out_format == "tsx":
+        print("[3/5] Generating React 19 Living TSX Interface Artifact...")
+        tsx = generator.generate_react_tsx(decision)
+        out_path = Path(args.output).resolve() if args.output else (ROOT_DIR / "examples" / "GeneratedMasterpiece.tsx").resolve()
+        out_path.parent.mkdir(parents=True, exist_ok=True)
+        with open(out_path, "w", encoding="utf-8") as f:
+            f.write(tsx)
+        try:
+            display_path = out_path.relative_to(ROOT_DIR)
+        except ValueError:
+            display_path = out_path
+        print(f"\n[SUCCESS] Completed React 19 TSX pipeline. Artifact saved to: {display_path}")
+        return
+
     print("[3/5] Generating Initial Interface Artifact...")
     html = generator.generate_html(decision, prompt_title=args.query)
 
@@ -172,7 +193,8 @@ def main():
     # generate
     p_gen = subparsers.add_parser("generate", help="Run full autonomous generation pipeline")
     p_gen.add_argument("query", help="Prompt or query")
-    p_gen.add_argument("-o", "--output", help="Output HTML file path")
+    p_gen.add_argument("-o", "--output", help="Output file path (.html or .tsx)")
+    p_gen.add_argument("-f", "--format", choices=["html", "tsx"], default=None, help="Output format: 'html' (default) or 'tsx' (React 19 component)")
     p_gen.add_argument("-s", "--style", help="Style override")
     p_gen.add_argument("--strict", action="store_true", help="Run Playwright runtime verification after generation")
 
