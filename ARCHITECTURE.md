@@ -1,6 +1,6 @@
 # 🏛️ Vibe UI Suite — System Architecture & Data Contract Specification
 
-**Version:** 4.1.0 (Apple Cupertino Design & Kowalski Motion Physics Ergonomics)  
+**Version:** 4.1.1 (Multi-Model Audit Hardening & Production Domain Fidelity)  
 **Status:** Feature Freeze (Production Certified)  
 **Document Type:** Core Architectural Specification  
 **Machine Contract Reference:** [`schemas/design-spec.v1.schema.json`](schemas/design-spec.v1.schema.json)  
