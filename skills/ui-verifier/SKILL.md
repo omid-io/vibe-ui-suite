@@ -58,12 +58,13 @@ Whenever asked to audit, verify, or review any web page, component, or frontend 
   - **Zero Emojis:** Zero raw unicode emojis used as interface icons; verified inline SVG vector paths.
   - **Frame Driver:** Continuous interactive elements (sliders, spring tilts) driven via `requestAnimationFrame`.
 
-### Pillar 5: Semantic RTL & BiDi Resilience
-- **Measurement Method:** Inspect bidirectional CSS logical properties and mixed-text punctuation.
+### Pillar 5: On-Demand RTL & BiDi Resilience (Applies to RTL/Bilingual Targets)
+- **Activation Scope:** Evaluated exclusively on Persian/RTL interfaces or bilingual UIs with RTL support (`RTL.md`). For pure English interfaces, this pillar evaluates as N/A or passes without imposing RTL overhead.
+- **Measurement Method:** Inspect bidirectional CSS logical properties, non-mirrored layout, and font independence.
 - **Evidence Required:**
-  - **Macro Layout Stability:** Structural grid coordinates remain locked; no indiscriminate layout flipping.
-  - **Directional Mirroring:** Sequential arrows, breadcrumb chevrons, and step indicators mirror semantically.
-  - **BiDi Punctuation Isolation:** Mixed sentences with English terms (`Claude Code`, `Tailwind`, `API`) wrapped in `<bdi>` or styled with `unicode-bidi: plaintext`.
+  - **Zero Layout Mirroring:** Macro grid coordinates, traffic lights, and component columns physically locked in LTR coordinates.
+  - **Font Independence:** English copy retains default English fonts (Inter, Geist, sans-serif); Vazirmatn is scoped strictly to Persian characters.
+  - **BiDi Punctuation Isolation:** Mixed sentences with English terms (`Claude Code`, `Tailwind`, `API`) wrapped in `<bdi>` or styled with `unicode-bidi: isolate`.
   - **Pure Monospace LTR:** Code blocks, CLI commands, telemetry digits, and URLs explicitly styled with `direction: ltr !important; text-align: left !important`.
 
 ---

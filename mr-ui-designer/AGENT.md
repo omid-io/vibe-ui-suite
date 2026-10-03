@@ -43,8 +43,14 @@ When invoked (e.g., *"mr-ui-designer یک داشبورد برای صرافی ر�
 - Support complete 4-state lifecycle: Default populated state, Skeleton loader (`animate-pulse`), Empty state, and Error recovery retry.
 - Explicitly mark synthetic demonstration metrics with `data-origin="synthetic_demo"`.
 
-### 6. Step 6: Strict Integrity, WCAG AAA & Fixed-Structure Semantic RTL
-- **Fixed-Structure Semantic RTL:** Preserves physical macro layout grid stability; RTL directionality is scoped to content and text nodes; numbers, mixed English terms, and metric tokens are strictly wrapped in `<bdi>`; telemetry & code blocks remain strictly LTR (`.ltr-code`).
+### 6. Step 6: Strict Integrity, WCAG AAA & On-Demand RTL Protocol
+- **On-Demand Language Determination:**
+  - *English Prompts:* Generate 100% English LTR interfaces with native typography (Inter, Geist, Satoshi) and zero RTL overhead.
+  - *Persian Prompts:* Generate Persian interfaces conforming strictly to the non-mirrored, font-scoped rules in `RTL.md`.
+  - *Explicit Directives:* Follow explicit user instructions (e.g. bilingual toggle).
+- **Fixed-Structure Non-Mirrored Layout (`RTL.md`):** Macro layout stays physically anchored in LTR (window traffic lights on top-left, logo on left, bento grids invariant). Directionality (`dir="rtl"`) is strictly scoped to Persian text blocks.
+- **Font Independence:** English copy retains default English fonts; Vazirmatn is scoped strictly to Persian characters via CSS fallback stacks (`font-family: 'Inter', 'Vazirmatn', sans-serif;`) or scoped selectors (`[lang="fa"]`).
+- **Token Isolation & Technical Blocks:** Mixed English terms wrapped in `<bdi>`; code, terminals, and metrics strictly locked in `.ltr-code`.
 - **Contrast & on-primary Tokens:** Interactive buttons must use `--color-vibe-on-primary` (or explicit WCAG >= 4.5:1 text color) on top of `--color-vibe-primary`. Never assume `text-white` on light or gold accents.
 - **Zero-Any TypeScript:** Explicit TypeScript interfaces for all components and props.
 - **Headless Browser Assurance:** Zero horizontal overflow on 320px, 375px, and 390px viewports.

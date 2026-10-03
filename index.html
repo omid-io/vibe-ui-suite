@@ -202,17 +202,25 @@
       transition: background-color var(--duration-enter) var(--ease-spring), color var(--duration-enter) var(--ease-spring);
     }
 
-    /* FIXED-STRUCTURE SEMANTIC RTL:
+    /* FIXED-STRUCTURE SEMANTIC RTL (RTL.md):
        Preserves physical layout structure (Window Chrome buttons on left, grids 1-2-3, LTR code).
-       Only typography and text blocks adapt without mirroring the entire page! */
+       Font Independence: English characters retain Inter/Geist; Persian glyphs render in Vazirmatn.
+       Only Persian typography and text blocks adapt without mirroring the entire page! */
     body.lang-fa {
-      font-family: var(--font-fa);
+      font-family: 'Inter', 'Vazirmatn', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
     }
     body.lang-fa .text-content {
       text-align: right;
+      direction: rtl;
     }
     body.lang-fa .text-content-center {
       text-align: center;
+      direction: rtl;
+    }
+    .ltr-code, .font-mono, pre, code {
+      font-family: var(--font-mono) !important;
+      direction: ltr !important;
+      text-align: left !important;
     }
 
     .vibe-card {
@@ -1441,11 +1449,11 @@
         : 'VIBE UI v4.2.0 • LIVING INTERFACES & MASTERPIECE GENERATIVE ENGINE';
       document.getElementById('heroHeadlineMain').textContent = isFa ? 'سیستم دیزاین خودکار برای' : 'The Autonomous Design System for';
       document.getElementById('heroHeadlineGradient').textContent = isFa ? 'ایجنت های کدنویسی هوش مصنوعی' : 'AI Coding Agents';
-      document.getElementById('heroSubheadline').textContent = isFa 
-        ? 'مهندسی قراردادمحور فرانت اند برای ایجنت های کدنویسی خودکار. کنتراست تایید شده WCAG AAA در فضای رنگی OKLCH، هفت کهن الگوی کلان، اسلایدرهای درگ تعاملی، دک های سخت افزاری لمسی و تولید مستقیم کدهای React 19 TSX.'
+      document.getElementById('heroSubheadline').innerHTML = isFa 
+        ? 'مهندسی قراردادمحور فرانت اند برای ایجنت های کدنویسی خودکار. کنتراست تایید شده <bdi>WCAG AAA</bdi> در فضای رنگی <bdi>OKLCH</bdi>، هفت کهن الگوی کلان، اسلایدرهای درگ تعاملی، دک های سخت افزاری لمسی و تولید مستقیم کدهای <bdi>React 19 TSX</bdi>.'
         : 'Contract-driven frontend engineering for autonomous coding agents. Mathematically certified WCAG AAA contrast, 7 macro visual archetypes, interactive split comparison sliders, tactile hardware decks, and living React 19 TSX generation.';
       document.getElementById('btnExploreDemoText').textContent = isFa ? 'مشاهده شوکیس پروداکشن' : 'Explore Living Showcase';
-      document.getElementById('btnVscodeMarketplaceText').textContent = isFa ? 'اکستنشن VS Code' : 'VS Code Extension';
+      document.getElementById('btnVscodeMarketplaceText').innerHTML = isFa ? 'اکستنشن <bdi>VS Code</bdi>' : 'VS Code Extension';
 
       // Window Chrome
       document.getElementById('tabTitleDevops').textContent = isFa ? 'تلمتری دواپس' : 'DevOps Telemetry';
@@ -1455,7 +1463,7 @@
       document.getElementById('lblLatencyMetric').textContent = isFa ? 'تاخیر گیت وی P99' : 'p99 Gateway Latency';
       document.getElementById('lblPodsMetric').textContent = isFa ? 'پادهای فعال کلاستر' : 'Cluster Ingress Pods';
       document.getElementById('lblThroughputMetric').textContent = isFa ? 'ترافیک ورودی فعال' : 'Active Throughput';
-      document.getElementById('clinicSliderTitle').textContent = isFa ? '۱۰ واحد ونیر سرامیکی E-Max — مقایسه تعاملی دو لایه' : '10 Units E-Max Ceramic Veneers — Interactive Split Comparison';
+      document.getElementById('clinicSliderTitle').innerHTML = isFa ? '<bdi>۱۰</bdi> واحد ونیر سرامیکی <bdi>E-Max</bdi> — مقایسه تعاملی دو لایه' : '10 Units E-Max Ceramic Veneers — Interactive Split Comparison';
       document.getElementById('clinicSliderSub').textContent = isFa ? 'دستگیره را بکشید تا تغییرات قبل و بعد از درمان را به صورت زنده مقایسه کنید.' : 'Drag the slider horizontally to compare baseline condition versus post-clinical restoration.';
       document.getElementById('lblSlideBefore').textContent = isFa ? 'قبل از درمان (پایه)' : 'BASELINE (BEFORE)';
       document.getElementById('lblSlideBeforeDesc').textContent = isFa ? 'تغییر رنگ دندان و سایش لبه های انسیزال.' : 'Tooth discoloration, mild crowding, and incisal edge attrition.';
@@ -1472,15 +1480,15 @@
       document.getElementById('btnFilterWeb3').textContent = isFa ? 'وب ۳ و تریدینگ' : 'Web3 & Trading';
       document.getElementById('btnFilterEditorial').textContent = isFa ? 'لوکس و تحریریه' : 'Luxury Editorial';
 
-      document.getElementById('pApexDesc').textContent = isFa ? 'سیستم بالانس سبد سرمایه گذاری با نمودارهای اسپارک لاین زنده SVG، تخصیص دارایی و فضای رنگی OKLCH.' : 'High-velocity portfolio balancing system with real-time SVG sparkline charting, multi-asset allocation, and zero-slop OKLCH color spaces.';
-      document.getElementById('pAuraDesc').textContent = isFa ? 'سیستم نوبت دهی و پورتال بیمار با کارت های اسکویرکل و شیشه مات در آرکتایپ اپل کوپرتینو.' : 'Fluid appointment scheduler and patient treatment portal designed in the Apple Cupertino archetype with squircle cards and frosted glass.';
-      document.getElementById('pSolanaDesc').textContent = isFa ? 'داشبورد صرافی و استیکینگ توکن سولانا با محاسبه لحظه ای APY و استایل لوکس شیشه ای دارک.' : 'Specular glass luxury liquidity dashboard featuring real-time APY calculation, zero slippage matrix, and dark prestige styling.';
+      document.getElementById('pApexDesc').innerHTML = isFa ? 'سیستم بالانس سبد سرمایه گذاری با نمودارهای اسپارک لاین زنده <bdi>SVG</bdi>، تخصیص دارایی و فضای رنگی <bdi>OKLCH</bdi>.' : 'High-velocity portfolio balancing system with real-time SVG sparkline charting, multi-asset allocation, and zero-slop OKLCH color spaces.';
+      document.getElementById('pAuraDesc').textContent = isFa ? 'سیستم نوبت دهی و پورتال بیمار با کارت های اسکویرکل و شیشه مات در کهن الگوی اپل کوپرتینو.' : 'Fluid appointment scheduler and patient treatment portal designed in the Apple Cupertino archetype with squircle cards and frosted glass.';
+      document.getElementById('pSolanaDesc').innerHTML = isFa ? 'داشبورد صرافی و استیکینگ توکن سولانا با محاسبه لحظه ای <bdi>APY</bdi> و استایل لوکس شیشه ای دارک.' : 'Specular glass luxury liquidity dashboard featuring real-time APY calculation, zero slippage matrix, and dark prestige styling.';
       document.getElementById('pVanguardDesc').textContent = isFa ? 'پلتفرم ساعت های لوکس با سیستم گرید سوئیسی، تایپوگرافی با کنتراست بالا و ریتم ستون های نامتقارن.' : 'High-fashion horology platform built with strict Swiss grid mathematics, high contrast typography, and asymmetric column rhythm.';
 
       // Lab Section
       document.getElementById('labBadge').textContent = isFa ? 'مکانیک تعاملی' : 'Interactive Mechanics';
       document.getElementById('labHeading').textContent = isFa ? 'آزمایشگاه مهندسی خودکار' : 'Autonomous Engineering Lab';
-      document.getElementById('labSub').textContent = isFa ? 'کامپوننت های زنده را تست کنید: فیزیک فنر، اسلایدر مقایسه دو لایه و دک سخت افزاری صدا به صورت لحظه ای.' : 'Explore live interactive components. Test spring mechanics, split comparison sliders, and tactile hardware audio decks in real time.';
+      document.getElementById('labSub').textContent = isFa ? 'کامپوننت های زنده را تست کنید: فیزیک فنر، اسلایدر مقایسه دو لایه و دک سخت افزاری صدا به صورت لحظه ای.' : 'Explore live interactive components. Test spring mechanics, split comparison sliders, and tactile hardware decks in real time.';
       document.getElementById('btnLabSpring').textContent = isFa ? 'فیزیک فنر کووالسکی' : 'Kowalski Spring Physics';
       document.getElementById('btnLabSlider').textContent = isFa ? 'اسلایدر مقایسه دو لایه' : 'Before/After Split Slider';
       document.getElementById('btnLabAudio').textContent = isFa ? 'دک سخت افزاری صدا' : 'Tactile Audio Deck';
@@ -1490,7 +1498,7 @@
       document.getElementById('springBoxText').textContent = isFa ? 'مرا به صورت افقی بکشید' : 'Drag Me Horizontally';
 
       document.getElementById('antiSlopTitle').textContent = isFa ? 'تفاوت شاهکار دیزاین با کدهای اسلوپ هوش مصنوعی' : 'High-Craft vs Generic AI Slop';
-      document.getElementById('antiSlopSub').textContent = isFa ? 'اسلایدر را بکشید تا مشاهده کنید Vibe UI چگونه با کنتراست WCAG AAA، راست چین استاندارد و آیکون های وکتور، کدهای بی کیفیت را پاکسازی می کند.' : 'Drag the slider horizontally to inspect how Vibe UI eliminates AI slop with WCAG AAA contrast, semantic RTL, and crisp vectors.';
+      document.getElementById('antiSlopSub').innerHTML = isFa ? 'اسلایدر را بکشید تا مشاهده کنید <bdi>Vibe UI</bdi> چگونه با کنتراست <bdi>WCAG AAA</bdi>، راست چین استاندارد و آیکون های وکتور، کدهای بی کیفیت را پاکسازی می کند.' : 'Drag the slider horizontally to inspect how Vibe UI eliminates AI slop with WCAG AAA contrast, semantic RTL, and crisp vectors.';
 
       document.getElementById('audioTitle').textContent = isFa ? 'دک سخت افزاری صدا با کنترل های لمسی' : 'Adaptive Hardware Audio Deck';
       document.getElementById('audioSub').textContent = isFa ? 'کنترل های لمسی نیومورفیک: روی پیچ های چرخشی کلیک کنید تا فرکانس تغییر کند، دکمه پاور را بزنید و فیدر را تنظیم کنید.' : 'Neumorphic tactile controls: click rotary knobs to step frequencies, toggle master power, and slide the debossed fader.';
@@ -1503,7 +1511,7 @@
       document.getElementById('arch1Badge').textContent = isFa ? 'HUD آبسیدین' : 'Obsidian HUD';
       document.getElementById('arch1Domain').textContent = isFa ? 'ابری و زیرساخت' : 'Cloud & Infra';
       document.getElementById('arch1Title').textContent = isFa ? 'تله متری Linear Dev HUD' : 'Linear Dev HUD';
-      document.getElementById('arch1Desc').textContent = isFa ? 'تله متری میکرودستور، تایپوگرافی مونو، وضعیت های زنده و اسپارک لاین های زنده K8s.' : 'Micro-terminal telemetry, monospace typography, cyan/emerald status pulses, and live K8s sparklines.';
+      document.getElementById('arch1Desc').innerHTML = isFa ? 'تله متری میکرودستور، تایپوگرافی مونو، وضعیت های زنده و اسپارک لاین های زنده <bdi>K8s</bdi>.' : 'Micro-terminal telemetry, monospace typography, cyan/emerald status pulses, and live K8s sparklines.';
 
       document.getElementById('arch2Badge').textContent = isFa ? 'تحریریه' : 'Editorial';
       document.getElementById('arch2Domain').textContent = isFa ? 'رسانه و لوکس' : 'Media & Luxury';
@@ -1513,7 +1521,7 @@
       document.getElementById('arch3Badge').textContent = isFa ? 'سیال اسکویرکل' : 'Squircle Fluid';
       document.getElementById('arch3Domain').textContent = isFa ? 'سلامت و درمان' : 'Consumer & Health';
       document.getElementById('arch3Title').textContent = isFa ? 'شیشه کوپرتینو' : 'Cupertino Glass';
-      document.getElementById('arch3Desc').textContent = isFa ? 'شیشه مات چند لایه، شعاع نرم اسکویرکل (28px)، فیزیک جهش کووالسکی و بازخورد لمسی.' : 'Multi-layer frosted glass, squircle border radii (28px), critically damped Kowalski spring motion, and tactile feedback.';
+      document.getElementById('arch3Desc').innerHTML = isFa ? 'شیشه مات چند لایه، شعاع نرم اسکویرکل (<bdi>28px</bdi>)، فیزیک جهش کووالسکی و بازخورد لمسی.' : 'Multi-layer frosted glass, squircle border radii (28px), critically damped Kowalski spring motion, and tactile feedback.';
 
       document.getElementById('arch4Badge').textContent = isFa ? 'بنتو نامتقارن' : 'Asymmetric Bento';
       document.getElementById('arch4Domain').textContent = isFa ? 'هوش مصنوعی و داده' : 'AI & Analytics';
@@ -1533,7 +1541,7 @@
       // Studio Section
       document.getElementById('studioBadge').textContent = isFa ? 'ایجنت خودکار' : 'Autonomous Agent';
       document.getElementById('studioHeading').textContent = isFa ? 'کنسول تعاملی mr-ui-designer' : 'Interactive mr-ui-designer Console';
-      document.getElementById('studioSub').textContent = isFa ? 'روی هر پرامپت آماده کلیک کنید تا اسکن استک (<1ms) و کارگردانی دامنه را به صورت زنده مشاهده کنید.' : 'Click any lazy prompt chip to watch Stack Sensor (<1ms) and Domain Director synthesize production interfaces.';
+      document.getElementById('studioSub').innerHTML = isFa ? 'روی هر پرامپت آماده کلیک کنید تا اسکن استک (<bdi><1ms</bdi>) و کارگردانی دامنه را به صورت زنده مشاهده کنید.' : 'Click any lazy prompt chip to watch Stack Sensor (<1ms) and Domain Director synthesize production interfaces.';
       document.getElementById('chipDental').textContent = isFa ? 'کلینیک زیبایی (اپل فلوید)' : 'Clinical Wellness (Apple Fluid)';
       document.getElementById('chipCrypto').textContent = isFa ? 'استیکینگ کریپتو (شیشه ای)' : 'Crypto Staking Pool (Specular Glass)';
       document.getElementById('chipSaas').textContent = isFa ? 'تحلیل و مالی SaaS (استرایپ)' : 'SaaS Analytics & Billing (Clean Stripe)';
@@ -1552,15 +1560,15 @@
 
       // CLI Section
       document.getElementById('cliBadge').textContent = isFa ? 'خط فرمان خودکار' : 'Autonomous CLI';
-      document.getElementById('cliHeading').textContent = isFa ? 'تولید فوری از ترمینال و کدهای React 19' : 'Instant CLI & React 19 Generation';
-      document.getElementById('cliSub').textContent = isFa ? 'تولید اپلیکیشن های کامل وب یا کامپوننت های ماژولار React 19 مستقیم از خط فرمان شما.' : 'Generate standalone HTML applications or stateful React 19 / TypeScript components directly from your command line.';
-      document.getElementById('feat1Title').textContent = isFa ? 'هوک های زنده React 19' : 'Living React 19 Hooks';
-      document.getElementById('feat1Desc').textContent = isFa ? 'خروجی کامپوننت های ماژولار TSX با اینترفیس تایپ شده و استیت اسلایدرها و تب ها.' : 'Direct export of modular TSX components with typed props, useState split sliders, and active tabs.';
-      document.getElementById('feat2Title').textContent = isFa ? 'راست چین ساختارثابت (Semantic RTL)' : 'Fixed-Structure Semantic RTL';
+      document.getElementById('cliHeading').innerHTML = isFa ? 'تولید فوری از ترمینال و کدهای <bdi>React 19</bdi>' : 'Instant CLI & React 19 Generation';
+      document.getElementById('cliSub').innerHTML = isFa ? 'تولید اپلیکیشن های کامل وب یا کامپوننت های ماژولار <bdi>React 19 / TypeScript</bdi> مستقیم از خط فرمان شما.' : 'Generate standalone HTML applications or stateful React 19 / TypeScript components directly from your command line.';
+      document.getElementById('feat1Title').innerHTML = isFa ? 'هوک های زنده <bdi>React 19</bdi>' : 'Living React 19 Hooks';
+      document.getElementById('feat1Desc').innerHTML = isFa ? 'خروجی کامپوننت های ماژولار <bdi>TSX</bdi> با اینترفیس تایپ شده و استیت اسلایدرها و تب ها.' : 'Direct export of modular TSX components with typed props, useState split sliders, and active tabs.';
+      document.getElementById('feat2Title').innerHTML = isFa ? 'راست چین ساختارثابت (<bdi>Semantic RTL</bdi>)' : 'Fixed-Structure Semantic RTL';
       document.getElementById('feat2Desc').textContent = isFa ? 'تضمین پایداری گرید صفحه بدون چرخش آینه ای و ناخواسته؛ کنترل های پنجره و ستون های گرید ثابت می مانند.' : 'Layout stability guaranteed without naive grid inversion. Window controls and grids stay physically locked; bidirectional tokens isolated in <bdi>.';
       document.getElementById('feat3Title').textContent = isFa ? 'صفر اموجی خام در محیط کاربری' : 'Absolute Zero Raw Emojis';
-      document.getElementById('feat3Desc').textContent = isFa ? 'آیکون های وکتور برداری خطی SVG با قابلیت ارث بری رنگ و تایید کامل استانداردهای وب.' : 'Strictly audited inline SVG vector icons with currentColor inheritance passing all accessibility linters.';
-      document.getElementById('footerCopyright').textContent = isFa ? '© ۲۰۲۶ Omid-IO. متن باز با مجوز MIT. تایید شده توسط Antigravity.' : '© 2026 Omid-IO. Open-Source MIT License. Certified Autonomous by Antigravity.';
+      document.getElementById('feat3Desc').innerHTML = isFa ? 'آیکون های وکتور برداری خطی <bdi>SVG</bdi> با قابلیت ارث بری رنگ و تایید کامل استانداردهای وب.' : 'Strictly audited inline SVG vector icons with currentColor inheritance passing all accessibility linters.';
+      document.getElementById('footerCopyright').innerHTML = isFa ? '© ۲۰۲۶ <bdi>Omid-IO</bdi>. متن باز با مجوز <bdi>MIT</bdi>. تایید شده توسط <bdi>Antigravity</bdi>.' : '© 2026 Omid-IO. Open-Source MIT License. Certified Autonomous by Antigravity.';
 
       // Re-trigger scenario update
       runScenario(currentScenario, null);
