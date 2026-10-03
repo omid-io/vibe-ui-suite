@@ -1,661 +1,1456 @@
 <!DOCTYPE html>
-<html lang="en" dir="ltr" class="scroll-smooth">
+<html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-  <title>Vibe UI Suite v4.2.0 — Autonomous Design System & Generative UI Engine</title>
-  <meta name="description" content="Production-grade generative UI engine and contract-driven design system for AI coding agents. 7 macro archetypes, macOS window chrome mockup, interactive Before/After sliders, WCAG AAA contrast, and living React 19 TSX.">
-  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%230ea5e9' stroke-width='2.5'><polygon points='12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2'/></svg>">
-
-  <!-- Google Fonts: Inter, Geist Mono, Vazirmatn -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Geist+Mono:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700;800;900&family=Vazirmatn:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <title>Vibe UI Suite v4.2.0 — Masterpiece Visual Engine & Living Creative Showcase</title>
+  <meta name="description" content="High-craft creative showcase and production-grade autonomous design system for AI coding agents. 7 macro visual archetypes, macOS window chrome mockup, interactive Before/After drag sliders, Kowalski spring physics, tactile hardware deck, WCAG AAA contrast, and fixed-structure semantic RTL.">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%230071e3' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'><polygon points='12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2'/></svg>">
 
   <!-- Tailwind CSS CDN -->
   <script src="https://cdn.tailwindcss.com"></script>
-  <script>
-    tailwind.config = {
-      darkMode: 'class',
-      theme: {
-        extend: {
-          fontFamily: {
-            sans: ['Inter', 'Vazirmatn', '-apple-system', 'sans-serif'],
-            mono: ['Geist Mono', 'ui-monospace', 'monospace'],
-            fa: ['Vazirmatn', 'sans-serif'],
-          }
-        }
-      }
-    }
-  </script>
+
+  <!-- Typography: Inter, Geist Mono, Playfair Display, Vazirmatn -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Geist+Mono:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700;800;900&family=Playfair+Display:ital,wght@0,600;0,700;1,600&family=Vazirmatn:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
 
   <style>
+    /* =========================================================================
+       1. CANONICAL OKLCH THEMES & DESIGN TOKENS
+       ========================================================================= */
     :root {
-      --canvas-bg: oklch(0.985 0.002 247);
-      --surface-bg: oklch(1 0 0);
-      --surface-elevated: oklch(0.995 0.002 247);
-      --text-primary: oklch(0.14 0.01 260);
-      --text-secondary: oklch(0.40 0.02 260);
-      --text-muted: oklch(0.55 0.02 260);
-      --border-subtle: oklch(0.91 0.005 260);
-      --border-strong: oklch(0.82 0.01 260);
-      --accent: oklch(0.58 0.22 250);
-      --accent-subtle: oklch(0.95 0.04 250);
-      --vibe-on-primary: #ffffff;
-      --radius-container: 20px;
-      --radius-card: 14px;
-      --radius-btn: 10px;
-      --mesh-glow: radial-gradient(ellipse at 50% 0%, oklch(0.58 0.22 250 / 0.16) 0%, transparent 70%);
-      --glass-blur: blur(20px);
-    }
+      --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      --font-mono: 'Geist Mono', ui-monospace, SFMono-Regular, monospace;
+      --font-serif: 'Playfair Display', Georgia, serif;
+      --font-fa: 'Vazirmatn', var(--font-sans);
 
-    .dark {
-      --canvas-bg: oklch(0.12 0.015 260);
-      --surface-bg: oklch(0.16 0.018 260);
-      --surface-elevated: oklch(0.20 0.02 260);
-      --text-primary: oklch(0.98 0.002 247);
-      --text-secondary: oklch(0.72 0.01 260);
-      --text-muted: oklch(0.52 0.015 260);
-      --border-subtle: oklch(0.24 0.02 260);
-      --border-strong: oklch(0.32 0.025 260);
-      --accent: oklch(0.68 0.18 245);
-      --accent-subtle: oklch(0.22 0.06 245);
-      --vibe-on-primary: #050811;
-      --mesh-glow: radial-gradient(ellipse at 50% 0%, oklch(0.68 0.18 245 / 0.22) 0%, transparent 70%);
-    }
+      --ease-spring: cubic-bezier(0.16, 1, 0.3, 1);
+      --ease-snap: cubic-bezier(0.34, 1.56, 0.64, 1);
+      --duration-enter: 320ms;
+      --duration-exit: 160ms;
 
-    /* Fixed-Structure Semantic RTL Typography */
-    body.lang-fa {
-      font-family: 'Vazirmatn', 'Inter', sans-serif;
+      --glass-blur: blur(var(--blur-amount, 20px));
+      --mesh-blur-filter: blur(var(--mesh-blur, 80px));
     }
 
     :focus-visible {
-      outline: 2px solid var(--accent);
+      outline: 2px solid var(--accent-brand);
       outline-offset: 2px;
     }
 
-    /* Atmospheric Canvas Grid & Spotlight */
-    .vibe-atmospheric-grid {
-      background-size: 36px 36px;
-      background-image: 
-        linear-gradient(to right, var(--border-subtle) 1px, transparent 1px),
-        linear-gradient(to bottom, var(--border-subtle) 1px, transparent 1px);
-    }
-
-    .vibe-gradient-heading {
-      background: linear-gradient(135deg, var(--text-primary) 20%, var(--accent) 100%);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-    }
-
-    /* Specular Spotlight Cards */
-    .vibe-spotlight-card {
-      position: relative;
-      overflow: hidden;
-      transition: transform 240ms cubic-bezier(0.16, 1, 0.3, 1), box-shadow 240ms cubic-bezier(0.16, 1, 0.3, 1), border-color 240ms cubic-bezier(0.16, 1, 0.3, 1);
-    }
-
-    .vibe-spotlight-card::before {
-      content: "";
-      position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      height: 1px;
-      background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.6), transparent);
-      opacity: 0.65;
-      pointer-events: none;
-      z-index: 2;
-    }
-
-    @media (hover: hover) and (pointer: fine) {
-      .vibe-spotlight-card::after {
-        content: "";
-        position: absolute;
-        width: 320px;
-        height: 320px;
-        border-radius: 50%;
-        background: radial-gradient(circle, var(--accent-subtle) 0%, transparent 70%);
-        top: var(--mouse-y, -999px);
-        left: var(--mouse-x, -999px);
-        transform: translate(-50%, -50%);
-        opacity: 0;
-        pointer-events: none;
-        transition: opacity 300ms ease;
-        z-index: 1;
-      }
-      .vibe-spotlight-card:hover::after {
-        opacity: 0.55;
-      }
-      .vibe-spotlight-card:hover {
-        transform: translateY(-2px);
-      }
-    }
-
     @media (prefers-reduced-motion: reduce) {
-      *, ::before, ::after {
+      *, *::before, *::after {
         animation-duration: 0.01ms !important;
         animation-iteration-count: 1 !important;
         transition-duration: 0.01ms !important;
         scroll-behavior: auto !important;
       }
     }
+
+    /* THEME 1: APPLE CUPERTINO FLUID (DEFAULT) */
+    body.theme-apple_cupertino {
+      --bg-canvas: #f5f5f7;
+      --bg-surface: rgba(255, 255, 255, 0.85);
+      --bg-surface-elevated: rgba(255, 255, 255, 0.96);
+      --text-primary: #1d1d1f;
+      --text-secondary: #6e6e73;
+      --text-muted: #86868b;
+      --border-subtle: rgba(0, 0, 0, 0.08);
+      --border-strong: rgba(0, 0, 0, 0.16);
+      --accent-brand: #0071e3;
+      --accent-brand-subtle: rgba(0, 113, 227, 0.10);
+      --radius-sm: 12px;
+      --radius-md: 18px;
+      --radius-lg: 28px;
+      --shadow-ambient: 0 4px 20px -2px rgba(0, 0, 0, 0.05), 0 2px 6px -1px rgba(0, 0, 0, 0.03);
+      --shadow-hover: 0 16px 36px -4px rgba(0, 113, 227, 0.14);
+      --blur-amount: 24px;
+      --spotlight-color: rgba(0, 113, 227, 0.12);
+    }
+
+    /* THEME 2: NEUMORPHIC SOFT (TACTILE DUAL-SHADOW) */
+    body.theme-neumorphic {
+      --bg-canvas: #e0e5ec;
+      --bg-surface: #e0e5ec;
+      --bg-surface-elevated: #e8eef6;
+      --text-primary: #1e293b;
+      --text-secondary: #475569;
+      --text-muted: #64748b;
+      --border-subtle: rgba(255, 255, 255, 0.6);
+      --border-strong: rgba(163, 177, 198, 0.6);
+      --accent-brand: #3182ce;
+      --accent-brand-subtle: rgba(49, 130, 206, 0.12);
+      --radius-sm: 12px;
+      --radius-md: 18px;
+      --radius-lg: 24px;
+      --shadow-ambient: 8px 8px 18px rgba(163, 177, 198, 0.65), -8px -8px 18px rgba(255, 255, 255, 0.85);
+      --shadow-hover: 12px 12px 24px rgba(163, 177, 198, 0.75), -12px -12px 24px rgba(255, 255, 255, 0.95);
+      --blur-amount: 0px;
+      --spotlight-color: rgba(49, 130, 206, 0.14);
+    }
+
+    /* THEME 3: MINIMALIST SAAS (STRIPE CRISP) */
+    body.theme-minimalist_saas {
+      --bg-canvas: #fafbfc;
+      --bg-surface: #ffffff;
+      --bg-surface-elevated: #f8fafc;
+      --text-primary: #0f172a;
+      --text-secondary: #475569;
+      --text-muted: #94a3b8;
+      --border-subtle: #e2e8f0;
+      --border-strong: #cbd5e1;
+      --accent-brand: #635bff;
+      --accent-brand-subtle: #ede9fe;
+      --radius-sm: 6px;
+      --radius-md: 8px;
+      --radius-lg: 12px;
+      --shadow-ambient: 0 1px 3px rgba(0, 0, 0, 0.05);
+      --shadow-hover: 0 10px 25px -3px rgba(99, 91, 255, 0.12);
+      --blur-amount: 0px;
+      --spotlight-color: rgba(99, 91, 255, 0.10);
+    }
+
+    /* THEME 4: SPECULAR GLASS (DARK PRESTIGE WEB3) */
+    body.theme-specular_glass {
+      --bg-canvas: #030712;
+      --bg-surface: rgba(17, 24, 39, 0.75);
+      --bg-surface-elevated: rgba(31, 41, 55, 0.92);
+      --text-primary: #f9fafb;
+      --text-secondary: #9ca3af;
+      --text-muted: #6b7280;
+      --border-subtle: rgba(255, 255, 255, 0.12);
+      --border-strong: rgba(255, 255, 255, 0.25);
+      --accent-brand: #a855f7;
+      --accent-brand-subtle: rgba(168, 85, 247, 0.16);
+      --radius-sm: 10px;
+      --radius-md: 16px;
+      --radius-lg: 24px;
+      --shadow-ambient: 0 8px 32px 0 rgba(0, 0, 0, 0.45);
+      --shadow-hover: 0 16px 48px -4px rgba(168, 85, 247, 0.35);
+      --blur-amount: 20px;
+      --spotlight-color: rgba(168, 85, 247, 0.18);
+    }
+
+    /* THEME 5: NEOBRUTALISM (HARD SHADOWS & RAW CONTRAST) */
+    body.theme-neobrutalism {
+      --bg-canvas: #fffbeb;
+      --bg-surface: #ffffff;
+      --bg-surface-elevated: #fef08a;
+      --text-primary: #000000;
+      --text-secondary: #1f2937;
+      --text-muted: #4b5563;
+      --border-subtle: #000000;
+      --border-strong: #000000;
+      --accent-brand: #f59e0b;
+      --accent-brand-subtle: #fef3c7;
+      --radius-sm: 0px;
+      --radius-md: 0px;
+      --radius-lg: 0px;
+      --shadow-ambient: 4px 4px 0px #000000;
+      --shadow-hover: 7px 7px 0px #000000;
+      --blur-amount: 0px;
+      --spotlight-color: rgba(245, 158, 11, 0.15);
+    }
+
+    /* THEME 6: SWISS EDITORIAL (TYPOGRAPHY GRID & HAIRLINE BORDERS) */
+    body.theme-swiss_editorial {
+      --bg-canvas: #ffffff;
+      --bg-surface: #f4f4f5;
+      --bg-surface-elevated: #e4e4e7;
+      --text-primary: #09090b;
+      --text-secondary: #52525b;
+      --text-muted: #71717a;
+      --border-subtle: #d4d4d8;
+      --border-strong: #18181b;
+      --accent-brand: #e11d48;
+      --accent-brand-subtle: #ffe4e6;
+      --radius-sm: 2px;
+      --radius-md: 4px;
+      --radius-lg: 6px;
+      --shadow-ambient: none;
+      --shadow-hover: 0 4px 12px rgba(0, 0, 0, 0.08);
+      --blur-amount: 0px;
+      --spotlight-color: rgba(225, 29, 72, 0.12);
+    }
+
+    /* THEME 7: TERMINAL HUD (CYBERNETIC MONOSPACE) */
+    body.theme-terminal_hud {
+      --bg-canvas: #090d0b;
+      --bg-surface: rgba(13, 20, 16, 0.88);
+      --bg-surface-elevated: #111a14;
+      --text-primary: #00ff66;
+      --text-secondary: #00cc52;
+      --text-muted: #008836;
+      --border-subtle: rgba(0, 255, 102, 0.25);
+      --border-strong: #00ff66;
+      --accent-brand: #00ff66;
+      --accent-brand-subtle: rgba(0, 255, 102, 0.12);
+      --radius-sm: 4px;
+      --radius-md: 6px;
+      --radius-lg: 8px;
+      --shadow-ambient: 0 0 15px rgba(0, 255, 102, 0.15);
+      --shadow-hover: 0 0 25px rgba(0, 255, 102, 0.35);
+      --blur-amount: 12px;
+      --spotlight-color: rgba(0, 255, 102, 0.20);
+    }
+
+    body {
+      background-color: var(--bg-canvas);
+      color: var(--text-primary);
+      font-family: var(--font-sans);
+      transition: background-color var(--duration-enter) var(--ease-spring), color var(--duration-enter) var(--ease-spring);
+    }
+
+    /* FIXED-STRUCTURE SEMANTIC RTL:
+       Preserves physical layout structure (Window Chrome buttons on left, grids 1-2-3, LTR code).
+       Only typography and text blocks adapt without mirroring the entire page! */
+    body.lang-fa {
+      font-family: var(--font-fa);
+    }
+    body.lang-fa .text-content {
+      text-align: right;
+    }
+    body.lang-fa .text-content-center {
+      text-align: center;
+    }
+
+    .vibe-card {
+      background: var(--bg-surface);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-md);
+      box-shadow: var(--shadow-ambient);
+      backdrop-filter: var(--glass-blur);
+      transition: all var(--duration-enter) var(--ease-spring);
+    }
+    .vibe-card:hover {
+      box-shadow: var(--shadow-hover);
+      border-color: var(--border-strong);
+    }
+
+    .btn-brand {
+      background-color: var(--accent-brand);
+      color: #ffffff;
+      border-radius: var(--radius-sm);
+      font-weight: 700;
+      min-height: 44px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      transition: all var(--duration-enter) var(--ease-spring);
+    }
+    .btn-brand:hover {
+      opacity: 0.92;
+      transform: translateY(-1px);
+    }
+
+    .btn-outline {
+      background: var(--bg-surface);
+      color: var(--text-primary);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-sm);
+      font-weight: 600;
+      min-height: 44px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      transition: all var(--duration-enter) var(--ease-spring);
+    }
+    .btn-outline:hover {
+      border-color: var(--border-strong);
+      background: var(--bg-surface-elevated);
+      transform: translateY(-1px);
+    }
+
+    .arch-btn {
+      min-height: 36px;
+      padding: 4px 12px;
+      font-size: 11px;
+      font-weight: 700;
+      border-radius: 9999px;
+      border: 1px solid var(--border-subtle);
+      background: var(--bg-surface);
+      color: var(--text-secondary);
+      transition: all 180ms var(--ease-spring);
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      white-space: nowrap;
+    }
+    .arch-btn:hover {
+      color: var(--text-primary);
+      border-color: var(--border-strong);
+    }
+    .arch-btn.active {
+      background: var(--accent-brand);
+      color: #ffffff;
+      border-color: var(--accent-brand);
+    }
+
+    /* Atmospheric grid background */
+    .bg-grid-mesh {
+      background-image: linear-gradient(to right, var(--border-subtle) 1px, transparent 1px),
+                        linear-gradient(to bottom, var(--border-subtle) 1px, transparent 1px);
+      background-size: 32px 32px;
+    }
   </style>
 </head>
-<body class="bg-[var(--canvas-bg)] text-[var(--text-primary)] antialiased transition-colors duration-200">
+<body class="theme-apple_cupertino antialiased min-h-screen relative selection:bg-blue-500/20 selection:text-blue-500">
 
-  <!-- 1. ATMOSPHERIC CANVAS LIGHTING -->
-  <div class="fixed inset-0 vibe-atmospheric-grid opacity-35 pointer-events-none z-0"></div>
-  <div class="fixed top-0 left-1/2 -translate-x-1/2 w-full max-w-6xl h-[480px] pointer-events-none z-0 opacity-80" style="background: var(--mesh-glow); filter: var(--glass-blur);"></div>
+  <!-- TOP PERSISTENT NOTIFICATION & CANONICAL ARCHETYPE BAR -->
+  <header class="sticky top-0 z-50 bg-[var(--bg-surface)] border-b border-[var(--border-subtle)] backdrop-blur-md">
+    <!-- Row 1: Brand & Actions -->
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-14 flex items-center justify-between">
+      <div class="flex items-center space-x-3">
+        <a href="#" class="flex items-center space-x-2 font-black text-base text-[var(--text-primary)] hover:opacity-90 transition-opacity">
+          <svg class="w-6 h-6 text-[var(--accent-brand)]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+            <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>
+          </svg>
+          <span>Vibe UI Suite</span>
+        </a>
+        <span class="px-2 py-0.5 rounded-full text-[10px] font-mono font-bold bg-emerald-500/10 text-emerald-600 border border-emerald-500/20">
+          <bdi>v4.2.0</bdi>
+        </span>
+      </div>
 
-  <!-- 2. NAVBAR -->
-  <header class="sticky top-0 z-40 w-full border-b border-[var(--border-subtle)] bg-[var(--surface-bg)]/85 backdrop-blur-md">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
-      <!-- Brand Logo -->
-      <a href="#" class="flex items-center space-x-3 rtl:space-x-reverse group">
-        <div class="w-9 h-9 rounded-[var(--radius-btn)] bg-gradient-to-tr from-sky-500 to-indigo-600 flex items-center justify-center text-white shadow-md shadow-sky-500/20 group-hover:scale-105 transition-transform duration-200">
-          <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
-        </div>
-        <div class="flex items-center space-x-2 rtl:space-x-reverse">
-          <span class="font-extrabold text-base tracking-tight text-[var(--text-primary)]">Vibe UI Suite</span>
-          <span class="px-2 py-0.5 rounded-full text-[10px] font-mono font-bold bg-emerald-500/10 text-emerald-500 border border-emerald-500/20"><bdi>v4.2.0</bdi></span>
-        </div>
-      </a>
-
-      <!-- Navigation Links -->
-      <nav class="hidden md:flex items-center space-x-8 rtl:space-x-reverse text-sm font-semibold text-[var(--text-secondary)]">
-        <a href="#hero" class="hover:text-[var(--accent)] transition-colors duration-150" id="navHome">Overview</a>
-        <a href="#showcase" class="hover:text-[var(--accent)] transition-colors duration-150" id="navShowcase">Living Canvas</a>
-        <a href="#archetypes" class="hover:text-[var(--accent)] transition-colors duration-150" id="navArchetypes">7 Archetypes</a>
-        <a href="#comparison" class="hover:text-[var(--accent)] transition-colors duration-150" id="navComparison">Anti-Slop Math</a>
-        <a href="#cli" class="hover:text-[var(--accent)] transition-colors duration-150" id="navCli">React 19 & CLI</a>
+      <nav class="hidden md:flex items-center space-x-6 text-xs font-semibold text-[var(--text-secondary)]">
+        <a href="#hero" class="hover:text-[var(--text-primary)] transition-colors" id="navHero">Living Canvas</a>
+        <a href="#work" class="hover:text-[var(--text-primary)] transition-colors" id="navWork">Production Showcase</a>
+        <a href="#lab" class="hover:text-[var(--text-primary)] transition-colors" id="navLab">Interactive Lab</a>
+        <a href="#studio" class="hover:text-[var(--text-primary)] transition-colors" id="navStudio">AI Studio</a>
+        <a href="#estimator" class="hover:text-[var(--text-primary)] transition-colors" id="navEstimator">Architecture Estimator</a>
       </nav>
 
-      <!-- Action Utilities -->
-      <div class="flex items-center space-x-3 rtl:space-x-reverse">
-        <!-- Language Switcher -->
-        <button onclick="toggleLang()" class="px-3 py-1.5 rounded-[var(--radius-btn)] border border-[var(--border-subtle)] bg-[var(--surface-bg)] text-xs font-bold text-[var(--text-secondary)] hover:text-[var(--text-primary)] hover:border-[var(--border-strong)] transition-all duration-150 flex items-center space-x-1.5 rtl:space-x-reverse" aria-label="Toggle Language">
+      <div class="flex items-center space-x-2.5">
+        <!-- Language Switcher (Fixed-Structure Semantic RTL) -->
+        <button onclick="toggleLang()" class="px-3 py-1.5 rounded-[var(--radius-sm)] border border-[var(--border-subtle)] bg-[var(--bg-surface)] text-xs font-bold text-[var(--text-secondary)] hover:text-[var(--text-primary)] hover:border-[var(--border-strong)] transition-all flex items-center space-x-1.5" aria-label="Toggle Language">
           <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
           <span id="langBtnText">فارسی</span>
         </button>
 
-        <!-- Theme Toggle -->
-        <button onclick="toggleDark()" class="w-9 h-9 rounded-[var(--radius-btn)] border border-[var(--border-subtle)] bg-[var(--surface-bg)] text-[var(--text-secondary)] hover:text-[var(--text-primary)] hover:border-[var(--border-strong)] transition-all duration-150 flex items-center justify-center" aria-label="Toggle Color Theme">
-          <svg id="sunIcon" class="w-4 h-4 hidden dark:block" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
-          <svg id="moonIcon" class="w-4 h-4 block dark:hidden" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
-        </button>
-
         <!-- GitHub Repo Link -->
-        <a href="https://github.com/omid-io/vibe-ui-suite" target="_blank" rel="noopener" class="hidden sm:inline-flex items-center space-x-1.5 rtl:space-x-reverse px-3.5 py-1.5 rounded-[var(--radius-btn)] bg-[var(--accent)] text-[var(--vibe-on-primary)] text-xs font-bold shadow-sm hover:opacity-95 transition-opacity duration-150">
-          <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>
-          <span>GitHub</span>
+        <a href="https://github.com/omid-io/vibe-ui-suite" target="_blank" rel="noopener" class="px-3 py-1.5 rounded-[var(--radius-sm)] bg-zinc-900 text-white hover:bg-zinc-800 text-xs font-bold transition-all flex items-center space-x-1.5">
+          <svg class="w-3.5 h-3.5 fill-current" viewBox="0 0 24 24"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
+          <span class="hidden sm:inline">GitHub</span>
         </a>
+      </div>
+    </div>
+
+    <!-- Row 2: Live Archetype Switcher Bar -->
+    <div class="border-t border-[var(--border-subtle)] bg-[var(--bg-canvas)] py-2 overflow-x-auto scrollbar-none">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center space-x-2">
+        <span class="text-[10px] font-mono uppercase tracking-wider text-[var(--text-muted)] font-bold shrink-0 me-2" id="lblLiveTheme">Active Archetype:</span>
+        <button onclick="setTheme('apple_cupertino', this)" class="arch-btn active" id="btnThemeCupertino">Apple Cupertino</button>
+        <button onclick="setTheme('neumorphic', this)" class="arch-btn" id="btnThemeNeumorphic">Neumorphic Soft</button>
+        <button onclick="setTheme('minimalist_saas', this)" class="arch-btn" id="btnThemeSaas">Minimalist SaaS</button>
+        <button onclick="setTheme('specular_glass', this)" class="arch-btn" id="btnThemeSpecular">Specular Glass</button>
+        <button onclick="setTheme('neobrutalism', this)" class="arch-btn" id="btnThemeBrutal">Neobrutalism</button>
+        <button onclick="setTheme('swiss_editorial', this)" class="arch-btn" id="btnThemeSwiss">Swiss Editorial</button>
+        <button onclick="setTheme('terminal_hud', this)" class="arch-btn" id="btnThemeTerminal">Terminal HUD</button>
       </div>
     </div>
   </header>
 
-  <!-- 3. HERO SECTION -->
-  <main class="relative z-10">
-    <section id="hero" class="pt-16 pb-12 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto text-center">
-      <!-- Status Pill -->
-      <div class="inline-flex items-center space-x-2 rtl:space-x-reverse px-3.5 py-1.5 rounded-full border border-[var(--border-subtle)] bg-[var(--surface-bg)] text-xs font-semibold text-[var(--text-secondary)] shadow-sm mb-6">
+  <!-- =========================================================================
+       HERO & LIVING MACOS WINDOW CHROME
+       ========================================================================= -->
+  <section id="hero" class="relative pt-12 pb-20 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto bg-grid-mesh">
+    <!-- Atmospheric Radial Lighting -->
+    <div class="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[350px] bg-blue-500/10 rounded-full blur-[90px] pointer-events-none -z-10"></div>
+
+    <div class="text-center max-w-4xl mx-auto space-y-6 mb-12">
+      <!-- Feature Pill -->
+      <div class="inline-flex items-center space-x-2 px-3 py-1 rounded-full border border-[var(--border-subtle)] bg-[var(--bg-surface)] text-xs font-semibold text-[var(--text-secondary)] shadow-sm">
         <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
-        <span id="heroPillText">VIBE UI v4.2.0 • MASTERPIECE VISUAL ENGINE & LIVING INTERFACES</span>
+        <span id="heroPillText">VIBE UI v4.2.0 • LIVING INTERFACES & MASTERPIECE GENERATIVE ENGINE</span>
       </div>
 
       <!-- Main Headline -->
-      <h1 class="text-4xl sm:text-6xl lg:text-7xl font-black tracking-tight text-[var(--text-primary)] max-w-5xl mx-auto leading-[1.08] mb-6">
-        <span id="heroHeadlineMain">The Generative UI Engine for</span>
-        <span class="vibe-gradient-heading block mt-2" id="heroHeadlineGradient">Autonomous AI Coding Agents</span>
+      <h1 class="text-4xl sm:text-6xl lg:text-7xl font-black tracking-tight leading-[1.1] text-[var(--text-primary)]">
+        <span id="heroHeadlineMain">The Autonomous Design System for</span><br>
+        <span id="heroHeadlineGradient" class="bg-gradient-to-r from-blue-600 via-indigo-600 to-purple-600 bg-clip-text text-transparent">AI Coding Agents</span>
       </h1>
 
       <!-- Subheadline -->
-      <p class="text-base sm:text-lg lg:text-xl text-[var(--text-secondary)] max-w-3xl mx-auto leading-relaxed mb-8" id="heroSubheadline">
-        Contract-driven frontend engineering, mathematically certified WCAG AAA contrast, 7 macro archetypes, interactive split comparison sliders, and living React 19 TSX generation.
+      <p id="heroSubheadline" class="text-lg sm:text-xl text-[var(--text-secondary)] max-w-3xl mx-auto leading-relaxed text-content">
+        Contract-driven frontend engineering for autonomous coding agents. Mathematically certified WCAG AAA contrast, 7 macro visual archetypes, interactive split comparison sliders, tactile hardware decks, and living React 19 TSX generation.
       </p>
 
-      <!-- CTA Action Buttons -->
-      <div class="flex flex-wrap items-center justify-center gap-4 mb-14">
-        <button onclick="copyInstallCmd(this)" class="px-6 py-3.5 rounded-[var(--radius-btn)] bg-[var(--accent)] text-[var(--vibe-on-primary)] font-bold text-sm shadow-lg shadow-[var(--accent)]/20 hover:opacity-95 active:scale-[0.98] transition-all duration-150 flex items-center space-x-2 rtl:space-x-reverse min-h-[46px]">
-          <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect width="14" height="14" x="8" y="8" rx="2" ry="2"/><path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"/></svg>
-          <span id="btnCopyInstallText">npx vibe-ui-suite init</span>
-        </button>
-
-        <a href="#showcase" class="px-6 py-3.5 rounded-[var(--radius-btn)] border border-[var(--border-strong)] bg-[var(--surface-bg)] text-[var(--text-primary)] font-bold text-sm hover:border-[var(--accent)] hover:text-[var(--accent)] active:scale-[0.98] transition-all duration-150 flex items-center space-x-2 rtl:space-x-reverse min-h-[46px]">
-          <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+      <!-- Action Buttons -->
+      <div class="flex flex-wrap items-center justify-center gap-3 pt-2">
+        <a href="#work" class="btn-brand px-6 text-sm" id="btnExploreDemo">
+          <svg class="w-4 h-4 me-2" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polygon points="5 3 19 12 5 21 5 3"/></svg>
           <span id="btnExploreDemoText">Explore Living Showcase</span>
         </a>
-
-        <a href="https://marketplace.visualstudio.com/items?itemName=omid-io.vibe-ui-vscode" target="_blank" rel="noopener" class="px-6 py-3.5 rounded-[var(--radius-btn)] border border-[var(--border-subtle)] bg-[var(--surface-bg)] text-[var(--text-secondary)] font-bold text-sm hover:text-[var(--text-primary)] active:scale-[0.98] transition-all duration-150 flex items-center space-x-2 rtl:space-x-reverse min-h-[46px]">
-          <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16.5 9.4 7.55 4.24a1.78 1.78 0 0 0-2.5 1.55v12.42a1.78 1.78 0 0 0 2.5 1.55L16.5 14.6l-6.22-2.6Z"/><path d="m18.5 7.5-6.22 2.6 6.22 2.6a1.78 1.78 0 0 0 2.5-1.55V9.05a1.78 1.78 0 0 0-2.5-1.55Z"/></svg>
-          <span id="btnVscodeMarketplaceText">VS Code Marketplace</span>
+        <button onclick="navigator.clipboard.writeText('npx vibe-ui-suite init'); alert('Copied: npx vibe-ui-suite init');" class="btn-outline px-5 text-sm font-mono">
+          <svg class="w-4 h-4 me-2 text-zinc-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+          <span>npx vibe-ui-suite init</span>
+        </button>
+        <a href="https://marketplace.visualstudio.com/items?itemName=omid-io.vibe-ui-vscode" target="_blank" rel="noopener" class="btn-outline px-5 text-sm" id="btnVscodeMarketplace">
+          <svg class="w-4 h-4 me-2 text-blue-500" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16.5 9.4 7.55 2.05a1.5 1.5 0 0 0-2.45 1.15v17.6a1.5 1.5 0 0 0 2.45 1.15L16.5 14.6l4.65 3.75a1 1 0 0 0 1.6-.8V6.45a1 1 0 0 0-1.6-.8L16.5 9.4z"/></svg>
+          <span id="btnVscodeMarketplaceText">VS Code Extension</span>
         </a>
       </div>
+    </div>
 
-      <!-- 4. HERO CENTERPIECE: LIVING MACOS WINDOW CHROME MOCKUP -->
-      <div id="showcase" class="w-full max-w-5xl mx-auto rounded-[var(--radius-container)] border border-[var(--border-strong)] bg-[var(--surface-bg)] shadow-2xl shadow-black/10 overflow-hidden text-start">
-        <!-- Titlebar -->
-        <div class="px-4 py-3 border-b border-[var(--border-subtle)] bg-[var(--surface-elevated)] flex flex-wrap items-center justify-between gap-3">
-          <!-- Window Controls -->
-          <div class="flex items-center space-x-2 rtl:space-x-reverse">
-            <span class="w-3 h-3 rounded-full bg-rose-500 border border-rose-600/50 inline-block"></span>
-            <span class="w-3 h-3 rounded-full bg-amber-500 border border-amber-600/50 inline-block"></span>
-            <span class="w-3 h-3 rounded-full bg-emerald-500 border border-emerald-600/50 inline-block"></span>
-            <span class="ms-2 font-mono text-xs font-semibold text-[var(--text-muted)] hidden sm:inline"><bdi>vibe-masterpiece-engine // v4.2.0</bdi></span>
+    <!-- LIVING MACOS WINDOW CHROME MOCKUP -->
+    <!-- CRITICAL: Traffic lights ALWAYS top-left; layout structure physically invariant in RTL! -->
+    <div class="vibe-card overflow-hidden rounded-[var(--radius-lg)] border-2 border-[var(--border-subtle)] shadow-2xl max-w-5xl mx-auto">
+      <!-- Window Chrome Header -->
+      <div class="h-11 px-4 bg-[var(--bg-surface-elevated)] border-b border-[var(--border-subtle)] flex items-center justify-between">
+        <!-- Top-Left Traffic Lights (ALWAYS ON THE LEFT!) -->
+        <div class="flex items-center space-x-2 shrink-0">
+          <span class="w-3 h-3 rounded-full bg-rose-500/90 inline-block"></span>
+          <span class="w-3 h-3 rounded-full bg-amber-500/90 inline-block"></span>
+          <span class="w-3 h-3 rounded-full bg-emerald-500/90 inline-block"></span>
+          <span class="ms-3 font-mono text-xs font-semibold text-[var(--text-muted)] hidden sm:inline">
+            <bdi>vibe-masterpiece-engine // v4.2.0</bdi>
+          </span>
+        </div>
+
+        <!-- Window Tab Controls -->
+        <div class="flex items-center space-x-1 font-mono text-xs">
+          <button onclick="switchMacTab('devops', this)" class="px-2.5 py-1 rounded-[var(--radius-sm)] bg-[var(--accent-brand-subtle)] text-[var(--accent-brand)] font-bold active-mac-tab" id="tabTitleDevops">DevOps Telemetry</button>
+          <button onclick="switchMacTab('clinic', this)" class="px-2.5 py-1 rounded-[var(--radius-sm)] text-[var(--text-secondary)] hover:text-[var(--text-primary)]" id="tabTitleClinic">Clinical Split Slider</button>
+          <button onclick="switchMacTab('bento', this)" class="px-2.5 py-1 rounded-[var(--radius-sm)] text-[var(--text-secondary)] hover:text-[var(--text-primary)]" id="tabTitleBento">AI Bento</button>
+        </div>
+
+        <!-- Live Status Pill -->
+        <div class="hidden md:flex items-center space-x-1.5 text-xs font-mono text-emerald-600 font-bold shrink-0">
+          <span class="w-2 h-2 rounded-full bg-emerald-500"></span>
+          <span id="sloStatusText"><bdi>K8S SLO: 99.99% • ACTIVE</bdi></span>
+        </div>
+      </div>
+
+      <!-- Window Body Content -->
+      <div class="p-6 sm:p-8 bg-[var(--bg-canvas)] min-h-[380px]">
+        <!-- TAB 1: DEVOPS TELEMETRY & LIVE KUBECTL LOGS -->
+        <div id="panelDevops" class="mac-panel space-y-6">
+          <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+            <div class="p-4 rounded-[var(--radius-md)] bg-[var(--bg-surface)] border border-[var(--border-subtle)] space-y-1">
+              <span class="text-[11px] font-mono uppercase text-[var(--text-muted)] tracking-wider block" id="lblLatencyMetric">p99 Gateway Latency</span>
+              <div class="text-2xl font-black text-emerald-600 font-mono"><bdi>1.8 ms</bdi></div>
+              <p class="text-[11px] text-[var(--text-muted)]">-0.4ms vs SLA Budget (2.5ms)</p>
+            </div>
+            <div class="p-4 rounded-[var(--radius-md)] bg-[var(--bg-surface)] border border-[var(--border-subtle)] space-y-1">
+              <span class="text-[11px] font-mono uppercase text-[var(--text-muted)] tracking-wider block" id="lblPodsMetric">Cluster Ingress Pods</span>
+              <div class="text-2xl font-black text-sky-600 font-mono"><bdi>64 / 64 Ready</bdi></div>
+              <p class="text-[11px] text-emerald-600 font-semibold">100% Ingress Mesh Health</p>
+            </div>
+            <div class="p-4 rounded-[var(--radius-md)] bg-[var(--bg-surface)] border border-[var(--border-subtle)] space-y-1">
+              <span class="text-[11px] font-mono uppercase text-[var(--text-muted)] tracking-wider block" id="lblThroughputMetric">Active Throughput</span>
+              <div class="text-2xl font-black text-[var(--text-primary)] font-mono"><bdi>142.8k req/s</bdi></div>
+              <p class="text-[11px] text-[var(--text-muted)]">Peak: 168k req/s (us-east)</p>
+            </div>
           </div>
 
-          <!-- Domain Switcher Tabs -->
-          <div class="flex items-center p-1 rounded-[var(--radius-btn)] bg-[var(--canvas-bg)] border border-[var(--border-subtle)] text-xs font-bold">
-            <button onclick="switchTab('devops', this)" class="domain-tab-btn active px-3 py-1.5 rounded-[6px] bg-[var(--surface-bg)] text-[var(--accent)] shadow-sm transition-all duration-150 flex items-center space-x-1.5 rtl:space-x-reverse">
-              <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="4 17 10 11 4 5"/><line x1="12" y1="19" x2="20" y2="19"/></svg>
-              <span id="tabTitleDevops">DevOps Telemetry</span>
-            </button>
-            <button onclick="switchTab('clinic', this)" class="domain-tab-btn px-3 py-1.5 rounded-[6px] text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-all duration-150 flex items-center space-x-1.5 rtl:space-x-reverse">
-              <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/></svg>
-              <span id="tabTitleClinic">Clinical Split Slider</span>
-            </button>
-            <button onclick="switchTab('bento', this)" class="domain-tab-btn px-3 py-1.5 rounded-[6px] text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-all duration-150 flex items-center space-x-1.5 rtl:space-x-reverse">
-              <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect width="7" height="9" x="3" y="3" rx="1"/><rect width="7" height="5" x="14" y="3" rx="1"/><rect width="7" height="9" x="14" y="12" rx="1"/><rect width="7" height="5" x="3" y="16" rx="1"/></svg>
-              <span id="tabTitleBento">AI Intelligence Bento</span>
-            </button>
-          </div>
-
-          <!-- Production SLO Tag -->
-          <div class="hidden lg:flex items-center space-x-2 rtl:space-x-reverse text-xs font-mono font-semibold text-emerald-500">
-            <span class="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse"></span>
-            <span id="sloStatusText"><bdi>K8S SLO: 99.99% • ACTIVE</bdi></span>
+          <!-- Live Kubectl Streaming Terminal (Strictly LTR) -->
+          <div class="rounded-[var(--radius-md)] bg-zinc-950 text-cyan-400 font-mono text-xs p-4 border border-zinc-800 shadow-inner space-y-2" dir="ltr">
+            <div class="flex items-center justify-between border-b border-zinc-800 pb-2 text-[11px] text-zinc-400">
+              <div class="flex items-center space-x-2">
+                <span class="w-2 h-2 rounded-full bg-cyan-400 animate-ping"></span>
+                <span>kubectl logs -f deployment/vibe-gateway-v42 -n prod</span>
+              </div>
+              <div class="flex items-center space-x-2">
+                <button onclick="toggleLogPause(this)" id="btnPauseLogs" class="px-2 py-0.5 rounded bg-zinc-800 hover:bg-zinc-700 text-zinc-300 transition-colors">Pause</button>
+                <button onclick="copyLogSnippet(this)" id="btnCopyLogs" class="px-2 py-0.5 rounded bg-zinc-800 hover:bg-zinc-700 text-zinc-300 transition-colors">Copy</button>
+              </div>
+            </div>
+            <div id="logStreamContent" class="space-y-1 leading-relaxed text-zinc-300 font-mono text-left">
+              <div>[2026-10-03T16:00:10Z] <span class="text-emerald-400 font-bold">INFO</span> route=/vibe/api/v4 status=200 latency=1.2ms downstream=oklch-engine</div>
+              <div>[2026-10-03T16:00:11Z] <span class="text-emerald-400 font-bold">INFO</span> verified mathematical contrast: WCAG AAA compliance confirmed (17.8:1)</div>
+              <div>[2026-10-03T16:00:12Z] <span class="text-sky-400 font-bold">DEBUG</span> cluster cache hit: 99.4% (zero memory page evictions across 64 pods)</div>
+              <div>[2026-10-03T16:00:13Z] <span class="text-emerald-400 font-bold">INFO</span> autonomous dispatch pipeline completed in &lt;1ms with zero errors</div>
+            </div>
           </div>
         </div>
 
-        <!-- Window Canvas -->
-        <div class="p-6">
-          <!-- TAB 1: DEVOPS OBSERVABILITY -->
-          <div id="panelDevops" class="domain-panel block space-y-5">
-            <!-- 3 Stat Cards -->
-            <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
-              <div class="vibe-spotlight-card p-4 rounded-[var(--radius-card)] bg-[var(--surface-elevated)] border border-[var(--border-subtle)] space-y-1">
-                <div class="text-xs font-semibold text-[var(--text-muted)] uppercase tracking-wider" id="lblLatencyMetric">p99 Gateway Latency</div>
-                <div class="text-2xl font-black font-mono text-emerald-500"><bdi>1.8 ms</bdi></div>
-                <div class="text-[11px] text-[var(--text-muted)]"><bdi>-0.4ms vs SLA Budget (2.5ms)</bdi></div>
-              </div>
-              <div class="vibe-spotlight-card p-4 rounded-[var(--radius-card)] bg-[var(--surface-elevated)] border border-[var(--border-subtle)] space-y-1">
-                <div class="text-xs font-semibold text-[var(--text-muted)] uppercase tracking-wider" id="lblPodsMetric">Cluster Ingress Pods</div>
-                <div class="text-2xl font-black font-mono text-[var(--accent)]"><bdi>64 / 64 Ready</bdi></div>
-                <div class="text-[11px] text-emerald-500 font-semibold"><bdi>100% Ingress Mesh Health</bdi></div>
-              </div>
-              <div class="vibe-spotlight-card p-4 rounded-[var(--radius-card)] bg-[var(--surface-elevated)] border border-[var(--border-subtle)] space-y-1">
-                <div class="text-xs font-semibold text-[var(--text-muted)] uppercase tracking-wider" id="lblThroughputMetric">Active Throughput</div>
-                <div class="text-2xl font-black font-mono text-[var(--text-primary)]"><bdi>142.8k req/s</bdi></div>
-                <div class="text-[11px] text-[var(--text-muted)]"><bdi>Peak: 168k req/s (us-east)</bdi></div>
-              </div>
+        <!-- TAB 2: CLINICAL BEFORE/AFTER SPLIT SLIDER -->
+        <div id="panelClinic" class="mac-panel hidden space-y-4">
+          <div class="flex items-center justify-between">
+            <div>
+              <h3 class="text-sm font-bold text-[var(--text-primary)]" id="clinicSliderTitle">10 Units E-Max Ceramic Veneers — Interactive Split Comparison</h3>
+              <p class="text-xs text-[var(--text-muted)]" id="clinicSliderSub">Drag the slider horizontally to compare baseline condition versus post-clinical restoration.</p>
             </div>
-
-            <!-- Kubectl Live Stream Console Terminal -->
-            <div class="rounded-[var(--radius-card)] bg-zinc-950 text-cyan-400 font-mono text-xs p-4 border border-zinc-800 shadow-inner space-y-2" dir="ltr">
-              <div class="flex items-center justify-between border-b border-zinc-800 pb-2 text-[11px] text-zinc-400">
-                <div class="flex items-center space-x-2">
-                  <span class="w-2 h-2 rounded-full bg-cyan-400 animate-ping"></span>
-                  <span id="logTerminalHeader">kubectl logs -f deployment/vibe-gateway-v42 -n prod</span>
-                </div>
-                <div class="flex items-center space-x-2">
-                  <button onclick="toggleLogPause(this)" id="btnPauseLogs" class="px-2 py-0.5 rounded bg-zinc-800 hover:bg-zinc-700 text-zinc-300 transition-colors">Pause</button>
-                  <button onclick="copyLogSnippet(this)" id="btnCopyLogs" class="px-2 py-0.5 rounded bg-zinc-800 hover:bg-zinc-700 text-zinc-300 transition-colors">Copy</button>
-                </div>
-              </div>
-              <div id="logStreamContent" class="space-y-1 leading-relaxed text-zinc-300 font-mono text-left">
-                <div>[2026-09-30T02:35:10Z] <span class="text-emerald-400 font-bold">INFO</span> route=/vibe/api/v4 status=200 latency=1.2ms downstream=oklch-engine</div>
-                <div>[2026-09-30T02:35:11Z] <span class="text-emerald-400 font-bold">INFO</span> verified mathematical contrast: WCAG AAA compliance confirmed (17.8:1)</div>
-                <div>[2026-09-30T02:35:12Z] <span class="text-sky-400 font-bold">DEBUG</span> cluster cache hit: 99.4% (zero memory page evictions across 64 pods)</div>
-                <div>[2026-09-30T02:35:13Z] <span class="text-emerald-400 font-bold">INFO</span> autonomous dispatch pipeline completed in &lt;1ms with zero errors</div>
-              </div>
-            </div>
+            <span class="px-2.5 py-0.5 rounded-full bg-emerald-500/10 text-emerald-600 text-xs font-mono font-bold"><bdi>98.4% Match</bdi></span>
           </div>
 
-          <!-- TAB 2: CLINICAL BEFORE/AFTER SPLIT SLIDER -->
-          <div id="panelClinic" class="domain-panel hidden space-y-4">
-            <div class="flex items-center justify-between">
-              <div>
-                <h3 class="text-sm font-bold text-[var(--text-primary)]" id="clinicSliderTitle">10 Units E-Max Ceramic Veneers — Interactive Split Comparison</h3>
-                <p class="text-xs text-[var(--text-muted)]" id="clinicSliderSub">Drag the slider horizontally to compare baseline condition versus post-clinical restoration.</p>
-              </div>
-              <span class="px-2.5 py-0.5 rounded-full bg-emerald-500/10 text-emerald-500 text-xs font-mono font-bold"><bdi>98.4% Match</bdi></span>
-            </div>
-
-            <!-- Interactive Draggable Split Container -->
-            <div class="relative h-64 w-full rounded-[var(--radius-card)] overflow-hidden border border-[var(--border-subtle)] bg-[var(--canvas-bg)] select-none">
-              <!-- Baseline Layer -->
-              <div class="absolute inset-0 bg-gradient-to-r from-stone-300 to-amber-100 dark:from-stone-800 dark:to-amber-950/40 flex items-center justify-start p-6">
-                <div class="space-y-1">
-                  <span class="text-xs font-extrabold text-stone-600 dark:text-stone-400 uppercase tracking-widest block" id="lblSlideBefore">BASELINE (BEFORE)</span>
-                  <p class="text-xs text-stone-500 max-w-xs" id="lblSlideBeforeDesc">Tooth discoloration, mild crowding, and incisal edge attrition.</p>
-                </div>
-              </div>
-
-              <!-- Post-Treatment Layer -->
-              <div id="splitLayerAfter" class="absolute inset-y-0 end-0 bg-gradient-to-l from-emerald-100 to-rose-50 dark:from-emerald-950/40 dark:to-rose-950/20 border-s-2 border-emerald-500 flex items-center justify-end p-6 transition-all duration-75" style="width: 50%;">
-                <div class="space-y-1 text-end">
-                  <span class="text-xs font-extrabold text-emerald-700 dark:text-emerald-400 uppercase tracking-widest block" id="lblSlideAfter">POST-TREATMENT (AFTER)</span>
-                  <p class="text-xs text-emerald-600/80 dark:text-emerald-300 max-w-xs" id="lblSlideAfterDesc">Bilateral symmetry, optimal light reflection, and certified gingival contour.</p>
-                </div>
-              </div>
-
-              <!-- HTML5 Range Input Handle -->
-              <input type="range" min="0" max="100" value="50" class="absolute inset-0 opacity-0 cursor-ew-resize w-full h-full z-20" oninput="updateSplit(this.value)" aria-label="Before/After Split Slider">
-              <div id="splitDivider" class="absolute inset-y-0 w-1 bg-white shadow-[0_0_12px_rgba(0,0,0,0.5)] pointer-events-none z-10 flex items-center justify-center" style="left: 50%;">
-                <div class="w-8 h-8 rounded-full bg-white dark:bg-zinc-900 border border-zinc-300 dark:border-zinc-700 shadow-lg flex items-center justify-center text-zinc-600 dark:text-zinc-300">
-                  <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="7 17 2 12 7 7"/><polyline points="17 7 22 12 17 17"/><line x1="2" y1="12" x2="22" y2="12"/></svg>
-                </div>
+          <div class="relative h-64 w-full rounded-[var(--radius-md)] overflow-hidden border border-[var(--border-subtle)] bg-stone-200 select-none">
+            <!-- Baseline Layer -->
+            <div class="absolute inset-0 bg-stone-300 flex items-center justify-start p-8">
+              <div class="space-y-1">
+                <span class="text-xs font-black text-stone-700 uppercase tracking-widest block" id="lblSlideBefore">BASELINE (BEFORE)</span>
+                <p class="text-xs text-stone-600 max-w-xs" id="lblSlideBeforeDesc">Tooth discoloration, mild crowding, and incisal edge attrition.</p>
               </div>
             </div>
-
-            <!-- Booking Schedule Slots -->
-            <div class="pt-2 flex flex-wrap items-center justify-between gap-3 text-xs">
-              <span class="text-[var(--text-muted)]" id="lblClinicSchedule">Available Clinical Appointments for Consultation:</span>
-              <div class="flex items-center space-x-2 rtl:space-x-reverse font-mono font-semibold">
-                <button onclick="selectSlot(this)" class="slot-btn px-2.5 py-1 rounded bg-[var(--accent)] text-[var(--vibe-on-primary)] min-h-[32px]">10:00 AM</button>
-                <button onclick="selectSlot(this)" class="slot-btn px-2.5 py-1 rounded bg-[var(--surface-elevated)] border border-[var(--border-subtle)] hover:bg-[var(--surface-bg)] min-h-[32px]">02:30 PM</button>
-                <button onclick="selectSlot(this)" class="slot-btn px-2.5 py-1 rounded bg-[var(--surface-elevated)] border border-[var(--border-subtle)] hover:bg-[var(--surface-bg)] min-h-[32px]">04:15 PM</button>
+            <!-- Post-Treatment Layer -->
+            <div id="splitLayerAfter" class="absolute inset-y-0 right-0 bg-emerald-100/90 border-l-2 border-emerald-600 flex items-center justify-end p-8 transition-all duration-75" style="width: 50%;">
+              <div class="space-y-1 text-right">
+                <span class="text-xs font-black text-emerald-800 uppercase tracking-widest block" id="lblSlideAfter">POST-TREATMENT (AFTER)</span>
+                <p class="text-xs text-emerald-700 max-w-xs" id="lblSlideAfterDesc">Bilateral symmetry, optimal light reflection, and certified gingival contour.</p>
               </div>
             </div>
+            <!-- Range Input -->
+            <input type="range" min="0" max="100" value="50" oninput="updateSplit(this.value)" class="absolute inset-0 w-full h-full opacity-0 cursor-ew-resize z-20" aria-label="Compare treatment slider">
           </div>
+        </div>
 
-          <!-- TAB 3: AI INTELLIGENCE BENTO -->
-          <div id="panelBento" class="domain-panel hidden">
-            <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
-              <!-- Big Card -->
-              <div class="sm:col-span-2 vibe-spotlight-card p-5 rounded-[var(--radius-card)] bg-[var(--surface-elevated)] border border-[var(--border-subtle)] space-y-2">
-                <div class="flex items-center justify-between">
-                  <span class="text-xs font-bold text-[var(--accent)] uppercase tracking-wider" id="lblSensorTitle">Autonomous Stack Sensor</span>
-                  <span class="text-xs font-mono font-bold text-emerald-500">&lt;1ms Discovery</span>
-                </div>
-                <h4 class="text-base font-extrabold text-[var(--text-primary)]" id="lblSensorHeading">Deterministic Code Synthesis with Zero AI Slop</h4>
-                <p class="text-xs text-[var(--text-secondary)] leading-relaxed" id="lblSensorDesc">
-                  Instantly discovers Next.js 15, Vite, React 19, and Tailwind CSS v4 in your project without asking setup questions. Calibrates contrast mathematically in perceptual OKLCH color spaces.
-                </p>
-              </div>
-
-              <!-- Contrast Card -->
-              <div class="vibe-spotlight-card p-5 rounded-[var(--radius-card)] bg-[var(--surface-elevated)] border border-[var(--border-subtle)] text-center flex flex-col justify-center space-y-1">
-                <div class="text-xs font-bold text-[var(--text-muted)] uppercase tracking-wider">WCAG AAA Contrast</div>
-                <div class="text-3xl font-black font-mono text-emerald-500"><bdi>17.8 : 1</bdi></div>
-                <div class="text-[11px] text-[var(--text-secondary)]">Exceeds 7:1 Requirement</div>
-              </div>
+        <!-- TAB 3: AI INTELLIGENCE BENTO -->
+        <div id="panelBento" class="mac-panel hidden">
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <div class="p-5 rounded-[var(--radius-md)] bg-[var(--bg-surface)] border border-[var(--border-subtle)] space-y-2">
+              <span class="text-xs font-mono font-bold text-blue-600">01 / STACK SENSOR</span>
+              <h4 class="text-base font-bold text-[var(--text-primary)]">Instant Telemetry (&lt;1ms)</h4>
+              <p class="text-xs text-[var(--text-secondary)]">Autonomous AST inspection detects Next.js 15, Vite, React 19, and Tailwind v4 without burning user tokens.</p>
+            </div>
+            <div class="p-5 rounded-[var(--radius-md)] bg-[var(--bg-surface)] border border-[var(--border-subtle)] space-y-2">
+              <span class="text-xs font-mono font-bold text-purple-600">02 / COLOR ENGINE</span>
+              <h4 class="text-base font-bold text-[var(--text-primary)]">OKLCH Mathematical Contrast</h4>
+              <p class="text-xs text-[var(--text-secondary)]">Deterministic relative luminance verification ensuring every color pair satisfies WCAG AAA (>7:1) across both light and dark backgrounds.</p>
+            </div>
+            <div class="p-5 rounded-[var(--radius-md)] bg-[var(--bg-surface)] border border-[var(--border-subtle)] space-y-2">
+              <span class="text-xs font-mono font-bold text-emerald-600">03 / MOTION PHYSICS</span>
+              <h4 class="text-base font-bold text-[var(--text-primary)]">Kowalski Spring Mechanics</h4>
+              <p class="text-xs text-[var(--text-secondary)]">Critically damped spring timing (&zeta;=1.0) with zero overshoot for enterprise UI stability and 100dvh mobile safety.</p>
+            </div>
+            <div class="p-5 rounded-[var(--radius-md)] bg-[var(--bg-surface)] border border-[var(--border-subtle)] space-y-2">
+              <span class="text-xs font-mono font-bold text-amber-600">04 / BILINGUAL RESILIENCE</span>
+              <h4 class="text-base font-bold text-[var(--text-primary)]">Fixed-Structure Semantic RTL</h4>
+              <p class="text-xs text-[var(--text-secondary)]">Physical layout geometry remains locked without naive mirror inversion. All English tokens and numbers isolated in &lt;bdi&gt;.</p>
             </div>
           </div>
         </div>
       </div>
-    </section>
+    </div>
+  </section>
 
-    <!-- 5. THE 7 CANONICAL ARCHETYPES SHOWCASE -->
-    <section id="archetypes" class="py-16 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto border-t border-[var(--border-subtle)]">
-      <div class="text-center max-w-3xl mx-auto mb-12">
-        <h2 class="text-3xl sm:text-4xl font-black tracking-tight text-[var(--text-primary)] mb-4" id="archetypesHeading">The 7 Macro Visual Archetypes</h2>
-        <p class="text-base text-[var(--text-secondary)]" id="archetypesSub">Engineered design systems calibrated for specific product domains. Switch archetypes dynamically with guaranteed zero layout shift.</p>
+  <!-- =========================================================================
+       SHOWCASE MODULE 1: FEATURED ENGINEERED DIGITAL PRODUCTS (WORK)
+       ========================================================================= -->
+  <section id="work" class="py-20 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto border-t border-[var(--border-subtle)]">
+    <div class="flex flex-col md:flex-row md:items-end justify-between mb-12 gap-6">
+      <div class="space-y-3 max-w-2xl">
+        <span class="text-xs font-mono uppercase tracking-wider text-[var(--accent-brand)] font-bold block" id="workBadge">Production Showcase</span>
+        <h2 class="text-3xl sm:text-4xl font-black text-[var(--text-primary)] tracking-tight" id="workHeading">Engineered Digital Products & Dashboards</h2>
+        <p class="text-base text-[var(--text-secondary)] text-content" id="workSub">Live preview components autonomously styled across all 7 macro archetypes with responsive geometry, high contrast, and tactile feedback.</p>
       </div>
 
-      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-        <!-- 1. Linear Dev HUD -->
-        <div class="vibe-spotlight-card p-6 rounded-[var(--radius-card)] bg-[var(--surface-bg)] border border-[var(--border-subtle)] space-y-3 text-start">
-          <div class="flex items-center justify-between">
-            <span id="arch1Badge" class="text-xs font-mono font-bold px-2 py-0.5 rounded bg-cyan-500/10 text-cyan-500 border border-cyan-500/20">Obsidian HUD</span>
-            <span id="arch1Domain" class="text-xs text-[var(--text-muted)]">Cloud & Infra</span>
-          </div>
-          <h3 id="arch1Title" class="text-lg font-bold text-[var(--text-primary)]">Linear Dev HUD</h3>
-          <p id="arch1Desc" class="text-xs text-[var(--text-secondary)] leading-relaxed">Micro-terminal telemetry, monospace typography, cyan/emerald status pulses, and live K8s sparklines.</p>
-        </div>
-
-        <!-- 2. Swiss Editorial -->
-        <div class="vibe-spotlight-card p-6 rounded-[var(--radius-card)] bg-[var(--surface-bg)] border border-[var(--border-subtle)] space-y-3 text-start">
-          <div class="flex items-center justify-between">
-            <span id="arch2Badge" class="text-xs font-mono font-bold px-2 py-0.5 rounded bg-stone-500/10 text-stone-500 border border-stone-500/20">Editorial</span>
-            <span id="arch2Domain" class="text-xs text-[var(--text-muted)]">Media & Luxury</span>
-          </div>
-          <h3 id="arch2Title" class="text-lg font-bold text-[var(--text-primary)]">Swiss Editorial</h3>
-          <p id="arch2Desc" class="text-xs text-[var(--text-secondary)] leading-relaxed">Asymmetric typographic grid, calm white space, crisp hairline borders, and international typographic hierarchy.</p>
-        </div>
-
-        <!-- 3. Cupertino Glass -->
-        <div class="vibe-spotlight-card p-6 rounded-[var(--radius-card)] bg-[var(--surface-bg)] border border-[var(--border-subtle)] space-y-3 text-start">
-          <div class="flex items-center justify-between">
-            <span id="arch3Badge" class="text-xs font-mono font-bold px-2 py-0.5 rounded bg-sky-500/10 text-sky-500 border border-sky-500/20">Squircle Fluid</span>
-            <span id="arch3Domain" class="text-xs text-[var(--text-muted)]">Consumer & Health</span>
-          </div>
-          <h3 id="arch3Title" class="text-lg font-bold text-[var(--text-primary)]">Cupertino Glass</h3>
-          <p id="arch3Desc" class="text-xs text-[var(--text-secondary)] leading-relaxed">Multi-layer frosted glass, squircle border radii (28px), critically damped Kowalski spring motion, and tactile feedback.</p>
-        </div>
-
-        <!-- 4. Full-Bleed Bento -->
-        <div class="vibe-spotlight-card p-6 rounded-[var(--radius-card)] bg-[var(--surface-bg)] border border-[var(--border-subtle)] space-y-3 text-start">
-          <div class="flex items-center justify-between">
-            <span id="arch4Badge" class="text-xs font-mono font-bold px-2 py-0.5 rounded bg-indigo-500/10 text-indigo-500 border border-indigo-500/20">Asymmetric Bento</span>
-            <span id="arch4Domain" class="text-xs text-[var(--text-muted)]">AI & Analytics</span>
-          </div>
-          <h3 id="arch4Title" class="text-lg font-bold text-[var(--text-primary)]">Full-Bleed Bento</h3>
-          <p id="arch4Desc" class="text-xs text-[var(--text-secondary)] leading-relaxed">4-tile asymmetric grid with variable visual weights, top specular hairline highlights, and mousemove-following radiance.</p>
-        </div>
-
-        <!-- 5. Quiet Luxury -->
-        <div class="vibe-spotlight-card p-6 rounded-[var(--radius-card)] bg-[var(--surface-bg)] border border-[var(--border-subtle)] space-y-3 text-start">
-          <div class="flex items-center justify-between">
-            <span id="arch5Badge" class="text-xs font-mono font-bold px-2 py-0.5 rounded bg-amber-500/10 text-amber-600 dark:text-amber-400 border border-amber-500/20">Warm Minimalist</span>
-            <span id="arch5Domain" class="text-xs text-[var(--text-muted)]">Aesthetics & Medical</span>
-          </div>
-          <h3 id="arch5Title" class="text-lg font-bold text-[var(--text-primary)]">Quiet Luxury & Clinical</h3>
-          <p id="arch5Desc" class="text-xs text-[var(--text-secondary)] leading-relaxed">Warm champagne and stone palettes, interactive Before/After drag split sliders, and certified board seals.</p>
-        </div>
-
-        <!-- 6. Cyber Terminal -->
-        <div class="vibe-spotlight-card p-6 rounded-[var(--radius-card)] bg-[var(--surface-bg)] border border-[var(--border-subtle)] space-y-3 text-start">
-          <div class="flex items-center justify-between">
-            <span id="arch6Badge" class="text-xs font-mono font-bold px-2 py-0.5 rounded bg-emerald-500/10 text-emerald-500 border border-emerald-500/20">Phosphor Matrix</span>
-            <span id="arch6Domain" class="text-xs text-[var(--text-muted)]">Web3 & Security</span>
-          </div>
-          <h3 id="arch6Title" class="text-lg font-bold text-[var(--text-primary)]">Cyber Terminal</h3>
-          <p id="arch6Desc" class="text-xs text-[var(--text-secondary)] leading-relaxed">Retro-futuristic phosphor green/amber accents, scanline telemetry, and dense monospace data structures.</p>
-        </div>
+      <!-- Project Filters -->
+      <div class="flex flex-wrap items-center gap-2">
+        <button onclick="filterProjects('all', this)" class="arch-btn active" id="btnFilterAll">All Systems</button>
+        <button onclick="filterProjects('fintech', this)" class="arch-btn" id="btnFilterFintech">FinTech SaaS</button>
+        <button onclick="filterProjects('clinical', this)" class="arch-btn" id="btnFilterClinical">Clinical Healthcare</button>
+        <button onclick="filterProjects('web3', this)" class="arch-btn" id="btnFilterWeb3">Web3 & Trading</button>
+        <button onclick="filterProjects('editorial', this)" class="arch-btn" id="btnFilterEditorial">Luxury Editorial</button>
       </div>
-    </section>
+    </div>
 
-    <!-- 6. REACT 19 & CLI GENERATION -->
-    <section id="cli" class="py-16 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto border-t border-[var(--border-subtle)]">
-      <div class="text-center max-w-3xl mx-auto mb-12">
-        <h2 class="text-3xl sm:text-4xl font-black tracking-tight text-[var(--text-primary)] mb-4" id="cliHeading">Instant CLI & React 19 Generation</h2>
-        <p class="text-base text-[var(--text-secondary)]" id="cliSub">Generate standalone HTML applications or stateful React 19 / TypeScript components directly from your command line.</p>
+    <!-- Product Cards Grid -->
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-8" id="projectsGrid">
+      <!-- Card 1: Apex Wealth (FinTech) -->
+      <div class="vibe-card p-6 sm:p-8 space-y-6 project-item" data-category="fintech">
+        <div class="flex items-center justify-between border-b border-[var(--border-subtle)] pb-4">
+          <div>
+            <span class="text-[10px] font-mono uppercase tracking-wider text-blue-600 font-bold block">Minimalist SaaS / FinTech</span>
+            <h3 class="text-xl font-bold text-[var(--text-primary)]">Apex Wealth & Financial Telemetry</h3>
+          </div>
+          <span class="px-2.5 py-1 rounded bg-blue-500/10 text-blue-600 text-xs font-mono font-bold"><bdi>+48.2% ARR</bdi></span>
+        </div>
+
+        <!-- Live SVG Financial Sparkline -->
+        <div class="h-40 rounded-[var(--radius-sm)] bg-[var(--bg-canvas)] border border-[var(--border-subtle)] p-4 flex flex-col justify-between">
+          <div class="flex items-center justify-between text-xs font-mono">
+            <span class="text-[var(--text-muted)]">Net Compound Revenue</span>
+            <span class="font-bold text-emerald-600"><bdi>$1,248,500.00</bdi></span>
+          </div>
+          <svg class="w-full h-20 text-[var(--accent-brand)]" viewBox="0 0 300 80" fill="none" stroke="currentColor" stroke-width="2.5">
+            <path d="M0 60 Q 50 55, 100 40 T 200 30 T 300 10" />
+            <path d="M0 60 Q 50 55, 100 40 T 200 30 T 300 10 L 300 80 L 0 80 Z" fill="currentColor" fill-opacity="0.08" stroke="none" />
+          </svg>
+          <div class="flex items-center justify-between text-[11px] text-[var(--text-muted)] font-mono">
+            <span>Q1 2026</span>
+            <span>Q2 2026</span>
+            <span>Q3 2026</span>
+            <span>Q4 2026 Target</span>
+          </div>
+        </div>
+
+        <p class="text-xs text-[var(--text-secondary)] leading-relaxed text-content" id="pApexDesc">High-velocity portfolio balancing system with real-time SVG sparkline charting, multi-asset allocation, and zero-slop OKLCH color spaces.</p>
       </div>
 
-      <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
-        <!-- Terminal Box -->
-        <div class="rounded-[var(--radius-container)] bg-zinc-950 text-zinc-100 p-6 border border-zinc-800 shadow-2xl font-mono text-xs space-y-4" dir="ltr">
-          <div class="flex items-center justify-between border-b border-zinc-800 pb-3 text-zinc-400">
+      <!-- Card 2: Aura Dental (Clinical Healthcare) -->
+      <div class="vibe-card p-6 sm:p-8 space-y-6 project-item" data-category="clinical">
+        <div class="flex items-center justify-between border-b border-[var(--border-subtle)] pb-4">
+          <div>
+            <span class="text-[10px] font-mono uppercase tracking-wider text-emerald-600 font-bold block">Apple Cupertino / Clinical</span>
+            <h3 class="text-xl font-bold text-[var(--text-primary)]">Aura Dental & Aesthetic Clinic</h3>
+          </div>
+          <span class="px-2.5 py-1 rounded bg-emerald-500/10 text-emerald-600 text-xs font-mono font-bold"><bdi>99.2% Satisfaction</bdi></span>
+        </div>
+
+        <div class="h-40 rounded-[var(--radius-sm)] bg-[var(--bg-canvas)] border border-[var(--border-subtle)] p-6 flex items-center justify-between">
+          <div class="space-y-1">
+            <span class="text-xs font-bold text-[var(--text-primary)]">Invisalign & Veneers Protocol</span>
+            <p class="text-xs text-[var(--text-muted)]">3D scan alignment with sub-millimeter precision</p>
+            <div class="pt-2">
+              <span class="px-2 py-0.5 rounded text-[10px] font-mono bg-emerald-500/15 text-emerald-700 font-bold">14 Days Recovery</span>
+            </div>
+          </div>
+          <div class="w-16 h-16 rounded-full bg-emerald-500/10 flex items-center justify-center text-emerald-600">
+            <svg class="w-8 h-8" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+          </div>
+        </div>
+
+        <p class="text-xs text-[var(--text-secondary)] leading-relaxed text-content" id="pAuraDesc">Fluid appointment scheduler and patient treatment portal designed in the Apple Cupertino archetype with squircle cards and frosted glass.</p>
+      </div>
+
+      <!-- Card 3: Solana Horizon DEX (Web3 & Security) -->
+      <div class="vibe-card p-6 sm:p-8 space-y-6 project-item" data-category="web3">
+        <div class="flex items-center justify-between border-b border-[var(--border-subtle)] pb-4">
+          <div>
+            <span class="text-[10px] font-mono uppercase tracking-wider text-purple-600 font-bold block">Specular Glass / Web3</span>
+            <h3 class="text-xl font-bold text-[var(--text-primary)]">Solana Horizon DEX & Staking</h3>
+          </div>
+          <span class="px-2.5 py-1 rounded bg-purple-500/10 text-purple-600 text-xs font-mono font-bold"><bdi>12.8% APY</bdi></span>
+        </div>
+
+        <div class="h-40 rounded-[var(--radius-sm)] bg-zinc-950 text-purple-300 font-mono text-xs p-5 border border-purple-900/40 flex flex-col justify-between" dir="ltr">
+          <div class="flex items-center justify-between">
+            <span class="text-zinc-500">LIQUIDITY STAKING POOL</span>
+            <span class="text-emerald-400 font-bold">ACTIVE</span>
+          </div>
+          <div class="text-2xl font-black text-white"><bdi>452,190.85 SOL</bdi></div>
+          <div class="flex items-center justify-between text-[11px] text-zinc-400">
+            <span>24h Volume: $42.8M</span>
+            <span>Fee: 0.05%</span>
+          </div>
+        </div>
+
+        <p class="text-xs text-[var(--text-secondary)] leading-relaxed text-content" id="pSolanaDesc">Specular glass luxury liquidity dashboard featuring real-time APY calculation, zero slippage matrix, and dark prestige styling.</p>
+      </div>
+
+      <!-- Card 4: Vanguard Chronometer (Luxury Swiss Editorial) -->
+      <div class="vibe-card p-6 sm:p-8 space-y-6 project-item" data-category="editorial">
+        <div class="flex items-center justify-between border-b border-[var(--border-subtle)] pb-4">
+          <div>
+            <span class="text-[10px] font-mono uppercase tracking-wider text-rose-600 font-bold block">Swiss Editorial / Luxury</span>
+            <h3 class="text-xl font-bold text-[var(--text-primary)] font-serif italic">L'Horlogerie Vanguard</h3>
+          </div>
+          <span class="px-2.5 py-1 rounded bg-rose-500/10 text-rose-600 text-xs font-mono font-bold"><bdi>16.4:1 AAA</bdi></span>
+        </div>
+
+        <div class="h-40 rounded-[var(--radius-sm)] bg-[var(--bg-canvas)] border border-[var(--border-subtle)] p-6 flex flex-col justify-between">
+          <div class="space-y-1">
+            <h4 class="text-lg font-serif italic font-bold text-[var(--text-primary)]">Calibre 9012 Tourbillon</h4>
+            <p class="text-xs text-[var(--text-muted)]">Hand-assembled in Geneva. 72-hour power reserve.</p>
+          </div>
+          <div class="flex items-center justify-between border-t border-[var(--border-subtle)] pt-2 text-xs font-mono text-[var(--text-secondary)]">
+            <span>LIMITED EDITION</span>
+            <span class="font-bold text-[var(--text-primary)]">25 PIECES WORLDWIDE</span>
+          </div>
+        </div>
+
+        <p class="text-xs text-[var(--text-secondary)] leading-relaxed text-content" id="pVanguardDesc">High-fashion horology platform built with strict Swiss grid mathematics, high contrast typography, and asymmetric column rhythm.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- =========================================================================
+       SHOWCASE MODULE 2: AUTONOMOUS ENGINEERING LAB (INTERACTIVE PLAYGROUND)
+       ========================================================================= -->
+  <section id="lab" class="py-20 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto border-t border-[var(--border-subtle)]">
+    <div class="text-center max-w-3xl mx-auto mb-14 space-y-3">
+      <span class="text-xs font-mono uppercase tracking-wider text-[var(--accent-brand)] font-bold block" id="labBadge">Interactive Mechanics</span>
+      <h2 class="text-3xl sm:text-4xl font-black text-[var(--text-primary)] tracking-tight" id="labHeading">Autonomous Engineering Lab</h2>
+      <p class="text-base text-[var(--text-secondary)] text-content" id="labSub">Explore live interactive components. Test spring mechanics, split comparison sliders, and tactile hardware audio decks in real time.</p>
+
+      <!-- Lab Tab Navigation -->
+      <div class="inline-flex p-1 rounded-[var(--radius-sm)] bg-[var(--bg-surface)] border border-[var(--border-subtle)] mt-4">
+        <button onclick="switchLabTab('spring', this)" class="px-4 py-1.5 rounded-[var(--radius-sm)] text-xs font-bold bg-[var(--accent-brand)] text-white lab-tab-btn" id="btnLabSpring">Kowalski Spring Physics</button>
+        <button onclick="switchLabTab('slider', this)" class="px-4 py-1.5 rounded-[var(--radius-sm)] text-xs font-bold text-[var(--text-secondary)] hover:text-[var(--text-primary)] lab-tab-btn" id="btnLabSlider">Before/After Split Slider</button>
+        <button onclick="switchLabTab('audio', this)" class="px-4 py-1.5 rounded-[var(--radius-sm)] text-xs font-bold text-[var(--text-secondary)] hover:text-[var(--text-primary)] lab-tab-btn" id="btnLabAudio">Tactile Audio Deck</button>
+      </div>
+    </div>
+
+    <!-- LAB CONTAINER -->
+    <div class="vibe-card p-6 sm:p-10 max-w-4xl mx-auto">
+      <!-- SUB-PANEL 1: KOWALSKI SPRING PHYSICS SANDBOX -->
+      <div id="labSpringPanel" class="space-y-6">
+        <div class="flex items-center justify-between border-b border-[var(--border-subtle)] pb-4">
+          <div>
+            <h3 class="text-lg font-bold text-[var(--text-primary)]" id="springTitle">Kowalski Spring Motion Playground</h3>
+            <p class="text-xs text-[var(--text-muted)]" id="springSub">Drag the card horizontally and release to observe critically damped (&zeta;=1.0) spring physics without overshoot.</p>
+          </div>
+          <div class="text-right font-mono text-xs">
+            <span class="text-[var(--text-muted)]">STATUS:</span>
+            <span id="springStatusText" class="font-bold text-emerald-600 block">Idle at Equilibrium</span>
+          </div>
+        </div>
+
+        <!-- Draggable Area -->
+        <div class="relative h-48 rounded-[var(--radius-md)] bg-[var(--bg-canvas)] border border-[var(--border-subtle)] flex items-center justify-center overflow-hidden">
+          <div id="springBox" class="w-44 h-28 rounded-[var(--radius-md)] bg-[var(--bg-surface-elevated)] border-2 border-[var(--accent-brand)] shadow-lg flex flex-col items-center justify-center cursor-grab active:cursor-grabbing select-none transition-transform" style="touch-action: none;">
+            <svg class="w-6 h-6 text-[var(--accent-brand)] mb-1" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="5 9 2 12 5 15"/><polyline points="9 5 12 2 15 5"/><polyline points="15 19 12 22 9 19"/><polyline points="19 9 22 12 19 15"/><line x1="2" y1="12" x2="22" y2="12"/><line x1="12" y1="2" x2="12" y2="22"/></svg>
+            <span class="text-xs font-bold text-[var(--text-primary)]" id="springBoxText">Drag Me Horizontally</span>
+            <span class="text-[10px] font-mono text-[var(--text-muted)]">&zeta; = 1.0 (Critical)</span>
+          </div>
+        </div>
+
+        <div class="grid grid-cols-3 gap-4 text-center font-mono text-xs">
+          <div class="p-3 rounded bg-[var(--bg-surface)] border border-[var(--border-subtle)]">
+            <span class="text-[var(--text-muted)] block">Displacement</span>
+            <span id="springDisp" class="font-bold text-[var(--text-primary)]"><bdi>0.0 px</bdi></span>
+          </div>
+          <div class="p-3 rounded bg-[var(--bg-surface)] border border-[var(--border-subtle)]">
+            <span class="text-[var(--text-muted)] block">Velocity</span>
+            <span id="springVel" class="font-bold text-[var(--text-primary)]"><bdi>0.00 px/ms</bdi></span>
+          </div>
+          <div class="p-3 rounded bg-[var(--bg-surface)] border border-[var(--border-subtle)]">
+            <span class="text-[var(--text-muted)] block">Damping Ratio</span>
+            <span class="font-bold text-emerald-600"><bdi>&zeta; = 1.0</bdi></span>
+          </div>
+        </div>
+      </div>
+
+      <!-- SUB-PANEL 2: BEFORE/AFTER ANTI-SLOP COMPARISON SLIDER -->
+      <div id="labSliderPanel" class="hidden space-y-6">
+        <div class="flex items-center justify-between border-b border-[var(--border-subtle)] pb-4">
+          <div>
+            <h3 class="text-lg font-bold text-[var(--text-primary)]" id="antiSlopTitle">High-Craft vs Generic AI Slop</h3>
+            <p class="text-xs text-[var(--text-muted)]" id="antiSlopSub">Drag the slider horizontally to inspect how Vibe UI eliminates AI slop with WCAG AAA contrast, semantic RTL, and crisp vectors.</p>
+          </div>
+          <span class="px-2.5 py-0.5 rounded bg-rose-500/10 text-rose-600 font-mono text-xs font-bold">ANTI-SLOP SHIELD</span>
+        </div>
+
+        <div class="relative h-64 rounded-[var(--radius-md)] overflow-hidden border border-[var(--border-subtle)] select-none">
+          <!-- Generic Slop Layer -->
+          <div class="absolute inset-0 bg-yellow-50/90 text-yellow-900 p-8 flex flex-col justify-between">
+            <div>
+              <span class="px-2 py-0.5 rounded bg-red-500 text-white text-[10px] font-bold">GENERIC AI SLOP</span>
+              <h4 class="text-xl font-bold mt-2 text-yellow-800">Uncalibrated UI Output</h4>
+              <p class="text-xs text-yellow-700 mt-1 max-w-sm">Yellow emojis, poor 2.1:1 contrast, sluggish 2s linear transitions, and broken mirrored layouts breaking RTL readers.</p>
+            </div>
+            <span class="text-[11px] font-mono text-yellow-600">WCAG Contrast: 2.1:1 (FAIL) • 14 Emojis</span>
+          </div>
+
+          <!-- Masterpiece Layer -->
+          <div id="labSplitAfter" class="absolute inset-y-0 right-0 bg-zinc-950 text-white p-8 flex flex-col justify-between border-l-2 border-emerald-500 transition-all duration-75" style="width: 50%;">
+            <div class="text-right">
+              <span class="px-2 py-0.5 rounded bg-emerald-500 text-black text-[10px] font-bold">VIBE UI MASTERPIECE</span>
+              <h4 class="text-xl font-bold mt-2 text-white">Production Certified UI</h4>
+              <p class="text-xs text-zinc-300 mt-1 max-w-sm ms-auto">Deterministic OKLCH contrast (17.8:1), 0 raw emojis (100% SVG), critically damped Kowalski springs, and fixed-structure RTL.</p>
+            </div>
+            <span class="text-[11px] font-mono text-emerald-400 text-right">WCAG AAA: 17.8:1 (PASS) • Zero Emojis</span>
+          </div>
+
+          <input type="range" min="0" max="100" value="50" oninput="updateLabSplit(this.value)" class="absolute inset-0 w-full h-full opacity-0 cursor-ew-resize z-20" aria-label="Compare slop vs masterpiece">
+        </div>
+      </div>
+
+      <!-- SUB-PANEL 3: TACTILE AUDIO & HARDWARE DECK -->
+      <div id="labAudioPanel" class="hidden space-y-6">
+        <div class="flex items-center justify-between border-b border-[var(--border-subtle)] pb-4">
+          <div>
+            <h3 class="text-lg font-bold text-[var(--text-primary)]" id="audioTitle">Adaptive Hardware Audio Deck</h3>
+            <p class="text-xs text-[var(--text-muted)]" id="audioSub">Neumorphic tactile controls: click rotary knobs to step frequencies, toggle master power, and slide the debossed fader.</p>
+          </div>
+          <div class="flex items-center space-x-1.5">
+            <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
+            <span class="text-xs font-mono text-emerald-600 font-bold">96.0 kHz • 32-BIT FLOAT</span>
+          </div>
+        </div>
+
+        <div class="p-6 rounded-[var(--radius-md)] bg-[var(--bg-canvas)] border border-[var(--border-subtle)] space-y-6">
+          <!-- Switches Row -->
+          <div class="flex flex-wrap items-center justify-between gap-4">
             <div class="flex items-center space-x-2">
-              <span class="w-2.5 h-2.5 rounded-full bg-rose-500/80"></span>
-              <span class="w-2.5 h-2.5 rounded-full bg-amber-500/80"></span>
-              <span class="w-2.5 h-2.5 rounded-full bg-emerald-500/80"></span>
-              <span class="ms-2">terminal — vibe-cli</span>
+              <button onclick="toggleAudioPower(this)" id="btnAudioPower" class="px-3 py-1.5 rounded-[var(--radius-sm)] text-xs font-bold border border-emerald-500 bg-emerald-500 text-white transition-all shadow-sm">MASTER POWER</button>
+              <button onclick="this.classList.toggle('bg-zinc-700')" class="px-3 py-1.5 rounded-[var(--radius-sm)] text-xs font-bold border border-[var(--border-subtle)] bg-[var(--bg-surface)] text-[var(--text-primary)] transition-all">ANALOG FILTER</button>
+              <button onclick="this.classList.toggle('bg-zinc-700')" class="px-3 py-1.5 rounded-[var(--radius-sm)] text-xs font-bold border border-[var(--border-subtle)] bg-[var(--bg-surface)] text-[var(--text-primary)] transition-all">SPATIAL HARMONY</button>
             </div>
-            <span class="text-[10px] text-zinc-500">pwsh</span>
-          </div>
-
-          <div class="space-y-3">
-            <div>
-              <span class="text-zinc-500"># 1. Generate autonomous masterpiece HTML:</span>
-              <div class="text-emerald-400 font-semibold mt-1">python vibe_cli.py generate "یک سایت کلینیک زیبایی با رزرو آنلاین" -o clinic.html</div>
-            </div>
-            <div>
-              <span class="text-zinc-500"># 2. Compile living React 19 TSX with stateful hooks:</span>
-              <div class="text-cyan-400 font-semibold mt-1">python vibe_cli.py generate "Developer observability dashboard" -f tsx -o DevDashboard.tsx</div>
-            </div>
-            <div>
-              <span class="text-zinc-500"># 3. Verify against all 6 production quality gates:</span>
-              <div class="text-amber-400 font-semibold mt-1">python vibe_cli.py verify clinic.html</div>
-            </div>
-          </div>
-        </div>
-
-        <!-- Benefits Checklist -->
-        <div class="space-y-5 text-start">
-          <div class="flex items-start space-x-3.5 rtl:space-x-reverse">
-            <div class="w-8 h-8 rounded-full bg-emerald-500/10 text-emerald-500 flex items-center justify-center shrink-0 mt-0.5">
-              <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
-            </div>
-            <div>
-              <h4 class="text-sm font-bold text-[var(--text-primary)]" id="feat1Title">Living React 19 Hooks</h4>
-              <p class="text-xs text-[var(--text-secondary)] mt-1" id="feat1Desc">Direct export of modular TSX components with typed props, useState split sliders, and active tabs.</p>
+            <!-- VU Meter Indicator -->
+            <div class="flex items-end space-x-1 h-8 px-3 py-1 rounded bg-zinc-900 border border-zinc-800" id="vuMeterBox">
+              <div class="vu-bar w-1.5 bg-emerald-500 rounded-t h-4 transition-all duration-100"></div>
+              <div class="vu-bar w-1.5 bg-emerald-500 rounded-t h-6 transition-all duration-100"></div>
+              <div class="vu-bar w-1.5 bg-emerald-400 rounded-t h-5 transition-all duration-100"></div>
+              <div class="vu-bar w-1.5 bg-yellow-400 rounded-t h-7 transition-all duration-100"></div>
+              <div class="vu-bar w-1.5 bg-rose-500 rounded-t h-3 transition-all duration-100"></div>
             </div>
           </div>
 
-          <div class="flex items-start space-x-3.5 rtl:space-x-reverse">
-            <div class="w-8 h-8 rounded-full bg-sky-500/10 text-sky-500 flex items-center justify-center shrink-0 mt-0.5">
-              <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+          <!-- Knobs & Fader Grid -->
+          <div class="grid grid-cols-1 sm:grid-cols-3 gap-6 items-center text-center">
+            <!-- Knob 1: Cutoff Freq -->
+            <div class="p-4 rounded-[var(--radius-sm)] bg-[var(--bg-surface)] border border-[var(--border-subtle)] space-y-2">
+              <span class="text-[11px] font-mono text-[var(--text-muted)] block">CUTOFF FREQUENCY</span>
+              <button onclick="rotateKnob('freq')" class="w-14 h-14 rounded-full bg-[var(--bg-canvas)] border-2 border-[var(--border-strong)] mx-auto flex items-center justify-center shadow-md active:scale-95 transition-transform" aria-label="Adjust Cutoff Frequency">
+                <div id="knobFreqIndicator" class="w-1 h-5 bg-[var(--accent-brand)] rounded-full -translate-y-2 transition-transform duration-200"></div>
+              </button>
+              <span id="knobFreqVal" class="text-xs font-mono font-bold text-[var(--text-primary)] block"><bdi>14.2 kHz</bdi></span>
             </div>
-            <div>
-              <h4 class="text-sm font-bold text-[var(--text-primary)]" id="feat2Title">Fixed-Structure Semantic RTL</h4>
-              <p class="text-xs text-[var(--text-secondary)] mt-1" id="feat2Desc">Layout stability guaranteed without naive grid inversion. All English identifiers and numbers isolated in &lt;bdi&gt;.</p>
-            </div>
-          </div>
 
-          <div class="flex items-start space-x-3.5 rtl:space-x-reverse">
-            <div class="w-8 h-8 rounded-full bg-purple-500/10 text-purple-500 flex items-center justify-center shrink-0 mt-0.5">
-              <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+            <!-- Knob 2: Resonance Q -->
+            <div class="p-4 rounded-[var(--radius-sm)] bg-[var(--bg-surface)] border border-[var(--border-subtle)] space-y-2">
+              <span class="text-[11px] font-mono text-[var(--text-muted)] block">RESONANCE Q</span>
+              <button onclick="rotateKnob('res')" class="w-14 h-14 rounded-full bg-[var(--bg-canvas)] border-2 border-[var(--border-strong)] mx-auto flex items-center justify-center shadow-md active:scale-95 transition-transform" aria-label="Adjust Resonance Q">
+                <div id="knobResIndicator" class="w-1 h-5 bg-[var(--accent-brand)] rounded-full -translate-y-2 rotate-45 transition-transform duration-200"></div>
+              </button>
+              <span id="knobResVal" class="text-xs font-mono font-bold text-[var(--text-primary)] block"><bdi>+4.5 dB</bdi></span>
             </div>
-            <div>
-              <h4 class="text-sm font-bold text-[var(--text-primary)]" id="feat3Title">Absolute Zero Raw Emojis</h4>
-              <p class="text-xs text-[var(--text-secondary)] mt-1" id="feat3Desc">Strictly audited inline SVG vector icons with currentColor inheritance passing all accessibility linters.</p>
+
+            <!-- Fader: Master Output -->
+            <div class="p-4 rounded-[var(--radius-sm)] bg-[var(--bg-surface)] border border-[var(--border-subtle)] space-y-2">
+              <span class="text-[11px] font-mono text-[var(--text-muted)] block">MASTER GAIN FADER</span>
+              <input type="range" min="0" max="100" value="82" oninput="updateAudioFader(this.value)" class="w-full cursor-pointer accent-[var(--accent-brand)]" aria-label="Master Gain Fader">
+              <span id="faderValDisplay" class="text-xs font-mono font-bold text-[var(--text-primary)] block"><bdi>82%</bdi></span>
             </div>
           </div>
         </div>
       </div>
-    </section>
-  </main>
+    </div>
+  </section>
 
-  <!-- 7. FOOTER -->
-  <footer class="border-t border-[var(--border-subtle)] bg-[var(--surface-bg)] py-10 px-4 sm:px-6 lg:px-8 mt-16 text-center text-xs text-[var(--text-muted)] space-y-4">
-    <div class="flex items-center justify-center space-x-6 rtl:space-x-reverse">
+  <!-- =========================================================================
+       SHOWCASE MODULE 3: THE 7 MACRO VISUAL ARCHETYPES
+       ========================================================================= -->
+  <section id="archetypes" class="py-20 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto border-t border-[var(--border-subtle)]">
+    <div class="text-center max-w-3xl mx-auto mb-14 space-y-3">
+      <span class="text-xs font-mono uppercase tracking-wider text-[var(--accent-brand)] font-bold block" id="archBadge">System Archetypes</span>
+      <h2 class="text-3xl sm:text-4xl font-black text-[var(--text-primary)] tracking-tight" id="archetypesHeading">The 7 Macro Visual Archetypes</h2>
+      <p class="text-base text-[var(--text-secondary)] text-content" id="archetypesSub">Engineered design systems calibrated for specific product domains. Switch archetypes dynamically with guaranteed zero layout shift.</p>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+      <!-- 1. Linear Dev HUD -->
+      <div class="vibe-card p-6 space-y-3">
+        <div class="flex items-center justify-between">
+          <span id="arch1Badge" class="text-xs font-mono font-bold px-2 py-0.5 rounded bg-cyan-500/10 text-cyan-600 border border-cyan-500/20">Obsidian HUD</span>
+          <span id="arch1Domain" class="text-xs text-[var(--text-muted)]">Cloud & Infra</span>
+        </div>
+        <h3 id="arch1Title" class="text-lg font-bold text-[var(--text-primary)]">Linear Dev HUD</h3>
+        <p id="arch1Desc" class="text-xs text-[var(--text-secondary)] leading-relaxed text-content">Micro-terminal telemetry, monospace typography, cyan/emerald status pulses, and live K8s sparklines.</p>
+      </div>
+
+      <!-- 2. Swiss Editorial -->
+      <div class="vibe-card p-6 space-y-3">
+        <div class="flex items-center justify-between">
+          <span id="arch2Badge" class="text-xs font-mono font-bold px-2 py-0.5 rounded bg-stone-500/10 text-stone-600 border border-stone-500/20">Editorial</span>
+          <span id="arch2Domain" class="text-xs text-[var(--text-muted)]">Media & Luxury</span>
+        </div>
+        <h3 id="arch2Title" class="text-lg font-bold text-[var(--text-primary)]">Swiss Editorial</h3>
+        <p id="arch2Desc" class="text-xs text-[var(--text-secondary)] leading-relaxed text-content">Asymmetric typographic grid, calm white space, crisp hairline borders, and international typographic hierarchy.</p>
+      </div>
+
+      <!-- 3. Cupertino Glass -->
+      <div class="vibe-card p-6 space-y-3">
+        <div class="flex items-center justify-between">
+          <span id="arch3Badge" class="text-xs font-mono font-bold px-2 py-0.5 rounded bg-sky-500/10 text-sky-600 border border-sky-500/20">Squircle Fluid</span>
+          <span id="arch3Domain" class="text-xs text-[var(--text-muted)]">Consumer & Health</span>
+        </div>
+        <h3 id="arch3Title" class="text-lg font-bold text-[var(--text-primary)]">Cupertino Glass</h3>
+        <p id="arch3Desc" class="text-xs text-[var(--text-secondary)] leading-relaxed text-content">Multi-layer frosted glass, squircle border radii (28px), critically damped Kowalski spring motion, and tactile feedback.</p>
+      </div>
+
+      <!-- 4. Full-Bleed Bento -->
+      <div class="vibe-card p-6 space-y-3">
+        <div class="flex items-center justify-between">
+          <span id="arch4Badge" class="text-xs font-mono font-bold px-2 py-0.5 rounded bg-indigo-500/10 text-indigo-600 border border-indigo-500/20">Asymmetric Bento</span>
+          <span id="arch4Domain" class="text-xs text-[var(--text-muted)]">AI & Analytics</span>
+        </div>
+        <h3 id="arch4Title" class="text-lg font-bold text-[var(--text-primary)]">Full-Bleed Bento</h3>
+        <p id="arch4Desc" class="text-xs text-[var(--text-secondary)] leading-relaxed text-content">4-tile asymmetric grid with variable visual weights, top specular hairline highlights, and mousemove-following radiance.</p>
+      </div>
+
+      <!-- 5. Quiet Luxury & Clinical -->
+      <div class="vibe-card p-6 space-y-3">
+        <div class="flex items-center justify-between">
+          <span id="arch5Badge" class="text-xs font-mono font-bold px-2 py-0.5 rounded bg-amber-500/10 text-amber-600 border border-amber-500/20">Warm Minimalist</span>
+          <span id="arch5Domain" class="text-xs text-[var(--text-muted)]">Aesthetics & Medical</span>
+        </div>
+        <h3 id="arch5Title" class="text-lg font-bold text-[var(--text-primary)]">Quiet Luxury & Clinical</h3>
+        <p id="arch5Desc" class="text-xs text-[var(--text-secondary)] leading-relaxed text-content">Warm champagne and stone palettes, interactive Before/After drag split sliders, and certified board seals.</p>
+      </div>
+
+      <!-- 6. Cyber Terminal -->
+      <div class="vibe-card p-6 space-y-3">
+        <div class="flex items-center justify-between">
+          <span id="arch6Badge" class="text-xs font-mono font-bold px-2 py-0.5 rounded bg-emerald-500/10 text-emerald-600 border border-emerald-500/20">Phosphor Matrix</span>
+          <span id="arch6Domain" class="text-xs text-[var(--text-muted)]">Web3 & Security</span>
+        </div>
+        <h3 id="arch6Title" class="text-lg font-bold text-[var(--text-primary)]">Cyber Terminal</h3>
+        <p id="arch6Desc" class="text-xs text-[var(--text-secondary)] leading-relaxed text-content">Retro-futuristic phosphor green/amber accents, scanline telemetry, and dense monospace data structures.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- =========================================================================
+       SHOWCASE MODULE 4: INTERACTIVE MR-UI-DESIGNER AI STUDIO
+       ========================================================================= -->
+  <section id="studio" class="py-20 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto border-t border-[var(--border-subtle)]">
+    <div class="text-center max-w-3xl mx-auto mb-14 space-y-3">
+      <span class="text-xs font-mono uppercase tracking-wider text-[var(--accent-brand)] font-bold block" id="studioBadge">Autonomous Agent</span>
+      <h2 class="text-3xl sm:text-4xl font-black text-[var(--text-primary)] tracking-tight" id="studioHeading">Interactive mr-ui-designer Console</h2>
+      <p class="text-base text-[var(--text-secondary)] text-content" id="studioSub">Click any lazy prompt chip to watch Stack Sensor (&lt;1ms) and Domain Director synthesize production interfaces.</p>
+
+      <!-- Prompt Chips -->
+      <div class="flex flex-wrap items-center justify-center gap-2 pt-2">
+        <button onclick="runScenario('dental', this)" class="arch-btn active" id="chipDental">Clinical Wellness (Apple Fluid)</button>
+        <button onclick="runScenario('crypto', this)" class="arch-btn" id="chipCrypto">Crypto Staking Pool (Specular Glass)</button>
+        <button onclick="runScenario('saas', this)" class="arch-btn" id="chipSaas">SaaS Analytics & Billing (Clean Stripe)</button>
+        <button onclick="runScenario('slop', this)" class="arch-btn" id="chipSlop">Surgical Anti-Slop Audit</button>
+      </div>
+    </div>
+
+    <div class="vibe-card p-6 sm:p-8 max-w-4xl mx-auto space-y-6">
+      <!-- Active Prompt Bar -->
+      <div class="rounded-[var(--radius-sm)] bg-[var(--bg-canvas)] border border-[var(--border-subtle)] p-4 flex items-center justify-between gap-4">
+        <div class="flex items-center space-x-3 overflow-hidden">
+          <span class="w-2 h-2 rounded-full bg-blue-500 shrink-0"></span>
+          <code id="activePromptDisplay" class="text-xs font-mono text-[var(--text-primary)] truncate">@mr-ui-designer design a booking screen for a luxury cosmetic dental clinic</code>
+        </div>
+        <button onclick="copyPrompt()" class="px-3 py-1 rounded bg-[var(--accent-brand)] text-white text-xs font-bold shrink-0 hover:opacity-90 transition-opacity">Copy Prompt</button>
+      </div>
+
+      <!-- Telemetry Readout (Strictly LTR) -->
+      <div class="rounded-[var(--radius-sm)] bg-zinc-950 text-zinc-300 font-mono text-xs p-4 border border-zinc-800 space-y-1" dir="ltr" id="sensorReadout">
+        <div>&gt; [0.10ms] Project Scanned: Next.js 15 + Tailwind CSS v4 detected</div>
+        <div>&gt; [0.22ms] Intent Disambiguated: Domain: "healthcare_clinical"</div>
+        <div>&gt; [0.35ms] Style Synthesized: Archetype: "apple_cupertino" (Squircle 28px)</div>
+        <div>&gt; [0.48ms] Interaction Contract: Causal recalculation wired</div>
+        <div class="text-emerald-400 font-bold">&gt; [0.60ms] Contrast Verified: All text pairs &gt;= 8.2:1 WCAG AAA</div>
+      </div>
+
+      <!-- Live Generated Interactive Mock Widget -->
+      <div class="p-6 rounded-[var(--radius-md)] bg-[var(--bg-surface-elevated)] border border-[var(--border-subtle)] space-y-4">
+        <div class="flex items-center justify-between">
+          <div>
+            <h4 id="widgetTitle" class="text-base font-bold text-[var(--text-primary)]">Aligner Treatment Plan</h4>
+            <p id="widgetSubtitle" class="text-xs text-[var(--text-muted)]">Estimated duration based on scan complexity:</p>
+          </div>
+          <span id="sliderValueDisplay" class="px-2.5 py-1 rounded bg-[var(--accent-brand-subtle)] text-[var(--accent-brand)] font-mono text-xs font-bold">Align Arch</span>
+        </div>
+
+        <input type="range" min="5" max="30" value="15" id="widgetSlider" oninput="updateWidgetCalculation(this.value)" class="w-full cursor-pointer accent-[var(--accent-brand)]" aria-label="Treatment Duration Slider">
+
+        <div class="flex items-center justify-between pt-2 border-t border-[var(--border-subtle)] text-xs font-mono">
+          <span id="widgetMetricLabel" class="text-[var(--text-secondary)]">Treatment Timeline:</span>
+          <span id="widgetMetricVal" class="text-base font-bold text-[var(--accent-brand)]"><bdi>15 Days</bdi></span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- =========================================================================
+       SHOWCASE MODULE 5: SCOPE & ARCHITECTURE ESTIMATOR
+       ========================================================================= -->
+  <section id="estimator" class="py-20 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto border-t border-[var(--border-subtle)]">
+    <div class="text-center max-w-3xl mx-auto mb-14 space-y-3">
+      <span class="text-xs font-mono uppercase tracking-wider text-[var(--accent-brand)] font-bold block" id="estBadge">System Sizing</span>
+      <h2 class="text-3xl sm:text-4xl font-black text-[var(--text-primary)] tracking-tight" id="estHeading">Scope & Architecture Estimator</h2>
+      <p class="text-base text-[var(--text-secondary)] text-content" id="estSub">Calculate autonomous design system delivery scope, token budget generation, and multi-archetype rollouts.</p>
+    </div>
+
+    <div class="vibe-card p-6 sm:p-8 max-w-3xl mx-auto space-y-6">
+      <!-- Screen Slider -->
+      <div class="space-y-2">
+        <div class="flex items-center justify-between text-xs font-bold">
+          <span class="text-[var(--text-primary)]" id="lblScreenCount">Screen & Flow Count:</span>
+          <span id="screensValDisplay" class="text-blue-600 font-mono"><bdi>12 Screens</bdi></span>
+        </div>
+        <input type="range" min="1" max="24" value="12" id="rangeScreens" oninput="calculateEstimate()" class="w-full cursor-pointer accent-[var(--accent-brand)]" aria-label="Screen and Flow Count">
+      </div>
+
+      <!-- Archetypes Slider -->
+      <div class="space-y-2">
+        <div class="flex items-center justify-between text-xs font-bold">
+          <span class="text-[var(--text-primary)]" id="lblArchCount">Visual Archetypes:</span>
+          <span id="archValDisplay" class="text-purple-600 font-mono"><bdi>3 Archetypes</bdi></span>
+        </div>
+        <input type="range" min="1" max="7" value="3" id="rangeArchetypes" oninput="calculateEstimate()" class="w-full cursor-pointer accent-[var(--accent-brand)]" aria-label="Visual Archetypes count">
+      </div>
+
+      <!-- Options Badges -->
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-2 text-xs font-semibold">
+        <div class="p-3 rounded bg-[var(--bg-canvas)] border border-[var(--border-subtle)] flex items-center justify-between">
+          <span id="lblRtlIncluded">Fixed-Structure Semantic RTL:</span>
+          <span class="text-emerald-600 font-bold">Included</span>
+        </div>
+        <div class="p-3 rounded bg-[var(--bg-canvas)] border border-[var(--border-subtle)] flex items-center justify-between">
+          <span id="lblAgentDelivery">Autonomous Agent Delivery:</span>
+          <span class="text-emerald-600 font-bold">Instant CLI</span>
+        </div>
+      </div>
+
+      <!-- Result Cost & Timeline -->
+      <div class="p-6 rounded-[var(--radius-md)] bg-[var(--bg-surface-elevated)] border border-[var(--border-subtle)] flex items-center justify-between">
+        <div>
+          <span class="text-xs text-[var(--text-muted)] block" id="lblEstCost">Estimated Implementation Value:</span>
+          <div id="costValDisplay" class="text-3xl font-black text-[var(--text-primary)] font-mono"><bdi>$2,630</bdi></div>
+        </div>
+        <div class="text-right">
+          <span class="text-xs text-[var(--text-muted)] block" id="lblEstTimeline">Delivery Timeline:</span>
+          <span id="timelineValDisplay" class="text-base font-bold text-emerald-600 font-mono"><bdi>5 Business Days</bdi></span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- =========================================================================
+       SHOWCASE MODULE 6: INSTANT CLI & REACT 19 GENERATION
+       ========================================================================= -->
+  <section id="cli" class="py-20 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto border-t border-[var(--border-subtle)]">
+    <div class="text-center max-w-3xl mx-auto mb-14 space-y-3">
+      <span class="text-xs font-mono uppercase tracking-wider text-[var(--accent-brand)] font-bold block" id="cliBadge">Autonomous CLI</span>
+      <h2 class="text-3xl sm:text-4xl font-black text-[var(--text-primary)] tracking-tight" id="cliHeading">Instant CLI & React 19 Generation</h2>
+      <p class="text-base text-[var(--text-secondary)] text-content" id="cliSub">Generate standalone HTML applications or stateful React 19 / TypeScript components directly from your command line.</p>
+    </div>
+
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
+      <!-- Terminal Box (Strictly LTR) -->
+      <div class="rounded-[var(--radius-md)] bg-zinc-950 text-zinc-100 p-6 border border-zinc-800 shadow-2xl font-mono text-xs space-y-4" dir="ltr">
+        <div class="flex items-center justify-between border-b border-zinc-800 pb-3 text-zinc-400">
+          <div class="flex items-center space-x-2">
+            <span class="w-2.5 h-2.5 rounded-full bg-rose-500/80"></span>
+            <span class="w-2.5 h-2.5 rounded-full bg-amber-500/80"></span>
+            <span class="w-2.5 h-2.5 rounded-full bg-emerald-500/80"></span>
+            <span class="ms-2">terminal — vibe-cli</span>
+          </div>
+          <span class="text-[10px] text-zinc-500">pwsh</span>
+        </div>
+
+        <div class="space-y-3">
+          <div>
+            <span class="text-zinc-500"># 1. Generate autonomous masterpiece HTML:</span>
+            <div class="text-emerald-400 font-semibold mt-1">python vibe_cli.py generate "یک سایت کلینیک زیبایی با رزرو آنلاین" -o clinic.html</div>
+          </div>
+          <div>
+            <span class="text-zinc-500"># 2. Compile living React 19 TSX with stateful hooks:</span>
+            <div class="text-cyan-400 font-semibold mt-1">python vibe_cli.py generate "Developer observability dashboard" -f tsx -o DevDashboard.tsx</div>
+          </div>
+          <div>
+            <span class="text-zinc-500"># 3. Verify against all 6 production quality gates:</span>
+            <div class="text-amber-400 font-semibold mt-1">python vibe_cli.py verify clinic.html</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Feature Checklist -->
+      <div class="space-y-5 text-start">
+        <div class="flex items-start space-x-3.5">
+          <div class="w-8 h-8 rounded-full bg-emerald-500/10 text-emerald-600 flex items-center justify-center shrink-0 mt-0.5">
+            <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+          </div>
+          <div class="text-content">
+            <h4 class="text-sm font-bold text-[var(--text-primary)]" id="feat1Title">Living React 19 Hooks</h4>
+            <p class="text-xs text-[var(--text-secondary)] mt-0.5" id="feat1Desc">Direct export of modular TSX components with typed props, useState split sliders, and active tabs.</p>
+          </div>
+        </div>
+
+        <div class="flex items-start space-x-3.5">
+          <div class="w-8 h-8 rounded-full bg-blue-500/10 text-blue-600 flex items-center justify-center shrink-0 mt-0.5">
+            <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+          </div>
+          <div class="text-content">
+            <h4 class="text-sm font-bold text-[var(--text-primary)]" id="feat2Title">Fixed-Structure Semantic RTL</h4>
+            <p class="text-xs text-[var(--text-secondary)] mt-0.5" id="feat2Desc">Layout stability guaranteed without naive grid inversion. Window controls and grids stay physically locked; bidirectional tokens isolated in &lt;bdi&gt;.</p>
+          </div>
+        </div>
+
+        <div class="flex items-start space-x-3.5">
+          <div class="w-8 h-8 rounded-full bg-purple-500/10 text-purple-600 flex items-center justify-center shrink-0 mt-0.5">
+            <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+          </div>
+          <div class="text-content">
+            <h4 class="text-sm font-bold text-[var(--text-primary)]" id="feat3Title">Absolute Zero Raw Emojis</h4>
+            <p class="text-xs text-[var(--text-secondary)] mt-0.5" id="feat3Desc">Strictly audited inline SVG vector icons with currentColor inheritance passing all accessibility linters.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- =========================================================================
+       FOOTER
+       ========================================================================= -->
+  <footer class="border-t border-[var(--border-subtle)] bg-[var(--bg-surface)] py-12 text-center text-xs text-[var(--text-muted)] space-y-4">
+    <div class="flex flex-wrap items-center justify-center gap-6 font-semibold text-[var(--text-secondary)]">
       <a href="https://github.com/omid-io/vibe-ui-suite" target="_blank" rel="noopener" class="hover:text-[var(--text-primary)] transition-colors">GitHub Repository</a>
       <a href="https://www.npmjs.com/package/vibe-ui-suite" target="_blank" rel="noopener" class="hover:text-[var(--text-primary)] transition-colors">npm Package</a>
       <a href="https://marketplace.visualstudio.com/items?itemName=omid-io.vibe-ui-vscode" target="_blank" rel="noopener" class="hover:text-[var(--text-primary)] transition-colors">VS Code Extension</a>
     </div>
-    <p id="footerCopyright">&copy; 2026 Omid-IO. Open-Source MIT License. Certified Autonomous by Antigravity.</p>
+    <p id="footerCopyright">© 2026 Omid-IO. Open-Source MIT License. Certified Autonomous by Antigravity.</p>
   </footer>
 
-  <!-- 8. INTERACTIVE CAUSAL JAVASCRIPT (ZERO DEAD CONTROLS) -->
+  <!-- =========================================================================
+       INTERACTIVE JAVASCRIPT CONTROLLERS
+       ========================================================================= -->
   <script>
-    // Theme Management
-    function toggleDark() {
-      document.documentElement.classList.toggle('dark');
-      localStorage.setItem('vibe-theme', document.documentElement.classList.contains('dark') ? 'dark' : 'light');
-    }
-    if (localStorage.getItem('vibe-theme') === 'dark' || (!('vibe-theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
-      document.documentElement.classList.add('dark');
-    } else {
-      document.documentElement.classList.remove('dark');
-    }
+    // 1. Dynamic Archetype Switcher
+    function setTheme(themeKey, btnElement) {
+      const themes = [
+        'theme-apple_cupertino',
+        'theme-neumorphic',
+        'theme-minimalist_saas',
+        'theme-specular_glass',
+        'theme-neobrutalism',
+        'theme-swiss_editorial',
+        'theme-terminal_hud'
+      ];
+      themes.forEach(t => document.body.classList.remove(t));
+      document.body.classList.add(`theme-${themeKey}`);
 
-    // Tab Switching in macOS Window
-    function switchTab(tabId, btn) {
-      document.querySelectorAll('.domain-tab-btn').forEach(b => {
-        b.className = 'domain-tab-btn px-3 py-1.5 rounded-[6px] text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-all duration-150 flex items-center space-x-1.5 rtl:space-x-reverse';
+      document.querySelectorAll('.arch-btn').forEach(btn => {
+        if (btn.id.startsWith('btnTheme')) btn.classList.remove('active');
       });
-      btn.className = 'domain-tab-btn active px-3 py-1.5 rounded-[6px] bg-[var(--surface-bg)] text-[var(--accent)] shadow-sm transition-all duration-150 flex items-center space-x-1.5 rtl:space-x-reverse';
-
-      document.querySelectorAll('.domain-panel').forEach(p => p.classList.add('hidden'));
-      if (tabId === 'devops') document.getElementById('panelDevops').classList.remove('hidden');
-      if (tabId === 'clinic') document.getElementById('panelClinic').classList.remove('hidden');
-      if (tabId === 'bento') document.getElementById('panelBento').classList.remove('hidden');
+      if (btnElement) btnElement.classList.add('active');
     }
 
-    // Split Comparison Drag Handler
+    // 2. Mac Window Tab Switcher
+    function switchMacTab(tabKey, btn) {
+      document.querySelectorAll('.mac-panel').forEach(p => p.classList.add('hidden'));
+      document.querySelectorAll('.active-mac-tab').forEach(b => {
+        b.classList.remove('active-mac-tab', 'bg-[var(--accent-brand-subtle)]', 'text-[var(--accent-brand)]', 'font-bold');
+        b.classList.add('text-[var(--text-secondary)]');
+      });
+
+      if (tabKey === 'devops') document.getElementById('panelDevops').classList.remove('hidden');
+      if (tabKey === 'clinic') document.getElementById('panelClinic').classList.remove('hidden');
+      if (tabKey === 'bento') document.getElementById('panelBento').classList.remove('hidden');
+
+      if (btn) {
+        btn.classList.add('active-mac-tab', 'bg-[var(--accent-brand-subtle)]', 'text-[var(--accent-brand)]', 'font-bold');
+        btn.classList.remove('text-[var(--text-secondary)]');
+      }
+    }
+
+    // 3. Clinical Split Comparison Slider
     function updateSplit(val) {
-      var isRtl = document.documentElement.getAttribute('dir') === 'rtl';
-      var layer = document.getElementById('splitLayerAfter');
-      var divider = document.getElementById('splitDivider');
-      if (layer) layer.style.width = isRtl ? val + '%' : (100 - val) + '%';
-      if (divider) divider.style.left = val + '%';
+      const layer = document.getElementById('splitLayerAfter');
+      if (layer) layer.style.width = `${100 - val}%`;
     }
 
-    // Log Stream Pause / Resume
-    var isLogPaused = false;
+    // 4. Kubectl Live Log Streamer Simulation
+    let logStreaming = true;
+    let logInterval = null;
+    const logMessages = [
+      '[2026-10-03T16:00:14Z] INFO route=/vibe/api/v4 status=200 latency=1.1ms downstream=oklch-engine',
+      '[2026-10-03T16:00:15Z] INFO verified contrast: WCAG AAA compliance confirmed (17.8:1)',
+      '[2026-10-03T16:00:16Z] DEBUG cluster cache hit: 99.6% across 64 pods',
+      '[2026-10-03T16:00:17Z] INFO autonomous dispatch pipeline completed in <1ms with zero errors',
+      '[2026-10-03T16:00:18Z] DEBUG AST parse completed for Next.js 15 App Router component',
+      '[2026-10-03T16:00:19Z] INFO zero raw emojis detected; 15 inline SVG vectors validated'
+    ];
+    let logIndex = 0;
+
+    function startLogStream() {
+      if (logInterval) clearInterval(logInterval);
+      logInterval = setInterval(() => {
+        if (!logStreaming) return;
+        const container = document.getElementById('logStreamContent');
+        if (!container) return;
+        const div = document.createElement('div');
+        div.innerHTML = logMessages[logIndex % logMessages.length];
+        container.appendChild(div);
+        if (container.children.length > 5) container.removeChild(container.firstChild);
+        logIndex++;
+      }, 2400);
+    }
+    startLogStream();
+
     function toggleLogPause(btn) {
-      isLogPaused = !isLogPaused;
-      var isFa = document.documentElement.getAttribute('dir') === 'rtl';
-      btn.textContent = isLogPaused ? (isFa ? 'ادامه' : 'Resume') : (isFa ? 'مکث' : 'Pause');
+      logStreaming = !logStreaming;
+      btn.textContent = logStreaming ? 'Pause' : 'Resume';
+      btn.classList.toggle('text-emerald-400', !logStreaming);
     }
 
-    // Copy Log Snippet
     function copyLogSnippet(btn) {
-      var text = document.getElementById('logStreamContent').innerText;
-      var isFa = document.documentElement.getAttribute('dir') === 'rtl';
-      navigator.clipboard.writeText(text).then(function() {
-        var orig = btn.textContent;
-        btn.textContent = isFa ? 'کپی شد!' : 'Copied!';
-        setTimeout(function() { btn.textContent = orig; }, 1500);
+      const container = document.getElementById('logStreamContent');
+      if (container) {
+        navigator.clipboard.writeText(container.innerText);
+        const orig = btn.textContent;
+        btn.textContent = 'Copied!';
+        setTimeout(() => { btn.textContent = orig; }, 1200);
+      }
+    }
+
+    // 5. Project Showcase Filters
+    function filterProjects(category, btn) {
+      document.querySelectorAll('#work .arch-btn').forEach(b => b.classList.remove('active'));
+      if (btn) btn.classList.add('active');
+
+      document.querySelectorAll('.project-item').forEach(item => {
+        if (category === 'all' || item.dataset.category === category) {
+          item.style.display = 'block';
+        } else {
+          item.style.display = 'none';
+        }
       });
     }
 
-    // Copy Install Command
-    function copyInstallCmd(btn) {
-      var isFa = document.documentElement.getAttribute('dir') === 'rtl';
-      navigator.clipboard.writeText('npx vibe-ui-suite init').then(function() {
-        var span = btn.querySelector('#btnCopyInstallText');
-        var orig = span.textContent;
-        span.textContent = isFa ? 'دستور کپی شد!' : 'Command Copied!';
-        setTimeout(function() { span.textContent = orig; }, 1800);
+    // 6. Lab Tab Switcher
+    function switchLabTab(tabKey, btn) {
+      document.getElementById('labSpringPanel').classList.add('hidden');
+      document.getElementById('labSliderPanel').classList.add('hidden');
+      document.getElementById('labAudioPanel').classList.add('hidden');
+
+      document.querySelectorAll('.lab-tab-btn').forEach(b => {
+        b.classList.remove('bg-[var(--accent-brand)]', 'text-white');
+        b.classList.add('text-[var(--text-secondary)]');
       });
+
+      if (tabKey === 'spring') document.getElementById('labSpringPanel').classList.remove('hidden');
+      if (tabKey === 'slider') document.getElementById('labSliderPanel').classList.remove('hidden');
+      if (tabKey === 'audio') document.getElementById('labAudioPanel').classList.remove('hidden');
+
+      if (btn) {
+        btn.classList.add('bg-[var(--accent-brand)]', 'text-white');
+        btn.classList.remove('text-[var(--text-secondary)]');
+      }
     }
 
-    // Slot Picker
-    function selectSlot(btn) {
-      document.querySelectorAll('.slot-btn').forEach(function(b) {
-        b.className = 'slot-btn px-2.5 py-1 rounded bg-[var(--surface-elevated)] border border-[var(--border-subtle)] hover:bg-[var(--surface-bg)] min-h-[32px]';
-      });
-      btn.className = 'slot-btn px-2.5 py-1 rounded bg-[var(--accent)] text-[var(--vibe-on-primary)] min-h-[32px]';
+    function updateLabSplit(val) {
+      const layer = document.getElementById('labSplitAfter');
+      if (layer) layer.style.width = `${100 - val}%`;
     }
 
-    // Spotlight mouse tracking (60FPS guarded)
-    if (window.matchMedia('(hover: hover) and (pointer: fine)').matches) {
-      document.querySelectorAll('.vibe-spotlight-card').forEach(function(card) {
-        card.addEventListener('mousemove', function(e) {
-          var rect = card.getBoundingClientRect();
-          card.style.setProperty('--mouse-x', (e.clientX - rect.left) + 'px');
-          card.style.setProperty('--mouse-y', (e.clientY - rect.top) + 'px');
-        });
+    // 7. Kowalski Spring Physics Simulation
+    const springBox = document.getElementById('springBox');
+    let isDragging = false;
+    let startX = 0;
+    let currentX = 0;
+
+    if (springBox) {
+      springBox.addEventListener('pointerdown', (e) => {
+        isDragging = true;
+        startX = e.clientX - currentX;
+        springBox.setPointerCapture(e.pointerId);
+        document.getElementById('springStatusText').textContent = 'Kinetic Tracking';
+        document.getElementById('springStatusText').className = 'font-bold text-blue-600 block';
       });
+
+      window.addEventListener('pointermove', (e) => {
+        if (!isDragging) return;
+        currentX = e.clientX - startX;
+        // Damp boundary
+        if (currentX > 180) currentX = 180 + (currentX - 180) * 0.2;
+        if (currentX < -180) currentX = -180 + (currentX + 180) * 0.2;
+        springBox.style.transform = `translateX(${currentX}px)`;
+        document.getElementById('springDisp').innerHTML = `<bdi>${currentX.toFixed(1)} px</bdi>`;
+        document.getElementById('springVel').innerHTML = `<bdi>${(Math.abs(currentX) / 80).toFixed(2)} px/ms</bdi>`;
+      });
+
+      const releaseSpring = () => {
+        if (!isDragging) return;
+        isDragging = false;
+        document.getElementById('springStatusText').textContent = 'Critically Damped Settling';
+        document.getElementById('springStatusText').className = 'font-bold text-amber-600 block';
+
+        springBox.style.transition = 'transform 0.4s cubic-bezier(0.16, 1, 0.3, 1)';
+        currentX = 0;
+        springBox.style.transform = 'translateX(0px)';
+
+        setTimeout(() => {
+          springBox.style.transition = '';
+          document.getElementById('springStatusText').textContent = 'Idle at Equilibrium';
+          document.getElementById('springStatusText').className = 'font-bold text-emerald-600 block';
+          document.getElementById('springDisp').innerHTML = '<bdi>0.0 px</bdi>';
+          document.getElementById('springVel').innerHTML = '<bdi>0.00 px/ms</bdi>';
+        }, 400);
+      };
+
+      springBox.addEventListener('pointerup', releaseSpring);
+      springBox.addEventListener('pointercancel', releaseSpring);
     }
 
-    // Bilingual Language Switching (Fixed-Structure Semantic RTL)
+    // 8. Tactile Audio Deck Controls
+    let knobFreqDeg = 0;
+    const freqSteps = ['4.8 kHz', '9.6 kHz', '14.2 kHz', '22.0 kHz'];
+    let freqIdx = 2;
+
+    let knobResDeg = 45;
+    const resSteps = ['-1.5 dB', '+4.5 dB', '+8.0 dB', '+12.0 dB'];
+    let resIdx = 1;
+
+    function rotateKnob(type) {
+      if (type === 'freq') {
+        freqIdx = (freqIdx + 1) % freqSteps.length;
+        knobFreqDeg = (freqIdx - 1.5) * 60;
+        document.getElementById('knobFreqIndicator').style.transform = `rotate(${knobFreqDeg}deg) translateY(-8px)`;
+        document.getElementById('knobFreqVal').innerHTML = `<bdi>${freqSteps[freqIdx]}</bdi>`;
+      } else {
+        resIdx = (resIdx + 1) % resSteps.length;
+        knobResDeg = (resIdx - 1.5) * 60;
+        document.getElementById('knobResIndicator').style.transform = `rotate(${knobResDeg}deg) translateY(-8px)`;
+        document.getElementById('knobResVal').innerHTML = `<bdi>${resSteps[resIdx]}</bdi>`;
+      }
+    }
+
+    function updateAudioFader(val) {
+      document.getElementById('faderValDisplay').innerHTML = `<bdi>${val}%</bdi>`;
+    }
+
+    function toggleAudioPower(btn) {
+      btn.classList.toggle('bg-emerald-500');
+      btn.classList.toggle('bg-zinc-800');
+    }
+
+    // 9. mr-ui-designer AI Studio Scenarios
+    let currentScenario = 'dental';
+    const scenarios = {
+      dental: {
+        theme: 'apple_cupertino',
+        promptEn: '@mr-ui-designer design a booking screen for a luxury cosmetic dental clinic',
+        promptFa: 'مستر UI دیزاینر، یک صفحه رزرو کلینیک دندانپزشکی زیبایی با سبک اپل بساز',
+        sensorEn: '> [0.10ms] Project Scanned: Next.js 15 + Tailwind CSS v4 detected\n> [0.22ms] Intent Disambiguated: Domain: "healthcare_clinical"\n> [0.35ms] Style Synthesized: Archetype: "apple_cupertino" (Squircle 28px)\n> [0.48ms] Interaction Contract: Causal recalculation wired\n> [0.60ms] Contrast Verified: All text pairs >= 8.2:1 WCAG AAA',
+        sensorFa: '> [0.10ms] اسکن استک پروژه: شناسایی Next.js 15 و Tailwind v4\n> [0.22ms] تشخیص خودکار دامنه: کلینیک پزشکی و درمانی\n> [0.35ms] پیاده سازی استایل: آرکتایپ اپل کوپرتینو (Squircle 28px)\n> [0.48ms] قرارداد تعامل: اتصال متغیرهای محاسباتی وابسته\n> [0.60ms] اعتبارسنجی کنتراست: تایید نسبت ۸.۲ به ۱ WCAG AAA',
+        titleEn: 'Aligner Treatment Plan',
+        titleFa: 'برنامه درمانی ارتودنسی',
+        subEn: 'Estimated duration based on scan complexity:',
+        subFa: 'مدت تخمینی بر اساس اسکن دندان:',
+        labelEn: 'Treatment Timeline:',
+        labelFa: 'طول دوره درمان:',
+        unit: 'Days'
+      },
+      crypto: {
+        theme: 'specular_glass',
+        promptEn: '@mr-ui-designer create a dark-mode staking pool widget for Solana tokens',
+        promptFa: 'مستر UI دیزاینر، ویجت استیکینگ توکن سولانا را در حالت دارک مود شیشه ای بساز',
+        sensorEn: '> [0.12ms] Project Scanned: Vite + React 19 + Tailwind v4 detected\n> [0.25ms] Intent Disambiguated: Domain: "web3_defi"\n> [0.38ms] Style Synthesized: Archetype: "specular_glass" (Blur 20px, Purple Glow)\n> [0.52ms] Interaction Contract: Recalculating staking yield curve\n> [0.65ms] Motion Verified: Kowalski spring feedback active',
+        sensorFa: '> [0.12ms] اسکن استک پروژه: شناسایی Vite و React 19 و Tailwind v4\n> [0.25ms] تشخیص خودکار دامنه: مالی غیرمتمرکز Web3\n> [0.38ms] پیاده سازی استایل: سبک شیشه ای دارک (Blur 20px)\n> [0.52ms] قرارداد تعامل: محاسبه لحظه ای سود استیکینگ\n> [0.65ms] تایید فیزیک موشن: فیزیک فنر کووالسکی فعال شد',
+        titleEn: 'Horizon SOL Liquid Staking',
+        titleFa: 'استیکینگ نقدینگی سولانا',
+        subEn: 'Annual yield compounding calculator:',
+        subFa: 'محاسبه سود مرکب سالانه:',
+        labelEn: 'Projected Reward:',
+        labelFa: 'پاداش تخمینی:',
+        unit: 'SOL'
+      },
+      saas: {
+        theme: 'minimalist_saas',
+        promptEn: '@mr-ui-designer build a seat-based pricing card with annual discount toggle',
+        promptFa: 'مستر UI دیزاینر، کارت قیمت گذاری بر اساس تعداد صندلی با تخفیف سالانه طراحی کن',
+        sensorEn: '> [0.11ms] Project Scanned: Next.js 15 App Router detected\n> [0.23ms] Intent Disambiguated: Domain: "saas_enterprise"\n> [0.36ms] Style Synthesized: Archetype: "minimalist_saas" (Stripe Crisp)\n> [0.49ms] Directional Guard: Positive compounding verified\n> [0.61ms] Formula Evaluation: Math.round(seats * 95 * 0.8) passed',
+        sensorFa: '> [0.11ms] اسکن استک پروژه: شناسایی Next.js 15 App Router\n> [0.23ms] تشخیص خودکار دامنه: پلتفرم سازمانی SaaS\n> [0.36ms] پیاده سازی استایل: مینیمال شرکتی با مرزبندی شفاف\n> [0.49ms] گارد جهت دهی: تایید روند صعودی محاسبه هزینه\n> [0.61ms] تایید فرمول ریاضی: ارزیابی ریاضی دقیق تخفیف ۲۰٪',
+        titleEn: 'Enterprise Seat Licensing',
+        titleFa: 'مجوز صندلی های سازمانی',
+        subEn: 'Configure team member capacity:',
+        subFa: 'تعیین ظرفیت اعضای تیم سازمانی:',
+        labelEn: 'Annual Compounded Total:',
+        labelFa: 'مجموع هزینه سالانه:',
+        unit: 'Seats'
+      },
+      slop: {
+        theme: 'terminal_hud',
+        promptEn: '@mr-ui-designer sanitize this legacy UI: strip raw yellow emojis and fix poor contrast',
+        promptFa: 'مستر UI دیزاینر، این کد قدیمی را پاکسازی کن: حذف اموجی های زرد و ارتقای کنتراست',
+        sensorEn: '> [0.15ms] Code Sanitized: Stripped 14 raw yellow emojis\n> [0.26ms] Contrast Calibrated: Slashed poor 2.1:1 to WCAG AAA 8.4:1\n> [0.39ms] Injected: Inline vector SVGs with currentColor\n> [0.49ms] RTL Fixed: Isolated numbers in <bdi> to stop sentence flip\n> [0.62ms] Motion: Replaced linear lag with 0.35s spring physics',
+        sensorFa: '> [0.15ms] پاکسازی کدهای اسلوپ: حذف ۱۴ عدد اموجی متنی زرد\n> [0.26ms] کالیبره کنتراست: ارتقای نسبت ضعیف ۲:۱ به استاندارد AAA ۸.۴:۱\n> [0.39ms] جایگزینی: درج آیکون های برداری SVG خطی\n> [0.49ms] اصلاح راست چین: ایزوله سازی ارقام درون bdi\n> [0.62ms] موشن: جایگزینی ترنزیشن های کند با فیزیک فنر ۰.۳۵ ثانیه',
+        titleEn: 'Anti-Slop Sanitized Component',
+        titleFa: 'کامپوننت ضد اسلوپ و بازطراحی شده',
+        subEn: 'Zero emojis • WCAG AAA • Spring motion',
+        subFa: 'بدون اموجی • کنتراست بالا • فیزیک فنر',
+        labelEn: 'Clean Output Score:',
+        labelFa: 'امتیاز ارزیابی بصری:',
+        unit: 'Points'
+      }
+    };
+
+    function runScenario(key, btn) {
+      currentScenario = key;
+      const data = scenarios[key];
+      if (!data) return;
+
+      document.querySelectorAll('#studio .arch-btn').forEach(b => b.classList.remove('active'));
+      if (btn) btn.classList.add('active');
+
+      setTheme(data.theme);
+
+      const isFa = currentLang === 'fa';
+      document.getElementById('activePromptDisplay').textContent = isFa ? data.promptFa : data.promptEn;
+      document.getElementById('sensorReadout').innerHTML = (isFa ? data.sensorFa : data.sensorEn).replace(/\n/g, '<br>');
+      document.getElementById('widgetTitle').textContent = isFa ? data.titleFa : data.titleEn;
+      document.getElementById('widgetSubtitle').textContent = isFa ? data.subFa : data.subEn;
+      document.getElementById('widgetMetricLabel').textContent = isFa ? data.labelFa : data.labelEn;
+
+      updateWidgetCalculation(document.getElementById('widgetSlider').value);
+    }
+
+    function updateWidgetCalculation(val) {
+      const num = parseFloat(val);
+      if (currentScenario === 'dental') {
+        document.getElementById('widgetMetricVal').innerHTML = `<bdi>${num} Days</bdi>`;
+        document.getElementById('sliderValueDisplay').textContent = 'Align Arch';
+      } else if (currentScenario === 'crypto') {
+        document.getElementById('widgetMetricVal').innerHTML = `<bdi>$${(num * 350).toLocaleString()}</bdi>`;
+        document.getElementById('sliderValueDisplay').textContent = `${num} SOL`;
+      } else if (currentScenario === 'saas') {
+        document.getElementById('widgetMetricVal').innerHTML = `<bdi>$${(num * 95).toLocaleString()}</bdi>`;
+        document.getElementById('sliderValueDisplay').textContent = `${num} Seats`;
+      } else {
+        document.getElementById('widgetMetricVal').innerHTML = '<bdi>98.5 / 100</bdi>';
+        document.getElementById('sliderValueDisplay').textContent = 'Certified';
+      }
+    }
+
+    function copyPrompt() {
+      const text = document.getElementById('activePromptDisplay').textContent;
+      navigator.clipboard.writeText(text);
+      alert('Prompt Copied to Clipboard!');
+    }
+
+    // 10. Scope & Architecture Estimator Calculator
+    function calculateEstimate() {
+      const screens = parseInt(document.getElementById('rangeScreens').value, 10);
+      const archs = parseInt(document.getElementById('rangeArchetypes').value, 10);
+
+      document.getElementById('screensValDisplay').innerHTML = `<bdi>${screens} Screens</bdi>`;
+      document.getElementById('archValDisplay').innerHTML = `<bdi>${archs} Archetypes</bdi>`;
+
+      const total = 650 + (screens * 120) + (archs * 180);
+      const days = Math.max(3, Math.round(screens * 0.4 + archs * 0.5));
+
+      document.getElementById('costValDisplay').innerHTML = `<bdi>$${total.toLocaleString()}</bdi>`;
+      document.getElementById('timelineValDisplay').innerHTML = `<bdi>${days} Business Days</bdi>`;
+    }
+
+    // 11. BILINGUAL CONTROLLER (FIXED-STRUCTURE SEMANTIC RTL)
+    // CRITICAL: We NEVER reverse the macro layout, window chrome dots, or grid columns!
     var currentLang = 'en';
+
     function toggleLang() {
       currentLang = currentLang === 'en' ? 'fa' : 'en';
       var isFa = currentLang === 'fa';
 
-      document.documentElement.setAttribute('dir', isFa ? 'rtl' : 'ltr');
       document.documentElement.setAttribute('lang', isFa ? 'fa' : 'en');
       document.body.classList.toggle('lang-fa', isFa);
       document.getElementById('langBtnText').textContent = isFa ? 'English' : 'فارسی';
 
       // Navbar
-      document.getElementById('navHome').textContent = isFa ? 'نمای کلی' : 'Overview';
-      document.getElementById('navShowcase').textContent = isFa ? 'بوم زنده محصول' : 'Living Canvas';
-      document.getElementById('navArchetypes').textContent = isFa ? '۷ کهن الگو' : '7 Archetypes';
-      document.getElementById('navComparison').textContent = isFa ? 'ریاضیات ضد اسلوپ' : 'Anti-Slop Math';
-      document.getElementById('navCli').textContent = isFa ? 'کدهای React 19' : 'React 19 & CLI';
+      document.getElementById('navHero').textContent = isFa ? 'بوم زنده محصول' : 'Living Canvas';
+      document.getElementById('navWork').textContent = isFa ? 'شوکیس پروداکشن' : 'Production Showcase';
+      document.getElementById('navLab').textContent = isFa ? 'آزمایشگاه تعاملی' : 'Interactive Lab';
+      document.getElementById('navStudio').textContent = isFa ? 'استودیو دیزاینر' : 'AI Studio';
+      document.getElementById('navEstimator').textContent = isFa ? 'برآورد معماری' : 'Architecture Estimator';
+
+      // Theme Bar
+      document.getElementById('lblLiveTheme').textContent = isFa ? 'کهن الگوی فعال:' : 'Active Archetype:';
 
       // Hero
       document.getElementById('heroPillText').textContent = isFa 
-        ? 'نسخه ۴.۲.۰ • موتور بصری شاهکار و رابط های کاربری زنده'
-        : 'VIBE UI v4.2.0 • MASTERPIECE VISUAL ENGINE & LIVING INTERFACES';
-      document.getElementById('heroHeadlineMain').textContent = isFa ? 'موتور تولید رابط کاربری برای' : 'The Generative UI Engine for';
-      document.getElementById('heroHeadlineGradient').textContent = isFa ? 'ایجنت های خودکار کدنویسی هوش مصنوعی' : 'Autonomous AI Coding Agents';
+        ? 'نسخه ۴.۲.۰ • رابط های کاربری زنده و موتور جنریتیو شاهکار'
+        : 'VIBE UI v4.2.0 • LIVING INTERFACES & MASTERPIECE GENERATIVE ENGINE';
+      document.getElementById('heroHeadlineMain').textContent = isFa ? 'سیستم دیزاین خودکار برای' : 'The Autonomous Design System for';
+      document.getElementById('heroHeadlineGradient').textContent = isFa ? 'ایجنت های کدنویسی هوش مصنوعی' : 'AI Coding Agents';
       document.getElementById('heroSubheadline').textContent = isFa 
-        ? 'مهندسی قراردادمحور فرانت اند، کنتراست تایید شده WCAG AAA در فضای رنگی OKLCH، هفت کهن الگوی کلان دیزاین، اسلایدرهای درگ تعاملی و تولید مستقیم کدهای React 19 TSX.'
-        : 'Contract-driven frontend engineering, mathematically certified WCAG AAA contrast, 7 macro archetypes, interactive split comparison sliders, and living React 19 TSX generation.';
-      document.getElementById('btnExploreDemoText').textContent = isFa ? 'بررسی بوم زنده محصول' : 'Explore Living Showcase';
-      document.getElementById('btnVscodeMarketplaceText').textContent = isFa ? 'مارکت پلیس VS Code' : 'VS Code Marketplace';
+        ? 'مهندسی قراردادمحور فرانت اند برای ایجنت های کدنویسی خودکار. کنتراست تایید شده WCAG AAA در فضای رنگی OKLCH، هفت کهن الگوی کلان، اسلایدرهای درگ تعاملی، دک های سخت افزاری لمسی و تولید مستقیم کدهای React 19 TSX.'
+        : 'Contract-driven frontend engineering for autonomous coding agents. Mathematically certified WCAG AAA contrast, 7 macro visual archetypes, interactive split comparison sliders, tactile hardware decks, and living React 19 TSX generation.';
+      document.getElementById('btnExploreDemoText').textContent = isFa ? 'مشاهده شوکیس پروداکشن' : 'Explore Living Showcase';
+      document.getElementById('btnVscodeMarketplaceText').textContent = isFa ? 'اکستنشن VS Code' : 'VS Code Extension';
 
       // Window Chrome
       document.getElementById('tabTitleDevops').textContent = isFa ? 'تلمتری دواپس' : 'DevOps Telemetry';
       document.getElementById('tabTitleClinic').textContent = isFa ? 'اسلایدر کلینیکال' : 'Clinical Split Slider';
-      document.getElementById('tabTitleBento').textContent = isFa ? 'بنتو هوش مصنوعی' : 'AI Intelligence Bento';
+      document.getElementById('tabTitleBento').textContent = isFa ? 'بنتو هوش مصنوعی' : 'AI Bento';
       document.getElementById('sloStatusText').innerHTML = isFa ? '<bdi>وضعیت K8S: ۹۹.۹۹٪ • فعال</bdi>' : '<bdi>K8S SLO: 99.99% • ACTIVE</bdi>';
       document.getElementById('lblLatencyMetric').textContent = isFa ? 'تاخیر گیت وی P99' : 'p99 Gateway Latency';
       document.getElementById('lblPodsMetric').textContent = isFa ? 'پادهای فعال کلاستر' : 'Cluster Ingress Pods';
@@ -663,14 +1458,48 @@
       document.getElementById('clinicSliderTitle').textContent = isFa ? '۱۰ واحد ونیر سرامیکی E-Max — مقایسه تعاملی دو لایه' : '10 Units E-Max Ceramic Veneers — Interactive Split Comparison';
       document.getElementById('clinicSliderSub').textContent = isFa ? 'دستگیره را بکشید تا تغییرات قبل و بعد از درمان را به صورت زنده مقایسه کنید.' : 'Drag the slider horizontally to compare baseline condition versus post-clinical restoration.';
       document.getElementById('lblSlideBefore').textContent = isFa ? 'قبل از درمان (پایه)' : 'BASELINE (BEFORE)';
+      document.getElementById('lblSlideBeforeDesc').textContent = isFa ? 'تغییر رنگ دندان و سایش لبه های انسیزال.' : 'Tooth discoloration, mild crowding, and incisal edge attrition.';
       document.getElementById('lblSlideAfter').textContent = isFa ? 'نتیجه پس از درمان' : 'POST-TREATMENT (AFTER)';
-      document.getElementById('lblClinicSchedule').textContent = isFa ? 'نوبت های مشاوره در دسترس امروز:' : 'Available Clinical Appointments for Consultation:';
+      document.getElementById('lblSlideAfterDesc').textContent = isFa ? 'تقارن دو طرفه، بازتاب بهینه نور و کانتور لثه تایید شده.' : 'Bilateral symmetry, optimal light reflection, and certified gingival contour.';
 
-      // Archetypes & Features
+      // Work Showcase Section
+      document.getElementById('workBadge').textContent = isFa ? 'شوکیس پروداکشن' : 'Production Showcase';
+      document.getElementById('workHeading').textContent = isFa ? 'محصولات دیجیتال و داشبوردهای مهندسی شده' : 'Engineered Digital Products & Dashboards';
+      document.getElementById('workSub').textContent = isFa ? 'کامپوننت های پیش نمایش زنده با استایل خودکار در ۷ کهن الگوی کلان، همراه با هندسه ریسپانسیو و کنتراست بالا.' : 'Live preview components autonomously styled across all 7 macro archetypes with responsive geometry, high contrast, and tactile feedback.';
+      document.getElementById('btnFilterAll').textContent = isFa ? 'همه سیستم ها' : 'All Systems';
+      document.getElementById('btnFilterFintech').textContent = isFa ? 'فین تک و SaaS' : 'FinTech SaaS';
+      document.getElementById('btnFilterClinical').textContent = isFa ? 'درمان و کلینیک' : 'Clinical Healthcare';
+      document.getElementById('btnFilterWeb3').textContent = isFa ? 'وب ۳ و تریدینگ' : 'Web3 & Trading';
+      document.getElementById('btnFilterEditorial').textContent = isFa ? 'لوکس و تحریریه' : 'Luxury Editorial';
+
+      document.getElementById('pApexDesc').textContent = isFa ? 'سیستم بالانس سبد سرمایه گذاری با نمودارهای اسپارک لاین زنده SVG، تخصیص دارایی و فضای رنگی OKLCH.' : 'High-velocity portfolio balancing system with real-time SVG sparkline charting, multi-asset allocation, and zero-slop OKLCH color spaces.';
+      document.getElementById('pAuraDesc').textContent = isFa ? 'سیستم نوبت دهی و پورتال بیمار با کارت های اسکویرکل و شیشه مات در آرکتایپ اپل کوپرتینو.' : 'Fluid appointment scheduler and patient treatment portal designed in the Apple Cupertino archetype with squircle cards and frosted glass.';
+      document.getElementById('pSolanaDesc').textContent = isFa ? 'داشبورد صرافی و استیکینگ توکن سولانا با محاسبه لحظه ای APY و استایل لوکس شیشه ای دارک.' : 'Specular glass luxury liquidity dashboard featuring real-time APY calculation, zero slippage matrix, and dark prestige styling.';
+      document.getElementById('pVanguardDesc').textContent = isFa ? 'پلتفرم ساعت های لوکس با سیستم گرید سوئیسی، تایپوگرافی با کنتراست بالا و ریتم ستون های نامتقارن.' : 'High-fashion horology platform built with strict Swiss grid mathematics, high contrast typography, and asymmetric column rhythm.';
+
+      // Lab Section
+      document.getElementById('labBadge').textContent = isFa ? 'مکانیک تعاملی' : 'Interactive Mechanics';
+      document.getElementById('labHeading').textContent = isFa ? 'آزمایشگاه مهندسی خودکار' : 'Autonomous Engineering Lab';
+      document.getElementById('labSub').textContent = isFa ? 'کامپوننت های زنده را تست کنید: فیزیک فنر، اسلایدر مقایسه دو لایه و دک سخت افزاری صدا به صورت لحظه ای.' : 'Explore live interactive components. Test spring mechanics, split comparison sliders, and tactile hardware audio decks in real time.';
+      document.getElementById('btnLabSpring').textContent = isFa ? 'فیزیک فنر کووالسکی' : 'Kowalski Spring Physics';
+      document.getElementById('btnLabSlider').textContent = isFa ? 'اسلایدر مقایسه دو لایه' : 'Before/After Split Slider';
+      document.getElementById('btnLabAudio').textContent = isFa ? 'دک سخت افزاری صدا' : 'Tactile Audio Deck';
+
+      document.getElementById('springTitle').textContent = isFa ? 'زمین بازی فیزیک فنر کووالسکی' : 'Kowalski Spring Motion Playground';
+      document.getElementById('springSub').textContent = isFa ? 'کارت را به صورت افقی بکشید و رها کنید تا میرایی بحرانی (بدون پرش اضافه) را مشاهده کنید.' : 'Drag the card horizontally and release to observe critically damped (zeta=1.0) spring physics without overshoot.';
+      document.getElementById('springBoxText').textContent = isFa ? 'مرا به صورت افقی بکشید' : 'Drag Me Horizontally';
+
+      document.getElementById('antiSlopTitle').textContent = isFa ? 'تفاوت شاهکار دیزاین با کدهای اسلوپ هوش مصنوعی' : 'High-Craft vs Generic AI Slop';
+      document.getElementById('antiSlopSub').textContent = isFa ? 'اسلایدر را بکشید تا مشاهده کنید Vibe UI چگونه با کنتراست WCAG AAA، راست چین استاندارد و آیکون های وکتور، کدهای بی کیفیت را پاکسازی می کند.' : 'Drag the slider horizontally to inspect how Vibe UI eliminates AI slop with WCAG AAA contrast, semantic RTL, and crisp vectors.';
+
+      document.getElementById('audioTitle').textContent = isFa ? 'دک سخت افزاری صدا با کنترل های لمسی' : 'Adaptive Hardware Audio Deck';
+      document.getElementById('audioSub').textContent = isFa ? 'کنترل های لمسی نیومورفیک: روی پیچ های چرخشی کلیک کنید تا فرکانس تغییر کند، دکمه پاور را بزنید و فیدر را تنظیم کنید.' : 'Neumorphic tactile controls: click rotary knobs to step frequencies, toggle master power, and slide the debossed fader.';
+
+      // Archetypes Section
+      document.getElementById('archBadge').textContent = isFa ? 'کهن الگوهای سیستم' : 'System Archetypes';
       document.getElementById('archetypesHeading').textContent = isFa ? '۷ کهن الگوی کلان دیزاین' : 'The 7 Macro Visual Archetypes';
       document.getElementById('archetypesSub').textContent = isFa ? 'سیستم های دیزاین کالیبره شده برای حوزه های تخصصی محصول، با تضمین صفر پرش ساختار.' : 'Engineered design systems calibrated for specific product domains. Switch archetypes dynamically with guaranteed zero layout shift.';
-      
-      // Archetype Cards Dynamic Translation
+
       document.getElementById('arch1Badge').textContent = isFa ? 'HUD آبسیدین' : 'Obsidian HUD';
       document.getElementById('arch1Domain').textContent = isFa ? 'ابری و زیرساخت' : 'Cloud & Infra';
       document.getElementById('arch1Title').textContent = isFa ? 'تله متری Linear Dev HUD' : 'Linear Dev HUD';
@@ -701,19 +1530,40 @@
       document.getElementById('arch6Title').textContent = isFa ? 'ترمینال سایبرنتیک' : 'Cyber Terminal';
       document.getElementById('arch6Desc').textContent = isFa ? 'جلوه های مدرن سبز فسفری و کهربایی، تله متری خطوط پویشی و ساختارهای متراکم مونو اسپس.' : 'Retro-futuristic phosphor green/amber accents, scanline telemetry, and dense monospace data structures.';
 
+      // Studio Section
+      document.getElementById('studioBadge').textContent = isFa ? 'ایجنت خودکار' : 'Autonomous Agent';
+      document.getElementById('studioHeading').textContent = isFa ? 'کنسول تعاملی mr-ui-designer' : 'Interactive mr-ui-designer Console';
+      document.getElementById('studioSub').textContent = isFa ? 'روی هر پرامپت آماده کلیک کنید تا اسکن استک (<1ms) و کارگردانی دامنه را به صورت زنده مشاهده کنید.' : 'Click any lazy prompt chip to watch Stack Sensor (<1ms) and Domain Director synthesize production interfaces.';
+      document.getElementById('chipDental').textContent = isFa ? 'کلینیک زیبایی (اپل فلوید)' : 'Clinical Wellness (Apple Fluid)';
+      document.getElementById('chipCrypto').textContent = isFa ? 'استیکینگ کریپتو (شیشه ای)' : 'Crypto Staking Pool (Specular Glass)';
+      document.getElementById('chipSaas').textContent = isFa ? 'تحلیل و مالی SaaS (استرایپ)' : 'SaaS Analytics & Billing (Clean Stripe)';
+      document.getElementById('chipSlop').textContent = isFa ? 'ممیزی ضد اسلوپ کدهای قدیمی' : 'Surgical Anti-Slop Audit';
+
+      // Estimator Section
+      document.getElementById('estBadge').textContent = isFa ? 'تخمین مقیاس' : 'System Sizing';
+      document.getElementById('estHeading').textContent = isFa ? 'محاسبه گر برآورد اسکوپ و معماری' : 'Scope & Architecture Estimator';
+      document.getElementById('estSub').textContent = isFa ? 'محاسبه مقیاس دلیوری سیستم دیزاین خودکار، بودجه توکن و پیاده سازی چند کهن الگویی.' : 'Calculate autonomous design system delivery scope, token budget generation, and multi-archetype rollouts.';
+      document.getElementById('lblScreenCount').textContent = isFa ? 'تعداد صفحات و فلوها:' : 'Screen & Flow Count:';
+      document.getElementById('lblArchCount').textContent = isFa ? 'کهن الگوهای بصری:' : 'Visual Archetypes:';
+      document.getElementById('lblRtlIncluded').textContent = isFa ? 'راست چین ساختارثابت:' : 'Fixed-Structure Semantic RTL:';
+      document.getElementById('lblAgentDelivery').textContent = isFa ? 'تحویل توسط ایجنت:' : 'Autonomous Agent Delivery:';
+      document.getElementById('lblEstCost').textContent = isFa ? 'ارزش تخمینی پیاده سازی:' : 'Estimated Implementation Value:';
+      document.getElementById('lblEstTimeline').textContent = isFa ? 'زمان تحویل نهایی:' : 'Delivery Timeline:';
+
+      // CLI Section
+      document.getElementById('cliBadge').textContent = isFa ? 'خط فرمان خودکار' : 'Autonomous CLI';
       document.getElementById('cliHeading').textContent = isFa ? 'تولید فوری از ترمینال و کدهای React 19' : 'Instant CLI & React 19 Generation';
       document.getElementById('cliSub').textContent = isFa ? 'تولید اپلیکیشن های کامل وب یا کامپوننت های ماژولار React 19 مستقیم از خط فرمان شما.' : 'Generate standalone HTML applications or stateful React 19 / TypeScript components directly from your command line.';
       document.getElementById('feat1Title').textContent = isFa ? 'هوک های زنده React 19' : 'Living React 19 Hooks';
       document.getElementById('feat1Desc').textContent = isFa ? 'خروجی کامپوننت های ماژولار TSX با اینترفیس تایپ شده و استیت اسلایدرها و تب ها.' : 'Direct export of modular TSX components with typed props, useState split sliders, and active tabs.';
       document.getElementById('feat2Title').textContent = isFa ? 'راست چین ساختارثابت (Semantic RTL)' : 'Fixed-Structure Semantic RTL';
-      document.getElementById('feat2Desc').textContent = isFa ? 'تضمین پایداری گرید صفحه بدون چرخش های ناشیانه؛ ایزولاسیون متن ها و کدهای انگلیسی در تگ bdi.' : 'Layout stability guaranteed without naive grid inversion. All English identifiers and numbers isolated in <bdi>.';
+      document.getElementById('feat2Desc').textContent = isFa ? 'تضمین پایداری گرید صفحه بدون چرخش آینه ای و ناخواسته؛ کنترل های پنجره و ستون های گرید ثابت می مانند.' : 'Layout stability guaranteed without naive grid inversion. Window controls and grids stay physically locked; bidirectional tokens isolated in <bdi>.';
       document.getElementById('feat3Title').textContent = isFa ? 'صفر اموجی خام در محیط کاربری' : 'Absolute Zero Raw Emojis';
       document.getElementById('feat3Desc').textContent = isFa ? 'آیکون های وکتور برداری خطی SVG با قابلیت ارث بری رنگ و تایید کامل استانداردهای وب.' : 'Strictly audited inline SVG vector icons with currentColor inheritance passing all accessibility linters.';
       document.getElementById('footerCopyright').textContent = isFa ? '© ۲۰۲۶ Omid-IO. متن باز با مجوز MIT. تایید شده توسط Antigravity.' : '© 2026 Omid-IO. Open-Source MIT License. Certified Autonomous by Antigravity.';
 
-      // Re-trigger split calculation for RTL orientation
-      var slider = document.querySelector('input[type="range"]');
-      if (slider) updateSplit(slider.value);
+      // Re-trigger scenario update
+      runScenario(currentScenario, null);
     }
   </script>
 </body>
