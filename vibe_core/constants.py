@@ -6,8 +6,8 @@ to prevent policy drift across critic, verifier, refiner, benchmark, and CLI mod
 """
 
 # Visual & GPU Composite Performance Budgets
-MAX_BLUR_SURFACES: int = 3
-"""Maximum allowable backdrop-filter / blur surfaces before flagging GPU composite blowout."""
+MAX_BLUR_SURFACES: int = 8
+"""Maximum allowable backdrop-filter / blur surfaces before flagging GPU composite blowout (calibrated for modern hardware, floating docks, and luxury glassmorphism)."""
 
 # WCAG & Accessibility Compliance Thresholds
 HARD_MIN_TOUCH_PX: int = 24

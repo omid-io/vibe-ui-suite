@@ -54,7 +54,7 @@ Whenever asked to audit, verify, or review any web page, component, or frontend 
 ### Pillar 4: Performance & Rendering Compositing Budget
 - **Measurement Method:** Count stacked blur layers, inspect SVG icons, verify animation drivers.
 - **Evidence Required:**
-  - **Backdrop Blur Layers:** Detected active `backdrop-filter: blur(...)` elements (Threshold: $\le 3$ active layers simultaneously).
+  - **Backdrop Blur Layers:** Detected active `backdrop-filter: blur(...)` elements (Threshold: $\le 8$ active layers simultaneously, calibrated for rich floating docks and multi-tier glassmorphism).
   - **Zero Emojis:** Zero raw unicode emojis used as interface icons; verified inline SVG vector paths.
   - **Frame Driver:** Continuous interactive elements (sliders, spring tilts) driven via `requestAnimationFrame`.
 

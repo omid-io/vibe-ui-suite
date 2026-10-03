@@ -96,27 +96,29 @@ To prevent every generated interface from collapsing into a predictable "dark ob
 
 ---
 
-## 🕹️ Universal Interactive Modules
+---
 
-Regardless of the chosen visual style, the agent can equip pages with high-value interactive primitives:
-1. **Time-Based Damped Lerp Slider:** (DeltaTime-based exponential decay $\alpha = 1 - e^{-\lambda \cdot \Delta t}$ with $\lambda \approx 12$, ensuring frame-rate-independent fluid motion across 60Hz, 120Hz, and 144Hz displays).
-2. **Magnetic Spring CTAs:** (Dynamic cursor-following or damped spring ease).
-3. **Bento Grid Architecture:** (Dynamic 3 or 4-column asymmetric cards with sparklines & AI badges).
-4. **Directional LTR/RTL Compatibility:** (Universal logical CSS properties `ms-*`, `me-*`, `start-*`, `end-*`).
+## 💎 The Impeccable Craft & Calming Standard (Bakaus Benchmark)
+
+To achieve world-class editorial calm and eliminate visual noise:
+1. **The Distill Law:** Before finalizing any generation, strip out unnecessary container borders, redundant badges, and box-in-a-box nesting. Let monumental typography and content breathe with confident negative space.
+2. **The Quieter Filter:** Replace aggressive, neon-glowing drop-shadows with subtle, multi-stop inset specular highlights (`box-shadow: inset 0 1.5px 1px 0 rgba(255, 255, 255, 0.22), inset 0 -1px 1px 0 rgba(0, 0, 0, 0.08)`).
+3. **Tactile Material Atmosphere:** Introduce procedural SVG film grain (`feTurbulence`) and dot-matrix ambient canvases with fade masks to replace sterile plastic digital surfaces.
+4. **Tactile Floating Control Island:** Use fixed-bottom floating islands with glass blur and drag handles for secondary toolbars, theme switchers, or preview controls.
+---
+
+## 🕹️ Universal Interactive Modules & Micro-Physics
+1. **Interactive 3D Perspective Tilt:** Mouse-following tilt with subtle angles (`perspective(1000px) rotateX/rotateY`) and dynamic specular reflection highlights (`--mouse-x` / `--mouse-y`).
+2. **Time-Based Damped Lerp Physics:** Frame-rate independent velocity decays ($\alpha = 1 - e^{-\lambda \cdot \Delta t}$).
+3. **Magnetic Spring CTAs:** Responsive cursor-snapping buttons with critically damped release.
+4. **Asymmetric Editorial Bento:** Diverse aspect ratios (`2.4:1`, `1.4:1`, `1:1`) to prevent uniform card grids.
 
 ---
 
 ## 📐 Semantic & Fixed-Structure RTL Architecture
-
 When building Persian, Arabic, or Bilingual LTR/RTL interfaces:
-1. **Preserve Macro Layout & Coordinates:**
-   - Navbars, grid column structures, slider tracks, and overall layout hierarchy remain physically stable. Do not indiscriminately flip entire layout grids.
-2. **Apply RTL Exclusively to Textual Content:**
-   - Paragraphs, article prose, headings, and descriptions receive `direction: rtl` and appropriate text alignment.
-3. **Mirror Semantic Directional Affordances:**
-   - Elements with intrinsic directional meaning (navigation back/forward arrows, sequential timelines, multi-step progress wizards) must mirror semantically to follow reading flow.
-4. **BiDi Resilience & Mixed English Brand Names:**
-   - When Persian sentences contain or start with English terms (e.g. `Claude Code`, `Cursor`, `API`), punctuation and layout must remain clean without scrambling (`unicode-bidi: plaintext` / `<bdi>`).
-5. **Code & Technical Metrics Remain Strictly LTR:**
-   - Code blocks, CLI commands, URLs, version pills, and telemetry data (`99.98%`, `+2.4%`) must always remain `direction: ltr !important; text-align: left !important` with monospace font.
+1. **Preserve Macro Layout & Coordinates:** Navbars, grid column structures, and window controls stay physically locked in LTR coordinates.
+2. **Apply RTL Exclusively to Textual Content:** Text prose, headings, and descriptions adapt without page mirroring.
+3. **BiDi Resilience & Mixed English Brand Names:** Wrap all mixed Latin tokens and acronyms inside `<bdi>` tags.
+4. **Code & Technical Metrics Remain Strictly LTR:** Telemetry, digits, URLs, and code snippets stay strictly `direction: ltr !important`.
 

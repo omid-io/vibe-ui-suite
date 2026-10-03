@@ -32,6 +32,10 @@
 
       --glass-blur: blur(var(--blur-amount, 20px));
       --mesh-blur-filter: blur(var(--mesh-blur, 80px));
+
+      /* Specular Glass 2.0 Multi-Stop Inset Lighting */
+      --glass-specular-border: inset 0 1.5px 1px 0 rgba(255, 255, 255, 0.22), inset 0 -1.5px 1px 0 rgba(0, 0, 0, 0.12);
+      --glass-specular-light: inset 0 1.5px 1.5px 0 rgba(255, 255, 255, 0.75), inset 0 -1px 1px 0 rgba(0, 0, 0, 0.06);
     }
 
     :focus-visible {
@@ -295,15 +299,49 @@
       border-color: var(--accent-brand);
     }
 
-    /* Atmospheric grid background */
+    /* Atmospheric grid & dot-matrix background */
     .bg-grid-mesh {
       background-image: linear-gradient(to right, var(--border-subtle) 1px, transparent 1px),
                         linear-gradient(to bottom, var(--border-subtle) 1px, transparent 1px);
       background-size: 32px 32px;
     }
+
+    /* Tactile Dot-Matrix Canvas (Lightswind Benchmark) */
+    .bg-dot-matrix {
+      background-image: radial-gradient(var(--border-strong) 1.25px, transparent 1.25px);
+      background-size: 20px 20px;
+      mask-image: linear-gradient(to bottom, black 65%, transparent 100%);
+      -webkit-mask-image: linear-gradient(to bottom, black 65%, transparent 100%);
+    }
+
+    /* Specular Glass 2.0 Card enhancement */
+    .vibe-card-specular {
+      box-shadow: var(--shadow-ambient), var(--glass-specular-border) !important;
+    }
+
+    /* Global Procedural Film Grain Overlay */
+    .film-grain-layer {
+      position: fixed;
+      inset: 0;
+      width: 100vw;
+      height: 100vh;
+      pointer-events: none;
+      z-index: 9999;
+      opacity: 0.038;
+      mix-blend-mode: overlay;
+    }
   </style>
 </head>
 <body class="theme-apple_cupertino antialiased min-h-screen relative selection:bg-blue-500/20 selection:text-blue-500">
+
+  <!-- PROCEDURAL SVG FILM GRAIN OVERLAY (TACTILE EDITORIAL ATMOSPHERE) -->
+  <svg class="film-grain-layer" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+    <filter id="filmGrainFilter">
+      <feTurbulence type="fractalNoise" baseFrequency="0.8" numOctaves="3" stitchTiles="stitch" />
+      <feColorMatrix type="matrix" values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 1 0" />
+    </filter>
+    <rect width="100%" height="100%" filter="url(#filmGrainFilter)" />
+  </svg>
 
   <!-- TOP PERSISTENT NOTIFICATION & CANONICAL ARCHETYPE BAR -->
   <header class="sticky top-0 z-50 bg-[var(--bg-surface)] border-b border-[var(--border-subtle)] backdrop-blur-md">
@@ -367,20 +405,20 @@
     <div class="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[350px] bg-blue-500/10 rounded-full blur-[90px] pointer-events-none -z-10"></div>
 
     <div class="text-center max-w-4xl mx-auto space-y-6 mb-12">
-      <!-- Feature Pill -->
-      <div class="inline-flex items-center space-x-2 px-3 py-1 rounded-full border border-[var(--border-subtle)] bg-[var(--bg-surface)] text-xs font-semibold text-[var(--text-secondary)] shadow-sm">
-        <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
-        <span id="heroPillText">VIBE UI v4.2.0 • LIVING INTERFACES & MASTERPIECE GENERATIVE ENGINE</span>
+      <!-- Editorial Micro-Metadata Taxonomy -->
+      <div class="inline-flex items-center space-x-2.5 px-3.5 py-1 rounded-full border border-[var(--border-subtle)] bg-[var(--bg-surface)] text-[10px] font-mono font-bold text-[var(--text-muted)] shadow-sm uppercase tracking-wider">
+        <span class="w-2 h-2 rounded-full bg-emerald-500 animate-ping"></span>
+        <span id="heroPillText"><bdi>[ REF: 01 // KINETIC MASTERPIECE CORE • v4.3.0 ]</bdi></span>
       </div>
 
-      <!-- Main Headline -->
-      <h1 class="text-4xl sm:text-6xl lg:text-7xl font-black tracking-tight leading-[1.1] text-[var(--text-primary)]">
-        <span id="heroHeadlineMain">The Autonomous Design System for</span><br>
-        <span id="heroHeadlineGradient" class="bg-gradient-to-r from-blue-600 via-indigo-600 to-purple-600 bg-clip-text text-transparent">AI Coding Agents</span>
+      <!-- Main Headline: Monumental Hairline & Radial Contrast -->
+      <h1 class="text-5xl sm:text-7xl lg:text-[5.5rem] font-black tracking-tight leading-[0.98] text-[var(--text-primary)]">
+        <span id="heroHeadlineMain" class="font-extralight tracking-tighter">The Autonomous Design System for</span><br>
+        <span id="heroHeadlineGradient" class="bg-gradient-to-r from-blue-600 via-indigo-600 to-purple-600 bg-clip-text text-transparent font-black">AI Coding Agents</span>
       </h1>
 
-      <!-- Subheadline -->
-      <p id="heroSubheadline" class="text-lg sm:text-xl text-[var(--text-secondary)] max-w-3xl mx-auto leading-relaxed text-content">
+      <!-- Subheadline with Editorial Hairline Rule -->
+      <p id="heroSubheadline" class="text-base sm:text-lg text-[var(--text-secondary)] max-w-3xl mx-auto leading-relaxed text-content font-normal">
         Contract-driven frontend engineering for autonomous coding agents. Mathematically certified WCAG AAA contrast, 7 macro visual archetypes, interactive split comparison sliders, tactile hardware decks, and living React 19 TSX generation.
       </p>
 
@@ -401,18 +439,21 @@
       </div>
     </div>
 
-    <!-- LIVING MACOS WINDOW CHROME MOCKUP -->
+    <!-- LIVING MACOS WINDOW CHROME MOCKUP WITH 3D TILT & SPECULAR FOIL -->
     <!-- CRITICAL: Traffic lights ALWAYS top-left; layout structure physically invariant in RTL! -->
-    <div class="vibe-card overflow-hidden rounded-[var(--radius-lg)] border-2 border-[var(--border-subtle)] shadow-2xl max-w-5xl mx-auto">
+    <div id="heroMacWindow" class="vibe-card vibe-card-specular overflow-hidden rounded-[var(--radius-lg)] border-2 border-[var(--border-subtle)] shadow-2xl max-w-5xl mx-auto relative transition-transform duration-200 ease-out will-change-transform">
+      <!-- Dynamic Specular Foil Reflection Layer -->
+      <div id="specularFoilOverlay" class="absolute inset-0 pointer-events-none opacity-0 transition-opacity duration-300 z-30" style="background: radial-gradient(circle 350px at var(--mouse-x, 50%) var(--mouse-y, 50%), rgba(255,255,255,0.08), transparent 80%);"></div>
+
       <!-- Window Chrome Header -->
-      <div class="h-11 px-4 bg-[var(--bg-surface-elevated)] border-b border-[var(--border-subtle)] flex items-center justify-between">
+      <div class="h-11 px-4 bg-[var(--bg-surface-elevated)] border-b border-[var(--border-subtle)] flex items-center justify-between relative z-10">
         <!-- Top-Left Traffic Lights (ALWAYS ON THE LEFT!) -->
         <div class="flex items-center space-x-2 shrink-0">
-          <span class="w-3 h-3 rounded-full bg-rose-500/90 inline-block"></span>
-          <span class="w-3 h-3 rounded-full bg-amber-500/90 inline-block"></span>
-          <span class="w-3 h-3 rounded-full bg-emerald-500/90 inline-block"></span>
+          <span class="w-3 h-3 rounded-full bg-rose-500/90 inline-block shadow-inner"></span>
+          <span class="w-3 h-3 rounded-full bg-amber-500/90 inline-block shadow-inner"></span>
+          <span class="w-3 h-3 rounded-full bg-emerald-500/90 inline-block shadow-inner"></span>
           <span class="ms-3 font-mono text-xs font-semibold text-[var(--text-muted)] hidden sm:inline">
-            <bdi>vibe-masterpiece-engine // v4.2.0</bdi>
+            <bdi>vibe-masterpiece-engine // v4.3.0</bdi>
           </span>
         </div>
 
@@ -553,25 +594,25 @@
       </div>
     </div>
 
-    <!-- Product Cards Grid -->
-    <div class="grid grid-cols-1 md:grid-cols-2 gap-8" id="projectsGrid">
-      <!-- Card 1: Apex Wealth (FinTech) -->
-      <div class="vibe-card p-6 sm:p-8 space-y-6 project-item" data-category="fintech">
+    <!-- Product Cards Grid: Dynamic Asymmetric Editorial Masonry (Anti-Template Benchmark) -->
+    <div class="grid grid-cols-1 md:grid-cols-12 gap-8 items-start" id="projectsGrid">
+      <!-- Card 1: Apex Wealth (Wide Panorama Telemetry - 7 Columns) -->
+      <div class="vibe-card vibe-card-specular p-6 sm:p-8 space-y-6 project-item md:col-span-7 transition-all duration-300 hover:-translate-y-1" data-category="fintech">
         <div class="flex items-center justify-between border-b border-[var(--border-subtle)] pb-4">
           <div>
-            <span class="text-[10px] font-mono uppercase tracking-wider text-blue-600 font-bold block">Minimalist SaaS / FinTech</span>
-            <h3 class="text-xl font-bold text-[var(--text-primary)]">Apex Wealth & Financial Telemetry</h3>
+            <span class="text-[10px] font-mono uppercase tracking-wider text-blue-600 font-bold block"><bdi>[ ARCH: 01 // FINTECH TELEMETRY ]</bdi></span>
+            <h3 class="text-2xl font-black text-[var(--text-primary)] tracking-tight">Apex Wealth & Financial Telemetry</h3>
           </div>
           <span class="px-2.5 py-1 rounded bg-blue-500/10 text-blue-600 text-xs font-mono font-bold"><bdi>+48.2% ARR</bdi></span>
         </div>
 
-        <!-- Live SVG Financial Sparkline -->
-        <div class="h-40 rounded-[var(--radius-sm)] bg-[var(--bg-canvas)] border border-[var(--border-subtle)] p-4 flex flex-col justify-between">
+        <!-- Live SVG Financial Sparkline (Panoramic 2.4:1 ratio) -->
+        <div class="h-44 rounded-[var(--radius-sm)] bg-[var(--bg-canvas)] border border-[var(--border-subtle)] p-4 flex flex-col justify-between shadow-inner">
           <div class="flex items-center justify-between text-xs font-mono">
             <span class="text-[var(--text-muted)]">Net Compound Revenue</span>
             <span class="font-bold text-emerald-600"><bdi>$1,248,500.00</bdi></span>
           </div>
-          <svg class="w-full h-20 text-[var(--accent-brand)]" viewBox="0 0 300 80" fill="none" stroke="currentColor" stroke-width="2.5">
+          <svg class="w-full h-24 text-[var(--accent-brand)]" viewBox="0 0 300 80" fill="none" stroke="currentColor" stroke-width="2.5">
             <path d="M0 60 Q 50 55, 100 40 T 200 30 T 300 10" />
             <path d="M0 60 Q 50 55, 100 40 T 200 30 T 300 10 L 300 80 L 0 80 Z" fill="currentColor" fill-opacity="0.08" stroke="none" />
           </svg>
@@ -583,28 +624,28 @@
           </div>
         </div>
 
-        <p class="text-xs text-[var(--text-secondary)] leading-relaxed text-content" id="pApexDesc">High-velocity portfolio balancing system with real-time SVG sparkline charting, multi-asset allocation, and zero-slop OKLCH color spaces.</p>
+        <p class="text-xs text-[var(--text-secondary)] leading-relaxed text-content font-medium" id="pApexDesc">High-velocity portfolio balancing system with real-time SVG sparkline charting, multi-asset allocation, and zero-slop OKLCH color spaces.</p>
       </div>
 
-      <!-- Card 2: Aura Dental (Clinical Healthcare) -->
-      <div class="vibe-card p-6 sm:p-8 space-y-6 project-item" data-category="clinical">
+      <!-- Card 2: Aura Dental (Compact Vertical Card - 5 Columns) -->
+      <div class="vibe-card vibe-card-specular p-6 sm:p-8 space-y-6 project-item md:col-span-5 transition-all duration-300 hover:-translate-y-1" data-category="clinical">
         <div class="flex items-center justify-between border-b border-[var(--border-subtle)] pb-4">
           <div>
-            <span class="text-[10px] font-mono uppercase tracking-wider text-emerald-600 font-bold block">Apple Cupertino / Clinical</span>
-            <h3 class="text-xl font-bold text-[var(--text-primary)]">Aura Dental & Aesthetic Clinic</h3>
+            <span class="text-[10px] font-mono uppercase tracking-wider text-emerald-600 font-bold block"><bdi>[ ARCH: 02 // CLINICAL HEALTHCARE ]</bdi></span>
+            <h3 class="text-xl font-bold text-[var(--text-primary)]">Aura Dental & Aesthetic</h3>
           </div>
-          <span class="px-2.5 py-1 rounded bg-emerald-500/10 text-emerald-600 text-xs font-mono font-bold"><bdi>99.2% Satisfaction</bdi></span>
+          <span class="px-2.5 py-1 rounded bg-emerald-500/10 text-emerald-600 text-xs font-mono font-bold"><bdi>99.2% Score</bdi></span>
         </div>
 
-        <div class="h-40 rounded-[var(--radius-sm)] bg-[var(--bg-canvas)] border border-[var(--border-subtle)] p-6 flex items-center justify-between">
+        <div class="h-44 rounded-[var(--radius-sm)] bg-[var(--bg-canvas)] border border-[var(--border-subtle)] p-6 flex items-center justify-between shadow-inner">
           <div class="space-y-1">
-            <span class="text-xs font-bold text-[var(--text-primary)]">Invisalign & Veneers Protocol</span>
-            <p class="text-xs text-[var(--text-muted)]">3D scan alignment with sub-millimeter precision</p>
-            <div class="pt-2">
-              <span class="px-2 py-0.5 rounded text-[10px] font-mono bg-emerald-500/15 text-emerald-700 font-bold">14 Days Recovery</span>
+            <span class="text-xs font-bold text-[var(--text-primary)]">Invisalign & Veneers</span>
+            <p class="text-xs text-[var(--text-muted)]">Sub-millimeter 3D scan alignment</p>
+            <div class="pt-3">
+              <span class="px-2.5 py-1 rounded text-[10px] font-mono bg-emerald-500/15 text-emerald-700 font-bold">14 Days Recovery</span>
             </div>
           </div>
-          <div class="w-16 h-16 rounded-full bg-emerald-500/10 flex items-center justify-center text-emerald-600">
+          <div class="w-16 h-16 rounded-full bg-emerald-500/10 flex items-center justify-center text-emerald-600 shadow-sm">
             <svg class="w-8 h-8" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
           </div>
         </div>
@@ -612,24 +653,24 @@
         <p class="text-xs text-[var(--text-secondary)] leading-relaxed text-content" id="pAuraDesc">Fluid appointment scheduler and patient treatment portal designed in the Apple Cupertino archetype with squircle cards and frosted glass.</p>
       </div>
 
-      <!-- Card 3: Solana Horizon DEX (Web3 & Security) -->
-      <div class="vibe-card p-6 sm:p-8 space-y-6 project-item" data-category="web3">
+      <!-- Card 3: Solana Horizon DEX (Dark Specular Glass Focus - 5 Columns) -->
+      <div class="vibe-card vibe-card-specular p-6 sm:p-8 space-y-6 project-item md:col-span-5 transition-all duration-300 hover:-translate-y-1" data-category="web3">
         <div class="flex items-center justify-between border-b border-[var(--border-subtle)] pb-4">
           <div>
-            <span class="text-[10px] font-mono uppercase tracking-wider text-purple-600 font-bold block">Specular Glass / Web3</span>
-            <h3 class="text-xl font-bold text-[var(--text-primary)]">Solana Horizon DEX & Staking</h3>
+            <span class="text-[10px] font-mono uppercase tracking-wider text-purple-600 font-bold block"><bdi>[ ARCH: 03 // WEB3 PRESTIGE ]</bdi></span>
+            <h3 class="text-xl font-bold text-[var(--text-primary)]">Solana Horizon DEX</h3>
           </div>
           <span class="px-2.5 py-1 rounded bg-purple-500/10 text-purple-600 text-xs font-mono font-bold"><bdi>12.8% APY</bdi></span>
         </div>
 
-        <div class="h-40 rounded-[var(--radius-sm)] bg-zinc-950 text-purple-300 font-mono text-xs p-5 border border-purple-900/40 flex flex-col justify-between" dir="ltr">
+        <div class="h-44 rounded-[var(--radius-sm)] bg-zinc-950 text-purple-300 font-mono text-xs p-5 border border-purple-900/40 flex flex-col justify-between shadow-inner" dir="ltr">
           <div class="flex items-center justify-between">
             <span class="text-zinc-500">LIQUIDITY STAKING POOL</span>
             <span class="text-emerald-400 font-bold">ACTIVE</span>
           </div>
           <div class="text-2xl font-black text-white"><bdi>452,190.85 SOL</bdi></div>
           <div class="flex items-center justify-between text-[11px] text-zinc-400">
-            <span>24h Volume: $42.8M</span>
+            <span>24h Vol: $42.8M</span>
             <span>Fee: 0.05%</span>
           </div>
         </div>
@@ -637,22 +678,22 @@
         <p class="text-xs text-[var(--text-secondary)] leading-relaxed text-content" id="pSolanaDesc">Specular glass luxury liquidity dashboard featuring real-time APY calculation, zero slippage matrix, and dark prestige styling.</p>
       </div>
 
-      <!-- Card 4: Vanguard Chronometer (Luxury Swiss Editorial) -->
-      <div class="vibe-card p-6 sm:p-8 space-y-6 project-item" data-category="editorial">
+      <!-- Card 4: Vanguard Chronometer (Luxury Swiss Editorial Spread - 7 Columns) -->
+      <div class="vibe-card vibe-card-specular p-6 sm:p-8 space-y-6 project-item md:col-span-7 transition-all duration-300 hover:-translate-y-1" data-category="editorial">
         <div class="flex items-center justify-between border-b border-[var(--border-subtle)] pb-4">
           <div>
-            <span class="text-[10px] font-mono uppercase tracking-wider text-rose-600 font-bold block">Swiss Editorial / Luxury</span>
-            <h3 class="text-xl font-bold text-[var(--text-primary)] font-serif italic">L'Horlogerie Vanguard</h3>
+            <span class="text-[10px] font-mono uppercase tracking-wider text-rose-600 font-bold block"><bdi>[ ARCH: 04 // EDITORIAL HOROLOGY ]</bdi></span>
+            <h3 class="text-2xl font-bold text-[var(--text-primary)] font-serif italic">L'Horlogerie Vanguard</h3>
           </div>
           <span class="px-2.5 py-1 rounded bg-rose-500/10 text-rose-600 text-xs font-mono font-bold"><bdi>16.4:1 AAA</bdi></span>
         </div>
 
-        <div class="h-40 rounded-[var(--radius-sm)] bg-[var(--bg-canvas)] border border-[var(--border-subtle)] p-6 flex flex-col justify-between">
+        <div class="h-44 rounded-[var(--radius-sm)] bg-[var(--bg-canvas)] border border-[var(--border-subtle)] p-6 flex flex-col justify-between shadow-inner">
           <div class="space-y-1">
-            <h4 class="text-lg font-serif italic font-bold text-[var(--text-primary)]">Calibre 9012 Tourbillon</h4>
-            <p class="text-xs text-[var(--text-muted)]">Hand-assembled in Geneva. 72-hour power reserve.</p>
+            <h4 class="text-xl font-serif italic font-bold text-[var(--text-primary)]">Calibre 9012 Tourbillon</h4>
+            <p class="text-xs text-[var(--text-muted)]">Hand-assembled in Geneva. 72-hour power reserve with titanium escapement.</p>
           </div>
-          <div class="flex items-center justify-between border-t border-[var(--border-subtle)] pt-2 text-xs font-mono text-[var(--text-secondary)]">
+          <div class="flex items-center justify-between border-t border-[var(--border-subtle)] pt-3 text-xs font-mono text-[var(--text-secondary)]">
             <span>LIMITED EDITION</span>
             <span class="font-bold text-[var(--text-primary)]">25 PIECES WORLDWIDE</span>
           </div>
@@ -1566,13 +1607,91 @@
       document.getElementById('feat1Desc').innerHTML = isFa ? 'خروجی کامپوننت های ماژولار <bdi>TSX</bdi> با اینترفیس تایپ شده و استیت اسلایدرها و تب ها.' : 'Direct export of modular TSX components with typed props, useState split sliders, and active tabs.';
       document.getElementById('feat2Title').innerHTML = isFa ? 'راست چین ساختارثابت (<bdi>Semantic RTL</bdi>)' : 'Fixed-Structure Semantic RTL';
       document.getElementById('feat2Desc').textContent = isFa ? 'تضمین پایداری گرید صفحه بدون چرخش آینه ای و ناخواسته؛ کنترل های پنجره و ستون های گرید ثابت می مانند.' : 'Layout stability guaranteed without naive grid inversion. Window controls and grids stay physically locked; bidirectional tokens isolated in <bdi>.';
-      document.getElementById('feat3Title').textContent = isFa ? 'صفر اموجی خام در محیط کاربری' : 'Absolute Zero Raw Emojis';
-      document.getElementById('feat3Desc').innerHTML = isFa ? 'آیکون های وکتور برداری خطی <bdi>SVG</bdi> با قابلیت ارث بری رنگ و تایید کامل استانداردهای وب.' : 'Strictly audited inline SVG vector icons with currentColor inheritance passing all accessibility linters.';
       document.getElementById('footerCopyright').innerHTML = isFa ? '© ۲۰۲۶ <bdi>Omid-IO</bdi>. متن باز با مجوز <bdi>MIT</bdi>. تایید شده توسط <bdi>Antigravity</bdi>.' : '© 2026 Omid-IO. Open-Source MIT License. Certified Autonomous by Antigravity.';
 
       // Re-trigger scenario update
       runScenario(currentScenario, null);
     }
+  </script>
+
+  <!-- TACTILE FLOATING ISLAND CONTROL DOCK (LIGHTSWIND BENCHMARK) -->
+  <aside class="fixed bottom-6 inset-x-0 z-50 pointer-events-none flex justify-center px-4" aria-label="Tactile System Floating Dock">
+    <div class="pointer-events-auto flex items-center gap-1.5 p-1.5 rounded-full border border-[var(--border-strong)] bg-[var(--bg-surface)] backdrop-blur-xl shadow-2xl transition-all duration-300 hover:scale-[1.02] text-xs font-mono font-bold text-[var(--text-primary)]" style="box-shadow: 0 20px 40px -10px rgba(0,0,0,0.3), var(--glass-specular-light);">
+      <!-- Drag Grip Handle -->
+      <div class="px-2 text-[var(--text-muted)] cursor-grab active:cursor-grabbing hidden sm:flex items-center" title="Tactile Grip">
+        <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="9" cy="12" r="1"/><circle cx="9" cy="5" r="1"/><circle cx="9" cy="19" r="1"/><circle cx="15" cy="12" r="1"/><circle cx="15" cy="5" r="1"/><circle cx="15" cy="19" r="1"/></svg>
+      </div>
+
+      <!-- Quick Archetype Pill Switchers in Floating Island -->
+      <button onclick="setTheme('apple_cupertino', null)" class="px-3 py-1.5 rounded-full hover:bg-[var(--accent-brand-subtle)] hover:text-[var(--accent-brand)] transition-colors text-[11px]" title="Cupertino Fluid">Cupertino</button>
+      <button onclick="setTheme('specular_glass', null)" class="px-3 py-1.5 rounded-full hover:bg-[var(--accent-brand-subtle)] hover:text-[var(--accent-brand)] transition-colors text-[11px]" title="Specular Obsidian Glass">Obsidian</button>
+      <button onclick="setTheme('swiss_editorial', null)" class="px-3 py-1.5 rounded-full hover:bg-[var(--accent-brand-subtle)] hover:text-[var(--accent-brand)] transition-colors text-[11px]" title="Swiss Editorial">Swiss</button>
+      <button onclick="setTheme('terminal_hud', null)" class="px-3 py-1.5 rounded-full hover:bg-[var(--accent-brand-subtle)] hover:text-[var(--accent-brand)] transition-colors text-[11px]" title="Cyber Terminal">Terminal</button>
+
+      <div class="w-px h-4 bg-[var(--border-subtle)] mx-1"></div>
+
+      <!-- Quick Action: Top Scroll & Lang Toggle -->
+      <button onclick="window.scrollTo({top: 0, behavior: 'smooth'})" class="p-1.5 rounded-full hover:bg-[var(--border-subtle)] text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-colors" title="Scroll to Top">
+        <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="m18 15-6-6-6 6"/></svg>
+      </button>
+      <button onclick="toggleLang()" class="px-2.5 py-1 rounded-full bg-[var(--accent-brand)] text-white text-[10px] font-bold shadow-xs hover:opacity-90 transition-opacity" title="Toggle Language">
+        <span>BiDi</span>
+      </button>
+    </div>
+  </aside>
+
+  <script>
+    /* =========================================================================
+       LUXURY KINETIC PHYSICS: 3D TILT, MOMENTUM INTERACTION & SPECULAR FOIL
+       ========================================================================= */
+    (function initKineticPhysics() {
+      const isReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      if (isReduced) return;
+
+      const macWindow = document.getElementById('heroMacWindow');
+      const foil = document.getElementById('specularFoilOverlay');
+
+      if (macWindow && foil) {
+        macWindow.addEventListener('pointerenter', () => {
+          foil.style.opacity = '1';
+        });
+
+        macWindow.addEventListener('pointerleave', () => {
+          foil.style.opacity = '0';
+          macWindow.style.transform = 'perspective(1000px) rotateX(0deg) rotateY(0deg)';
+        });
+
+        macWindow.addEventListener('pointermove', (e) => {
+          const rect = macWindow.getBoundingClientRect();
+          const x = e.clientX - rect.left;
+          const y = e.clientY - rect.top;
+          
+          const centerX = rect.width / 2;
+          const centerY = rect.height / 2;
+          
+          const rotateX = ((y - centerY) / centerY) * -4.5;
+          const rotateY = ((x - centerX) / centerX) * 4.5;
+
+          macWindow.style.transform = `perspective(1000px) rotateX(${rotateX.toFixed(2)}deg) rotateY(${rotateY.toFixed(2)}deg)`;
+          macWindow.style.setProperty('--mouse-x', `${x.toFixed(1)}px`);
+          macWindow.style.setProperty('--mouse-y', `${y.toFixed(1)}px`);
+        });
+      }
+
+      // Magnetic CTAs physics
+      const magneticBtns = document.querySelectorAll('.btn-brand');
+      magneticBtns.forEach((btn) => {
+        btn.addEventListener('pointermove', (e) => {
+          const rect = btn.getBoundingClientRect();
+          const x = e.clientX - rect.left - rect.width / 2;
+          const y = e.clientY - rect.top - rect.height / 2;
+          btn.style.transform = `translate(${x * 0.18}px, ${y * 0.18}px)`;
+        });
+        btn.addEventListener('pointerleave', () => {
+          btn.style.transform = 'translate(0px, 0px)';
+        });
+      });
+    })();
   </script>
 </body>
 </html>
