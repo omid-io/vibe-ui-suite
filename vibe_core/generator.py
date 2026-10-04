@@ -1518,9 +1518,98 @@ export default {component_name};
       left: 140%;
       transition: left 0.75s ease-in-out;
     }}
+
+    /* Lightswind Trailing Arrow Pointer & Spotlight Physics */
+    @media (pointer: fine) {{
+      #vibeCursorDot {{
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 8px;
+        height: 8px;
+        background-color: var(--accent);
+        border-radius: 9999px;
+        pointer-events: none;
+        z-index: 10000;
+        transform: translate(-50%, -50%);
+        transition: opacity 0.2s ease;
+      }}
+      #vibeCursorFollower {{
+        position: fixed;
+        top: 0;
+        left: 0;
+        pointer-events: none;
+        z-index: 9999;
+        will-change: transform;
+        color: var(--accent);
+        filter: drop-shadow(0 0 10px color-mix(in oklch, var(--accent) 55%, transparent));
+        transition: opacity 0.25s ease;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+      }}
+      #vibeCursorFollower svg {{
+        width: 36px;
+        height: 39px;
+        display: block;
+        transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+      }}
+      #vibeCursorFollower.hover-active svg {{
+        transform: scale(1.2);
+      }}
+      #vibeCursorFollower.click-active svg {{
+        transform: scale(0.85);
+      }}
+      #vibeCursorBadge {{
+        position: absolute;
+        top: 100%;
+        margin-top: 4px;
+        padding: 2px 7px;
+        border-radius: 9999px;
+        background-color: var(--surface-bg);
+        border: 1px solid var(--border-subtle);
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+        font-family: var(--font-body);
+        font-size: 9px;
+        font-weight: 800;
+        color: var(--accent);
+        letter-spacing: 0.05em;
+        opacity: 0;
+        transform: scale(0.85);
+        transition: opacity 0.2s ease, transform 0.2s ease;
+        white-space: nowrap;
+      }}
+      #vibeCursorFollower.hover-active #vibeCursorBadge {{
+        opacity: 1;
+        transform: scale(1);
+      }}
+    }}
+
+    .ambient-spotlight-layer {{
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 1;
+      background: radial-gradient(550px circle at var(--mouse-x, 50%) var(--mouse-y, 50%), color-mix(in oklch, var(--accent) 6%, transparent), transparent 70%);
+      transition: opacity 0.3s ease;
+    }}
   </style>
 </head>
 <body class="min-h-full flex flex-col antialiased relative">
+  <!-- Lightswind Trailing Arrow Pointer -->
+  <div id="vibeCursorDot" class="hidden md:block" aria-hidden="true"></div>
+  <div id="vibeCursorFollower" class="hidden md:flex" aria-hidden="true">
+    <svg xmlns="http://www.w3.org/2000/svg" width="36" height="39" viewBox="0 0 50 54" fill="none" class="pointer-events-none drop-shadow-md">
+      <path d="M42.6817 41.1495L27.5103 6.79925C26.7269 5.02557 24.2082 5.02558 23.3927 6.79925L7.59814 41.1495C6.75833 42.9759 8.52712 44.8902 10.4125 44.1954L24.3757 39.0496C24.8829 38.8627 25.4385 38.8627 25.9422 39.0496L39.8121 44.1954C41.6849 44.8902 43.4884 42.9759 42.6817 41.1495Z" fill="currentColor"/>
+      <path d="M43.7146 40.6933L28.5431 6.34306C27.3556 3.65428 23.5772 3.69516 22.3668 6.32755L6.57226 40.6778C5.3134 43.4156 7.97238 46.298 10.803 45.2549L24.7662 40.109C25.0221 40.0147 25.2999 40.0156 25.5494 40.1082L39.4193 45.254C42.2261 46.2953 44.9254 43.4347 43.7146 40.6933Z" stroke="currentColor" stroke-width="1.5"/>
+    </svg>
+    <span id="vibeCursorBadge"></span>
+  </div>
+
+  <!-- Ambient Cursor Spotlight Overlay -->
+  <div id="ambientSpotlightOverlay" class="ambient-spotlight-layer" aria-hidden="true"></div>
+
   <!-- Atmospheric Canvas Background: Ambient Lighting & Grid System -->
   <div class="fixed inset-0 pointer-events-none z-0 overflow-hidden" aria-hidden="true">
     <div class="absolute inset-0 bg-[linear-gradient(to_right,rgba(128,128,128,0.06)_1px,transparent_1px),linear-gradient(to_bottom,rgba(128,128,128,0.06)_1px,transparent_1px)] bg-[size:36px_36px] [mask-image:radial-gradient(ellipse_60%_50%_at_50%_0%,#000_70%,transparent_100%)]"></div>
@@ -1786,6 +1875,89 @@ export default {component_name};
             var y = e.clientY - rect.top;
             card.style.setProperty('--mouse-x', x + 'px');
             card.style.setProperty('--mouse-y', y + 'px');
+          }});
+        }});
+      }}
+
+      // 10. Lightswind Kinetic Trailing Arrow Pointer Engine
+      var cursorDot = document.getElementById('vibeCursorDot');
+      var cursorFollower = document.getElementById('vibeCursorFollower');
+      var cursorBadge = document.getElementById('vibeCursorBadge');
+
+      if (cursorDot && cursorFollower && window.matchMedia('(pointer: fine)').matches) {{
+        var mouseX = window.innerWidth / 2;
+        var mouseY = window.innerHeight / 2;
+        var prevMouseX = mouseX;
+        var prevMouseY = mouseY;
+        var followerX = mouseX;
+        var followerY = mouseY;
+        var currentAngle = 0;
+        var targetAngle = 0;
+        var cursorVisible = false;
+
+        window.addEventListener('pointermove', function(e) {{
+          mouseX = e.clientX;
+          mouseY = e.clientY;
+          if (!cursorVisible) {{
+            cursorVisible = true;
+            cursorDot.style.opacity = '1';
+            cursorFollower.style.opacity = '1';
+          }}
+          cursorDot.style.transform = 'translate(' + mouseX + 'px, ' + mouseY + 'px) translate(-50%, -50%)';
+          document.documentElement.style.setProperty('--mouse-x', mouseX + 'px');
+          document.documentElement.style.setProperty('--mouse-y', mouseY + 'px');
+        }});
+
+        document.addEventListener('mouseleave', function() {{
+          cursorVisible = false;
+          cursorDot.style.opacity = '0';
+          cursorFollower.style.opacity = '0';
+        }});
+
+        document.addEventListener('mousedown', function() {{
+          cursorFollower.classList.add('click-active');
+        }});
+        document.addEventListener('mouseup', function() {{
+          cursorFollower.classList.remove('click-active');
+        }});
+
+        function renderKineticFollower() {{
+          var vx = mouseX - followerX;
+          var vy = mouseY - followerY;
+          followerX += vx * 0.18;
+          followerY += vy * 0.18;
+
+          var dx = mouseX - prevMouseX;
+          var dy = mouseY - prevMouseY;
+          var speed = Math.hypot(dx, dy);
+
+          if (speed > 1.2) {{
+            targetAngle = Math.atan2(dy, dx) * (180 / Math.PI) + 90;
+            var diff = targetAngle - currentAngle;
+            if (diff > 180) diff -= 360;
+            if (diff < -180) diff += 360;
+            currentAngle += diff * 0.22;
+          }}
+          prevMouseX = mouseX;
+          prevMouseY = mouseY;
+
+          cursorFollower.style.transform = 'translate(' + followerX.toFixed(2) + 'px, ' + followerY.toFixed(2) + 'px) translate(-50%, -50%) rotate(' + currentAngle.toFixed(2) + 'deg)';
+          requestAnimationFrame(renderKineticFollower);
+        }}
+        requestAnimationFrame(renderKineticFollower);
+
+        document.querySelectorAll('a, button, input, .vibe-spotlight-card').forEach(function(el) {{
+          el.addEventListener('pointerenter', function() {{
+            cursorFollower.classList.add('hover-active');
+            if (cursorBadge) {{
+              if (el.tagName.toLowerCase() === 'button') cursorBadge.textContent = 'ACTIVATE';
+              else if (el.tagName.toLowerCase() === 'a') cursorBadge.textContent = 'EXPLORE';
+              else cursorBadge.textContent = 'VIEW';
+            }}
+          }});
+          el.addEventListener('pointerleave', function() {{
+            cursorFollower.classList.remove('hover-active');
+            if (cursorBadge) cursorBadge.textContent = '';
           }});
         }});
       }}

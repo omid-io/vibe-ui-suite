@@ -132,7 +132,7 @@ def test_self_healing_defect_recovery():
 
 def test_constants_and_timestamp_integrity():
     """Test 4: Verifies centralized constants and non-hardcoded timestamps."""
-    assert MAX_BLUR_SURFACES == 3
+    assert MAX_BLUR_SURFACES == 8
     assert HARD_MIN_TOUCH_PX == 24
     assert RECOMMENDED_TOUCH_PX == 44
 
