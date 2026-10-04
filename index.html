@@ -354,6 +354,9 @@
        LIGHTSWIND KINETIC BENCHMARK: TRAILING CURSOR, MARQUEE & SPOTLIGHT
        ========================================================================= */
     @media (pointer: fine) {
+      *, *::before, *::after {
+        cursor: none !important;
+      }
       #vibeCursorDot {
         position: fixed;
         top: 0;
@@ -365,7 +368,13 @@
         pointer-events: none;
         z-index: 10000;
         transform: translate(-50%, -50%);
-        transition: opacity 0.2s ease, transform 0.15s ease;
+        box-shadow: 0 0 10px var(--accent-brand);
+        transition: opacity 0.2s ease, transform 0.15s cubic-bezier(0.16, 1, 0.3, 1), background-color 0.2s ease;
+      }
+      #vibeCursorDot.hover-target {
+        transform: translate(-50%, -50%) scale(1.5);
+        background-color: #ffffff;
+        box-shadow: 0 0 14px var(--accent-brand), 0 0 25px var(--accent-brand);
       }
       #vibeCursorFollower {
         position: fixed;
@@ -455,31 +464,101 @@
       transition: height 0.1s ease-out;
     }
 
-    /* Scroll-Driven Kinetic Stagger Reveal & Lazy Loading Standard */
+    /* =========================================================================
+       CINEMATIC KINETIC SCROLL REVEAL & LAZY-LOAD ENTRANCE ENGINE
+       ========================================================================= */
     .vibe-reveal-node {
       opacity: 0;
-      transform: translateY(32px);
-      transition: opacity 0.75s cubic-bezier(0.16, 1, 0.3, 1), transform 0.75s cubic-bezier(0.16, 1, 0.3, 1);
-      will-change: opacity, transform;
+      transform: translateY(38px) scale(0.97);
+      filter: blur(5px);
+      transition: opacity 0.85s cubic-bezier(0.16, 1, 0.3, 1),
+                  transform 0.85s cubic-bezier(0.16, 1, 0.3, 1),
+                  filter 0.85s cubic-bezier(0.16, 1, 0.3, 1);
+      will-change: opacity, transform, filter;
     }
     .vibe-reveal-node.vibe-revealed {
       opacity: 1 !important;
-      transform: translateY(0) !important;
+      transform: translateY(0) scale(1) !important;
+      filter: blur(0) !important;
     }
-    @media (prefers-reduced-motion: reduce) {
-      .vibe-reveal-node {
-        opacity: 1 !important;
-        transform: none !important;
-        transition: none !important;
+
+    /* Cinematic Lazy-Load Image Entrance (Scale + Blur Unmask + Shimmer) */
+    .vibe-image-container {
+      position: relative;
+      overflow: hidden;
+      background-color: var(--bg-surface-elevated, #18181b);
+    }
+    .vibe-image-container::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.08), transparent);
+      transform: translateX(-100%);
+      animation: vibeShimmerWave 1.8s infinite;
+      z-index: 2;
+      pointer-events: none;
+    }
+    .vibe-image-container.loaded::before {
+      display: none;
+    }
+    @keyframes vibeShimmerWave {
+      0% { transform: translateX(-100%); }
+      100% { transform: translateX(100%); }
+    }
+    img.vibe-lazy-image {
+      opacity: 0;
+      transform: scale(1.08);
+      filter: blur(10px);
+      transition: opacity 0.9s cubic-bezier(0.16, 1, 0.3, 1),
+                  transform 0.9s cubic-bezier(0.16, 1, 0.3, 1),
+                  filter 0.9s cubic-bezier(0.16, 1, 0.3, 1);
+      will-change: opacity, transform, filter;
+    }
+    img.vibe-lazy-image.loaded {
+      opacity: 1 !important;
+      transform: scale(1) !important;
+      filter: blur(0) !important;
+    }
+    .group:hover img.vibe-lazy-image.loaded {
+      transform: scale(1.05) !important;
+    }
+
+    /* Page-Load Hero Stagger (Living immediate entrance) */
+    @keyframes heroGlideIn {
+      0% {
+        opacity: 0;
+        transform: translateY(28px) scale(0.97);
+        filter: blur(5px);
+      }
+      100% {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+        filter: blur(0);
       }
     }
-    /* Lazy Editorial Image Smooth Fade-In */
-    img[loading="lazy"] {
-      opacity: 0;
-      transition: opacity 0.6s ease-in-out;
-    }
-    img[loading="lazy"].loaded {
-      opacity: 1 !important;
+    .hero-enter-pill { animation: heroGlideIn 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.05s backwards; }
+    .hero-enter-title { animation: heroGlideIn 0.85s cubic-bezier(0.16, 1, 0.3, 1) 0.15s backwards; }
+    .hero-enter-sub { animation: heroGlideIn 0.9s cubic-bezier(0.16, 1, 0.3, 1) 0.25s backwards; }
+    .hero-enter-actions { animation: heroGlideIn 0.95s cubic-bezier(0.16, 1, 0.3, 1) 0.35s backwards; }
+    .hero-enter-window { animation: heroGlideIn 1.1s cubic-bezier(0.16, 1, 0.3, 1) 0.45s backwards; }
+
+    @media (prefers-reduced-motion: reduce) {
+      .vibe-reveal-node,
+      img.vibe-lazy-image,
+      .hero-enter-pill,
+      .hero-enter-title,
+      .hero-enter-sub,
+      .hero-enter-actions,
+      .hero-enter-window {
+        opacity: 1 !important;
+        transform: none !important;
+        filter: none !important;
+        transition: none !important;
+        animation: none !important;
+      }
+      .vibe-image-container::before {
+        display: none !important;
+      }
     }
   </style>
 </head>
@@ -519,7 +598,7 @@
           <span>Vibe UI Suite</span>
         </a>
         <span class="px-2 py-0.5 rounded-full text-[10px] font-mono font-bold bg-emerald-500/10 text-emerald-600 border border-emerald-500/20">
-          <bdi>v4.6.0</bdi>
+          <bdi>v4.7.0</bdi>
         </span>
       </div>
 
@@ -2162,6 +2241,7 @@
         const hoverTargets = document.querySelectorAll('a, button, .vibe-card, input[type="range"]');
         hoverTargets.forEach((el) => {
           el.addEventListener('pointerenter', () => {
+            cursorDot.classList.add('hover-target');
             cursorFollower.classList.add('hover-active');
             if (cursorBadge) {
               if (el.tagName.toLowerCase() === 'button' || el.classList.contains('btn-brand')) {
@@ -2176,6 +2256,7 @@
             }
           });
           el.addEventListener('pointerleave', () => {
+            cursorDot.classList.remove('hover-target');
             cursorFollower.classList.remove('hover-active');
             if (cursorBadge) cursorBadge.textContent = '';
           });

@@ -1521,6 +1521,9 @@ export default {component_name};
 
     /* Lightswind Trailing Arrow Pointer & Spotlight Physics */
     @media (pointer: fine) {{
+      *, *::before, *::after {{
+        cursor: none !important;
+      }}
       #vibeCursorDot {{
         position: fixed;
         top: 0;
@@ -1532,7 +1535,13 @@ export default {component_name};
         pointer-events: none;
         z-index: 10000;
         transform: translate(-50%, -50%);
-        transition: opacity 0.2s ease;
+        box-shadow: 0 0 10px var(--accent);
+        transition: opacity 0.2s ease, transform 0.15s cubic-bezier(0.16, 1, 0.3, 1), background-color 0.2s ease;
+      }}
+      #vibeCursorDot.hover-target {{
+        transform: translate(-50%, -50%) scale(1.5);
+        background-color: #ffffff;
+        box-shadow: 0 0 14px var(--accent), 0 0 25px var(--accent);
       }}
       #vibeCursorFollower {{
         position: fixed;
@@ -1975,6 +1984,7 @@ export default {component_name};
 
         document.querySelectorAll('a, button, input, .vibe-spotlight-card').forEach(function(el) {{
           el.addEventListener('pointerenter', function() {{
+            cursorDot.classList.add('hover-target');
             cursorFollower.classList.add('hover-active');
             if (cursorBadge) {{
               if (el.tagName.toLowerCase() === 'button') cursorBadge.textContent = 'ACTIVATE';
@@ -1983,6 +1993,7 @@ export default {component_name};
             }}
           }});
           el.addEventListener('pointerleave', function() {{
+            cursorDot.classList.remove('hover-target');
             cursorFollower.classList.remove('hover-active');
             if (cursorBadge) cursorBadge.textContent = '';
           }});
