@@ -1594,6 +1594,33 @@ export default {component_name};
       background: radial-gradient(550px circle at var(--mouse-x, 50%) var(--mouse-y, 50%), color-mix(in oklch, var(--accent) 6%, transparent), transparent 70%);
       transition: opacity 0.3s ease;
     }}
+
+    /* Scroll-Driven Kinetic Stagger Reveal & Lazy Loading Standard */
+    .vibe-reveal-node {{
+      opacity: 0;
+      transform: translateY(28px);
+      transition: opacity 0.75s cubic-bezier(0.16, 1, 0.3, 1), transform 0.75s cubic-bezier(0.16, 1, 0.3, 1);
+      will-change: opacity, transform;
+    }}
+    .vibe-reveal-node.vibe-revealed {{
+      opacity: 1 !important;
+      transform: translateY(0) !important;
+    }}
+    @media (prefers-reduced-motion: reduce) {{
+      .vibe-reveal-node {{
+        opacity: 1 !important;
+        transform: none !important;
+        transition: none !important;
+      }}
+    }}
+    /* Lazy Editorial Image Smooth Fade-In */
+    img[loading="lazy"] {{
+      opacity: 0;
+      transition: opacity 0.6s ease-in-out;
+    }}
+    img[loading="lazy"].loaded {{
+      opacity: 1 !important;
+    }}
   </style>
 </head>
 <body class="min-h-full flex flex-col antialiased relative">
@@ -1961,6 +1988,40 @@ export default {component_name};
           }});
         }});
       }}
+
+      // 11. Scroll-Driven Kinetic Stagger Entrance Observers
+      var revealTargets = document.querySelectorAll('section > div, .vibe-spotlight-card');
+      revealTargets.forEach(function(el, index) {{
+        el.classList.add('vibe-reveal-node');
+        var delay = (index % 3) * 0.08;
+        if (delay > 0) {{
+          el.style.transitionDelay = delay.toFixed(2) + 's';
+        }}
+      }});
+
+      var scrollObserver = new IntersectionObserver(function(entries) {{
+        entries.forEach(function(entry) {{
+          if (entry.isIntersecting) {{
+            entry.target.classList.add('vibe-revealed');
+            scrollObserver.unobserve(entry.target);
+          }}
+        }});
+      }}, {{ threshold: 0.08, rootMargin: '0px 0px -30px 0px' }});
+
+      revealTargets.forEach(function(el) {{
+        scrollObserver.observe(el);
+      }});
+
+      // Lazy Loading Image Progressive Fade-In
+      var lazyImages = document.querySelectorAll('img[loading="lazy"]');
+      lazyImages.forEach(function(img) {{
+        if (img.complete) {{
+          img.classList.add('loaded');
+        }} else {{
+          img.addEventListener('load', function() {{ img.classList.add('loaded'); }});
+          img.addEventListener('error', function() {{ img.classList.add('loaded'); }});
+        }}
+      }});
     }})();
   </script>
 </body>

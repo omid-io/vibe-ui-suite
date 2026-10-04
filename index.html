@@ -454,6 +454,33 @@
       box-shadow: 0 0 14px var(--accent-brand);
       transition: height 0.1s ease-out;
     }
+
+    /* Scroll-Driven Kinetic Stagger Reveal & Lazy Loading Standard */
+    .vibe-reveal-node {
+      opacity: 0;
+      transform: translateY(32px);
+      transition: opacity 0.75s cubic-bezier(0.16, 1, 0.3, 1), transform 0.75s cubic-bezier(0.16, 1, 0.3, 1);
+      will-change: opacity, transform;
+    }
+    .vibe-reveal-node.vibe-revealed {
+      opacity: 1 !important;
+      transform: translateY(0) !important;
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .vibe-reveal-node {
+        opacity: 1 !important;
+        transform: none !important;
+        transition: none !important;
+      }
+    }
+    /* Lazy Editorial Image Smooth Fade-In */
+    img[loading="lazy"] {
+      opacity: 0;
+      transition: opacity 0.6s ease-in-out;
+    }
+    img[loading="lazy"].loaded {
+      opacity: 1 !important;
+    }
   </style>
 </head>
 <body class="theme-apple_cupertino antialiased min-h-screen relative selection:bg-blue-500/20 selection:text-blue-500">
@@ -492,7 +519,7 @@
           <span>Vibe UI Suite</span>
         </a>
         <span class="px-2 py-0.5 rounded-full text-[10px] font-mono font-bold bg-emerald-500/10 text-emerald-600 border border-emerald-500/20">
-          <bdi>v4.5.0</bdi>
+          <bdi>v4.6.0</bdi>
         </span>
       </div>
 
@@ -542,7 +569,7 @@
     <!-- Atmospheric Radial Lighting -->
     <div class="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[350px] bg-blue-500/10 rounded-full blur-[90px] pointer-events-none -z-10"></div>
 
-    <div class="text-center max-w-4xl mx-auto space-y-6 -mb-6 md:-mb-10 relative z-20 pointer-events-auto">
+    <div class="text-center max-w-4xl mx-auto space-y-6 mb-12 md:mb-16 relative z-20 pointer-events-auto">
       <!-- Editorial Micro-Metadata Taxonomy -->
       <div class="inline-flex items-center space-x-2.5 px-3.5 py-1 rounded-full border border-[var(--border-subtle)] bg-[var(--bg-surface)] text-[10px] font-mono font-bold text-[var(--text-muted)] shadow-sm uppercase tracking-wider">
         <span class="w-2 h-2 rounded-full bg-emerald-500 animate-ping"></span>
@@ -2027,8 +2054,16 @@
         window.__lenis = lenis;
       }
 
-      // Scroll-Driven Text Reveal / Stagger Entrance Observers
-      const revealElements = document.querySelectorAll('h2, .project-item, .vibe-card, .journey-milestone');
+      // Scroll-Driven Kinetic Stagger Entrance Observers
+      const revealTargets = document.querySelectorAll('section > div, .project-item, .journey-milestone, #work .vibe-card, #lab .vibe-card, #studio .vibe-card, #estimator .vibe-card');
+      revealTargets.forEach((el, index) => {
+        el.classList.add('vibe-reveal-node');
+        const delay = (index % 3) * 0.08;
+        if (delay > 0) {
+          el.style.transitionDelay = `${delay.toFixed(2)}s`;
+        }
+      });
+
       const observer = new IntersectionObserver((entries) => {
         entries.forEach((entry) => {
           if (entry.isIntersecting) {
@@ -2036,11 +2071,21 @@
             observer.unobserve(entry.target);
           }
         });
-      }, { threshold: 0.12 });
+      }, { threshold: 0.08, rootMargin: '0px 0px -40px 0px' });
 
-      revealElements.forEach((el) => {
-        el.style.transition = 'opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1), transform 0.6s cubic-bezier(0.16, 1, 0.3, 1)';
+      revealTargets.forEach((el) => {
         observer.observe(el);
+      });
+
+      // Lazy Loading Image Progressive Fade-In
+      const lazyImages = document.querySelectorAll('img[loading="lazy"]');
+      lazyImages.forEach((img) => {
+        if (img.complete) {
+          img.classList.add('loaded');
+        } else {
+          img.addEventListener('load', () => img.classList.add('loaded'));
+          img.addEventListener('error', () => img.classList.add('loaded'));
+        }
       });
 
       // Lightswind Kinetic Trailing Arrow Pointer Engine
