@@ -349,9 +349,107 @@
       opacity: 0.038;
       mix-blend-mode: overlay;
     }
+
+    /* =========================================================================
+       LIGHTSWIND KINETIC BENCHMARK: TRAILING CURSOR, MARQUEE & SPOTLIGHT
+       ========================================================================= */
+    @media (pointer: fine) {
+      #vibeCursorDot {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 8px;
+        height: 8px;
+        background-color: var(--accent-brand);
+        border-radius: 9999px;
+        pointer-events: none;
+        z-index: 10000;
+        transform: translate(-50%, -50%);
+        transition: opacity 0.2s ease;
+      }
+      #vibeCursorFollower {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 36px;
+        height: 36px;
+        border: 1.5px solid var(--accent-brand);
+        border-radius: 9999px;
+        pointer-events: none;
+        z-index: 9999;
+        transform: translate(-50%, -50%);
+        transition: width 0.25s cubic-bezier(0.16, 1, 0.3, 1), height 0.25s cubic-bezier(0.16, 1, 0.3, 1), background-color 0.25s ease, border-color 0.25s ease, opacity 0.2s ease;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+      #vibeCursorFollower.hover-active {
+        width: 68px;
+        height: 68px;
+        background-color: color-mix(in oklch, var(--accent-brand) 20%, transparent);
+        border-color: var(--accent-brand);
+      }
+      #vibeCursorFollower.hover-active #vibeCursorLabel {
+        opacity: 1;
+      }
+      #vibeCursorLabel {
+        font-family: 'Geist Mono', monospace;
+        font-size: 9px;
+        font-weight: 800;
+        color: var(--accent-brand);
+        opacity: 0;
+        letter-spacing: 0.05em;
+        transition: opacity 0.2s ease;
+      }
+    }
+
+    /* Ambient Cursor Spotlight Illuminator */
+    .ambient-spotlight-layer {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 1;
+      background: radial-gradient(550px circle at var(--mouse-x, 50%) var(--mouse-y, 50%), rgba(255, 255, 255, 0.04), transparent 70%);
+      transition: opacity 0.3s ease;
+    }
+
+    /* Infinite Kinetic Marquee Rails */
+    @keyframes marquee-scroll {
+      0% { transform: translateX(0%); }
+      100% { transform: translateX(-50%); }
+    }
+    .animate-marquee {
+      display: flex;
+      width: max-content;
+      animation: marquee-scroll 28s linear infinite;
+    }
+    .animate-marquee:hover {
+      animation-play-state: paused;
+    }
+
+    /* Scroll Journey Progress Track */
+    .journey-rail-fill {
+      position: absolute;
+      top: 0;
+      left: 50%;
+      width: 2px;
+      transform: translateX(-50%);
+      background: linear-gradient(180deg, var(--accent-brand), #10b981, #6366f1);
+      box-shadow: 0 0 14px var(--accent-brand);
+      transition: height 0.1s ease-out;
+    }
   </style>
 </head>
 <body class="theme-apple_cupertino antialiased min-h-screen relative selection:bg-blue-500/20 selection:text-blue-500">
+
+  <!-- LIGHTSWIND FLUID TRAILING CURSOR (SPRING LERP PHYSICS) -->
+  <div id="vibeCursorDot" class="hidden md:block" aria-hidden="true"></div>
+  <div id="vibeCursorFollower" class="hidden md:flex" aria-hidden="true">
+    <span id="vibeCursorLabel"></span>
+  </div>
+
+  <!-- AMBIENT CURSOR SPOTLIGHT ILLUMINATOR -->
+  <div id="ambientSpotlightOverlay" class="ambient-spotlight-layer" aria-hidden="true"></div>
 
   <!-- PROCEDURAL SVG FILM GRAIN OVERLAY (TACTILE EDITORIAL ATMOSPHERE) -->
   <svg class="film-grain-layer" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
@@ -374,13 +472,14 @@
           <span>Vibe UI Suite</span>
         </a>
         <span class="px-2 py-0.5 rounded-full text-[10px] font-mono font-bold bg-emerald-500/10 text-emerald-600 border border-emerald-500/20">
-          <bdi>v4.2.0</bdi>
+          <bdi>v4.4.0</bdi>
         </span>
       </div>
 
       <nav class="hidden md:flex items-center space-x-6 text-xs font-semibold text-[var(--text-secondary)]">
         <a href="#hero" class="hover:text-[var(--text-primary)] transition-colors" id="navHero">Living Canvas</a>
         <a href="#work" class="hover:text-[var(--text-primary)] transition-colors" id="navWork">Production Showcase</a>
+        <a href="#journey" class="hover:text-[var(--text-primary)] transition-colors" id="navJourney">Milestone Journey</a>
         <a href="#lab" class="hover:text-[var(--text-primary)] transition-colors" id="navLab">Interactive Lab</a>
         <a href="#studio" class="hover:text-[var(--text-primary)] transition-colors" id="navStudio">AI Studio</a>
         <a href="#estimator" class="hover:text-[var(--text-primary)] transition-colors" id="navEstimator">Architecture Estimator</a>
@@ -593,6 +692,81 @@
   </section>
 
   <!-- =========================================================================
+       INFINITE KINETIC MARQUEE RAIL (LIGHTSWIND VELOCITY BENCHMARK)
+       ========================================================================= -->
+  <section class="py-6 border-y border-[var(--border-subtle)] bg-[var(--bg-surface)]/60 overflow-hidden relative group [mask-image:linear-gradient(to_right,transparent,black_8%,black_92%,transparent)]" aria-label="Ecosystem Marquee">
+    <div class="animate-marquee flex items-center space-x-8 text-xs font-mono font-bold tracking-wider text-[var(--text-secondary)] select-none uppercase">
+      <!-- Item Set 1 -->
+      <span class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[var(--bg-canvas)] border border-[var(--border-subtle)]">
+        <span class="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-ping"></span>
+        <span>KOWALSKI SPRING PHYSICS &bull; &zeta;=1.0</span>
+      </span>
+      <span class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[var(--bg-canvas)] border border-[var(--border-subtle)]">
+        <svg class="w-3.5 h-3.5 text-blue-500" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="10"/><path d="m9 12 2 2 4-4"/></svg>
+        <span>WCAG AAA CONTRAST &bull; 17.8:1</span>
+      </span>
+      <span class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[var(--bg-canvas)] border border-[var(--border-subtle)]">
+        <span class="w-2 h-2 rounded bg-purple-500"></span>
+        <span>OKLCH PERCEPTUAL GAMUT</span>
+      </span>
+      <span class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[var(--bg-canvas)] border border-[var(--border-subtle)]">
+        <svg class="w-3.5 h-3.5 text-amber-500" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+        <span>ZERO RAW EMOJIS &bull; 100% SVG</span>
+      </span>
+      <span class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[var(--bg-canvas)] border border-[var(--border-subtle)]">
+        <span class="w-1.5 h-1.5 rounded-full bg-cyan-400"></span>
+        <span>FIXED-STRUCTURE SEMANTIC RTL</span>
+      </span>
+      <span class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[var(--bg-canvas)] border border-[var(--border-subtle)]">
+        <svg class="w-3.5 h-3.5 text-rose-500" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
+        <span>REACT 19 TSX LIVE STATE</span>
+      </span>
+      <span class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[var(--bg-canvas)] border border-[var(--border-subtle)]">
+        <span class="w-1.5 h-1.5 rounded-full bg-sky-400"></span>
+        <span>CURATED UNSPLASH EDITORIAL</span>
+      </span>
+      <span class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[var(--bg-canvas)] border border-[var(--border-subtle)]">
+        <span class="w-1.5 h-1.5 rounded-full bg-indigo-500"></span>
+        <span>LENIS SMOOTH INERTIA SCROLL</span>
+      </span>
+
+      <!-- Item Set 2 (Seamless loop duplicate) -->
+      <span class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[var(--bg-canvas)] border border-[var(--border-subtle)]">
+        <span class="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-ping"></span>
+        <span>KOWALSKI SPRING PHYSICS &bull; &zeta;=1.0</span>
+      </span>
+      <span class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[var(--bg-canvas)] border border-[var(--border-subtle)]">
+        <svg class="w-3.5 h-3.5 text-blue-500" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="10"/><path d="m9 12 2 2 4-4"/></svg>
+        <span>WCAG AAA CONTRAST &bull; 17.8:1</span>
+      </span>
+      <span class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[var(--bg-canvas)] border border-[var(--border-subtle)]">
+        <span class="w-2 h-2 rounded bg-purple-500"></span>
+        <span>OKLCH PERCEPTUAL GAMUT</span>
+      </span>
+      <span class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[var(--bg-canvas)] border border-[var(--border-subtle)]">
+        <svg class="w-3.5 h-3.5 text-amber-500" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+        <span>ZERO RAW EMOJIS &bull; 100% SVG</span>
+      </span>
+      <span class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[var(--bg-canvas)] border border-[var(--border-subtle)]">
+        <span class="w-1.5 h-1.5 rounded-full bg-cyan-400"></span>
+        <span>FIXED-STRUCTURE SEMANTIC RTL</span>
+      </span>
+      <span class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[var(--bg-canvas)] border border-[var(--border-subtle)]">
+        <svg class="w-3.5 h-3.5 text-rose-500" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
+        <span>REACT 19 TSX LIVE STATE</span>
+      </span>
+      <span class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[var(--bg-canvas)] border border-[var(--border-subtle)]">
+        <span class="w-1.5 h-1.5 rounded-full bg-sky-400"></span>
+        <span>CURATED UNSPLASH EDITORIAL</span>
+      </span>
+      <span class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[var(--bg-canvas)] border border-[var(--border-subtle)]">
+        <span class="w-1.5 h-1.5 rounded-full bg-indigo-500"></span>
+        <span>LENIS SMOOTH INERTIA SCROLL</span>
+      </span>
+    </div>
+  </section>
+
+  <!-- =========================================================================
        SHOWCASE MODULE 1: FEATURED ENGINEERED DIGITAL PRODUCTS (WORK)
        ========================================================================= -->
   <section id="work" class="py-20 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto border-t border-[var(--border-subtle)]">
@@ -625,21 +799,25 @@
           <span class="px-2.5 py-1 rounded bg-blue-500/10 text-blue-600 text-xs font-mono font-bold"><bdi>+48.2% ARR</bdi></span>
         </div>
 
-        <!-- Live SVG Financial Sparkline (Panoramic 2.4:1 ratio) -->
-        <div class="h-44 rounded-[var(--radius-sm)] bg-[var(--bg-canvas)] border border-[var(--border-subtle)] p-4 flex flex-col justify-between shadow-inner">
-          <div class="flex items-center justify-between text-xs font-mono">
-            <span class="text-[var(--text-muted)]">Net Compound Revenue</span>
-            <span class="font-bold text-emerald-600"><bdi>$1,248,500.00</bdi></span>
-          </div>
-          <svg class="w-full h-24 text-[var(--accent-brand)]" viewBox="0 0 300 80" fill="none" stroke="currentColor" stroke-width="2.5">
-            <path d="M0 60 Q 50 55, 100 40 T 200 30 T 300 10" />
-            <path d="M0 60 Q 50 55, 100 40 T 200 30 T 300 10 L 300 80 L 0 80 Z" fill="currentColor" fill-opacity="0.08" stroke="none" />
-          </svg>
-          <div class="flex items-center justify-between text-[11px] text-[var(--text-muted)] font-mono">
-            <span>Q1 2026</span>
-            <span>Q2 2026</span>
-            <span>Q3 2026</span>
-            <span>Q4 2026 Target</span>
+        <!-- Live SVG Financial Sparkline with Curated Unsplash Financial Architecture Backdrop -->
+        <div class="relative h-48 rounded-[var(--radius-sm)] overflow-hidden border border-[var(--border-subtle)] shadow-inner group">
+          <img src="https://images.unsplash.com/photo-1642543492481-44e81e3914a7?auto=format&fit=crop&w=1200&q=80" alt="Financial Architecture" loading="lazy" decoding="async" class="absolute inset-0 w-full h-full object-cover opacity-25 group-hover:scale-105 transition-transform duration-700">
+          <div class="absolute inset-0 bg-gradient-to-t from-[var(--bg-surface)] via-[var(--bg-surface)]/75 to-transparent"></div>
+          <div class="relative h-full p-4 flex flex-col justify-between z-10">
+            <div class="flex items-center justify-between text-xs font-mono">
+              <span class="text-[var(--text-muted)] font-bold">Net Compound Revenue</span>
+              <span class="font-bold text-emerald-600 bg-emerald-500/10 px-2 py-0.5 rounded"><bdi>$1,248,500.00</bdi></span>
+            </div>
+            <svg class="w-full h-20 text-[var(--accent-brand)]" viewBox="0 0 300 80" fill="none" stroke="currentColor" stroke-width="2.5">
+              <path d="M0 60 Q 50 55, 100 40 T 200 30 T 300 10" />
+              <path d="M0 60 Q 50 55, 100 40 T 200 30 T 300 10 L 300 80 L 0 80 Z" fill="currentColor" fill-opacity="0.12" stroke="none" />
+            </svg>
+            <div class="flex items-center justify-between text-[11px] text-[var(--text-muted)] font-mono">
+              <span>Q1 2026</span>
+              <span>Q2 2026</span>
+              <span>Q3 2026</span>
+              <span>Q4 2026 Target</span>
+            </div>
           </div>
         </div>
 
@@ -656,16 +834,20 @@
           <span class="px-2.5 py-1 rounded bg-emerald-500/10 text-emerald-600 text-xs font-mono font-bold"><bdi>99.2% Score</bdi></span>
         </div>
 
-        <div class="h-44 rounded-[var(--radius-sm)] bg-[var(--bg-canvas)] border border-[var(--border-subtle)] p-6 flex items-center justify-between shadow-inner">
-          <div class="space-y-1">
-            <span class="text-xs font-bold text-[var(--text-primary)]">Invisalign & Veneers</span>
-            <p class="text-xs text-[var(--text-muted)]">Sub-millimeter 3D scan alignment</p>
-            <div class="pt-3">
-              <span class="px-2.5 py-1 rounded text-[10px] font-mono bg-emerald-500/15 text-emerald-700 font-bold">14 Days Recovery</span>
+        <div class="relative h-48 rounded-[var(--radius-sm)] overflow-hidden border border-[var(--border-subtle)] shadow-inner group">
+          <img src="https://images.unsplash.com/photo-1629909613654-28e377c37b09?auto=format&fit=crop&w=800&q=80" alt="Clinical Aesthetic" loading="lazy" decoding="async" class="absolute inset-0 w-full h-full object-cover opacity-35 group-hover:scale-105 transition-transform duration-700">
+          <div class="absolute inset-0 bg-gradient-to-t from-[var(--bg-surface)] via-[var(--bg-surface)]/65 to-transparent"></div>
+          <div class="relative h-full p-6 flex items-center justify-between z-10">
+            <div class="space-y-1">
+              <span class="text-xs font-bold text-[var(--text-primary)] block">Invisalign & Veneers</span>
+              <p class="text-xs text-[var(--text-muted)]">Sub-millimeter 3D scan alignment</p>
+              <div class="pt-3">
+                <span class="px-2.5 py-1 rounded text-[10px] font-mono bg-emerald-500/15 text-emerald-700 font-bold">14 Days Recovery</span>
+              </div>
             </div>
-          </div>
-          <div class="w-16 h-16 rounded-full bg-emerald-500/10 flex items-center justify-center text-emerald-600 shadow-sm">
-            <svg class="w-8 h-8" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+            <div class="w-16 h-16 rounded-full bg-emerald-500/10 backdrop-blur-sm border border-emerald-500/20 flex items-center justify-center text-emerald-600 shadow-sm">
+              <svg class="w-8 h-8" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+            </div>
           </div>
         </div>
 
@@ -682,15 +864,19 @@
           <span class="px-2.5 py-1 rounded bg-purple-500/10 text-purple-600 text-xs font-mono font-bold"><bdi>12.8% APY</bdi></span>
         </div>
 
-        <div class="h-44 rounded-[var(--radius-sm)] bg-zinc-950 text-purple-300 font-mono text-xs p-5 border border-purple-900/40 flex flex-col justify-between shadow-inner" dir="ltr">
-          <div class="flex items-center justify-between">
-            <span class="text-zinc-500">LIQUIDITY STAKING POOL</span>
-            <span class="text-emerald-400 font-bold">ACTIVE</span>
-          </div>
-          <div class="text-2xl font-black text-white"><bdi>452,190.85 SOL</bdi></div>
-          <div class="flex items-center justify-between text-[11px] text-zinc-400">
-            <span>24h Vol: $42.8M</span>
-            <span>Fee: 0.05%</span>
+        <div class="relative h-48 rounded-[var(--radius-sm)] overflow-hidden border border-purple-900/40 shadow-inner group" dir="ltr">
+          <img src="https://images.unsplash.com/photo-1639762681485-074b7f938ba0?auto=format&fit=crop&w=800&q=80" alt="Cryptographic Architecture" loading="lazy" decoding="async" class="absolute inset-0 w-full h-full object-cover opacity-35 group-hover:scale-105 transition-transform duration-700">
+          <div class="absolute inset-0 bg-gradient-to-t from-zinc-950 via-zinc-950/80 to-zinc-950/40"></div>
+          <div class="relative h-full p-5 flex flex-col justify-between z-10 font-mono text-xs text-purple-300">
+            <div class="flex items-center justify-between">
+              <span class="text-zinc-400 font-bold">LIQUIDITY STAKING POOL</span>
+              <span class="text-emerald-400 font-bold bg-emerald-500/15 px-2 py-0.5 rounded">ACTIVE</span>
+            </div>
+            <div class="text-2xl font-black text-white"><bdi>452,190.85 SOL</bdi></div>
+            <div class="flex items-center justify-between text-[11px] text-zinc-400">
+              <span>24h Vol: $42.8M</span>
+              <span>Fee: 0.05%</span>
+            </div>
           </div>
         </div>
 
@@ -707,18 +893,107 @@
           <span class="px-2.5 py-1 rounded bg-rose-500/10 text-rose-600 text-xs font-mono font-bold"><bdi>16.4:1 AAA</bdi></span>
         </div>
 
-        <div class="h-44 rounded-[var(--radius-sm)] bg-[var(--bg-canvas)] border border-[var(--border-subtle)] p-6 flex flex-col justify-between shadow-inner">
-          <div class="space-y-1">
-            <h4 class="text-xl font-serif italic font-bold text-[var(--text-primary)]">Calibre 9012 Tourbillon</h4>
-            <p class="text-xs text-[var(--text-muted)]">Hand-assembled in Geneva. 72-hour power reserve with titanium escapement.</p>
-          </div>
-          <div class="flex items-center justify-between border-t border-[var(--border-subtle)] pt-3 text-xs font-mono text-[var(--text-secondary)]">
-            <span>LIMITED EDITION</span>
-            <span class="font-bold text-[var(--text-primary)]">25 PIECES WORLDWIDE</span>
+        <div class="relative h-48 rounded-[var(--radius-sm)] overflow-hidden border border-[var(--border-subtle)] shadow-inner group">
+          <img src="https://images.unsplash.com/photo-1522335789203-aabd1fc54bc9?auto=format&fit=crop&w=1200&q=80" alt="Haute Horology Timepiece" loading="lazy" decoding="async" class="absolute inset-0 w-full h-full object-cover opacity-30 group-hover:scale-105 transition-transform duration-700">
+          <div class="absolute inset-0 bg-gradient-to-t from-[var(--bg-surface)] via-[var(--bg-surface)]/70 to-transparent"></div>
+          <div class="relative h-full p-6 flex flex-col justify-between z-10">
+            <div class="space-y-1">
+              <h4 class="text-xl font-serif italic font-bold text-[var(--text-primary)]">Calibre 9012 Tourbillon</h4>
+              <p class="text-xs text-[var(--text-muted)]">Hand-assembled in Geneva. 72-hour power reserve with titanium escapement.</p>
+            </div>
+            <div class="flex items-center justify-between border-t border-[var(--border-subtle)] pt-3 text-xs font-mono text-[var(--text-secondary)]">
+              <span>LIMITED EDITION</span>
+              <span class="font-bold text-[var(--text-primary)]">25 PIECES WORLDWIDE</span>
+            </div>
           </div>
         </div>
 
         <p class="text-xs text-[var(--text-secondary)] leading-relaxed text-content" id="pVanguardDesc">High-fashion horology platform built with strict Swiss grid mathematics, high contrast typography, and asymmetric column rhythm.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- =========================================================================
+       SHOWCASE MODULE 1.5: THE KINETIC ENGINEERING JOURNEY & PROVENANCE
+       ========================================================================= -->
+  <section id="journey" class="py-24 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto border-t border-[var(--border-subtle)] relative">
+    <div class="text-center max-w-3xl mx-auto mb-16 space-y-3">
+      <span class="text-xs font-mono uppercase tracking-wider text-[var(--accent-brand)] font-bold block" id="journeyBadge">[ MILESTONE TRACK // PROVENANCE ]</span>
+      <h2 class="text-3xl sm:text-5xl font-black text-[var(--text-primary)] tracking-tight" id="journeyHeading">The Autonomous Engineering Journey</h2>
+      <p class="text-base text-[var(--text-secondary)] text-content" id="journeySub">From primitive template skeletons to the living kinetic monolith. Watch the progress rail illuminate milestones in real time as you scroll.</p>
+    </div>
+
+    <!-- Central Vertical Journey Track -->
+    <div class="relative max-w-4xl mx-auto py-8" id="journeyTrackContainer">
+      <!-- Background Guide Line -->
+      <div class="absolute top-0 bottom-0 left-4 md:left-1/2 w-0.5 -translate-x-1/2 bg-[var(--border-subtle)]"></div>
+      <!-- Scroll-Driven Dynamic Glowing Rail Fill -->
+      <div id="journeyRailFill" class="journey-rail-fill left-4 md:left-1/2 h-0"></div>
+
+      <div class="space-y-16">
+        <!-- Milestone 1 -->
+        <div class="relative flex flex-col md:flex-row items-start journey-milestone" data-step="1">
+          <div class="flex items-center md:w-1/2 md:justify-end md:pe-12 ps-12 md:ps-0 w-full">
+            <div class="vibe-card vibe-card-specular p-6 rounded-[var(--radius-md)] border border-[var(--border-subtle)] space-y-2 max-w-md w-full transition-all duration-500">
+              <span class="text-[10px] font-mono uppercase font-bold text-blue-600 block">[ PHASE 01 // 2026.08 ]</span>
+              <h3 class="text-lg font-bold text-[var(--text-primary)]">Sub-Millisecond AST Stack Sensor</h3>
+              <p class="text-xs text-[var(--text-secondary)] leading-relaxed">Instant telemetry parsing for Next.js 15, Vite, and Tailwind v4 without burning user LLM tokens. Zero external build dependencies.</p>
+            </div>
+          </div>
+          <!-- Node Dot on Rail -->
+          <div class="absolute left-4 md:left-1/2 -translate-x-1/2 w-6 h-6 rounded-full bg-[var(--bg-canvas)] border-2 border-[var(--border-strong)] flex items-center justify-center journey-node transition-all duration-300 z-10 top-6">
+            <span class="w-2 h-2 rounded-full bg-blue-500"></span>
+          </div>
+          <div class="hidden md:block md:w-1/2"></div>
+        </div>
+
+        <!-- Milestone 2 -->
+        <div class="relative flex flex-col md:flex-row items-start journey-milestone" data-step="2">
+          <div class="hidden md:block md:w-1/2"></div>
+          <!-- Node Dot on Rail -->
+          <div class="absolute left-4 md:left-1/2 -translate-x-1/2 w-6 h-6 rounded-full bg-[var(--bg-canvas)] border-2 border-[var(--border-strong)] flex items-center justify-center journey-node transition-all duration-300 z-10 top-6">
+            <span class="w-2 h-2 rounded-full bg-emerald-500"></span>
+          </div>
+          <div class="flex items-center md:w-1/2 md:justify-start md:ps-12 ps-12 w-full">
+            <div class="vibe-card vibe-card-specular p-6 rounded-[var(--radius-md)] border border-[var(--border-subtle)] space-y-2 max-w-md w-full transition-all duration-500">
+              <span class="text-[10px] font-mono uppercase font-bold text-emerald-600 block">[ PHASE 02 // 2026.09 ]</span>
+              <h3 class="text-lg font-bold text-[var(--text-primary)]">Deterministic OKLCH & WCAG AAA Contrast</h3>
+              <p class="text-xs text-[var(--text-secondary)] leading-relaxed">Exact mathematical luminance calculation guaranteeing contrast ratios exceeding 7.0:1 across all 7 archetypes and both light and dark canvas surfaces.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Milestone 3 -->
+        <div class="relative flex flex-col md:flex-row items-start journey-milestone" data-step="3">
+          <div class="flex items-center md:w-1/2 md:justify-end md:pe-12 ps-12 md:ps-0 w-full">
+            <div class="vibe-card vibe-card-specular p-6 rounded-[var(--radius-md)] border border-[var(--border-subtle)] space-y-2 max-w-md w-full transition-all duration-500">
+              <span class="text-[10px] font-mono uppercase font-bold text-amber-600 block">[ PHASE 03 // 2026.09 ]</span>
+              <h3 class="text-lg font-bold text-[var(--text-primary)]">Fixed-Structure Semantic RTL Protocol</h3>
+              <p class="text-xs text-[var(--text-secondary)] leading-relaxed">Universal layout stability preserving physical coordinates and macOS controls while isolating mixed tokens and acronyms inside &lt;bdi&gt; containers.</p>
+            </div>
+          </div>
+          <!-- Node Dot on Rail -->
+          <div class="absolute left-4 md:left-1/2 -translate-x-1/2 w-6 h-6 rounded-full bg-[var(--bg-canvas)] border-2 border-[var(--border-strong)] flex items-center justify-center journey-node transition-all duration-300 z-10 top-6">
+            <span class="w-2 h-2 rounded-full bg-amber-500"></span>
+          </div>
+          <div class="hidden md:block md:w-1/2"></div>
+        </div>
+
+        <!-- Milestone 4 -->
+        <div class="relative flex flex-col md:flex-row items-start journey-milestone" data-step="4">
+          <div class="hidden md:block md:w-1/2"></div>
+          <!-- Node Dot on Rail -->
+          <div class="absolute left-4 md:left-1/2 -translate-x-1/2 w-6 h-6 rounded-full bg-[var(--bg-canvas)] border-2 border-[var(--border-strong)] flex items-center justify-center journey-node transition-all duration-300 z-10 top-6">
+            <span class="w-2.5 h-2.5 rounded-full bg-indigo-500 animate-ping"></span>
+          </div>
+          <div class="flex items-center md:w-1/2 md:justify-start md:ps-12 ps-12 w-full">
+            <div class="vibe-card vibe-card-specular p-6 rounded-[var(--radius-md)] border-2 border-[var(--accent-brand)] shadow-xl space-y-2 max-w-md w-full transition-all duration-500">
+              <span class="text-[10px] font-mono uppercase font-bold text-indigo-600 block">[ PHASE 04 // 2026.10 • v4.4.0 ]</span>
+              <h3 class="text-lg font-bold text-[var(--text-primary)]">The Kinetic Living Monolith</h3>
+              <p class="text-xs text-[var(--text-secondary)] leading-relaxed">Lenis momentum inertia scrolling, custom spring cursor follower, interactive spotlight dot matrix, infinite marquee velocity rails, and curated Unsplash editorial photography.</p>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   </section>
@@ -1496,6 +1771,7 @@
       // Navbar
       document.getElementById('navHero').textContent = isFa ? 'بوم زنده محصول' : 'Living Canvas';
       document.getElementById('navWork').textContent = isFa ? 'شوکیس پروداکشن' : 'Production Showcase';
+      document.getElementById('navJourney').textContent = isFa ? 'خط سیر مهندسی' : 'Milestone Journey';
       document.getElementById('navLab').textContent = isFa ? 'آزمایشگاه تعاملی' : 'Interactive Lab';
       document.getElementById('navStudio').textContent = isFa ? 'استودیو دیزاینر' : 'AI Studio';
       document.getElementById('navEstimator').textContent = isFa ? 'برآورد معماری' : 'Architecture Estimator';
@@ -1505,8 +1781,8 @@
 
       // Hero
       document.getElementById('heroPillText').textContent = isFa 
-        ? 'نسخه ۴.۲.۰ • رابط های کاربری زنده و موتور جنریتیو شاهکار'
-        : 'VIBE UI v4.2.0 • LIVING INTERFACES & MASTERPIECE GENERATIVE ENGINE';
+        ? 'نسخه ۴.۴.۰ • رابط های کاربری زنده و موتور جنریتیو شاهکار'
+        : 'VIBE UI v4.4.0 • LIVING INTERFACES & MASTERPIECE GENERATIVE ENGINE';
       document.getElementById('heroHeadlineMain').textContent = isFa ? 'سیستم دیزاین خودکار برای' : 'The Autonomous Design System for';
       document.getElementById('heroHeadlineGradient').textContent = isFa ? 'ایجنت های کدنویسی هوش مصنوعی' : 'AI Coding Agents';
       document.getElementById('heroSubheadline').innerHTML = isFa 
@@ -1732,7 +2008,7 @@
       }
 
       // Scroll-Driven Text Reveal / Stagger Entrance Observers
-      const revealElements = document.querySelectorAll('h2, .project-item, .vibe-card');
+      const revealElements = document.querySelectorAll('h2, .project-item, .vibe-card, .journey-milestone');
       const observer = new IntersectionObserver((entries) => {
         entries.forEach((entry) => {
           if (entry.isIntersecting) {
@@ -1740,12 +2016,99 @@
             observer.unobserve(entry.target);
           }
         });
-      }, { threshold: 0.15 });
+      }, { threshold: 0.12 });
 
       revealElements.forEach((el) => {
         el.style.transition = 'opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1), transform 0.6s cubic-bezier(0.16, 1, 0.3, 1)';
         observer.observe(el);
       });
+
+      // Lightswind Trailing Cursor with Kowalski Lerp Physics
+      const cursorDot = document.getElementById('vibeCursorDot');
+      const cursorFollower = document.getElementById('vibeCursorFollower');
+      const cursorLabel = document.getElementById('vibeCursorLabel');
+
+      if (cursorDot && cursorFollower && window.matchMedia('(pointer: fine)').matches) {
+        let mouseX = window.innerWidth / 2;
+        let mouseY = window.innerHeight / 2;
+        let followerX = mouseX;
+        let followerY = mouseY;
+        let cursorVisible = false;
+
+        window.addEventListener('pointermove', (e) => {
+          mouseX = e.clientX;
+          mouseY = e.clientY;
+          if (!cursorVisible) {
+            cursorVisible = true;
+            cursorDot.style.opacity = '1';
+            cursorFollower.style.opacity = '1';
+          }
+          cursorDot.style.transform = `translate(${mouseX}px, ${mouseY}px) translate(-50%, -50%)`;
+          
+          // Ambient Spotlight updates
+          document.documentElement.style.setProperty('--mouse-x', `${mouseX}px`);
+          document.documentElement.style.setProperty('--mouse-y', `${mouseY}px`);
+        });
+
+        // Kowalski damped follower loop
+        function renderCursor() {
+          followerX += (mouseX - followerX) * 0.16;
+          followerY += (mouseY - followerY) * 0.16;
+          cursorFollower.style.transform = `translate(${followerX.toFixed(2)}px, ${followerY.toFixed(2)}px) translate(-50%, -50%)`;
+          requestAnimationFrame(renderCursor);
+        }
+        requestAnimationFrame(renderCursor);
+
+        // Hover expansions on interactive elements
+        const hoverTargets = document.querySelectorAll('a, button, .vibe-card, input[type="range"]');
+        hoverTargets.forEach((el) => {
+          el.addEventListener('pointerenter', () => {
+            cursorFollower.classList.add('hover-active');
+            if (el.tagName.toLowerCase() === 'button' || el.classList.contains('btn-brand')) {
+              cursorLabel.textContent = 'ACTIVATE';
+            } else if (el.tagName.toLowerCase() === 'a') {
+              cursorLabel.textContent = 'OPEN';
+            } else if (el.tagName.toLowerCase() === 'input') {
+              cursorLabel.textContent = 'DRAG';
+            } else {
+              cursorLabel.textContent = 'VIEW';
+            }
+          });
+          el.addEventListener('pointerleave', () => {
+            cursorFollower.classList.remove('hover-active');
+            cursorLabel.textContent = '';
+          });
+        });
+      }
+
+      // Scroll Journey Vertical Rail Dynamic Progress
+      const journeyTrack = document.getElementById('journeyTrackContainer');
+      const railFill = document.getElementById('journeyRailFill');
+      const milestones = document.querySelectorAll('.journey-milestone');
+
+      if (journeyTrack && railFill) {
+        function updateJourneyRail() {
+          const rect = journeyTrack.getBoundingClientRect();
+          const windowHeight = window.innerHeight;
+          const trackHeight = rect.height;
+          
+          const progress = Math.max(0, Math.min(1, (windowHeight * 0.7 - rect.top) / trackHeight));
+          railFill.style.height = `${(progress * 100).toFixed(1)}%`;
+
+          milestones.forEach((m) => {
+            const mRect = m.getBoundingClientRect();
+            if (mRect.top <= windowHeight * 0.65) {
+              m.querySelector('.journey-node')?.classList.add('border-[var(--accent-brand)]', 'shadow-[0_0_12px_var(--accent-brand)]');
+              m.querySelector('.vibe-card')?.classList.add('border-[var(--accent-brand)]');
+            } else {
+              m.querySelector('.journey-node')?.classList.remove('border-[var(--accent-brand)]', 'shadow-[0_0_12px_var(--accent-brand)]');
+              m.querySelector('.vibe-card')?.classList.remove('border-[var(--accent-brand)]');
+            }
+          });
+        }
+        window.addEventListener('scroll', updateJourneyRail, { passive: true });
+        updateJourneyRail();
+      }
     })();
   </script>
 </body>

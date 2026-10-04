@@ -122,3 +122,15 @@ When building Persian, Arabic, or Bilingual LTR/RTL interfaces:
 3. **BiDi Resilience & Mixed English Brand Names:** Wrap all mixed Latin tokens and acronyms inside `<bdi>` tags.
 4. **Code & Technical Metrics Remain Strictly LTR:** Telemetry, digits, URLs, and code snippets stay strictly `direction: ltr !important`.
 
+---
+
+## 🌟 The Lightswind Kinetic Living Benchmark (Living Web Experience)
+To guarantee generated interfaces feel tactile, magnetic, and alive rather than static templates:
+1. **Curated Editorial Photography via AssetDirector:** Eliminate empty grey boxes with camera icons. Always embed domain-curated high-resolution Unsplash photography with `loading="lazy"`, `decoding="async"`, and dark gradient scrim overlays ensuring WCAG AAA text contrast.
+2. **Fluid Trailing Cursor & Magnetic Snapping:** Precision center dot + smooth trailing ring/follower with Kowalski damped lerp physics (`@media (pointer: fine)` only), expanding on interactive elements (`mix-blend-difference` or magnetic scale).
+3. **Infinite Kinetic Marquee Rails:** Continuous horizontal scrolling rails (`.animate-marquee`) for tech stacks, badges, and partners with gradient edge fade masks (`mask-image: linear-gradient(...)`) and hover pause.
+4. **Interactive Radial Spotlight Dot Matrix:** Ambient dot matrix canvases that respond to cursor movement with dynamic radial illumination masks (`radial-gradient(circle 500px at var(--mouse-x) var(--mouse-y), ...)`).
+5. **Scroll-Driven Journey Milestone Timeline:** Progressive vertical glowing timeline rail that fills dynamically during scroll, activating milestones and lighting nodes as they enter view.
+6. **Staggered Viewport Entrances:** Progressive scroll reveals using IntersectionObserver with staggered delays and smooth cubic-bezier transitions (`cubic-bezier(0.16, 1, 0.3, 1)`).
+
+
