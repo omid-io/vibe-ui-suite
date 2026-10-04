@@ -2001,8 +2001,9 @@ export default {component_name};
       }}
 
       // 11. Scroll-Driven Kinetic Stagger Entrance Observers
-      var revealTargets = document.querySelectorAll('section > div, .vibe-spotlight-card');
+      var revealTargets = document.querySelectorAll('section > div:not(.animate-marquee), .vibe-spotlight-card');
       revealTargets.forEach(function(el, index) {{
+        if (el.classList.contains('animate-marquee') || el.closest('.animate-marquee')) return;
         el.classList.add('vibe-reveal-node');
         var delay = (index % 3) * 0.08;
         if (delay > 0) {{

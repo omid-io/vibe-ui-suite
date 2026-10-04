@@ -440,13 +440,14 @@
 
     /* Infinite Kinetic Marquee Rails */
     @keyframes marquee-scroll {
-      0% { transform: translateX(0%); }
-      100% { transform: translateX(-50%); }
+      0% { transform: translate3d(0%, 0, 0); }
+      100% { transform: translate3d(-50%, 0, 0); }
     }
     .animate-marquee {
-      display: flex;
-      width: max-content;
-      animation: marquee-scroll 28s linear infinite;
+      display: flex !important;
+      width: max-content !important;
+      animation: marquee-scroll 24s linear infinite !important;
+      will-change: transform;
     }
     .animate-marquee:hover {
       animation-play-state: paused;
@@ -598,7 +599,7 @@
           <span>Vibe UI Suite</span>
         </a>
         <span class="px-2 py-0.5 rounded-full text-[10px] font-mono font-bold bg-emerald-500/10 text-emerald-600 border border-emerald-500/20">
-          <bdi>v4.7.0</bdi>
+          <bdi>v4.8.0</bdi>
         </span>
       </div>
 
@@ -2134,8 +2135,9 @@
       }
 
       // Scroll-Driven Kinetic Stagger Entrance Observers
-      const revealTargets = document.querySelectorAll('section > div, .project-item, .journey-milestone, #work .vibe-card, #lab .vibe-card, #studio .vibe-card, #estimator .vibe-card');
+      const revealTargets = document.querySelectorAll('section:not([aria-label="Ecosystem Marquee"]) > div:not(.animate-marquee), .project-item, .journey-milestone, #work .vibe-card, #lab .vibe-card, #studio .vibe-card, #estimator .vibe-card');
       revealTargets.forEach((el, index) => {
+        if (el.classList.contains('animate-marquee') || el.closest('.animate-marquee')) return;
         el.classList.add('vibe-reveal-node');
         const delay = (index % 3) * 0.08;
         if (delay > 0) {
