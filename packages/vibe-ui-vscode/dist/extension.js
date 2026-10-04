@@ -302,6 +302,18 @@ class ChemistrySidebarProvider {
       <button class="btn" onclick="insertComponent('contrast-badge')">Insert into Active Editor</button>
       <button class="btn btn-secondary" onclick="copyComponent('contrast-badge')">Copy TSX</button>
     </div>
+    <div class="card">
+      <div class="card-title">Kinetic Arrow Cursor <span class="tag">Kinetic v4.8</span></div>
+      <div class="desc">OS-hiding precision dot cursor with velocity-trailing SVG chevron follower.</div>
+      <button class="btn" onclick="insertComponent('kinetic-cursor')">Insert into Active Editor</button>
+      <button class="btn btn-secondary" onclick="copyComponent('kinetic-cursor')">Copy TSX</button>
+    </div>
+    <div class="card">
+      <div class="card-title">Infinite Marquee Rail <span class="tag">Living v4.8</span></div>
+      <div class="desc">GPU-accelerated infinite horizontal loop rail with pause-on-hover.</div>
+      <button class="btn" onclick="insertComponent('marquee-rail')">Insert into Active Editor</button>
+      <button class="btn btn-secondary" onclick="copyComponent('marquee-rail')">Copy TSX</button>
+    </div>
   </div>
 
   <script>
@@ -331,7 +343,9 @@ class ChemistrySidebarProvider {
     const COMPONENT_SNIPPETS = {
       'thinking-drawer': \`<AiThinkingDrawer title="Reasoning DAG" durationMs={120} />\`,
       'telemetry-hud': \`<TelemetryHud metrics={[{ label: 'Latency', value: '38ms' }, { label: 'WCAG', value: '4.8:1', unit: 'AA' }]} />\`,
-      'contrast-badge': \`<ContrastBadge ratio={4.8} label="WCAG 2.2" />\`
+      'contrast-badge': \`<ContrastBadge ratio={4.8} label="WCAG 2.2" />\`,
+      'kinetic-cursor': \`<div id="vibeCursorDot" className="fixed pointer-events-none z-[9999] rounded-full" />\\n<div id="vibeCursorFollower" className="fixed pointer-events-none z-[9998] transition-transform duration-100 ease-out">\\n  <svg viewBox="0 0 50 50" className="w-9 h-9 fill-current"><path d="M42.68 41.15L27.51 6.8a2.3 2.3 0 0 0-4.12 0L7.6 41.15a2.2 2.2 0 0 0 2.81 3.05L24.38 39a2.3 2.3 0 0 1 1.56 0l13.87 5.15a2.2 2.2 0 0 0 2.87-3z"/></svg>\\n</div>\`,
+      'marquee-rail': \`<div className="overflow-hidden w-full relative whitespace-nowrap">\\n  <div className="inline-flex gap-8 animate-marquee" style={{ animation: 'marquee 35s linear infinite' }}>\\n    {items.map((item, i) => <span key={i} className="font-mono text-xs">{item}</span>)}\\n  </div>\\n</div>\`
     };
 
     function insertComponent(id) {

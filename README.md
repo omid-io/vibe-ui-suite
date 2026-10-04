@@ -26,19 +26,22 @@
 
 ---
 
-## ⚖️ Visual Impact: Vanilla AI Slop vs. Vibe UI v4.2 Masterpiece
+## ⚖️ Visual Impact: Vanilla AI Slop vs. Vibe UI v4.8 Masterpiece
 
 What happens when you ask a standard AI assistant to generate a frontend component?
 
 ```text
 ┌──────────────────────────────────────┐  vs  ┌──────────────────────────────────────┐
-│ ❌ VANILLA AI SLOP                   │      │ ✨ VIBE UI v4.2 MASTERPIECE          │
+│ ❌ VANILLA AI SLOP                   │      │ ✨ VIBE UI v4.8 MASTERPIECE          │
 ├──────────────────────────────────────┤      ├──────────────────────────────────────┤
 │ • Generic purple gradient buttons    │      │ • Atmospheric Canvas Vector & Glow   │
 │ • Low contrast text (3.2:1 FAILS AA) │      │ • Mathematical WCAG 2.2 AAA (17.8:1) │
 │ • Broken mobile overflow (375px)     │      │ • macOS Window Chrome & Live Canvas  │
 │ • Hallucinated raw emojis            │      │ • Interactive Before/After Sliders   │
 │ • Dead toggle cards & static mockups │      │ • Living React 19 TSX + State Hooks  │
+│ • Missing custom physics & stiff CSS │      │ • Kinetic Arrow Cursor + Dot Follower│
+│ • Empty blank or broken image links  │      │ • Curated Unsplash Editorial Photos  │
+│ • Abrupt page pops & jittery scroll  │      │ • Stagger Scroll Reveals & Marquee   │
 │ • Mixed direction text / numbers     │      │ • Strict LTR metrics & BiDi isolation│
 └──────────────────────────────────────┘      └──────────────────────────────────────┘
 ```
@@ -69,7 +72,7 @@ Headless Browser Evaluation (Playwright 375px mobile overflow)
 Verified Output or Actionable Failure Diagnostics
 ```
 
-> **Day-One Transparency**: Vibe UI Suite is at `v4.2.0` (**Masterpiece Visual Engine 2.0 & Living Interfaces**). Featuring 7 Canonical Visual Archetypes (Linear Dev HUD, Swiss Editorial, Cupertino Glass, Full-Bleed Bento, Quiet Luxury, Cyber Terminal, and Centered Stage), Atmospheric Canvas Lighting (subtle 36px vector background grid + radial mesh glow spotlight cone), macOS Window Chrome mockup with live domain telemetry (p99 latency sparklines, real-time kubectl logs, clinical slots), interactive Before/After drag split sliders with inline SVG controls, living React 19 TSX generation (`-f tsx`), specular micro-surfaces (`.vibe-spotlight-card::before` and mouse-following spotlight radiance with 60FPS mobile touch guards), 100% live headless Chromium browser truth across all benchmark scenarios with zero sampling skips, and dual-tier contrast governance (Target: WCAG AAA >= 7:1 | Hard Gate: WCAG AA >= 4.5:1). Constructive criticism, issues, and contributions from frontend engineers and AI researchers are warmly welcomed.
+> **Day-One Transparency**: Vibe UI Suite is at `v4.8.0` (**Living Kinetic Standards & Kinetic Arrow Physics**). Featuring 7 Canonical Visual Archetypes (Linear Dev HUD, Swiss Editorial, Cupertino Glass, Full-Bleed Bento, Quiet Luxury, Cyber Terminal, and Centered Stage), The Lightswind Kinetic Living Standard (Kinetic Arrow Cursor with velocity-trailing SVG chevron follower and complete OS cursor hiding, ambient spotlight dot-matrix lighting, infinite GPU-accelerated marquee velocity rails, curated editorial Unsplash photography via `AssetDirector`, cinematic scroll-driven stagger reveals, and progressive blur-up lazy image loading), Atmospheric Canvas Lighting (subtle 36px vector background grid + radial mesh glow spotlight cone), macOS Window Chrome mockup with live domain telemetry (p99 latency sparklines, real-time kubectl logs, clinical slots), interactive Before/After drag split sliders with inline SVG controls, living React 19 TSX generation (`-f tsx`), specular micro-surfaces (`.vibe-spotlight-card::before` and mouse-following spotlight radiance with 60FPS mobile touch guards), 100% live headless Chromium browser truth across all benchmark scenarios with zero sampling skips, and dual-tier contrast governance (Target: WCAG AAA >= 7:1 | Hard Gate: WCAG AA >= 4.5:1). Constructive criticism, issues, and contributions from frontend engineers and AI researchers are warmly welcomed.
 
 ---
 
@@ -290,6 +293,27 @@ Vibe UI defines five visual systems for consistent design decisions:
 3. **Neobrutalism**: High-contrast saturated cards, hard 3px black offset geometric drop-shadows, zero blur, explicit physical boundaries (`oklch(0.98 0.02 95)`).
 4. **Swiss Editorial**: Asymmetric typographic grid, content-first layout inspired by the International Typographic Style (`oklch(0.97 0.005 80)`).
 5. **Stripe Crisp Light**: Developer-first documentation aesthetic, micro-borders, clean typography, subtle shadows (`oklch(0.99 0.002 250)`).
+
+---
+
+## ⚡ The Lightswind Kinetic Living Standard (v4.8.0)
+
+Production web experiences must feel tactile, responsive, and alive. Vibe UI v4.8 codifies 6 mandatory kinetic living principles:
+
+1. **Kinetic Arrow Cursor & Trailing Physics**:
+   - Total suppression of the default OS cursor (`cursor: none !important`).
+   - Ultra-responsive, zero-lag glowing focal dot (`#vibeCursorDot`) tracking mouse coordinates 1:1.
+   - Angled SVG chevron follower (`#vibeCursorFollower`) with spring inertia and velocity rotation physics (`Math.atan2`).
+2. **Spotlight Dot-Matrix Mesh**:
+   - Subtle dot-matrix substrate revealed through an interactive radial gradient spotlight cone (`radial-gradient(circle at X Y, ...)`).
+3. **Infinite Marquee Velocity Rails**:
+   - Hardware-accelerated ticker ribbons utilizing `translate3d(0, 0, 0)` to `translate3d(-50%, 0, 0)` with pause-on-hover and zero scroll-reveal transform collision.
+4. **Curated Editorial Photography (`AssetDirector`)**:
+   - Automatic injection of high-resolution, thematic Unsplash editorial imagery with verified domain relevance and graceful SVG fallbacks.
+5. **Cinematic Stagger Scroll-Reveals**:
+   - Progressive `IntersectionObserver` triggers animating elements into view with simultaneous opacity, Y-axis translation, and blur removal.
+6. **Progressive Lazy Image Blur-Up**:
+   - High-craft image loading transition shifting from `filter: blur(12px)` to crisp native rendering on load.
 
 ---
 

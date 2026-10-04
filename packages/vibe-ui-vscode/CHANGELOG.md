@@ -3,6 +3,15 @@
 All notable changes to the **Vibe UI (VS Code, Cursor & Open-VSX)** extension will be documented in this file.
 This project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [4.8.0] — 2026-10-04
+
+### Added
+- **Lightswind Kinetic Living Standard:** Interactive custom cursor follower with SVG arrow physics, ambient spotlight dot-matrix lighting, and infinite marquee velocity rails.
+- **Component Snippets:** Direct 1-click insertion for Kinetic Arrow Cursor and Infinite Marquee Rail.
+- **Full Version Uniformity:** Synchronized across Vibe UI suite ecosystem v4.8.0.
+
+---
+
 ## [4.1.0] — 2026-09-29
 
 ### Added

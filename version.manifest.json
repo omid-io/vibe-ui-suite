@@ -1,12 +1,12 @@
 {
   "$schema": "./schemas/version-manifest.schema.json",
-  "version": "4.2.0",
-  "codename": "Masterpiece Visual Engine 2.0 & Living Interfaces",
+  "version": "4.8.0",
+  "codename": "Living Kinetic Standards & Kinetic Arrow Physics",
   "release_channel": "stable",
   "packages": {
-    "vibe-ui-suite": "4.2.0",
-    "vibe-ui-vscode": "4.2.0",
-    "vibe-ui-nextjs-starter": "4.2.0"
+    "vibe-ui-suite": "4.8.0",
+    "vibe-ui-vscode": "4.8.0",
+    "vibe-ui-nextjs-starter": "4.8.0"
   },
   "schemas": {
     "intent_contract": "v1",
@@ -23,5 +23,5 @@
     "nextjs": ">=15.0.0",
     "react": ">=19.0.0"
   },
-  "last_updated": "2026-09-30"
+  "last_updated": "2026-10-04"
 }
