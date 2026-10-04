@@ -1,12 +1,14 @@
 {
-  "name": "vibe-ui-tokens-internal",
-  "private": true,
+  "name": "@omid-io/tokens",
   "version": "4.8.0",
-  "description": "Typed OKLCH design tokens, physics curves, and zero-config Tailwind plugin for Vibe UI (Deprecated in favor of vibe-ui-suite)",
-  "bin": {
-    "vibe-ui": "./dist/cli.js",
-    "tokens": "./dist/cli.js"
+  "description": "Typed OKLCH design tokens, physics curves, and zero-config Tailwind plugin for Vibe UI (Migrated to vibe-ui-suite)",
+  "dependencies": {
+    "vibe-ui-suite": "^4.8.0"
   },
+  "files": [
+    "dist",
+    "README.md"
+  ],
   "main": "./dist/index.js",
   "module": "./dist/index.mjs",
   "types": "./dist/index.d.ts",
