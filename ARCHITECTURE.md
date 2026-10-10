@@ -14,11 +14,14 @@ The **Vibe UI Skills Suite** is a contract-driven design engineering ecosystem d
 Vibe UI replaces ad-hoc prompt hacking with a **deterministic, contract-governed multi-skill architecture**. Commanded by the lead frontend architect agent **`mr-ui-designer`**, the system coordinates six modular sub-skills in a unidirectional pipeline that enforces strict visual diversity, mathematical physics, WCAG 2.2 AA accessibility, anti-dark-pattern copy, and structurally stable bidirectional rendering.
 
 ### Core Architectural Invariants
-1. **Zero Hallucination of Data Shapes:** All UI generations are parameterized through the canonical JSON Schema (`design-spec.v1.schema.json`).
-2. **Fixed-Structure Semantic RTL:** Macro layout grids remain physically stable; RTL directionality is scoped exclusively to text nodes, paired with `<bdi>` BiDi punctuation isolation and pure LTR telemetry.
-3. **Strict Compositing Performance Budget:** A maximum cap of $\le 3$ active `backdrop-filter` blur surfaces is enforced across all viewports to protect GPU fill-rate.
-4. **Frame-Rate-Independent Physics:** Motion decay and scroll physics rely on mathematical deltaTime integration ($\alpha = 1 - e^{-\lambda \cdot \Delta t}$, $\lambda = 14$) rather than frame-locked CSS keyframes.
-5. **Zero Unicode Emojis in Production UI:** All iconography mandates inline SVG vectors with `currentColor` stroke binding.
+1. **Semantic Understanding First (Domain Soul):** Deep comprehension of product domain, user emotional state, and primary jobs-to-be-done precedes all styling decisions. Mechanical hygiene (no slop, emoji stripping, BiDi isolation) executes silently in background.
+2. **Universal Dual-Theme Invariant:** Every interface natively implements both Light and Dark themes via semantic design tokens (`--bg-primary`, `--surface`, `--border`, `--text`, `--accent`) with an accessible toggle switch.
+3. **Closed-Loop Visual Screenshot Audit:** Final verification requires visual inspection of rendered screenshots to evaluate hierarchy, negative space, and aesthetic balance.
+4. **Zero Hallucination of Data Shapes:** All UI generations are parameterized through the canonical JSON Schema (`design-spec.v1.schema.json`).
+5. **Fixed-Structure Semantic RTL:** Macro layout grids remain physically stable; RTL directionality is scoped exclusively to text nodes, paired with `<bdi>` BiDi punctuation isolation and pure LTR telemetry.
+6. **Strict Compositing Performance Budget:** A maximum cap of $\le 3$ active `backdrop-filter` blur surfaces is enforced across all viewports to protect GPU fill-rate.
+7. **Frame-Rate-Independent Physics:** Motion decay and scroll physics rely on mathematical deltaTime integration ($\alpha = 1 - e^{-\lambda \cdot \Delta t}$, $\lambda = 14$) rather than frame-locked CSS keyframes.
+8. **Zero Unicode Emojis in Production UI:** All iconography mandates inline SVG vectors with `currentColor` stroke binding.
 
 ---
 
