@@ -16,7 +16,7 @@ Vibe UI replaces ad-hoc prompt hacking with a **deterministic, contract-governed
 ### Core Architectural Invariants
 1. **Semantic Understanding First (Domain Soul):** Deep comprehension of product domain, user emotional state, and primary jobs-to-be-done precedes all styling decisions. Mechanical hygiene (no slop, emoji stripping, BiDi isolation) executes silently in background.
 2. **Universal Dual-Theme Invariant:** Every interface natively implements both Light and Dark themes via semantic design tokens (`--bg-primary`, `--surface`, `--border`, `--text`, `--accent`) with an accessible toggle switch.
-3. **Closed-Loop Visual Screenshot Audit:** Final verification requires visual inspection of rendered screenshots to evaluate hierarchy, negative space, and aesthetic balance.
+3. **Mandatory Full-Page Visual Screenshot Audit:** Final verification requires capturing and visually inspecting a **full-page screenshot of the entire vertical height of the site** (`page.screenshot({ fullPage: true })`), not merely the initial viewport. The agent must examine all sections down to the footer to ensure zero contrast breaks, orphaned dark blocks, or visual inconsistencies.
 4. **Zero Hallucination of Data Shapes:** All UI generations are parameterized through the canonical JSON Schema (`design-spec.v1.schema.json`).
 5. **Fixed-Structure Semantic RTL:** Macro layout grids remain physically stable; RTL directionality is scoped exclusively to text nodes, paired with `<bdi>` BiDi punctuation isolation and pure LTR telemetry.
 6. **Strict Compositing Performance Budget:** A maximum cap of $\le 3$ active `backdrop-filter` blur surfaces is enforced across all viewports to protect GPU fill-rate.
