@@ -20,11 +20,11 @@ Whenever asked to audit, verify, or review any web page, component, or frontend 
 │                   🔍 UI-VERIFIER PIPELINE                   │
 └─────────────────────────────────────────────────────────────┘
   │
-  ├─► [1] Anti-Slop Visual Architecture (Aesthetics & Tokens)
+  ├─► [1] Living Visual & Screenshot Inspection (Eyes on Render)
   ├─► [2] Responsive Multi-Device Integrity (375px / 768px / 1440px)
   ├─► [3] Accessibility & WCAG AA (Keyboard, ARIA, Reduced Motion)
-  ├─► [4] Performance & Compositing Budget (rAF, Blur Count, Vectors)
-  └─► [5] Semantic RTL & BiDi Stability (Fixed Layout, Monospace LTR)
+  ├─► [4] Performance & Compositing Budget (Clean CSS, Vectors)
+  └─► [5] On-Demand RTL & BiDi Stability (Only when RTL requested)
 ```
 
 ---
