@@ -107,12 +107,12 @@ The following elements **MUST ALWAYS** have `direction: ltr !important` and `tex
 
 ---
 
-## 🚫 6. Absolute Zero ZWNJ Rule (نیم‌فاصله مطلقا ممنوع)
+## 🚫 6. Absolute Zero ZWNJ Rule (نیم فاصله مطلقا ممنوع)
 
 In all Persian text (UI copy, comments, documentation, and chat output):
-- The zero-width non-joiner (ZWNJ / `\u200c` / نیم‌فاصله) is **strictly forbidden**.
+- The zero-width non-joiner (ZWNJ / `\u200c` / نیم فاصله) is **strictly forbidden**.
 - Standard ASCII space (`\u0020`) must be used exclusively.
-- Example: Write `می شود` (never `می‌شود`), `طراحی شده` (never `طراحی‌شده`).
+- Example: Write `می شود` (never `می شود`), `طراحی شده` (never `طراحی شده`).
 
 ---
 

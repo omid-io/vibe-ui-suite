@@ -1,6 +1,6 @@
 # 🧪 Vibe UI Evaluation Suite (`evals/`)
 
-This directory contains formal evaluation benchmarks for measuring AI coding agent outputs when guided by **`mr-ui-designer`** and the Vibe UI Skills Suite.
+This directory contains formal evaluation benchmarks for measuring AI coding agent outputs when guided by **`vibe-ui-agent`** and the Vibe UI Skills Suite.
 
 ---
 

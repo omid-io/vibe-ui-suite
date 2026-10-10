@@ -10,13 +10,14 @@ triggers: ["ui-kit", "uikit", "beautifului", "beui", "rareui", "transitions.dev"
 
 ---
 
-## 🌐 The 6 Pillar Resource Catalogs
+## 🌐 The 7 Pillar Resource Catalogs
 
 | Catalog Reference | Source / Provenance | Component Scope |
 | :--- | :--- | :--- |
 | [`references/ai_native_full_catalog.md`](references/ai_native_full_catalog.md) | **[Beautiful UI](https://beautifului.dev)** (Adapted) | **20 AI Primitives:** Loading State, Thinking State, Streaming Text, Approval Card, Tool Chips, Task Rows, Chat, Prompt Bar, Recommendation Card, Context Cards, Diff Table, Records Table, Filter Table, Sidebar Nav, Search HUD, Insight Cards / Sparklines, Code Block with Copy, Fine-tune Card, Selection Actions. |
 | [`references/shadcn_full_catalog.md`](references/shadcn_full_catalog.md) | **[Shadcn UI](https://ui.shadcn.com)** (MIT) | **50+ UI Primitives:** Forms & Inputs (Input, Textarea, Select, Checkbox, Switch, InputOTP, Slider), Overlays & Modals (Dialog, Sheet/Drawer, Popover, Tooltip, Dropdown), Navigation (Command Palette `Cmd+K`, Tabs, Breadcrumb), Feedback (Sonner Toast, Skeleton Shimmer, Progress), Data Display (Accordion, Avatar, Table). |
 | [`references/bento_grids_and_cards.md`](references/bento_grids_and_cards.md) | **[BeUI](https://beui.dev) & [Rare UI](https://rareui.com)** (MIT) | **Bento & Interactive Cards:** 3-Col & 4-Col Asymmetric Bento Grids, Glassmorphism 2.0 Inset Specular Cards, Animated Gradient Shimmer Buttons, Metric HUD Tiles. |
+| [`references/modern_vibe_components.md`](references/modern_vibe_components.md) | **[Aceternity](https://ui.aceternity.com) & [Magic UI](https://magicui.design)** (Adapted) | **Modern Vibe Recipes:** Aurora Glow Background, Spotlight Hero, Neon Border-Beam Cards, 3D Tilt Cards, Infinite Smooth Marquee, Shimmer Glow Buttons, Floating Dock Island. |
 | [`references/data_and_flow.md`](references/data_and_flow.md) | **Flow & Metric Visualization** | **Workflow & Canvas Nodes:** Modular Trigger Nodes, If/Else Conditional Splitters, Action Execution Cards, Micro Sparkline Meters, Dotted Grid Canvas. |
 | [`references/physics_transitions_catalog.md`](references/physics_transitions_catalog.md) | **[Transitions.dev](https://transitions.dev)** (Zero-Dep) | **Zero-Dependency Motion:** Pure CSS Grid Dynamic Height Accordions (`0fr` -> `1fr`), Spring Easing Bezier Curves, Staggered List Reveals, JS Number Flip Counters, 3D Tilt Cards. |
 | [`references/tokens_and_theme_engine.md`](references/tokens_and_theme_engine.md) | **Universal Design System** | **Tokens & Layouts:** Theme Variables (Light, Dark, Custom), Directional Logical CSS (`ms-*`, `me-*`, `start-*`, `end-*`) for universal LTR & RTL support. |

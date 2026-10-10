@@ -11,7 +11,7 @@
 
 The **Vibe UI Skills Suite** is a contract-driven design engineering ecosystem designed for autonomous AI coding agents (such as Claude Code, Cursor, Antigravity, GitHub Copilot, and Windsurf). Standard frontier models default to generic visual archetypes—predictable `border-radius: 8px` cards, flat gray borders, cliché blue-to-purple gradients, missing AI execution states, and unstable RTL layout flips.
 
-Vibe UI replaces ad-hoc prompt hacking with a **deterministic, contract-governed multi-skill architecture**. Commanded by the lead frontend architect agent **`mr-ui-designer`**, the system coordinates six modular sub-skills in a unidirectional pipeline that enforces strict visual diversity, mathematical physics, WCAG 2.2 AA accessibility, anti-dark-pattern copy, and structurally stable bidirectional rendering.
+Vibe UI replaces ad-hoc prompt hacking with a **deterministic, contract-governed multi-skill architecture**. Commanded by the lead frontend architect agent **`vibe-ui-agent`**, the system coordinates six modular sub-skills in a unidirectional pipeline that enforces strict visual diversity, mathematical physics, WCAG 2.2 AA accessibility, anti-dark-pattern copy, and structurally stable bidirectional rendering.
 
 ### Core Architectural Invariants
 1. **Semantic Understanding First (Domain Soul):** Deep comprehension of product domain, user emotional state, and primary jobs-to-be-done precedes all styling decisions. Mechanical hygiene (no slop, emoji stripping, BiDi isolation) executes silently in background.
@@ -27,7 +27,7 @@ Vibe UI replaces ad-hoc prompt hacking with a **deterministic, contract-governed
 
 ## 2. The 6-Skill Orchestration Pipeline
 
-The system operates as a unidirectional Directed Acyclic Graph (DAG) commanded by `mr-ui-designer`:
+The system operates as a unidirectional Directed Acyclic Graph (DAG) commanded by `vibe-ui-agent`:
 
 ```
                                  ┌─────────────────────────────────┐
@@ -37,7 +37,7 @@ The system operates as a unidirectional Directed Acyclic Graph (DAG) commanded b
                                                   │
                                                   ▼
                                  ┌─────────────────────────────────┐
-                                 │        👑 mr-ui-designer        │
+                                 │        👑 vibe-ui-agent        │
                                  │   (Master Frontend Architect)   │
                                  └────────────────┬────────────────┘
                                                   │
@@ -340,7 +340,7 @@ Vibe UI enforces a **Fixed-Structure Semantic RTL Architecture**:
 Vibe UI provides universal IDE configuration adapters to ensure consistent agent behavior across diverse developer toolchains:
 
 ```
-vibe-ui-skills/
+vibe-ui-suite/
 ├── adapters/
 │   ├── cursor/
 │   │   └── .cursorrules               --> Root `.cursorrules` for Cursor IDE
@@ -413,7 +413,7 @@ The repository includes a modern Next.js 15 production starter demonstrating ful
 
 The Vibe UI Skills Suite bridges the gap between frontier AI generative capabilities and enterprise frontend standards. By enforcing strict schemas, mathematical physics, accessibility guardrails, and fixed-structure RTL stability, it establishes the industry benchmark for AI-driven user interface development.
 
-- **Master Agent Specification:** [`mr-ui-designer/AGENT.md`](mr-ui-designer/AGENT.md)
+- **Master Agent Specification:** [`vibe-ui-agent/AGENT.md`](vibe-ui-agent/AGENT.md)
 - **JSON Schema:** [`schemas/design-spec.v1.schema.json`](schemas/design-spec.v1.schema.json)
 - **Evaluation Suite:** [`evals/README.md`](evals/README.md)
 - **Component Catalogs:** [`skills/ui-kit/references/`](skills/ui-kit/references/)

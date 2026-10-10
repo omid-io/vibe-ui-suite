@@ -1,13 +1,13 @@
 # 🧪 Benchmark: Swiss Editorial Typographic Article (`evals/swiss_editorial_eval.md`)
 
 ## 🎯 Test Objective
-Verifies that `mr-ui-designer` commands `visual-chemistry-engine` to produce a refined Swiss Editorial layout on warm paper ivory, with high-contrast serif typography, asymmetric grid cadence, generous whitespace, and zero artificial glow or blur.
+Verifies that `vibe-ui-agent` commands `visual-chemistry-engine` to produce a refined Swiss Editorial layout on warm paper ivory, with high-contrast serif typography, asymmetric grid cadence, generous whitespace, and zero artificial glow or blur.
 
 ---
 
 ## 📥 Benchmark Prompt
 ```text
-mr-ui-designer create a Swiss Editorial essay layout about design craftsmanship.
+vibe-ui-agent create a Swiss Editorial essay layout about design craftsmanship.
 Must feature warm paper ivory canvas, high-contrast Instrument Serif headers,
 an oversized drop cap, two-column asymmetric metadata sidebar, and zero blur layers.
 ```

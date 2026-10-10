@@ -8,7 +8,7 @@
 
 ## 📝 Input Prompt
 ```text
-mr-ui-designer create an AI chat response component featuring a collapsible thinking state, tool execution pill, and an approval card for database execution.
+vibe-ui-agent create an AI chat response component featuring a collapsible thinking state, tool execution pill, and an approval card for database execution.
 ```
 
 ---

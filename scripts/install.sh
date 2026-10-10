@@ -2,7 +2,7 @@
 set -eo pipefail
 
 # ==============================================================================
-# Safe Non-Destructive Installer for Vibe UI & mr-ui-designer Skills Suite
+# Safe Non-Destructive Installer for Vibe UI & vibe-ui-agent Skills Suite
 # ==============================================================================
 # Usage:
 #   ./install.sh                     # Installs to default ~/.gemini/config/skills
@@ -55,7 +55,7 @@ if [ -z "$TARGET_DIR" ]; then
     esac
 fi
 
-echo "✨ Installing Vibe UI & mr-ui-designer Skills Suite..."
+echo "✨ Installing Vibe UI & vibe-ui-agent Skills Suite..."
 echo "🤖 Target Agent     : $AGENT"
 echo "🎯 Target Directory : $TARGET_DIR"
 echo "🛡️  Safe Backup Mode : $([ "$FORCE" = true ] && echo 'Disabled (--force)' || echo 'Enabled')"
@@ -137,4 +137,4 @@ fi
 
 echo ""
 echo "🎉 Successfully installed all $count Vibe UI skills into $TARGET_DIR!"
-echo "✨ Commanded by mr-ui-designer with 70+ components, WCAG AA accessibility, and semantic RTL support."
+echo "✨ Commanded by vibe-ui-agent with 70+ components, WCAG AA accessibility, and semantic RTL support."

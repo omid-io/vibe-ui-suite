@@ -1,7 +1,7 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "title": "VibeUIDesignSpecification",
-  "description": "Canonical machine-readable design contract synthesized by autonomous-intent-expander for mr-ui-designer and sub-skills.",
+  "description": "Canonical machine-readable design contract synthesized by autonomous-intent-expander for vibe-ui-agent and sub-skills.",
   "type": "object",
   "required": [
     "spec_version",

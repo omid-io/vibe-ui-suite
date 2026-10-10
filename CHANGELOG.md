@@ -5,6 +5,13 @@ All notable changes to the **Vibe UI Skills** repository are documented in this 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [5.0.0] - 2026-10-10
+
+### Changed & Modernized
+- **Agent Renaming**: Formally transitioned `mr-ui-designer` to `vibe-ui-agent` across all definitions, skills, manifests, and documentation.
+- **Project Renaming**: Unified repository identity and package branding to `vibe-ui-suite`.
+- **Modern Vibe Components Catalog**: Introduced the 7th Pillar resource catalog (`skills/ui-kit/references/modern_vibe_components.md`) incorporating top modern recipes (Aurora glow backgrounds, Spotlight heros, neon border-beam cards, 3D spring tilt cards, infinite smooth marquees, shimmer glow buttons, and floating dock islands).
+
 ---
 
 ## [4.1.1] - 2026-09-30

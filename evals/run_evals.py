@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-🧪 Automated Evaluation Runner for Vibe UI & mr-ui-designer
+🧪 Automated Evaluation Runner for Vibe UI & vibe-ui-agent
 Audits production examples against the 5-Pillar UI-Verifier specification
 and validates machine-readable JSON design specs.
 """
@@ -1601,7 +1601,7 @@ def run_standalone_fixture(fixture_path_str: str, root_dir: Path, json_mode: boo
 
 def main():
     parser = argparse.ArgumentParser(
-        description="🧪 Automated Evaluation Runner for Vibe UI & mr-ui-designer"
+        description="🧪 Automated Evaluation Runner for Vibe UI & vibe-ui-agent"
     )
     parser.add_argument(
         "--json",

@@ -1,4 +1,4 @@
-# E2E Test Infra: vibe-ui-skills
+# E2E Test Infra: vibe-ui-suite
 
 ## Test Philosophy
 - Opaque-box, requirement-driven verification derived directly from `ORIGINAL_REQUEST.md`.

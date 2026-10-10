@@ -1,7 +1,7 @@
 # Project: Vibe UI Suite (Deep Architectural Hardening)
 
 ## Architecture
-The `vibe-ui-skills` (Vibe UI Suite) repository is an autonomous AI agent UI design system. Master orchestrator `mr-ui-designer` commands 6 specialized sub-skills and a unified Python design core (`vibe_core`):
+The `vibe-ui-suite` (Vibe UI Suite) repository is an autonomous AI agent UI design system. Master orchestrator `vibe-ui-agent` commands 6 specialized sub-skills and a unified Python design core (`vibe_core`):
 1. `autonomous-intent-expander` & `vibe_core/director.py`: Ingests user prompt, evaluates intent, selects domain archetype and visual chemistry.
 2. `vibe_core/generator.py`: Emits contract-declared semantic HTML adhering to design tokens.
 3. `vibe_core/critic.py`: Evaluates HTML designs across 9 scorecard dimensions (100-point scale) and enforces binary hard-gate invariants.

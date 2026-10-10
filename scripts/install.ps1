@@ -1,6 +1,6 @@
 <#
 .SYNOPSIS
-  Safe, Non-Destructive Installer for Vibe UI & mr-ui-designer Skills Suite
+  Safe, Non-Destructive Installer for Vibe UI & vibe-ui-agent Skills Suite
 .DESCRIPTION
   Installs or updates the 6 Vibe UI skills:
   - autonomous-intent-expander
@@ -136,4 +136,4 @@ if ($TempDir -and (Test-Path $TempDir)) {
 
 Write-Host ""
 Write-Host "Successfully installed all $($skills.Count) Vibe UI skills into $TargetDir!" -ForegroundColor Yellow
-Write-Host "Commanded by mr-ui-designer with 70+ components, WCAG AA accessibility, and semantic RTL support." -ForegroundColor Cyan
+Write-Host "Commanded by vibe-ui-agent with 70+ components, WCAG AA accessibility, and semantic RTL support." -ForegroundColor Cyan

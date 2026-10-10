@@ -8,7 +8,7 @@
 
 ## 📝 Input Prompt
 ```text
-mr-ui-designer build a dark developer analytics dashboard hero with live agent execution metrics and active tool status chips.
+vibe-ui-agent build a dark developer analytics dashboard hero with live agent execution metrics and active tool status chips.
 ```
 
 ---

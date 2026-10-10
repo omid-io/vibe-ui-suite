@@ -6,7 +6,7 @@ This guide establishes the architectural protocol for engineering organizations 
 
 ## 1. Architectural Model & Boundary
 
-Vibe UI enforces a unidirectional 6-skill orchestration DAG commanded by `mr-ui-designer`. When deploying in an enterprise codebase with an existing design system (e.g. `@company/design-system`, Storybook, or Radix UI):
+Vibe UI enforces a unidirectional 6-skill orchestration DAG commanded by `vibe-ui-agent`. When deploying in an enterprise codebase with an existing design system (e.g. `@company/design-system`, Storybook, or Radix UI):
 
 ```
 ┌───────────────────────────────────────┐

@@ -6,7 +6,7 @@
 
 ## 🌟 Overview
 
-The **Vibe UI Next.js 15 Starter** provides a reference implementation of the Vibe UI ecosystem (`mr-ui-designer`). It demonstrates how to replace generic "AI slop" interfaces with intentional visual chemistries, mathematical color scales, and accessible AI interaction primitives.
+The **Vibe UI Next.js 15 Starter** provides a reference implementation of the Vibe UI ecosystem (`vibe-ui-agent`). It demonstrates how to replace generic "AI slop" interfaces with intentional visual chemistries, mathematical color scales, and accessible AI interaction primitives.
 
 ### Core Architecture Highlights
 

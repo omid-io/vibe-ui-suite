@@ -1,13 +1,13 @@
 # 🧪 Benchmark: Neobrutalist High-Contrast Store (`evals/neobrutalist_store_eval.md`)
 
 ## 🎯 Test Objective
-Verifies that `mr-ui-designer` commands `visual-chemistry-engine` to produce a high-contrast Neobrutalist interface with hard offset box shadows, physical click states, zero blur layers, and 100% accessible contrast without falling back to generic purple gradients.
+Verifies that `vibe-ui-agent` commands `visual-chemistry-engine` to produce a high-contrast Neobrutalist interface with hard offset box shadows, physical click states, zero blur layers, and 100% accessible contrast without falling back to generic purple gradients.
 
 ---
 
 ## 📥 Benchmark Prompt
 ```text
-mr-ui-designer build a bold neobrutalist creative design store for digital assets.
+vibe-ui-agent build a bold neobrutalist creative design store for digital assets.
 Must feature high-contrast pastels with pitch black borders, hard offset shadows,
 interactive physical buttons, and zero generic gradients or blurry glassmorphism.
 ```

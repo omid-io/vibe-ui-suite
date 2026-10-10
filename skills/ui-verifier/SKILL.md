@@ -7,7 +7,7 @@ triggers: ["verify ui", "ui-verifier", "audit ui", "a11y check", "check design",
 # 🔍 UI-Verifier: 5-Pillar Frontend Quality & Verification Engine
 
 ## 🎯 Purpose
-The `ui-verifier` skill provides automated, rigorous quality gates for generated interfaces. It acts as an autonomous design auditor, ensuring that code synthesized by `mr-ui-designer` (utilizing `visual-chemistry-engine` and `ui-kit`) meets international engineering, accessibility, and aesthetic standards.
+The `ui-verifier` skill provides automated, rigorous quality gates for generated interfaces. It acts as an autonomous design auditor, ensuring that code synthesized by `vibe-ui-agent` (utilizing `visual-chemistry-engine` and `ui-kit`) meets international engineering, accessibility, and aesthetic standards.
 
 ---
 

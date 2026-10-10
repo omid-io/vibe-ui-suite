@@ -76,15 +76,15 @@ Verified Output or Actionable Failure Diagnostics
 
 ---
 
-## 👑 Autonomous AI Lead Architect: `mr-ui-designer`
+## 👑 Autonomous AI Lead Architect: `vibe-ui-agent`
 
 Frontend design should not require developers to study color contrast mathematics, OKLCH formulas, CSS spring physics, or memorizing style taxonomies. That cognitive burden belongs entirely to the agent.
 
-Vibe UI Suite includes a dedicated master architect agent: **`mr-ui-designer`** ([AGENT.md](mr-ui-designer/AGENT.md)). Powered by an autonomous **Stack Sensor** (<1ms) and **Domain Director**, it reads your project's `package.json`, existing Tailwind configuration, and component libraries, autonomously deciding the optimal design archetype, color harmony, and component flow without asking tedious setup questions.
+Vibe UI Suite includes a dedicated master architect agent: **`vibe-ui-agent`** ([AGENT.md](vibe-ui-agent/AGENT.md)). Powered by an autonomous **Stack Sensor** (<1ms) and **Domain Director**, it reads your project's `package.json`, existing Tailwind configuration, and component libraries, autonomously deciding the optimal design archetype, color harmony, and component flow without asking tedious setup questions.
 
 ```mermaid
 flowchart LR
-    User["User Prompt<br/>'@mr-ui-designer ...'"] --> Sensor["Stack Sensor &lt;1ms<br/>(Framework, Tailwind v4, Icons)"]
+    User["User Prompt<br/>'@vibe-ui-agent ...'"] --> Sensor["Stack Sensor &lt;1ms<br/>(Framework, Tailwind v4, Icons)"]
     Sensor --> Director["Autonomous Director<br/>(Domain, Light/Dark, Archetype)"]
     Director --> AntiSlop["Anti-Slop Compiler<br/>(OKLCH, No Emojis, &lt;bdi&gt; RTL)"]
     AntiSlop --> ClosedLoop["Closed-Loop Critic<br/>(Headless Chromium &amp; Touch Gate)"]
@@ -97,15 +97,15 @@ flowchart LR
 Just give your AI assistant (Antigravity, Cursor, Hermes, Claude Code) a single sentence describing what you need:
 
 ```text
-@mr-ui-designer build a modern, high-conversion landing page for my project.
+@vibe-ui-agent build a modern, high-conversion landing page for my project.
 ```
 
 **Optional Domain or Vibe Hints (Never Required):**
-- `@mr-ui-designer build an analytics billing dashboard with Apple Cupertino fluid style`
-- `@mr-ui-designer design a crypto staking interface with dark terminal HUD aesthetic`
-- `@mr-ui-designer create a patient booking screen for an aesthetic dental clinic`
+- `@vibe-ui-agent build an analytics billing dashboard with Apple Cupertino fluid style`
+- `@vibe-ui-agent design a crypto staking interface with dark terminal HUD aesthetic`
+- `@vibe-ui-agent create a patient booking screen for an aesthetic dental clinic`
 
-**What `mr-ui-designer` guarantees automatically:**
+**What `vibe-ui-agent` guarantees automatically:**
 - **Zero Raw Emojis:** Replaced with crisp, accessible inline SVG vector icons with `currentColor`.
 - **WCAG AAA Contrast:** Background and foreground colors mathematically calibrated in OKLCH.
 - **BiDi / RTL Isolation:** Numbers, currencies, and technical metrics wrapped in `<bdi>` so English/Persian text never flips.
@@ -118,7 +118,7 @@ Just give your AI assistant (Antigravity, Cursor, Hermes, Claude Code) a single 
 When an existing screen or component looks like generic, cheap "AI slop" (clichéd purple gradients, yellow emojis, poor contrast, or broken RTL):
 
 ```text
-@mr-ui-designer this UI looks ugly and generic. Elevate and polish it using Vibe UI anti-slop standards.
+@vibe-ui-agent this UI looks ugly and generic. Elevate and polish it using Vibe UI anti-slop standards.
 ```
 
 **What gets fixed in seconds:**
@@ -133,18 +133,18 @@ When an existing screen or component looks like generic, cheap "AI slop" (clich�
 When starting a new project or onboarding Vibe UI Suite without touching the terminal:
 
 ```text
-Install and configure vibe-ui-suite in this project and activate mr-ui-designer rules.
+Install and configure vibe-ui-suite in this project and activate vibe-ui-agent rules.
 ```
 
 **The agent autonomously:**
 1. Runs `npm install vibe-ui-suite` in your project terminal.
 2. Injects `@import "vibe-ui-suite/v4.css";` into your main stylesheet (`app/globals.css` or `src/index.css`).
-3. Creates your editor rule file (`.cursorrules`, `CLAUDE.md`, or `AGENTS.md`) with the full `mr-ui-designer` protocol.
+3. Creates your editor rule file (`.cursorrules`, `CLAUDE.md`, or `AGENTS.md`) with the full `vibe-ui-agent` protocol.
 
 ---
 
 ### 🎨 The 7 Canonical Visual Archetypes (Autonomous or User-Specified)
-You never need to choose a style—`mr-ui-designer` automatically selects the ideal archetype based on your domain. However, you can explicitly request any archetype from the **Design Vault** (`data/design_vault/archetypes.json`):
+You never need to choose a style—`vibe-ui-agent` automatically selects the ideal archetype based on your domain. However, you can explicitly request any archetype from the **Design Vault** (`data/design_vault/archetypes.json`):
 
 | Macro Archetype | Visual Philosophy | Key Surface & Lighting Physics | Best Suited For |
 | :--- | :--- | :--- | :--- |
@@ -232,7 +232,7 @@ Vibe UI is available directly inside your IDE sidebar:
 
 ## 🏛️ Architecture: The 6-Skill Orchestration DAG
 
-The system is coordinated by a lead architect agent (**`mr-ui-designer`**) that orchestrates 6 specialized sub-skills:
+The system is coordinated by a lead architect agent (**`vibe-ui-agent`**) that orchestrates 6 specialized sub-skills:
 
 ```text
                ┌──────────────────────────────┐
@@ -241,7 +241,7 @@ The system is coordinated by a lead architect agent (**`mr-ui-designer`**) that 
                               │
                               ▼
                ┌──────────────────────────────┐
-               │       mr-ui-designer         │
+               │       vibe-ui-agent         │
                │  (Lead Frontend Architect)   │
                └──────────────┬───────────────┘
                               │

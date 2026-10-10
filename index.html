@@ -1359,7 +1359,7 @@
   <section id="studio" class="py-20 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto border-t border-[var(--border-subtle)]">
     <div class="text-center max-w-3xl mx-auto mb-14 space-y-3">
       <span class="text-xs font-mono uppercase tracking-wider text-[var(--accent-brand)] font-bold block" id="studioBadge">Autonomous Agent</span>
-      <h2 class="text-3xl sm:text-4xl font-black text-[var(--text-primary)] tracking-tight" id="studioHeading">Interactive mr-ui-designer Console</h2>
+      <h2 class="text-3xl sm:text-4xl font-black text-[var(--text-primary)] tracking-tight" id="studioHeading">Interactive vibe-ui-agent Console</h2>
       <p class="text-base text-[var(--text-secondary)] text-content" id="studioSub">Click any lazy prompt chip to watch Stack Sensor (&lt;1ms) and Domain Director synthesize production interfaces.</p>
 
       <!-- Prompt Chips -->
@@ -1376,7 +1376,7 @@
       <div class="rounded-[var(--radius-sm)] bg-[var(--bg-canvas)] border border-[var(--border-subtle)] p-4 flex items-center justify-between gap-4">
         <div class="flex items-center space-x-3 overflow-hidden">
           <span class="w-2 h-2 rounded-full bg-blue-500 shrink-0"></span>
-          <code id="activePromptDisplay" class="text-xs font-mono text-[var(--text-primary)] truncate">@mr-ui-designer design a booking screen for a luxury cosmetic dental clinic</code>
+          <code id="activePromptDisplay" class="text-xs font-mono text-[var(--text-primary)] truncate">@vibe-ui-agent design a booking screen for a luxury cosmetic dental clinic</code>
         </div>
         <button onclick="copyPrompt()" class="px-3 py-1 rounded bg-[var(--accent-brand)] text-white text-xs font-bold shrink-0 hover:opacity-90 transition-opacity">Copy Prompt</button>
       </div>
@@ -1764,12 +1764,12 @@
       btn.classList.toggle('bg-zinc-800');
     }
 
-    // 9. mr-ui-designer AI Studio Scenarios
+    // 9. vibe-ui-agent AI Studio Scenarios
     let currentScenario = 'dental';
     const scenarios = {
       dental: {
         theme: 'apple_cupertino',
-        promptEn: '@mr-ui-designer design a booking screen for a luxury cosmetic dental clinic',
+        promptEn: '@vibe-ui-agent design a booking screen for a luxury cosmetic dental clinic',
         promptFa: 'مستر UI دیزاینر، یک صفحه رزرو کلینیک دندانپزشکی زیبایی با سبک اپل بساز',
         sensorEn: '> [0.10ms] Project Scanned: Next.js 15 + Tailwind CSS v4 detected\n> [0.22ms] Intent Disambiguated: Domain: "healthcare_clinical"\n> [0.35ms] Style Synthesized: Archetype: "apple_cupertino" (Squircle 28px)\n> [0.48ms] Interaction Contract: Causal recalculation wired\n> [0.60ms] Contrast Verified: All text pairs >= 8.2:1 WCAG AAA',
         sensorFa: '> [0.10ms] اسکن استک پروژه: شناسایی Next.js 15 و Tailwind v4\n> [0.22ms] تشخیص خودکار دامنه: کلینیک پزشکی و درمانی\n> [0.35ms] پیاده سازی استایل: آرکتایپ اپل کوپرتینو (Squircle 28px)\n> [0.48ms] قرارداد تعامل: اتصال متغیرهای محاسباتی وابسته\n> [0.60ms] اعتبارسنجی کنتراست: تایید نسبت ۸.۲ به ۱ WCAG AAA',
@@ -1783,7 +1783,7 @@
       },
       crypto: {
         theme: 'specular_glass',
-        promptEn: '@mr-ui-designer create a dark-mode staking pool widget for Solana tokens',
+        promptEn: '@vibe-ui-agent create a dark-mode staking pool widget for Solana tokens',
         promptFa: 'مستر UI دیزاینر، ویجت استیکینگ توکن سولانا را در حالت دارک مود شیشه ای بساز',
         sensorEn: '> [0.12ms] Project Scanned: Vite + React 19 + Tailwind v4 detected\n> [0.25ms] Intent Disambiguated: Domain: "web3_defi"\n> [0.38ms] Style Synthesized: Archetype: "specular_glass" (Blur 20px, Purple Glow)\n> [0.52ms] Interaction Contract: Recalculating staking yield curve\n> [0.65ms] Motion Verified: Kowalski spring feedback active',
         sensorFa: '> [0.12ms] اسکن استک پروژه: شناسایی Vite و React 19 و Tailwind v4\n> [0.25ms] تشخیص خودکار دامنه: مالی غیرمتمرکز Web3\n> [0.38ms] پیاده سازی استایل: سبک شیشه ای دارک (Blur 20px)\n> [0.52ms] قرارداد تعامل: محاسبه لحظه ای سود استیکینگ\n> [0.65ms] تایید فیزیک موشن: فیزیک فنر کووالسکی فعال شد',
@@ -1797,7 +1797,7 @@
       },
       saas: {
         theme: 'minimalist_saas',
-        promptEn: '@mr-ui-designer build a seat-based pricing card with annual discount toggle',
+        promptEn: '@vibe-ui-agent build a seat-based pricing card with annual discount toggle',
         promptFa: 'مستر UI دیزاینر، کارت قیمت گذاری بر اساس تعداد صندلی با تخفیف سالانه طراحی کن',
         sensorEn: '> [0.11ms] Project Scanned: Next.js 15 App Router detected\n> [0.23ms] Intent Disambiguated: Domain: "saas_enterprise"\n> [0.36ms] Style Synthesized: Archetype: "minimalist_saas" (Stripe Crisp)\n> [0.49ms] Directional Guard: Positive compounding verified\n> [0.61ms] Formula Evaluation: Math.round(seats * 95 * 0.8) passed',
         sensorFa: '> [0.11ms] اسکن استک پروژه: شناسایی Next.js 15 App Router\n> [0.23ms] تشخیص خودکار دامنه: پلتفرم سازمانی SaaS\n> [0.36ms] پیاده سازی استایل: مینیمال شرکتی با مرزبندی شفاف\n> [0.49ms] گارد جهت دهی: تایید روند صعودی محاسبه هزینه\n> [0.61ms] تایید فرمول ریاضی: ارزیابی ریاضی دقیق تخفیف ۲۰٪',
@@ -1811,7 +1811,7 @@
       },
       slop: {
         theme: 'terminal_hud',
-        promptEn: '@mr-ui-designer sanitize this legacy UI: strip raw yellow emojis and fix poor contrast',
+        promptEn: '@vibe-ui-agent sanitize this legacy UI: strip raw yellow emojis and fix poor contrast',
         promptFa: 'مستر UI دیزاینر، این کد قدیمی را پاکسازی کن: حذف اموجی های زرد و ارتقای کنتراست',
         sensorEn: '> [0.15ms] Code Sanitized: Stripped 14 raw yellow emojis\n> [0.26ms] Contrast Calibrated: Slashed poor 2.1:1 to WCAG AAA 8.4:1\n> [0.39ms] Injected: Inline vector SVGs with currentColor\n> [0.49ms] RTL Fixed: Isolated numbers in <bdi> to stop sentence flip\n> [0.62ms] Motion: Replaced linear lag with 0.35s spring physics',
         sensorFa: '> [0.15ms] پاکسازی کدهای اسلوپ: حذف ۱۴ عدد اموجی متنی زرد\n> [0.26ms] کالیبره کنتراست: ارتقای نسبت ضعیف ۲:۱ به استاندارد AAA ۸.۴:۱\n> [0.39ms] جایگزینی: درج آیکون های برداری SVG خطی\n> [0.49ms] اصلاح راست چین: ایزوله سازی ارقام درون bdi\n> [0.62ms] موشن: جایگزینی ترنزیشن های کند با فیزیک فنر ۰.۳۵ ثانیه',
@@ -2003,7 +2003,7 @@
 
       // Studio Section
       document.getElementById('studioBadge').textContent = isFa ? 'ایجنت خودکار' : 'Autonomous Agent';
-      document.getElementById('studioHeading').textContent = isFa ? 'کنسول تعاملی mr-ui-designer' : 'Interactive mr-ui-designer Console';
+      document.getElementById('studioHeading').textContent = isFa ? 'کنسول تعاملی vibe-ui-agent' : 'Interactive vibe-ui-agent Console';
       document.getElementById('studioSub').innerHTML = isFa ? 'روی هر پرامپت آماده کلیک کنید تا اسکن استک (<bdi><1ms</bdi>) و کارگردانی دامنه را به صورت زنده مشاهده کنید.' : 'Click any lazy prompt chip to watch Stack Sensor (<1ms) and Domain Director synthesize production interfaces.';
       document.getElementById('chipDental').textContent = isFa ? 'کلینیک زیبایی (اپل فلوید)' : 'Clinical Wellness (Apple Fluid)';
       document.getElementById('chipCrypto').textContent = isFa ? 'استیکینگ کریپتو (شیشه ای)' : 'Crypto Staking Pool (Specular Glass)';
