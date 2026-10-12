@@ -15,7 +15,7 @@
 
 ---
 
-## ⚡ Extension Update Checklist ("افزونه‌ها رو آپدیت کن")
+## ⚡ Extension Update Checklist ("افزونه ها رو آپدیت کن")
 
 Whenever the user instructs to update the extensions, execute this 4-step deployment cycle without omitting any target:
 

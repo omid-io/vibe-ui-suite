@@ -39,7 +39,7 @@ const path = __importStar(require("path"));
 const readline = __importStar(require("readline"));
 const components_1 = require("./registry/components");
 const index_1 = require("./index");
-const VERSION = '4.1.1';
+const VERSION = '6.0.0';
 function printBanner() {
     console.log(`
 \x1b[35m  ▲ VIBE UI CLI v${VERSION}\x1b[0m

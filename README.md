@@ -26,23 +26,23 @@
 
 ---
 
-## ⚖️ Visual Impact: Vanilla AI Slop vs. Vibe UI v4.8 Masterpiece
+## ⚖️ Visual Impact: Vanilla AI Slop vs. Vibe UI v6.0 Masterpiece
 
 What happens when you ask a standard AI assistant to generate a frontend component?
 
 ```text
 ┌──────────────────────────────────────┐  vs  ┌──────────────────────────────────────┐
-│ ❌ VANILLA AI SLOP                   │      │ ✨ VIBE UI v4.8 MASTERPIECE          │
+│ ❌ VANILLA AI SLOP                   │      │ ✨ VIBE UI v6.0 MASTERPIECE          │
 ├──────────────────────────────────────┤      ├──────────────────────────────────────┤
-│ • Generic purple gradient buttons    │      │ • Atmospheric Canvas Vector & Glow   │
+│ • Generic purple gradient buttons    │      │ • Vibrant Light Canvas & Brand Glow  │
 │ • Low contrast text (3.2:1 FAILS AA) │      │ • Mathematical WCAG 2.2 AAA (17.8:1) │
-│ • Broken mobile overflow (375px)     │      │ • macOS Window Chrome & Live Canvas  │
-│ • Hallucinated raw emojis            │      │ • Interactive Before/After Sliders   │
+│ • Broken mobile overflow (375px)     │      │ • Headless Multi-Viewport Screenshots│
+│ • Hallucinated raw emojis            │      │ • Crisp Vector SVGs & Clean Icons    │
 │ • Dead toggle cards & static mockups │      │ • Living React 19 TSX + State Hooks  │
-│ • Missing custom physics & stiff CSS │      │ • Kinetic Arrow Cursor + Dot Follower│
-│ • Empty blank or broken image links  │      │ • Curated Unsplash Editorial Photos  │
+│ • Missing custom physics & stiff CSS │      │ • Curated 24-Domain Unsplash CDN CDN │
+│ • Empty blank or broken image links  │      │ • Zero Broken Images or 404 URLs     │
 │ • Abrupt page pops & jittery scroll  │      │ • Stagger Scroll Reveals & Marquee   │
-│ • Mixed direction text / numbers     │      │ • Strict LTR metrics & BiDi isolation│
+│ • Mixed direction text / numbers     │      │ • On-Demand Scoped RTL & BiDi Guard  │
 └──────────────────────────────────────┘      └──────────────────────────────────────┘
 ```
 
@@ -57,7 +57,7 @@ Instead of relying on fragile prompt engineering ("make this dashboard look clea
 ```text
 User Intent
     ↓
-Intent Expansion (30-parameter design contract)
+Intent Expansion (Structured 6-Dimensional Design Contract)
     ↓
 Machine-Readable Schema (design-spec.v1.schema.json)
     ↓
@@ -72,7 +72,7 @@ Headless Browser Evaluation (Playwright 375px mobile overflow)
 Verified Output or Actionable Failure Diagnostics
 ```
 
-> **Day-One Transparency**: Vibe UI Suite is at `v4.8.0` (**Living Kinetic Standards & Kinetic Arrow Physics**). Featuring 7 Canonical Visual Archetypes (Linear Dev HUD, Swiss Editorial, Cupertino Glass, Full-Bleed Bento, Quiet Luxury, Cyber Terminal, and Centered Stage), The Lightswind Kinetic Living Standard (Kinetic Arrow Cursor with velocity-trailing SVG chevron follower and complete OS cursor hiding, ambient spotlight dot-matrix lighting, infinite GPU-accelerated marquee velocity rails, curated editorial Unsplash photography via `AssetDirector`, cinematic scroll-driven stagger reveals, and progressive blur-up lazy image loading), Atmospheric Canvas Lighting (subtle 36px vector background grid + radial mesh glow spotlight cone), macOS Window Chrome mockup with live domain telemetry (p99 latency sparklines, real-time kubectl logs, clinical slots), interactive Before/After drag split sliders with inline SVG controls, living React 19 TSX generation (`-f tsx`), specular micro-surfaces (`.vibe-spotlight-card::before` and mouse-following spotlight radiance with 60FPS mobile touch guards), 100% live headless Chromium browser truth across all benchmark scenarios with zero sampling skips, and dual-tier contrast governance (Target: WCAG AAA >= 7:1 | Hard Gate: WCAG AA >= 4.5:1). Constructive criticism, issues, and contributions from frontend engineers and AI researchers are warmly welcomed.
+> **Day-One Transparency**: Vibe UI Suite is at `v6.0.0` (**The Two Golden Pillars: Trend Inspiration & Living Visual Feedback Loop**). Anchored on Pillar 1 (deep trend research across Mobbin, Dribbble, Figma Community, and Awwwards with Vibrant Light Mode default) and Pillar 2 (deterministic Playwright multi-viewport screenshot verification across Desktop 1440px and Mobile 390px with zero orphaned processes), Curated High-Res Unsplash Asset Vault covering all 24 canonical domains with tested HTTP 200 CDN URLs, clean 8-pillar component catalog, living React 19 TSX generation (`-f tsx`), and synchronized cross-platform tooling across npm, Python CLI, and VS Code. Constructive criticism, issues, and contributions from frontend engineers and AI researchers are warmly welcomed.
 
 ---
 
@@ -275,7 +275,7 @@ The system is coordinated by a lead architect agent (**`vibe-ui-agent`**) that o
 
 | Sub-Skill | Role & Boundary | Primary Constraint |
 | :--- | :--- | :--- |
-| **`autonomous-intent-expander`** | Intent synthesis via 30-parameter contract | Calibrated Ambiguity Budget; rejects unstated business assumptions |
+| **`autonomous-intent-expander`** | Intent synthesis via structured 6-dimensional contract | Calibrated Ambiguity Budget; rejects unstated business assumptions |
 | **`visual-chemistry-engine`** | Cohesive aesthetic system selection | 5 distinct chemistries; anti-repetition constraint across projects |
 | **`ui-kit`** | Component primitives & interaction patterns | AI reasoning drawers, tool chips, telemetry HUDs, Bento recipes |
 | **`vibe-physics-engine`** | Motion, color, and GPU budgets | OKLCH perceptual spaces, spring curves, strict $\le 3$ blur layer limit |
@@ -296,9 +296,9 @@ Vibe UI defines five visual systems for consistent design decisions:
 
 ---
 
-## ⚡ The Lightswind Kinetic Living Standard (v4.8.0)
+## ⚡ The Lightswind Kinetic Living Standard (v6.0.0)
 
-Production web experiences must feel tactile, responsive, and alive. Vibe UI v4.8 codifies 6 mandatory kinetic living principles:
+Production web experiences must feel tactile, responsive, and alive. Vibe UI v6.0 codifies 6 mandatory kinetic living principles:
 
 1. **Kinetic Arrow Cursor & Trailing Physics**:
    - Total suppression of the default OS cursor (`cursor: none !important`).
@@ -347,10 +347,10 @@ python evals/run_evals.py --browser
 
 | Verification Gate | Type | Method | Scope |
 | :--- | :--- | :--- | :--- |
-| **JSON Schema Validation** | Deterministic | Draft 2020-12 Schema Validator | Validates 30 parameters with `additionalProperties: false` |
+| **JSON Schema Validation** | Deterministic | Draft 2020-12 Schema Validator | Validates technical design spec with `additionalProperties: false` |
 | **Negative Fixture Rejection** | Deterministic | Exit code assertion | Verifies exit code 1 on out-of-range entropy, invalid archetypes, or touch targets $< 24\text{px}$ |
 | **Relative Luminance & Contrast** | Deterministic | $L = 0.2126 R' + 0.7152 G' + 0.0722 B'$ | Enforces WCAG AA ($\ge 4.5:1$ body, $\ge 3.0:1$ headings) |
-| **Mobile Viewport Overflow** | Runtime | Chromium DOM (`scrollWidth <= clientWidth`) | Verifies 0px horizontal overflow at exact 375px viewport |
+| **Mobile Viewport Overflow** | Runtime | Chromium DOM (`scrollWidth <= clientWidth`) | Verifies 0px horizontal overflow across 375px and 390px viewports |
 | **Semantic Clickables** | Static / Lint | Regex DOM tree audit | Asserts 0 raw `<div onclick>` instances (buttons/anchors required) |
 | **Focus Rings** | Static / Lint | CSS rule check | Verifies presence of `:focus-visible` styles |
 | **GPU Compositing Budget** | Static / Heuristic | CSS rule check | Enforces $\le 3$ active `backdrop-filter` blur layers |

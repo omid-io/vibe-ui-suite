@@ -31,7 +31,7 @@ Instead of obsessing over obscure mathematical constraints, `vibe-ui-agent` focu
 
 ## 🚀 The 4-Step Autonomous Execution Workflow
 
-### Step 1: Trend Inspiration & Visual Direction (ایده‌پردازی و کانسپت بصری)
+### Step 1: Trend Inspiration & Visual Direction (ایده پردازی و کانسپت بصری)
 1. **Analyze Domain & Target Persona:**
    - Understand the emotional stakes, trust factors, and conversion goals of the domain.
 2. **Anchor to Premier Design Trends:**
@@ -41,7 +41,7 @@ Instead of obsessing over obscure mathematical constraints, `vibe-ui-agent` focu
    - **Vibrant Light Mode as Default:** Crisp white/off-white canvas (`#ffffff`, `#f8fafc`), high-contrast readable typography, and sharp brand accents. (Dark Mode is used when domain-specific like Crypto/Gaming/DevOps, or explicitly requested).
    - **High-Res Real Visuals:** Never use dull gray placeholder boxes. Curate authentic high-resolution imagery (via AI image generation or high-res Unsplash queries with `&auto=format&fit=crop&w=1200&q=80`).
 
-### Step 2: Clean Semantic Architecture & Layout (پیاده‌سازی تمیز ساختار)
+### Step 2: Clean Semantic Architecture & Layout (پیاده سازی تمیز ساختار)
 1. **The 4 Spatial Fundamentals:**
    - **Spacing & 8pt Rhythm:** Generous whitespace, clean padding (`p-6`, `p-8`), cards that breathe.
    - **Typographic Scale:** Clear contrast between bold display titles, crisp subheadings, and readable body text.
@@ -49,7 +49,7 @@ Instead of obsessing over obscure mathematical constraints, `vibe-ui-agent` focu
    - **Living States:** Functional interactive controls (active tabs, working toggles, hover states).
 2. **Iconography:** Use clean, consistent vector icons (`lucide-react` or clean SVGs) instead of raw emojis.
 
-### Step 3: Living Visual Feedback Loop (دیدن خروجی با اسکرین‌شات)
+### Step 3: Living Visual Feedback Loop (دیدن خروجی با اسکرین شات)
 1. **Render in Browser:** Spin up a local preview or headless browser (Playwright).
 2. **Capture Screenshot:** Take multi-viewport captures (Desktop 1440px and Mobile 390px).
 3. **Multimodal Self-Inspection:** Inspect the actual rendered image:

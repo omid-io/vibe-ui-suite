@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """
-vibe_cli.py — Vibe UI V3 Master Unified CLI & Orchestrator
-Production-grade interface connecting Design Director, Recommendation, Genome, Critic, Refiner & Verifier.
+vibe_cli.py — Vibe UI Suite v6.0.0 Master Unified CLI & Orchestrator
+Production-grade interface connecting Design Director, Recommendation, Genome, Critic, Refiner, Verifier & Visual Auditor.
 """
 
 import sys
@@ -176,8 +176,48 @@ def cmd_heal(args):
             out.write_text(final_html, encoding="utf-8")
             print(f"[SAVED] Healed artifact: {args.output}")
 
+def cmd_screenshot(args):
+    """Executes multi-viewport headless screenshot audit on an HTML/TSX artifact."""
+    from scripts.screenshot_audit import capture_audit_screenshots
+
+    file_path = Path(args.file)
+    if not file_path.exists():
+        print(f"[FAIL] Target file not found: {args.file}", file=sys.stderr)
+        sys.exit(1)
+
+    out_dir = getattr(args, "output_dir", None) or getattr(args, "output", ".test-artifacts/screenshots")
+    viewports = getattr(args, "viewports", "desktop,mobile")
+    full_page = getattr(args, "full_page", True)
+    if getattr(args, "no_full_page", False):
+        full_page = False
+
+    try:
+        report = capture_audit_screenshots(
+            file_path=file_path,
+            output_dir=out_dir,
+            viewports=viewports,
+            full_page=full_page,
+        )
+        if getattr(args, "json", False):
+            print(json.dumps(report, indent=2, ensure_ascii=False))
+        else:
+            rendered_target = report.get("rendered_file", str(file_path))
+            print(f"[SUCCESS] Multi-viewport screenshots captured for: {rendered_target}")
+            for item in report.get("viewports_captured", []):
+                rel_path = Path(item["path"]).name
+                size_kb = item["bytes"] / 1024
+                print(f"  * {item['viewport'].upper()} ({item['width']}px): {rel_path} ({size_kb:.1f} KB, Status: {item['status']})")
+            print(f"\nOverall Status: {report['overall_status']}")
+    except Exception as e:
+        print(f"[FAIL] Screenshot capture failed: {e}", file=sys.stderr)
+        sys.exit(1)
+
+    if report.get("overall_status") == "FAIL":
+        sys.exit(1)
+
 def main():
-    parser = argparse.ArgumentParser(description="Vibe UI Master CLI")
+    parser = argparse.ArgumentParser(description="Vibe UI Suite v6.0.0 Master CLI")
+    parser.add_argument("--version", action="version", version="Vibe UI Suite v6.0.0")
     subparsers = parser.add_subparsers(dest="command", help="Command to run")
 
     # search
@@ -213,6 +253,14 @@ def main():
     p_heal.add_argument("-p", "--prompt", help="Original design prompt for context in correction output")
     p_heal.add_argument("-o", "--output", help="Save healed HTML to this path (if ACCEPTED)")
 
+    # screenshot
+    p_ss = subparsers.add_parser("screenshot", help="Capture multi-viewport screenshots (Desktop 1440px, Mobile 390px) via Playwright")
+    p_ss.add_argument("file", help="Path to target HTML or TSX file to render")
+    p_ss.add_argument("-o", "--output", "--output-dir", dest="output", default=".test-artifacts/screenshots", help="Directory for saved screenshots (default: .test-artifacts/screenshots)")
+    p_ss.add_argument("--viewports", default="desktop,mobile", help="Comma-separated viewports: 'desktop', 'mobile' (default: desktop,mobile)")
+    p_ss.add_argument("--no-full-page", dest="full_page", action="store_false", default=True, help="Capture only initial viewport area instead of full page")
+    p_ss.add_argument("--json", action="store_true", default=False, help="Output audit report as JSON")
+
     args = parser.parse_args()
     if not args.command:
         parser.print_help()
@@ -230,6 +278,8 @@ def main():
         cmd_verify(args)
     elif args.command == "heal":
         cmd_heal(args)
+    elif args.command == "screenshot":
+        cmd_screenshot(args)
 
 if __name__ == "__main__":
     main()

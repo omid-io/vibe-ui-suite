@@ -14,20 +14,18 @@ The `visual-chemistry-engine` serves as the primary aesthetic and visual archite
 
 A truly world-class UI designer does not treat visual design as mechanical decoration or rule-checking. **The #1 priority is deep comprehension of the page's domain, target persona, emotional register, and operational purpose.**
 
-### 🏛️ The Three Master Pillars:
-1. **Pillar I — Semantic Understanding First (فهم عمیق موضوع صفحه):**
-   - Before writing any CSS or selecting tokens, deeply analyze: *What is this product? What emotional and operational state is the user in when viewing this screen? What is the primary job-to-be-done?*
-   - Research the specific domain (e.g., mission-critical developer telemetry vs. luxury clinic vs. high-velocity fintech vs. local craft) and tailor a bespoke aesthetic tailored uniquely to that universe.
-2. **Pillar II — Visual Conception & Full-Page Closed-Loop Visual Audit (ایده‌پردازی و ممیزی با اسکرین‌شات تمام‌قد):**
-   - **Ideation & Exploration:** Before coding, explore visual direction via vivid narrative prompts, reference concepts, or prompt generation to inspire the layout, lighting, and hierarchy.
-   - **Mandatory Full-Page Screenshot & Visual Inspection:** Never consider a UI complete until capturing and actively inspecting an **actual FULL-PAGE screenshot of the entire vertical height of the site** (`page.screenshot({ fullPage: true })` / visual tool), NOT just the single viewport.
-   - **Active Cognitive Review Protocol:** The agent MUST view the captured image file (`view_file`), actively scrutinize it across all sections from header to footer (inspecting vertical rhythm, contrast harmony, card boundaries, and dark/light mode balance), and never report success without performing this vision audit.
-3. **Pillar III — Vibrant Light Aesthetic as Default (پیش‌فرض تم روشن و باطراوت):**
-   - General business interfaces (Healthcare, SaaS, E-commerce, Education, Portfolios, Agencies) default to a **crisp, vibrant, high-contrast Light Theme** (`#ffffff`, `#f8fafc`, deep slate `#0f172a` text, sharp accent).
-   - Dark Theme is reserved for domain-native contexts (Crypto/Web3, Gaming, Terminal/Hacker HUD, Cybersecurity) or explicit user requests. An optional clean theme toggle can be provided without bloating the codebase with redundant token scaffolding.
+### 🏛️ The Two Golden Pillars Architecture:
 
-### 🤫 Silent Baseline Hygiene (بهداشت پس‌زمینه بدون خودنمایی):
-- Mechanical hygiene factors—such as clean vector SVGs over raw emojis, legible contrast, and on-demand RTL for Persian—are **handled quietly in the background**.
+1. **Pillar 1: Deep Trend Research & Award-Winning Inspiration (الهام گیری و پژوهش روندهای برتر طراحی):**
+   - **Semantic Understanding First (فهم عمیق موضوع صفحه):** Before writing any CSS or selecting tokens, deeply analyze: *What is this product? What emotional and operational state is the user in when viewing this screen? What is the primary job-to-be-done?* Research domain benchmarks from Mobbin, Dribbble, Figma Community, Godly, and Awwwards.
+   - **Vibrant Light Aesthetic as Default (پیش فرض تم روشن و باطراوت):** General business interfaces (Healthcare, SaaS, E-commerce, Education, Portfolios, Agencies) default to a **crisp, vibrant, high-contrast Light Theme** (`#ffffff`, `#f8fafc`, deep slate `#0f172a` text, sharp accent). Dark Theme is reserved for domain-native contexts (Crypto/Web3, Gaming, Terminal/Hacker HUD, Cybersecurity) or explicit user requests. An optional clean theme toggle can be provided without bloating the codebase with redundant token scaffolding.
+
+2. **Pillar 2: Living Visual Feedback Loop (چرخه بازخورد بصری زنده و ممیزی اسکرین شات):**
+   - **Automated Multi-Viewport Screenshot Capture:** Never consider a UI complete until executing automated headless Chromium rendering via `scripts/screenshot_audit.py` (or `vibe_cli.py screenshot`) capturing both **Desktop (1440px)** and **Mobile (390px)** into `.test-artifacts/screenshots/`, plus full-page vertical verification.
+   - **Active Cognitive Review Protocol (ایده پردازی و ممیزی با اسکرین شات تمام قد):** The agent MUST view captured PNG files (`view_file`), actively scrutinize them from header to footer (inspecting vertical rhythm, contrast harmony, card boundaries, real CDN photography, and light/dark balance), and self-heal any detected visual defects before reporting completion.
+
+### 🤫 Silent Baseline Hygiene (بهداشت پس زمینه بدون خودنمایی):
+- Mechanical hygiene factors—such as clean vector SVGs over raw emojis, legible contrast, and on-demand scoped RTL for Persian/Arabic—are **handled quietly in the background**.
 - Never distract from core design fundamentals (whitespace, layout balance, typography, imagery) by over-indexing on minor mechanical checks.
 
 ---
@@ -148,7 +146,7 @@ When building Persian, Arabic, or Bilingual LTR/RTL interfaces:
 
 ## 🌟 The Lightswind Kinetic Living Benchmark (Living Web Standard)
 To guarantee generated interfaces feel tactile, magnetic, and alive rather than static templates:
-1. **Curated Editorial Photography via AssetDirector:** Eliminate empty grey boxes with camera icons. Always embed domain-curated high-resolution Unsplash photography with `loading="lazy"`, `decoding="async"`, and dark gradient scrim overlays ensuring WCAG AAA text contrast.
+1. **Curated Editorial Photography via Asset Vault:** Eliminate empty grey boxes with camera icons. Always embed domain-curated high-resolution Unsplash photography from `data/unsplash_assets.json` and `skills/ui-kit/references/curated_unsplash_vault.md` with explicit focal dimensions (`&auto=format&fit=crop&w=1200&q=80` for heroes, `w=600&h=400` for cards), `loading="lazy"`, `decoding="async"`, and dark gradient scrim overlays ensuring WCAG AAA text contrast.
 2. **Kinetic Trailing Arrow Pointer Engine:**
    - Precision center dot (`#vibeCursorDot`, 8px circle, tracks pointer immediately).
    - Trailing chevron/arrow pointer (`#vibeCursorFollower`, 50x54 SVG path, spring damping lag, neon glow drop-shadow).

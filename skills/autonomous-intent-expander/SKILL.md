@@ -1,13 +1,16 @@
 ---
 name: autonomous-intent-expander
-description: Opinionated 30-parameter intent expansion engine that synthesizes complete technical, aesthetic, and architectural specifications from sparse prompts using a calibrated Ambiguity Budget.
+description: Streamlined intent expansion engine that synthesizes architectural specifications from sparse prompts anchored in the Two Golden Pillars (Trend Inspiration & Living Visual Feedback).
 triggers: ["expand intent", "auto-spec", "read my mind", "full architecture", "scale this", "deepen constraints", "lazy prompt", "complete website design", "requirements spec"]
 ---
 
-# 🧠 Autonomous Intent Expander (30-Parameter Specification Engine)
+# 🧠 Autonomous Intent Expander (v6.0.0 Architecture Core)
 
 ## 🎯 Purpose & Philosophy
-The `autonomous-intent-expander` skill eliminates friction and interrogation fatigue while preventing blind hallucinations. When a user provides a minimal or ambiguous prompt (e.g., *"Build gym website"*, *"Design aesthetic dental clinic website"*), this engine applies **opinionated default inference** governed by a strict **Ambiguity Budget**.
+The `autonomous-intent-expander` skill eliminates friction and interrogation fatigue while preventing blind hallucinations. When a user provides a minimal or ambiguous prompt (e.g., *"Build gym website"*, *"Design aesthetic dental clinic website"*), this engine applies **opinionated default inference** governed by **The Two Golden Pillars**:
+1. **Pillar 1: Deep Trend Research & Inspiration** (Sourcing world-class aesthetic benchmarks from Mobbin, Dribbble, Figma Community, Godly, and Awwwards; establishing domain-tailored visual direction with Vibrant Light Mode as the primary living default).
+2. **Pillar 2: Living Visual Feedback Loop** (Preparing deterministic layout specifications calibrated for headless Playwright multi-viewport screenshot verification and automated visual repair).
+
 
 ---
 
@@ -38,51 +41,50 @@ The `autonomous-intent-expander` skill eliminates friction and interrogation fat
    python scripts/search.py "<user prompt>" --pretty
    ```
 
-3. **Structured Specification Pipeline (Core vs. Conditional Parameters):**
-   Synthesizes an explicit architectural contract without inflating irrelevant metadata:
-   
-   **A. Core Parameters (Universal for all interfaces):**
-   - **P01-P05: Intent & Product Foundations** (Archetype, Target Persona, Core Job-To-Be-Done, Primary CTA, Secondary Micro-Action).
-   - **P06-P08: Trust & Value Mechanics** (Objection Neutralization, Evidence Density, Transparent Risk Reversal).
-   - **P09-P13: Visual Chemistry & Tokens** (Canvas Base, Surface Layers, Accent Palette, Functional Colors, Border Radius).
-   - **P14-P17: Typography & Spatial Rhythm** (Display Font, Body Font, Tabular Metric Font, 8pt Spacing Cadence).
-   - **P18-P21: Motion & Interaction Model** (Scroll Mechanics, Interactive Hero Module, SVG Vector Iconography, Transition Curves).
-   - **P22-P24: Narrative & Copy Architecture** (BLUF Value Hook, Problem/Solution Matrix, Brand Voice Register).
-   
-   **B. Conditional Domain Parameters (Synthesized only when contextually relevant):**
-   - **P25: Local Geo-Coordinates & Address** *(Conditional: Local Trades, Hospitality, Brick-and-Mortar only; skipped for SaaS).*
-   - **P26: Clinical / Board Certification Proof** *(Conditional: Healthcare, Medical, Legal only).*
-   - **P27: Public Web Schema & Wikidata Entity Graph** *(Conditional: Public discoverable SEO sites only; skipped for internal dashboards).*
-   - **P28: Financial Math & Transaction Guardrails** *(Conditional: FinTech, Trading, Payment flows only).*
-   - **P29-P30: Performance & Isolation Budgets** (Core Web Vitals Budget, Boundary Isolation).
+3. **The 6-Dimensional Streamlined Architecture:**
+   Instead of overwhelming the agent's attention window with legacy parameter bloat, the expander synthesizes 6 essential dimensions:
+   1. **D1: Domain Archetype & Target Persona** (Operational stakes, trust level, and primary conversion goal).
+   2. **D2: Living Visual Direction & Light Palette Default** (Crisp white canvas `#ffffff` / `oklch(0.99 0.002 260)`, surface `oklch(0.97 0.005 260)`, dark slate text `#0f172a`, and vibrant primary accent `oklch(0.55 0.22 260)`).
+   3. **D3: Curated Real Imagery Specification** (High-res Unsplash CDN URLs from `data/unsplash_assets.json` and `skills/ui-kit/references/curated_unsplash_vault.md`).
+   4. **D4: Typography & 8pt Spatial Rhythm** (Bold display headers, readable body font, and generous padding).
+   5. **D5: Living Micro-States & Components** (Modular cards, active navigation, interactive sliders/tabs from `skills/ui-kit`).
+   6. **D6: On-Demand RTL & Language Protocol** (Disabled by default; activated strictly on-demand for Persian/Arabic queries with `<bdi>` isolation).
 
 ---
 
 ## 📄 4. Canonical Machine-Readable Output (`design-spec.json`)
 
-When requested or when compiling specs for downstream build pipelines, `autonomous-intent-expander` outputs this formal JSON Design Contract:
+When requested or when compiling specs for downstream build pipelines, `autonomous-intent-expander` outputs this clean JSON Design Contract:
 
 ```json
 {
   "$schema": "../../schemas/design-spec.v1.schema.json",
-  "spec_version": "2.2.0",
+  "spec_version": "6.0.0",
   "domain_archetype": "HIGH_PERFORMANCE_SAAS",
-  "visual_chemistry": "MINIMALIST_SAAS",
+  "visual_chemistry": "STRIPE_CRISP_LIGHT",
   "core_parameters": {
     "primary_palette": {
-      "canvas_oklch": "oklch(0.14 0.005 260)",
-      "surface_oklch": "oklch(0.18 0.008 260)",
-      "primary_accent_oklch": "oklch(0.65 0.22 265)",
-      "border_oklch": "oklch(0.28 0.01 260)"
+      "canvas_oklch": "oklch(0.99 0.002 260)",
+      "surface_oklch": "oklch(0.97 0.005 260)",
+      "primary_accent_oklch": "oklch(0.55 0.22 260)",
+      "border_oklch": "oklch(0.92 0.008 260)"
     },
     "typography_pair": {
-      "display_font": "Inter, system-ui, sans-serif",
+      "display_font": "Plus Jakarta Sans, Inter, system-ui, sans-serif",
       "body_font": "Inter, system-ui, sans-serif",
       "mono_font": "JetBrains Mono, monospace"
     },
-    "surface_treatment": "subtle_mesh_glow_with_svg_noise",
+    "surface_treatment": "crisp_light_with_subtle_elevation",
     "grid_density": "bento_asymmetric",
-    "hero_composition": "split_terminal"
+    "hero_composition": "split_visual_showcase"
+  },
+  "asset_strategy": {
+    "provider": "curated_unsplash_vault",
+    "domain_key": "saas_b2b_enterprise",
+    "dimensions": {
+      "hero": "&auto=format&fit=crop&w=1200&q=80",
+      "card": "&auto=format&fit=crop&w=600&h=400&q=80"
+    }
   },
   "accessibility_contract": {
     "wcag_level": "AA",
@@ -92,9 +94,9 @@ When requested or when compiling specs for downstream build pipelines, `autonomo
     "reduced_motion_strategy": "functional_only"
   },
   "semantic_rtl_contract": {
-    "enabled": true,
+    "enabled": false,
     "physical_macro_stability": true,
-    "bidi_isolation": true,
+    "bidi_isolation": false,
     "code_ltr_enforced": true
   },
   "novelty_budget": {

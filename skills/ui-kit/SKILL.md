@@ -6,11 +6,20 @@ triggers: ["ui-kit", "uikit", "beautifului", "beui", "rareui", "transitions.dev"
 
 # 🎨 UI-Kit: Exhaustive AI-Native & Modern Component Recipes
 
-`ui-kit` is a 100% domain-agnostic component encyclopedia and design intelligence engine. It contains 70+ accessible component recipes and reference implementations across premier modern design ecosystems.
+`ui-kit` is a 100% domain-agnostic component encyclopedia and design intelligence engine. It contains 70+ accessible component recipes and reference implementations across premier modern design ecosystems, anchored directly in **The Two Golden Pillars** (Trend Inspiration & Living Visual Feedback).
 
 ---
 
-## 🌐 The 7 Pillar Resource Catalogs
+## 🏛️ The Two Golden Pillars of Component Selection
+
+1. **Pillar 1: Deep Trend Inspiration & Benchmark Aesthetics**:
+   Select components sourced from elite design benchmarks (Beautiful UI, Shadcn, BeUI, Rare UI, Transitions.dev, and Curated Unsplash Vault). Default to vibrant, modern light mode with high-contrast typography, avoiding dark-mode bias unless the domain explicitly demands it (e.g., terminal or crypto trading).
+2. **Pillar 2: Living Visual Feedback & Render Verifiability**:
+   Every component enforces deterministic container sizing, responsive aspect ratios (`16:9`, `3:2`, `4:5`, `1:1`), zero cumulative layout shift (CLS), and explicit demarcation slots, calibrated for headless Playwright multi-viewport screenshot auditing and automated healing.
+
+---
+
+## 🌐 The 8 Pillar Resource Catalogs
 
 | Catalog Reference | Source / Provenance | Component Scope |
 | :--- | :--- | :--- |
@@ -21,6 +30,7 @@ triggers: ["ui-kit", "uikit", "beautifului", "beui", "rareui", "transitions.dev"
 | [`references/data_and_flow.md`](references/data_and_flow.md) | **Flow & Metric Visualization** | **Workflow & Canvas Nodes:** Modular Trigger Nodes, If/Else Conditional Splitters, Action Execution Cards, Micro Sparkline Meters, Dotted Grid Canvas. |
 | [`references/physics_transitions_catalog.md`](references/physics_transitions_catalog.md) | **[Transitions.dev](https://transitions.dev)** (Zero-Dep) | **Zero-Dependency Motion:** Pure CSS Grid Dynamic Height Accordions (`0fr` -> `1fr`), Spring Easing Bezier Curves, Staggered List Reveals, JS Number Flip Counters, 3D Tilt Cards. |
 | [`references/tokens_and_theme_engine.md`](references/tokens_and_theme_engine.md) | **Universal Design System** | **Tokens & Layouts:** Theme Variables (Light, Dark, Custom), Directional Logical CSS (`ms-*`, `me-*`, `start-*`, `end-*`) for universal LTR & RTL support. |
+| [`references/curated_unsplash_vault.md`](references/curated_unsplash_vault.md) | **Curated Unsplash Asset Vault** | **24 Canonical Domains:** Verified high-resolution CDN photography with responsive WebP focal dimensions (`w=1200` heroes, `w=600&h=400` cards) across all 24 industry domains with zero gray placeholder boxes. |
 
 ---
 
@@ -37,24 +47,27 @@ When generating or adapting any component from this kit, the AI Agent must stric
 ## ⚡ Universal Usage Workflow
 
 Whenever asked to build, design, or refactor any frontend component or view:
-1. **Identify the Component Domain:** AI Reasoning, Forms, Navigation, Data Visualization, or Layout.
-2. **Read the Target Reference:** Pull exact markup, Tailwind utility classes, and zero-JS transitions from `references/`.
-3. **Adapt Seamlessly:** Match the target framework (React, Vue, HTML/JS, Tailwind), color theme, and language direction (LTR / RTL).
+1. **Identify the Component Domain & Aesthetic Anchor:** Anchor to Pillar 1 by selecting cohesive primitives matching domain blueprints. Default to vibrant light mode unless domain explicitly dictates otherwise.
+2. **Read the Target Reference:** Pull exact markup, Tailwind utility classes, zero-JS transitions, and verified photography from `references/`.
+3. **Adapt Seamlessly:** Match the target framework (React, Vue, HTML/JS, Tailwind), color theme, and language direction.
+4. **Verify Living Visuals:** Align with Pillar 2 by ensuring all media containers and layout nodes render cleanly under multi-viewport Playwright screenshot audits.
 
 ---
 
-## 📐 Semantic & Fixed-Structure RTL Architecture
+## 📐 On-Demand Scoped RTL & Semantic Architecture
 
-When implementing components in Persian, Arabic, or Bilingual LTR/RTL views:
+RTL layout rules and `<bdi>` bidirectional contracts are strictly scoped to on-demand Persian/Arabic execution (never enforced by default on universal or English interfaces). When explicitly executing for Persian, Arabic, or bilingual viewports:
 1. **Preserve Macro Layout & Coordinates:**
-   - Global grid columns, module cards, slider tracks, and navigation bars remain physically stable. Do not indiscriminately flip entire layout grids.
+   Global grid columns, module cards, slider tracks, and navigation bars remain physically stable. Do not indiscriminately flip entire layout grids.
 2. **Target Textual & Paragraph Direction:**
-   - Apply `direction: rtl` and text alignments to text nodes, headings, and descriptions.
+   Apply `direction: rtl` and text alignments to text nodes, headings, and descriptions.
 3. **Mirror Semantic Directional Affordances:**
-   - Navigation arrows (previous/next), sequential timelines, step wizards, and back-buttons must mirror semantically to follow reading flow.
+   Navigation arrows (previous/next), sequential timelines, step wizards, and back-buttons must mirror semantically to follow reading flow.
 4. **BiDi Resilience & Strict Monospace LTR:**
-   - Mixed English brand names or tech terms inside Persian sentences must not scramble punctuation (`unicode-bidi: plaintext` or `<bdi>`).
-   - Code blocks, numbers, metric counters (`99.98%`), and URLs always stay strictly `direction: ltr !important; text-align: left !important`.
+   Mixed English brand names or tech terms inside Persian sentences must not scramble punctuation (`unicode-bidi: plaintext` or `<bdi>`).
+   Code blocks, numbers, metric counters (`99.98%`), and URLs always stay strictly `direction: ltr !important; text-align: left !important`.
+5. **Zero ZWNJ Protocol:**
+   All Persian text in copy, comments, and configuration must use standard spaces exclusively. The zero-width non-joiner (`\u200c`) is strictly forbidden.
 
 ---
 

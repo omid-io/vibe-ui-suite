@@ -1,5 +1,5 @@
 """
-vibe_core — Vibe UI V3 Core Architecture Engine
+vibe_core — Vibe UI Suite v6.0.0 Architecture Engine
 Autonomous Design Decision Engine, Director, Recommendation & Genome
 """
 
@@ -13,7 +13,7 @@ from vibe_core.constants import (
     MAX_DEFECTS_IN_CORRECTION_PROMPT,
 )
 
-__version__ = "3.1.0"
+__version__ = "6.0.0"
 
 __all__ = [
     "MAX_BLUR_SURFACES",

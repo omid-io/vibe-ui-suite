@@ -150,7 +150,7 @@ def test_constants_and_timestamp_integrity():
 
 def main():
     print("=" * 70)
-    print("🧪 VIBE UI V3 FULL PIPELINE INTEGRATION TESTS (E2E)")
+    print("🧪 VIBE UI V6 FULL PIPELINE INTEGRATION TESTS (E2E)")
     print("=" * 70)
 
     tests = [

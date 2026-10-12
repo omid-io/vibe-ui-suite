@@ -1,0 +1,638 @@
+{
+  "version": "6.0.0",
+  "generated_at": "2026-10-10T16:30:00Z",
+  "description": "Curated high-resolution Unsplash CDN photographic asset catalog for all 24 canonical domains in Vibe UI Suite.",
+  "cdn_base": "https://images.unsplash.com",
+  "focal_dimensions": {
+    "hero": "&auto=format&fit=crop&w=1200&q=80",
+    "card": "&auto=format&fit=crop&w=600&h=400&q=80",
+    "square": "&auto=format&fit=crop&w=400&h=400&q=80",
+    "wide": "&auto=format&fit=crop&w=1600&h=900&q=80"
+  },
+  "domains": {
+    "beauty_clinical_wellness": {
+      "domain_id": "beauty_clinical_wellness",
+      "display_name": "Beauty, Clinical & Wellness",
+      "display_name_fa": "کلینیک زیبایی، پوست و سلامت",
+      "category": "Health & Lifestyle",
+      "hero": {
+        "photo_id": "photo-1629909613654-28e377c37b09",
+        "url": "https://images.unsplash.com/photo-1629909613654-28e377c37b09?auto=format&fit=crop&w=1200&q=80",
+        "aspect_ratio": "aspect-[4/5] sm:aspect-[3/4]",
+        "role": "clinical_portrait",
+        "overlay_style": "subtle_vignette",
+        "caption": "Clinical Outcome Visual Slot (Laser Rejuvenation Protocol)",
+        "caption_fa": "فریم نتایج بالینی جوانسازی پوست و پروتکل درمانی",
+        "alt": "Clinical outcome visual slot for dermatology and laser therapy"
+      },
+      "card": {
+        "photo_id": "photo-1629909613654-28e377c37b09",
+        "url": "https://images.unsplash.com/photo-1629909613654-28e377c37b09?auto=format&fit=crop&w=600&h=400&q=80",
+        "aspect_ratio": "aspect-[3/2]",
+        "role": "card_feature",
+        "caption": "Aesthetic Treatment & Dermatological Care",
+        "caption_fa": "خدمات زیبایی و مراقبت تخصصی پوست",
+        "alt": "Dermatological care and aesthetic treatment room"
+      },
+      "tags": ["beauty", "clinical", "wellness", "dermatology", "skincare"]
+    },
+    "fintech_banking": {
+      "domain_id": "fintech_banking",
+      "display_name": "FinTech & Digital Banking",
+      "display_name_fa": "فین تک و بانکداری دیجیتال",
+      "category": "Finance",
+      "hero": {
+        "photo_id": "photo-1642543492481-44e81e3914a7",
+        "url": "https://images.unsplash.com/photo-1642543492481-44e81e3914a7?auto=format&fit=crop&w=1200&q=80",
+        "aspect_ratio": "aspect-[16/9] sm:aspect-[16/10]",
+        "role": "capital_portfolio",
+        "overlay_style": "subtle_financial_grid",
+        "caption": "Smart Capital Allocation & Real-Time Liquidity Chart",
+        "caption_fa": "نمودار تخصیص سرمایه هوشمند و شاخص نقدشوندگی",
+        "alt": "Real-time financial capital allocation dashboard and analytics"
+      },
+      "card": {
+        "photo_id": "photo-1642543492481-44e81e3914a7",
+        "url": "https://images.unsplash.com/photo-1642543492481-44e81e3914a7?auto=format&fit=crop&w=600&h=400&q=80",
+        "aspect_ratio": "aspect-[3/2]",
+        "role": "card_feature",
+        "caption": "Digital Banking & Liquidity Management",
+        "caption_fa": "بانکداری دیجیتال و مدیریت نقدینگی",
+        "alt": "Digital banking and investment portfolio analytics"
+      },
+      "tags": ["fintech", "banking", "finance", "liquidity", "investments"]
+    },
+    "crypto_trading_web3": {
+      "domain_id": "crypto_trading_web3",
+      "display_name": "Crypto, Web3 & DeFi",
+      "display_name_fa": "رمزارز و پلتفرم معاملاتی غیرمتمرکز",
+      "category": "Finance & Web3",
+      "hero": {
+        "photo_id": "photo-1639762681485-074b7f938ba0",
+        "url": "https://images.unsplash.com/photo-1639762681485-074b7f938ba0?auto=format&fit=crop&w=1200&q=80",
+        "aspect_ratio": "aspect-[16/9] sm:aspect-[21/9]",
+        "role": "orderbook_depth",
+        "overlay_style": "cyber_matrix_glow",
+        "caption": "Aggregated Liquidity Depth & Low-Slippage Routing Matrix",
+        "caption_fa": "عمق نقدینگی صرافی نامتمرکز و ماتریکس مسیریابی",
+        "alt": "Decentralized crypto orderbook depth and liquidity routing visualization"
+      },
+      "card": {
+        "photo_id": "photo-1639762681485-074b7f938ba0",
+        "url": "https://images.unsplash.com/photo-1639762681485-074b7f938ba0?auto=format&fit=crop&w=600&h=400&q=80",
+        "aspect_ratio": "aspect-[3/2]",
+        "role": "card_feature",
+        "caption": "Decentralized Liquidity & Token Swap",
+        "caption_fa": "نقدینگی نامتمرکز و تبادل توکن",
+        "alt": "Web3 decentralized token exchange visualization"
+      },
+      "tags": ["crypto", "web3", "defi", "trading", "blockchain"]
+    },
+    "devops_cloud_terminal": {
+      "domain_id": "devops_cloud_terminal",
+      "display_name": "DevOps & Cloud Infrastructure",
+      "display_name_fa": "دواپس و زیرساخت های ابری",
+      "category": "Developer Tools",
+      "hero": {
+        "photo_id": "photo-1558494949-ef010cbdcc31",
+        "url": "https://images.unsplash.com/photo-1558494949-ef010cbdcc31?auto=format&fit=crop&w=1200&q=80",
+        "aspect_ratio": "aspect-[16/10] sm:aspect-[16/9]",
+        "role": "cluster_topology",
+        "overlay_style": "terminal_hud_scanline",
+        "caption": "Multi-Region Kubernetes Pod Topology & Egress Flow",
+        "caption_fa": "توپولوژی نودهای ابری کوبرنتیز و مسیرهای شبکه",
+        "alt": "High-density cloud server racks and Kubernetes network infrastructure"
+      },
+      "card": {
+        "photo_id": "photo-1558494949-ef010cbdcc31",
+        "url": "https://images.unsplash.com/photo-1558494949-ef010cbdcc31?auto=format&fit=crop&w=600&h=400&q=80",
+        "aspect_ratio": "aspect-[3/2]",
+        "role": "card_feature",
+        "caption": "Cluster Node Telemetry & Egress Monitoring",
+        "caption_fa": "تله متری نودهای کلاستر و نظارت بر ترافیک شبکه",
+        "alt": "Cloud infrastructure server racks and node status"
+      },
+      "tags": ["devops", "cloud", "infrastructure", "kubernetes", "servers"]
+    },
+    "saas_b2b_enterprise": {
+      "domain_id": "saas_b2b_enterprise",
+      "display_name": "B2B Enterprise SaaS",
+      "display_name_fa": "نرم افزار سازمانی ابری",
+      "category": "Enterprise Software",
+      "hero": {
+        "photo_id": "photo-1460925895917-afdab827c52f",
+        "url": "https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=1200&q=80",
+        "aspect_ratio": "aspect-[16/9] sm:aspect-[16/10]",
+        "role": "enterprise_dashboard",
+        "overlay_style": "corporate_clean_surface",
+        "caption": "Unified Enterprise Orchestration & Provisioning Suite",
+        "caption_fa": "داشبورد یکپارچه مدیریت فرآیندهای سازمانی",
+        "alt": "Enterprise dashboard analytics and business performance metrics"
+      },
+      "card": {
+        "photo_id": "photo-1460925895917-afdab827c52f",
+        "url": "https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=600&h=400&q=80",
+        "aspect_ratio": "aspect-[3/2]",
+        "role": "card_feature",
+        "caption": "Business Intelligence & Pipeline Analytics",
+        "caption_fa": "هوش تجاری و تحلیل جریان های کاری سازمانی",
+        "alt": "Business growth charts and enterprise workflow metrics"
+      },
+      "tags": ["saas", "enterprise", "b2b", "analytics", "dashboard"]
+    },
+    "ai_developer_platform": {
+      "domain_id": "ai_developer_platform",
+      "display_name": "AI Developer Platform",
+      "display_name_fa": "پلتفرم توسعه هوش مصنوعی مولد",
+      "category": "Artificial Intelligence",
+      "hero": {
+        "photo_id": "photo-1618005182384-a83a8bd57fbe",
+        "url": "https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?auto=format&fit=crop&w=1200&q=80",
+        "aspect_ratio": "aspect-[16/9] sm:aspect-[21/9]",
+        "role": "neural_latent_canvas",
+        "overlay_style": "deep_space_spectrum",
+        "caption": "Transformer Attention Map & Cluster Latency Telemetry",
+        "caption_fa": "نقشه توجه لایه های هوش مصنوعی و تله متری کلاستر GPU",
+        "alt": "Generative neural latent spectrum and abstract compute visualization"
+      },
+      "card": {
+        "photo_id": "photo-1618005182384-a83a8bd57fbe",
+        "url": "https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?auto=format&fit=crop&w=600&h=400&q=80",
+        "aspect_ratio": "aspect-[3/2]",
+        "role": "card_feature",
+        "caption": "Model Inference Weights & Latent Geometry",
+        "caption_fa": "وزن های استنتاج مدل و هندسه فضاهای پنهان",
+        "alt": "Neural vector space dynamic gradient visualization"
+      },
+      "tags": ["ai", "machine_learning", "neural_networks", "developer", "platform"]
+    },
+    "ecommerce_luxury_fashion": {
+      "domain_id": "ecommerce_luxury_fashion",
+      "display_name": "Haute Horology & Luxury Fashion",
+      "display_name_fa": "مد فاخر و ساعت سازی لوکس",
+      "category": "Luxury Retail",
+      "hero": {
+        "photo_id": "photo-1539109136881-3be0616acf4b",
+        "url": "https://images.unsplash.com/photo-1539109136881-3be0616acf4b?auto=format&fit=crop&w=1200&q=80",
+        "aspect_ratio": "aspect-square sm:aspect-[4/5]",
+        "role": "atelier_lookbook",
+        "overlay_style": "editorial_soft_shadow",
+        "caption": "Handcrafted Bespoke Atelier Collection • Limited Edition",
+        "caption_fa": "کلکسیون دست دوز آتلیه مد اختصاصی با پارچه های ارگانیک",
+        "alt": "High-fashion editorial model in bespoke luxury designer garments"
+      },
+      "card": {
+        "photo_id": "photo-1539109136881-3be0616acf4b",
+        "url": "https://images.unsplash.com/photo-1539109136881-3be0616acf4b?auto=format&fit=crop&w=600&h=400&q=80",
+        "aspect_ratio": "aspect-[3/2]",
+        "role": "card_feature",
+        "caption": "Haute Couture Editorial Lookbook",
+        "caption_fa": "لوک بوک تحلیلی مد فاخر و اکسسوری های دست ساز",
+        "alt": "Bespoke fashion garments and luxury runway collection"
+      },
+      "tags": ["luxury", "fashion", "haute_couture", "atelier", "editorial"]
+    },
+    "ecommerce_mass_market": {
+      "domain_id": "ecommerce_mass_market",
+      "display_name": "E-Commerce Retail Storefront",
+      "display_name_fa": "فروشگاه آنلاین و خرده فروشی دیجیتال",
+      "category": "Retail & Commerce",
+      "hero": {
+        "photo_id": "photo-1441986300917-64674bd600d8",
+        "url": "https://images.unsplash.com/photo-1441986300917-64674bd600d8?auto=format&fit=crop&w=1200&q=80",
+        "aspect_ratio": "aspect-square sm:aspect-[4/3]",
+        "role": "product_catalog_showcase",
+        "overlay_style": "high_fidelity_storefront",
+        "caption": "Dynamic Catalog Showcase with Tiered Volume Discounts",
+        "caption_fa": "کاتالوگ محصولات با اعمال آنی تخفیف های پلکانی",
+        "alt": "Modern bright retail storefront display and product collection"
+      },
+      "card": {
+        "photo_id": "photo-1441986300917-64674bd600d8",
+        "url": "https://images.unsplash.com/photo-1441986300917-64674bd600d8?auto=format&fit=crop&w=600&h=400&q=80",
+        "aspect_ratio": "aspect-[3/2]",
+        "role": "card_feature",
+        "caption": "Retail Inventory & Fast Shipping Catalog",
+        "caption_fa": "موجودی انبار و کاتالوگ ارسال سریع کالا",
+        "alt": "Organized boutique retail display and merchandise"
+      },
+      "tags": ["ecommerce", "retail", "shopping", "storefront", "products"]
+    },
+    "real_estate_architecture": {
+      "domain_id": "real_estate_architecture",
+      "display_name": "Prime Architecture & Real Estate",
+      "display_name_fa": "املاک لوکس و معماری معاصر",
+      "category": "Real Estate & Architecture",
+      "hero": {
+        "photo_id": "photo-1600585154340-be6161a56a0c",
+        "url": "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=1200&q=80",
+        "aspect_ratio": "aspect-[16/9] sm:aspect-[3/2]",
+        "role": "architectural_perspective",
+        "overlay_style": "specular_floorplan_tint",
+        "caption": "Prime Residential Penthouse Portfolio & Skyline View",
+        "caption_fa": "پلان معماری پنت هاوس اختصاصی و چشم انداز پانوراما",
+        "alt": "Contemporary luxury architectural villa with warm ambient lighting"
+      },
+      "card": {
+        "photo_id": "photo-1600585154340-be6161a56a0c",
+        "url": "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=600&h=400&q=80",
+        "aspect_ratio": "aspect-[3/2]",
+        "role": "card_feature",
+        "caption": "Modern Residence Exterior & Landscape",
+        "caption_fa": "نمای مدرن ویلا و محوطه سازی اختصاصی",
+        "alt": "Modern architectural luxury home exterior and pool"
+      },
+      "tags": ["real_estate", "architecture", "interior_design", "luxury_homes", "property"]
+    },
+    "healthcare_hospital_medical": {
+      "domain_id": "healthcare_hospital_medical",
+      "display_name": "Hospital & Clinical Diagnostics",
+      "display_name_fa": "بیمارستان و خدمات تشخیصی سلامت",
+      "category": "Healthcare & Medicine",
+      "hero": {
+        "photo_id": "photo-1519494026892-80bbd2d6fd0d",
+        "url": "https://images.unsplash.com/photo-1519494026892-80bbd2d6fd0d?auto=format&fit=crop&w=1200&q=80",
+        "aspect_ratio": "aspect-[4/3] sm:aspect-[16/10]",
+        "role": "clinical_diagnostic",
+        "overlay_style": "sterile_clinical_soft",
+        "caption": "FHIR-Compliant Electronic Health Record & Tele-Triage",
+        "caption_fa": "پرونده الکترونیک سلامت و تریاژ هوشمند بالینی",
+        "alt": "Clean modern hospital corridor and clinical medical diagnostic facility"
+      },
+      "card": {
+        "photo_id": "photo-1519494026892-80bbd2d6fd0d",
+        "url": "https://images.unsplash.com/photo-1519494026892-80bbd2d6fd0d?auto=format&fit=crop&w=600&h=400&q=80",
+        "aspect_ratio": "aspect-[3/2]",
+        "role": "card_feature",
+        "caption": "Medical Laboratory & Patient Tele-Triage",
+        "caption_fa": "مرکز تشخیصی آزمایشگاهی و پایش سلامت بیمار",
+        "alt": "State-of-the-art clinical healthcare facility"
+      },
+      "tags": ["healthcare", "hospital", "medical", "diagnostics", "telehealth"]
+    },
+    "education_edtech_lms": {
+      "domain_id": "education_edtech_lms",
+      "display_name": "EdTech & Digital Learning",
+      "display_name_fa": "سامانه آموزش تعاملی و دانشگاهی",
+      "category": "Education",
+      "hero": {
+        "photo_id": "photo-1523240795612-9a054b0db644",
+        "url": "https://images.unsplash.com/photo-1523240795612-9a054b0db644?auto=format&fit=crop&w=1200&q=80",
+        "aspect_ratio": "aspect-[16/9] sm:aspect-[16/10]",
+        "role": "curriculum_interactive",
+        "overlay_style": "educational_focus_glow",
+        "caption": "Adaptive Learning Graph & Mastery Certification Track",
+        "caption_fa": "مسیر یادگیری انطباقی و گراف تسلط بر مهارت ها",
+        "alt": "University students collaborating with digital laptops and learning materials"
+      },
+      "card": {
+        "photo_id": "photo-1523240795612-9a054b0db644",
+        "url": "https://images.unsplash.com/photo-1523240795612-9a054b0db644?auto=format&fit=crop&w=600&h=400&q=80",
+        "aspect_ratio": "aspect-[3/2]",
+        "role": "card_feature",
+        "caption": "Collaborative Study & Peer Review Groups",
+        "caption_fa": "یادگیری مشارکتی و کارگاه های تخصصی دانشجویی",
+        "alt": "Students engaged in collaborative educational study"
+      },
+      "tags": ["education", "edtech", "learning", "university", "curriculum"]
+    },
+    "creative_portfolio_agency": {
+      "domain_id": "creative_portfolio_agency",
+      "display_name": "Creative Design Agency",
+      "display_name_fa": "استودیو طراحی خلاق و برندینگ",
+      "category": "Design & Creative",
+      "hero": {
+        "photo_id": "photo-1507238691740-187a5b1d37b8",
+        "url": "https://images.unsplash.com/photo-1507238691740-187a5b1d37b8?auto=format&fit=crop&w=1200&q=80",
+        "aspect_ratio": "aspect-[16/10] sm:aspect-[3/2]",
+        "role": "editorial_case_study",
+        "overlay_style": "minimal_high_contrast",
+        "caption": "Award-Winning Brand Identity & Design System Deliverable",
+        "caption_fa": "نمونه کار هویت بصری جامع و سیستم طراحی برند",
+        "alt": "Designer workspace with sketches, brand typography, and laptop displays"
+      },
+      "card": {
+        "photo_id": "photo-1507238691740-187a5b1d37b8",
+        "url": "https://images.unsplash.com/photo-1507238691740-187a5b1d37b8?auto=format&fit=crop&w=600&h=400&q=80",
+        "aspect_ratio": "aspect-[3/2]",
+        "role": "card_feature",
+        "caption": "Brand Guidelines & Visual Identity Systems",
+        "caption_fa": "راهنمای هویت بصری و دیزاین سیستم خلاق",
+        "alt": "Design agency brand system development on desk"
+      },
+      "tags": ["portfolio", "creative", "design_agency", "branding", "ui_ux"]
+    },
+    "media_editorial_magazine": {
+      "domain_id": "media_editorial_magazine",
+      "display_name": "Editorial Media & Longform Journalism",
+      "display_name_fa": "نشریه تخصصی و رسانه تحلیلی",
+      "category": "Media & Publishing",
+      "hero": {
+        "photo_id": "photo-1505373877841-8d25f7d46678",
+        "url": "https://images.unsplash.com/photo-1505373877841-8d25f7d46678?auto=format&fit=crop&w=1200&q=80",
+        "aspect_ratio": "aspect-[3/4] sm:aspect-[4/5]",
+        "role": "longform_journalism",
+        "overlay_style": "monochrome_editorial",
+        "caption": "Investigative Edition Cover • Independent Journalism",
+        "caption_fa": "گزارش ویژه تحلیلی و روزنامه نگاری مستقل",
+        "alt": "Large keynote conference hall and editorial symposium auditorium"
+      },
+      "card": {
+        "photo_id": "photo-1505373877841-8d25f7d46678",
+        "url": "https://images.unsplash.com/photo-1505373877841-8d25f7d46678?auto=format&fit=crop&w=600&h=400&q=80",
+        "aspect_ratio": "aspect-[3/2]",
+        "role": "card_feature",
+        "caption": "Press Room Briefings & Investigative Articles",
+        "caption_fa": "جلسات اتاق خبر و مقالات تحقیقی تحلیلی",
+        "alt": "Auditorium press conference and keynote address"
+      },
+      "tags": ["media", "editorial", "journalism", "magazine", "publishing"]
+    },
+    "food_restaurant_cafe": {
+      "domain_id": "food_restaurant_cafe",
+      "display_name": "Artisanal Food & Restaurant",
+      "display_name_fa": "رستوران و کافه تجربی",
+      "category": "Food & Beverage",
+      "hero": {
+        "photo_id": "photo-1555396273-367ea4eb4db5",
+        "url": "https://images.unsplash.com/photo-1555396273-367ea4eb4db5?auto=format&fit=crop&w=1200&q=80",
+        "aspect_ratio": "aspect-[16/9] sm:aspect-[4/3]",
+        "role": "sensory_food_editorial",
+        "overlay_style": "warm_atmospheric_gradient",
+        "caption": "Signature Seasonal Degustation Menu Presentation",
+        "caption_fa": "معرفی منوی فصلی سرآشپز و هنر آشپزی ارگانیک",
+        "alt": "Gourmet dining restaurant interior with ambient warm chandeliers and tables"
+      },
+      "card": {
+        "photo_id": "photo-1555396273-367ea4eb4db5",
+        "url": "https://images.unsplash.com/photo-1555396273-367ea4eb4db5?auto=format&fit=crop&w=600&h=400&q=80",
+        "aspect_ratio": "aspect-[3/2]",
+        "role": "card_feature",
+        "caption": "Artisanal Gastronomy & Seasonal Tasting",
+        "caption_fa": "هنر چیدمان میز غذا و چشیدن طعم های فصلی",
+        "alt": "Elegant dining room ambiance and culinary table settings"
+      },
+      "tags": ["food", "restaurant", "cafe", "culinary", "gastronomy"]
+    },
+    "travel_hospitality_tourism": {
+      "domain_id": "travel_hospitality_tourism",
+      "display_name": "Luxury Travel & Hospitality",
+      "display_name_fa": "هتل داری و گردشگری لوکس",
+      "category": "Hospitality & Travel",
+      "hero": {
+        "photo_id": "photo-1566073771259-6a8506099945",
+        "url": "https://images.unsplash.com/photo-1566073771259-6a8506099945?auto=format&fit=crop&w=1200&q=80",
+        "aspect_ratio": "aspect-[16/9] sm:aspect-[3/2]",
+        "role": "destination_panoramic",
+        "overlay_style": "golden_hour_vignette",
+        "caption": "Exclusive Coastal Villa Retreat & Private Heliport",
+        "caption_fa": "ویلای ساحلی اختصاصی و چشم انداز طبیعی بکر",
+        "alt": "Luxury resort infinity pool overlooking tranquil coastal waters"
+      },
+      "card": {
+        "photo_id": "photo-1566073771259-6a8506099945",
+        "url": "https://images.unsplash.com/photo-1566073771259-6a8506099945?auto=format&fit=crop&w=600&h=400&q=80",
+        "aspect_ratio": "aspect-[3/2]",
+        "role": "card_feature",
+        "caption": "Boutique Resort Suites & Concierge Services",
+        "caption_fa": "سوئیت های اختصاصی ریزورت و خدمات اقامتی تشریفاتی",
+        "alt": "Tropical luxury resort suite and palm ocean scenery"
+      },
+      "tags": ["travel", "hospitality", "tourism", "resort", "vacation"]
+    },
+    "legal_compliance_law": {
+      "domain_id": "legal_compliance_law",
+      "display_name": "Legal & Corporate Compliance",
+      "display_name_fa": "مشاوره حقوقی و ممیزی مقرراتی",
+      "category": "Legal & Regulatory",
+      "hero": {
+        "photo_id": "photo-1589829545856-d10d557cf95f",
+        "url": "https://images.unsplash.com/photo-1589829545856-d10d557cf95f?auto=format&fit=crop&w=1200&q=80",
+        "aspect_ratio": "aspect-[16/9] sm:aspect-[4/3]",
+        "role": "statutory_compliance",
+        "overlay_style": "sober_navy_tint",
+        "caption": "Cross-Border Regulatory Compliance & Audit Assurance",
+        "caption_fa": "ممیزی مقرراتی حقوقی بین المللی و تطبیق استانداردها",
+        "alt": "Classic brass Lady Justice scales and legal reference volumes in library"
+      },
+      "card": {
+        "photo_id": "photo-1589829545856-d10d557cf95f",
+        "url": "https://images.unsplash.com/photo-1589829545856-d10d557cf95f?auto=format&fit=crop&w=600&h=400&q=80",
+        "aspect_ratio": "aspect-[3/2]",
+        "role": "card_feature",
+        "caption": "Corporate Governance & Regulatory Counsel",
+        "caption_fa": "مشاوره حاکمیت شرکتی و انطباق با قوانین دادگستری",
+        "alt": "Statutory legal scales of justice and corporate law books"
+      },
+      "tags": ["legal", "compliance", "law", "attorney", "regulatory"]
+    },
+    "gaming_entertainment_streaming": {
+      "domain_id": "gaming_entertainment_streaming",
+      "display_name": "Esports & Interactive Gaming",
+      "display_name_fa": "گیمینگ و استریمینگ تعاملی",
+      "category": "Gaming & Entertainment",
+      "hero": {
+        "photo_id": "photo-1542751371-adc38448a05e",
+        "url": "https://images.unsplash.com/photo-1542751371-adc38448a05e?auto=format&fit=crop&w=1200&q=80",
+        "aspect_ratio": "aspect-[16/9] sm:aspect-[21/9]",
+        "role": "gameplay_cinematic",
+        "overlay_style": "neon_raytraced_accent",
+        "caption": "Real-Time 4K Raytraced Stream & Sub-Millisecond Tickrate",
+        "caption_fa": "استریم با کیفیت 4K و تاخیر شبکه نزدیک به صفر",
+        "alt": "High-end esports gaming battlestation with neon ambient RGB lighting"
+      },
+      "card": {
+        "photo_id": "photo-1542751371-adc38448a05e",
+        "url": "https://images.unsplash.com/photo-1542751371-adc38448a05e?auto=format&fit=crop&w=600&h=400&q=80",
+        "aspect_ratio": "aspect-[3/2]",
+        "role": "card_feature",
+        "caption": "Interactive Live Broadcast & Low-Latency Chat",
+        "caption_fa": "پخش زنده تعاملی و گفتگوی برخط گیمرها",
+        "alt": "Ultrawide gaming monitor setup with mechanical keyboard"
+      },
+      "tags": ["gaming", "esports", "streaming", "entertainment", "battlestation"]
+    },
+    "automotive_ev_mobility": {
+      "domain_id": "automotive_ev_mobility",
+      "display_name": "Next-Gen EV Mobility & Automotive",
+      "display_name_fa": "خودروهای برقی و حمل ونقل نوین",
+      "category": "Automotive & Mobility",
+      "hero": {
+        "photo_id": "photo-1617814076367-b759c7d7e738",
+        "url": "https://images.unsplash.com/photo-1617814076367-b759c7d7e738?auto=format&fit=crop&w=1200&q=80",
+        "aspect_ratio": "aspect-[16/9] sm:aspect-[21/9]",
+        "role": "aerodynamic_chassis",
+        "overlay_style": "edge_glow_ambient",
+        "caption": "Silicon-Carbide 800V Powertrain & Telemetry Matrix",
+        "caption_fa": "شاسی آیرودینامیک و سیستم محرکه پیشرفته ۸۰۰ ولت",
+        "alt": "Sleek aerodynamic electric sports car profile with laser LED headlights"
+      },
+      "card": {
+        "photo_id": "photo-1617814076367-b759c7d7e738",
+        "url": "https://images.unsplash.com/photo-1617814076367-b759c7d7e738?auto=format&fit=crop&w=600&h=400&q=80",
+        "aspect_ratio": "aspect-[3/2]",
+        "role": "card_feature",
+        "caption": "Electric Vehicle Telemetry & Fast Charging",
+        "caption_fa": "تله متری خودروی الکتریکی و شبکه شارژ سریع",
+        "alt": "Modern electric concept vehicle exterior lines"
+      },
+      "tags": ["automotive", "electric_vehicles", "mobility", "transportation", "clean_energy"]
+    },
+    "logistics_supply_chain": {
+      "domain_id": "logistics_supply_chain",
+      "display_name": "Global Freight & Supply Chain",
+      "display_name_fa": "لجستیک بین الملل و زنجیره تامین",
+      "category": "Logistics & Transport",
+      "hero": {
+        "photo_id": "photo-1586528116311-ad8dd3c8310d",
+        "url": "https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?auto=format&fit=crop&w=1200&q=80",
+        "aspect_ratio": "aspect-[16/9] sm:aspect-[16/10]",
+        "role": "supply_telematics",
+        "overlay_style": "fleet_corridor_tint",
+        "caption": "Autonomous Global Freight Corridor & Fleet Tracking",
+        "caption_fa": "مسیریابی هوشمند ناوگان ترانزیت و نظارت بر بار",
+        "alt": "High-bay automated logistics fulfillment warehouse with organized cargo pallets"
+      },
+      "card": {
+        "photo_id": "photo-1586528116311-ad8dd3c8310d",
+        "url": "https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?auto=format&fit=crop&w=600&h=400&q=80",
+        "aspect_ratio": "aspect-[3/2]",
+        "role": "card_feature",
+        "caption": "Intermodal Container Terminal & Customs Routing",
+        "caption_fa": "پایانه کانتینری و مدیریت گمرکی ترانزیت کالا",
+        "alt": "Global cargo shipping distribution warehouse"
+      },
+      "tags": ["logistics", "supply_chain", "freight", "warehouse", "transportation"]
+    },
+    "energy_greentech_sustainability": {
+      "domain_id": "energy_greentech_sustainability",
+      "display_name": "GreenTech & Clean Energy Grid",
+      "display_name_fa": "انرژی پاک و فناوری های پایدار",
+      "category": "Energy & CleanTech",
+      "hero": {
+        "photo_id": "photo-1497435334941-8c899ee9e8e9",
+        "url": "https://images.unsplash.com/photo-1497435334941-8c899ee9e8e9?auto=format&fit=crop&w=1200&q=80",
+        "aspect_ratio": "aspect-[16/9] sm:aspect-[3/2]",
+        "role": "renewable_grid",
+        "overlay_style": "clean_solar_glow",
+        "caption": "Megawatt Solar Array & Battery Energy Storage System (BESS)",
+        "caption_fa": "نیروگاه خورشیدی متصل به شبکه و ذخیره سازی انرژی",
+        "alt": "Expansive photovoltaic solar farm panels basking in bright natural sunlight"
+      },
+      "card": {
+        "photo_id": "photo-1497435334941-8c899ee9e8e9",
+        "url": "https://images.unsplash.com/photo-1497435334941-8c899ee9e8e9?auto=format&fit=crop&w=600&h=400&q=80",
+        "aspect_ratio": "aspect-[3/2]",
+        "role": "card_feature",
+        "caption": "Photovoltaic Inverters & Smart Grid Microcells",
+        "caption_fa": "اینورترهای خورشیدی و شبکه هوشمند توزیع برق",
+        "alt": "Renewable solar energy generation facility"
+      },
+      "tags": ["energy", "greentech", "sustainability", "solar", "clean_power"]
+    },
+    "nonprofit_charity_social": {
+      "domain_id": "nonprofit_charity_social",
+      "display_name": "Social Impact & Humanitarian Aid",
+      "display_name_fa": "توانمندسازی مدنی و امور بشردوستانه",
+      "category": "Social Impact",
+      "hero": {
+        "photo_id": "photo-1488521787991-ed7bbaae773c",
+        "url": "https://images.unsplash.com/photo-1488521787991-ed7bbaae773c?auto=format&fit=crop&w=1200&q=80",
+        "aspect_ratio": "aspect-[16/9] sm:aspect-[4/3]",
+        "role": "humanitarian_impact",
+        "overlay_style": "warm_compassion_tint",
+        "caption": "On-the-Ground Direct Clean Water Installation & Solar Pump",
+        "caption_fa": "پروژه میدانی دسترسی مستقیم به آب پاک و توسعه پایدار",
+        "alt": "Heartwarming community volunteers and children engaged in humanitarian support"
+      },
+      "card": {
+        "photo_id": "photo-1488521787991-ed7bbaae773c",
+        "url": "https://images.unsplash.com/photo-1488521787991-ed7bbaae773c?auto=format&fit=crop&w=600&h=400&q=80",
+        "aspect_ratio": "aspect-[3/2]",
+        "role": "card_feature",
+        "caption": "Community Outreach & Direct Aid Delivery",
+        "caption_fa": "امدادرسانی مستقیم و پشتیبانی از جوامع محلی",
+        "alt": "Humanitarian volunteer workers delivering direct social aid"
+      },
+      "tags": ["nonprofit", "charity", "humanitarian", "social_impact", "community"]
+    },
+    "personal_branding_creator": {
+      "domain_id": "personal_branding_creator",
+      "display_name": "Executive Personal Branding",
+      "display_name_fa": "برند شخصی و تولید محتوای تخصصی",
+      "category": "Creator Economy",
+      "hero": {
+        "photo_id": "photo-1534528741775-53994a69daeb",
+        "url": "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=1200&q=80",
+        "aspect_ratio": "aspect-[4/5] sm:aspect-[1/1]",
+        "role": "creator_signature",
+        "overlay_style": "editorial_soft_studio",
+        "caption": "Curated Thought-Leadership Digest & Audio Studio Edition",
+        "caption_fa": "استودیوی اختصاصی تولید محتوای تخصصی و خبرنامه",
+        "alt": "High-fashion executive portrait with natural studio lighting and warm tones"
+      },
+      "card": {
+        "photo_id": "photo-1534528741775-53994a69daeb",
+        "url": "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=600&h=400&q=80",
+        "aspect_ratio": "aspect-[3/2]",
+        "role": "card_feature",
+        "caption": "Podcast Broadcast Studio & Author Bio",
+        "caption_fa": "استودیو ضبط پادکست و معرفی نویسنده تخصصی",
+        "alt": "Editorial portrait of creative entrepreneur in modern studio"
+      },
+      "tags": ["personal_branding", "creator", "podcast", "thought_leadership", "portfolio"]
+    },
+    "cybersecurity_identity_auth": {
+      "domain_id": "cybersecurity_identity_auth",
+      "display_name": "Zero-Trust Cybersecurity",
+      "display_name_fa": "امنیت ابری و احراز هویت یکپارچه",
+      "category": "Cybersecurity",
+      "hero": {
+        "photo_id": "photo-1563986768609-322da13575f3",
+        "url": "https://images.unsplash.com/photo-1563986768609-322da13575f3?auto=format&fit=crop&w=1200&q=80",
+        "aspect_ratio": "aspect-[16/9] sm:aspect-[21/9]",
+        "role": "zero_trust_matrix",
+        "overlay_style": "crimson_threat_grid",
+        "caption": "Continuous Behavioral Anomaly Detection & Zero-Trust Shield",
+        "caption_fa": "سپر دفاعی احراز هویت بدون گذرواژه و پایش تهدیدات",
+        "alt": "Modern cybersecurity operations screen monitoring network traffic and digital locks"
+      },
+      "card": {
+        "photo_id": "photo-1563986768609-322da13575f3",
+        "url": "https://images.unsplash.com/photo-1563986768609-322da13575f3?auto=format&fit=crop&w=600&h=400&q=80",
+        "aspect_ratio": "aspect-[3/2]",
+        "role": "card_feature",
+        "caption": "Threat Intelligence & Identity Verification Shield",
+        "caption_fa": "پایش بلادرنگ تهدیدات سایبری و سپر امنیتی احراز هویت",
+        "alt": "Network security monitor with cyber threat indicators"
+      },
+      "tags": ["cybersecurity", "zero_trust", "identity", "authentication", "infosec"]
+    },
+    "general_modern_saas": {
+      "domain_id": "general_modern_saas",
+      "display_name": "General Modern Cloud SaaS",
+      "display_name_fa": "نرم افزار ابری نوین و اتوماسیون",
+      "category": "Cloud Software",
+      "hero": {
+        "photo_id": "photo-1551288049-bebda4e38f71",
+        "url": "https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=1200&q=80",
+        "aspect_ratio": "aspect-[16/9] sm:aspect-[16/10]",
+        "role": "workflow_orchestration",
+        "overlay_style": "subtle_gradient",
+        "caption": "Autonomous Multi-Agent Workflow Engine & Automation Matrix",
+        "caption_fa": "موتور خودکارسازی فرآیندهای ابری و هوش مصنوعی مولد",
+        "alt": "Interactive modern cloud SaaS data analytics charts and collaboration platform"
+      },
+      "card": {
+        "photo_id": "photo-1551288049-bebda4e38f71",
+        "url": "https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=600&h=400&q=80",
+        "aspect_ratio": "aspect-[3/2]",
+        "role": "card_feature",
+        "caption": "Real-Time Pipeline Metrics & Multi-Agent Jobs",
+        "caption_fa": "شاخص های عملکردی برخط و فرآیندهای چندعاملی",
+        "alt": "Cloud workflow automation analytics dashboard"
+      },
+      "tags": ["saas", "cloud", "automation", "workflow", "dashboard"]
+    }
+  }
+}

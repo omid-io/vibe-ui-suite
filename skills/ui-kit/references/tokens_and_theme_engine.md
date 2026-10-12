@@ -2,6 +2,8 @@
 
 Universal CSS custom properties, color scales, typography tokens, and Tailwind configuration presets compatible with all UI-Kit components.
 
+> **Living Default Mandate:** `:root` defines **Vibrant Light Mode** as the primary living default (`--background: 0 0% 100%`). The `.dark` class serves strictly as an optional theme extension. All component layouts run standard LTR by default with zero bidirectional overhead, while logical properties ensure on-demand Persian/Arabic RTL works seamlessly without code duplication.
+
 ---
 
 ## 1. Universal CSS Theme Variables (Tailwind & Vanilla)

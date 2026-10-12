@@ -1,0 +1,807 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en" data-domain="ai_developer_platform" class="h-full">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>The Autonomous Intelligence Engine for Mission-Critical Agents</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Playfair+Display:ital,wght@0,600;1,400&family=Vazirmatn:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+:root {
+  --canvas-bg: oklch(0.13 0.006 260);
+  --surface-bg: oklch(0.18 0.008 260);
+  --accent: oklch(0.70 0.18 260);
+  --vibe-on-primary: oklch(0.12 0.02 85);
+  --border-subtle: oklch(0.28 0.01 260);
+  --text-primary: oklch(0.96 0.005 260);
+  --text-muted: oklch(0.68 0.01 260);
+  --radius-base: 8px;
+  --radius-container: 12px;
+  --radius-button: 8px;
+  --font-display: 'Space Grotesk', 'Vazirmatn', sans-serif;
+  --font-body: 'Inter', 'Vazirmatn', sans-serif;
+  --motion-lambda: 14;
+  --transition-duration: 200ms;
+}
+
+    body {
+      background-color: var(--canvas-bg);
+      color: var(--text-primary);
+      font-family: var(--font-body);
+      overflow-x: hidden;
+      unicode-bidi: plaintext;
+    }
+
+    bdi, .ltr-code {
+      direction: ltr !important;
+      unicode-bidi: isolate;
+    }
+
+    h1, h2, h3, .display-font {
+      font-family: var(--font-display);
+    }
+
+    button:focus-visible, a:focus-visible, input:focus-visible {
+      outline: 2px solid var(--accent);
+      outline-offset: 2px;
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, ::before, ::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+      }
+    }
+
+    /* Masterpiece Visual Engine: Atmospheric Lighting & Specular Physics */
+    .vibe-gradient-heading {
+      background: linear-gradient(180deg, var(--text-primary) 0%, color-mix(in oklch, var(--text-primary) 72%, transparent) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .vibe-spotlight-card {
+      position: relative;
+      overflow: hidden;
+      transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .vibe-spotlight-card::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      top: 0;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.22), transparent);
+      z-index: 10;
+      pointer-events: none;
+    }
+
+    .vibe-spotlight-card::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      border-radius: inherit;
+      background: radial-gradient(450px circle at var(--mouse-x, 50%) var(--mouse-y, 50%), color-mix(in oklch, var(--accent) 10%, transparent), transparent 75%);
+      pointer-events: none;
+      opacity: 0;
+      transition: opacity 0.35s ease;
+      z-index: 5;
+    }
+
+    .vibe-spotlight-card:hover::after {
+      opacity: 1;
+    }
+
+    .vibe-shimmer-btn {
+      position: relative;
+      overflow: hidden;
+      transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .vibe-shimmer-btn:hover {
+      box-shadow: 0 0 25px -4px var(--accent);
+    }
+
+    .vibe-shimmer-btn:active {
+      transform: scale(0.98);
+    }
+
+    .vibe-shimmer-btn::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 60%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.28), transparent);
+      transform: skewX(-20deg);
+      transition: none;
+      pointer-events: none;
+    }
+
+    .vibe-shimmer-btn:hover::after {
+      left: 140%;
+      transition: left 0.75s ease-in-out;
+    }
+
+    /* Lightswind Trailing Arrow Pointer & Spotlight Physics */
+    @media (pointer: fine) {
+      *, *::before, *::after {
+        cursor: none !important;
+      }
+      #vibeCursorDot {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 8px;
+        height: 8px;
+        background-color: var(--accent);
+        border-radius: 9999px;
+        pointer-events: none;
+        z-index: 10000;
+        transform: translate(-50%, -50%);
+        box-shadow: 0 0 10px var(--accent);
+        transition: opacity 0.2s ease, transform 0.15s cubic-bezier(0.16, 1, 0.3, 1), background-color 0.2s ease;
+      }
+      #vibeCursorDot.hover-target {
+        transform: translate(-50%, -50%) scale(1.5);
+        background-color: #ffffff;
+        box-shadow: 0 0 14px var(--accent), 0 0 25px var(--accent);
+      }
+      #vibeCursorFollower {
+        position: fixed;
+        top: 0;
+        left: 0;
+        pointer-events: none;
+        z-index: 9999;
+        will-change: transform;
+        color: var(--accent);
+        filter: drop-shadow(0 0 10px color-mix(in oklch, var(--accent) 55%, transparent));
+        transition: opacity 0.25s ease;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+      }
+      #vibeCursorFollower svg {
+        width: 36px;
+        height: 39px;
+        display: block;
+        transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+      }
+      #vibeCursorFollower.hover-active svg {
+        transform: scale(1.2);
+      }
+      #vibeCursorFollower.click-active svg {
+        transform: scale(0.85);
+      }
+      #vibeCursorBadge {
+        position: absolute;
+        top: 100%;
+        margin-top: 4px;
+        padding: 2px 7px;
+        border-radius: 9999px;
+        background-color: var(--surface-bg);
+        border: 1px solid var(--border-subtle);
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+        font-family: var(--font-body);
+        font-size: 9px;
+        font-weight: 800;
+        color: var(--accent);
+        letter-spacing: 0.05em;
+        opacity: 0;
+        transform: scale(0.85);
+        transition: opacity 0.2s ease, transform 0.2s ease;
+        white-space: nowrap;
+      }
+      #vibeCursorFollower.hover-active #vibeCursorBadge {
+        opacity: 1;
+        transform: scale(1);
+      }
+    }
+
+    .ambient-spotlight-layer {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 1;
+      background: radial-gradient(550px circle at var(--mouse-x, 50%) var(--mouse-y, 50%), color-mix(in oklch, var(--accent) 6%, transparent), transparent 70%);
+      transition: opacity 0.3s ease;
+    }
+
+    /* Scroll-Driven Kinetic Stagger Reveal & Lazy Loading Standard */
+    .vibe-reveal-node {
+      opacity: 0;
+      transform: translateY(28px);
+      transition: opacity 0.75s cubic-bezier(0.16, 1, 0.3, 1), transform 0.75s cubic-bezier(0.16, 1, 0.3, 1);
+      will-change: opacity, transform;
+    }
+    .vibe-reveal-node.vibe-revealed {
+      opacity: 1 !important;
+      transform: translateY(0) !important;
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .vibe-reveal-node {
+        opacity: 1 !important;
+        transform: none !important;
+        transition: none !important;
+      }
+    }
+    /* Lazy Editorial Image Smooth Fade-In */
+    img[loading="lazy"] {
+      opacity: 0;
+      transition: opacity 0.6s ease-in-out;
+    }
+    img[loading="lazy"].loaded {
+      opacity: 1 !important;
+    }
+  </style>
+</head>
+<body class="min-h-full flex flex-col antialiased relative">
+  <!-- Lightswind Trailing Arrow Pointer -->
+  <div id="vibeCursorDot" class="hidden md:block" aria-hidden="true"></div>
+  <div id="vibeCursorFollower" class="hidden md:flex" aria-hidden="true">
+    <svg xmlns="http://www.w3.org/2000/svg" width="36" height="39" viewBox="0 0 50 54" fill="none" class="pointer-events-none drop-shadow-md">
+      <path d="M42.6817 41.1495L27.5103 6.79925C26.7269 5.02557 24.2082 5.02558 23.3927 6.79925L7.59814 41.1495C6.75833 42.9759 8.52712 44.8902 10.4125 44.1954L24.3757 39.0496C24.8829 38.8627 25.4385 38.8627 25.9422 39.0496L39.8121 44.1954C41.6849 44.8902 43.4884 42.9759 42.6817 41.1495Z" fill="currentColor"/>
+      <path d="M43.7146 40.6933L28.5431 6.34306C27.3556 3.65428 23.5772 3.69516 22.3668 6.32755L6.57226 40.6778C5.3134 43.4156 7.97238 46.298 10.803 45.2549L24.7662 40.109C25.0221 40.0147 25.2999 40.0156 25.5494 40.1082L39.4193 45.254C42.2261 46.2953 44.9254 43.4347 43.7146 40.6933Z" stroke="currentColor" stroke-width="1.5"/>
+    </svg>
+    <span id="vibeCursorBadge"></span>
+  </div>
+
+  <!-- Ambient Cursor Spotlight Overlay -->
+  <div id="ambientSpotlightOverlay" class="ambient-spotlight-layer" aria-hidden="true"></div>
+
+  <!-- Atmospheric Canvas Background: Ambient Lighting & Grid System -->
+  <div class="fixed inset-0 pointer-events-none z-0 overflow-hidden" aria-hidden="true">
+    <div class="absolute inset-0 bg-[linear-gradient(to_right,rgba(128,128,128,0.06)_1px,transparent_1px),linear-gradient(to_bottom,rgba(128,128,128,0.06)_1px,transparent_1px)] bg-[size:36px_36px] [mask-image:radial-gradient(ellipse_60%_50%_at_50%_0%,#000_70%,transparent_100%)]"></div>
+    <div class="absolute -top-32 start-1/2 -translate-x-1/2 rtl:translate-x-1/2 w-[760px] h-[520px] bg-[var(--accent)]/[0.08] blur-[140px] rounded-full"></div>
+  </div>
+
+  <!-- Top Navigation Bar -->
+  <header class="w-full border-b border-[var(--border-subtle)] bg-[var(--surface-bg)]/85 backdrop-blur-md sticky top-0 z-30">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
+      <div class="flex items-center space-x-3 rtl:space-x-reverse">
+        <svg class="w-8 h-8 text-[var(--accent)]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <polygon points="12 2 2 7 12 12 22 7 12 2"></polygon>
+          <polyline points="2 17 12 22 22 17"></polyline>
+          <polyline points="2 12 12 17 22 12"></polyline>
+        </svg>
+        <span class="text-xl font-bold tracking-tight display-font">Vibe Studio</span>
+      </div>
+      <nav class="hidden md:flex items-center space-x-6 rtl:space-x-reverse" aria-label="Main Navigation">
+        <a href="#features" class="text-sm font-medium hover:text-[var(--accent)] transition-colors min-h-[44px] inline-flex items-center">Features</a>
+        <a href="#services" class="text-sm font-medium hover:text-[var(--accent)] transition-colors min-h-[44px] inline-flex items-center">Services & Pricing</a>
+        <a href="#contact" class="text-sm font-medium hover:text-[var(--accent)] transition-colors min-h-[44px] inline-flex items-center">Contact</a>
+      </nav>
+      <div class="flex items-center space-x-3 rtl:space-x-reverse">
+        <button type="button" id="header-cta-btn" class="inline-flex items-center justify-center px-4 py-2.5 text-sm font-medium rounded-[var(--radius-button)] text-[var(--vibe-on-primary,#fff)] bg-[var(--accent)] hover:opacity-90 min-h-[44px] min-w-[44px] transition-all">
+          Get Instant API Key
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main Hero & Content Section -->
+  <main class="flex-1 max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-12 lg:py-16 relative z-10">
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-stretch">
+      <!-- Main Bento Hero Card with Asymmetric Layout -->
+      <section class="vibe-spotlight-card lg:col-span-7 bg-[var(--surface-bg)] border border-[var(--border-subtle)] shadow-sm hover:shadow-md transition-shadow rounded-[var(--radius-container)] p-6 sm:p-8 lg:p-10 flex flex-col justify-between" aria-labelledby="hero-title">
+        <div>
+          <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-semibold bg-[var(--accent)]/10 text-[var(--accent)] border border-[var(--accent)]/20 mb-4 shadow-sm">
+            <span class="relative flex h-2 w-2">
+              <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+              <span class="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
+            </span>
+            <span>Vibe UI Verified</span>
+          </div>
+          <h1 id="hero-title" class="text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight mb-4 vibe-gradient-heading">
+            The Autonomous Intelligence Engine for Mission-Critical Agents
+          </h1>
+          <p class="text-[var(--text-muted)] text-base sm:text-lg leading-relaxed max-w-2xl mb-8">
+            Sub-20ms first-token latency, native tool orchestration, and deterministic schema enforcement at planetary scale.
+          </p>
+        </div>
+
+        <div class="flex flex-wrap gap-4 items-center pt-4 border-t border-[var(--border-subtle)]">
+          <button type="button" id="hero-primary-btn" class="vibe-shimmer-btn inline-flex items-center justify-center px-6 py-3 text-base font-semibold rounded-[var(--radius-button)] text-[var(--vibe-on-primary,#fff)] bg-[var(--accent)] min-h-[44px]">
+            Get Instant API Key
+          </button>
+          <button type="button" id="hero-secondary-btn" class="inline-flex items-center justify-center px-6 py-3 text-base font-semibold rounded-[var(--radius-button)] text-[var(--text-primary)] border border-[var(--border-subtle)] bg-[var(--canvas-bg)] hover:bg-[var(--surface-bg)] min-h-[44px] transition-all hover:scale-[1.02] active:scale-[0.98]">
+            Try Live Reasoning Canvas
+          </button>
+        </div>
+      </section>
+
+      <!-- Secondary Domain Highlights: Ultra-Crisp macOS Window Chrome Mockup -->
+      <aside class="vibe-spotlight-card lg:col-span-5 bg-[var(--surface-bg)] border border-[var(--border-subtle)] shadow-sm hover:shadow-md transition-shadow rounded-[var(--radius-container)] overflow-hidden flex flex-col justify-between" aria-label="Domain Highlights">
+        <!-- Window Chrome Titlebar -->
+        <div class="px-4 py-3 bg-[var(--canvas-bg)]/80 border-b border-[var(--border-subtle)] flex items-center justify-between backdrop-blur-md">
+          <div class="flex items-center space-x-2 rtl:space-x-reverse">
+            <span class="w-3 h-3 rounded-full bg-rose-500/80 inline-block border border-rose-600/40"></span>
+            <span class="w-3 h-3 rounded-full bg-amber-500/80 inline-block border border-amber-600/40"></span>
+            <span class="w-3 h-3 rounded-full bg-emerald-500/80 inline-block border border-emerald-600/40"></span>
+          </div>
+          <div class="text-[11px] font-mono text-[var(--text-muted)] flex items-center gap-1.5 opacity-80">
+            <svg class="w-3.5 h-3.5 text-[var(--accent)]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg>
+            <span>ai_developer_platform.vibe // live</span>
+          </div>
+          <div class="flex items-center space-x-1.5 rtl:space-x-reverse">
+            <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-ping"></span>
+            <span class="text-[10px] font-mono text-emerald-500 font-semibold uppercase">SECURE</span>
+          </div>
+        </div>
+
+        <div class="p-6 flex-1 flex flex-col justify-between">
+          <div>
+            <h2 class="text-base font-bold mb-4 flex items-center space-x-2 rtl:space-x-reverse">
+              <svg class="w-4 h-4 text-[var(--accent)]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M22 12h-4l-3 9L9 3l-3 9H2"></path></svg>
+              <span>Highlights & Status</span>
+            </h2>
+            <div class="space-y-3">
+            <div class="p-3.5 bg-[var(--canvas-bg)] rounded-[var(--radius-base)] border border-[var(--border-subtle)]">
+              <div class="text-xs text-[var(--text-muted)] mb-1">First Token Latency</div>
+              <div class="text-2xl font-bold text-[var(--accent)]"><bdi>18ms</bdi></div>
+            </div>
+            <div class="p-3.5 bg-[var(--canvas-bg)] rounded-[var(--radius-base)] border border-[var(--border-subtle)]">
+              <div class="text-xs text-[var(--text-muted)] mb-1">Tokens / Second</div>
+              <div class="text-2xl font-bold text-[var(--accent)]"><bdi>145 t/s</bdi></div>
+            </div>
+            <div class="p-3.5 bg-[var(--canvas-bg)] rounded-[var(--radius-base)] border border-[var(--border-subtle)]">
+              <div class="text-xs text-[var(--text-muted)] mb-1">Schema Compliance</div>
+              <div class="text-2xl font-bold text-[var(--accent)]"><bdi>100%</bdi></div>
+            </div>
+            </div>
+          </div>
+          <div class="mt-6 pt-4 border-t border-[var(--border-subtle)] text-xs text-[var(--text-muted)] flex items-center justify-between">
+            <div class="flex items-center space-x-1.5 rtl:space-x-reverse">
+              <span class="w-2 h-2 rounded-full bg-emerald-500"></span>
+              <span>Active & Ready</span>
+            </div>
+            <span class="font-mono text-[10px] opacity-70"><bdi>99.99% SLO</bdi></span>
+          </div>
+        </div>
+      </aside>
+    </div>
+
+
+    <!-- General Section 1: Asymmetric Bento Grid Features -->
+    <section id="features" class="mt-12 pt-8 border-t border-[var(--border-subtle)]" aria-labelledby="features-heading">
+      <div class="flex items-center justify-between mb-8">
+        <div>
+          <h2 id="features-heading" class="text-2xl font-bold tracking-tight">
+            Engineered Capabilities & Bento Architecture
+          </h2>
+          <p class="text-xs text-[var(--text-muted)] mt-1">
+            Built with strict WCAG standards, fluid physics, and sub-millisecond execution.
+          </p>
+        </div>
+        <span class="hidden sm:inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold bg-[var(--accent)]/10 text-[var(--accent)] border border-[var(--accent)]/20">
+          <span class="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse"></span>
+          Vibe UI 4.1.1 Certified
+        </span>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <!-- Tile 1: Hero Bento Feature (Span 2) -->
+        <div class="vibe-spotlight-card md:col-span-2 p-6 sm:p-8 bg-[var(--surface-bg)] border border-[var(--border-subtle)] rounded-[var(--radius-container)] shadow-sm hover:shadow-md transition-shadow flex flex-col justify-between">
+          <div>
+            <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-semibold bg-[var(--accent)]/10 text-[var(--accent)] mb-4">
+              <svg class="w-4 h-4 text-[var(--accent)]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>
+              <span>Quality Guarantee & Core Engine</span>
+            </div>
+            <h3 class="text-xl font-bold mb-3">Deterministic Architecture Free of AI-Slop</h3>
+            <p class="text-xs sm:text-sm text-[var(--text-muted)] leading-relaxed max-w-xl">
+              Engineered with strict accessibility, responsive geometry, zero inline CSS, and mathematically proven contrast ratios across light and dark modes.
+            </p>
+          </div>
+          <div class="mt-6 pt-4 border-t border-[var(--border-subtle)] flex flex-wrap items-center gap-3 text-xs text-[var(--text-muted)]">
+            <span class="px-2.5 py-1 rounded-md bg-[var(--canvas-bg)] border border-[var(--border-subtle)] font-mono">OKLCH Palette</span>
+            <span class="px-2.5 py-1 rounded-md bg-[var(--canvas-bg)] border border-[var(--border-subtle)] font-mono">BiDi Isolation</span>
+            <span class="px-2.5 py-1 rounded-md bg-[var(--canvas-bg)] border border-[var(--border-subtle)] font-mono">0.01ms Motion Guards</span>
+          </div>
+        </div>
+
+        <!-- Tile 2: Vital Metric KPI with Inline Sparkline (Span 1) -->
+        <div class="vibe-spotlight-card p-6 bg-[var(--surface-bg)] border border-[var(--border-subtle)] rounded-[var(--radius-container)] shadow-sm hover:shadow-md transition-shadow flex flex-col justify-between">
+          <div>
+            <div class="text-xs font-semibold text-[var(--text-muted)] uppercase tracking-wider mb-2">Uptime & Reliability</div>
+            <div class="text-3xl font-extrabold text-emerald-500 mb-2"><bdi>99.98%</bdi></div>
+            <p class="text-xs text-[var(--text-muted)] leading-relaxed">
+              Real-time health verification with automated self-healing resilience.
+            </p>
+          </div>
+          <!-- Inline Vector Sparkline -->
+          <div class="mt-4 pt-4 border-t border-[var(--border-subtle)]">
+            <svg class="w-full h-10 text-emerald-500" viewBox="0 0 120 30" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="M0 25 L20 22 L40 24 L60 14 L80 16 L100 8 L120 6"></path>
+              <circle cx="120" cy="6" r="3" fill="currentColor"></circle>
+            </svg>
+            <div class="flex justify-between text-[10px] text-[var(--text-muted)] mt-1 font-mono">
+              <span>-30d</span>
+              <span>Today: 100%</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Tile 3: Live Latency & Pulse Indicator (Span 1) -->
+        <div class="vibe-spotlight-card p-6 bg-[var(--surface-bg)] border border-[var(--border-subtle)] rounded-[var(--radius-container)] shadow-sm hover:shadow-md transition-shadow flex flex-col justify-between">
+          <div>
+            <div class="w-10 h-10 rounded-lg bg-[var(--accent)]/10 text-[var(--accent)] flex items-center justify-center mb-4">
+              <svg class="w-5 h-5 text-[var(--accent)]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon></svg>
+            </div>
+            <h3 class="text-base font-bold mb-2">Speed & Precision</h3>
+            <p class="text-xs text-[var(--text-muted)] leading-relaxed">
+              Optimized for lightning-fast delivery, mobile ergonomics, and seamless user interaction.
+            </p>
+          </div>
+          <div class="mt-4 pt-3 border-t border-[var(--border-subtle)] flex items-center justify-between text-xs">
+            <span class="text-[var(--text-muted)]">Response Time</span>
+            <span class="font-mono font-bold text-[var(--accent)]">&lt; 0.4s</span>
+          </div>
+        </div>
+
+        <!-- Tile 4: Governance & Certifications Bento Card (Span 2) -->
+        <div class="vibe-spotlight-card md:col-span-2 p-6 bg-[var(--surface-bg)] border border-[var(--border-subtle)] rounded-[var(--radius-container)] shadow-sm hover:shadow-md transition-shadow flex flex-col justify-between">
+          <div>
+            <div class="w-10 h-10 rounded-lg bg-[var(--accent)]/10 text-[var(--accent)] flex items-center justify-center mb-4">
+              <svg class="w-5 h-5 text-[var(--accent)]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 14 14"></polyline></svg>
+            </div>
+            <h3 class="text-base font-bold mb-2">Enterprise Governance & Security</h3>
+            <p class="text-xs text-[var(--text-muted)] leading-relaxed">
+              Strict data retention policies, zero secrets leakage compliance, and verified enterprise security baselines.
+            </p>
+          </div>
+          <div class="mt-6 pt-4 border-t border-[var(--border-subtle)] grid grid-cols-2 sm:grid-cols-4 gap-2 text-[11px] font-medium text-[var(--text-muted)]">
+            <div class="flex items-center gap-1.5"><svg class="w-3.5 h-3.5 text-emerald-500" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"></polyline></svg><span>WCAG AAA</span></div>
+            <div class="flex items-center gap-1.5"><svg class="w-3.5 h-3.5 text-emerald-500" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"></polyline></svg><span>BiDi Isolated</span></div>
+            <div class="flex items-center gap-1.5"><svg class="w-3.5 h-3.5 text-emerald-500" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"></polyline></svg><span>Zero Slop</span></div>
+            <div class="flex items-center gap-1.5"><svg class="w-3.5 h-3.5 text-emerald-500" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"></polyline></svg><span>100% SVG</span></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- General Section 2: Services & Pricing -->
+    <section id="services" class="mt-12 pt-8 border-t border-[var(--border-subtle)]" aria-labelledby="general-services-heading">
+      <h2 id="general-services-heading" class="text-2xl font-bold tracking-tight mb-6">Services & Architecture Plans</h2>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <div class="p-6 bg-[var(--surface-bg)] border border-[var(--border-subtle)] rounded-[var(--radius-container)] shadow-sm hover:shadow-md transition-shadow space-y-3">
+          <h3 class="text-lg font-bold">Core Essentials</h3>
+          <p class="text-xs text-[var(--text-muted)]">Complete foundational setup with certified WCAG compliance.</p>
+          <div class="text-2xl font-bold text-[var(--accent)]"><bdi>Open Source</bdi></div>
+        </div>
+        <div class="p-6 bg-[var(--surface-bg)] border border-[var(--border-subtle)] rounded-[var(--radius-container)] shadow-sm hover:shadow-md transition-shadow space-y-3 ring-2 ring-[var(--accent)]">
+          <span class="inline-flex px-2 py-0.5 rounded text-xs font-bold bg-[var(--accent)] text-[var(--vibe-on-primary,#fff)]">RECOMMENDED</span>
+          <h3 class="text-lg font-bold">Professional Studio</h3>
+          <p class="text-xs text-[var(--text-muted)]">AI primitive components, spring physics & telemetry HUD.</p>
+          <div class="text-2xl font-bold text-[var(--accent)]"><bdi>Custom Tier</bdi></div>
+        </div>
+        <div class="p-6 bg-[var(--surface-bg)] border border-[var(--border-subtle)] rounded-[var(--radius-container)] shadow-sm hover:shadow-md transition-shadow space-y-3">
+          <h3 class="text-lg font-bold">Enterprise Governance</h3>
+          <p class="text-xs text-[var(--text-muted)]">Deterministic machine contracts, CI/CD integration & SLAs.</p>
+          <div class="text-2xl font-bold text-[var(--accent)]"><bdi>Contact Sales</bdi></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- General Section 3: Contact & Inquiry -->
+    <section id="contact" class="mt-12 pt-8 border-t border-[var(--border-subtle)]" aria-labelledby="contact-heading">
+      <div class="p-6 sm:p-10 bg-[var(--surface-bg)] border border-[var(--border-subtle)] rounded-[var(--radius-container)] shadow-sm hover:shadow-md transition-shadow max-w-2xl mx-auto">
+        <h2 id="contact-heading" class="text-2xl font-bold tracking-tight mb-2">Quick Contact & Inquiry</h2>
+        <p class="text-xs text-[var(--text-muted)] mb-6">Leave your information and our engineering team will get back to you promptly.</p>
+        <form id="contact-form" class="space-y-4">
+          <div>
+            <label for="contact-name" class="block text-xs font-semibold mb-1">Full Name</label>
+            <input type="text" id="contact-name" required placeholder="e.g. Alex Miller" class="w-full px-4 py-2.5 text-xs rounded-[var(--radius-button)] bg-[var(--canvas-bg)] border border-[var(--border-subtle)] focus:border-[var(--accent)] min-h-[44px] outline-none">
+          </div>
+          <div>
+            <label for="contact-email" class="block text-xs font-semibold mb-1">Email or Phone Number</label>
+            <input type="text" id="contact-email" required placeholder="user@company.com" class="w-full px-4 py-2.5 text-xs rounded-[var(--radius-button)] bg-[var(--canvas-bg)] border border-[var(--border-subtle)] focus:border-[var(--accent)] min-h-[44px] outline-none">
+          </div>
+          <div class="pt-2">
+            <button type="submit" id="submit-contact-btn" class="w-full sm:w-auto inline-flex items-center justify-center px-8 py-3 text-sm font-semibold rounded-[var(--radius-button)] text-[var(--vibe-on-primary,#fff)] bg-[var(--accent)] hover:opacity-90 min-h-[44px] transition-all">
+              Submit Request
+            </button>
+          </div>
+        </form>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="w-full border-t border-[var(--border-subtle)] bg-[var(--surface-bg)] py-6 mt-12">
+    <div class="max-w-7xl mx-auto px-4 text-center text-xs text-[var(--text-muted)]">
+      &copy; 2026 Vibe Studio. All rights reserved.
+    </div>
+  </footer>
+
+  <!-- Interactive Client-side Script (Zero Dead Buttons & Zero Broken Anchors) -->
+  <script>
+    (function() {
+      // 1. Toast Notification Utility
+      function showToast(message) {
+        let toast = document.getElementById('vibe-toast');
+        if (!toast) {
+          toast = document.createElement('div');
+          toast.id = 'vibe-toast';
+          toast.setAttribute('role', 'status');
+          toast.setAttribute('aria-live', 'polite');
+          toast.className = 'fixed bottom-5 end-5 z-50 px-5 py-3 rounded-lg shadow-xl text-xs font-semibold transition-all transform duration-300 opacity-0 translate-y-2 pointer-events-none border';
+          document.body.appendChild(toast);
+        }
+        toast.style.backgroundColor = 'var(--surface-bg)';
+        toast.style.color = 'var(--text-primary)';
+        toast.style.borderColor = 'var(--accent)';
+        toast.textContent = message;
+        toast.classList.remove('opacity-0', 'translate-y-2', 'pointer-events-none');
+        setTimeout(function() {
+          toast.classList.add('opacity-0', 'translate-y-2', 'pointer-events-none');
+        }, 3500);
+      }
+
+      // 2. Smooth Scrolling for all Internal Anchors
+      document.querySelectorAll('a[href^="#"]').forEach(function(anchor) {
+        anchor.addEventListener('click', function(e) {
+          var targetId = anchor.getAttribute('href');
+          var targetEl = document.querySelector(targetId);
+          if (targetEl) {
+            e.preventDefault();
+            targetEl.scrollIntoView({ behavior: 'smooth' });
+          }
+        });
+      });
+
+      // 3. Header & Hero CTAs
+      var headerCta = document.getElementById('header-cta-btn');
+      var heroPrimary = document.getElementById('hero-primary-btn');
+      var heroSecondary = document.getElementById('hero-secondary-btn');
+
+      if (headerCta) {
+        headerCta.addEventListener('click', function() {
+          var bookingEl = document.getElementById('booking') || document.getElementById('services') || document.getElementById('contact');
+          if (bookingEl) bookingEl.scrollIntoView({ behavior: 'smooth' });
+          else showToast('Get Instant API Key - Active');
+        });
+      }
+      if (heroPrimary) {
+        heroPrimary.addEventListener('click', function() {
+          var bookingEl = document.getElementById('booking') || document.getElementById('services') || document.getElementById('contact');
+          if (bookingEl) bookingEl.scrollIntoView({ behavior: 'smooth' });
+          else showToast('Get Instant API Key - Started');
+        });
+      }
+      if (heroSecondary) {
+        heroSecondary.addEventListener('click', function() {
+          var targetEl = document.getElementById('portfolio') || document.getElementById('services') || document.getElementById('features') || document.getElementById('cluster');
+          if (targetEl) targetEl.scrollIntoView({ behavior: 'smooth' });
+          else showToast('Try Live Reasoning Canvas');
+        });
+      }
+
+      // 4. Interactive Action Buttons
+      document.querySelectorAll('.btn-action').forEach(function(btn) {
+        btn.addEventListener('click', function() {
+          showToast('Telemetry traces inspection opened.');
+        });
+      });
+
+      // 5. Booking Day & Time Slot Selection
+      document.querySelectorAll('.day-slot-btn').forEach(function(btn) {
+        btn.addEventListener('click', function() {
+          document.querySelectorAll('.day-slot-btn').forEach(function(b) {
+            b.className = 'day-slot-btn px-4 py-2 text-xs font-bold rounded-[var(--radius-button)] bg-[var(--canvas-bg)] border border-[var(--border-subtle)] hover:bg-[var(--surface-bg)] min-h-[44px]';
+          });
+          btn.className = 'day-slot-btn px-4 py-2 text-xs font-bold rounded-[var(--radius-button)] bg-[var(--accent)] text-[var(--vibe-on-primary,#fff)] min-h-[44px]';
+        });
+      });
+
+      document.querySelectorAll('.time-slot-btn').forEach(function(btn) {
+        btn.addEventListener('click', function() {
+          document.querySelectorAll('.time-slot-btn').forEach(function(b) {
+            b.className = 'time-slot-btn px-4 py-2 text-xs font-bold rounded-[var(--radius-button)] bg-[var(--canvas-bg)] border border-[var(--border-subtle)] hover:bg-[var(--surface-bg)] min-h-[44px]';
+          });
+          btn.className = 'time-slot-btn px-4 py-2 text-xs font-bold rounded-[var(--radius-button)] bg-[var(--accent)] text-[var(--vibe-on-primary,#fff)] min-h-[44px]';
+        });
+      });
+
+      // 6. Portfolio Before/After Tab Switching
+      document.querySelectorAll('.portfolio-tab').forEach(function(tab) {
+        tab.addEventListener('click', function() {
+          var view = tab.getAttribute('data-view');
+          document.querySelectorAll('.portfolio-tab').forEach(function(t) {
+            t.className = 'portfolio-tab px-3 py-1.5 text-xs font-semibold rounded-[var(--radius-button)] bg-[var(--canvas-bg)] border border-[var(--border-subtle)] hover:bg-[var(--surface-bg)] min-h-[44px]';
+          });
+          tab.className = 'portfolio-tab px-3 py-1.5 text-xs font-semibold rounded-[var(--radius-button)] bg-[var(--accent)] text-[var(--vibe-on-primary,#fff)] min-h-[44px]';
+          showToast(view === 'before' ? 'نمایش تصاویر قبل از درمان' : 'نمایش نتایج نهایی پس از اتمام درمان');
+        });
+      });
+
+      // 6.5. Interactive Before/After Split Comparison Sliders
+      document.querySelectorAll('.before-after-range').forEach(function(slider) {
+        slider.addEventListener('input', function(e) {
+          var targetId = slider.getAttribute('data-target');
+          var dividerId = slider.getAttribute('data-divider');
+          var targetEl = document.getElementById(targetId);
+          var dividerEl = document.getElementById(dividerId);
+          var val = e.target.value;
+          if (targetEl) targetEl.style.width = (100 - val) + '%';
+          if (dividerEl) dividerEl.style.left = val + '%';
+        });
+      });
+
+      // 7. DevOps Log Stream Toggle & Copy
+      var streamToggle = document.getElementById('toggle-log-stream');
+      if (streamToggle) {
+        var isStreaming = true;
+        streamToggle.addEventListener('click', function() {
+          isStreaming = !isStreaming;
+          streamToggle.textContent = isStreaming ? 'Pause Stream' : 'Resume Stream';
+          showToast(isStreaming ? 'Live log telemetry resumed' : 'Log stream paused for inspection');
+        });
+      }
+      var copyCurlBtn = document.getElementById('copy-curl-btn');
+      if (copyCurlBtn) {
+        copyCurlBtn.addEventListener('click', function() {
+          showToast('curl command copied to clipboard');
+        });
+      }
+
+      // 8. Forms Submission with Feedback
+      var bookingForm = document.getElementById('quick-booking-form');
+      if (bookingForm) {
+        bookingForm.addEventListener('submit', function(e) {
+          e.preventDefault();
+          showToast('درخواست نوبت شما با موفقیت ثبت شد. مشاوران کلینیک به زودی با شما تماس خواهند گرفت.');
+          bookingForm.reset();
+        });
+      }
+
+      var contactForm = document.getElementById('contact-form');
+      if (contactForm) {
+        contactForm.addEventListener('submit', function(e) {
+          e.preventDefault();
+          showToast('درخواست شما با موفقیت ارسال شد. کارشناسان ما به زودی با شما تماس می گیرند.');
+          contactForm.reset();
+        });
+      }
+
+      // 9. Mouse-tracking Spotlight Cards (Guarded for Mobile Performance)
+      if (window.matchMedia('(hover: hover) and (pointer: fine)').matches) {
+        document.querySelectorAll('.vibe-spotlight-card').forEach(function(card) {
+          card.addEventListener('mousemove', function(e) {
+            var rect = card.getBoundingClientRect();
+            var x = e.clientX - rect.left;
+            var y = e.clientY - rect.top;
+            card.style.setProperty('--mouse-x', x + 'px');
+            card.style.setProperty('--mouse-y', y + 'px');
+          });
+        });
+      }
+
+      // 10. Lightswind Kinetic Trailing Arrow Pointer Engine
+      var cursorDot = document.getElementById('vibeCursorDot');
+      var cursorFollower = document.getElementById('vibeCursorFollower');
+      var cursorBadge = document.getElementById('vibeCursorBadge');
+
+      if (cursorDot && cursorFollower && window.matchMedia('(pointer: fine)').matches) {
+        var mouseX = window.innerWidth / 2;
+        var mouseY = window.innerHeight / 2;
+        var prevMouseX = mouseX;
+        var prevMouseY = mouseY;
+        var followerX = mouseX;
+        var followerY = mouseY;
+        var currentAngle = 0;
+        var targetAngle = 0;
+        var cursorVisible = false;
+
+        window.addEventListener('pointermove', function(e) {
+          mouseX = e.clientX;
+          mouseY = e.clientY;
+          if (!cursorVisible) {
+            cursorVisible = true;
+            cursorDot.style.opacity = '1';
+            cursorFollower.style.opacity = '1';
+          }
+          cursorDot.style.transform = 'translate(' + mouseX + 'px, ' + mouseY + 'px) translate(-50%, -50%)';
+          document.documentElement.style.setProperty('--mouse-x', mouseX + 'px');
+          document.documentElement.style.setProperty('--mouse-y', mouseY + 'px');
+        });
+
+        document.addEventListener('mouseleave', function() {
+          cursorVisible = false;
+          cursorDot.style.opacity = '0';
+          cursorFollower.style.opacity = '0';
+        });
+
+        document.addEventListener('mousedown', function() {
+          cursorFollower.classList.add('click-active');
+        });
+        document.addEventListener('mouseup', function() {
+          cursorFollower.classList.remove('click-active');
+        });
+
+        function renderKineticFollower() {
+          var vx = mouseX - followerX;
+          var vy = mouseY - followerY;
+          followerX += vx * 0.18;
+          followerY += vy * 0.18;
+
+          var dx = mouseX - prevMouseX;
+          var dy = mouseY - prevMouseY;
+          var speed = Math.hypot(dx, dy);
+
+          if (speed > 1.2) {
+            targetAngle = Math.atan2(dy, dx) * (180 / Math.PI) + 90;
+            var diff = targetAngle - currentAngle;
+            if (diff > 180) diff -= 360;
+            if (diff < -180) diff += 360;
+            currentAngle += diff * 0.22;
+          }
+          prevMouseX = mouseX;
+          prevMouseY = mouseY;
+
+          cursorFollower.style.transform = 'translate(' + followerX.toFixed(2) + 'px, ' + followerY.toFixed(2) + 'px) translate(-50%, -50%) rotate(' + currentAngle.toFixed(2) + 'deg)';
+          requestAnimationFrame(renderKineticFollower);
+        }
+        requestAnimationFrame(renderKineticFollower);
+
+        document.querySelectorAll('a, button, input, .vibe-spotlight-card').forEach(function(el) {
+          el.addEventListener('pointerenter', function() {
+            cursorDot.classList.add('hover-target');
+            cursorFollower.classList.add('hover-active');
+            if (cursorBadge) {
+              if (el.tagName.toLowerCase() === 'button') cursorBadge.textContent = 'ACTIVATE';
+              else if (el.tagName.toLowerCase() === 'a') cursorBadge.textContent = 'EXPLORE';
+              else cursorBadge.textContent = 'VIEW';
+            }
+          });
+          el.addEventListener('pointerleave', function() {
+            cursorDot.classList.remove('hover-target');
+            cursorFollower.classList.remove('hover-active');
+            if (cursorBadge) cursorBadge.textContent = '';
+          });
+        });
+      }
+
+      // 11. Scroll-Driven Kinetic Stagger Entrance Observers
+      var revealTargets = document.querySelectorAll('section > div:not(.animate-marquee), .vibe-spotlight-card');
+      revealTargets.forEach(function(el, index) {
+        if (el.classList.contains('animate-marquee') || el.closest('.animate-marquee')) return;
+        el.classList.add('vibe-reveal-node');
+        var delay = (index % 3) * 0.08;
+        if (delay > 0) {
+          el.style.transitionDelay = delay.toFixed(2) + 's';
+        }
+      });
+
+      var scrollObserver = new IntersectionObserver(function(entries) {
+        entries.forEach(function(entry) {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('vibe-revealed');
+            scrollObserver.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.08, rootMargin: '0px 0px -30px 0px' });
+
+      revealTargets.forEach(function(el) {
+        scrollObserver.observe(el);
+      });
+
+      // Lazy Loading Image Progressive Fade-In
+      var lazyImages = document.querySelectorAll('img[loading="lazy"]');
+      lazyImages.forEach(function(img) {
+        if (img.complete) {
+          img.classList.add('loaded');
+        } else {
+          img.addEventListener('load', function() { img.classList.add('loaded'); });
+          img.addEventListener('error', function() { img.classList.add('loaded'); });
+        }
+      });
+    })();
+  </script>
+</body>
+</html>

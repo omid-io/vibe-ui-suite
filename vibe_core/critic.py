@@ -415,6 +415,7 @@ class DesignCritic:
             "hard_gates_pass": hard_gates_pass,
             "hard_gate_failures": hard_gate_failures,
             "quality_score": round(quality_score, 1),
+            "score": round(quality_score, 1),
             "scorecard": scorecard,
             "defects_ranked": defects_ranked,
             "acceptance_status": acceptance_status

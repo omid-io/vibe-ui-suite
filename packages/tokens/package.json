@@ -1,9 +1,9 @@
 {
   "name": "@omid-io/tokens",
-  "version": "4.8.0",
+  "version": "6.0.0",
   "description": "Typed OKLCH design tokens, physics curves, and zero-config Tailwind plugin for Vibe UI (Migrated to vibe-ui-suite)",
   "dependencies": {
-    "vibe-ui-suite": "^4.8.0"
+    "vibe-ui-suite": "^6.0.0"
   },
   "files": [
     "dist",

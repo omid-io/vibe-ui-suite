@@ -567,8 +567,36 @@ class InterfaceGenerator:
             </div>
           </div>'''
 
-    def generate_react_tsx(self, decision: Dict[str, Any], component_name: str = "VibeMasterpiece") -> str:
+    def generate(
+        self,
+        decision_or_intent: Dict[str, Any],
+        decision_opt: Optional[Dict[str, Any]] = None,
+        format_type: str = "html",
+        **kwargs
+    ) -> str:
+        """
+        Universal generation method dispatching to generate_html or generate_react_tsx.
+        Accepts either (intent), (decision), or (intent, decision).
+        """
+        decision = decision_opt or decision_or_intent
+        # If raw intent was passed, synthesize decision context
+        if "intent" not in decision and "product_domain" in decision:
+            decision = {
+                "intent": decision,
+                "genome": {
+                    "domain": decision.get("product_domain"),
+                    "platform": {"rtl_support": decision.get("language") == "fa" or "fa" in decision.get("languages", [])}
+                },
+                "selected_style": decision.get("selected_style", "clean_stripe"),
+            }
+        elif "intent" not in decision and decision_or_intent is not decision:
+            decision["intent"] = decision_or_intent
 
+        if format_type.lower() in ["react", "tsx"]:
+            return self.generate_react_tsx(decision, **kwargs)
+        return self.generate_html(decision, **kwargs)
+
+    def generate_react_tsx(self, decision: Dict[str, Any], component_name: str = "VibeMasterpiece") -> str:
         """
         Generates a modular, living React 19 / TypeScript component (.tsx)
         featuring render-affecting style compiler, living micro-states (useState),
@@ -579,7 +607,14 @@ class InterfaceGenerator:
         sig_widget = blueprint.get("signature_widget", {})
         selected_style = decision.get("selected_style", "clean_stripe")
         theme_strategy = decision.get("intent", {}).get("theme_strategy", "light")
-        is_rtl = decision.get("genome", {}).get("platform", {}).get("rtl_support", False) or (decision.get("intent", {}).get("language", ["en"])[0] == "fa" if decision.get("intent", {}).get("language") else False)
+        intent_obj = decision.get("intent", {})
+        intent_lang = intent_obj.get("language", "en")
+        has_fa = (
+            intent_lang == "fa"
+            or (isinstance(intent_lang, (list, tuple)) and "fa" in intent_lang)
+            or ("fa" in intent_obj.get("languages", []))
+        )
+        is_rtl = decision.get("genome", {}).get("platform", {}).get("rtl_support", False) or has_fa
         dir_attr = 'dir="rtl"' if is_rtl else 'dir="ltr"'
 
         style_cfg = self._compile_style(selected_style, theme_strategy)
@@ -767,7 +802,14 @@ export default {component_name};
         typography = genome.get("typography", {})
         radius = genome.get("radius", {})
         depth = genome.get("depth", "diffused_soft")
-        is_rtl = genome.get("platform", {}).get("rtl_support", False)
+        intent_obj = decision.get("intent", {})
+        intent_lang = intent_obj.get("language", "en")
+        has_fa_lang = (
+            intent_lang == "fa"
+            or (isinstance(intent_lang, (list, tuple)) and "fa" in intent_lang)
+            or ("fa" in intent_obj.get("languages", []))
+        )
+        is_rtl = genome.get("platform", {}).get("rtl_support", False) or has_fa_lang
         dir_attr = 'dir="rtl" lang="fa"' if is_rtl else 'dir="ltr" lang="en"'
 
         css_vars = self.genome_engine.to_css_variables(genome)
@@ -788,6 +830,9 @@ export default {component_name};
             card_border = "border border-[var(--border-subtle)]"
 
         domain_id = decision.get("genome", {}).get("domain") or decision.get("intent", {}).get("product_domain", "")
+        media_spec = self.asset_director.get_media_spec(domain_id)
+        hero_image_url = media_spec.get("unsplash_url", "https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=1200&q=80")
+        hero_image_caption = media_spec.get("caption_fa" if is_rtl else "caption", "High-Resolution Domain Showcase")
         blueprint = decision.get("intent", {}).get("blueprint") or self.blueprints.get("domains", {}).get(domain_id, {})
         mock_data_all = blueprint.get("mock_data", {})
         mock_data_dict = mock_data_all.get("fa" if is_rtl else "en", {}) if isinstance(mock_data_all.get("en"), dict) else mock_data_all
@@ -1273,7 +1318,7 @@ export default {component_name};
         </div>
         <span class="hidden sm:inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold bg-[var(--accent)]/10 text-[var(--accent)] border border-[var(--accent)]/20">
           <span class="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse"></span>
-          {"تاییدیه کیفی Vibe UI" if is_rtl else "Vibe UI 4.1.1 Certified"}
+          {"تاییدیه کیفی Vibe UI" if is_rtl else "Vibe UI 6.0.0 Certified"}
         </span>
       </div>
 
@@ -1690,9 +1735,19 @@ export default {component_name};
           <h1 id="hero-title" class="text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight mb-4 vibe-gradient-heading">
             {hero_headline}
           </h1>
-          <p class="text-[var(--text-muted)] text-base sm:text-lg leading-relaxed max-w-2xl mb-8">
+          <p class="text-[var(--text-muted)] text-base sm:text-lg leading-relaxed max-w-2xl mb-6">
             {hero_subheadline}
           </p>
+
+          <!-- Editorial Domain Asset Showcase -->
+          <div class="relative w-full h-44 sm:h-56 rounded-[var(--radius-button)] overflow-hidden border border-[var(--border-subtle)] mb-6 shadow-sm">
+            <img src="{hero_image_url}" alt="{hero_image_caption}" class="w-full h-full object-cover" loading="lazy" />
+            <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent pointer-events-none"></div>
+            <div class="absolute bottom-2 start-3 end-3 text-[11px] font-mono text-white/95 flex items-center justify-between">
+              <span class="truncate"><bdi>{hero_image_caption}</bdi></span>
+              <span class="px-1.5 py-0.5 rounded bg-black/40 text-[10px] uppercase font-mono">Unsplash</span>
+            </div>
+          </div>
         </div>
 
         <div class="flex flex-wrap gap-4 items-center pt-4 border-t border-[var(--border-subtle)]">

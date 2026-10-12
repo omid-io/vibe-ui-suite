@@ -39,6 +39,7 @@ htmlcov/
 *.vsix
 .next/
 .agents/
+.test-artifacts/
 *.zip
 *.gz
 *.tar

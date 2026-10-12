@@ -6,7 +6,7 @@ import * as readline from 'readline';
 import { COMPONENT_REGISTRY } from './registry/components';
 import { VISUAL_CHEMISTRIES } from './index';
 
-const VERSION = '4.1.1';
+const VERSION = '6.0.0';
 
 interface CliOptions {
   force: boolean;

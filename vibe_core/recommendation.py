@@ -131,7 +131,7 @@ class RecommendationEngine:
             },
             "platform": {
                 "mobile_first": True,
-                "rtl_support": "fa" in intent.get("language", [])
+                "rtl_support": ("fa" in intent.get("language", [])) if isinstance(intent.get("language"), (list, tuple)) else (intent.get("language") == "fa" or "fa" in intent.get("languages", []))
             },
             "accessibility": {
                 "target_contrast": "WCAG_AA",

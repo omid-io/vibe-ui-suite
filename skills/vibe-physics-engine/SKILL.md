@@ -4,10 +4,14 @@ description: Physics-based UI motion, anti-template visual architecture, Apple/L
 triggers: ["vibe coding", "add physics", "animate", "smooth UI", "framer motion", "gsap", "fluid motion", "lenis", "oklch", "spring physics", "motion review"]
 ---
 
-# ⚡ Vibe Motion & Physics Engine (v2026 Core)
+# ⚡ Vibe Motion & Physics Engine (v6.0.0 Core)
 
 ## 🎯 Purpose
-The `vibe-physics-engine` powers bespoke, high-framerate visual and interactive experiences. It mandates mathematical motion curves, critically damped spring mechanics, GPU-accelerated layer compositing, refresh-rate-aware interpolation, OKLCH perceptual color science, and strict anti-slop animation ergonomics.
+The `vibe-physics-engine` powers bespoke, high-framerate visual and interactive experiences anchored in **The Two Golden Pillars**:
+1. **Pillar 1: Deep Trend Research & Inspiration** (Mathematical motion curves, critically damped spring mechanics, Apple WWDC human interface guidelines, and Linear/Stripe kinetic elegance).
+2. **Pillar 2: Living Visual Feedback Loop** (Ensuring all entrance animations, staggers, and spring transitions settle deterministically before Playwright headless multi-viewport screenshot verification).
+
+It mandates GPU-accelerated layer compositing, refresh-rate-aware interpolation, OKLCH perceptual color science, and strict anti-slop animation ergonomics.
 
 ---
 
@@ -128,7 +132,10 @@ For high-contrast glassmorphism surfaces:
 @media (prefers-reduced-transparency: reduce) {
   .vibe-glass {
     backdrop-filter: none !important;
-    background: oklch(0.14 0.005 260) !important; /* Fully opaque surface */
+    background: var(--surface-opaque, #ffffff) !important; /* Fully opaque surface adaptive to light mode */
+  }
+  .dark .vibe-glass {
+    background: var(--surface-opaque-dark, #09090b) !important;
   }
 }
 ```

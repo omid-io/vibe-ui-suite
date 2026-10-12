@@ -3,6 +3,16 @@
 All notable changes to the **Vibe UI (VS Code, Cursor & Open-VSX)** extension will be documented in this file.
 This project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [6.0.0] — 2026-10-13
+
+### Added
+- **The Two Golden Pillars:** Integrated Trend Inspiration & Living Visual Feedback loop standards into IDE workflows.
+- **Curated Unsplash Asset Vault:** Instant access to 24-domain high-res photography CDN tokens with tested HTTP 200 URLs.
+- **Multi-Viewport Headless Screenshot Engine:** Integrated multi-viewport verification across Desktop (1440px) and Mobile (390px).
+- **Full Monorepo v6.0.0 Synchronization:** Unified version alignment across `@omid-io/tokens`, `vibe-ui-suite`, Python CLI, and VS Code extension.
+
+---
+
 ## [4.8.0] — 2026-10-04
 
 ### Added

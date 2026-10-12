@@ -1,12 +1,13 @@
 {
   "$schema": "./schemas/version-manifest.schema.json",
-  "version": "4.8.0",
-  "codename": "Living Kinetic Standards & Kinetic Arrow Physics",
+  "version": "6.0.0",
+  "codename": "The Two Golden Pillars (Trend Inspiration & Living Visual Feedback)",
   "release_channel": "stable",
   "packages": {
-    "vibe-ui-suite": "4.8.0",
-    "vibe-ui-vscode": "4.8.0",
-    "vibe-ui-nextjs-starter": "4.8.0"
+    "vibe-ui-suite": "6.0.0",
+    "vibe-ui-vscode": "6.0.0",
+    "vibe-ui-nextjs-starter": "6.0.0",
+    "@omid-io/tokens": "6.0.0"
   },
   "schemas": {
     "intent_contract": "v1",
@@ -23,5 +24,5 @@
     "nextjs": ">=15.0.0",
     "react": ">=19.0.0"
   },
-  "last_updated": "2026-10-04"
+  "last_updated": "2026-10-10"
 }

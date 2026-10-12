@@ -29,16 +29,15 @@ Whenever asked to audit, verify, or review any web page, component, or frontend 
 
 ---
 
-### Pillar 1: Anti-Slop Visual & Novelty Audit
-- **Measurement Method:** Audit visual chemistry against the 5 archetypes and verify the **Novelty Budget**.
-- **Evidence Required:**
-  - Specified visual chemistry (e.g., *Minimalist SaaS*, *Neobrutalism*, *Swiss Editorial*).
-  - Novelty check: At least 2 of 6 structural dimensions (hero composition, card geometry, background treatment, typography pairing, CTA style, lighting) differ from previous outputs to prevent template collapse.
+### Pillar 1: Living Visual & Screenshot Inspection (Playwright Multi-Viewport)
+- **Measurement Method:** Execute automated headless Chromium rendering via `python scripts/screenshot_audit.py <file>` or `vibe_cli.py screenshot <file>`. Capture both **Desktop (1440px)** and **Mobile (390px)** viewports into `.test-artifacts/screenshots/`.
+- **Vision Review:** Inspect captured PNGs directly (`view_file`) to audit whitespace cadence, optical balance, alignment, typographic contrast, and card boundaries.
+- **Novelty & Anti-Slop Audit:** Audit visual chemistry against the 5 archetypes and verify the **Novelty Budget** (at least 2 of 6 structural dimensions—hero composition, card geometry, background treatment, typography pairing, CTA style, lighting—differ from previous outputs to prevent template collapse). Verify real CDN photography from `skills/ui-kit/references/curated_unsplash_vault.md` rather than empty gray placeholder boxes.
 
 ### Pillar 2: Responsive Multi-Device Integrity
 - **Measurement Method:** Verify CSS rules across 3 critical viewport widths.
 - **Evidence Required:**
-  - **Mobile (375px):** Zero horizontal scroll blowouts (`overflow-x: hidden` / flex wrapping confirmed). Touch targets conform to **WCAG 2.2 AA (min $24 \times 24\text{px}$)**, with **$44 \times 44\text{px}$ design best practice** recommended for primary mobile CTAs.
+  - **Mobile (375px/390px):** Zero horizontal scroll blowouts (`overflow-x: hidden` / flex wrapping confirmed). Touch targets conform to **WCAG 2.2 AA (min $24 \times 24\text{px}$)**, with **$44 \times 44\text{px}$ design best practice** recommended for primary mobile CTAs.
   - **Tablet (768px):** Asymmetric Bento grids collapse gracefully into balanced 1-column or 2-column stacks.
   - **Desktop (1440px+):** Max-width containers (`max-w-7xl` or equivalent) prevent awkward stretching.
 
@@ -54,7 +53,7 @@ Whenever asked to audit, verify, or review any web page, component, or frontend 
 ### Pillar 4: Performance & Rendering Compositing Budget
 - **Measurement Method:** Count stacked blur layers, inspect SVG icons, verify animation drivers.
 - **Evidence Required:**
-  - **Backdrop Blur Layers:** Detected active `backdrop-filter: blur(...)` elements (Threshold: $\le 8$ active layers simultaneously, calibrated for rich floating docks and multi-tier glassmorphism).
+  - **Backdrop Blur Layers:** Detected active `backdrop-filter: blur(...)` elements (Threshold: $\le 5$ active layers simultaneously, reduced to $\le 2$ on mobile).
   - **Zero Emojis:** Zero raw unicode emojis used as interface icons; verified inline SVG vector paths.
   - **Frame Driver:** Continuous interactive elements (sliders, spring tilts) driven via `requestAnimationFrame`.
 
@@ -79,35 +78,37 @@ When evaluating or generating any frontend code, `ui-verifier` outputs a structu
 ├─────────────────────────────────────────────────────────────────┤
 │ Overall Status: [ PASS | WARN | FAIL ]                          │
 ├─────────────────────────────────────────────────────────────────┤
-│ 1. Accessibility (WCAG 2.2 AA)                                  │
+│ 1. Living Visual & Screenshot Inspection (Playwright Multi-VP)  │
+│    [PASS] Multi-Viewport PNG : 1440px & 390px screenshots viewed│
+│    [PASS] Visual Hierarchy   : Whitespace & typography balanced │
+│    [PASS] Novelty Budget     : 3/6 structural dimensions unique │
+│    [PASS] Curated CDN Assets : Real photography, 0 gray boxes   │
+│                                                                 │
+│ 2. Responsive Breakpoints                                       │
+│    [PASS] Mobile 390px/375px : 0 horizontal overflow violations │
+│    [PASS] Touch Targets      : Meets WCAG AA (>= 24px, CTA 44px)│
+│    [PASS] Desktop 1440px     : max-w-7xl container bounded      │
+│                                                                 │
+│ 3. Accessibility & WCAG 2.2 AA                                  │
 │    [PASS] Keyboard Traversal : 12/12 elements keyboard reachable│
 │    [PASS] Focus Rings        : 12/12 have focus-visible states  │
 │    [PASS] Color Contrast     : Min 5.4:1 (exceeds 4.5:1 minimum)│
 │    [PASS] Functional Motion  : prefers-reduced-motion enforced  │
 │                                                                 │
-│ 2. Responsive Breakpoints                                       │
-│    [PASS] Mobile 375px       : 0 horizontal overflow violations │
-│    [PASS] Touch Targets      : Meets WCAG AA (>= 24px, CTA 44px)│
-│    [PASS] Desktop 1440px     : max-w-7xl container bounded      │
-│                                                                 │
-│ 3. Performance & Compositing Budget                             │
-│    [PASS] Backdrop Blur Layers: 2 active layers (budget max: 3) │
-│    [PASS] Vector Iconography : 0 raw emojis, 6 SVG paths used   │
+│ 4. Performance & Compositing Budget                             │
+│    [PASS] Backdrop Blur Layers: 2 active layers (budget max: 5) │
+│    [PASS] Vector Iconography : 0 raw emojis, inline SVGs used   │
 │    [PASS] Motion Driver      : rAF-based sub-pixel interpolation│
 │                                                                 │
-│ 4. Semantic RTL & BiDi Stability                                │
-│    [PASS] Macro Layout       : Coordinate grid physically locked│
-│    [PASS] BiDi Punctuation   : <bdi> wrappers on brand terms    │
-│    [PASS] Monospace LTR      : Code/metrics locked in LTR font  │
-│                                                                 │
-│ 5. Visual Novelty & Anti-Slop                                   │
-│    [PASS] Visual Chemistry   : Minimalist SaaS Archetype applied│
-│    [PASS] Novelty Budget     : 3/6 structural dimensions unique │
+│ 5. Semantic RTL & BiDi Stability                                │
+│    [PASS / N/A (LTR Default)] Macro Layout : Coordinate grid locked │
+│    [PASS / N/A (LTR Default)] BiDi Wrapper : <bdi> on brand tokens  │
+│    [PASS / N/A (LTR Default)] Monospace LTR: Code/metrics locked LTR│
 └─────────────────────────────────────────────────────────────────┘
 ```
 
 - **PASS:** All critical checks pass. Code is production-ready.
-- **WARN:** Non-breaking advisory (e.g., 4 blur layers detected; advisory to reduce to 3 on mobile).
+- **WARN:** Non-breaking advisory (e.g., 4 blur layers detected; advisory to reduce to max 2 on mobile).
 - **FAIL:** Blocking defect detected (e.g., `<div onclick>`, missing focus ring, 375px layout blowout, unisolated BiDi punctuation). Execution must pause and fix before completion.
 
 ---
@@ -121,9 +122,9 @@ When conducting an audit, output findings using this concise scorecard:
 
 | Pillar | Status | Key Observations & Verified Items |
 | :--- | :---: | :--- |
-| **1. Visual Architecture** | ✅ PASS | Distinct visual chemistry, clear visual hierarchy. |
-| **2. Responsive Design** | ✅ PASS | Fluid across 375px, 768px, and 1440px with no horizontal overflow. |
+| **1. Living Visual Inspection** | ✅ PASS | Playwright 1440px/390px screenshots captured & inspected; 0 template slop. |
+| **2. Responsive Design** | ✅ PASS | Fluid across 390px, 768px, and 1440px with no horizontal overflow. |
 | **3. Accessibility (WCAG)** | ✅ PASS | Semantic `<button>` elements, visible focus, reduced-motion handled. |
-| **4. Motion & Performance** | ✅ PASS | GPU-friendly compositing, SVG vectors, rAF interpolation. |
-| **5. Semantic RTL & BiDi** | ✅ PASS | Macro layout stable, mixed English/Persian punctuation intact, telemetry in LTR. |
+| **4. Motion & Performance** | ✅ PASS | GPU-friendly compositing (<=5 blur layers), inline SVGs, rAF interpolation. |
+| **5. Semantic RTL & BiDi** | [PASS / N/A (LTR Default)] | Evaluated strictly for RTL/Persian interfaces; passes as N/A on pure English LTR. |
 ```

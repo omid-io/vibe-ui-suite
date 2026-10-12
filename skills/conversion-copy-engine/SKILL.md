@@ -7,7 +7,7 @@ triggers: ["write copy", "conversion", "sales page", "persuasive", "CTA", "landi
 # ✍️ Conversion Copy Engine & Strategic Value Architecture
 
 ## 🎯 Purpose
-The `conversion-copy-engine` transforms standard marketing filler into high-converting, domain-calibrated narrative architecture. It applies behavioral clarity, objection neutralization, and transparent risk reversal to maximize conversion rates without resorting to manipulative tricks.
+The `conversion-copy-engine` transforms standard marketing filler into high-converting, domain-calibrated narrative architecture anchored in **Pillar 1: Deep Trend Research & World-Class Inspiration** (benchmarking premier SaaS and product copy from Linear, Stripe, Apple, Notion, and Framer). It applies behavioral clarity, objection neutralization, and transparent risk reversal to maximize conversion rates without resorting to manipulative tricks.
 
 ---
 
@@ -54,3 +54,12 @@ High conversion is built on radical trust, not deceptive manipulation:
 2. **Zero Fake Scarcity or Urgency:** Never generate countdown timers that reset on page reload, or false stock counters ("Only 1 seat left!").
 3. **Zero Unsubstantiated ROI Claims:** Never promise arbitrary financial multiples ("300% guaranteed ROI in 7 days") unless backed by verifiable customer case studies.
 4. **Transparent Cancellation & Terms:** Clearly state trial periods, billing cadences, and cancellation rights.
+
+---
+
+## 🌐 4. Multilingual & Persian Copy Protocol (Zero ZWNJ Standard)
+
+When synthesizing Persian or bilingual conversion copy:
+1. **Natural Standard Persian:** Write compelling, fluent copy using standard Persian with regular spaces exclusively.
+2. **Absolute Prohibition of ZWNJ:** Never use the zero-width non-joiner (`\u200c` / half-space) in any headline, body text, or CTA label per User Global Rule 9. Standard spaces must be used exclusively (e.g., `ثبت نام سریع`, `شروع رایگان`, `پشتیبانی مداوم`).
+3. **On-Demand `<bdi>` Isolation:** Wrap Latin brand tokens, acronyms, and product terms inside `<bdi>` elements when embedded within Persian phrases to prevent bidirectional text reversals.

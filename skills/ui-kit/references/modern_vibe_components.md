@@ -1,6 +1,6 @@
 # 🌟 Modern Vibe Components & Motion Recipes (Aceternity & Magic UI Patterns)
 
-Production-grade, AI-ready React + Tailwind CSS + Framer Motion component recipes designed for modern Vibe Coding. Adheres strictly to zero raw emojis (inline SVGs only), bidirectional text resilience with `<bdi>`, WCAG AAA contrast ratios, and native dual-theme support (Light + Dark).
+Production-grade, AI-ready React + Tailwind CSS + Framer Motion component recipes designed for modern Vibe Coding. Adheres strictly to Vibrant Light Mode as the primary living default, clean inline SVG vectors (zero raw emojis), WCAG AAA contrast ratios, and on-demand Persian/Arabic RTL support with `<bdi>`.
 
 ---
 
@@ -373,6 +373,6 @@ export const FloatingDock: React.FC<FloatingDockProps> = ({ items, className = "
 
 Whenever implementing components from this catalog:
 1. **Color Token Alignment:** Always bind color values to CSS design tokens (`--color-vibe-primary`, `--color-vibe-surface`, etc.) rather than hardcoded Hex values.
-2. **Accessible Interaction (`bdi` & `aria`):** Wrap labels in `<bdi>` to isolate mixed LTR/RTL text. Provide explicit `aria-label` for icon-only action triggers.
+2. **Accessible Interaction (`bdi` & `aria`):** Wrap labels in `<bdi>` to isolate mixed LTR/RTL text (for on-demand Persian/Arabic targets; pure English interfaces run standard LTR without `<bdi>` overhead). Provide explicit `aria-label` for icon-only action triggers.
 3. **Hardware Acceleration:** Ensure motion elements use `will-change-transform` or CSS transforms to prevent CPU reflows.
 4. **WCAG AAA Contrast:** Pair primary buttons with certified `--color-vibe-on-primary` foreground values (minimum 4.5:1, target 7:1).

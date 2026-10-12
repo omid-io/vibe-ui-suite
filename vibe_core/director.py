@@ -96,7 +96,8 @@ class DesignDirector:
 
         # Language detection
         has_persian = bool(re.search(r"[\u0600-\u06FF]", prompt))
-        language = ["fa", "en"] if has_persian else ["en"]
+        language = "fa" if has_persian else "en"
+        languages = ["fa", "en"] if has_persian else ["en"]
 
         # Smart Lighting / Theme Strategy (Breaking the Dark Mode Bias)
         theme_bias = user_overrides.get("theme_bias") or blueprint.get("theme_bias", "light")
@@ -158,6 +159,8 @@ class DesignDirector:
             "theme_strategy": theme_bias,
             "platform": ["mobile", "tablet", "desktop"],
             "language": language,
+            "languages": languages,
+            "language_direction": "rtl" if has_persian else "ltr",
             "confidence": {
                 "overall": confidence_score,
                 "domain": confidence_score,

@@ -4,7 +4,7 @@ import * as path from 'path';
 import * as readline from 'readline';
 import { COMPONENT_REGISTRY } from './registry/components';
 import { VISUAL_CHEMISTRIES } from './index';
-const VERSION = '4.1.1';
+const VERSION = '6.0.0';
 function printBanner() {
     console.log(`
 \x1b[35m  ▲ VIBE UI CLI v${VERSION}\x1b[0m

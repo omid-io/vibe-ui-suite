@@ -1,6 +1,6 @@
 # 🏛️ Vibe UI Suite — System Architecture & Data Contract Specification
 
-**Version:** 4.8.0 (Living Kinetic Standards & Kinetic Arrow Physics)  
+**Version:** 6.0.0 (The Two Golden Pillars — Trend Inspiration & Living Visual Feedback)  
 **Status:** Feature Freeze (Production Certified)  
 **Document Type:** Core Architectural Specification  
 **Machine Contract Reference:** [`schemas/design-spec.v1.schema.json`](schemas/design-spec.v1.schema.json)  
