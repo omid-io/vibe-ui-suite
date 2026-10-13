@@ -461,10 +461,11 @@ class Tier1Tests:
 
     @staticmethod
     def test_t1_28():
-        """T1.28 (F6): Verify packages/tokens/package.json has version: '6.0.0'."""
-        p_path = ROOT_DIR / "packages" / "tokens" / "package.json"
-        data = json.loads(p_path.read_text(encoding="utf-8"))
-        assert data.get("version") == "6.0.0", f"tokens package.json is '{data.get('version')}', expected '6.0.0'"
+        """T1.28 (F6): Verify @omid-io/tokens is excluded from active release manifest."""
+        m_path = ROOT_DIR / "version.manifest.json"
+        data = json.loads(m_path.read_text(encoding="utf-8"))
+        assert "@omid-io/tokens" not in data.get("packages", {}), \
+            "@omid-io/tokens must be excluded from active release manifest (migrated to vibe-ui-suite)"
 
     @staticmethod
     def test_t1_29():
@@ -952,7 +953,7 @@ ALL_TEST_CASES: List[TestCase] = [
     TestCase("T1.25", 1, "F5", "Verify .test-artifacts/ is ignored in .gitignore", Tier1Tests.test_t1_25),
     TestCase("T1.26", 1, "F6", "Verify version.json has version: '6.0.0'", Tier1Tests.test_t1_26),
     TestCase("T1.27", 1, "F6", "Verify packages/vibe-ui-suite/package.json has version: '6.0.0'", Tier1Tests.test_t1_27),
-    TestCase("T1.28", 1, "F6", "Verify packages/tokens/package.json has version: '6.0.0'", Tier1Tests.test_t1_28),
+    TestCase("T1.28", 1, "F6", "Verify @omid-io/tokens is excluded from active release manifest", Tier1Tests.test_t1_28),
     TestCase("T1.29", 1, "F6", "Verify packages/vibe-ui-vscode/package.json has version: '6.0.0'", Tier1Tests.test_t1_29),
     TestCase("T1.30", 1, "F6", "Verify vibe_cli.py --version outputs 'Vibe UI Suite v6.0.0'", Tier1Tests.test_t1_30),
     TestCase("T1.31", 1, "F7", "Verify README.md and README.fa.md describe v6.0.0 and Two Golden Pillars", Tier1Tests.test_t1_31),

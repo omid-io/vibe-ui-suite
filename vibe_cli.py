@@ -215,6 +215,20 @@ def cmd_screenshot(args):
     if report.get("overall_status") == "FAIL":
         sys.exit(1)
 
+def cmd_assets(args):
+    from scripts.cache_assets import cache_all_assets, verify_assets, DEFAULT_OUTPUT_DIR
+    action = getattr(args, "action", "verify")
+    out_dir = Path(getattr(args, "output_dir", None) or str(DEFAULT_OUTPUT_DIR))
+    if action == "download":
+        success = cache_all_assets(output_dir=out_dir, force=getattr(args, "force", False), quality=getattr(args, "quality", 80))
+    elif action == "verify":
+        success = verify_assets(output_dir=out_dir)
+    else:
+        print(f"Unknown action: {action}", file=sys.stderr)
+        sys.exit(1)
+    if not success:
+        sys.exit(1)
+
 def main():
     parser = argparse.ArgumentParser(description="Vibe UI Suite v6.0.0 Master CLI")
     parser.add_argument("--version", action="version", version="Vibe UI Suite v6.0.0")
@@ -261,6 +275,13 @@ def main():
     p_ss.add_argument("--no-full-page", dest="full_page", action="store_false", default=True, help="Capture only initial viewport area instead of full page")
     p_ss.add_argument("--json", action="store_true", default=False, help="Output audit report as JSON")
 
+    # assets
+    p_assets = subparsers.add_parser("assets", help="Manage curated WebP assets (download, verify)")
+    p_assets.add_argument("action", choices=["download", "verify"], default="verify", nargs="?", help="Action: 'download' or 'verify'")
+    p_assets.add_argument("--force", action="store_true", help="Force re-download of existing assets")
+    p_assets.add_argument("--quality", type=int, default=80, help="WebP compression quality (default: 80)")
+    p_assets.add_argument("--output-dir", default=None, help="Output directory for assets")
+
     args = parser.parse_args()
     if not args.command:
         parser.print_help()
@@ -280,6 +301,8 @@ def main():
         cmd_heal(args)
     elif args.command == "screenshot":
         cmd_screenshot(args)
+    elif args.command == "assets":
+        cmd_assets(args)
 
 if __name__ == "__main__":
     main()

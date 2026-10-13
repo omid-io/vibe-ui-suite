@@ -1,0 +1,392 @@
+{
+  "version": "6.0.0",
+  "generated_at": "2026-10-13T17:01:45Z",
+  "total_domains": 24,
+  "total_assets": 48,
+  "domains": {
+    "crypto_trading_web3": {
+      "card": {
+        "path": "assets\\curated_webp\\crypto_trading_web3_card.webp",
+        "status": "downloaded",
+        "width": 600,
+        "height": 400,
+        "bytes": 24622
+      },
+      "hero": {
+        "path": "assets\\curated_webp\\crypto_trading_web3_hero.webp",
+        "status": "downloaded",
+        "width": 1200,
+        "height": 800,
+        "bytes": 62630
+      }
+    },
+    "beauty_clinical_wellness": {
+      "card": {
+        "path": "assets\\curated_webp\\beauty_clinical_wellness_card.webp",
+        "status": "downloaded",
+        "width": 600,
+        "height": 400,
+        "bytes": 20774
+      },
+      "hero": {
+        "path": "assets\\curated_webp\\beauty_clinical_wellness_hero.webp",
+        "status": "downloaded",
+        "width": 1200,
+        "height": 800,
+        "bytes": 57066
+      }
+    },
+    "fintech_banking": {
+      "card": {
+        "path": "assets\\curated_webp\\fintech_banking_card.webp",
+        "status": "downloaded",
+        "width": 600,
+        "height": 400,
+        "bytes": 38796
+      },
+      "hero": {
+        "path": "assets\\curated_webp\\fintech_banking_hero.webp",
+        "status": "downloaded",
+        "width": 1200,
+        "height": 800,
+        "bytes": 121112
+      }
+    },
+    "devops_cloud_terminal": {
+      "card": {
+        "path": "assets\\curated_webp\\devops_cloud_terminal_card.webp",
+        "status": "downloaded",
+        "width": 600,
+        "height": 400,
+        "bytes": 48422
+      },
+      "hero": {
+        "path": "assets\\curated_webp\\devops_cloud_terminal_hero.webp",
+        "status": "downloaded",
+        "width": 1200,
+        "height": 800,
+        "bytes": 163544
+      }
+    },
+    "ai_developer_platform": {
+      "hero": {
+        "path": "assets\\curated_webp\\ai_developer_platform_hero.webp",
+        "status": "downloaded",
+        "width": 1200,
+        "height": 800,
+        "bytes": 13466
+      },
+      "card": {
+        "path": "assets\\curated_webp\\ai_developer_platform_card.webp",
+        "status": "downloaded",
+        "width": 600,
+        "height": 400,
+        "bytes": 5502
+      }
+    },
+    "saas_b2b_enterprise": {
+      "card": {
+        "path": "assets\\curated_webp\\saas_b2b_enterprise_card.webp",
+        "status": "downloaded",
+        "width": 600,
+        "height": 400,
+        "bytes": 18672
+      },
+      "hero": {
+        "path": "assets\\curated_webp\\saas_b2b_enterprise_hero.webp",
+        "status": "downloaded",
+        "width": 1200,
+        "height": 800,
+        "bytes": 43460
+      }
+    },
+    "ecommerce_luxury_fashion": {
+      "card": {
+        "path": "assets\\curated_webp\\ecommerce_luxury_fashion_card.webp",
+        "status": "downloaded",
+        "width": 600,
+        "height": 400,
+        "bytes": 32884
+      },
+      "hero": {
+        "path": "assets\\curated_webp\\ecommerce_luxury_fashion_hero.webp",
+        "status": "downloaded",
+        "width": 1200,
+        "height": 800,
+        "bytes": 78096
+      }
+    },
+    "ecommerce_mass_market": {
+      "card": {
+        "path": "assets\\curated_webp\\ecommerce_mass_market_card.webp",
+        "status": "downloaded",
+        "width": 600,
+        "height": 400,
+        "bytes": 32870
+      },
+      "hero": {
+        "path": "assets\\curated_webp\\ecommerce_mass_market_hero.webp",
+        "status": "downloaded",
+        "width": 1200,
+        "height": 800,
+        "bytes": 86142
+      }
+    },
+    "real_estate_architecture": {
+      "hero": {
+        "path": "assets\\curated_webp\\real_estate_architecture_hero.webp",
+        "status": "downloaded",
+        "width": 1200,
+        "height": 800,
+        "bytes": 148804
+      },
+      "card": {
+        "path": "assets\\curated_webp\\real_estate_architecture_card.webp",
+        "status": "downloaded",
+        "width": 600,
+        "height": 400,
+        "bytes": 44994
+      }
+    },
+    "education_edtech_lms": {
+      "card": {
+        "path": "assets\\curated_webp\\education_edtech_lms_card.webp",
+        "status": "downloaded",
+        "width": 600,
+        "height": 400,
+        "bytes": 31476
+      },
+      "hero": {
+        "path": "assets\\curated_webp\\education_edtech_lms_hero.webp",
+        "status": "downloaded",
+        "width": 1200,
+        "height": 800,
+        "bytes": 78220
+      }
+    },
+    "healthcare_hospital_medical": {
+      "card": {
+        "path": "assets\\curated_webp\\healthcare_hospital_medical_card.webp",
+        "status": "downloaded",
+        "width": 600,
+        "height": 400,
+        "bytes": 15478
+      },
+      "hero": {
+        "path": "assets\\curated_webp\\healthcare_hospital_medical_hero.webp",
+        "status": "downloaded",
+        "width": 1200,
+        "height": 800,
+        "bytes": 47484
+      }
+    },
+    "creative_portfolio_agency": {
+      "card": {
+        "path": "assets\\curated_webp\\creative_portfolio_agency_card.webp",
+        "status": "downloaded",
+        "width": 600,
+        "height": 400,
+        "bytes": 22274
+      },
+      "hero": {
+        "path": "assets\\curated_webp\\creative_portfolio_agency_hero.webp",
+        "status": "downloaded",
+        "width": 1200,
+        "height": 800,
+        "bytes": 52484
+      }
+    },
+    "media_editorial_magazine": {
+      "card": {
+        "path": "assets\\curated_webp\\media_editorial_magazine_card.webp",
+        "status": "downloaded",
+        "width": 600,
+        "height": 400,
+        "bytes": 25324
+      },
+      "hero": {
+        "path": "assets\\curated_webp\\media_editorial_magazine_hero.webp",
+        "status": "downloaded",
+        "width": 1200,
+        "height": 800,
+        "bytes": 77970
+      }
+    },
+    "food_restaurant_cafe": {
+      "card": {
+        "path": "assets\\curated_webp\\food_restaurant_cafe_card.webp",
+        "status": "downloaded",
+        "width": 600,
+        "height": 400,
+        "bytes": 56306
+      },
+      "hero": {
+        "path": "assets\\curated_webp\\food_restaurant_cafe_hero.webp",
+        "status": "downloaded",
+        "width": 1200,
+        "height": 800,
+        "bytes": 183028
+      }
+    },
+    "travel_hospitality_tourism": {
+      "card": {
+        "path": "assets\\curated_webp\\travel_hospitality_tourism_card.webp",
+        "status": "downloaded",
+        "width": 600,
+        "height": 400,
+        "bytes": 44876
+      },
+      "hero": {
+        "path": "assets\\curated_webp\\travel_hospitality_tourism_hero.webp",
+        "status": "downloaded",
+        "width": 1200,
+        "height": 800,
+        "bytes": 151338
+      }
+    },
+    "legal_compliance_law": {
+      "hero": {
+        "path": "assets\\curated_webp\\legal_compliance_law_hero.webp",
+        "status": "downloaded",
+        "width": 1200,
+        "height": 800,
+        "bytes": 52244
+      },
+      "card": {
+        "path": "assets\\curated_webp\\legal_compliance_law_card.webp",
+        "status": "downloaded",
+        "width": 600,
+        "height": 400,
+        "bytes": 19376
+      }
+    },
+    "gaming_entertainment_streaming": {
+      "card": {
+        "path": "assets\\curated_webp\\gaming_entertainment_streaming_card.webp",
+        "status": "downloaded",
+        "width": 600,
+        "height": 400,
+        "bytes": 22454
+      },
+      "hero": {
+        "path": "assets\\curated_webp\\gaming_entertainment_streaming_hero.webp",
+        "status": "downloaded",
+        "width": 1200,
+        "height": 800,
+        "bytes": 52840
+      }
+    },
+    "automotive_ev_mobility": {
+      "card": {
+        "path": "assets\\curated_webp\\automotive_ev_mobility_card.webp",
+        "status": "downloaded",
+        "width": 600,
+        "height": 400,
+        "bytes": 39932
+      },
+      "hero": {
+        "path": "assets\\curated_webp\\automotive_ev_mobility_hero.webp",
+        "status": "downloaded",
+        "width": 1200,
+        "height": 800,
+        "bytes": 115074
+      }
+    },
+    "logistics_supply_chain": {
+      "card": {
+        "path": "assets\\curated_webp\\logistics_supply_chain_card.webp",
+        "status": "downloaded",
+        "width": 600,
+        "height": 400,
+        "bytes": 72088
+      },
+      "hero": {
+        "path": "assets\\curated_webp\\logistics_supply_chain_hero.webp",
+        "status": "downloaded",
+        "width": 1200,
+        "height": 800,
+        "bytes": 224086
+      }
+    },
+    "energy_greentech_sustainability": {
+      "card": {
+        "path": "assets\\curated_webp\\energy_greentech_sustainability_card.webp",
+        "status": "downloaded",
+        "width": 600,
+        "height": 400,
+        "bytes": 76050
+      },
+      "hero": {
+        "path": "assets\\curated_webp\\energy_greentech_sustainability_hero.webp",
+        "status": "downloaded",
+        "width": 1200,
+        "height": 800,
+        "bytes": 288424
+      }
+    },
+    "nonprofit_charity_social": {
+      "card": {
+        "path": "assets\\curated_webp\\nonprofit_charity_social_card.webp",
+        "status": "downloaded",
+        "width": 600,
+        "height": 400,
+        "bytes": 33478
+      },
+      "hero": {
+        "path": "assets\\curated_webp\\nonprofit_charity_social_hero.webp",
+        "status": "downloaded",
+        "width": 1200,
+        "height": 800,
+        "bytes": 87596
+      }
+    },
+    "personal_branding_creator": {
+      "hero": {
+        "path": "assets\\curated_webp\\personal_branding_creator_hero.webp",
+        "status": "downloaded",
+        "width": 1200,
+        "height": 800,
+        "bytes": 24678
+      },
+      "card": {
+        "path": "assets\\curated_webp\\personal_branding_creator_card.webp",
+        "status": "downloaded",
+        "width": 600,
+        "height": 400,
+        "bytes": 8360
+      }
+    },
+    "cybersecurity_identity_auth": {
+      "hero": {
+        "path": "assets\\curated_webp\\cybersecurity_identity_auth_hero.webp",
+        "status": "downloaded",
+        "width": 1200,
+        "height": 800,
+        "bytes": 48130
+      },
+      "card": {
+        "path": "assets\\curated_webp\\cybersecurity_identity_auth_card.webp",
+        "status": "downloaded",
+        "width": 600,
+        "height": 400,
+        "bytes": 18636
+      }
+    },
+    "general_modern_saas": {
+      "card": {
+        "path": "assets\\curated_webp\\general_modern_saas_card.webp",
+        "status": "downloaded",
+        "width": 600,
+        "height": 400,
+        "bytes": 20360
+      },
+      "hero": {
+        "path": "assets\\curated_webp\\general_modern_saas_hero.webp",
+        "status": "downloaded",
+        "width": 1200,
+        "height": 800,
+        "bytes": 50046
+      }
+    }
+  }
+}

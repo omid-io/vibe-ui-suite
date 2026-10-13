@@ -205,6 +205,33 @@ def _parse_viewports(viewports_arg: Union[str, Sequence[Any]]) -> List[Dict[str,
     return configs
 
 
+def ensure_playwright_runtime() -> None:
+    """
+    Ensures Playwright package and Chromium binary are installed and ready.
+    If missing, automatically installs them via pip and playwright install chromium.
+    """
+    import subprocess
+    try:
+        import playwright
+    except ImportError:
+        print("[INFO] Playwright package not found. Self-provisioning via pip...", file=sys.stderr)
+        subprocess.run([sys.executable, "-m", "pip", "install", "playwright"], check=True)
+
+    from playwright.sync_api import sync_playwright
+    try:
+        with sync_playwright() as p:
+            b = p.chromium.launch(
+                headless=True,
+                args=["--remote-debugging-port=0", "--disable-dev-shm-usage", "--no-sandbox"]
+            )
+            b.close()
+    except Exception as e:
+        err_msg = str(e).lower()
+        if "executable doesn't exist" in err_msg or "run the following" in err_msg or "playwright install" in err_msg:
+            print("[INFO] Chromium binary not found. Installing Chromium via Playwright...", file=sys.stderr)
+            subprocess.run([sys.executable, "-m", "playwright", "install", "chromium"], check=True)
+
+
 def capture_audit_screenshots(
     file_path: Union[str, Path],
     output_dir: Union[str, Path] = ".test-artifacts/screenshots",
@@ -239,15 +266,16 @@ def capture_audit_screenshots(
     vp_configs = _parse_viewports(viewports)
 
     try:
+        ensure_playwright_runtime()
         from playwright.sync_api import sync_playwright
-    except ImportError as err:
+    except Exception as err:
         if temp_file_to_cleanup and temp_file_to_cleanup.exists():
             try:
                 temp_file_to_cleanup.unlink()
             except Exception:
                 pass
         raise RuntimeError(
-            "Playwright is not installed. Run 'pip install playwright && playwright install chromium'."
+            f"Failed to initialize Playwright/Chromium runtime: {err}"
         ) from err
 
     browser_inst = None
@@ -256,7 +284,10 @@ def capture_audit_screenshots(
     try:
         with sync_playwright() as playwright_cm:
             _GLOBAL_ACTIVE_PLAYWRIGHT = playwright_cm
-            browser_inst = playwright_cm.chromium.launch(headless=True)
+            browser_inst = playwright_cm.chromium.launch(
+                headless=True,
+                args=["--remote-debugging-port=0", "--disable-dev-shm-usage", "--no-sandbox"]
+            )
             _GLOBAL_ACTIVE_BROWSER = browser_inst
 
             file_uri = render_path.resolve().as_uri()

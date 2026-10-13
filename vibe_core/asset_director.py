@@ -232,7 +232,18 @@ class AssetDirector:
     def get_media_spec(self, domain_id: str) -> Dict[str, Any]:
         """Resolves the editorial media specification for a given domain."""
         canonical_id = self.DOMAIN_ALIASES.get(domain_id, domain_id)
-        return self.DOMAIN_MEDIA_SPECS.get(canonical_id, self.DEFAULT_MEDIA_SPEC)
+        spec = dict(self.DOMAIN_MEDIA_SPECS.get(canonical_id, self.DEFAULT_MEDIA_SPEC))
+        spec["canonical_id"] = canonical_id
+        spec["hero_webp"] = f"assets/curated_webp/{canonical_id}_hero.webp"
+        spec["card_webp"] = f"assets/curated_webp/{canonical_id}_card.webp"
+        return spec
+
+    def get_webp_path(self, domain_id: str, slot: str = "hero") -> str:
+        """Returns relative path to local curated WebP asset."""
+        canonical_id = self.DOMAIN_ALIASES.get(domain_id, domain_id)
+        if canonical_id not in self.DOMAIN_MEDIA_SPECS:
+            canonical_id = "general_modern_saas"
+        return f"assets/curated_webp/{canonical_id}_{slot}.webp"
 
     def generate_media_container_jsx(
         self,
@@ -242,12 +253,13 @@ class AssetDirector:
     ) -> str:
         """
         Generates an accessible, responsive media container with transparent synthetic demarcation,
-        aspect ratio constraints, curated high-resolution photography, and editorial caption.
+        aspect ratio constraints, curated local WebP photography with CDN fallback, and editorial caption.
         """
         spec = self.get_media_spec(domain_id)
         aspect = spec["aspect_ratio"]
         caption = spec.get("caption_fa" if is_rtl else "caption", spec["caption"])
         unsplash_url = spec.get("unsplash_url", self.DEFAULT_MEDIA_SPEC["unsplash_url"])
+        hero_webp = spec.get("hero_webp", f"assets/curated_webp/{spec.get('canonical_id', 'general_modern_saas')}_hero.webp")
 
         # Style-tailored border and surface
         if style_name == "neobrutalism":
@@ -261,13 +273,16 @@ class AssetDirector:
 
         return f'''
         <div className="relative overflow-hidden bg-zinc-950 {aspect} {border_cls} flex flex-col justify-between p-4 group select-none" data-origin="synthetic_demo">
-          <img
-            src="{unsplash_url}"
-            alt="{caption}"
-            loading="lazy"
-            decoding="async"
-            className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105 opacity-80"
-          />
+          <picture className="absolute inset-0 w-full h-full">
+            <source srcSet="{hero_webp}" type="image/webp" />
+            <img
+              src="{unsplash_url}"
+              alt="{caption}"
+              loading="lazy"
+              decoding="async"
+              className="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105 opacity-80"
+            />
+          </picture>
           <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-black/20 pointer-events-none" />
 
           <div className="flex items-center justify-between text-[11px] font-mono text-zinc-300 z-10">
@@ -284,3 +299,4 @@ class AssetDirector:
             <p className="text-xs font-semibold text-white/95 leading-snug drop-shadow-sm"><bdi>{caption}</bdi></p>
           </div>
         </div>'''
+

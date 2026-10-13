@@ -832,6 +832,7 @@ export default {component_name};
         domain_id = decision.get("genome", {}).get("domain") or decision.get("intent", {}).get("product_domain", "")
         media_spec = self.asset_director.get_media_spec(domain_id)
         hero_image_url = media_spec.get("unsplash_url", "https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=1200&q=80")
+        hero_webp_url = media_spec.get("hero_webp", "assets/curated_webp/general_modern_saas_hero.webp")
         hero_image_caption = media_spec.get("caption_fa" if is_rtl else "caption", "High-Resolution Domain Showcase")
         blueprint = decision.get("intent", {}).get("blueprint") or self.blueprints.get("domains", {}).get(domain_id, {})
         mock_data_all = blueprint.get("mock_data", {})
@@ -1741,11 +1742,14 @@ export default {component_name};
 
           <!-- Editorial Domain Asset Showcase -->
           <div class="relative w-full h-44 sm:h-56 rounded-[var(--radius-button)] overflow-hidden border border-[var(--border-subtle)] mb-6 shadow-sm">
-            <img src="{hero_image_url}" alt="{hero_image_caption}" class="w-full h-full object-cover" loading="lazy" />
+            <picture class="w-full h-full block">
+              <source srcset="{hero_webp_url}" type="image/webp">
+              <img src="{hero_image_url}" alt="{hero_image_caption}" class="w-full h-full object-cover" loading="lazy" decoding="async" />
+            </picture>
             <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent pointer-events-none"></div>
             <div class="absolute bottom-2 start-3 end-3 text-[11px] font-mono text-white/95 flex items-center justify-between">
               <span class="truncate"><bdi>{hero_image_caption}</bdi></span>
-              <span class="px-1.5 py-0.5 rounded bg-black/40 text-[10px] uppercase font-mono">Unsplash</span>
+              <span class="px-1.5 py-0.5 rounded bg-black/40 text-[10px] uppercase font-mono">Curated WebP</span>
             </div>
           </div>
         </div>

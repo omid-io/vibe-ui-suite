@@ -6,8 +6,7 @@
   "packages": {
     "vibe-ui-suite": "6.0.0",
     "vibe-ui-vscode": "6.0.0",
-    "vibe-ui-nextjs-starter": "6.0.0",
-    "@omid-io/tokens": "6.0.0"
+    "vibe-ui-nextjs-starter": "6.0.0"
   },
   "schemas": {
     "intent_contract": "v1",

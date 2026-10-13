@@ -13,6 +13,10 @@
   npm publish --access public
   ```
 
+> [!NOTE]
+> **Consolidated Architecture: `@omid-io/tokens` Eliminated**  
+> The legacy `packages/tokens` package has been completely deleted and consolidated directly into `packages/vibe-ui-suite`. All CLI binaries, tokens, recipes, and TypeScript typings are compiled and published solely from `vibe-ui-suite`.
+
 ---
 
 ## ⚡ Extension Update Checklist ("افزونه ها رو آپدیت کن")
