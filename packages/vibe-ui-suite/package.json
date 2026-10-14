@@ -1,6 +1,6 @@
 {
   "name": "vibe-ui-suite",
-  "version": "6.0.0",
+  "version": "6.1.0",
   "description": "Deterministic design contracts, component recipes, and WCAG AA evaluation gates for AI coding agents (Cursor, Claude Code, Windsurf, Antigravity).",
   "bin": {
     "vibe-ui-suite": "./dist/cli.js",
@@ -21,7 +21,17 @@
       "require": "./dist/tailwind.js"
     },
     "./v4": "./dist/v4.css",
-    "./v4.css": "./dist/v4.css"
+    "./v4.css": "./dist/v4.css",
+    "./registry": {
+      "types": "./dist/registry/components.d.ts",
+      "import": "./dist/registry/components.mjs",
+      "require": "./dist/registry/components.js"
+    },
+    "./registry/*": {
+      "types": "./dist/registry/*.d.ts",
+      "import": "./dist/registry/*.mjs",
+      "require": "./dist/registry/*.js"
+    }
   },
   "files": [
     "dist",

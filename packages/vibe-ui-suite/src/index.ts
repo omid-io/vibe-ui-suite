@@ -245,3 +245,6 @@ export function getContrastRatio(lumA: number, lumB: number): number {
   const l2 = Math.min(lumA, lumB);
   return (l1 + 0.05) / (l2 + 0.05);
 }
+
+// Re-export Component Registry and templates
+export { COMPONENT_REGISTRY, type ComponentTemplate } from './registry/components';

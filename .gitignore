@@ -55,7 +55,9 @@ scripts/run_upload.js
 scripts/upload_*
 scripts/build_upload_action.py
 scripts/generate_playwright_snippet.py
-
-
+# Large offline dataset
+data/uiverse-galaxy/
+data/
 
 *.bak
+

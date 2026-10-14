@@ -34,9 +34,10 @@ Instead of obsessing over obscure mathematical constraints, `vibe-ui-agent` focu
 ### Step 1: Trend Inspiration & Visual Direction (ایده پردازی و کانسپت بصری)
 1. **Analyze Domain & Target Persona:**
    - Understand the emotional stakes, trust factors, and conversion goals of the domain.
-2. **Anchor to Premier Design Trends:**
-   - Draw inspiration from the best real-world patterns (clean Bento grids, Apple-style subtle depth, modern SaaS layouts, editorial typography).
-   - Review `skills/ui-kit/references/` for proven component recipes.
+2. **Anchor to Premier Design Trends & Active Element Harvesting:**
+   - Draw inspiration from the best real-world patterns (clean Bento grids, Apple-style subtle depth, modern SaaS layouts, editorial typography, Dribbble, Mobbin, Awwwards).
+   - **Active Micro-Interaction Hunting:** Search and harvest signature interactive elements (buttons, loaders, cards, inputs, toggles) from the Galaxy library (`python vibe_cli.py inspire "<keyword>"`) or online inspiration. Freely select the most captivating, trending, and alive elements for each section without requiring user micromanagement.
+   - Review `skills/ui-kit/references/` (especially `living_micro_interactions.md` and `modern_vibe_components.md`) for verified recipes.
 3. **Establish Living Visual Direction:**
    - **Vibrant Light Mode as Default:** Crisp white/off-white canvas (`#ffffff`, `#f8fafc`), high-contrast readable typography, and sharp brand accents. (Dark Mode is used when domain-specific like Crypto/Gaming/DevOps, or explicitly requested).
    - **High-Res Real Visuals:** Never use dull gray placeholder boxes. Curate authentic high-resolution imagery (via AI image generation or high-res Unsplash queries with `&auto=format&fit=crop&w=1200&q=80`).
@@ -57,11 +58,25 @@ Instead of obsessing over obscure mathematical constraints, `vibe-ui-agent` focu
    - *Are the fonts legible and balanced?*
    - *Does the design look fresh, modern, and trustworthy?*
 4. **Auto-Refinement:** Fix detected visual bugs before delivering to the user.
+5. **Headless Fallback Strategy:** If Playwright or a browser environment is unavailable, seamlessly switch to static DOM & CSS inspection fallback: verify touch target bounds (min-h-[44px] min-w-[44px]), WCAG AA contrast ratio calculations, absence of raw unicode emojis, and ARIA accessibility semantics directly via `vibe_core.verifier` without stalling the delivery pipeline.
 
 ### Step 4: Living Micro-Interactions & Delivery (تعاملات و تحویل نهایی)
-1. Smooth hover effects (`transition-all duration-200 ease-out`, subtle scale `hover:scale-[1.02]`, soft shadow elevations).
-2. Optional accessible Dark/Light theme toggle where relevant.
-3. Deliver clean, modular, production-ready TSX/HTML.
+1. **Autonomous Living Injection Matrix:** Proactively inject domain-matched living micro-interactions from `skills/ui-kit/references/living_micro_interactions.md` during design synthesis without waiting for user prompting:
+   - **FinTech / Web3 / Crypto:** `shimmer-button` (CTA), `holographic-card` (wallet / asset tile), `cyber-loader` (transaction confirmation).
+   - **DevOps / Cloud / AI SaaS:** `thinking-drawer` (AI reasoning), `telemetry-hud` (latency / tokens), `glow-input` (command prompt).
+   - **E-Commerce & Luxury Retail:** `holographic-card` (product tilt), `shimmer-button` (add to cart), `tactile-switch` (variant options).
+   - **Healthcare & Enterprise Apps:** `tactile-switch` (patient consent), `glow-input` (input validation), `shimmer-button` (booking action).
+2. **Elevate & Vibe-ify Any Harvested Element:** Whenever pulling or adapting an external component (from Galaxy, Uiverse, Dribbble, or web inspiration), elevate it into world-class Vibe UI engineering: harmonize colors to OKLCH tokens, guarantee dual-theme support, make spacing responsive, isolate LTR/RTL text with `<bdi>`, and ensure accessible keyboard semantics.
+3. Smooth hover effects (`transition-all duration-200 ease-out`, subtle scale `hover:scale-[1.02]`, soft shadow elevations).
+4. Optional accessible Dark/Light theme toggle where relevant.
+5. Deliver clean, modular, production-ready TSX/HTML.
+
+---
+
+## 🛡️ Zero-Hallucination Guardrail & Anti-Slop Contract
+- **Zero Imaginary Packages:** Never invent non-existent libraries or packages (e.g. `framer-motion-extra`, `vibe-magic-glow`, or fake lucide icon names). Use React 19 standard hooks, standard Tailwind v4 classes, or inline SVGs.
+- **Strict Visual Token Integrity:** Use typed OKLCH color palettes and maintain at least 4.5:1 contrast for body copy and 3.0:1 for headings. Maximum of 3 backdrop-blur layers per viewport.
+- **Absolute Prohibition of ZWNJ:** In Persian copy, comments, and strings, never use zero-width non-joiners (نیم فاصله); use standard spaces exclusively.
 
 ---
 
@@ -76,6 +91,7 @@ Instead of obsessing over obscure mathematical constraints, `vibe-ui-agent` focu
 ---
 
 ## 🧼 Silent Baseline Hygiene (Keep in Background)
-- Keep buttons comfortably touch-friendly on mobile screens.
+- Keep buttons comfortably touch-friendly on mobile screens (44px × 44px minimum bounding box).
 - Use vector SVGs for clean, professional iconography.
 - Maintain comfortable contrast between text and background.
+

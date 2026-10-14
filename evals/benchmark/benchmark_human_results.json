@@ -1,6 +1,6 @@
 {
   "$schema": "../../schemas/benchmark-result.v1.json",
-  "timestamp": "2026-09-26T23:46:26.304273+00:00",
+  "timestamp": "2026-10-14T13:07:21.788416+00:00",
   "suite_version": "4.0.0",
   "scenario_count": 25,
   "benchmark_type": "internal_deterministic_heuristic",
@@ -57,8 +57,8 @@
     },
     "domain_resolution_accuracy": {
       "baseline": 56.0,
-      "candidate": 68.0,
-      "delta_percent": 12.0
+      "candidate": 60.0,
+      "delta_percent": 4.0
     },
     "avg_automated_refiner_rounds": {
       "baseline": 2.4,
@@ -77,7 +77,7 @@
       "reduction_percent": 100.0
     },
     "avg_time_to_accept_ms": {
-      "candidate": 331.74
+      "candidate": 398.49
     },
     "visual_diversity_index": {
       "candidate": 66.7,
@@ -104,11 +104,11 @@
       "formula_validation_passed": true,
       "pixel_buffer_valid": true,
       "in_browser_vision_score": 95,
-      "dom_quality_score": 97.0,
-      "visual_quality_score": 89.1,
-      "critic_score": 97.0,
+      "dom_quality_score": 96.0,
+      "visual_quality_score": 93.2,
+      "critic_score": 96.0,
       "verification_status": "PASS",
-      "elapsed_ms": 423.42
+      "elapsed_ms": 520.44
     },
     {
       "scenario_id": "task_02",
@@ -126,11 +126,11 @@
       "formula_validation_passed": true,
       "pixel_buffer_valid": true,
       "in_browser_vision_score": 95,
-      "dom_quality_score": 97.0,
-      "visual_quality_score": 92.4,
-      "critic_score": 97.0,
+      "dom_quality_score": 96.0,
+      "visual_quality_score": 95.0,
+      "critic_score": 96.0,
       "verification_status": "PASS",
-      "elapsed_ms": 363.08
+      "elapsed_ms": 400.07
     },
     {
       "scenario_id": "task_03",
@@ -148,11 +148,11 @@
       "formula_validation_passed": true,
       "pixel_buffer_valid": true,
       "in_browser_vision_score": 95,
-      "dom_quality_score": 97.0,
-      "visual_quality_score": 89.1,
-      "critic_score": 97.0,
+      "dom_quality_score": 96.0,
+      "visual_quality_score": 93.2,
+      "critic_score": 96.0,
       "verification_status": "PASS",
-      "elapsed_ms": 352.64
+      "elapsed_ms": 371.4
     },
     {
       "scenario_id": "task_04",
@@ -170,19 +170,19 @@
       "formula_validation_passed": true,
       "pixel_buffer_valid": true,
       "in_browser_vision_score": 95,
-      "dom_quality_score": 97.0,
-      "visual_quality_score": 89.1,
-      "critic_score": 97.0,
+      "dom_quality_score": 96.0,
+      "visual_quality_score": 93.2,
+      "critic_score": 96.0,
       "verification_status": "PASS",
-      "elapsed_ms": 354.76
+      "elapsed_ms": 392.2
     },
     {
       "scenario_id": "task_05",
       "domain": "ai_developer_platform",
       "prompt": "Design a developer platform console for AI engineers to scale dedicated GPU clusters. Include a token throughput slider adjusting monthly budget, allocated H100 SXM5 VRAM, active worker slots, and per-token inference latency.",
-      "detected_domain": "ai_developer_platform",
-      "domain_match": true,
-      "selected_style": "linear_dark",
+      "detected_domain": "devops_cloud_terminal",
+      "domain_match": false,
+      "selected_style": "data_dense_terminal",
       "candidate_passed_first_pass": true,
       "autonomous_resolved": true,
       "react_tsx_compiled": true,
@@ -192,11 +192,11 @@
       "formula_validation_passed": true,
       "pixel_buffer_valid": true,
       "in_browser_vision_score": 95,
-      "dom_quality_score": 97.0,
-      "visual_quality_score": 89.1,
-      "critic_score": 97.0,
+      "dom_quality_score": 96.0,
+      "visual_quality_score": 93.2,
+      "critic_score": 96.0,
       "verification_status": "PASS",
-      "elapsed_ms": 345.96
+      "elapsed_ms": 389.1
     },
     {
       "scenario_id": "task_06",
@@ -214,19 +214,19 @@
       "formula_validation_passed": true,
       "pixel_buffer_valid": true,
       "in_browser_vision_score": 95,
-      "dom_quality_score": 97.0,
-      "visual_quality_score": 89.1,
-      "critic_score": 97.0,
+      "dom_quality_score": 96.0,
+      "visual_quality_score": 93.2,
+      "critic_score": 96.0,
       "verification_status": "PASS",
-      "elapsed_ms": 321.36
+      "elapsed_ms": 416.76
     },
     {
       "scenario_id": "task_07",
       "domain": "healthcare_hospital_medical",
       "prompt": "Design a mission-critical hospital ER triage console with incoming patient volume slider, dynamic average triage wait minutes, ICU bed occupancy percentage, real-time vital sign telemetry cards, and rapid-dispatch protocol buttons.",
-      "detected_domain": "ai_developer_platform",
+      "detected_domain": "devops_cloud_terminal",
       "domain_match": false,
-      "selected_style": "linear_dark",
+      "selected_style": "data_dense_terminal",
       "candidate_passed_first_pass": true,
       "autonomous_resolved": true,
       "react_tsx_compiled": true,
@@ -236,11 +236,11 @@
       "formula_validation_passed": true,
       "pixel_buffer_valid": true,
       "in_browser_vision_score": 95,
-      "dom_quality_score": 97.0,
-      "visual_quality_score": 89.1,
-      "critic_score": 97.0,
+      "dom_quality_score": 96.0,
+      "visual_quality_score": 93.2,
+      "critic_score": 96.0,
       "verification_status": "PASS",
-      "elapsed_ms": 313.74
+      "elapsed_ms": 370.91
     },
     {
       "scenario_id": "task_08",
@@ -258,11 +258,11 @@
       "formula_validation_passed": true,
       "pixel_buffer_valid": true,
       "in_browser_vision_score": 95,
-      "dom_quality_score": 97.0,
-      "visual_quality_score": 89.1,
-      "critic_score": 97.0,
+      "dom_quality_score": 96.0,
+      "visual_quality_score": 93.2,
+      "critic_score": 96.0,
       "verification_status": "PASS",
-      "elapsed_ms": 332.58
+      "elapsed_ms": 361.97
     },
     {
       "scenario_id": "task_09",
@@ -280,11 +280,11 @@
       "formula_validation_passed": true,
       "pixel_buffer_valid": true,
       "in_browser_vision_score": 95,
-      "dom_quality_score": 97.0,
-      "visual_quality_score": 89.1,
-      "critic_score": 97.0,
+      "dom_quality_score": 96.0,
+      "visual_quality_score": 93.2,
+      "critic_score": 96.0,
       "verification_status": "PASS",
-      "elapsed_ms": 314.03
+      "elapsed_ms": 370.76
     },
     {
       "scenario_id": "task_10",
@@ -302,11 +302,11 @@
       "formula_validation_passed": true,
       "pixel_buffer_valid": true,
       "in_browser_vision_score": 95,
-      "dom_quality_score": 97.0,
-      "visual_quality_score": 89.1,
-      "critic_score": 97.0,
+      "dom_quality_score": 96.0,
+      "visual_quality_score": 93.2,
+      "critic_score": 96.0,
       "verification_status": "PASS",
-      "elapsed_ms": 334.02
+      "elapsed_ms": 365.04
     },
     {
       "scenario_id": "task_11",
@@ -324,19 +324,19 @@
       "formula_validation_passed": true,
       "pixel_buffer_valid": true,
       "in_browser_vision_score": 95,
-      "dom_quality_score": 97.0,
-      "visual_quality_score": 89.1,
-      "critic_score": 97.0,
+      "dom_quality_score": 96.0,
+      "visual_quality_score": 89.7,
+      "critic_score": 96.0,
       "verification_status": "PASS",
-      "elapsed_ms": 338.93
+      "elapsed_ms": 423.36
     },
     {
       "scenario_id": "task_12",
       "domain": "real_estate_architecture",
       "prompt": "Build an architectural development analyzer with usable square meters slider dynamically computing structural volume, estimated cap rate percentage, and construction cost per square meter.",
-      "detected_domain": "automotive_ev_mobility",
+      "detected_domain": "media_editorial_magazine",
       "domain_match": false,
-      "selected_style": "clean_stripe",
+      "selected_style": "editorial_magazine",
       "candidate_passed_first_pass": true,
       "autonomous_resolved": true,
       "react_tsx_compiled": true,
@@ -346,19 +346,19 @@
       "formula_validation_passed": true,
       "pixel_buffer_valid": true,
       "in_browser_vision_score": 95,
-      "dom_quality_score": 97.0,
-      "visual_quality_score": 89.1,
-      "critic_score": 97.0,
+      "dom_quality_score": 96.0,
+      "visual_quality_score": 93.2,
+      "critic_score": 96.0,
       "verification_status": "PASS",
-      "elapsed_ms": 342.53
+      "elapsed_ms": 371.1
     },
     {
       "scenario_id": "task_13",
       "domain": "automotive_ev_mobility",
       "prompt": "Create a sleek EV connected cockpit telemetry screen with battery capacity slider estimating real-world highway range in km, supercharging 10-80% ETA in minutes, and regenerative braking efficiency.",
-      "detected_domain": "automotive_ev_mobility",
-      "domain_match": true,
-      "selected_style": "clean_stripe",
+      "detected_domain": "devops_cloud_terminal",
+      "domain_match": false,
+      "selected_style": "data_dense_terminal",
       "candidate_passed_first_pass": true,
       "autonomous_resolved": true,
       "react_tsx_compiled": true,
@@ -368,19 +368,19 @@
       "formula_validation_passed": true,
       "pixel_buffer_valid": true,
       "in_browser_vision_score": 95,
-      "dom_quality_score": 97.0,
-      "visual_quality_score": 89.1,
-      "critic_score": 97.0,
+      "dom_quality_score": 96.0,
+      "visual_quality_score": 93.2,
+      "critic_score": 96.0,
       "verification_status": "PASS",
-      "elapsed_ms": 315.49
+      "elapsed_ms": 358.12
     },
     {
       "scenario_id": "task_14",
       "domain": "logistics_supply_chain",
       "prompt": "Design a supply chain control tower interface with active fleet size slider calculating average dispatch latency, fuel consumption index, and on-time delivery confidence.",
-      "detected_domain": "beauty_clinical_wellness",
+      "detected_domain": "devops_cloud_terminal",
       "domain_match": false,
-      "selected_style": "quiet_luxury",
+      "selected_style": "data_dense_terminal",
       "candidate_passed_first_pass": true,
       "autonomous_resolved": true,
       "react_tsx_compiled": true,
@@ -390,11 +390,11 @@
       "formula_validation_passed": true,
       "pixel_buffer_valid": true,
       "in_browser_vision_score": 95,
-      "dom_quality_score": 97.0,
-      "visual_quality_score": 89.1,
-      "critic_score": 97.0,
+      "dom_quality_score": 96.0,
+      "visual_quality_score": 93.2,
+      "critic_score": 96.0,
       "verification_status": "PASS",
-      "elapsed_ms": 301.72
+      "elapsed_ms": 384.66
     },
     {
       "scenario_id": "task_15",
@@ -412,11 +412,11 @@
       "formula_validation_passed": true,
       "pixel_buffer_valid": true,
       "in_browser_vision_score": 95,
-      "dom_quality_score": 97.0,
-      "visual_quality_score": 89.1,
-      "critic_score": 97.0,
+      "dom_quality_score": 96.0,
+      "visual_quality_score": 93.2,
+      "critic_score": 96.0,
       "verification_status": "PASS",
-      "elapsed_ms": 336.91
+      "elapsed_ms": 428.7
     },
     {
       "scenario_id": "task_16",
@@ -434,19 +434,19 @@
       "formula_validation_passed": true,
       "pixel_buffer_valid": true,
       "in_browser_vision_score": 95,
-      "dom_quality_score": 97.0,
-      "visual_quality_score": 89.1,
-      "critic_score": 97.0,
+      "dom_quality_score": 96.0,
+      "visual_quality_score": 93.2,
+      "critic_score": 96.0,
       "verification_status": "PASS",
-      "elapsed_ms": 332.37
+      "elapsed_ms": 388.66
     },
     {
       "scenario_id": "task_17",
       "domain": "cybersecurity_identity_auth",
       "prompt": "Create a cybersecurity threat intelligence dashboard with network ingress monitor slider adjusting simulated intercepted anomalies, Mean Time To Respond (MTTR) in seconds, and SOC threat posture.",
-      "detected_domain": "cybersecurity_identity_auth",
-      "domain_match": true,
-      "selected_style": "linear_dark",
+      "detected_domain": "general_modern_saas",
+      "domain_match": false,
+      "selected_style": "clean_stripe",
       "candidate_passed_first_pass": true,
       "autonomous_resolved": true,
       "react_tsx_compiled": true,
@@ -456,11 +456,11 @@
       "formula_validation_passed": true,
       "pixel_buffer_valid": true,
       "in_browser_vision_score": 95,
-      "dom_quality_score": 97.0,
-      "visual_quality_score": 89.1,
-      "critic_score": 97.0,
+      "dom_quality_score": 96.0,
+      "visual_quality_score": 93.2,
+      "critic_score": 96.0,
       "verification_status": "PASS",
-      "elapsed_ms": 348.25
+      "elapsed_ms": 376.05
     },
     {
       "scenario_id": "task_18",
@@ -478,11 +478,11 @@
       "formula_validation_passed": true,
       "pixel_buffer_valid": true,
       "in_browser_vision_score": 95,
-      "dom_quality_score": 97.0,
-      "visual_quality_score": 89.1,
-      "critic_score": 97.0,
+      "dom_quality_score": 96.0,
+      "visual_quality_score": 93.2,
+      "critic_score": 96.0,
       "verification_status": "PASS",
-      "elapsed_ms": 347.65
+      "elapsed_ms": 412.98
     },
     {
       "scenario_id": "task_19",
@@ -500,11 +500,11 @@
       "formula_validation_passed": true,
       "pixel_buffer_valid": true,
       "in_browser_vision_score": 95,
-      "dom_quality_score": 97.0,
-      "visual_quality_score": 89.1,
-      "critic_score": 97.0,
+      "dom_quality_score": 96.0,
+      "visual_quality_score": 93.2,
+      "critic_score": 96.0,
       "verification_status": "PASS",
-      "elapsed_ms": 338.81
+      "elapsed_ms": 421.41
     },
     {
       "scenario_id": "task_20",
@@ -522,11 +522,11 @@
       "formula_validation_passed": true,
       "pixel_buffer_valid": true,
       "in_browser_vision_score": 95,
-      "dom_quality_score": 97.0,
-      "visual_quality_score": 89.1,
-      "critic_score": 97.0,
+      "dom_quality_score": 96.0,
+      "visual_quality_score": 93.2,
+      "critic_score": 96.0,
       "verification_status": "PASS",
-      "elapsed_ms": 311.86
+      "elapsed_ms": 421.1
     },
     {
       "scenario_id": "task_21",
@@ -544,19 +544,19 @@
       "formula_validation_passed": true,
       "pixel_buffer_valid": true,
       "in_browser_vision_score": 95,
-      "dom_quality_score": 97.0,
-      "visual_quality_score": 89.1,
-      "critic_score": 97.0,
+      "dom_quality_score": 96.0,
+      "visual_quality_score": 93.2,
+      "critic_score": 96.0,
       "verification_status": "PASS",
-      "elapsed_ms": 336.06
+      "elapsed_ms": 449.2
     },
     {
       "scenario_id": "task_22",
       "domain": "personal_branding_creator",
       "prompt": "Build a creator monetization engine with active subscriber slider calculating projected monthly sponsor slot valuation, open-rate CPM, and premium tier revenue.",
-      "detected_domain": "automotive_ev_mobility",
-      "domain_match": false,
-      "selected_style": "clean_stripe",
+      "detected_domain": "personal_branding_creator",
+      "domain_match": true,
+      "selected_style": "editorial_magazine",
       "candidate_passed_first_pass": true,
       "autonomous_resolved": true,
       "react_tsx_compiled": true,
@@ -566,11 +566,11 @@
       "formula_validation_passed": true,
       "pixel_buffer_valid": true,
       "in_browser_vision_score": 95,
-      "dom_quality_score": 97.0,
-      "visual_quality_score": 89.1,
-      "critic_score": 97.0,
+      "dom_quality_score": 96.0,
+      "visual_quality_score": 93.2,
+      "critic_score": 96.0,
       "verification_status": "PASS",
-      "elapsed_ms": 298.7
+      "elapsed_ms": 413.56
     },
     {
       "scenario_id": "task_23",
@@ -588,11 +588,11 @@
       "formula_validation_passed": true,
       "pixel_buffer_valid": true,
       "in_browser_vision_score": 95,
-      "dom_quality_score": 97.0,
-      "visual_quality_score": 92.4,
-      "critic_score": 97.0,
+      "dom_quality_score": 96.0,
+      "visual_quality_score": 95.0,
+      "critic_score": 96.0,
       "verification_status": "PASS",
-      "elapsed_ms": 302.62
+      "elapsed_ms": 330.74
     },
     {
       "scenario_id": "task_24",
@@ -610,11 +610,11 @@
       "formula_validation_passed": true,
       "pixel_buffer_valid": true,
       "in_browser_vision_score": 95,
-      "dom_quality_score": 97.0,
-      "visual_quality_score": 89.1,
-      "critic_score": 97.0,
+      "dom_quality_score": 96.0,
+      "visual_quality_score": 93.2,
+      "critic_score": 96.0,
       "verification_status": "PASS",
-      "elapsed_ms": 294.63
+      "elapsed_ms": 383.18
     },
     {
       "scenario_id": "task_25",
@@ -632,11 +632,11 @@
       "formula_validation_passed": true,
       "pixel_buffer_valid": true,
       "in_browser_vision_score": 95,
-      "dom_quality_score": 97.0,
-      "visual_quality_score": 89.1,
-      "critic_score": 97.0,
+      "dom_quality_score": 96.0,
+      "visual_quality_score": 93.2,
+      "critic_score": 96.0,
       "verification_status": "PASS",
-      "elapsed_ms": 291.42
+      "elapsed_ms": 440.83
     }
   ]
 }

@@ -19,10 +19,11 @@ triggers: ["ui-kit", "uikit", "beautifului", "beui", "rareui", "transitions.dev"
 
 ---
 
-## 🌐 The 8 Pillar Resource Catalogs
+## 🌐 The 9 Pillar Resource Catalogs
 
 | Catalog Reference | Source / Provenance | Component Scope |
 | :--- | :--- | :--- |
+| [`references/living_micro_interactions.md`](references/living_micro_interactions.md) | **Uiverse Galaxy & Living Micro-Interactions** | **Living Micro-Interactions:** Shimmer Button, Cyber Loader, Holographic 3D Tilt Card, Tactile Switch, Glow Input, Autonomous Living Injection Matrix, and Zero-Hallucination Guardrails. |
 | [`references/ai_native_full_catalog.md`](references/ai_native_full_catalog.md) | **[Beautiful UI](https://beautifului.dev)** (Adapted) | **20 AI Primitives:** Loading State, Thinking State, Streaming Text, Approval Card, Tool Chips, Task Rows, Chat, Prompt Bar, Recommendation Card, Context Cards, Diff Table, Records Table, Filter Table, Sidebar Nav, Search HUD, Insight Cards / Sparklines, Code Block with Copy, Fine-tune Card, Selection Actions. |
 | [`references/shadcn_full_catalog.md`](references/shadcn_full_catalog.md) | **[Shadcn UI](https://ui.shadcn.com)** (MIT) | **50+ UI Primitives:** Forms & Inputs (Input, Textarea, Select, Checkbox, Switch, InputOTP, Slider), Overlays & Modals (Dialog, Sheet/Drawer, Popover, Tooltip, Dropdown), Navigation (Command Palette `Cmd+K`, Tabs, Breadcrumb), Feedback (Sonner Toast, Skeleton Shimmer, Progress), Data Display (Accordion, Avatar, Table). |
 | [`references/bento_grids_and_cards.md`](references/bento_grids_and_cards.md) | **[BeUI](https://beui.dev) & [Rare UI](https://rareui.com)** (MIT) | **Bento & Interactive Cards:** 3-Col & 4-Col Asymmetric Bento Grids, Glassmorphism 2.0 Inset Specular Cards, Animated Gradient Shimmer Buttons, Metric HUD Tiles. |

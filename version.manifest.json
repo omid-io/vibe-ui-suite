@@ -1,12 +1,12 @@
 {
   "$schema": "./schemas/version-manifest.schema.json",
-  "version": "6.0.0",
-  "codename": "The Two Golden Pillars (Trend Inspiration & Living Visual Feedback)",
+  "version": "6.1.0",
+  "codename": "Living Micro-Interactions & Galaxy Inspiration Standard",
   "release_channel": "stable",
   "packages": {
-    "vibe-ui-suite": "6.0.0",
-    "vibe-ui-vscode": "6.0.0",
-    "vibe-ui-nextjs-starter": "6.0.0"
+    "vibe-ui-suite": "6.1.0",
+    "vibe-ui-vscode": "6.1.0",
+    "vibe-ui-nextjs-starter": "6.1.0"
   },
   "schemas": {
     "intent_contract": "v1",

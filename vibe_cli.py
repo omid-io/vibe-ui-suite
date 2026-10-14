@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-vibe_cli.py — Vibe UI Suite v6.0.0 Master Unified CLI & Orchestrator
+vibe_cli.py — Vibe UI Suite v6.1.0 Master Unified CLI & Orchestrator
 Production-grade interface connecting Design Director, Recommendation, Genome, Critic, Refiner, Verifier & Visual Auditor.
 """
 
@@ -26,6 +26,55 @@ from vibe_core.critic import DesignCritic
 from vibe_core.refiner import AutoRefiner
 from vibe_core.verifier import VerificationEngine
 from vibe_core.healer import SelfHealingLoop
+from vibe_core.galaxy_engine import GalaxyEngine
+
+def cmd_inspire(args):
+    """Searches or extracts components from the offline Galaxy repository (3000+ items)."""
+    engine = GalaxyEngine()
+    if not engine.ensure_galaxy_dataset():
+        print("[FAIL] Could not access or clone Galaxy repository. Please verify network or clone manually.", file=sys.stderr)
+        sys.exit(1)
+
+    extract_target = getattr(args, "extract", None)
+    if extract_target:
+        comp = engine.get_component(extract_target)
+        if not comp:
+            print(f"[FAIL] Component not found: {extract_target}", file=sys.stderr)
+            sys.exit(1)
+        if getattr(args, "json", False):
+            print(json.dumps(comp, indent=2, ensure_ascii=False))
+        else:
+            print(f"\n✨ Component: {comp['title']} [{comp['category']}]")
+            print(f"Tags: {', '.join(comp['tags'])}")
+            print(f"File: {comp['relative_path']}")
+            print("-" * 60)
+            print("<!-- HTML Structure -->")
+            print(comp["html"])
+            print("-" * 60)
+            print("/* CSS Styles */")
+            print(comp["css"][:500] + ("\n... [truncated]" if len(comp["css"]) > 500 else ""))
+            print("-" * 60)
+        return
+
+    query = args.query or ""
+    results = engine.search(query, category=getattr(args, "category", None), limit=getattr(args, "limit", 5))
+
+    if getattr(args, "json", False):
+        print(json.dumps(results, indent=2, ensure_ascii=False))
+        return
+
+    if not results:
+        print(f"No Galaxy components found matching query: '{query}'")
+        return
+
+    print(f"\n🌌 Uiverse Galaxy Inspiration ({len(results)} matches for '{query}'):")
+    print(f"   Indexed: {len(engine._index)} components | Search Latency: {results[0].get('search_time_ms', 0)} ms\n")
+    for idx, r in enumerate(results, 1):
+        print(f" [{idx}] {r['title']} ({r['category']})")
+        print(f"     Tags: {', '.join(r['tags'])}")
+        print(f"     Path: data/uiverse-galaxy/{r['relative_path']}")
+        print(f"     Extract command: python vibe_cli.py inspire --extract \"{r['relative_path']}\"\n")
+
 
 def cmd_search(args):
     director = DesignDirector()
@@ -230,8 +279,8 @@ def cmd_assets(args):
         sys.exit(1)
 
 def main():
-    parser = argparse.ArgumentParser(description="Vibe UI Suite v6.0.0 Master CLI")
-    parser.add_argument("--version", action="version", version="Vibe UI Suite v6.0.0")
+    parser = argparse.ArgumentParser(description="Vibe UI Suite v6.1.0 Master CLI")
+    parser.add_argument("--version", action="version", version="Vibe UI Suite v6.1.0")
     subparsers = parser.add_subparsers(dest="command", help="Command to run")
 
     # search
@@ -282,6 +331,14 @@ def main():
     p_assets.add_argument("--quality", type=int, default=80, help="WebP compression quality (default: 80)")
     p_assets.add_argument("--output-dir", default=None, help="Output directory for assets")
 
+    # inspire (Galaxy offline repository search)
+    p_inspire = subparsers.add_parser("inspire", help="Offline search across 3000+ Uiverse Galaxy micro-interactions (<10ms)")
+    p_inspire.add_argument("query", nargs="?", default="", help="Search query (e.g. 'neon button', 'loader', 'cyberpunk')")
+    p_inspire.add_argument("-c", "--category", help="Category filter (Buttons, Cards, loaders, Inputs, Toggle-switches, etc.)")
+    p_inspire.add_argument("-l", "--limit", type=int, default=5, help="Number of results to return (default: 5)")
+    p_inspire.add_argument("-e", "--extract", help="Component relative path or name to extract raw HTML/CSS")
+    p_inspire.add_argument("--json", action="store_true", help="Output results strictly as JSON")
+
     args = parser.parse_args()
     if not args.command:
         parser.print_help()
@@ -303,6 +360,9 @@ def main():
         cmd_screenshot(args)
     elif args.command == "assets":
         cmd_assets(args)
+    elif args.command == "inspire":
+        cmd_inspire(args)
 
 if __name__ == "__main__":
     main()
+

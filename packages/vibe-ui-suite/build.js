@@ -57,6 +57,27 @@ if (cjsDiagnostics.length > 0) {
 }
 cjsProgram.emit();
 
+// Rewrite relative import/export specifiers for ESM (.mjs)
+function rewriteRelativeImports(code) {
+  return code.replace(
+    /(from\s*|import\s*\(\s*|import\s+)(['"])(\.{1,2}\/[^'"]+?)\2(\s*\))?/g,
+    (match, prefix, quote, specifier, closeParen) => {
+      let resolved = specifier;
+      if (resolved.endsWith('.js')) {
+        resolved = resolved.slice(0, -3) + '.mjs';
+      } else if (
+        !resolved.endsWith('.mjs') &&
+        !resolved.endsWith('.json') &&
+        !resolved.endsWith('.css') &&
+        !resolved.endsWith('.node')
+      ) {
+        resolved = resolved + '.mjs';
+      }
+      return `${prefix}${quote}${resolved}${quote}${closeParen || ''}`;
+    }
+  );
+}
+
 // Compile ESM (.mjs)
 const esmOptions = {
   target: ts.ScriptTarget.ES2022,
@@ -72,27 +93,42 @@ const esmOptions = {
 };
 
 const esmProgram = ts.createProgram(files, esmOptions);
+const esmDiagnostics = ts.getPreEmitDiagnostics(esmProgram);
+if (esmDiagnostics.length > 0) {
+  const formatHost = {
+    getCanonicalFileName: (f) => f,
+    getCurrentDirectory: ts.sys.getCurrentDirectory,
+    getNewLine: () => ts.sys.newLine,
+  };
+  const message = ts.formatDiagnosticsWithColorAndContext(esmDiagnostics, formatHost);
+  console.error(message);
+  process.exit(1);
+}
+
 esmProgram.emit(undefined, (fileName, data) => {
   if (fileName.endsWith('.js')) {
     const mjsName = fileName.replace(/\.js$/, '.mjs');
-    fs.writeFileSync(mjsName, data);
+    const fixedData = rewriteRelativeImports(data);
+    fs.writeFileSync(mjsName, fixedData);
   } else {
     fs.writeFileSync(fileName, data);
   }
 });
 
-// Prepend shebang to dist/cli.js if not present
-const cliPath = path.join(distDir, 'cli.js');
-if (fs.existsSync(cliPath)) {
-  let cliContent = fs.readFileSync(cliPath, 'utf-8');
-  if (!cliContent.startsWith('#!/usr/bin/env node')) {
-    cliContent = '#!/usr/bin/env node\n' + cliContent;
-    fs.writeFileSync(cliPath, cliContent, 'utf-8');
+// Prepend shebang to dist/cli.js and dist/cli.mjs if not present
+['cli.js', 'cli.mjs'].forEach((file) => {
+  const cliFilePath = path.join(distDir, file);
+  if (fs.existsSync(cliFilePath)) {
+    let cliContent = fs.readFileSync(cliFilePath, 'utf-8');
+    if (!cliContent.startsWith('#!/usr/bin/env node')) {
+      cliContent = '#!/usr/bin/env node\n' + cliContent;
+      fs.writeFileSync(cliFilePath, cliContent, 'utf-8');
+    }
+    try {
+      fs.chmodSync(cliFilePath, 0o755);
+    } catch (e) {}
   }
-  try {
-    fs.chmodSync(cliPath, 0o755);
-  } catch (e) {}
-}
+});
 
 // Copy Tailwind v4 theme CSS to dist
 const v4CssSrc = path.join(__dirname, 'v4.css');

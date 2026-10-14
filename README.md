@@ -26,13 +26,13 @@
 
 ---
 
-## ⚖️ Visual Impact: Vanilla AI Slop vs. Vibe UI v6.0 Masterpiece
+## ⚖️ Visual Impact: Vanilla AI Slop vs. Vibe UI v6.1 Masterpiece
 
 What happens when you ask a standard AI assistant to generate a frontend component?
 
 ```text
 ┌──────────────────────────────────────┐  vs  ┌──────────────────────────────────────┐
-│ ❌ VANILLA AI SLOP                   │      │ ✨ VIBE UI v6.0 MASTERPIECE          │
+│ ❌ VANILLA AI SLOP                   │      │ ✨ VIBE UI v6.1 MASTERPIECE          │
 ├──────────────────────────────────────┤      ├──────────────────────────────────────┤
 │ • Generic purple gradient buttons    │      │ • Vibrant Light Canvas & Brand Glow  │
 │ • Low contrast text (3.2:1 FAILS AA) │      │ • Mathematical WCAG 2.2 AAA (17.8:1) │
@@ -72,7 +72,7 @@ Headless Browser Evaluation (Playwright 375px mobile overflow)
 Verified Output or Actionable Failure Diagnostics
 ```
 
-> **Day-One Transparency**: Vibe UI Suite is at `v6.0.0` (**The Two Golden Pillars: Trend Inspiration & Living Visual Feedback Loop**). Anchored on Pillar 1 (deep trend research across Mobbin, Dribbble, Figma Community, and Awwwards with Vibrant Light Mode default) and Pillar 2 (deterministic Playwright multi-viewport screenshot verification across Desktop 1440px and Mobile 390px with zero orphaned processes), Curated High-Res Unsplash Asset Vault covering all 24 canonical domains with tested HTTP 200 CDN URLs, clean 8-pillar component catalog, living React 19 TSX generation (`-f tsx`), and synchronized cross-platform tooling across npm, Python CLI, and VS Code. Constructive criticism, issues, and contributions from frontend engineers and AI researchers are warmly welcomed.
+> **Day-One Transparency**: Vibe UI Suite is at `v6.1.0` (built upon `v6.0.0` **The Two Golden Pillars: Trend Inspiration & Living Visual Feedback Loop** with the **Living Micro-Interactions & Galaxy Inspiration Standard**). Anchored on Pillar 1 (deep trend research across Mobbin, Dribbble, Figma Community, and Awwwards with Vibrant Light Mode default) and Pillar 2 (deterministic Playwright multi-viewport screenshot verification across Desktop 1440px and Mobile 390px with zero orphaned processes), Galaxy Inspiration Engine (3,800+ community elements with offline caching), Curated High-Res Unsplash Asset Vault covering all 24 canonical domains with tested HTTP 200 CDN URLs, clean 9-pillar component catalog with living interactive micro-interactions (`shimmer-button`, `cyber-loader`, `holographic-card`, `tactile-switch`, `glow-input`), living React 19 TSX generation (`-f tsx`), and synchronized cross-platform tooling across npm, Python CLI, and VS Code. Constructive criticism, issues, and contributions from frontend engineers and AI researchers are warmly welcomed.
 
 ---
 
@@ -200,18 +200,36 @@ Zero JavaScript configuration files needed. Instantly unlocks:
 
 Add production-ready, accessible component templates directly into `components/vibe-ui/`:
 ```bash
-# Collapsible AI reasoning drawer with CSS grid zero-JS transition & status radar
+# Core AI & Telemetry Primitives:
 npx vibe-ui-suite add thinking-drawer
-
-# LTR-isolated technical metric HUD for latency, tokens, and model status
 npx vibe-ui-suite add telemetry-hud
-
-# Live mathematical WCAG AA / AAA contrast compliance indicator badge
 npx vibe-ui-suite add contrast-badge
+npx vibe-ui-suite add theme-toggle
+
+# Living Micro-Interactions (v6.1.0):
+npx vibe-ui-suite add shimmer-button
+npx vibe-ui-suite add cyber-loader
+npx vibe-ui-suite add holographic-card
+npx vibe-ui-suite add tactile-switch
+npx vibe-ui-suite add glow-input
 ```
 List all available registry components:
 ```bash
 npx vibe-ui-suite list
+```
+
+---
+
+## 🌌 Galaxy Inspiration Engine (`inspire`)
+
+Tap into a curated offline knowledge graph of over 3,800+ micro-interactions and component patterns directly from your terminal or AI coding agent:
+```bash
+# Query community components with sub-10ms offline cache:
+python vibe_cli.py inspire "neon cyber button"
+python vibe_cli.py inspire "holographic card" -l 3
+
+# Or via npm CLI:
+npx vibe-ui-suite inspire "orbit loader"
 ```
 
 ---

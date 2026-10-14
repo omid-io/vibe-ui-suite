@@ -32,6 +32,39 @@ def normalize_text(text: str) -> str:
     text = re.sub(r"[^\w\s\u0600-\u06FF]", " ", text)
     return " ".join(text.split())
 
+DIVERSE_FALLBACK_ARCHETYPES = [
+    {
+        "id": "creative_portfolio_agency",
+        "style": "neobrutalism",
+        "reason": "entropy_diversity:creative_agency"
+    },
+    {
+        "id": "ai_developer_platform",
+        "style": "apple_cupertino",
+        "reason": "entropy_diversity:ai_platform"
+    },
+    {
+        "id": "crypto_trading_web3",
+        "style": "specular_glass",
+        "reason": "entropy_diversity:crypto_web3"
+    },
+    {
+        "id": "media_editorial_magazine",
+        "style": "minimal_swiss",
+        "reason": "entropy_diversity:editorial_magazine"
+    },
+    {
+        "id": "devops_cloud_terminal",
+        "style": "linear_hud",
+        "reason": "entropy_diversity:devops_terminal"
+    },
+    {
+        "id": "general_modern_saas",
+        "style": "clean_stripe",
+        "reason": "entropy_diversity:modern_saas"
+    }
+]
+
 class DesignDirector:
     def __init__(self, data_dir: Optional[Path] = None):
         self.data_dir = data_dir or DATA_DIR
@@ -141,12 +174,24 @@ class DesignDirector:
         elif any(w in lower_prompt for w in ["glass", "glassmorphism", "شیشه"]):
             style_override = "specular_glass"
 
-        chosen_style = user_overrides.get("selected_style") or style_override or matched_domain.get("recommended_styles", ["clean_stripe"])[0]
+        # Entropy Diversity: if confidence is low or ambiguity is high and no explicit style is given
+        entropy_active = any("entropy_diversity" in str(r) for r in match_reasons)
+        if entropy_active and not style_override and "selected_style" not in user_overrides:
+            entropy_seed = sum(ord(c) for c in norm_prompt) if norm_prompt else 0
+            pick = DIVERSE_FALLBACK_ARCHETYPES[entropy_seed % len(DIVERSE_FALLBACK_ARCHETYPES)]
+            chosen_style = pick["style"]
+        else:
+            chosen_style = user_overrides.get("selected_style") or style_override or matched_domain.get("recommended_styles", ["clean_stripe"])[0]
 
         # Construct Comprehensive DesignIntentContract
         intent = {
             "product_domain": user_overrides.get("product_domain") or domain_id,
             "selected_style": chosen_style,
+            "entropy_diversity": {
+                "active": entropy_active,
+                "chosen_style": chosen_style,
+                "entropy_score": round(((sum(ord(c) for c in norm_prompt) if norm_prompt else 0) % 100) / 100, 2)
+            },
             "audience": {
                 "type": matched_domain.get("name_en", "General Audience"),
                 "technical_level": "expert" if "terminal" in domain_id or "devops" in domain_id else "general",
@@ -270,9 +315,14 @@ class DesignDirector:
                 reasons = matched_aliases
 
         if not best_domain or best_score < 0.20:
-            fallback = next((d for d in self.taxonomy if d["id"] == "general_modern_saas"), self.taxonomy[0] if self.taxonomy else {})
+            # Entropy Diversity: avoid falling back to generic SaaS when confidence is low or input is ambiguous
+            entropy_seed = sum(ord(c) for c in text) if text else 0
+            pick = DIVERSE_FALLBACK_ARCHETYPES[entropy_seed % len(DIVERSE_FALLBACK_ARCHETYPES)]
+            fallback = next((d for d in self.taxonomy if d["id"] == pick["id"]), None)
+            if not fallback:
+                fallback = next((d for d in self.taxonomy if d["id"] == "general_modern_saas"), self.taxonomy[0] if self.taxonomy else {})
             actual_score = round(best_score, 2) if best_domain else 0.0
-            return fallback, actual_score, ["fallback_general_modern_saas", "no_matching_taxonomy"]
+            return fallback, actual_score, [pick["reason"], "entropy_diversity_applied"]
 
         return best_domain, best_score, reasons
 

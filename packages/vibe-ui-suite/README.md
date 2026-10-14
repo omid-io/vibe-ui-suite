@@ -46,20 +46,31 @@ This interactive command sets up:
 Add verified, zero-emoji, accessible React 19 component templates directly into your codebase (`components/vibe-ui/`):
 
 ```bash
-# Add an expandable reasoning / thinking trace drawer
+# Core AI & Telemetry Primitives:
 npx vibe-ui-suite add thinking-drawer
-
-# Add a dense telemetry HUD with live metric formatting
 npx vibe-ui-suite add telemetry-hud
-
-# Add a real-time WCAG AAA contrast indicator badge
 npx vibe-ui-suite add contrast-badge
+npx vibe-ui-suite add theme-toggle
+
+# Living Micro-Interactions (v6.1.0):
+npx vibe-ui-suite add shimmer-button
+npx vibe-ui-suite add cyber-loader
+npx vibe-ui-suite add holographic-card
+npx vibe-ui-suite add tactile-switch
+npx vibe-ui-suite add glow-input
 ```
 
 ### 3. List Registry Components (`list`)
 
 ```bash
 npx vibe-ui-suite list
+```
+
+### 4. Galaxy Inspiration Engine (`inspire`)
+
+Search 3,800+ community micro-interactions with offline caching:
+```bash
+npx vibe-ui-suite inspire "neon button"
 ```
 
 ---

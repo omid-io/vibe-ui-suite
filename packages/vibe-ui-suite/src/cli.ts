@@ -6,7 +6,7 @@ import * as readline from 'readline';
 import { COMPONENT_REGISTRY } from './registry/components';
 import { VISUAL_CHEMISTRIES } from './index';
 
-const VERSION = '6.0.0';
+const VERSION = '6.1.0';
 
 interface CliOptions {
   force: boolean;
@@ -48,6 +48,7 @@ function printHelp() {
   npx vibe-ui-suite init -y
   npx vibe-ui-suite init --dry-run
   npx vibe-ui-suite add thinking-drawer
+  npx vibe-ui-suite add shimmer-button
   npx vibe-ui-suite add theme-toggle
   npx vibe-ui-suite add thinking-drawer --force
 `);
@@ -258,10 +259,22 @@ function handleAdd(componentName?: string, options: CliOptions = { force: false,
 }
 
 function handleList() {
-  console.log('\x1b[1mAvailable Vibe UI Components:\x1b[0m');
-  Object.values(COMPONENT_REGISTRY).forEach((comp) => {
-    console.log(`  \x1b[32m${comp.name.padEnd(18)}\x1b[0m \x1b[90m${comp.description}\x1b[0m`);
-  });
+  console.log('\x1b[1mAvailable Vibe UI Components:\x1b[0m\n');
+
+  console.log('  \x1b[1;36mAI Contracts & Observation:\x1b[0m');
+  Object.values(COMPONENT_REGISTRY)
+    .filter((comp) => comp.category === 'ai-contracts')
+    .forEach((comp) => {
+      console.log(`    \x1b[32m${comp.name.padEnd(20)}\x1b[0m \x1b[90m${comp.description}\x1b[0m`);
+    });
+
+  console.log('\n  \x1b[1;35mLiving Micro-Interactions:\x1b[0m');
+  Object.values(COMPONENT_REGISTRY)
+    .filter((comp) => comp.category === 'living-micro-interactions')
+    .forEach((comp) => {
+      console.log(`    \x1b[32m${comp.name.padEnd(20)}\x1b[0m \x1b[90m${comp.description}\x1b[0m`);
+    });
+  console.log('');
 }
 
 async function main() {
