@@ -36,47 +36,87 @@
 
 ---
 
-## 🚀 The 4-Step Autonomous Execution Workflow
+## 🚀 The 5 Immutable Execution Gates (پروتکل ۵ مرحله ای مهندسی شاهکار)
 
-### Step 1: Trend Inspiration & Visual Direction (ایده پردازی و کانسپت بصری)
-1. **Analyze Domain & Target Persona:**
-   - Understand emotional stakes, trust factors, and conversion goals of the domain.
-2. **Anchor to Premier Design Trends & Active Element Harvesting:**
-   - Draw inspiration from the best real-world patterns (clean Bento grids, Apple-style subtle depth, modern SaaS layouts, editorial typography, Dribbble, Mobbin, Awwwards).
-   - **Active Micro-Interaction Hunting:** Search and harvest signature interactive elements (buttons, loaders, cards, inputs, toggles) from the Galaxy library (`python vibe_cli.py inspire "<keyword>"`) or online inspiration. Freely select the most captivating, trending, and alive elements for each section without requiring user micromanagement.
-   - Review `skills/ui-kit/references/` (especially `living_micro_interactions.md` and `modern_vibe_components.md`) for verified recipes.
-3. **Establish Living Visual Direction:**
-   - **Enforce Light-First Mandate:** Always build the primary canvas in crisp Light Mode unless explicitly overridden.
-   - **Curate Bespoke Visuals:** Integrate high-res photography, ambient video loops, or generate AI artwork.
+To eradicate slop, lazy shortcuts, and hallucinated completion, the agent MUST strictly execute through all 5 sequential gates. Skipping or rushing through any gate is strictly prohibited.
 
-### Step 2: Clean Semantic Architecture & Layout (پیاده سازی تمیز ساختار)
-1. **The 4 Spatial Fundamentals:**
-   - **Spacing & 8pt Rhythm:** Generous whitespace, clean padding (`p-6`, `p-8`), cards that breathe.
-   - **Typographic Scale:** Clear contrast between bold display titles, crisp subheadings, and readable body text.
-   - **Clean Alignment:** Rock-solid flex and grid alignments without awkward wrapping or overflow.
-   - **Living States:** Functional interactive controls (active tabs, working toggles, hover states, ambient cursor trails).
-2. **Iconography:** Use clean, consistent vector icons (`lucide-react` or clean SVGs) instead of raw emojis.
+```
+[ Gate 1: Intent & Domain Deliberation ]
+           ↓
+[ Gate 2: Deep Trend & Pattern Hunting ]
+           ↓
+[ Gate 3: Clean Semantic Architecture & Library Synthesis ]
+           ↓
+[ Gate 4: Multi-Viewport Living Visual Audit & Self-Critique ]
+           ↓
+[ Gate 5: Dual Functional & Mathematical Quality Assurance ]
+```
 
-### Step 3: Living Visual Feedback Loop (دیدن خروجی با اسکرین شات)
-1. **Render in Browser:** Spin up a local preview or headless browser (Playwright).
-2. **Capture Screenshot:** Take multi-viewport captures (Desktop 1440px and Mobile 390px).
-3. **Multimodal Self-Inspection:** Inspect the actual rendered image:
-   - *Is anything crowded or misaligned?*
-   - *Are the fonts legible and balanced?*
-   - *Does the design look fresh, modern, and trustworthy?*
-4. **Auto-Refinement:** Fix detected visual bugs before delivering to the user.
-5. **Headless Fallback Strategy:** If Playwright or a browser environment is unavailable, seamlessly switch to static DOM & CSS inspection fallback: verify touch target bounds (min-h-[44px] min-w-[44px]), WCAG AA contrast ratio calculations, absence of raw unicode emojis, and ARIA accessibility semantics directly via `vibe_core.verifier` without stalling the delivery pipeline.
+---
 
-### Step 4: Living Micro-Interactions & Delivery (تعاملات و تحویل نهایی)
-1. **Autonomous Living Injection Matrix:** Proactively inject domain-matched living micro-interactions from `skills/ui-kit/references/living_micro_interactions.md` during design synthesis without waiting for user prompting:
-   - **FinTech / Web3 / Crypto:** `shimmer-button` (CTA), `holographic-card` (wallet / asset tile), `cyber-loader` (transaction confirmation).
-   - **DevOps / Cloud / AI SaaS:** `thinking-drawer` (AI reasoning), `telemetry-hud` (latency / tokens), `glow-input` (command prompt).
-   - **E-Commerce & Luxury Retail:** `holographic-card` (product tilt), `shimmer-button` (add to cart), `tactile-switch` (variant options).
-   - **Healthcare & Enterprise Apps:** `tactile-switch` (patient consent), `glow-input` (input validation), `shimmer-button` (booking action).
-2. **Elevate & Vibe-ify Any Harvested Element:** Whenever pulling or adapting an external component (from Galaxy, Uiverse, Dribbble, or web inspiration), elevate it into world-class Vibe UI engineering: harmonize colors to OKLCH tokens, guarantee dual-theme support, make spacing responsive, isolate LTR/RTL text with `<bdi>`, and ensure accessible keyboard semantics.
-3. Smooth hover effects (`transition-all duration-200 ease-out`, subtle scale `hover:scale-[1.02]`, soft shadow elevations).
-4. **Dual-Theme Toggle Switch:** Always include an accessible Light/Dark theme toggle.
-5. Deliver clean, modular, production-ready TSX/HTML.
+### 🧠 Gate 1: Intent & Domain Deliberation (تعمق و استخراج اطلاعات پایه)
+1. **Analyze Domain, User Persona & Conversion Stakes:**
+   - Unpack user intent thoroughly without jumping to immediate code generation.
+   - Determine core operational stakes, brand authority, and key action drivers.
+2. **Strict Light-First Palette & Theme Strategy:**
+   - Establish crisp Light Mode as the primary canvas (`#ffffff`, `#f8fafc`, surface `oklch(0.97 0.005 260)`).
+   - Plan mandatory dual-theme support with an accessible, polished Light/Dark toggle.
+   - Dark canvas is strictly prohibited unless explicitly requested or inherently terminal/cyber.
+3. **Patience & Unrushed Cognitive Budget:**
+   - Allocate generous deliberate time to draft information architecture, spatial rhythm, and component inventory before touching markup.
+
+---
+
+### 🎨 Gate 2: Deep Trend & Pattern Hunting (شکار الگوهای روز و بنچ مارک)
+1. **Anchor to World-Class Design Benchmarks:**
+   - Harvest aesthetic inspiration from premier design sources: Dribbble, Figma Community, Mobbin, and Awwwards.
+   - Choose the tailored aesthetic paradigm (Bento Grid, Apple Glass, Claymorphism, Neo-Skeuomorphism, Neubrutalism, Swiss Minimal).
+2. **Active Living Micro-Interaction Hunting:**
+   - Query the Galaxy engine (`python vibe_cli.py inspire "<keyword>"`) or curated recipes in `skills/ui-kit/references/living_micro_interactions.md`.
+   - Select tactile signature elements (shimmer buttons, cyber loaders, holographic cards, tactile switches, ambient glow inputs).
+3. **Bespoke Visual & Media Strategy:**
+   - Plan authentic high-resolution visuals from `data/unsplash_assets.json` or bespoke AI art generation.
+   - Integrate subtle ambient video loops or interactive fluid shaders in hero focal points. Zero gray placeholder boxes permitted.
+
+---
+
+### 💻 Gate 3: Clean Semantic Architecture & Library Synthesis (معماری تمیز و پیاده سازی)
+1. **Zero-Hallucination Package Contract:**
+   - Use only verified standard libraries: React 19 standard hooks, standard Tailwind CSS v4, Lucide icons, and typed OKLCH tokens.
+   - Strictly forbidden to import non-existent packages (e.g. `framer-motion-extra`, `vibe-magic-glow`).
+2. **Spatial Fundamentals & 8pt Rhythm:**
+   - Implement generous spacing, clean cards, strong typographic hierarchy, and responsive flex/grid layouts.
+   - Isolate bidirectional numbers, codes, and metric badges with `<bdi>` and scoped RTL.
+3. **Living Interactive State Implementation:**
+   - Fully wire up interactive controls: stateful toggles, range sliders, tab switches, and hover/active states with spring transitions.
+
+---
+
+### 👁️ Gate 4: Multi-Viewport Living Visual Audit (دیدن خروجی با چشم ایجنت)
+1. **Render Real Artifact in Browser:**
+   - Spin up local preview server and navigate via Playwright in the user's browser or headless Chromium.
+2. **Multi-Viewport Visual Captures:**
+   - Take mandatory Desktop (1440px) and Mobile (390px) screenshots into designated `screenshots/` directory (Zero root pollution).
+3. **Multimodal Self-Inspection & Critique:**
+   - Inspect the rendered image with multimodal vision:
+     - *Are the typography hierarchies sharp and harmonious?*
+     - *Is there any awkward padding, wrapping, or visual clutter?*
+     - *Does the design breathe with world-class polish or does it look generic?*
+4. **Auto-Refinement Loop:**
+   - Fix detected visual defects and re-render before claiming completion.
+
+---
+
+### 🛡️ Gate 5: Dual Functional & Mathematical Quality Assurance (تست دوگانه کارکردی و بصری)
+1. **Functional Verification:**
+   - Verify that all buttons, toggles, and form inputs trigger their intended state updates.
+   - Ensure 0 console errors, 0 broken images (HTTP 404), and 0 TypeScript compilation faults (`tsc --noEmit`).
+2. **Mathematical Visual Verification:**
+   - Calculate WCAG AA/AAA contrast ratios ($\ge 4.5:1$ for body, $\ge 3.0:1$ for headings, target $18:1$ on light canvas).
+   - Verify 0px horizontal layout overflow across all viewports.
+   - Ensure 0 raw unicode emojis in UI (clean vector SVGs only).
+3. **Final Delivery Invariant:**
+   - An artifact is ONLY delivered to the user once both functional and visual quality gates pass 100%.
 
 ---
 

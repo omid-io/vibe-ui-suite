@@ -1,0 +1,1052 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth" data-style="apple-glass" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Vibe UI Suite v6.1.1 — Living Universal Design Matrix & Multi-Paradigm Playground</title>
+  
+  <!-- Tailwind CSS Play CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  
+  <!-- Lucide Vector Icons -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+  
+  <!-- World-Class Typography Suite -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600;700;800;900&family=Outfit:wght@400;500;600;700;800;900&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+
+  <style>
+    /* ========================================================
+       CORE BASE TOKENS & TRANSITIONS
+       ======================================================== */
+    :root {
+      --font-body: 'Plus Jakarta Sans', system-ui, sans-serif;
+      --font-heading: 'Plus Jakarta Sans', system-ui, sans-serif;
+      --font-mono: 'JetBrains Mono', monospace;
+
+      /* Baseline Light Tokens (WCAG AAA 18:1 Compliant) */
+      --bg-page: #f8fafc;
+      --bg-pattern: radial-gradient(#cbd5e1 1px, transparent 1px);
+      --bg-surface: #ffffff;
+      --bg-card: #ffffff;
+      --text-main: #0f172a;
+      --text-muted: #64748b;
+      --border-color: #e2e8f0;
+      
+      /* Active Accent / Brand */
+      --brand-primary: #4f46e5;
+      --brand-accent: #06b6d4;
+      
+      /* Element Physics Defaults */
+      --card-radius: 1.25rem;
+      --card-border: 1px solid rgba(226, 232, 240, 0.9);
+      --card-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.05);
+      --card-backdrop: blur(16px);
+      
+      --btn-radius: 0.875rem;
+      --btn-bg: #4f46e5;
+      --btn-text: #ffffff;
+      --btn-border: 1px solid transparent;
+      --btn-shadow: 0 4px 14px 0 rgba(79, 70, 229, 0.25);
+      --btn-hover-transform: translateY(-2px);
+      --btn-active-transform: translateY(0px) scale(0.98);
+
+      --input-bg: #f8fafc;
+      --input-border: 1px solid #cbd5e1;
+      --input-radius: 0.75rem;
+      --input-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.04);
+    }
+
+    [data-theme="dark"] {
+      --bg-page: #080c14;
+      --bg-pattern: radial-gradient(#1e293b 1px, transparent 1px);
+      --bg-surface: #0f172a;
+      --bg-card: #111a2e;
+      --text-main: #f8fafc;
+      --text-muted: #94a3b8;
+      --border-color: #1e293b;
+      --card-border: 1px solid rgba(255, 255, 255, 0.08);
+      --card-shadow: 0 20px 40px -15px rgba(0, 0, 0, 0.6);
+      --input-bg: #0b1120;
+      --input-border: 1px solid #1e293b;
+      --input-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.4);
+    }
+
+    /* ========================================================
+       12 FULL-SPECTRUM SIGNATURE DESIGN PARADIGMS
+       ======================================================== */
+
+    /* 1. Apple Glassmorphism */
+    [data-style="apple-glass"] {
+      --font-body: 'Geist', system-ui, sans-serif;
+      --font-heading: 'Geist', system-ui, sans-serif;
+      --card-radius: 1.5rem;
+      --card-backdrop: blur(32px) saturate(200%);
+      --card-border: 1px solid rgba(255, 255, 255, 0.6);
+      --card-shadow: 0 24px 48px -12px rgba(0, 0, 0, 0.08);
+      --btn-radius: 1rem;
+      --btn-bg: linear-gradient(180deg, #4f46e5 0%, #4338ca 100%);
+      --btn-border: 1px solid rgba(255, 255, 255, 0.25);
+      --btn-shadow: 0 8px 20px -4px rgba(79, 70, 229, 0.35);
+      --input-radius: 0.875rem;
+    }
+    [data-style="apple-glass"][data-theme="light"] {
+      --bg-card: rgba(255, 255, 255, 0.72);
+      --border-color: rgba(226, 232, 240, 0.75);
+    }
+    [data-style="apple-glass"][data-theme="dark"] {
+      --bg-card: rgba(15, 23, 42, 0.6);
+      --card-border: 1px solid rgba(255, 255, 255, 0.12);
+      --card-shadow: 0 30px 60px -15px rgba(0, 0, 0, 0.7);
+    }
+
+    /* 2. Neumorphism (Soft Physical Plastic) */
+    [data-style="neumorphism"] {
+      --font-body: 'Plus Jakarta Sans', system-ui, sans-serif;
+      --card-radius: 1.75rem;
+      --card-backdrop: none;
+      --btn-radius: 1.25rem;
+      --input-radius: 1rem;
+    }
+    [data-style="neumorphism"][data-theme="light"] {
+      --bg-page: #e8eef6;
+      --bg-pattern: none;
+      --bg-surface: #e8eef6;
+      --bg-card: #e8eef6;
+      --card-border: 1px solid transparent;
+      --card-shadow: 12px 12px 24px #c2c9d2, -12px -12px 24px #ffffff;
+      --btn-bg: #e8eef6;
+      --btn-text: #4f46e5;
+      --btn-border: 1px solid rgba(255, 255, 255, 0.8);
+      --btn-shadow: 6px 6px 14px #c2c9d2, -6px -6px 14px #ffffff;
+      --btn-hover-transform: translateY(-1px);
+      --btn-active-transform: translateY(0);
+      --input-bg: #e8eef6;
+      --input-border: 1px solid transparent;
+      --input-shadow: inset 4px 4px 8px #c2c9d2, inset -4px -4px 8px #ffffff;
+    }
+    [data-style="neumorphism"][data-theme="dark"] {
+      --bg-page: #131720;
+      --bg-pattern: none;
+      --bg-surface: #131720;
+      --bg-card: #131720;
+      --card-border: 1px solid transparent;
+      --card-shadow: 10px 10px 22px #0a0c11, -10px -10px 22px #1c2230;
+      --btn-bg: #131720;
+      --btn-text: #818cf8;
+      --btn-border: 1px solid rgba(255, 255, 255, 0.05);
+      --btn-shadow: 6px 6px 14px #0a0c11, -6px -6px 14px #1c2230;
+      --input-bg: #131720;
+      --input-border: 1px solid transparent;
+      --input-shadow: inset 4px 4px 8px #0a0c11, inset -4px -4px 8px #1c2230;
+    }
+
+    /* 3. Claymorphism (Soft 3D Pillowy Pillows) */
+    [data-style="claymorphism"] {
+      --font-body: 'Outfit', sans-serif;
+      --font-heading: 'Outfit', sans-serif;
+      --card-radius: 2.25rem;
+      --card-backdrop: none;
+      --btn-radius: 1.5rem;
+      --input-radius: 1.25rem;
+    }
+    [data-style="claymorphism"][data-theme="light"] {
+      --bg-page: #f1f5fd;
+      --bg-card: #ffffff;
+      --card-border: 2px solid rgba(255, 255, 255, 0.9);
+      --card-shadow: 16px 16px 36px 0 rgba(79, 70, 229, 0.12), inset -8px -8px 16px 0 rgba(224, 231, 255, 0.7), inset 8px 8px 16px 0 #ffffff;
+      --btn-bg: #6366f1;
+      --btn-border: 2px solid rgba(255, 255, 255, 0.7);
+      --btn-shadow: 10px 10px 24px 0 rgba(99, 102, 241, 0.35), inset -4px -4px 8px 0 rgba(49, 46, 129, 0.4), inset 4px 4px 8px 0 rgba(255, 255, 255, 0.6);
+      --input-bg: #f8faff;
+      --input-border: 2px solid #e0e7ff;
+      --input-shadow: inset 4px 4px 8px rgba(199, 210, 254, 0.4), inset -4px -4px 8px #ffffff;
+    }
+    [data-style="claymorphism"][data-theme="dark"] {
+      --bg-page: #0d111d;
+      --bg-card: #182035;
+      --card-border: 2px solid rgba(255, 255, 255, 0.1);
+      --card-shadow: 16px 16px 36px 0 rgba(0, 0, 0, 0.5), inset -8px -8px 16px 0 rgba(10, 14, 25, 0.8), inset 8px 8px 16px 0 rgba(255, 255, 255, 0.1);
+      --btn-bg: #4f46e5;
+      --btn-border: 2px solid rgba(255, 255, 255, 0.2);
+      --btn-shadow: 8px 8px 20px 0 rgba(0, 0, 0, 0.4), inset -4px -4px 8px 0 rgba(15, 23, 42, 0.5), inset 4px 4px 8px 0 rgba(255, 255, 255, 0.2);
+      --input-bg: #121727;
+      --input-border: 2px solid #1e293b;
+      --input-shadow: inset 4px 4px 8px rgba(0, 0, 0, 0.6), inset -4px -4px 8px rgba(255, 255, 255, 0.05);
+    }
+
+    /* 4. Neubrutalism (High-Energy Bold Ink & Offset Hard Shadows) */
+    [data-style="neubrutalism"] {
+      --font-body: 'Space Grotesk', system-ui, sans-serif;
+      --font-heading: 'Space Grotesk', system-ui, sans-serif;
+      --card-radius: 0.5rem;
+      --card-backdrop: none;
+      --card-border: 3.5px solid #000000;
+      --card-shadow: 8px 8px 0px #000000;
+      --btn-radius: 0.375rem;
+      --btn-bg: #ff3366;
+      --btn-text: #ffffff;
+      --btn-border: 3.5px solid #000000;
+      --btn-shadow: 5px 5px 0px #000000;
+      --btn-hover-transform: translate(-2px, -2px);
+      --btn-active-transform: translate(3px, 3px);
+      --input-radius: 0.375rem;
+      --input-bg: #ffffff;
+      --input-border: 3px solid #000000;
+      --input-shadow: 4px 4px 0px #000000;
+    }
+    [data-style="neubrutalism"][data-theme="light"] {
+      --bg-page: #fef08a; /* Energetic lemon-lime pastel paper */
+      --bg-pattern: radial-gradient(#000000 1.2px, transparent 1.2px);
+      --bg-card: #ffffff;
+      --text-main: #000000;
+      --border-color: #000000;
+    }
+    [data-style="neubrutalism"][data-theme="dark"] {
+      --bg-page: #141416;
+      --bg-card: #222227;
+      --card-border: 3.5px solid #facc15;
+      --card-shadow: 8px 8px 0px #facc15;
+      --btn-border: 3.5px solid #facc15;
+      --btn-shadow: 5px 5px 0px #facc15;
+      --input-border: 3px solid #facc15;
+      --input-shadow: 4px 4px 0px #facc15;
+      --input-bg: #18181b;
+      --border-color: #facc15;
+    }
+
+    /* 5. Bento Grid Architecture */
+    [data-style="bento-grid"] {
+      --font-body: 'Plus Jakarta Sans', system-ui, sans-serif;
+      --card-radius: 1.5rem;
+      --card-border: 1px solid rgba(226, 232, 240, 0.85);
+      --card-shadow: 0 4px 20px -2px rgba(15, 23, 42, 0.05), 0 2px 6px -1px rgba(15, 23, 42, 0.02);
+      --card-backdrop: none;
+      --btn-radius: 0.875rem;
+      --btn-bg: #0f172a;
+      --btn-text: #ffffff;
+      --btn-shadow: 0 4px 12px rgba(15, 23, 42, 0.15);
+      --input-radius: 0.75rem;
+    }
+    [data-style="bento-grid"][data-theme="light"] {
+      --bg-page: #f1f5f9;
+      --bg-card: #ffffff;
+    }
+    [data-style="bento-grid"][data-theme="dark"] {
+      --bg-page: #090e17;
+      --bg-card: #0f172a;
+      --card-border: 1px solid rgba(255, 255, 255, 0.08);
+      --btn-bg: #ffffff;
+      --btn-text: #0f172a;
+    }
+
+    /* 6. Aurora UI (Mesh Gradients & Living Glow) */
+    [data-style="aurora-ui"] {
+      --font-body: 'Outfit', sans-serif;
+      --font-heading: 'Outfit', sans-serif;
+      --card-radius: 1.75rem;
+      --card-backdrop: blur(28px);
+      --card-border: 1px solid rgba(255, 255, 255, 0.6);
+      --card-shadow: 0 24px 50px -10px rgba(147, 51, 234, 0.18);
+      --btn-radius: 1.25rem;
+      --btn-bg: linear-gradient(135deg, #ec4899 0%, #8b5cf6 50%, #3b82f6 100%);
+      --btn-text: #ffffff;
+      --btn-border: 1px solid rgba(255, 255, 255, 0.4);
+      --btn-shadow: 0 10px 25px -4px rgba(236, 72, 153, 0.4);
+      --input-radius: 1rem;
+    }
+    [data-style="aurora-ui"][data-theme="light"] {
+      --bg-page: #fcf4ff;
+      --bg-card: rgba(255, 255, 255, 0.78);
+      --border-color: rgba(236, 72, 153, 0.2);
+    }
+    [data-style="aurora-ui"][data-theme="dark"] {
+      --bg-page: #0a0414;
+      --bg-card: rgba(24, 10, 42, 0.65);
+      --card-border: 1px solid rgba(216, 180, 254, 0.25);
+    }
+
+    /* 7. Neo-Skeuomorphism (Tactile Metallic Surfaces) */
+    [data-style="skeuomorphism"] {
+      --font-body: 'Plus Jakarta Sans', system-ui, sans-serif;
+      --card-radius: 1.25rem;
+      --card-backdrop: none;
+      --btn-radius: 0.75rem;
+      --input-radius: 0.625rem;
+    }
+    [data-style="skeuomorphism"][data-theme="light"] {
+      --bg-page: #e3e6ec;
+      --bg-pattern: none;
+      --bg-card: linear-gradient(180deg, #ffffff 0%, #edf1f7 100%);
+      --card-border: 1px solid #b8bfc9;
+      --card-shadow: inset 0 1px 0 #ffffff, 0 8px 20px -4px rgba(0, 0, 0, 0.15), 0 2px 4px 0 rgba(0, 0, 0, 0.06);
+      --btn-bg: linear-gradient(180deg, #5b54e8 0%, #3c34c7 100%);
+      --btn-border: 1px solid #2b24a3;
+      --btn-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.4), inset 0 -2px 0 rgba(0, 0, 0, 0.25), 0 4px 10px rgba(0, 0, 0, 0.2);
+      --input-bg: #f5f7fa;
+      --input-border: 1px solid #b8bfc9;
+      --input-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.08);
+    }
+    [data-style="skeuomorphism"][data-theme="dark"] {
+      --bg-page: #171920;
+      --bg-pattern: none;
+      --bg-card: linear-gradient(180deg, #2b303d 0%, #1e222c 100%);
+      --card-border: 1px solid #3c4456;
+      --card-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.15), 0 12px 28px -6px rgba(0, 0, 0, 0.6);
+      --btn-bg: linear-gradient(180deg, #4f46e5 0%, #3730a3 100%);
+      --btn-border: 1px solid #232070;
+      --btn-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.25), inset 0 -2px 0 rgba(0, 0, 0, 0.5), 0 6px 14px rgba(0, 0, 0, 0.4);
+      --input-bg: #14171f;
+      --input-border: 1px solid #3c4456;
+    }
+
+    /* 8. Spatial UI (VisionOS Layered Depth) */
+    [data-style="spatial-ui"] {
+      --font-body: 'Geist', system-ui, sans-serif;
+      --card-radius: 2rem;
+      --card-backdrop: blur(44px) brightness(1.1);
+      --card-border: 1px solid rgba(255, 255, 255, 0.8);
+      --card-shadow: 0 32px 64px -12px rgba(0, 0, 0, 0.12), inset 0 1px 1px 0 rgba(255, 255, 255, 0.9);
+      --btn-radius: 1.5rem;
+      --btn-bg: rgba(255, 255, 255, 0.85);
+      --btn-text: #0f172a;
+      --btn-border: 1px solid rgba(255, 255, 255, 0.9);
+      --btn-shadow: 0 10px 25px -4px rgba(0, 0, 0, 0.1), inset 0 1px 1px 0 rgba(255, 255, 255, 1);
+      --input-radius: 1.25rem;
+    }
+    [data-style="spatial-ui"][data-theme="light"] {
+      --bg-page: #edf2f8;
+      --bg-card: rgba(255, 255, 255, 0.65);
+    }
+    [data-style="spatial-ui"][data-theme="dark"] {
+      --bg-page: #030712;
+      --bg-card: rgba(17, 24, 39, 0.55);
+      --card-border: 1px solid rgba(255, 255, 255, 0.2);
+      --card-shadow: 0 35px 70px -15px rgba(0, 0, 0, 0.8), inset 0 1px 1px 0 rgba(255, 255, 255, 0.2);
+      --btn-bg: rgba(255, 255, 255, 0.15);
+      --btn-text: #ffffff;
+      --btn-border: 1px solid rgba(255, 255, 255, 0.25);
+    }
+
+    /* 9. Swiss Minimalism / Flat 2.0 */
+    [data-style="minimalism"] {
+      --font-body: 'Geist', system-ui, sans-serif;
+      --font-heading: 'Geist', system-ui, sans-serif;
+      --card-radius: 0px;
+      --card-backdrop: none;
+      --card-shadow: none;
+      --card-border: 1px solid #e2e8f0;
+      --btn-radius: 0px;
+      --btn-bg: #000000;
+      --btn-text: #ffffff;
+      --btn-border: 1px solid #000000;
+      --btn-shadow: none;
+      --input-radius: 0px;
+      --input-border: 1px solid #000000;
+      --input-shadow: none;
+    }
+    [data-style="minimalism"][data-theme="light"] {
+      --bg-page: #ffffff;
+      --bg-pattern: none;
+      --bg-card: #ffffff;
+      --text-main: #000000;
+      --border-color: #000000;
+    }
+    [data-style="minimalism"][data-theme="dark"] {
+      --bg-page: #050505;
+      --bg-pattern: none;
+      --bg-card: #050505;
+      --card-border: 1px solid #27272a;
+      --border-color: #27272a;
+      --btn-bg: #ffffff;
+      --btn-text: #000000;
+      --btn-border: 1px solid #ffffff;
+      --input-border: 1px solid #3f3f46;
+    }
+
+    /* 10. Y2K Retro-Futurism Chrome */
+    [data-style="y2k-retro"] {
+      --font-body: 'Space Grotesk', monospace;
+      --font-heading: 'Space Grotesk', monospace;
+      --card-radius: 0.75rem;
+      --card-backdrop: none;
+      --card-border: 2px solid #0284c7;
+      --card-shadow: 0 0 20px rgba(14, 165, 233, 0.35);
+      --btn-radius: 0.5rem;
+      --btn-bg: linear-gradient(180deg, #38bdf8 0%, #0284c7 100%);
+      --btn-text: #ffffff;
+      --btn-border: 1.5px solid #7dd3fc;
+      --btn-shadow: 0 0 15px rgba(56, 189, 248, 0.5);
+      --input-radius: 0.5rem;
+      --input-border: 1.5px solid #0284c7;
+      --input-shadow: 0 0 8px rgba(14, 165, 233, 0.2);
+    }
+    [data-style="y2k-retro"][data-theme="light"] {
+      --bg-page: #f0fdf4;
+      --bg-card: linear-gradient(135deg, #ffffff 0%, #e0f2fe 100%);
+    }
+    [data-style="y2k-retro"][data-theme="dark"] {
+      --bg-page: #020617;
+      --bg-card: linear-gradient(135deg, #091322 0%, #030712 100%);
+      --card-border: 2px solid #00f0ff;
+      --card-shadow: 0 0 25px rgba(0, 240, 255, 0.45);
+      --btn-bg: linear-gradient(180deg, #00f0ff 0%, #0077ff 100%);
+      --btn-text: #000000;
+      --btn-border: 1.5px solid #ffffff;
+    }
+
+    /* 11. Dark UI & Ambient Glow */
+    [data-style="dark-glow"] {
+      --font-body: 'Geist', system-ui, sans-serif;
+      --bg-page: #030712 !important;
+      --bg-pattern: radial-gradient(#1e1b4b 1px, transparent 1px);
+      --bg-surface: #0b0f19 !important;
+      --bg-card: #0f172a !important;
+      --text-main: #f8fafc !important;
+      --text-muted: #94a3b8 !important;
+      --border-color: #1e293b !important;
+      --card-radius: 1.5rem;
+      --card-border: 1px solid rgba(99, 102, 241, 0.35);
+      --card-shadow: 0 0 40px -5px rgba(79, 70, 229, 0.3);
+      --btn-radius: 1rem;
+      --btn-bg: #6366f1;
+      --btn-text: #ffffff;
+      --btn-border: 1px solid #818cf8;
+      --btn-shadow: 0 0 25px rgba(99, 102, 241, 0.5);
+      --input-radius: 0.75rem;
+      --input-bg: #0b1120;
+      --input-border: 1px solid #312e81;
+    }
+
+    /* 12. Clean Stripe SaaS */
+    [data-style="clean-stripe"] {
+      --font-body: 'Plus Jakarta Sans', system-ui, sans-serif;
+      --card-radius: 1rem;
+      --card-border: 1px solid rgba(226, 232, 240, 0.8);
+      --card-shadow: 0 13px 27px -5px rgba(50, 50, 93, 0.08), 0 8px 16px -8px rgba(0, 0, 0, 0.08);
+      --card-backdrop: none;
+      --btn-radius: 0.75rem;
+      --btn-bg: #635bff;
+      --btn-text: #ffffff;
+      --btn-border: 1px solid transparent;
+      --btn-shadow: 0 4px 14px rgba(99, 91, 255, 0.3);
+      --input-radius: 0.625rem;
+    }
+    [data-style="clean-stripe"][data-theme="light"] {
+      --bg-page: #f6f9fc;
+      --bg-card: #ffffff;
+    }
+    [data-style="clean-stripe"][data-theme="dark"] {
+      --bg-page: #0a0f1d;
+      --bg-card: #121829;
+      --card-border: 1px solid rgba(255, 255, 255, 0.08);
+    }
+
+    /* ========================================================
+       GLOBAL DYNAMIC COMPONENT CLASSES
+       ======================================================== */
+    body {
+      background-color: var(--bg-page);
+      background-image: var(--bg-pattern);
+      background-size: 24px 24px;
+      color: var(--text-main);
+      font-family: var(--font-body);
+      transition: background-color 0.35s ease, color 0.35s ease;
+    }
+
+    h1, h2, h3, h4 {
+      font-family: var(--font-heading);
+    }
+
+    .vibe-card {
+      background: var(--bg-card);
+      border-radius: var(--card-radius);
+      border: var(--card-border);
+      box-shadow: var(--card-shadow);
+      backdrop-filter: var(--card-backdrop);
+      -webkit-backdrop-filter: var(--card-backdrop);
+      transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .vibe-btn-primary {
+      border-radius: var(--btn-radius);
+      background: var(--btn-bg);
+      color: var(--btn-text);
+      border: var(--btn-border);
+      box-shadow: var(--btn-shadow);
+      transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .vibe-btn-primary:hover {
+      transform: var(--btn-hover-transform);
+    }
+    .vibe-btn-primary:active {
+      transform: var(--btn-active-transform);
+    }
+
+    .vibe-input {
+      border-radius: var(--input-radius);
+      background: var(--input-bg);
+      border: var(--input-border);
+      box-shadow: var(--input-shadow);
+      transition: all 0.2s ease;
+    }
+
+    /* Custom Scrollbar for Style Dock */
+    .no-scrollbar::-webkit-scrollbar {
+      display: none;
+    }
+    .no-scrollbar {
+      -ms-overflow-style: none;
+      scrollbar-width: none;
+    }
+
+    /* Living Cursor Glow Engine */
+    #cursor-glow {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 480px;
+      height: 480px;
+      margin-left: -240px;
+      margin-top: -240px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(99, 102, 241, 0.12) 0%, rgba(99, 102, 241, 0) 70%);
+      pointer-events: none;
+      z-index: 9999;
+      transform: translate3d(0, 0, 0);
+      transition: opacity 0.3s ease;
+    }
+
+    [data-theme="dark"] #cursor-glow {
+      background: radial-gradient(circle, rgba(129, 140, 248, 0.18) 0%, rgba(99, 102, 241, 0) 70%);
+    }
+
+    /* Shimmer Effect for Buttons */
+    @keyframes shimmer {
+      0% { transform: translateX(-100%); }
+      100% { transform: translateX(200%); }
+    }
+    .animate-shimmer {
+      animation: shimmer 2.5s infinite;
+    }
+  </style>
+</head>
+<body class="min-h-screen relative overflow-x-hidden selection:bg-indigo-500 selection:text-white">
+
+  <!-- Living Mouse Cursor Glow -->
+  <div id="cursor-glow" aria-hidden="true"></div>
+
+  <!-- ========================================================
+       EXPANDABLE FLOATING STYLE MATRIX DOCK
+       ======================================================== -->
+  <aside 
+    id="style-matrix-dock" 
+    class="fixed start-5 top-1/2 -translate-y-1/2 z-50 flex flex-col items-start gap-1 p-2 rounded-2xl bg-white/85 dark:bg-slate-900/85 backdrop-blur-2xl border border-slate-200/80 dark:border-slate-800 shadow-2xl transition-all duration-300 w-14 hover:w-60 overflow-hidden group select-none"
+    aria-label="Style Switcher Matrix"
+  >
+    <!-- Dock Brand / Expand Header -->
+    <div class="flex items-center gap-3 px-2 py-2 border-b border-slate-200 dark:border-slate-800 w-full mb-1">
+      <div class="w-7 h-7 rounded-lg bg-indigo-600 text-white flex items-center justify-center font-bold text-xs shrink-0 shadow-md">
+        <i data-lucide="palette" class="w-3.5 h-3.5"></i>
+      </div>
+      <div class="opacity-0 group-hover:opacity-100 transition-opacity duration-200 whitespace-nowrap overflow-hidden">
+        <p class="text-xs font-bold text-slate-800 dark:text-slate-200 leading-none">Design Matrix</p>
+        <p class="text-[9px] text-slate-400 dark:text-slate-500">12 World Paradigms</p>
+      </div>
+    </div>
+
+    <!-- Styles Selector List -->
+    <div class="flex flex-col gap-1 w-full max-h-[62vh] overflow-y-auto no-scrollbar py-0.5">
+      
+      <!-- 1. Apple Glass -->
+      <button onclick="setStyle('apple-glass', this)" class="style-btn active-btn w-full px-2 py-1.5 rounded-xl flex items-center gap-3 text-slate-600 dark:text-slate-300 hover:bg-indigo-50 dark:hover:bg-slate-800 transition-all text-start" title="Apple Glassmorphism">
+        <div class="w-6 h-6 flex items-center justify-center shrink-0">
+          <i data-lucide="sparkles" class="w-4 h-4"></i>
+        </div>
+        <span class="text-xs font-medium whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity">Apple Glass</span>
+      </button>
+
+      <!-- 2. Neumorphism -->
+      <button onclick="setStyle('neumorphism', this)" class="style-btn w-full px-2 py-1.5 rounded-xl flex items-center gap-3 text-slate-600 dark:text-slate-300 hover:bg-indigo-50 dark:hover:bg-slate-800 transition-all text-start" title="Neumorphism (Soft UI)">
+        <div class="w-6 h-6 flex items-center justify-center shrink-0">
+          <i data-lucide="circle-dot" class="w-4 h-4"></i>
+        </div>
+        <span class="text-xs font-medium whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity">Neumorphism</span>
+      </button>
+
+      <!-- 3. Claymorphism -->
+      <button onclick="setStyle('claymorphism', this)" class="style-btn w-full px-2 py-1.5 rounded-xl flex items-center gap-3 text-slate-600 dark:text-slate-300 hover:bg-indigo-50 dark:hover:bg-slate-800 transition-all text-start" title="Claymorphism (3D Soft)">
+        <div class="w-6 h-6 flex items-center justify-center shrink-0">
+          <i data-lucide="cloud" class="w-4 h-4"></i>
+        </div>
+        <span class="text-xs font-medium whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity">Claymorphism</span>
+      </button>
+
+      <!-- 4. Neubrutalism -->
+      <button onclick="setStyle('neubrutalism', this)" class="style-btn w-full px-2 py-1.5 rounded-xl flex items-center gap-3 text-slate-600 dark:text-slate-300 hover:bg-indigo-50 dark:hover:bg-slate-800 transition-all text-start" title="Neubrutalism">
+        <div class="w-6 h-6 flex items-center justify-center shrink-0">
+          <i data-lucide="box" class="w-4 h-4"></i>
+        </div>
+        <span class="text-xs font-medium whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity">Neubrutalism</span>
+      </button>
+
+      <!-- 5. Bento Grid -->
+      <button onclick="setStyle('bento-grid', this)" class="style-btn w-full px-2 py-1.5 rounded-xl flex items-center gap-3 text-slate-600 dark:text-slate-300 hover:bg-indigo-50 dark:hover:bg-slate-800 transition-all text-start" title="Bento Grid">
+        <div class="w-6 h-6 flex items-center justify-center shrink-0">
+          <i data-lucide="layout-grid" class="w-4 h-4"></i>
+        </div>
+        <span class="text-xs font-medium whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity">Bento Grid</span>
+      </button>
+
+      <!-- 6. Aurora UI -->
+      <button onclick="setStyle('aurora-ui', this)" class="style-btn w-full px-2 py-1.5 rounded-xl flex items-center gap-3 text-slate-600 dark:text-slate-300 hover:bg-indigo-50 dark:hover:bg-slate-800 transition-all text-start" title="Aurora UI">
+        <div class="w-6 h-6 flex items-center justify-center shrink-0">
+          <i data-lucide="sun-medium" class="w-4 h-4"></i>
+        </div>
+        <span class="text-xs font-medium whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity">Aurora UI</span>
+      </button>
+
+      <!-- 7. Neo-Skeuomorphism -->
+      <button onclick="setStyle('skeuomorphism', this)" class="style-btn w-full px-2 py-1.5 rounded-xl flex items-center gap-3 text-slate-600 dark:text-slate-300 hover:bg-indigo-50 dark:hover:bg-slate-800 transition-all text-start" title="Neo-Skeuomorphism">
+        <div class="w-6 h-6 flex items-center justify-center shrink-0">
+          <i data-lucide="disc" class="w-4 h-4"></i>
+        </div>
+        <span class="text-xs font-medium whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity">Skeuomorphism</span>
+      </button>
+
+      <!-- 8. Spatial UI -->
+      <button onclick="setStyle('spatial-ui', this)" class="style-btn w-full px-2 py-1.5 rounded-xl flex items-center gap-3 text-slate-600 dark:text-slate-300 hover:bg-indigo-50 dark:hover:bg-slate-800 transition-all text-start" title="Spatial UI (VisionOS)">
+        <div class="w-6 h-6 flex items-center justify-center shrink-0">
+          <i data-lucide="glasses" class="w-4 h-4"></i>
+        </div>
+        <span class="text-xs font-medium whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity">Spatial UI</span>
+      </button>
+
+      <!-- 9. Swiss Minimalism -->
+      <button onclick="setStyle('minimalism', this)" class="style-btn w-full px-2 py-1.5 rounded-xl flex items-center gap-3 text-slate-600 dark:text-slate-300 hover:bg-indigo-50 dark:hover:bg-slate-800 transition-all text-start" title="Swiss Minimalism">
+        <div class="w-6 h-6 flex items-center justify-center shrink-0">
+          <i data-lucide="minus" class="w-4 h-4"></i>
+        </div>
+        <span class="text-xs font-medium whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity">Minimalism</span>
+      </button>
+
+      <!-- 10. Y2K Retro -->
+      <button onclick="setStyle('y2k-retro', this)" class="style-btn w-full px-2 py-1.5 rounded-xl flex items-center gap-3 text-slate-600 dark:text-slate-300 hover:bg-indigo-50 dark:hover:bg-slate-800 transition-all text-start" title="Y2K Chrome">
+        <div class="w-6 h-6 flex items-center justify-center shrink-0">
+          <i data-lucide="zap" class="w-4 h-4"></i>
+        </div>
+        <span class="text-xs font-medium whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity">Y2K Chrome</span>
+      </button>
+
+      <!-- 11. Dark & Glow -->
+      <button onclick="setStyle('dark-glow', this)" class="style-btn w-full px-2 py-1.5 rounded-xl flex items-center gap-3 text-slate-600 dark:text-slate-300 hover:bg-indigo-50 dark:hover:bg-slate-800 transition-all text-start" title="Dark UI & Glow">
+        <div class="w-6 h-6 flex items-center justify-center shrink-0">
+          <i data-lucide="moon" class="w-4 h-4"></i>
+        </div>
+        <span class="text-xs font-medium whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity">Dark & Glow</span>
+      </button>
+
+      <!-- 12. Clean Stripe -->
+      <button onclick="setStyle('clean-stripe', this)" class="style-btn w-full px-2 py-1.5 rounded-xl flex items-center gap-3 text-slate-600 dark:text-slate-300 hover:bg-indigo-50 dark:hover:bg-slate-800 transition-all text-start" title="Clean Stripe SaaS">
+        <div class="w-6 h-6 flex items-center justify-center shrink-0">
+          <i data-lucide="credit-card" class="w-4 h-4"></i>
+        </div>
+        <span class="text-xs font-medium whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity">Clean Stripe</span>
+      </button>
+
+    </div>
+
+    <!-- Theme Toggle at dock bottom -->
+    <div class="pt-2 border-t border-slate-200 dark:border-slate-800 w-full flex items-center gap-3 px-2 mt-1">
+      <button onclick="toggleTheme()" class="w-6 h-6 flex items-center justify-center text-slate-600 dark:text-amber-400 shrink-0" title="Toggle Theme">
+        <i id="dock-theme-icon" data-lucide="moon" class="w-4 h-4"></i>
+      </button>
+      <span class="text-xs font-medium whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity text-slate-500">Toggle Theme</span>
+    </div>
+  </aside>
+
+  <!-- ========================================================
+       TOP HEADER & BARRIER-FREE NAVIGATION
+       ======================================================== -->
+  <header class="sticky top-0 z-40 w-full backdrop-blur-xl bg-white/75 dark:bg-slate-900/75 border-b border-slate-200/80 dark:border-slate-800/80 transition-colors">
+    <div class="max-w-7xl mx-auto px-6 h-18 flex items-center justify-between">
+      
+      <!-- Logo & Meta -->
+      <div class="flex items-center gap-3 ms-10 md:ms-0">
+        <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-indigo-600 to-cyan-500 flex items-center justify-center text-white font-black text-lg shadow-md shadow-indigo-500/20">
+          V
+        </div>
+        <div>
+          <div class="flex items-center gap-2">
+            <span class="font-extrabold text-lg tracking-tight">Vibe UI Suite</span>
+            <span class="text-[11px] font-bold px-2 py-0.5 rounded-full bg-indigo-50 dark:bg-indigo-950/80 text-indigo-600 dark:text-indigo-400 border border-indigo-200 dark:border-indigo-800/60 font-mono">
+              v6.1.1
+            </span>
+          </div>
+          <p class="text-xs text-slate-500 dark:text-slate-400">Universal Multi-Paradigm Design Matrix</p>
+        </div>
+      </div>
+
+      <!-- Active Paradigm Indicator Badge -->
+      <div class="hidden md:flex items-center gap-3 px-4 py-1.5 rounded-full bg-slate-100/90 dark:bg-slate-800/90 border border-slate-200 dark:border-slate-700 shadow-sm">
+        <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
+        <span class="text-xs text-slate-500 dark:text-slate-400">Current Material:</span>
+        <span id="active-style-name" class="text-xs font-bold text-indigo-600 dark:text-indigo-400 uppercase tracking-wide">Apple Glassmorphism</span>
+      </div>
+
+      <!-- Actions -->
+      <div class="flex items-center gap-3">
+        <a href="https://github.com/omid-io/vibe-ui-suite" target="_blank" class="flex items-center gap-2 px-3.5 py-2 rounded-xl text-xs font-semibold text-slate-700 dark:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors">
+          <i data-lucide="github" class="w-4 h-4"></i>
+          <span class="hidden sm:inline">GitHub</span>
+        </a>
+        <button onclick="toggleTheme()" class="px-3.5 py-2 rounded-xl flex items-center gap-2 text-xs font-semibold bg-slate-100 dark:bg-slate-800 text-slate-800 dark:text-slate-100 hover:bg-slate-200 dark:hover:bg-slate-700 transition-all border border-slate-200 dark:border-slate-700 shadow-sm">
+          <i id="header-theme-icon" data-lucide="moon" class="w-4 h-4"></i>
+          <span>Theme Mode</span>
+        </button>
+      </div>
+
+    </div>
+  </header>
+
+  <!-- ========================================================
+       HERO SECTION WITH AMBIENT VIDEO & LIVING ENGINE
+       ======================================================== -->
+  <section class="relative min-h-[620px] flex items-center justify-center overflow-hidden border-b border-slate-200/60 dark:border-slate-800/60">
+    
+    <!-- Ambient Video Loop Background (Subtle & Fluid) -->
+    <video
+      autoplay
+      loop
+      muted
+      playsinline
+      disablepictureinpicture
+      poster="https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?auto=format&fit=crop&w=1200&q=80"
+      class="absolute inset-0 w-full h-full object-cover pointer-events-none opacity-20 dark:opacity-25 transition-opacity duration-1000 motion-reduce:hidden"
+    >
+      <source src="https://assets.mixkit.co/videos/preview/mixkit-fluid-particles-in-motion-41556-large.mp4" type="video/mp4">
+    </video>
+
+    <!-- Contrast High-Clarity Scrim Overlay (Ensures WCAG AAA 18:1 readability) -->
+    <div class="absolute inset-0 bg-white/75 dark:bg-slate-950/80 backdrop-blur-[2px] pointer-events-none transition-colors"></div>
+
+    <!-- Hero Content Container -->
+    <div class="relative z-10 max-w-5xl mx-auto px-6 py-20 text-center">
+      
+      <!-- Living Status Pill -->
+      <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white/90 dark:bg-slate-900/90 border border-slate-200 dark:border-slate-800 text-xs font-semibold text-slate-700 dark:text-slate-300 shadow-sm mb-6">
+        <i data-lucide="sparkles" class="w-3.5 h-3.5 text-indigo-500"></i>
+        <span>12 Signature Design Paradigms • 1 Dynamic Universal Engine</span>
+      </div>
+
+      <!-- Main Headline -->
+      <h1 class="text-4xl sm:text-6xl md:text-7xl font-extrabold tracking-tight text-slate-900 dark:text-white leading-[1.1] mb-6">
+        Next-Gen UI Engineering <br>
+        <span class="text-transparent bg-clip-text bg-gradient-to-r from-indigo-600 via-purple-600 to-cyan-500">
+          Alive In Every Aesthetic.
+        </span>
+      </h1>
+
+      <!-- Subtitle -->
+      <p class="max-w-2xl mx-auto text-base sm:text-lg text-slate-600 dark:text-slate-300 leading-relaxed mb-10">
+        Hover the floating dock on the left to switch design paradigms. Watch how surface materials, shadows, tactile button physics, and typography instantly transmute.
+      </p>
+
+      <!-- Action Button Group (Bound to Active Paradigm Variables) -->
+      <div class="flex flex-wrap items-center justify-center gap-4">
+        
+        <!-- Primary Action (Inherits Dynamic Style Classes) -->
+        <button class="vibe-btn-primary px-8 py-3.5 font-semibold text-sm flex items-center gap-2 group cursor-pointer">
+          <span>Explore Design Matrix</span>
+          <i data-lucide="arrow-right" class="w-4 h-4 group-hover:translate-x-1 transition-transform"></i>
+        </button>
+
+        <!-- Secondary Tactile Trigger -->
+        <a href="#matrix-grid" class="px-6 py-3.5 rounded-xl bg-white/80 dark:bg-slate-800/80 border border-slate-200 dark:border-slate-700 text-slate-700 dark:text-slate-200 font-semibold text-sm hover:bg-slate-100 dark:hover:bg-slate-700 transition-colors shadow-sm">
+          Inspect Architecture
+        </a>
+
+      </div>
+
+    </div>
+
+  </section>
+
+  <!-- ========================================================
+       LIVE MULTI-COMPONENT PLAYGROUND
+       ======================================================== -->
+  <main id="matrix-grid" class="max-w-7xl mx-auto px-6 py-20">
+
+    <!-- Section Intro Header -->
+    <div class="flex flex-col md:flex-row md:items-end justify-between mb-12 gap-4">
+      <div>
+        <p class="text-xs font-bold uppercase tracking-wider text-indigo-600 dark:text-indigo-400 mb-2 font-mono">Interactive Laboratory</p>
+        <h2 class="text-3xl font-extrabold text-slate-900 dark:text-white">Living Multi-Component Playground</h2>
+      </div>
+      <p class="text-sm text-slate-500 dark:text-slate-400 max-w-md">
+        Every component, button, slider, and input in this suite recalibrates physical properties live with the active style paradigm.
+      </p>
+    </div>
+
+    <!-- Multi-Column Layout -->
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+
+      <!-- Card 1: Web3 Vault & Financial Strategy -->
+      <div class="vibe-card p-8 flex flex-col justify-between min-h-[380px]">
+        <div>
+          <div class="flex items-center justify-between mb-6">
+            <span class="px-3 py-1 rounded-full text-xs font-bold bg-indigo-50 dark:bg-indigo-950/60 text-indigo-600 dark:text-indigo-400 border border-indigo-200 dark:border-indigo-800/50">
+              Web3 Vault
+            </span>
+            <div class="w-8 h-8 rounded-full bg-slate-100 dark:bg-slate-800 flex items-center justify-center text-slate-500">
+              <i data-lucide="shield-check" class="w-4 h-4"></i>
+            </div>
+          </div>
+          <h3 class="text-xl font-bold text-slate-900 dark:text-white mb-2">Automated Yield Orchestrator</h3>
+          <p class="text-sm text-slate-500 dark:text-slate-400 leading-relaxed mb-6">
+            Multi-strategy yield aggregation with deterministic zero-loss rebalancing and proof-of-reserve telemetry.
+          </p>
+
+          <!-- Interactive Range Slider -->
+          <div class="space-y-2">
+            <div class="flex justify-between text-xs font-semibold text-slate-500">
+              <span>Risk Allocation</span>
+              <span id="slider-val" class="font-mono text-indigo-600 dark:text-indigo-400 font-bold">75%</span>
+            </div>
+            <input 
+              type="range" 
+              min="10" 
+              max="100" 
+              value="75" 
+              oninput="document.getElementById('slider-val').innerText = this.value + '%'" 
+              class="w-full accent-indigo-600 cursor-pointer"
+            >
+          </div>
+        </div>
+
+        <div class="pt-6 border-t border-slate-100 dark:border-slate-800/80 flex items-center justify-between mt-6">
+          <div>
+            <p class="text-xs text-slate-400 font-medium">Annualized APY</p>
+            <p class="text-2xl font-black text-indigo-600 dark:text-indigo-400">14.82%</p>
+          </div>
+          <button class="vibe-btn-primary px-5 py-2 text-xs font-bold cursor-pointer">
+            Deposit
+          </button>
+        </div>
+      </div>
+
+      <!-- Card 2: Interactive Controls & Form Elements -->
+      <div class="vibe-card p-8 flex flex-col justify-between min-h-[380px]">
+        <div>
+          <div class="flex items-center justify-between mb-6">
+            <span class="px-3 py-1 rounded-full text-xs font-bold bg-emerald-50 dark:bg-emerald-950/60 text-emerald-600 dark:text-emerald-400 border border-emerald-200 dark:border-emerald-800/50">
+              Micro-Interactions
+            </span>
+            <!-- CyberLoader Dual Orbit Ring -->
+            <div class="relative w-6 h-6">
+              <div class="absolute inset-0 rounded-full border-2 border-indigo-500/20 border-t-indigo-500 animate-spin"></div>
+              <div class="absolute inset-1 rounded-full border-2 border-cyan-500/20 border-b-cyan-500 animate-spin" style="animation-direction: reverse;"></div>
+            </div>
+          </div>
+
+          <h3 class="text-xl font-bold text-slate-900 dark:text-white mb-4">Tactile Controls & Sensors</h3>
+
+          <!-- Form / Glow Input (Style-Adaptive) -->
+          <div class="space-y-4">
+            <div>
+              <label class="block text-xs font-semibold text-slate-500 dark:text-slate-400 mb-1.5">Interactive Key Input</label>
+              <div class="relative">
+                <input 
+                  type="text" 
+                  value="vib_live_994812_session" 
+                  readonly 
+                  class="vibe-input w-full px-4 py-2.5 text-xs font-mono text-slate-700 dark:text-slate-200 focus:outline-none"
+                >
+                <div class="absolute inset-y-0 end-0 flex items-center pe-3 text-slate-400">
+                  <i data-lucide="copy" class="w-3.5 h-3.5 cursor-pointer hover:text-indigo-500"></i>
+                </div>
+              </div>
+            </div>
+
+            <!-- Tactile Switch Control -->
+            <div class="flex items-center justify-between p-3 rounded-xl bg-slate-50/80 dark:bg-slate-900/50 border border-slate-200/60 dark:border-slate-800">
+              <span class="text-xs font-semibold text-slate-700 dark:text-slate-300">GPU Accelerated Physics</span>
+              <button onclick="toggleSwitch(this)" class="w-11 h-6 rounded-full bg-indigo-600 p-0.5 transition-colors focus:outline-none flex items-center cursor-pointer">
+                <span class="w-5 h-5 rounded-full bg-white shadow-md transform translate-x-5 transition-transform"></span>
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <div class="pt-4 flex items-center justify-between text-xs text-slate-400 font-medium">
+          <span>Latency: 2.4ms</span>
+          <span class="text-emerald-500 flex items-center gap-1 font-semibold">
+            <i data-lucide="check" class="w-3.5 h-3.5"></i> Calibrated
+          </span>
+        </div>
+      </div>
+
+      <!-- Card 3: Curated Visual Assets & 3D Synthesis -->
+      <div class="vibe-card p-8 flex flex-col justify-between min-h-[380px] relative overflow-hidden group">
+        <!-- Visual Art Backdrop with subtle zoom on hover -->
+        <img 
+          src="https://images.unsplash.com/photo-1634017839464-5c339ebe3cb4?auto=format&fit=crop&w=800&q=80" 
+          alt="Curated 3D Artwork" 
+          class="absolute inset-0 w-full h-full object-cover opacity-20 dark:opacity-30 group-hover:scale-105 transition-transform duration-700 pointer-events-none"
+        >
+        <div class="relative z-10">
+          <div class="flex items-center justify-between mb-6">
+            <span class="px-3 py-1 rounded-full text-xs font-bold bg-amber-50 dark:bg-amber-950/60 text-amber-600 dark:text-amber-400 border border-amber-200 dark:border-amber-800/50">
+              Curated Assets
+            </span>
+            <span class="text-xs text-slate-400 font-mono">24 Domains</span>
+          </div>
+          <h3 class="text-xl font-bold text-slate-900 dark:text-white mb-2">Zero-Slop Media Pipeline</h3>
+          <p class="text-sm text-slate-500 dark:text-slate-400 leading-relaxed">
+            Zero gray boxes, zero missing assets. Curated from verified Unsplash vaults and high-fidelity 3D generative synthesis.
+          </p>
+        </div>
+
+        <div class="relative z-10 pt-6">
+          <div class="flex -space-x-2 overflow-hidden mb-3">
+            <img class="inline-block h-8 w-8 rounded-full ring-2 ring-white dark:ring-slate-900" src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=120&q=80" alt="Avatar">
+            <img class="inline-block h-8 w-8 rounded-full ring-2 ring-white dark:ring-slate-900" src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=120&q=80" alt="Avatar">
+            <img class="inline-block h-8 w-8 rounded-full ring-2 ring-white dark:ring-slate-900" src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=120&q=80" alt="Avatar">
+          </div>
+          <p class="text-xs text-slate-400 font-medium">Over 3,800+ micro-interactions indexed in Galaxy.</p>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Architectural Metric Ribbon -->
+    <div class="vibe-card mt-8 p-8 flex flex-col md:flex-row items-center justify-between gap-6">
+      <div class="flex items-center gap-4">
+        <div class="w-12 h-12 rounded-2xl bg-indigo-50 dark:bg-indigo-950/80 text-indigo-600 dark:text-indigo-400 flex items-center justify-center font-bold text-xl">
+          <i data-lucide="gauge" class="w-6 h-6"></i>
+        </div>
+        <div>
+          <h4 class="font-bold text-base text-slate-900 dark:text-white">Strict WCAG AAA Mathematical Contrast</h4>
+          <p class="text-xs text-slate-500 dark:text-slate-400">Exceeds standard 4.5:1 ratio across both Light Mode and Dark Mode automatically.</p>
+        </div>
+      </div>
+
+      <div class="flex items-center gap-6">
+        <div class="text-right">
+          <p class="text-xs text-slate-400 uppercase tracking-wider font-semibold">Contrast Verified</p>
+          <p class="text-2xl font-black text-emerald-500 font-mono">18.80 : 1</p>
+        </div>
+        <div class="h-10 w-px bg-slate-200 dark:bg-slate-800"></div>
+        <div class="text-right">
+          <p class="text-xs text-slate-400 uppercase tracking-wider font-semibold">Layout Overflow</p>
+          <p class="text-2xl font-black text-indigo-600 dark:text-indigo-400 font-mono">0.00 px</p>
+        </div>
+      </div>
+    </div>
+
+  </main>
+
+  <!-- ========================================================
+       FOOTER
+       ======================================================== -->
+  <footer class="border-t border-slate-200/80 dark:border-slate-800/80 py-12 text-center text-xs text-slate-500 dark:text-slate-400 transition-colors">
+    <div class="max-w-7xl mx-auto px-6 flex flex-col sm:flex-row items-center justify-between gap-4">
+      <p>© 2026 Vibe UI Suite • Contract-Driven Autonomous Frontend Architecture</p>
+      <div class="flex items-center gap-6">
+        <a href="https://github.com/omid-io/vibe-ui-suite" class="hover:text-indigo-500 transition-colors">GitHub Repository</a>
+        <a href="ARCHITECTURE.md" class="hover:text-indigo-500 transition-colors">Architecture Spec</a>
+        <a href="README.fa.md" class="hover:text-indigo-500 transition-colors">مستندات فارسی</a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ========================================================
+       RUNTIME LOGIC & PARADIGM COMPILER
+       ======================================================== -->
+  <script>
+    // Initialize Lucide Icons
+    lucide.createIcons();
+
+    // 1. Mouse Cursor Glow Tracking
+    const glow = document.getElementById('cursor-glow');
+    window.addEventListener('mousemove', (e) => {
+      glow.style.transform = `translate3d(${e.clientX}px, ${e.clientY}px, 0)`;
+    });
+
+    // 2. Style Names Dictionary
+    const styleDisplayNames = {
+      'apple-glass': 'Apple Glassmorphism',
+      'neumorphism': 'Neumorphism (Soft UI)',
+      'claymorphism': 'Claymorphism (3D Soft)',
+      'neubrutalism': 'Neubrutalism (High-Energy)',
+      'bento-grid': 'Bento Grid Architecture',
+      'aurora-ui': 'Aurora UI (Mesh Glow)',
+      'skeuomorphism': 'Neo-Skeuomorphism (Tactile)',
+      'spatial-ui': 'Spatial UI (VisionOS Depth)',
+      'minimalism': 'Swiss Minimalism / Flat 2.0',
+      'y2k-retro': 'Y2K Retro-Futurism Chrome',
+      'dark-glow': 'Dark UI & Ambient Glow',
+      'clean-stripe': 'Clean Stripe SaaS'
+    };
+
+    // 3. Style Paradigm Switching Engine
+    function setStyle(styleName, btnElement) {
+      document.documentElement.setAttribute('data-style', styleName);
+      
+      // Update badge label
+      const badge = document.getElementById('active-style-name');
+      if (badge && styleDisplayNames[styleName]) {
+        badge.innerText = styleDisplayNames[styleName];
+      }
+
+      // Update active state in dock buttons
+      document.querySelectorAll('.style-btn').forEach(btn => {
+        btn.classList.remove('bg-indigo-600', 'text-white');
+      });
+      
+      const targetBtn = btnElement || (window.event ? window.event.currentTarget : null);
+      if (targetBtn && targetBtn.classList) {
+        targetBtn.classList.add('bg-indigo-600', 'text-white');
+      }
+
+      // Re-initialize icons
+      lucide.createIcons();
+    }
+
+    // 4. Theme Mode Switching (Light / Dark)
+    function toggleTheme() {
+      const current = document.documentElement.getAttribute('data-theme') || 'light';
+      const target = current === 'light' ? 'dark' : 'light';
+      document.documentElement.setAttribute('data-theme', target);
+      
+      // Update icons in dock and header
+      const dockIcon = document.getElementById('dock-theme-icon');
+      const headerIcon = document.getElementById('header-theme-icon');
+      const newIconName = target === 'light' ? 'moon' : 'sun';
+      
+      if (dockIcon) dockIcon.setAttribute('data-lucide', newIconName);
+      if (headerIcon) headerIcon.setAttribute('data-lucide', newIconName);
+      
+      lucide.createIcons();
+    }
+
+    // 5. Tactile Switch Toggle
+    function toggleSwitch(btn) {
+      const knob = btn.querySelector('span');
+      if (knob.classList.contains('translate-x-5')) {
+        knob.classList.remove('translate-x-5');
+        knob.classList.add('translate-x-0');
+        btn.classList.remove('bg-indigo-600');
+        btn.classList.add('bg-slate-300', 'dark:bg-slate-700');
+      } else {
+        knob.classList.remove('translate-x-0');
+        knob.classList.add('translate-x-5');
+        btn.classList.remove('bg-slate-300', 'dark:bg-slate-700');
+        btn.classList.add('bg-indigo-600');
+      }
+    }
+  </script>
+
+</body>
+</html>

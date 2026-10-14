@@ -7,11 +7,12 @@ triggers: ["expand intent", "auto-spec", "read my mind", "full architecture", "s
 # 🧠 Autonomous Intent Expander (v6.1.1 Architecture Core)
 
 ## 🎯 Purpose & Philosophy
-The `autonomous-intent-expander` skill eliminates friction and interrogation fatigue while preventing blind hallucinations. When a user provides a minimal or ambiguous prompt (e.g., *"Build gym website"*, *"Design aesthetic dental clinic website"*), this engine applies **opinionated default inference** governed by **The Four Architectural Mandates (v6.1.1)**:
-1. **Mandate 1: Strict Light-First Canvas & Anti-Dark-Bias Invariant** (Defaulting canvas to crisp, luminous Light Mode unless the prompt explicitly requests dark or the archetype is inherently dark, alongside an accessible Dark Mode toggle).
-2. **Mandate 2: Unrushed, Deliberate Craft & Multi-Pass Inspection** (Unbounded creative refinement loop; allocating cognitive budget to polish visuals and typography).
-3. **Mandate 3: Living Ambient Hero Video & Fluid Canvas Loops** (Proactively planning lightweight, cinematic ambient video loops or fluid interactive canvas backgrounds for hero focal points).
-4. **Mandate 4: Trend-First Pipeline** (Harvesting aesthetic trends from Dribbble, Figma Community, Mobbin, and Awwwards first, then mapping tools and assets to execute).
+The `autonomous-intent-expander` skill eliminates friction and interrogation fatigue while preventing blind hallucinations. When a user provides a minimal or ambiguous prompt (e.g., *"Build gym website"*, *"Design aesthetic dental clinic website"*), this engine applies **opinionated default inference** strictly governed by **The 5 Immutable Execution Gates (پروتکل ۵ مرحله ای مهندسی شاهکار)**:
+1. **Gate 1: Intent & Domain Deliberation** (Deeply understanding persona, trust factors, conversion goals, and enforcing crisp Light-First canvas with unbounded deliberate craft).
+2. **Gate 2: Deep Trend & Pattern Hunting** (Benchmarking premier aesthetics from Dribbble, Figma Community, Mobbin, and Awwwards; harvesting Galaxy micro-interactions; planning real HD media).
+3. **Gate 3: Clean Semantic Architecture & Library Synthesis** (Standard React 19, Tailwind v4, Lucide vector icons, and typed OKLCH tokens with zero imaginary packages).
+4. **Gate 4: Multi-Viewport Living Visual Audit & Self-Critique** (Mandatory browser rendering, Desktop 1440px / Mobile 390px screenshots into `screenshots/`, and multimodal self-correction).
+5. **Gate 5: Dual Functional & Mathematical Quality Assurance** (Verifying 100% interactive state feedback, WCAG AAA contrast >= 18:1, 0px horizontal overflow, and zero raw emojis).
 
 
 ---
