@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" class="scroll-smooth" data-style="apple-glass" data-theme="light">
+<html lang="en" class="scroll-smooth" data-style="claymorphism" data-theme="light">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,6 +7,11 @@
   
   <!-- Tailwind CSS Play CDN -->
   <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+    };
+  </script>
   
   <!-- Lucide Vector Icons -->
   <script src="https://unpkg.com/lucide@latest"></script>
@@ -492,6 +497,140 @@
       transition: all 0.2s ease;
     }
 
+    /* Continuous Marquee Ticker */
+    @keyframes marqueeScroll {
+      0% { transform: translateX(0); }
+      100% { transform: translateX(-50%); }
+    }
+    .marquee-track {
+      display: flex;
+      width: max-content;
+      animation: marqueeScroll 32s linear infinite;
+    }
+    .marquee-track:hover {
+      animation-play-state: paused;
+    }
+    .marquee-fade-mask {
+      mask-image: linear-gradient(to right, transparent, black 12%, black 88%, transparent);
+      -webkit-mask-image: linear-gradient(to right, transparent, black 12%, black 88%, transparent);
+    }
+
+    /* Accordion Details Animation */
+    details summary::-webkit-details-marker {
+      display: none;
+    }
+    details[open] summary .faq-chevron {
+      transform: rotate(180deg);
+    }
+
+    /* Floating Toast Container */
+    #vibeToastContainer {
+      position: fixed;
+      bottom: 24px;
+      right: 24px;
+      z-index: 99999;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      pointer-events: none;
+    }
+    .vibe-toast-item {
+      pointer-events: auto;
+      animation: toastSlideUp 0.35s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    }
+    @keyframes toastSlideUp {
+      from {
+        opacity: 0;
+        transform: translateY(20px) scale(0.95);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+      }
+    }
+
+    /* Modal Animation */
+    .modal-backdrop-blur {
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+    }
+    @keyframes modalScaleIn {
+      from {
+        opacity: 0;
+        transform: scale(0.94) translateY(10px);
+      }
+      to {
+        opacity: 1;
+        transform: scale(1) translateY(0);
+      }
+    }
+    .animate-modal-in {
+      animation: modalScaleIn 0.3s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    }
+
+    /* Creative Living Animations Suite */
+    .sheen-card {
+      position: relative;
+      overflow: hidden;
+    }
+    .sheen-card::after {
+      content: '';
+      position: absolute;
+      top: -60%;
+      left: -70%;
+      width: 35%;
+      height: 220%;
+      background: linear-gradient(to right, transparent, rgba(255, 255, 255, 0.28), transparent);
+      transform: rotate(30deg);
+      transition: all 0.85s cubic-bezier(0.16, 1, 0.3, 1);
+      pointer-events: none;
+      z-index: 10;
+    }
+    .sheen-card:hover::after {
+      left: 150%;
+    }
+
+    @keyframes spinConic {
+      to { transform: rotate(360deg); }
+    }
+    .animate-spin-conic {
+      animation: spinConic 6s linear infinite;
+    }
+
+    @keyframes floatSlow {
+      0%, 100% { transform: translateY(0px) rotate(0deg); }
+      50% { transform: translateY(-12px) rotate(3deg); }
+    }
+    .animate-float-slow {
+      animation: floatSlow 5s ease-in-out infinite;
+    }
+
+    /* Before-After Comparison Lens */
+    .before-after-lens {
+      position: relative;
+      overflow: hidden;
+      user-select: none;
+    }
+    .before-after-overlay {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+      pointer-events: none;
+    }
+    .before-after-handle {
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      width: 3px;
+      background: #6366f1;
+      box-shadow: 0 0 14px #6366f1;
+      pointer-events: none;
+      z-index: 30;
+    }
+
     /* Custom Scrollbar for Style Dock */
     .no-scrollbar::-webkit-scrollbar {
       display: none;
@@ -501,25 +640,97 @@
       scrollbar-width: none;
     }
 
-    /* Living Cursor Glow Engine */
-    #cursor-glow {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 480px;
-      height: 480px;
-      margin-left: -240px;
-      margin-top: -240px;
-      border-radius: 50%;
-      background: radial-gradient(circle, rgba(99, 102, 241, 0.12) 0%, rgba(99, 102, 241, 0) 70%);
-      pointer-events: none;
-      z-index: 9999;
-      transform: translate3d(0, 0, 0);
-      transition: opacity 0.3s ease;
+    /* =========================================================================
+       LIGHTSWIND KINETIC TRAILING CHEVRON & LEAD DOT (Tip-Connected Hotspot)
+       ========================================================================= */
+    @media (pointer: fine) {
+      *, *::before, *::after {
+        cursor: none !important;
+      }
+      #vibeCursorDot {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 8px;
+        height: 8px;
+        background-color: var(--brand-primary, #6366f1);
+        border-radius: 9999px;
+        pointer-events: none;
+        z-index: 1000001 !important;
+        transform: translate(-50%, -50%);
+        box-shadow: 0 0 10px var(--brand-primary, #6366f1);
+        transition: opacity 0.2s ease, transform 0.15s cubic-bezier(0.16, 1, 0.3, 1), background-color 0.2s ease;
+      }
+      #vibeCursorDot.hover-target {
+        transform: translate(-50%, -50%) scale(1.5);
+        background-color: #ffffff;
+        box-shadow: 0 0 14px var(--brand-primary, #6366f1), 0 0 25px var(--brand-primary, #6366f1);
+      }
+      #vibeCursorFollower {
+        position: fixed;
+        top: 0;
+        left: 0;
+        pointer-events: none;
+        z-index: 1000000 !important;
+        will-change: transform;
+        color: var(--brand-primary, #6366f1);
+        filter: drop-shadow(0 0 12px rgba(99, 102, 241, 0.65));
+        transition: opacity 0.25s ease;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        transform-origin: 50% 4px;
+      }
+      #vibeCursorFollower svg {
+        width: 38px;
+        height: 41px;
+        display: block;
+        transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+      }
+      #vibeCursorFollower.hover-active svg {
+        transform: scale(1.22);
+      }
+      #vibeCursorFollower.click-active svg {
+        transform: scale(0.82);
+      }
+      #vibeCursorBadge {
+        position: absolute;
+        top: 100%;
+        margin-top: 4px;
+        padding: 2px 7px;
+        border-radius: 9999px;
+        background-color: var(--bg-surface, #ffffff);
+        border: 1px solid var(--border-color, #e2e8f0);
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+        font-family: 'JetBrains Mono', monospace;
+        font-size: 9px;
+        font-weight: 800;
+        color: var(--brand-primary, #6366f1);
+        letter-spacing: 0.06em;
+        opacity: 0;
+        transform: scale(0.85);
+        transition: opacity 0.2s ease, transform 0.2s ease;
+        white-space: nowrap;
+      }
+      #vibeCursorFollower.hover-active #vibeCursorBadge {
+        opacity: 1;
+        transform: scale(1);
+      }
     }
 
-    [data-theme="dark"] #cursor-glow {
-      background: radial-gradient(circle, rgba(129, 140, 248, 0.18) 0%, rgba(99, 102, 241, 0) 70%);
+    /* Ambient Cursor Spotlight Layer */
+    .ambient-spotlight-layer {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 1;
+      background: radial-gradient(550px circle at var(--mouse-x, 50%) var(--mouse-y, 50%), rgba(99, 102, 241, 0.06), transparent 70%);
+      transition: opacity 0.3s ease;
+    }
+    [data-theme="dark"] .ambient-spotlight-layer,
+    .dark .ambient-spotlight-layer {
+      background: radial-gradient(550px circle at var(--mouse-x, 50%) var(--mouse-y, 50%), rgba(129, 140, 248, 0.08), transparent 70%);
     }
 
     /* Shimmer Effect for Buttons */
@@ -530,127 +741,205 @@
     .animate-shimmer {
       animation: shimmer 2.5s infinite;
     }
+
+    /* Living Stage Floating & Pulse Physics */
+    @keyframes floatSlow {
+      0%, 100% { transform: translateY(0px) rotate(0deg); }
+      50% { transform: translateY(-8px) rotate(0.3deg); }
+    }
+    .animate-float {
+      animation: floatSlow 6s ease-in-out infinite;
+    }
+
+    /* 3D Gyroscopic Physics Tilt for Device Mockup */
+    .hero-phone-perspective-stage {
+      perspective: 1200px;
+      transform-style: preserve-3d;
+    }
+    .hero-phone-3d-card {
+      transform-style: preserve-3d;
+      will-change: transform;
+      transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1), filter 0.3s ease;
+    }
+    .hero-phone-3d-card.reset-spring {
+      transition: transform 0.75s cubic-bezier(0.2, 0.9, 0.3, 1), filter 0.75s ease !important;
+    }
+
+    @keyframes pulseGlow {
+      0%, 100% { opacity: 0.35; transform: scale(1); }
+      50% { opacity: 0.75; transform: scale(1.08); }
+    }
+    .animate-pulse-glow {
+      animation: pulseGlow 5s ease-in-out infinite;
+    }
+
+    /* Hero Scrim Theme Overrides */
+    .hero-scrim {
+      background: linear-gradient(to bottom, rgba(255, 255, 255, 0.75) 0%, rgba(255, 255, 255, 0.55) 50%, rgba(255, 255, 255, 0.95) 100%);
+      transition: background 0.4s ease;
+    }
+    [data-theme="dark"] .hero-scrim,
+    .dark .hero-scrim {
+      background: linear-gradient(to bottom, rgba(8, 12, 20, 0.88) 0%, rgba(8, 12, 20, 0.70) 50%, rgba(8, 12, 20, 0.98) 100%) !important;
+    }
   </style>
 </head>
 <body class="min-h-screen relative overflow-x-hidden selection:bg-indigo-500 selection:text-white">
 
-  <!-- Living Mouse Cursor Glow -->
-  <div id="cursor-glow" aria-hidden="true"></div>
+  <!-- LIGHTSWIND KINETIC ARROW CURSOR FOLLOWER -->
+  <div id="vibeCursorDot" class="hidden md:block" aria-hidden="true"></div>
+  <div id="vibeCursorFollower" class="hidden md:flex" aria-hidden="true">
+    <svg xmlns="http://www.w3.org/2000/svg" width="38" height="41" viewBox="0 0 50 54" fill="none" class="pointer-events-none drop-shadow-md">
+      <path d="M42.6817 41.1495L27.5103 6.79925C26.7269 5.02557 24.2082 5.02558 23.3927 6.79925L7.59814 41.1495C6.75833 42.9759 8.52712 44.8902 10.4125 44.1954L24.3757 39.0496C24.8829 38.8627 25.4385 38.8627 25.9422 39.0496L39.8121 44.1954C41.6849 44.8902 43.4884 42.9759 42.6817 41.1495Z" fill="currentColor"/>
+      <path d="M43.7146 40.6933L28.5431 6.34306C27.3556 3.65428 23.5772 3.69516 22.3668 6.32755L6.57226 40.6778C5.3134 43.4156 7.97238 46.298 10.803 45.2549L24.7662 40.109C25.0221 40.0147 25.2999 40.0156 25.5494 40.1082L39.4193 45.254C42.2261 46.2953 44.9254 43.4347 43.7146 40.6933Z" stroke="currentColor" stroke-width="1.5"/>
+    </svg>
+    <span id="vibeCursorBadge"></span>
+  </div>
+
+  <!-- AMBIENT CURSOR SPOTLIGHT ILLUMINATOR -->
+  <div id="ambientSpotlightOverlay" class="ambient-spotlight-layer" aria-hidden="true"></div>
 
   <!-- ========================================================
        EXPANDABLE FLOATING STYLE MATRIX DOCK
        ======================================================== -->
   <aside 
     id="style-matrix-dock" 
-    class="fixed start-5 top-1/2 -translate-y-1/2 z-50 flex flex-col items-start gap-1 p-2 rounded-2xl bg-white/85 dark:bg-slate-900/85 backdrop-blur-2xl border border-slate-200/80 dark:border-slate-800 shadow-2xl transition-all duration-300 w-14 hover:w-60 overflow-hidden group select-none"
+    class="fixed start-5 top-1/2 -translate-y-1/2 z-50 flex flex-col items-start gap-1 p-2 rounded-2xl bg-white/95 dark:bg-slate-900/95 backdrop-blur-2xl border border-slate-200 dark:border-slate-800 shadow-2xl transition-all duration-300 w-14 hover:w-60 overflow-hidden group select-none"
     aria-label="Style Switcher Matrix"
   >
     <!-- Dock Brand / Expand Header -->
     <div class="flex items-center gap-3 px-2 py-2 border-b border-slate-200 dark:border-slate-800 w-full mb-1">
       <div class="w-7 h-7 rounded-lg bg-indigo-600 text-white flex items-center justify-center font-bold text-xs shrink-0 shadow-md">
-        <i data-lucide="palette" class="w-3.5 h-3.5"></i>
+        <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="13.5" cy="6.5" r=".5" fill="currentColor"/>
+          <circle cx="17.5" cy="10.5" r=".5" fill="currentColor"/>
+          <circle cx="8.5" cy="7.5" r=".5" fill="currentColor"/>
+          <circle cx="6.5" cy="12.5" r=".5" fill="currentColor"/>
+          <path d="M12 2C6.5 2 2 6.5 2 12s4.5 10 10 10c.926 0 1.648-.746 1.648-1.688 0-.437-.18-.835-.437-1.125-.29-.289-.438-.652-.438-1.125a1.64 1.64 0 0 1 1.668-1.668h1.996c3.051 0 5.555-2.503 5.555-5.554C21.965 6.012 17.461 2 12 2z"/>
+        </svg>
       </div>
       <div class="opacity-0 group-hover:opacity-100 transition-opacity duration-200 whitespace-nowrap overflow-hidden">
         <p class="text-xs font-bold text-slate-800 dark:text-slate-200 leading-none">Design Matrix</p>
-        <p class="text-[9px] text-slate-400 dark:text-slate-500">12 World Paradigms</p>
+        <p class="text-[9px] text-slate-400 dark:text-slate-500">11 World Paradigms</p>
       </div>
     </div>
 
     <!-- Styles Selector List -->
     <div class="flex flex-col gap-1 w-full max-h-[62vh] overflow-y-auto no-scrollbar py-0.5">
       
-      <!-- 1. Apple Glass -->
-      <button onclick="setStyle('apple-glass', this)" class="style-btn active-btn w-full px-2 py-1.5 rounded-xl flex items-center gap-3 text-slate-600 dark:text-slate-300 hover:bg-indigo-50 dark:hover:bg-slate-800 transition-all text-start" title="Apple Glassmorphism">
+      <!-- 1. Claymorphism -->
+      <button type="button" onclick="setStyle('claymorphism', this)" class="style-btn active-btn w-full px-2 py-1.5 rounded-xl flex items-center gap-3 bg-indigo-600 text-white transition-all text-start" title="Claymorphism (3D Soft)">
         <div class="w-6 h-6 flex items-center justify-center shrink-0">
-          <i data-lucide="sparkles" class="w-4 h-4"></i>
-        </div>
-        <span class="text-xs font-medium whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity">Apple Glass</span>
-      </button>
-
-      <!-- 2. Neumorphism -->
-      <button onclick="setStyle('neumorphism', this)" class="style-btn w-full px-2 py-1.5 rounded-xl flex items-center gap-3 text-slate-600 dark:text-slate-300 hover:bg-indigo-50 dark:hover:bg-slate-800 transition-all text-start" title="Neumorphism (Soft UI)">
-        <div class="w-6 h-6 flex items-center justify-center shrink-0">
-          <i data-lucide="circle-dot" class="w-4 h-4"></i>
-        </div>
-        <span class="text-xs font-medium whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity">Neumorphism</span>
-      </button>
-
-      <!-- 3. Claymorphism -->
-      <button onclick="setStyle('claymorphism', this)" class="style-btn w-full px-2 py-1.5 rounded-xl flex items-center gap-3 text-slate-600 dark:text-slate-300 hover:bg-indigo-50 dark:hover:bg-slate-800 transition-all text-start" title="Claymorphism (3D Soft)">
-        <div class="w-6 h-6 flex items-center justify-center shrink-0">
-          <i data-lucide="cloud" class="w-4 h-4"></i>
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M17.5 19H9a7 7 0 1 1 6.71-9h1.79a4.5 4.5 0 1 1 0 9Z"/>
+          </svg>
         </div>
         <span class="text-xs font-medium whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity">Claymorphism</span>
       </button>
 
-      <!-- 4. Neubrutalism -->
-      <button onclick="setStyle('neubrutalism', this)" class="style-btn w-full px-2 py-1.5 rounded-xl flex items-center gap-3 text-slate-600 dark:text-slate-300 hover:bg-indigo-50 dark:hover:bg-slate-800 transition-all text-start" title="Neubrutalism">
+      <!-- 2. Apple Glass -->
+      <button type="button" onclick="setStyle('apple-glass', this)" class="style-btn w-full px-2 py-1.5 rounded-xl flex items-center gap-3 text-slate-700 dark:text-slate-300 hover:bg-indigo-50 dark:hover:bg-slate-800 transition-all text-start" title="Apple Glassmorphism">
         <div class="w-6 h-6 flex items-center justify-center shrink-0">
-          <i data-lucide="box" class="w-4 h-4"></i>
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="m12 3-1.912 5.813a2 2 0 0 1-1.275 1.275L3 12l5.813 1.912a2 2 0 0 1 1.275 1.275L12 21l1.912-5.813a2 2 0 0 1 1.275-1.275L21 12l-5.813-1.912a2 2 0 0 1-1.275-1.275L12 3Z"/>
+            <path d="M5 3v4"/><path d="M19 17v4"/><path d="M3 5h4"/><path d="M17 19h4"/>
+          </svg>
+        </div>
+        <span class="text-xs font-medium whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity">Apple Glass</span>
+      </button>
+
+      <!-- 3. Neumorphism -->
+      <button type="button" onclick="setStyle('neumorphism', this)" class="style-btn w-full px-2 py-1.5 rounded-xl flex items-center gap-3 text-slate-700 dark:text-slate-300 hover:bg-indigo-50 dark:hover:bg-slate-800 transition-all text-start" title="Neumorphism (Soft UI)">
+        <div class="w-6 h-6 flex items-center justify-center shrink-0">
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="1"/>
+          </svg>
+        </div>
+        <span class="text-xs font-medium whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity">Neumorphism</span>
+      </button>
+
+      <!-- 4. Neubrutalism -->
+      <button type="button" onclick="setStyle('neubrutalism', this)" class="style-btn w-full px-2 py-1.5 rounded-xl flex items-center gap-3 text-slate-700 dark:text-slate-300 hover:bg-indigo-50 dark:hover:bg-slate-800 transition-all text-start" title="Neubrutalism">
+        <div class="w-6 h-6 flex items-center justify-center shrink-0">
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M21 8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16Z"/>
+            <path d="m3.3 7 8.7 5 8.7-5"/><path d="M12 22V12"/>
+          </svg>
         </div>
         <span class="text-xs font-medium whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity">Neubrutalism</span>
       </button>
 
       <!-- 5. Bento Grid -->
-      <button onclick="setStyle('bento-grid', this)" class="style-btn w-full px-2 py-1.5 rounded-xl flex items-center gap-3 text-slate-600 dark:text-slate-300 hover:bg-indigo-50 dark:hover:bg-slate-800 transition-all text-start" title="Bento Grid">
+      <button type="button" onclick="setStyle('bento-grid', this)" class="style-btn w-full px-2 py-1.5 rounded-xl flex items-center gap-3 text-slate-700 dark:text-slate-300 hover:bg-indigo-50 dark:hover:bg-slate-800 transition-all text-start" title="Bento Grid">
         <div class="w-6 h-6 flex items-center justify-center shrink-0">
-          <i data-lucide="layout-grid" class="w-4 h-4"></i>
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <rect width="7" height="7" x="3" y="3" rx="1"/><rect width="7" height="7" x="14" y="3" rx="1"/>
+            <rect width="7" height="7" x="14" y="14" rx="1"/><rect width="7" height="7" x="3" y="14" rx="1"/>
+          </svg>
         </div>
         <span class="text-xs font-medium whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity">Bento Grid</span>
       </button>
 
       <!-- 6. Aurora UI -->
-      <button onclick="setStyle('aurora-ui', this)" class="style-btn w-full px-2 py-1.5 rounded-xl flex items-center gap-3 text-slate-600 dark:text-slate-300 hover:bg-indigo-50 dark:hover:bg-slate-800 transition-all text-start" title="Aurora UI">
+      <button type="button" onclick="setStyle('aurora-ui', this)" class="style-btn w-full px-2 py-1.5 rounded-xl flex items-center gap-3 text-slate-700 dark:text-slate-300 hover:bg-indigo-50 dark:hover:bg-slate-800 transition-all text-start" title="Aurora UI">
         <div class="w-6 h-6 flex items-center justify-center shrink-0">
-          <i data-lucide="sun-medium" class="w-4 h-4"></i>
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="4"/><path d="M12 2v2"/><path d="M12 20v2"/><path d="m4.93 4.93 1.41 1.41"/>
+            <path d="m17.66 17.66 1.41 1.41"/><path d="M2 12h2"/><path d="M20 12h2"/>
+            <path d="m6.34 17.66-1.41 1.41"/><path d="m19.07 4.93-1.41 1.41"/>
+          </svg>
         </div>
         <span class="text-xs font-medium whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity">Aurora UI</span>
       </button>
 
       <!-- 7. Neo-Skeuomorphism -->
-      <button onclick="setStyle('skeuomorphism', this)" class="style-btn w-full px-2 py-1.5 rounded-xl flex items-center gap-3 text-slate-600 dark:text-slate-300 hover:bg-indigo-50 dark:hover:bg-slate-800 transition-all text-start" title="Neo-Skeuomorphism">
+      <button type="button" onclick="setStyle('skeuomorphism', this)" class="style-btn w-full px-2 py-1.5 rounded-xl flex items-center gap-3 text-slate-700 dark:text-slate-300 hover:bg-indigo-50 dark:hover:bg-slate-800 transition-all text-start" title="Neo-Skeuomorphism">
         <div class="w-6 h-6 flex items-center justify-center shrink-0">
-          <i data-lucide="disc" class="w-4 h-4"></i>
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="2"/>
+          </svg>
         </div>
         <span class="text-xs font-medium whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity">Skeuomorphism</span>
       </button>
 
       <!-- 8. Spatial UI -->
-      <button onclick="setStyle('spatial-ui', this)" class="style-btn w-full px-2 py-1.5 rounded-xl flex items-center gap-3 text-slate-600 dark:text-slate-300 hover:bg-indigo-50 dark:hover:bg-slate-800 transition-all text-start" title="Spatial UI (VisionOS)">
+      <button type="button" onclick="setStyle('spatial-ui', this)" class="style-btn w-full px-2 py-1.5 rounded-xl flex items-center gap-3 text-slate-700 dark:text-slate-300 hover:bg-indigo-50 dark:hover:bg-slate-800 transition-all text-start" title="Spatial UI (VisionOS)">
         <div class="w-6 h-6 flex items-center justify-center shrink-0">
-          <i data-lucide="glasses" class="w-4 h-4"></i>
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="6" cy="15" r="4"/><circle cx="18" cy="15" r="4"/><path d="M14 15a2 2 0 0 0-2-2 2 2 0 0 0-2 2"/><path d="M2.5 13 5 7c.7-1.3 1.4-2 3-2"/><path d="M21.5 13 19 7c-.7-1.3-1.5-2-3-2"/>
+          </svg>
         </div>
         <span class="text-xs font-medium whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity">Spatial UI</span>
       </button>
 
       <!-- 9. Swiss Minimalism -->
-      <button onclick="setStyle('minimalism', this)" class="style-btn w-full px-2 py-1.5 rounded-xl flex items-center gap-3 text-slate-600 dark:text-slate-300 hover:bg-indigo-50 dark:hover:bg-slate-800 transition-all text-start" title="Swiss Minimalism">
+      <button type="button" onclick="setStyle('minimalism', this)" class="style-btn w-full px-2 py-1.5 rounded-xl flex items-center gap-3 text-slate-700 dark:text-slate-300 hover:bg-indigo-50 dark:hover:bg-slate-800 transition-all text-start" title="Swiss Minimalism">
         <div class="w-6 h-6 flex items-center justify-center shrink-0">
-          <i data-lucide="minus" class="w-4 h-4"></i>
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M5 12h14"/>
+          </svg>
         </div>
         <span class="text-xs font-medium whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity">Minimalism</span>
       </button>
 
       <!-- 10. Y2K Retro -->
-      <button onclick="setStyle('y2k-retro', this)" class="style-btn w-full px-2 py-1.5 rounded-xl flex items-center gap-3 text-slate-600 dark:text-slate-300 hover:bg-indigo-50 dark:hover:bg-slate-800 transition-all text-start" title="Y2K Chrome">
+      <button type="button" onclick="setStyle('y2k-retro', this)" class="style-btn w-full px-2 py-1.5 rounded-xl flex items-center gap-3 text-slate-700 dark:text-slate-300 hover:bg-indigo-50 dark:hover:bg-slate-800 transition-all text-start" title="Y2K Chrome">
         <div class="w-6 h-6 flex items-center justify-center shrink-0">
-          <i data-lucide="zap" class="w-4 h-4"></i>
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/>
+          </svg>
         </div>
         <span class="text-xs font-medium whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity">Y2K Chrome</span>
       </button>
 
-      <!-- 11. Dark & Glow -->
-      <button onclick="setStyle('dark-glow', this)" class="style-btn w-full px-2 py-1.5 rounded-xl flex items-center gap-3 text-slate-600 dark:text-slate-300 hover:bg-indigo-50 dark:hover:bg-slate-800 transition-all text-start" title="Dark UI & Glow">
-        <div class="w-6 h-6 flex items-center justify-center shrink-0">
-          <i data-lucide="moon" class="w-4 h-4"></i>
-        </div>
-        <span class="text-xs font-medium whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity">Dark & Glow</span>
-      </button>
+
 
       <!-- 12. Clean Stripe -->
-      <button onclick="setStyle('clean-stripe', this)" class="style-btn w-full px-2 py-1.5 rounded-xl flex items-center gap-3 text-slate-600 dark:text-slate-300 hover:bg-indigo-50 dark:hover:bg-slate-800 transition-all text-start" title="Clean Stripe SaaS">
+      <button type="button" onclick="setStyle('clean-stripe', this)" class="style-btn w-full px-2 py-1.5 rounded-xl flex items-center gap-3 text-slate-700 dark:text-slate-300 hover:bg-indigo-50 dark:hover:bg-slate-800 transition-all text-start" title="Clean Stripe SaaS">
         <div class="w-6 h-6 flex items-center justify-center shrink-0">
-          <i data-lucide="credit-card" class="w-4 h-4"></i>
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <rect width="20" height="14" x="2" y="5" rx="2"/><line x1="2" x2="22" y1="10" y2="10"/>
+          </svg>
         </div>
         <span class="text-xs font-medium whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity">Clean Stripe</span>
       </button>
@@ -659,8 +948,10 @@
 
     <!-- Theme Toggle at dock bottom -->
     <div class="pt-2 border-t border-slate-200 dark:border-slate-800 w-full flex items-center gap-3 px-2 mt-1">
-      <button onclick="toggleTheme()" class="w-6 h-6 flex items-center justify-center text-slate-600 dark:text-amber-400 shrink-0" title="Toggle Theme">
-        <i id="dock-theme-icon" data-lucide="moon" class="w-4 h-4"></i>
+      <button type="button" onclick="toggleTheme()" class="w-6 h-6 flex items-center justify-center text-slate-700 dark:text-amber-400 shrink-0" title="Toggle Theme">
+        <svg id="dock-theme-svg" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"/>
+        </svg>
       </button>
       <span class="text-xs font-medium whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity text-slate-500">Toggle Theme</span>
     </div>
@@ -670,38 +961,37 @@
        TOP HEADER & BARRIER-FREE NAVIGATION
        ======================================================== -->
   <header class="sticky top-0 z-40 w-full backdrop-blur-xl bg-white/75 dark:bg-slate-900/75 border-b border-slate-200/80 dark:border-slate-800/80 transition-colors">
-    <div class="max-w-7xl mx-auto px-6 h-18 flex items-center justify-between">
+    <div class="max-w-7xl mx-auto px-6 h-14 flex items-center justify-between">
       
       <!-- Logo & Meta -->
       <div class="flex items-center gap-3 ms-10 md:ms-0">
-        <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-indigo-600 to-cyan-500 flex items-center justify-center text-white font-black text-lg shadow-md shadow-indigo-500/20">
+        <div class="w-8 h-8 rounded-xl bg-gradient-to-tr from-indigo-600 to-cyan-500 flex items-center justify-center text-white font-black text-base shadow-md shadow-indigo-500/20">
           V
         </div>
         <div>
           <div class="flex items-center gap-2">
-            <span class="font-extrabold text-lg tracking-tight">Vibe UI Suite</span>
-            <span class="text-[11px] font-bold px-2 py-0.5 rounded-full bg-indigo-50 dark:bg-indigo-950/80 text-indigo-600 dark:text-indigo-400 border border-indigo-200 dark:border-indigo-800/60 font-mono">
+            <span class="font-extrabold text-base tracking-tight">Vibe UI Suite</span>
+            <span class="text-[10px] font-bold px-2 py-0.5 rounded-full bg-indigo-50 dark:bg-indigo-950/80 text-indigo-600 dark:text-indigo-400 border border-indigo-200 dark:border-indigo-800/60 font-mono">
               v6.1.1
             </span>
           </div>
-          <p class="text-xs text-slate-500 dark:text-slate-400">Universal Multi-Paradigm Design Matrix</p>
         </div>
       </div>
 
       <!-- Active Paradigm Indicator Badge -->
-      <div class="hidden md:flex items-center gap-3 px-4 py-1.5 rounded-full bg-slate-100/90 dark:bg-slate-800/90 border border-slate-200 dark:border-slate-700 shadow-sm">
+      <div class="hidden md:flex items-center gap-3 px-4 py-1 rounded-full bg-slate-100/90 dark:bg-slate-800/90 border border-slate-200 dark:border-slate-700 shadow-sm">
         <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
         <span class="text-xs text-slate-500 dark:text-slate-400">Current Material:</span>
-        <span id="active-style-name" class="text-xs font-bold text-indigo-600 dark:text-indigo-400 uppercase tracking-wide">Apple Glassmorphism</span>
+        <span id="active-style-name" class="text-xs font-bold text-indigo-600 dark:text-indigo-400 uppercase tracking-wide">Claymorphism (3D Soft)</span>
       </div>
 
       <!-- Actions -->
       <div class="flex items-center gap-3">
-        <a href="https://github.com/omid-io/vibe-ui-suite" target="_blank" class="flex items-center gap-2 px-3.5 py-2 rounded-xl text-xs font-semibold text-slate-700 dark:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors">
+        <a href="https://github.com/omid-io/vibe-ui-suite" target="_blank" class="flex items-center gap-2 px-3 py-1.5 rounded-xl text-xs font-semibold text-slate-700 dark:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors">
           <i data-lucide="github" class="w-4 h-4"></i>
           <span class="hidden sm:inline">GitHub</span>
         </a>
-        <button onclick="toggleTheme()" class="px-3.5 py-2 rounded-xl flex items-center gap-2 text-xs font-semibold bg-slate-100 dark:bg-slate-800 text-slate-800 dark:text-slate-100 hover:bg-slate-200 dark:hover:bg-slate-700 transition-all border border-slate-200 dark:border-slate-700 shadow-sm">
+        <button onclick="toggleTheme()" class="px-3 py-1.5 rounded-xl flex items-center gap-2 text-xs font-semibold bg-slate-100 dark:bg-slate-800 text-slate-800 dark:text-slate-100 hover:bg-slate-200 dark:hover:bg-slate-700 transition-all border border-slate-200 dark:border-slate-700 shadow-sm">
           <i id="header-theme-icon" data-lucide="moon" class="w-4 h-4"></i>
           <span>Theme Mode</span>
         </button>
@@ -711,155 +1001,536 @@
   </header>
 
   <!-- ========================================================
-       HERO SECTION WITH AMBIENT VIDEO & LIVING ENGINE
+       CINEMATIC SPATIAL HERO SECTION WITH LOCAL 4K/60FPS VIDEO DECK
        ======================================================== -->
-  <section class="relative min-h-[620px] flex items-center justify-center overflow-hidden border-b border-slate-200/60 dark:border-slate-800/60">
+  <section class="relative flex items-center justify-center overflow-hidden border-b border-slate-200/80 dark:border-slate-800/80 transition-colors duration-500">
     
-    <!-- Ambient Video Loop Background (Subtle & Fluid) -->
+    <!-- Ambient Video Loop Background (Seamless Generative Abstract UI Fluid Loop) -->
     <video
       autoplay
       loop
       muted
       playsinline
       disablepictureinpicture
-      poster="https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?auto=format&fit=crop&w=1200&q=80"
-      class="absolute inset-0 w-full h-full object-cover pointer-events-none opacity-20 dark:opacity-25 transition-opacity duration-1000 motion-reduce:hidden"
+      class="absolute inset-0 w-full h-full object-cover pointer-events-none opacity-45 dark:opacity-35 transition-opacity duration-1000 motion-reduce:hidden"
     >
-      <source src="https://assets.mixkit.co/videos/preview/mixkit-fluid-particles-in-motion-41556-large.mp4" type="video/mp4">
+      <source src="assets/hero_abstract_pingpong_loop.mp4" type="video/mp4">
     </video>
 
-    <!-- Contrast High-Clarity Scrim Overlay (Ensures WCAG AAA 18:1 readability) -->
-    <div class="absolute inset-0 bg-white/75 dark:bg-slate-950/80 backdrop-blur-[2px] pointer-events-none transition-colors"></div>
+    <!-- Dynamic Theme & Paradigm Adaptive Scrim -->
+    <div class="hero-scrim absolute inset-0 pointer-events-none backdrop-blur-[1px]"></div>
 
-    <!-- Hero Content Container -->
-    <div class="relative z-10 max-w-5xl mx-auto px-6 py-20 text-center">
-      
-      <!-- Living Status Pill -->
-      <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white/90 dark:bg-slate-900/90 border border-slate-200 dark:border-slate-800 text-xs font-semibold text-slate-700 dark:text-slate-300 shadow-sm mb-6">
-        <i data-lucide="sparkles" class="w-3.5 h-3.5 text-indigo-500"></i>
-        <span>12 Signature Design Paradigms • 1 Dynamic Universal Engine</span>
-      </div>
+    <!-- Ambient Mesh Light Beams -->
+    <div class="absolute top-1/4 start-1/4 w-96 h-96 rounded-full bg-indigo-500/20 dark:bg-indigo-600/25 blur-3xl pointer-events-none animate-pulse-glow"></div>
+    <div class="absolute bottom-1/4 end-1/4 w-96 h-96 rounded-full bg-cyan-500/20 dark:bg-cyan-600/20 blur-3xl pointer-events-none animate-pulse-glow" style="animation-delay: 2.5s"></div>
 
-      <!-- Main Headline -->
-      <h1 class="text-4xl sm:text-6xl md:text-7xl font-extrabold tracking-tight text-slate-900 dark:text-white leading-[1.1] mb-6">
-        Next-Gen UI Engineering <br>
-        <span class="text-transparent bg-clip-text bg-gradient-to-r from-indigo-600 via-purple-600 to-cyan-500">
-          Alive In Every Aesthetic.
-        </span>
-      </h1>
-
-      <!-- Subtitle -->
-      <p class="max-w-2xl mx-auto text-base sm:text-lg text-slate-600 dark:text-slate-300 leading-relaxed mb-10">
-        Hover the floating dock on the left to switch design paradigms. Watch how surface materials, shadows, tactile button physics, and typography instantly transmute.
-      </p>
-
-      <!-- Action Button Group (Bound to Active Paradigm Variables) -->
-      <div class="flex flex-wrap items-center justify-center gap-4">
+    <!-- Hero Content Container (Asymmetric 12-Column Spatial Stage) -->
+    <div class="relative z-10 max-w-7xl mx-auto px-6 pt-3 pb-8 lg:pt-4 lg:pb-12 w-full">
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-8 items-center">
         
-        <!-- Primary Action (Inherits Dynamic Style Classes) -->
-        <button class="vibe-btn-primary px-8 py-3.5 font-semibold text-sm flex items-center gap-2 group cursor-pointer">
-          <span>Explore Design Matrix</span>
-          <i data-lucide="arrow-right" class="w-4 h-4 group-hover:translate-x-1 transition-transform"></i>
-        </button>
+        <!-- Column 1: Value Proposition, Headline & Interactive Hub -->
+        <div class="lg:col-span-7 flex flex-col items-start text-start">
+          
+          <!-- Living Engine Status Pill -->
+          <div class="inline-flex items-center gap-2.5 px-3.5 py-1.5 rounded-full bg-white/90 dark:bg-slate-900/90 border border-slate-200/80 dark:border-slate-800 text-xs font-semibold text-slate-700 dark:text-slate-300 shadow-sm mb-4 backdrop-blur-md">
+            <span class="relative flex h-2 w-2">
+              <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+              <span class="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
+            </span>
+            <span class="font-mono text-[11px] uppercase tracking-wider text-indigo-600 dark:text-indigo-400 font-bold">Vibe Engine v6.1.1</span>
+            <span class="text-slate-300 dark:text-slate-700">•</span>
+            <span>11 World Paradigms In 1 System</span>
+          </div>
 
-        <!-- Secondary Tactile Trigger -->
-        <a href="#matrix-grid" class="px-6 py-3.5 rounded-xl bg-white/80 dark:bg-slate-800/80 border border-slate-200 dark:border-slate-700 text-slate-700 dark:text-slate-200 font-semibold text-sm hover:bg-slate-100 dark:hover:bg-slate-700 transition-colors shadow-sm">
-          Inspect Architecture
-        </a>
+          <!-- Main Power Headline -->
+          <h1 class="text-4xl sm:text-5xl lg:text-6xl font-black tracking-tight text-slate-900 dark:text-white leading-[1.08] mb-6">
+            One Universal Core. <br>
+            <span class="text-transparent bg-clip-text bg-gradient-to-r from-indigo-600 via-purple-600 to-cyan-500">
+              Infinite Living Aesthetics.
+            </span>
+          </h1>
+
+          <!-- Subtitle / Narrative -->
+          <p class="text-base sm:text-lg text-slate-600 dark:text-slate-300 leading-relaxed mb-8 max-w-xl">
+            Zero CSS rewrites. Morph any interface seamlessly between Apple Glass, Neumorphism, Bento Grid, and Y2K Chrome with mathematical luminance and physical tactile feedback.
+          </p>
+
+          <!-- Primary Action Button Group -->
+          <div class="flex flex-wrap items-center gap-4 mb-8 w-full sm:w-auto">
+            <a href="#matrix-grid" class="vibe-btn-primary px-7 py-3.5 font-bold text-sm flex items-center justify-center gap-2.5 group cursor-pointer shadow-lg shadow-indigo-500/20">
+              <span>Explore Living Laboratory</span>
+              <i data-lucide="arrow-right" class="w-4 h-4 group-hover:translate-x-1 transition-transform"></i>
+            </a>
+            <a href="https://github.com/omid-io/vibe-ui-suite" target="_blank" class="px-5 py-3.5 rounded-xl bg-white/80 dark:bg-slate-800/80 border border-slate-200/90 dark:border-slate-700 text-slate-700 dark:text-slate-200 font-bold text-sm hover:bg-slate-100 dark:hover:bg-slate-700/80 transition-all shadow-sm flex items-center justify-center gap-2">
+              <i data-lucide="terminal" class="w-4 h-4 text-slate-500"></i>
+              <span>npx vibe-ui add</span>
+            </a>
+          </div>
+
+          <!-- In-Hero Quick Morph Selectors -->
+          <div class="w-full pt-6 border-t border-slate-200/60 dark:border-slate-800/60">
+            <div class="flex items-center gap-2 mb-3">
+              <i data-lucide="sparkles" class="w-3.5 h-3.5 text-indigo-500"></i>
+              <span class="text-xs font-bold uppercase tracking-wider text-slate-500 dark:text-slate-400 font-mono">Quick Morph Test:</span>
+            </div>
+            <div class="flex flex-wrap gap-2">
+              <button type="button" onclick="setStyle('apple-glass')" class="hero-quick-pill px-3 py-1.5 rounded-lg text-xs font-semibold bg-white/70 dark:bg-slate-800/70 border border-slate-200 dark:border-slate-700 hover:border-indigo-500 text-slate-700 dark:text-slate-200 transition-all flex items-center gap-1.5 cursor-pointer">
+                <i data-lucide="layers" class="w-3 h-3 text-indigo-500"></i>
+                <span>Glass</span>
+              </button>
+              <button type="button" onclick="setStyle('neumorphism')" class="hero-quick-pill px-3 py-1.5 rounded-lg text-xs font-semibold bg-white/70 dark:bg-slate-800/70 border border-slate-200 dark:border-slate-700 hover:border-indigo-500 text-slate-700 dark:text-slate-200 transition-all flex items-center gap-1.5 cursor-pointer">
+                <i data-lucide="box" class="w-3 h-3 text-indigo-500"></i>
+                <span>Neumorphic</span>
+              </button>
+              <button type="button" onclick="setStyle('bento-grid')" class="hero-quick-pill px-3 py-1.5 rounded-lg text-xs font-semibold bg-white/70 dark:bg-slate-800/70 border border-slate-200 dark:border-slate-700 hover:border-indigo-500 text-slate-700 dark:text-slate-200 transition-all flex items-center gap-1.5 cursor-pointer">
+                <i data-lucide="layout-grid" class="w-3 h-3 text-indigo-500"></i>
+                <span>Bento</span>
+              </button>
+              <button type="button" onclick="setStyle('aurora-ui')" class="hero-quick-pill px-3 py-1.5 rounded-lg text-xs font-semibold bg-white/70 dark:bg-slate-800/70 border border-slate-200 dark:border-slate-700 hover:border-indigo-500 text-slate-700 dark:text-slate-200 transition-all flex items-center gap-1.5 cursor-pointer">
+                <i data-lucide="flame" class="w-3 h-3 text-indigo-500"></i>
+                <span>Aurora</span>
+              </button>
+              <button type="button" onclick="setStyle('neubrutalism')" class="hero-quick-pill px-3 py-1.5 rounded-lg text-xs font-semibold bg-white/70 dark:bg-slate-800/70 border border-slate-200 dark:border-slate-700 hover:border-indigo-500 text-slate-700 dark:text-slate-200 transition-all flex items-center gap-1.5 cursor-pointer">
+                <i data-lucide="zap" class="w-3 h-3 text-indigo-500"></i>
+                <span>Brutal</span>
+              </button>
+              <button type="button" onclick="setStyle('y2k-retro')" class="hero-quick-pill px-3 py-1.5 rounded-lg text-xs font-semibold bg-white/70 dark:bg-slate-800/70 border border-slate-200 dark:border-slate-700 hover:border-indigo-500 text-slate-700 dark:text-slate-200 transition-all flex items-center gap-1.5 cursor-pointer">
+                <i data-lucide="disc" class="w-3 h-3 text-indigo-500"></i>
+                <span>Y2K</span>
+              </button>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- Column 2: Ultra-Realistic iPhone 16 Pro Living Mobile App Mockup -->
+        <div class="lg:col-span-5 relative flex justify-center items-center select-none hero-phone-perspective-stage">
+
+          <!-- Top-End Satellite Badge -->
+          <div class="absolute -top-3 -end-2 z-30 px-3 py-1.5 rounded-xl bg-white/95 dark:bg-slate-900/95 border border-indigo-500/30 shadow-xl backdrop-blur-xl flex items-center gap-2 text-xs font-bold text-indigo-600 dark:text-indigo-400">
+            <i data-lucide="smartphone" class="w-4 h-4 text-indigo-500"></i>
+            <span>iOS 18 App Kit</span>
+          </div>
+
+          <!-- Bottom-Start Satellite Badge -->
+          <div class="absolute -bottom-3 -start-2 z-30 px-3.5 py-1.5 rounded-xl bg-white/95 dark:bg-slate-900/95 border border-emerald-500/30 shadow-xl backdrop-blur-xl flex items-center gap-2 text-xs font-bold text-emerald-600 dark:text-emerald-400">
+            <i data-lucide="sparkles" class="w-4 h-4 text-emerald-500"></i>
+            <span id="hero-artifact-badge">Claymorphism 3D</span>
+          </div>
+
+          <!-- Official Apple iPhone 16 Pro Device Mockup Container (Compact Balanced Scale & 3D Spring Tilt) -->
+          <div id="hero-phone-mockup" class="relative z-10 w-[265px] sm:w-[285px] h-[532px] sm:h-[572px] hero-phone-3d-card cursor-pointer drop-shadow-[0_20px_40px_rgba(0,0,0,0.35)]">
+            
+            <!-- Real Hardware Device Frame PNG (Layered on top with pointer-events-none) -->
+            <img src="assets/iphone_16_pro_black_titanium_frame.png" alt="iPhone 16 Pro Frame" class="absolute inset-0 w-full h-full object-contain pointer-events-none z-30 select-none">
+
+            <!-- Active Screen Viewport (Positioned precisely to match Apple hardware screen ratio) -->
+            <div class="absolute inset-[3.6%_7.2%_3.6%_7.2%] rounded-[40px] overflow-hidden z-20 flex flex-col justify-between shadow-xs">
+              
+              <!-- Inner Screen Surface (Opaque Background & Crisp Mobile Layout) -->
+              <div id="phone-screen-surface" data-style="claymorphism" class="w-full h-full bg-slate-50 dark:bg-slate-950 text-slate-800 dark:text-slate-100 flex flex-col justify-between p-3 relative transition-all duration-300">
+
+                <!-- Dynamic Island Buffer & Status Bar -->
+                <div class="relative z-20 pt-0.5 pb-1">
+                  <!-- Status Bar: Time & Signals -->
+                  <div class="flex items-center justify-between px-3 text-[10px] font-semibold tracking-tight text-slate-700 dark:text-slate-300 font-mono">
+                    <span>9:41</span>
+                    <!-- Spacer for Hardware Dynamic Island Cutout on PNG frame -->
+                    <div class="w-20 h-4"></div>
+                    <div class="flex items-center gap-1.5 text-slate-600 dark:text-slate-300">
+                      <i data-lucide="signal" class="w-2.5 h-2.5"></i>
+                      <i data-lucide="wifi" class="w-2.5 h-2.5"></i>
+                      <div class="w-3.5 h-1.5 rounded-2xs border border-slate-500 dark:border-slate-400 p-0.5 flex items-center">
+                        <div class="w-full h-full bg-emerald-500 dark:bg-emerald-400 rounded-3xs"></div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+              <!-- App Scrollable Feed -->
+              <div class="space-y-3 flex-1 overflow-y-auto overflow-x-hidden no-scrollbar py-1">
+                
+                <!-- App User Bar -->
+                <div class="flex items-center justify-between px-1">
+                  <div class="flex items-center gap-2">
+                    <div class="w-8 h-8 rounded-full ring-2 ring-indigo-500/40 p-0.5 relative">
+                      <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=120&q=80" alt="Avatar" class="w-full h-full rounded-full object-cover">
+                      <div class="absolute bottom-0 right-0 w-2.5 h-2.5 bg-emerald-500 rounded-full border-2 border-white dark:border-slate-950"></div>
+                    </div>
+                    <div>
+                      <div class="text-[11px] font-bold text-slate-900 dark:text-white flex items-center gap-1">
+                        <span>Elena Vance</span>
+                        <i data-lucide="badge-check" class="w-3 h-3 text-indigo-600 dark:text-indigo-400 fill-indigo-500/20"></i>
+                      </div>
+                      <div class="text-[9px] text-slate-500 dark:text-slate-400 font-mono">Senior UI Architect</div>
+                    </div>
+                  </div>
+                  <button type="button" class="w-7 h-7 rounded-full bg-slate-100 dark:bg-slate-800/80 border border-slate-200 dark:border-slate-700 flex items-center justify-center relative text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white transition-colors cursor-pointer">
+                    <i data-lucide="bell" class="w-3.5 h-3.5"></i>
+                    <span class="absolute top-1 right-1 w-1.5 h-1.5 bg-rose-500 rounded-full"></span>
+                  </button>
+                </div>
+
+                <!-- Featured App Card: Vibe Living Card (Natural Clean Corners) -->
+                <div class="vibe-card p-3 space-y-2 relative overflow-hidden transition-all duration-300 rounded-xl">
+                  <div class="flex items-center justify-between">
+                    <span class="text-[9px] font-mono uppercase tracking-wider font-bold opacity-80">Universal Balance</span>
+                    <span class="px-1.5 py-0.5 rounded text-[8px] font-mono font-bold bg-emerald-500/15 text-emerald-600 dark:text-emerald-400 border border-emerald-500/30 flex items-center gap-1">
+                      <i data-lucide="trending-up" class="w-2.5 h-2.5"></i>
+                      <span>+38.4%</span>
+                    </span>
+                  </div>
+
+                  <div class="text-lg font-black font-mono tracking-tight flex items-baseline gap-1">
+                    <span>$84,290</span><span class="text-xs opacity-70 font-normal">.50</span>
+                  </div>
+
+                  <!-- Mini Sparkline Wave in Card -->
+                  <div class="h-9 w-full relative">
+                    <svg class="w-full h-full overflow-visible" viewBox="0 0 240 40" preserveAspectRatio="none">
+                      <defs>
+                        <linearGradient id="mobileSparkGrad" x1="0" y1="0" x2="0" y2="1">
+                          <stop offset="0%" stop-color="var(--brand-primary, #6366f1)" stop-opacity="0.3" />
+                          <stop offset="100%" stop-color="var(--brand-primary, #6366f1)" stop-opacity="0.0" />
+                        </linearGradient>
+                      </defs>
+                      <path d="M0,30 Q30,10 60,20 T120,8 T180,22 T240,5 L240,40 L0,40 Z" fill="url(#mobileSparkGrad)" />
+                      <path d="M0,30 Q30,10 60,20 T120,8 T180,22 T240,5" fill="none" stroke="var(--brand-primary, #6366f1)" stroke-width="2" stroke-linecap="round" />
+                      <circle cx="240" cy="5" r="2.5" class="fill-indigo-600 dark:fill-cyan-400 animate-pulse" />
+                    </svg>
+                  </div>
+
+                  <!-- Quick 4 Action Buttons inside App -->
+                  <div class="grid grid-cols-4 gap-1.5 pt-1 border-t border-slate-200/60 dark:border-white/10 text-center">
+                    <button type="button" class="p-1 rounded-lg bg-slate-100/80 dark:bg-white/5 hover:scale-105 border border-slate-200/80 dark:border-white/10 shadow-xs transition-all flex flex-col items-center gap-0.5 cursor-pointer">
+                      <div class="w-5 h-5 rounded-md bg-indigo-600 text-white flex items-center justify-center shadow-xs">
+                        <i data-lucide="send" class="w-2.5 h-2.5"></i>
+                      </div>
+                      <span class="text-[7.5px] font-medium opacity-90">Send</span>
+                    </button>
+                    <button type="button" class="p-1 rounded-lg bg-slate-100/80 dark:bg-white/5 hover:scale-105 border border-slate-200/80 dark:border-white/10 shadow-xs transition-all flex flex-col items-center gap-0.5 cursor-pointer">
+                      <div class="w-5 h-5 rounded-md bg-cyan-600 text-white flex items-center justify-center shadow-xs">
+                        <i data-lucide="qr-code" class="w-2.5 h-2.5"></i>
+                      </div>
+                      <span class="text-[7.5px] font-medium opacity-90">Scan</span>
+                    </button>
+                    <button type="button" class="p-1 rounded-lg bg-slate-100/80 dark:bg-white/5 hover:scale-105 border border-slate-200/80 dark:border-white/10 shadow-xs transition-all flex flex-col items-center gap-0.5 cursor-pointer">
+                      <div class="w-5 h-5 rounded-md bg-purple-600 text-white flex items-center justify-center shadow-xs">
+                        <i data-lucide="sparkles" class="w-2.5 h-2.5"></i>
+                      </div>
+                      <span class="text-[7.5px] font-medium opacity-90">Morph</span>
+                    </button>
+                    <button type="button" class="p-1 rounded-lg bg-slate-100/80 dark:bg-white/5 hover:scale-105 border border-slate-200/80 dark:border-white/10 shadow-xs transition-all flex flex-col items-center gap-0.5 cursor-pointer">
+                      <div class="w-5 h-5 rounded-md bg-emerald-600 text-white flex items-center justify-center shadow-xs">
+                        <i data-lucide="activity" class="w-2.5 h-2.5"></i>
+                      </div>
+                      <span class="text-[7.5px] font-medium opacity-90">Stats</span>
+                    </button>
+                  </div>
+                </div>
+
+                <!-- Curated AI Visual Asset Card inside App -->
+                <div class="vibe-card p-2 space-y-1.5 transition-all duration-300 rounded-xl">
+                  <div class="flex items-center justify-between text-[9px] px-1 font-mono">
+                    <span class="opacity-80 font-bold uppercase">Synthesized 3D Model</span>
+                    <span class="text-indigo-600 dark:text-cyan-400 font-bold flex items-center gap-1">
+                      <span class="w-1.5 h-1.5 rounded-full bg-indigo-500 dark:bg-cyan-400"></span> Live
+                    </span>
+                  </div>
+                  
+                  <div class="w-full h-20 rounded-lg overflow-hidden relative border border-slate-200 dark:border-white/10 shadow-sm group/phoneart">
+                    <img src="assets/generated/visual_alchemy_hero.webp" alt="App 3D Asset" class="w-full h-full object-cover group-hover/phoneart:scale-105 transition-transform duration-500">
+                    <div class="absolute inset-0 bg-gradient-to-t from-slate-950/80 via-transparent to-transparent flex items-end p-1.5">
+                      <div class="flex items-center justify-between w-full text-[8.5px] font-mono text-white">
+                        <span class="font-bold">Glass Prism Core</span>
+                        <span class="text-indigo-300">60 FPS</span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Interactive Switch Row inside App -->
+                <div class="vibe-card p-2 flex items-center justify-between transition-all duration-300 rounded-xl">
+                  <div class="flex items-center gap-2">
+                    <i data-lucide="shield" class="w-3 h-3 text-indigo-600 dark:text-indigo-400"></i>
+                    <span class="text-[9px] font-medium opacity-90">Auto Rebalance</span>
+                  </div>
+                  <button type="button" onclick="toggleSwitch(this)" class="w-8 h-4 rounded-full bg-indigo-600 p-0.5 transition-colors cursor-pointer flex items-center">
+                    <span class="w-3 h-3 rounded-full bg-white shadow-md transform translate-x-4 transition-transform"></span>
+                  </button>
+                </div>
+
+              </div>
+
+              <!-- Bottom Floating Navigation Bar (Dynamically Reactive to Selected Paradigm) -->
+              <div class="pt-1">
+                <div class="vibe-card p-1.5 flex items-center justify-around transition-all duration-300">
+                  <button type="button" class="p-1 text-indigo-600 dark:text-indigo-400 flex flex-col items-center gap-0.5 cursor-pointer">
+                    <i data-lucide="home" class="w-3.5 h-3.5"></i>
+                    <span class="w-1 h-1 rounded-full bg-indigo-600 dark:text-indigo-400"></span>
+                  </button>
+                  <button type="button" class="p-1 text-slate-400 hover:text-slate-800 dark:hover:text-white transition-colors flex flex-col items-center gap-0.5 cursor-pointer">
+                    <i data-lucide="compass" class="w-3.5 h-3.5"></i>
+                  </button>
+                  <!-- Central Plus Action Button (Reactive to Paradigm Button Tokens) -->
+                  <button type="button" class="vibe-btn-primary w-8 h-8 -mt-2.5 flex items-center justify-center cursor-pointer hover:scale-105 active:scale-95 transition-all">
+                    <i data-lucide="plus" class="w-3.5 h-3.5"></i>
+                  </button>
+                  <button type="button" class="p-1 text-slate-400 hover:text-slate-800 dark:hover:text-white transition-colors flex flex-col items-center gap-0.5 cursor-pointer">
+                    <i data-lucide="wallet" class="w-3.5 h-3.5"></i>
+                  </button>
+                  <button type="button" class="p-1 text-slate-400 hover:text-slate-800 dark:hover:text-white transition-colors flex flex-col items-center gap-0.5 cursor-pointer">
+                    <i data-lucide="user" class="w-3.5 h-3.5"></i>
+                  </button>
+                </div>
+
+                <!-- iOS Home Indicator -->
+                <div class="w-20 h-1 bg-slate-300/80 dark:bg-white/30 rounded-full mx-auto mt-1.5 transition-colors"></div>
+              </div>
+
+            </div>
+            </div>
+          </div>
+
+        </div>
 
       </div>
-
     </div>
 
   </section>
 
   <!-- ========================================================
-       LIVE MULTI-COMPONENT PLAYGROUND
+       SOCIAL PROOF / TRUSTED BY MARQUEE TICKER
        ======================================================== -->
-  <main id="matrix-grid" class="max-w-7xl mx-auto px-6 py-20">
-
-    <!-- Section Intro Header -->
-    <div class="flex flex-col md:flex-row md:items-end justify-between mb-12 gap-4">
-      <div>
-        <p class="text-xs font-bold uppercase tracking-wider text-indigo-600 dark:text-indigo-400 mb-2 font-mono">Interactive Laboratory</p>
-        <h2 class="text-3xl font-extrabold text-slate-900 dark:text-white">Living Multi-Component Playground</h2>
-      </div>
-      <p class="text-sm text-slate-500 dark:text-slate-400 max-w-md">
-        Every component, button, slider, and input in this suite recalibrates physical properties live with the active style paradigm.
+  <section class="py-12 border-y border-slate-200/60 dark:border-slate-800/60 relative overflow-hidden bg-slate-50/50 dark:bg-slate-950/40">
+    <div class="max-w-7xl mx-auto px-6 text-center mb-6">
+      <p class="text-[11px] uppercase tracking-widest font-mono font-bold text-slate-600 dark:text-slate-400">
+        Empowering Next-Generation Product Teams & Sovereign Protocols
       </p>
     </div>
 
-    <!-- Multi-Column Layout -->
-    <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+    <div class="relative w-full overflow-hidden marquee-fade-mask">
+      <div class="marquee-track flex items-center gap-14 sm:gap-20 py-2">
+        <!-- Logo Group 1 -->
+        <div class="flex items-center gap-2.5 text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white transition-colors cursor-pointer select-none">
+          <svg class="w-5 h-5 fill-current" viewBox="0 0 24 24"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.81-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M15.97 6.37c.56-.69.95-1.64.84-2.6-.82.03-1.83.56-2.41 1.24-.52.59-.98 1.57-.86 2.49.92.07 1.86-.48 2.43-1.13z"/></svg>
+          <span class="font-bold text-base tracking-tight">Apple</span>
+        </div>
+        <div class="flex items-center gap-2.5 text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white transition-colors cursor-pointer select-none">
+          <svg class="w-5 h-5 fill-current" viewBox="0 0 24 24"><path d="M24 22.525H0l12-21.05 12 21.05z"/></svg>
+          <span class="font-bold text-base tracking-tight">Vercel</span>
+        </div>
+        <div class="flex items-center gap-2.5 text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white transition-colors cursor-pointer select-none">
+          <span class="font-black text-xl italic font-serif tracking-tighter">stripe</span>
+        </div>
+        <div class="flex items-center gap-2.5 text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white transition-colors cursor-pointer select-none">
+          <svg class="w-5 h-5 fill-current" viewBox="0 0 24 24"><path d="M2.5 12c0-5.247 4.253-9.5 9.5-9.5a9.47 9.47 0 0 1 6.718 2.782l-1.414 1.414A7.476 7.476 0 0 0 12 4.5C7.858 4.5 4.5 7.858 4.5 12s3.358 7.5 7.5 7.5c3.708 0 6.78-2.693 7.375-6.25H12v-2h9.45c.033.41.05.827.05 1.25 0 5.247-4.253 9.5-9.5 9.5S2.5 17.247 2.5 12z"/></svg>
+          <span class="font-bold text-base tracking-tight">Linear</span>
+        </div>
+        <div class="flex items-center gap-2.5 text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white transition-colors cursor-pointer select-none">
+          <svg class="w-5 h-5 fill-current" viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
+          <span class="font-bold text-base tracking-tight">Raycast</span>
+        </div>
+        <div class="flex items-center gap-2.5 text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white transition-colors cursor-pointer select-none">
+          <svg class="w-5 h-5 fill-current" viewBox="0 0 24 24"><path d="M21.362 9.354H12V.5L2.638 14.646H12V23.5l9.362-14.146z"/></svg>
+          <span class="font-bold text-base tracking-tight">Supabase</span>
+        </div>
+        <div class="flex items-center gap-2.5 text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white transition-colors cursor-pointer select-none">
+          <i data-lucide="sparkles" class="w-5 h-5"></i>
+          <span class="font-bold text-base tracking-tight">OpenAI</span>
+        </div>
+        <div class="flex items-center gap-2.5 text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white transition-colors cursor-pointer select-none">
+          <svg class="w-5 h-5 fill-current" viewBox="0 0 24 24"><path d="M12 12a4 4 0 1 0 4-4 4 4 0 0 0-4 4zm-4 4a4 4 0 1 1 4 4 4 4 0 0 1-4-4zm0-8a4 4 0 1 1 4 4 4 4 0 0 1-4-4z"/></svg>
+          <span class="font-bold text-base tracking-tight">Figma</span>
+        </div>
+        <div class="flex items-center gap-2.5 text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white transition-colors cursor-pointer select-none">
+          <svg class="w-5 h-5 fill-current" viewBox="0 0 24 24"><path fill-rule="evenodd" clip-rule="evenodd" d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.53 1.032 1.53 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"/></svg>
+          <span class="font-bold text-base tracking-tight">GitHub</span>
+        </div>
 
-      <!-- Card 1: Web3 Vault & Financial Strategy -->
-      <div class="vibe-card p-8 flex flex-col justify-between min-h-[380px]">
-        <div>
-          <div class="flex items-center justify-between mb-6">
-            <span class="px-3 py-1 rounded-full text-xs font-bold bg-indigo-50 dark:bg-indigo-950/60 text-indigo-600 dark:text-indigo-400 border border-indigo-200 dark:border-indigo-800/50">
-              Web3 Vault
+        <!-- Logo Group 2 (Clone for infinite seamless loop) -->
+        <div class="flex items-center gap-2.5 text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white transition-colors cursor-pointer select-none">
+          <svg class="w-5 h-5 fill-current" viewBox="0 0 24 24"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.81-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M15.97 6.37c.56-.69.95-1.64.84-2.6-.82.03-1.83.56-2.41 1.24-.52.59-.98 1.57-.86 2.49.92.07 1.86-.48 2.43-1.13z"/></svg>
+          <span class="font-bold text-base tracking-tight">Apple</span>
+        </div>
+        <div class="flex items-center gap-2.5 text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white transition-colors cursor-pointer select-none">
+          <svg class="w-5 h-5 fill-current" viewBox="0 0 24 24"><path d="M24 22.525H0l12-21.05 12 21.05z"/></svg>
+          <span class="font-bold text-base tracking-tight">Vercel</span>
+        </div>
+        <div class="flex items-center gap-2.5 text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white transition-colors cursor-pointer select-none">
+          <span class="font-black text-xl italic font-serif tracking-tighter">stripe</span>
+        </div>
+        <div class="flex items-center gap-2.5 text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white transition-colors cursor-pointer select-none">
+          <svg class="w-5 h-5 fill-current" viewBox="0 0 24 24"><path d="M2.5 12c0-5.247 4.253-9.5 9.5-9.5a9.47 9.47 0 0 1 6.718 2.782l-1.414 1.414A7.476 7.476 0 0 0 12 4.5C7.858 4.5 4.5 7.858 4.5 12s3.358 7.5 7.5 7.5c3.708 0 6.78-2.693 7.375-6.25H12v-2h9.45c.033.41.05.827.05 1.25 0 5.247-4.253 9.5-9.5 9.5S2.5 17.247 2.5 12z"/></svg>
+          <span class="font-bold text-base tracking-tight">Linear</span>
+        </div>
+        <div class="flex items-center gap-2.5 text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white transition-colors cursor-pointer select-none">
+          <svg class="w-5 h-5 fill-current" viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
+          <span class="font-bold text-base tracking-tight">Raycast</span>
+        </div>
+        <div class="flex items-center gap-2.5 text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white transition-colors cursor-pointer select-none">
+          <svg class="w-5 h-5 fill-current" viewBox="0 0 24 24"><path d="M21.362 9.354H12V.5L2.638 14.646H12V23.5l9.362-14.146z"/></svg>
+          <span class="font-bold text-base tracking-tight">Supabase</span>
+        </div>
+        <div class="flex items-center gap-2.5 text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white transition-colors cursor-pointer select-none">
+          <i data-lucide="sparkles" class="w-5 h-5"></i>
+          <span class="font-bold text-base tracking-tight">OpenAI</span>
+        </div>
+        <div class="flex items-center gap-2.5 text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white transition-colors cursor-pointer select-none">
+          <svg class="w-5 h-5 fill-current" viewBox="0 0 24 24"><path d="M12 12a4 4 0 1 0 4-4 4 4 0 0 0-4 4zm-4 4a4 4 0 1 1 4 4 4 4 0 0 1-4-4zm0-8a4 4 0 1 1 4 4 4 4 0 0 1-4-4z"/></svg>
+          <span class="font-bold text-base tracking-tight">Figma</span>
+        </div>
+        <div class="flex items-center gap-2.5 text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white transition-colors cursor-pointer select-none">
+          <svg class="w-5 h-5 fill-current" viewBox="0 0 24 24"><path fill-rule="evenodd" clip-rule="evenodd" d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.53 1.032 1.53 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"/></svg>
+          <span class="font-bold text-base tracking-tight">GitHub</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========================================================
+       LIVE MULTI-COMPONENT BENTO GRID LABORATORY (Awwwards / Dribbble Grade)
+       ======================================================== -->
+  <main id="matrix-grid" class="max-w-7xl mx-auto px-6 py-20">
+
+    <!-- Section Intro Header with Live Metrics -->
+    <div class="flex flex-col md:flex-row md:items-end justify-between mb-12 gap-6">
+      <div>
+        <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-indigo-50 dark:bg-indigo-950/80 text-indigo-600 dark:text-indigo-400 text-xs font-bold font-mono mb-3 border border-indigo-200 dark:border-indigo-800/60">
+          <i data-lucide="layers" class="w-3.5 h-3.5"></i>
+          <span>Asymmetric Bento Grid Architecture</span>
+        </div>
+        <h2 class="text-3xl sm:text-4xl font-extrabold text-slate-900 dark:text-white tracking-tight">
+          Living Multi-Component Laboratory
+        </h2>
+      </div>
+      <p class="text-sm text-slate-500 dark:text-slate-400 max-w-lg leading-relaxed">
+        Every primitive recalibrates physical depth, borders, radiuses, and spring dynamics in real-time across all 12 architectural paradigms.
+      </p>
+    </div>
+
+    <!-- Asymmetric 12-Column Bento Grid -->
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-6">
+
+      <!-- Bento Item 1: Sovereign Yield Aggregator (Span 8 Cols) -->
+      <div class="lg:col-span-8 vibe-card p-8 flex flex-col justify-between relative overflow-hidden group min-h-[420px]">
+        
+        <!-- Top Metadata Row -->
+        <div class="flex items-center justify-between pb-4 border-b border-slate-200/60 dark:border-slate-800/80">
+          <div class="flex items-center gap-3">
+            <span class="px-3 py-1 rounded-full text-xs font-bold bg-indigo-50 dark:bg-indigo-950/80 text-indigo-600 dark:text-indigo-400 border border-indigo-200 dark:border-indigo-800/60 font-mono">
+              Web3 Vault v4.2
             </span>
-            <div class="w-8 h-8 rounded-full bg-slate-100 dark:bg-slate-800 flex items-center justify-center text-slate-500">
-              <i data-lucide="shield-check" class="w-4 h-4"></i>
+            <span class="text-xs text-slate-400 font-mono hidden sm:inline">0x8F3a...91C2</span>
+          </div>
+          <div class="flex items-center gap-2">
+            <span class="w-2 h-2 rounded-full bg-emerald-500 animate-ping"></span>
+            <span class="text-xs font-bold text-emerald-600 dark:text-emerald-400 font-mono">Proof-of-Reserve Active</span>
+          </div>
+        </div>
+
+        <!-- Core Telemetry Display -->
+        <div class="py-6 space-y-4">
+          <div class="flex flex-col sm:flex-row sm:items-baseline justify-between gap-2">
+            <div>
+              <p class="text-xs uppercase tracking-wider text-slate-400 font-mono font-medium">Aggregated Vault Valuation</p>
+              <h3 class="text-3xl sm:text-4xl font-black font-mono text-slate-900 dark:text-white tracking-tight pt-1">
+                $4,892,105.42 <span class="text-sm font-semibold text-emerald-500 font-sans">+18.4% APY</span>
+              </h3>
+            </div>
+            <div class="flex gap-2">
+              <button type="button" class="vibe-btn-primary px-4 py-2 text-xs font-bold flex items-center gap-1.5 cursor-pointer">
+                <i data-lucide="plus-circle" class="w-3.5 h-3.5"></i>
+                <span>Deposit</span>
+              </button>
+              <button type="button" class="px-4 py-2 rounded-xl text-xs font-bold border border-slate-200 dark:border-slate-700 hover:border-indigo-500 text-slate-700 dark:text-slate-200 transition-colors cursor-pointer">
+                Telemetry
+              </button>
             </div>
           </div>
-          <h3 class="text-xl font-bold text-slate-900 dark:text-white mb-2">Automated Yield Orchestrator</h3>
-          <p class="text-sm text-slate-500 dark:text-slate-400 leading-relaxed mb-6">
-            Multi-strategy yield aggregation with deterministic zero-loss rebalancing and proof-of-reserve telemetry.
-          </p>
 
-          <!-- Interactive Range Slider -->
-          <div class="space-y-2">
-            <div class="flex justify-between text-xs font-semibold text-slate-500">
-              <span>Risk Allocation</span>
-              <span id="slider-val" class="font-mono text-indigo-600 dark:text-indigo-400 font-bold">75%</span>
+          <!-- Dynamic SVG Vector Sparkline -->
+          <div class="h-24 w-full relative pt-2">
+            <svg class="w-full h-full overflow-visible" viewBox="0 0 600 80" preserveAspectRatio="none">
+              <defs>
+                <linearGradient id="vaultBentoGrad" x1="0" y1="0" x2="0" y2="1">
+                  <stop offset="0%" stop-color="#4f46e5" stop-opacity="0.25" />
+                  <stop offset="100%" stop-color="#4f46e5" stop-opacity="0.0" />
+                </linearGradient>
+              </defs>
+              <path d="M0,60 Q75,30 150,45 T300,20 T450,40 T600,10 L600,80 L0,80 Z" fill="url(#vaultBentoGrad)" />
+              <path d="M0,60 Q75,30 150,45 T300,20 T450,40 T600,10" fill="none" stroke="#4f46e5" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" />
+              <circle cx="600" cy="10" r="5" class="fill-indigo-500 animate-pulse" />
+            </svg>
+          </div>
+
+          <!-- Live Risk Allocation Slider -->
+          <div class="space-y-1.5 pt-2">
+            <div class="flex justify-between text-xs font-semibold text-slate-500 dark:text-slate-400">
+              <span>Autonomous Risk Rebalancing Ratio</span>
+              <span id="bento-risk-val" class="font-mono text-indigo-600 dark:text-indigo-400 font-bold">82% Aggressive</span>
             </div>
             <input 
               type="range" 
               min="10" 
               max="100" 
-              value="75" 
-              oninput="document.getElementById('slider-val').innerText = this.value + '%'" 
-              class="w-full accent-indigo-600 cursor-pointer"
+              value="82" 
+              oninput="document.getElementById('bento-risk-val').innerText = this.value + '% ' + (this.value > 70 ? 'Aggressive' : (this.value > 40 ? 'Balanced' : 'Conservative'))" 
+              class="w-full accent-indigo-600 cursor-pointer h-2 bg-slate-200 dark:bg-slate-800 rounded-lg appearance-none"
             >
           </div>
         </div>
 
-        <div class="pt-6 border-t border-slate-100 dark:border-slate-800/80 flex items-center justify-between mt-6">
+        <!-- Micro-Metrics Footer Bar -->
+        <div class="pt-4 border-t border-slate-200/60 dark:border-slate-800/80 grid grid-cols-2 sm:grid-cols-4 gap-4 text-xs font-mono">
           <div>
-            <p class="text-xs text-slate-400 font-medium">Annualized APY</p>
-            <p class="text-2xl font-black text-indigo-600 dark:text-indigo-400">14.82%</p>
+            <span class="text-slate-400 block text-[10px]">CURRENT STRATEGY</span>
+            <span class="font-bold text-slate-800 dark:text-slate-200">Arbitrum Delta-Neutral</span>
           </div>
-          <button class="vibe-btn-primary px-5 py-2 text-xs font-bold cursor-pointer">
-            Deposit
-          </button>
+          <div>
+            <span class="text-slate-400 block text-[10px]">TOTAL LIQUIDITY</span>
+            <span class="font-bold text-indigo-600 dark:text-indigo-400">$64.2M</span>
+          </div>
+          <div>
+            <span class="text-slate-400 block text-[10px]">SLIPPAGE TOLERANCE</span>
+            <span class="font-bold text-emerald-500">&lt; 0.01%</span>
+          </div>
+          <div class="text-start sm:text-end">
+            <span class="text-slate-400 block text-[10px]">HEALTH FACTOR</span>
+            <span class="font-bold text-emerald-500">1.94 (Optimal)</span>
+          </div>
         </div>
+
       </div>
 
-      <!-- Card 2: Interactive Controls & Form Elements -->
-      <div class="vibe-card p-8 flex flex-col justify-between min-h-[380px]">
+      <!-- Bento Item 2: Micro-Interactions & Living Physics (Span 4 Cols) -->
+      <div class="lg:col-span-4 vibe-card p-8 flex flex-col justify-between min-h-[420px] relative">
         <div>
           <div class="flex items-center justify-between mb-6">
-            <span class="px-3 py-1 rounded-full text-xs font-bold bg-emerald-50 dark:bg-emerald-950/60 text-emerald-600 dark:text-emerald-400 border border-emerald-200 dark:border-emerald-800/50">
-              Micro-Interactions
+            <span class="px-3 py-1 rounded-full text-xs font-bold bg-cyan-50 dark:bg-cyan-950/80 text-cyan-600 dark:text-cyan-400 border border-cyan-200 dark:border-cyan-800/60 font-mono">
+              Sensors & Physics
             </span>
             <!-- CyberLoader Dual Orbit Ring -->
-            <div class="relative w-6 h-6">
+            <div class="relative w-7 h-7">
               <div class="absolute inset-0 rounded-full border-2 border-indigo-500/20 border-t-indigo-500 animate-spin"></div>
               <div class="absolute inset-1 rounded-full border-2 border-cyan-500/20 border-b-cyan-500 animate-spin" style="animation-direction: reverse;"></div>
             </div>
           </div>
 
-          <h3 class="text-xl font-bold text-slate-900 dark:text-white mb-4">Tactile Controls & Sensors</h3>
+          <h3 class="text-xl font-bold text-slate-900 dark:text-white mb-2">Tactile Micro-Sensors</h3>
+          <p class="text-xs text-slate-500 dark:text-slate-400 mb-6 leading-relaxed">
+            Physics-based velocity handoff and hardware-accelerated spring curves with zero dropped frames.
+          </p>
 
-          <!-- Form / Glow Input (Style-Adaptive) -->
+          <!-- Interactive Sensor Stack -->
           <div class="space-y-4">
+            <!-- Glow Key Input -->
             <div>
-              <label class="block text-xs font-semibold text-slate-500 dark:text-slate-400 mb-1.5">Interactive Key Input</label>
+              <label class="block text-xs font-semibold text-slate-500 dark:text-slate-400 mb-1.5">Hardware Sensor Session</label>
               <div class="relative">
                 <input 
                   type="text" 
-                  value="vib_live_994812_session" 
+                  value="vib_engine_774902_live" 
                   readonly 
                   class="vibe-input w-full px-4 py-2.5 text-xs font-mono text-slate-700 dark:text-slate-200 focus:outline-none"
                 >
@@ -869,61 +1540,141 @@
               </div>
             </div>
 
-            <!-- Tactile Switch Control -->
-            <div class="flex items-center justify-between p-3 rounded-xl bg-slate-50/80 dark:bg-slate-900/50 border border-slate-200/60 dark:border-slate-800">
-              <span class="text-xs font-semibold text-slate-700 dark:text-slate-300">GPU Accelerated Physics</span>
-              <button onclick="toggleSwitch(this)" class="w-11 h-6 rounded-full bg-indigo-600 p-0.5 transition-colors focus:outline-none flex items-center cursor-pointer">
+            <!-- Tactile Spring Switch 1 -->
+            <div class="flex items-center justify-between p-3.5 rounded-xl bg-slate-50/80 dark:bg-slate-900/50 border border-slate-200/60 dark:border-slate-800">
+              <span class="text-xs font-semibold text-slate-700 dark:text-slate-300">GPU Sub-Pixel rAF</span>
+              <button type="button" onclick="toggleSwitch(this)" class="w-11 h-6 rounded-full bg-indigo-600 p-0.5 transition-colors focus:outline-none flex items-center cursor-pointer">
+                <span class="w-5 h-5 rounded-full bg-white shadow-md transform translate-x-5 transition-transform"></span>
+              </button>
+            </div>
+
+            <!-- Tactile Spring Switch 2 -->
+            <div class="flex items-center justify-between p-3.5 rounded-xl bg-slate-50/80 dark:bg-slate-900/50 border border-slate-200/60 dark:border-slate-800">
+              <span class="text-xs font-semibold text-slate-700 dark:text-slate-300">BiDi Text Isolation &lt;bdi&gt;</span>
+              <button type="button" onclick="toggleSwitch(this)" class="w-11 h-6 rounded-full bg-indigo-600 p-0.5 transition-colors focus:outline-none flex items-center cursor-pointer">
                 <span class="w-5 h-5 rounded-full bg-white shadow-md transform translate-x-5 transition-transform"></span>
               </button>
             </div>
           </div>
         </div>
 
-        <div class="pt-4 flex items-center justify-between text-xs text-slate-400 font-medium">
-          <span>Latency: 2.4ms</span>
-          <span class="text-emerald-500 flex items-center gap-1 font-semibold">
+        <div class="pt-6 border-t border-slate-200/60 dark:border-slate-800/80 flex items-center justify-between text-xs font-mono text-slate-400">
+          <span>Latency: &lt; 0.2ms</span>
+          <span class="text-emerald-500 font-bold flex items-center gap-1">
             <i data-lucide="check" class="w-3.5 h-3.5"></i> Calibrated
           </span>
         </div>
       </div>
 
-      <!-- Card 3: Curated Visual Assets & 3D Synthesis -->
-      <div class="vibe-card p-8 flex flex-col justify-between min-h-[380px] relative overflow-hidden group">
-        <!-- Visual Art Backdrop with subtle zoom on hover -->
-        <img 
-          src="https://images.unsplash.com/photo-1634017839464-5c339ebe3cb4?auto=format&fit=crop&w=800&q=80" 
-          alt="Curated 3D Artwork" 
-          class="absolute inset-0 w-full h-full object-cover opacity-20 dark:opacity-30 group-hover:scale-105 transition-transform duration-700 pointer-events-none"
-        >
-        <div class="relative z-10">
-          <div class="flex items-center justify-between mb-6">
-            <span class="px-3 py-1 rounded-full text-xs font-bold bg-amber-50 dark:bg-amber-950/60 text-amber-600 dark:text-amber-400 border border-amber-200 dark:border-amber-800/50">
-              Curated Assets
+      <!-- Bento Item 3: Autonomous Generative Visual Studio (Span 5 Cols) -->
+      <div class="lg:col-span-5 vibe-card p-6 sm:p-7 flex flex-col justify-between relative overflow-hidden group">
+        <div>
+          <!-- Header Bar -->
+          <div class="flex items-center justify-between mb-3">
+            <span class="px-2.5 py-1 rounded-full text-xs font-bold bg-amber-500/10 text-amber-600 dark:text-amber-400 border border-amber-500/20 font-mono flex items-center gap-1.5">
+              <i data-lucide="sparkles" class="w-3.5 h-3.5 text-amber-500"></i>
+              <span>Generative Studio</span>
             </span>
-            <span class="text-xs text-slate-400 font-mono">24 Domains</span>
+            <span class="text-[11px] font-mono text-slate-500 dark:text-slate-400 font-semibold">Priority 1: Synthesized</span>
           </div>
-          <h3 class="text-xl font-bold text-slate-900 dark:text-white mb-2">Zero-Slop Media Pipeline</h3>
-          <p class="text-sm text-slate-500 dark:text-slate-400 leading-relaxed">
-            Zero gray boxes, zero missing assets. Curated from verified Unsplash vaults and high-fidelity 3D generative synthesis.
+
+          <h3 class="text-xl sm:text-2xl font-bold text-slate-900 dark:text-white tracking-tight mb-2">
+            Zero-Slop Bespoke 3D Artifacts
+          </h3>
+          <p class="text-xs text-slate-600 dark:text-slate-300 leading-relaxed mb-4">
+            Curated director-grade 3D artwork and domain visuals synthesized on-demand. Dedicated visual assets framed with optical precision, never washed-out background clutter.
           </p>
+
+          <!-- Dedicated Visual Showcase Frame (Zero Background Wash) -->
+          <div class="relative w-full aspect-[16/9] rounded-2xl overflow-hidden border border-slate-200/90 dark:border-slate-800 shadow-md group/frame bg-slate-950">
+            <img 
+              src="assets/generated/visual_alchemy_hero.webp" 
+              alt="Synthesized 3D Glassmorphic Cube Artifact" 
+              class="w-full h-full object-cover group-hover/frame:scale-105 transition-transform duration-700 ease-out"
+              loading="lazy"
+            >
+            <!-- Top Floating Glass Pill -->
+            <div class="absolute top-2.5 start-2.5 px-2.5 py-1 rounded-lg bg-black/60 backdrop-blur-md border border-white/20 text-white text-[10px] font-mono font-bold flex items-center gap-1.5 shadow-lg">
+              <span class="w-2 h-2 rounded-full bg-cyan-400 animate-pulse"></span>
+              <span>8K Glass Prism Cube</span>
+            </div>
+
+            <!-- Bottom Floating Status Pill -->
+            <div class="absolute bottom-2.5 end-2.5 px-2.5 py-1 rounded-lg bg-black/60 backdrop-blur-md border border-white/20 text-slate-200 text-[10px] font-mono flex items-center gap-1">
+              <i data-lucide="cpu" class="w-3 h-3 text-indigo-400"></i>
+              <span>Vibe Visual Engine</span>
+            </div>
+          </div>
         </div>
 
-        <div class="relative z-10 pt-6">
-          <div class="flex -space-x-2 overflow-hidden mb-3">
-            <img class="inline-block h-8 w-8 rounded-full ring-2 ring-white dark:ring-slate-900" src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=120&q=80" alt="Avatar">
-            <img class="inline-block h-8 w-8 rounded-full ring-2 ring-white dark:ring-slate-900" src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=120&q=80" alt="Avatar">
-            <img class="inline-block h-8 w-8 rounded-full ring-2 ring-white dark:ring-slate-900" src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=120&q=80" alt="Avatar">
+        <!-- Footer Telemetry -->
+        <div class="pt-4 mt-4 border-t border-slate-200/60 dark:border-slate-800/80 flex items-center justify-between text-xs font-mono">
+          <div class="flex items-center gap-2 text-slate-500 dark:text-slate-400 text-[11px]">
+            <span class="text-emerald-500 font-bold flex items-center gap-1">
+              <i data-lucide="check-circle" class="w-3.5 h-3.5"></i> Synthesized
+            </span>
+            <span>•</span>
+            <span>OKLCH Neon Caustics</span>
           </div>
-          <p class="text-xs text-slate-400 font-medium">Over 3,800+ micro-interactions indexed in Galaxy.</p>
+          <span class="text-[10px] text-slate-400 font-bold uppercase tracking-wider">No Lazy Wash</span>
+        </div>
+      </div>
+
+      <!-- Bento Item 4: Live CSS Paradigm Token Telemetry Inspector (Span 7 Cols) -->
+      <div class="lg:col-span-7 vibe-card p-8 flex flex-col justify-between min-h-[340px]">
+        <div>
+          <div class="flex items-center justify-between pb-3 border-b border-slate-200/60 dark:border-slate-800/80 mb-4">
+            <div class="flex items-center gap-2">
+              <span class="w-2.5 h-2.5 rounded-full bg-indigo-500 animate-pulse"></span>
+              <h3 class="text-base font-bold text-slate-900 dark:text-white font-mono">Live CSS Token Telemetry Inspector</h3>
+            </div>
+            <span class="text-xs font-mono text-indigo-600 dark:text-indigo-400 font-bold uppercase tracking-wider">
+              Reactive Engine
+            </span>
+          </div>
+
+          <p class="text-xs text-slate-500 dark:text-slate-400 mb-4">
+            Click any paradigm in the left dock or header to watch live computed tokens recalibrate instantly across the entire DOM:
+          </p>
+
+          <!-- Interactive Token Matrix Grid -->
+          <div class="grid grid-cols-1 sm:grid-cols-3 gap-3 font-mono text-xs">
+            <div class="p-3.5 rounded-xl bg-slate-900 text-slate-200 border border-slate-800 shadow-inner space-y-1">
+              <span class="text-[10px] text-slate-500 uppercase block font-semibold">Border Radius</span>
+              <span id="tok-inspector-radius" class="text-cyan-400 font-bold text-sm">2.25rem</span>
+              <span class="text-[10px] text-slate-400 block pt-0.5">--card-radius</span>
+            </div>
+            <div class="p-3.5 rounded-xl bg-slate-900 text-slate-200 border border-slate-800 shadow-inner space-y-1">
+              <span class="text-[10px] text-slate-500 uppercase block font-semibold">Backdrop Filter</span>
+              <span id="tok-inspector-backdrop" class="text-purple-400 font-bold text-sm">none</span>
+              <span class="text-[10px] text-slate-400 block pt-0.5">--card-backdrop</span>
+            </div>
+            <div class="p-3.5 rounded-xl bg-slate-900 text-slate-200 border border-slate-800 shadow-inner space-y-1">
+              <span class="text-[10px] text-slate-500 uppercase block font-semibold">Elevation Shadow</span>
+              <span id="tok-inspector-shadow" class="text-emerald-400 font-bold text-sm">14px 14px 28px</span>
+              <span class="text-[10px] text-slate-400 block pt-0.5">--card-shadow</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="pt-4 border-t border-slate-200/60 dark:border-slate-800/80 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 text-xs">
+          <div class="flex items-center gap-2 text-slate-500 dark:text-slate-400">
+            <i data-lucide="shield-check" class="w-4 h-4 text-emerald-500"></i>
+            <span>Zero Slop • WCAG AAA Strict • Zero Inline CSS</span>
+          </div>
+          <button type="button" onclick="setStyle('bento-grid')" class="vibe-btn-primary px-4 py-2 text-xs font-bold cursor-pointer flex items-center gap-1.5">
+            <i data-lucide="sparkles" class="w-3.5 h-3.5"></i>
+            <span>Apply Bento Style</span>
+          </button>
         </div>
       </div>
 
     </div>
 
     <!-- Architectural Metric Ribbon -->
-    <div class="vibe-card mt-8 p-8 flex flex-col md:flex-row items-center justify-between gap-6">
+    <div class="vibe-card mt-8 p-8 flex flex-col md:flex-row items-center justify-between gap-6 shadow-xl">
       <div class="flex items-center gap-4">
-        <div class="w-12 h-12 rounded-2xl bg-indigo-50 dark:bg-indigo-950/80 text-indigo-600 dark:text-indigo-400 flex items-center justify-center font-bold text-xl">
+        <div class="w-12 h-12 rounded-2xl bg-indigo-50 dark:bg-indigo-950/80 text-indigo-600 dark:text-indigo-400 flex items-center justify-center font-bold text-xl shadow-inner">
           <i data-lucide="gauge" class="w-6 h-6"></i>
         </div>
         <div>
@@ -932,14 +1683,14 @@
         </div>
       </div>
 
-      <div class="flex items-center gap-6">
+      <div class="flex items-center gap-8">
         <div class="text-right">
-          <p class="text-xs text-slate-400 uppercase tracking-wider font-semibold">Contrast Verified</p>
+          <p class="text-xs text-slate-400 uppercase tracking-wider font-semibold font-mono">Contrast Verified</p>
           <p class="text-2xl font-black text-emerald-500 font-mono">18.80 : 1</p>
         </div>
         <div class="h-10 w-px bg-slate-200 dark:bg-slate-800"></div>
         <div class="text-right">
-          <p class="text-xs text-slate-400 uppercase tracking-wider font-semibold">Layout Overflow</p>
+          <p class="text-xs text-slate-400 uppercase tracking-wider font-semibold font-mono">Layout Overflow</p>
           <p class="text-2xl font-black text-indigo-600 dark:text-indigo-400 font-mono">0.00 px</p>
         </div>
       </div>
@@ -948,31 +1699,1165 @@
   </main>
 
   <!-- ========================================================
-       FOOTER
+       CREATIVE VISUAL PRODUCTION & BEFORE/AFTER LENS LABORATORY
        ======================================================== -->
-  <footer class="border-t border-slate-200/80 dark:border-slate-800/80 py-12 text-center text-xs text-slate-500 dark:text-slate-400 transition-colors">
-    <div class="max-w-7xl mx-auto px-6 flex flex-col sm:flex-row items-center justify-between gap-4">
-      <p>© 2026 Vibe UI Suite • Contract-Driven Autonomous Frontend Architecture</p>
-      <div class="flex items-center gap-6">
-        <a href="https://github.com/omid-io/vibe-ui-suite" class="hover:text-indigo-500 transition-colors">GitHub Repository</a>
-        <a href="ARCHITECTURE.md" class="hover:text-indigo-500 transition-colors">Architecture Spec</a>
-        <a href="README.fa.md" class="hover:text-indigo-500 transition-colors">مستندات فارسی</a>
+  <section id="creative-gallery" class="max-w-7xl mx-auto px-6 py-20 border-t border-slate-200/60 dark:border-slate-800/60 relative overflow-hidden">
+    
+    <!-- Ambient Floating Mesh Decorative Orbs -->
+    <div class="absolute -top-20 -right-20 w-72 h-72 rounded-full bg-gradient-to-tr from-indigo-500/10 via-purple-500/10 to-pink-500/10 blur-3xl pointer-events-none animate-float-slow"></div>
+    <div class="absolute -bottom-20 -left-20 w-80 h-80 rounded-full bg-gradient-to-tr from-cyan-500/10 via-blue-500/10 to-indigo-500/10 blur-3xl pointer-events-none animate-float-slow" style="animation-delay: -2.5s;"></div>
+
+    <div class="flex flex-col md:flex-row md:items-end justify-between mb-12 gap-6 relative z-10">
+      <div>
+        <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-pink-50 dark:bg-pink-950/80 text-pink-600 dark:text-pink-400 text-xs font-bold font-mono mb-3 border border-pink-200 dark:border-pink-800/60">
+          <i data-lucide="image" class="w-3.5 h-3.5"></i>
+          <span>Creative Visual Alchemy • 8K Production Gallery</span>
+        </div>
+        <h2 class="text-3xl sm:text-4xl font-extrabold text-slate-900 dark:text-white tracking-tight">
+          Visual Masterpieces & Kinetic Depth
+        </h2>
+        <p class="text-slate-500 dark:text-slate-400 mt-2 max-w-2xl text-sm sm:text-base">
+          Experience authentic high-resolution imagery, living specular reflections, and an interactive before/after split lens demonstrating raw baseline UI versus Vibe Claymorphism & 3D Optics.
+        </p>
+      </div>
+
+      <!-- Gallery Filter Chips -->
+      <div class="flex items-center gap-1.5 p-1.5 rounded-xl bg-slate-100 dark:bg-slate-900/90 border border-slate-200 dark:border-slate-800 text-xs font-semibold self-start md:self-auto">
+        <button type="button" onclick="filterGallery('all', this)" class="gallery-filter-btn px-4 py-2 rounded-lg bg-white dark:bg-slate-800 text-slate-900 dark:text-white shadow-sm font-bold transition-all cursor-pointer">
+          All Artifacts
+        </button>
+        <button type="button" onclick="filterGallery('spatial', this)" class="gallery-filter-btn px-4 py-2 rounded-lg text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white transition-all cursor-pointer">
+          Spatial & 3D
+        </button>
+        <button type="button" onclick="filterGallery('fintech', this)" class="gallery-filter-btn px-4 py-2 rounded-lg text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white transition-all cursor-pointer">
+          Fintech Protocol
+        </button>
+        <button type="button" onclick="filterGallery('hardware', this)" class="gallery-filter-btn px-4 py-2 rounded-lg text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white transition-all cursor-pointer">
+          Tactile Studio
+        </button>
+      </div>
+    </div>
+
+    <!-- FEATURE 1: Interactive Before / After Split-Screen Lens -->
+    <div class="vibe-card p-6 sm:p-8 mb-12 relative overflow-hidden shadow-2xl">
+      <div class="flex items-center justify-between mb-4">
+        <div class="flex items-center gap-2">
+          <span class="w-3 h-3 rounded-full bg-indigo-500 inline-block animate-ping"></span>
+          <span class="text-xs font-bold font-mono uppercase tracking-wider text-slate-700 dark:text-slate-300">
+            Interactive Visual Lens: Raw Tailwind vs. Vibe 3D Claymorphism
+          </span>
+        </div>
+        <span class="text-xs text-slate-500 font-mono hidden sm:inline">Drag the center slider left/right</span>
+      </div>
+
+      <div id="beforeAfterContainer" class="before-after-lens relative h-[280px] sm:h-[360px] rounded-2xl overflow-hidden border border-slate-200 dark:border-slate-800 cursor-ew-resize">
+        
+        <!-- BEFORE LAYER: Raw Flat Baseline UI -->
+        <div class="absolute inset-0 bg-slate-200 dark:bg-slate-900 p-8 flex flex-col justify-between select-none">
+          <div class="space-y-3">
+            <span class="px-3 py-1 rounded bg-slate-300 dark:bg-slate-800 text-slate-600 dark:text-slate-400 font-mono text-xs font-semibold">
+              BEFORE: Raw Flat Baseline UI
+            </span>
+            <h4 class="text-2xl font-bold text-slate-800 dark:text-slate-200">Standard Generic Component</h4>
+            <p class="text-xs text-slate-500 max-w-sm">Flat gray borders, 0 depth, standard static shadow, zero visual emotion.</p>
+          </div>
+          <div class="flex items-center gap-4">
+            <button class="px-5 py-2.5 rounded bg-slate-400 text-white text-xs font-medium cursor-not-allowed">Standard Button</button>
+            <span class="text-xs text-slate-400 font-mono">Contrast: 4.5:1 (Minimal)</span>
+          </div>
+        </div>
+
+        <!-- AFTER LAYER: Vibe Claymorphism & 3D Optics (Clipped by slider) -->
+        <div id="beforeAfterClip" class="before-after-overlay select-none" style="clip-path: inset(0 0 0 50%);">
+          <div class="w-full h-full p-8 flex flex-col justify-between items-end text-right text-white relative overflow-hidden" style="background: radial-gradient(circle at 70% 30%, #4338ca, #1e1b4b);">
+            <div class="absolute -right-10 -bottom-10 w-60 h-60 rounded-full bg-pink-500/20 blur-2xl pointer-events-none"></div>
+            
+            <div class="space-y-3 relative z-10 max-w-sm flex flex-col items-end">
+              <span class="px-3.5 py-1 rounded-full bg-emerald-500/20 border border-emerald-400/40 text-emerald-300 font-mono text-xs font-bold inline-flex items-center gap-1.5 shadow-sm">
+                <i data-lucide="sparkles" class="w-3.5 h-3.5"></i>
+                <span>AFTER: Vibe 3D Claymorphism & Specular Optics</span>
+              </span>
+              <h4 class="text-2xl sm:text-3xl font-black tracking-tight text-white drop-shadow-md">
+                Tactile Living Masterpiece
+              </h4>
+              <p class="text-xs sm:text-sm text-indigo-200 leading-relaxed drop-shadow">
+                Pillowy 3D elevation, organic specular bevels, critically damped springs, and 18.8:1 WCAG AAA verified contrast.
+              </p>
+            </div>
+
+            <div class="flex items-center gap-4 relative z-10 justify-end">
+              <div class="px-3.5 py-1.5 rounded-xl bg-white/10 backdrop-blur-md border border-white/20 text-xs font-mono font-bold text-emerald-300">
+                Contrast: 18.80 : 1 AAA
+              </div>
+              <button class="vibe-btn-primary px-6 py-3 text-xs font-extrabold cursor-pointer shadow-xl flex items-center gap-2">
+                <i data-lucide="zap" class="w-4 h-4"></i>
+                <span>Tactile Clay Button</span>
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Draggable Handle Bar -->
+        <div id="beforeAfterHandle" class="before-after-handle" style="left: 50%;">
+          <div class="absolute top-1/2 -translate-y-1/2 -translate-x-1/2 w-9 h-9 rounded-full bg-indigo-600 text-white shadow-2xl border-2 border-white flex items-center justify-center font-bold text-xs select-none">
+            <i data-lucide="chevrons-left-right" class="w-4 h-4"></i>
+          </div>
+        </div>
+
+        <!-- Hidden Range Input for full touch & keyboard accessibility -->
+        <input type="range" min="0" max="100" value="50" id="beforeAfterRange" oninput="updateBeforeAfter(this.value)" class="absolute inset-0 opacity-0 cursor-ew-resize z-40 w-full h-full">
+      </div>
+    </div>
+
+    <!-- FEATURE 2: Curated 4-Card Photographic Gallery Showcase -->
+    <div id="galleryGrid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-8 items-stretch">
+      
+      <!-- Card 1: 3D Spatial Holographic Prism (Span 7) -->
+      <div class="gallery-card lg:col-span-7 vibe-card sheen-card group relative overflow-hidden rounded-3xl p-6 sm:p-8 flex flex-col justify-between shadow-2xl transition-all duration-500 hover:-translate-y-1" data-category="spatial">
+        <div class="relative h-64 sm:h-80 w-full rounded-2xl overflow-hidden mb-6 bg-slate-950">
+          <img src="assets/generated/visual_alchemy_hero.webp" alt="3D Spatial UI Crystal" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105">
+          <div class="absolute inset-0 bg-gradient-to-t from-slate-950/90 via-slate-950/20 to-transparent"></div>
+          
+          <div class="absolute top-4 left-4 flex items-center gap-2">
+            <span class="px-3 py-1 rounded-full bg-white/90 dark:bg-slate-900/90 backdrop-blur-md text-indigo-600 dark:text-indigo-400 font-mono text-xs font-bold shadow-md border border-white/20">
+              8K Specular Map
+            </span>
+            <span class="px-3 py-1 rounded-full bg-emerald-500 text-white font-mono text-xs font-bold shadow-md">
+              Clay 3D
+            </span>
+          </div>
+
+          <div class="absolute bottom-4 left-4 right-4">
+            <h3 class="text-xl sm:text-2xl font-black text-white tracking-tight drop-shadow-md">
+              Volumetric Glass Prism & Clay Laboratory
+            </h3>
+            <p class="text-xs text-slate-300 mt-1 line-clamp-2">
+              Refractive neon cyan, violet, and deep indigo light dispersion with mathematical grid coordinates.
+            </p>
+          </div>
+        </div>
+
+        <div class="flex items-center justify-between pt-2 border-t border-slate-200/60 dark:border-slate-800/60 text-xs">
+          <div class="flex items-center gap-3 text-slate-500">
+            <span>Render: GPU Raymarching</span>
+            <span>•</span>
+            <span class="text-emerald-500 font-mono font-bold">60 FPS Fluid</span>
+          </div>
+          <button type="button" onclick="showVibeToast('Inspecting 3D Spatial Artifact', 'info')" class="vibe-btn-primary px-4 py-2 text-xs font-bold cursor-pointer flex items-center gap-1.5">
+            <i data-lucide="eye" class="w-3.5 h-3.5"></i>
+            <span>Inspect Artifact</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- Card 2: Sovereign Liquidity Protocol (Span 5) -->
+      <div class="gallery-card lg:col-span-5 vibe-card sheen-card group relative overflow-hidden rounded-3xl p-6 sm:p-8 flex flex-col justify-between shadow-2xl transition-all duration-500 hover:-translate-y-1" data-category="fintech">
+        <div class="relative h-64 sm:h-80 w-full rounded-2xl overflow-hidden mb-6 bg-slate-950">
+          <img src="https://images.unsplash.com/photo-1634017839464-5c339ebe3cb4?auto=format&fit=crop&w=800&q=80" alt="Fintech Sovereign Protocol" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105">
+          <div class="absolute inset-0 bg-gradient-to-t from-slate-950/90 via-slate-950/20 to-transparent"></div>
+
+          <div class="absolute top-4 left-4">
+            <span class="px-3 py-1 rounded-full bg-purple-500 text-white font-mono text-xs font-bold shadow-md">
+              Fintech Protocol
+            </span>
+          </div>
+
+          <div class="absolute bottom-4 left-4 right-4">
+            <h3 class="text-xl font-bold text-white tracking-tight">
+              Sovereign Liquidity Vault
+            </h3>
+            <p class="text-xs text-slate-300 mt-1">
+              Multi-asset mathematical rebalancing with zero slippage execution.
+            </p>
+          </div>
+        </div>
+
+        <div class="flex items-center justify-between pt-2 border-t border-slate-200/60 dark:border-slate-800/60 text-xs">
+          <span class="text-emerald-500 font-mono font-bold">+38.4% APY Locked</span>
+          <button type="button" onclick="showVibeToast('Vault Telemetry Synced', 'success')" class="text-indigo-500 font-bold hover:underline flex items-center gap-1">
+            <span>View Telemetry</span>
+            <i data-lucide="arrow-right" class="w-3.5 h-3.5"></i>
+          </button>
+        </div>
+      </div>
+
+      <!-- Card 3: Tactile Studio Hardware (Span 5) -->
+      <div class="gallery-card lg:col-span-5 vibe-card sheen-card group relative overflow-hidden rounded-3xl p-6 sm:p-8 flex flex-col justify-between shadow-2xl transition-all duration-500 hover:-translate-y-1" data-category="hardware">
+        <div class="relative h-60 w-full rounded-2xl overflow-hidden mb-6 bg-slate-950">
+          <img src="https://images.unsplash.com/photo-1550745165-9bc0b252726f?auto=format&fit=crop&w=800&q=80" alt="Tactile Hardware" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105">
+          <div class="absolute inset-0 bg-gradient-to-t from-slate-950/90 via-slate-950/20 to-transparent"></div>
+
+          <div class="absolute top-4 left-4">
+            <span class="px-3 py-1 rounded-full bg-amber-500 text-white font-mono text-xs font-bold shadow-md">
+              Tactile Studio
+            </span>
+          </div>
+
+          <div class="absolute bottom-4 left-4 right-4">
+            <h3 class="text-lg font-bold text-white tracking-tight">
+              Ergonomic Hardware Sensors
+            </h3>
+            <p class="text-xs text-slate-300 mt-0.5">
+              Sub-millisecond haptic latency feedback with physical depth.
+            </p>
+          </div>
+        </div>
+
+        <div class="flex items-center justify-between pt-2 border-t border-slate-200/60 dark:border-slate-800/60 text-xs">
+          <span class="text-slate-500 font-mono">Response: 0.8ms</span>
+          <span class="text-indigo-500 font-bold cursor-pointer hover:underline" onclick="showVibeToast('Sensor calibrated', 'info')">Calibrate</span>
+        </div>
+      </div>
+
+      <!-- Card 4: Generative Neural Studio (Span 7) -->
+      <div class="gallery-card lg:col-span-7 vibe-card sheen-card group relative overflow-hidden rounded-3xl p-6 sm:p-8 flex flex-col justify-between shadow-2xl transition-all duration-500 hover:-translate-y-1" data-category="spatial">
+        <div class="relative h-60 w-full rounded-2xl overflow-hidden mb-6 bg-slate-950">
+          <img src="https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?auto=format&fit=crop&w=800&q=80" alt="Generative Art Canvas" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105">
+          <div class="absolute inset-0 bg-gradient-to-t from-slate-950/90 via-slate-950/20 to-transparent"></div>
+
+          <div class="absolute top-4 left-4">
+            <span class="px-3 py-1 rounded-full bg-indigo-600 text-white font-mono text-xs font-bold shadow-md">
+              Generative Studio
+            </span>
+          </div>
+
+          <div class="absolute bottom-4 left-4 right-4">
+            <h3 class="text-lg font-bold text-white tracking-tight">
+              Autonomous Design Chemistry Engine
+            </h3>
+            <p class="text-xs text-slate-300 mt-0.5">
+              Multi-paradigm token orchestration mapped to mathematical color spaces.
+            </p>
+          </div>
+        </div>
+
+        <div class="flex items-center justify-between pt-2 border-t border-slate-200/60 dark:border-slate-800/60 text-xs">
+          <span class="text-slate-500 font-mono">OKLCH Uniformity: 100%</span>
+          <button type="button" onclick="showVibeToast('Palette tokens copied', 'success')" class="text-indigo-500 font-bold hover:underline flex items-center gap-1">
+            <span>Copy Color Palette</span>
+            <i data-lucide="copy" class="w-3.5 h-3.5"></i>
+          </button>
+        </div>
+      </div>
+
+    </div>
+
+  </section>
+
+  <!-- ========================================================
+       SECTION 3: ARCHITECTURAL PILLARS & FEATURE DEEP-DIVE
+       ======================================================== -->
+  <section id="features" class="max-w-7xl mx-auto px-6 py-20 border-t border-slate-200/60 dark:border-slate-800/60">
+    <div class="flex flex-col md:flex-row md:items-end justify-between mb-12 gap-6">
+      <div>
+        <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-indigo-50 dark:bg-indigo-950/80 text-indigo-600 dark:text-indigo-400 text-xs font-bold font-mono mb-3 border border-indigo-200 dark:border-indigo-800/60">
+          <i data-lucide="cpu" class="w-3.5 h-3.5"></i>
+          <span>Pillar Architecture</span>
+        </div>
+        <h2 class="text-3xl sm:text-4xl font-extrabold text-slate-900 dark:text-white tracking-tight">
+          Engineered for Mathematical Precision
+        </h2>
+        <p class="text-slate-500 dark:text-slate-400 mt-2 max-w-2xl text-sm sm:text-base">
+          Three foundational pillars delivering autonomous design token compilation, real-time spring physics, and strict zero-slop bidirectional layout.
+        </p>
+      </div>
+
+      <!-- Interactive Feature Tab Switcher -->
+      <div class="flex items-center gap-1.5 p-1.5 rounded-xl bg-slate-100 dark:bg-slate-900/90 border border-slate-200 dark:border-slate-800 text-xs font-semibold self-start md:self-auto">
+        <button type="button" onclick="switchFeatureTab('tokens')" id="tab-btn-tokens" class="px-4 py-2 rounded-lg bg-white dark:bg-slate-800 text-slate-900 dark:text-white shadow-sm font-bold transition-all cursor-pointer">
+          Token Telemetry
+        </button>
+        <button type="button" onclick="switchFeatureTab('physics')" id="tab-btn-physics" class="px-4 py-2 rounded-lg text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white transition-all cursor-pointer">
+          Kinetic Physics
+        </button>
+        <button type="button" onclick="switchFeatureTab('rtl')" id="tab-btn-rtl" class="px-4 py-2 rounded-lg text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white transition-all cursor-pointer">
+          Semantic BiDi / RTL
+        </button>
+      </div>
+    </div>
+
+    <!-- Feature Tab Panels -->
+    <div class="space-y-6">
+      <!-- Panel 1: Token Telemetry -->
+      <div id="feature-panel-tokens" class="vibe-card p-6 sm:p-10">
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+          <div class="lg:col-span-5 space-y-4">
+            <span class="text-xs uppercase font-mono font-bold text-indigo-500">Autonomous Compiler</span>
+            <h3 class="text-2xl font-bold text-slate-900 dark:text-white tracking-tight">Zero-Runtime CSS Variables</h3>
+            <p class="text-sm text-slate-500 dark:text-slate-400 leading-relaxed">
+              Every design paradigm compiles instantly into native CSS custom properties. No heavy CSS-in-JS runtimes, zero layout shifts, and instantaneous sub-millisecond theme synchronization across all UI components.
+            </p>
+            <div class="space-y-2 pt-2">
+              <div class="flex items-center gap-3 text-xs font-medium text-slate-700 dark:text-slate-300">
+                <i data-lucide="check-circle-2" class="w-4 h-4 text-emerald-500 shrink-0"></i>
+                <span>11 World-class paradigms compiled dynamically</span>
+              </div>
+              <div class="flex items-center gap-3 text-xs font-medium text-slate-700 dark:text-slate-300">
+                <i data-lucide="check-circle-2" class="w-4 h-4 text-emerald-500 shrink-0"></i>
+                <span>OKLCH perceptual uniformity for flawless color scales</span>
+              </div>
+              <div class="flex items-center gap-3 text-xs font-medium text-slate-700 dark:text-slate-300">
+                <i data-lucide="check-circle-2" class="w-4 h-4 text-emerald-500 shrink-0"></i>
+                <span>100% typed contracts for Tailwind CSS, Vanilla, and React</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="lg:col-span-7">
+            <div class="rounded-xl overflow-hidden bg-slate-950 border border-slate-800 shadow-2xl text-xs font-mono">
+              <div class="px-4 py-3 bg-slate-900/90 border-b border-slate-800 flex items-center justify-between text-slate-400">
+                <div class="flex items-center gap-2">
+                  <span class="w-3 h-3 rounded-full bg-rose-500/80 inline-block"></span>
+                  <span class="w-3 h-3 rounded-full bg-amber-500/80 inline-block"></span>
+                  <span class="w-3 h-3 rounded-full bg-emerald-500/80 inline-block"></span>
+                  <span class="ml-2 text-slate-300 font-semibold">tokens.runtime.css</span>
+                </div>
+                <span class="text-[11px] text-slate-500">Live Computed Variables</span>
+              </div>
+              <div class="p-5 text-slate-300 space-y-1.5 overflow-x-auto">
+                <p><span class="text-purple-400">:root</span>[<span class="text-amber-300">data-style</span>=<span class="text-emerald-400" id="code-token-style">"claymorphism"</span>] {</p>
+                <p class="pl-4"><span class="text-cyan-400">--card-radius</span>: <span class="text-amber-300" id="code-tok-radius">2.25rem</span>;</p>
+                <p class="pl-4"><span class="text-cyan-400">--card-backdrop</span>: <span class="text-emerald-400" id="code-tok-backdrop">none</span>;</p>
+                <p class="pl-4"><span class="text-cyan-400">--card-border</span>: <span class="text-slate-400" id="code-tok-border">2px solid rgba(255, 255, 255, 0.7)</span>;</p>
+                <p class="pl-4"><span class="text-cyan-400">--card-shadow</span>: <span class="text-slate-400" id="code-tok-shadow">14px 14px 28px</span>;</p>
+                <p class="pl-4"><span class="text-cyan-400">--brand-primary</span>: <span class="text-indigo-400" id="code-tok-brand">#6366f1</span>;</p>
+                <p class="pl-4"><span class="text-cyan-400">--contrast-ratio</span>: <span class="text-emerald-400 font-bold">18.80 : 1 (WCAG AAA)</span>;</p>
+                <p>}</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Panel 2: Kinetic Physics Engine -->
+      <div id="feature-panel-physics" class="vibe-card p-6 sm:p-10 hidden">
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+          <div class="lg:col-span-5 space-y-4">
+            <span class="text-xs uppercase font-mono font-bold text-purple-500">Apple & Linear Kinematics</span>
+            <h3 class="text-2xl font-bold text-slate-900 dark:text-white tracking-tight">Damped Spring Physics</h3>
+            <p class="text-sm text-slate-500 dark:text-slate-400 leading-relaxed">
+              Say goodbye to stiff bezier curves. Every micro-interaction is governed by critically damped harmonic oscillator physics with velocity handoff, sub-pixel rAF rendering, and hardware-accelerated transforms.
+            </p>
+            <div class="space-y-4 pt-2">
+              <div>
+                <div class="flex justify-between text-xs font-semibold text-slate-700 dark:text-slate-300 mb-1.5">
+                  <span>Spring Stiffness (k)</span>
+                  <span id="slider-stiffness-val" class="text-indigo-500 font-mono">180 N/m</span>
+                </div>
+                <input type="range" min="80" max="320" value="180" oninput="updateSpringStiffness(this.value)" class="w-full accent-indigo-600 cursor-pointer">
+              </div>
+              <div>
+                <div class="flex justify-between text-xs font-semibold text-slate-700 dark:text-slate-300 mb-1.5">
+                  <span>Damping Ratio (ζ)</span>
+                  <span id="slider-damping-val" class="text-emerald-500 font-mono">0.82 (Sub-Critical)</span>
+                </div>
+                <input type="range" min="40" max="100" value="82" oninput="updateSpringDamping(this.value)" class="w-full accent-indigo-600 cursor-pointer">
+              </div>
+            </div>
+          </div>
+
+          <div class="lg:col-span-7 flex flex-col items-center justify-center p-8 rounded-xl bg-slate-100/80 dark:bg-slate-950/80 border border-slate-200 dark:border-slate-800 min-h-[300px]">
+            <div id="interactive-physics-orb" onclick="pingPhysicsOrb()" class="w-28 h-28 rounded-3xl bg-gradient-to-tr from-indigo-600 via-purple-600 to-pink-500 shadow-2xl flex flex-col items-center justify-center text-white cursor-pointer select-none transition-transform hover:scale-105 active:scale-90">
+              <i data-lucide="activity" class="w-8 h-8 mb-1"></i>
+              <span class="text-[10px] font-mono uppercase font-bold tracking-wider">Click Me</span>
+            </div>
+            <p class="text-xs text-slate-500 dark:text-slate-400 mt-4 font-mono text-center">
+              Click the tactile orb to pulse damped spring oscillation
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Panel 3: Semantic BiDi / RTL -->
+      <div id="feature-panel-rtl" class="vibe-card p-6 sm:p-10 hidden">
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+          <div class="lg:col-span-5 space-y-4">
+            <span class="text-xs uppercase font-mono font-bold text-emerald-500">Global Accessibility</span>
+            <h3 class="text-2xl font-bold text-slate-900 dark:text-white tracking-tight">Zero-Slop BiDi & Persian RTL</h3>
+            <p class="text-sm text-slate-500 dark:text-slate-400 leading-relaxed">
+              Native logical CSS properties (`margin-inline`, `padding-inline`) and isolated `<bdi>` context protect currency digits, code tokens, and metrics from bidirectional flipping corruption. Absolute zero half-space (ZWNJ) strict formatting.
+            </p>
+            <div class="flex items-center gap-3 pt-2">
+              <button type="button" onclick="toggleRtlPreview('ltr')" id="rtl-btn-ltr" class="px-4 py-2 rounded-lg bg-indigo-600 text-white text-xs font-bold cursor-pointer transition-colors">
+                LTR Mode (English)
+              </button>
+              <button type="button" onclick="toggleRtlPreview('rtl')" id="rtl-btn-rtl" class="px-4 py-2 rounded-lg bg-slate-200 dark:bg-slate-800 text-slate-700 dark:text-slate-300 text-xs font-bold cursor-pointer hover:bg-slate-300 dark:hover:bg-slate-700 transition-colors">
+                RTL Mode (فارسی)
+              </button>
+            </div>
+          </div>
+
+          <div class="lg:col-span-7">
+            <div id="rtl-demo-card" dir="ltr" class="p-6 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-xl transition-all space-y-4">
+              <div class="flex items-center justify-between">
+                <div class="flex items-center gap-3">
+                  <div class="w-10 h-10 rounded-xl bg-indigo-500/10 text-indigo-600 dark:text-indigo-400 flex items-center justify-center font-bold">
+                    <i data-lucide="wallet" class="w-5 h-5"></i>
+                  </div>
+                  <div>
+                    <h5 id="rtl-card-title" class="font-bold text-sm text-slate-900 dark:text-white">Treasury Settlement</h5>
+                    <p id="rtl-card-sub" class="text-xs text-slate-500">Autonomous Multisig Smart Contract</p>
+                  </div>
+                </div>
+                <span class="px-2.5 py-1 rounded-full bg-emerald-500/10 text-emerald-500 text-xs font-bold font-mono">
+                  <bdi>+24.5% APY</bdi>
+                </span>
+              </div>
+              <div class="p-4 rounded-xl bg-slate-50 dark:bg-slate-950 border border-slate-200/80 dark:border-slate-800/80 flex items-center justify-between">
+                <span id="rtl-card-label" class="text-xs text-slate-500">Total Available Balance</span>
+                <span class="text-base font-bold font-mono text-slate-900 dark:text-white"><bdi>$1,280,450.00 USD</bdi></span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========================================================
+       SECTION 4: LIVE INTERACTIVE UI COMPONENT SANDBOX
+       ======================================================== -->
+  <section id="components" class="max-w-7xl mx-auto px-6 py-20 border-t border-slate-200/60 dark:border-slate-800/60">
+    <div class="text-center max-w-3xl mx-auto mb-16">
+      <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-purple-50 dark:bg-purple-950/80 text-purple-600 dark:text-purple-400 text-xs font-bold font-mono mb-3 border border-purple-200 dark:border-purple-800/60">
+        <i data-lucide="layout-grid" class="w-3.5 h-3.5"></i>
+        <span>Component Laboratory</span>
+      </div>
+      <h2 class="text-3xl sm:text-4xl font-extrabold text-slate-900 dark:text-white tracking-tight">
+        All Standard Web UI Elements, Fully Reactive
+      </h2>
+      <p class="text-slate-500 dark:text-slate-400 mt-2 text-sm sm:text-base">
+        Explore interactive form controls, live feedback triggers, dialogs, badges, and micro-sensors that automatically inherit your active design paradigm.
+      </p>
+    </div>
+
+    <!-- 3-Column UI Sandbox Grid -->
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+      
+      <!-- Card 1: Form Primitives & Controls -->
+      <div class="vibe-card p-6 space-y-6">
+        <div class="flex items-center justify-between border-b border-slate-200/60 dark:border-slate-800/60 pb-3">
+          <div class="flex items-center gap-2 font-bold text-sm text-slate-900 dark:text-white">
+            <i data-lucide="check-square" class="w-4 h-4 text-indigo-500"></i>
+            <span>Form & Input Primitives</span>
+          </div>
+          <span class="text-[10px] uppercase font-mono px-2 py-0.5 rounded bg-slate-100 dark:bg-slate-800 text-slate-500 font-bold">Interactive</span>
+        </div>
+
+        <div class="space-y-4">
+          <!-- Text Input -->
+          <div>
+            <label class="block text-xs font-semibold text-slate-700 dark:text-slate-300 mb-1.5">Project Domain</label>
+            <div class="relative">
+              <input type="text" value="vibe-protocol.io" class="vibe-input w-full px-3.5 py-2.5 text-xs font-mono text-slate-900 dark:text-white pl-9">
+              <i data-lucide="globe" class="w-4 h-4 text-slate-400 absolute left-3 top-3"></i>
+              <i data-lucide="check" class="w-4 h-4 text-emerald-500 absolute right-3 top-3"></i>
+            </div>
+          </div>
+
+          <!-- Segmented Control Switcher -->
+          <div>
+            <label class="block text-xs font-semibold text-slate-700 dark:text-slate-300 mb-1.5">Telemetry Frequency</label>
+            <div class="grid grid-cols-3 gap-1 p-1 rounded-xl bg-slate-100 dark:bg-slate-900 border border-slate-200 dark:border-slate-800 text-xs font-semibold text-center">
+              <button type="button" onclick="setSegmented(this)" class="py-1.5 rounded-lg bg-white dark:bg-slate-800 text-slate-900 dark:text-white shadow-sm font-bold transition-all cursor-pointer">Daily</button>
+              <button type="button" onclick="setSegmented(this)" class="py-1.5 rounded-lg text-slate-500 hover:text-slate-900 dark:hover:text-white transition-all cursor-pointer">Weekly</button>
+              <button type="button" onclick="setSegmented(this)" class="py-1.5 rounded-lg text-slate-500 hover:text-slate-900 dark:hover:text-white transition-all cursor-pointer">Monthly</button>
+            </div>
+          </div>
+
+          <!-- Spring Toggle Switch -->
+          <div class="flex items-center justify-between pt-1">
+            <div>
+              <p class="text-xs font-bold text-slate-900 dark:text-white">Strict Contrast Enforcer</p>
+              <p class="text-[11px] text-slate-500">Auto-lock to WCAG AAA</p>
+            </div>
+            <button type="button" onclick="toggleVibeSwitch(this)" class="w-11 h-6 rounded-full bg-indigo-600 p-0.5 transition-colors cursor-pointer relative" role="switch" aria-checked="true">
+              <span class="w-5 h-5 rounded-full bg-white shadow-md block transform translate-x-5 transition-transform duration-200"></span>
+            </button>
+          </div>
+
+          <!-- Interactive Range Slider -->
+          <div>
+            <div class="flex justify-between text-xs font-semibold text-slate-700 dark:text-slate-300 mb-1.5">
+              <span>Backdrop Saturation</span>
+              <span id="slider-sat-readout" class="font-mono text-indigo-500">180%</span>
+            </div>
+            <input type="range" min="100" max="250" value="180" oninput="document.getElementById('slider-sat-readout').innerText = this.value + '%'" class="w-full accent-indigo-600 cursor-pointer">
+          </div>
+        </div>
+      </div>
+
+      <!-- Card 2: Feedback, Notifications & Dialogs -->
+      <div class="vibe-card p-6 space-y-6">
+        <div class="flex items-center justify-between border-b border-slate-200/60 dark:border-slate-800/60 pb-3">
+          <div class="flex items-center gap-2 font-bold text-sm text-slate-900 dark:text-white">
+            <i data-lucide="bell" class="w-4 h-4 text-purple-500"></i>
+            <span>Feedback & Live Dialogs</span>
+          </div>
+          <span class="text-[10px] uppercase font-mono px-2 py-0.5 rounded bg-slate-100 dark:bg-slate-800 text-slate-500 font-bold">Triggers</span>
+        </div>
+
+        <div class="space-y-4">
+          <p class="text-xs text-slate-500 dark:text-slate-400">
+            Trigger real responsive dialogs and toast alerts rendered with native modal accessibility.
+          </p>
+
+          <div class="flex flex-col gap-2.5">
+            <button type="button" onclick="showVibeToast('Design tokens compiled successfully!', 'success')" class="vibe-btn-primary w-full py-2.5 px-4 text-xs font-bold cursor-pointer flex items-center justify-center gap-2 shadow-sm">
+              <i data-lucide="sparkles" class="w-4 h-4"></i>
+              <span>Spawn Live Toast Notification</span>
+            </button>
+
+            <button type="button" onclick="openVibeModal()" class="w-full py-2.5 px-4 text-xs font-bold rounded-xl border border-slate-300 dark:border-slate-700 bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-750 text-slate-900 dark:text-white cursor-pointer flex items-center justify-center gap-2 transition-colors">
+              <i data-lucide="maximize-2" class="w-4 h-4"></i>
+              <span>Inspect Accessible Modal Dialog</span>
+            </button>
+          </div>
+
+          <!-- Micro Badges & Indicators -->
+          <div class="pt-2">
+            <p class="text-xs font-semibold text-slate-700 dark:text-slate-300 mb-2">System Status Chips</p>
+            <div class="flex flex-wrap gap-2">
+              <span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-[11px] font-bold font-mono bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 border border-emerald-500/20">
+                <span class="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse"></span>
+                <span>ONLINE</span>
+              </span>
+              <span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-[11px] font-bold font-mono bg-indigo-500/10 text-indigo-600 dark:text-indigo-400 border border-indigo-500/20">
+                <i data-lucide="shield" class="w-3 h-3"></i>
+                <span>ENCRYPTED</span>
+              </span>
+              <span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-[11px] font-bold font-mono bg-amber-500/10 text-amber-600 dark:text-amber-400 border border-amber-500/20">
+                <i data-lucide="zap" class="w-3 h-3"></i>
+                <span>60 FPS</span>
+              </span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Card 3: Audio, Telemetry & Media Primitives -->
+      <div class="vibe-card p-6 space-y-6">
+        <div class="flex items-center justify-between border-b border-slate-200/60 dark:border-slate-800/60 pb-3">
+          <div class="flex items-center gap-2 font-bold text-sm text-slate-900 dark:text-white">
+            <i data-lucide="sliders" class="w-4 h-4 text-emerald-500"></i>
+            <span>Telemetry & Dynamic Media</span>
+          </div>
+          <span class="text-[10px] uppercase font-mono px-2 py-0.5 rounded bg-slate-100 dark:bg-slate-800 text-slate-500 font-bold">Sensors</span>
+        </div>
+
+        <div class="space-y-4">
+          <!-- Audio Waveform Equalizer -->
+          <div>
+            <div class="flex items-center justify-between text-xs font-semibold text-slate-700 dark:text-slate-300 mb-2">
+              <span>Haptic Waveform Sensor</span>
+              <span class="text-[10px] font-mono text-emerald-500">48.2 kHz</span>
+            </div>
+            <div class="h-14 rounded-xl bg-slate-900 dark:bg-slate-950 p-3 flex items-center justify-between gap-1 overflow-hidden border border-slate-800">
+              <div class="w-1.5 bg-indigo-500 rounded-full animate-pulse h-6"></div>
+              <div class="w-1.5 bg-indigo-400 rounded-full animate-pulse h-10 delay-75"></div>
+              <div class="w-1.5 bg-purple-500 rounded-full animate-pulse h-8 delay-100"></div>
+              <div class="w-1.5 bg-purple-400 rounded-full animate-pulse h-12 delay-150"></div>
+              <div class="w-1.5 bg-pink-500 rounded-full animate-pulse h-5 delay-200"></div>
+              <div class="w-1.5 bg-indigo-500 rounded-full animate-pulse h-11 delay-300"></div>
+              <div class="w-1.5 bg-emerald-400 rounded-full animate-pulse h-7 delay-150"></div>
+              <div class="w-1.5 bg-emerald-500 rounded-full animate-pulse h-10 delay-75"></div>
+              <div class="w-1.5 bg-indigo-400 rounded-full animate-pulse h-6 delay-200"></div>
+              <div class="w-1.5 bg-purple-500 rounded-full animate-pulse h-9 delay-100"></div>
+              <div class="w-1.5 bg-pink-500 rounded-full animate-pulse h-7 delay-300"></div>
+              <div class="w-1.5 bg-indigo-500 rounded-full animate-pulse h-11 delay-150"></div>
+            </div>
+          </div>
+
+          <!-- Health Matrix Progress -->
+          <div>
+            <div class="flex justify-between text-xs font-semibold text-slate-700 dark:text-slate-300 mb-1.5">
+              <span>GPU Compositing Efficiency</span>
+              <span class="text-xs font-mono font-bold text-emerald-500">99.98%</span>
+            </div>
+            <div class="w-full h-2 rounded-full bg-slate-200 dark:bg-slate-800 overflow-hidden">
+              <div class="h-full bg-gradient-to-r from-indigo-500 via-purple-500 to-emerald-400 rounded-full" style="width: 99.98%;"></div>
+            </div>
+          </div>
+
+          <!-- Interactive Checklist -->
+          <div class="space-y-1.5 pt-1 text-xs">
+            <label class="flex items-center gap-2 cursor-pointer select-none text-slate-700 dark:text-slate-300">
+              <input type="checkbox" checked class="rounded border-slate-300 text-indigo-600 focus:ring-0">
+              <span>Zero layout shift (CLS: 0.000)</span>
+            </label>
+            <label class="flex items-center gap-2 cursor-pointer select-none text-slate-700 dark:text-slate-300">
+              <input type="checkbox" checked class="rounded border-slate-300 text-indigo-600 focus:ring-0">
+              <span>Damped spring motion handoff</span>
+            </label>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ========================================================
+       SECTION 5: INTERACTIVE TIERED PRICING MATRIX
+       ======================================================== -->
+  <section id="pricing" class="max-w-7xl mx-auto px-6 py-24 border-t border-slate-200/60 dark:border-slate-800/60">
+    <div class="text-center max-w-3xl mx-auto mb-16">
+      <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-50 dark:bg-emerald-950/80 text-emerald-600 dark:text-emerald-400 text-xs font-bold font-mono mb-3 border border-emerald-200 dark:border-emerald-800/60">
+        <i data-lucide="tag" class="w-3.5 h-3.5"></i>
+        <span>Transparent Investment</span>
+      </div>
+      <h2 class="text-3xl sm:text-4xl font-extrabold text-slate-900 dark:text-white tracking-tight">
+        Scale From Solo Creator to Global Enterprise
+      </h2>
+      <p class="text-slate-500 dark:text-slate-400 mt-2 text-sm sm:text-base">
+        All plans unlock full access to the 11 design paradigms with lifetime updates and zero lock-in.
+      </p>
+
+      <!-- Billing Frequency Switcher -->
+      <div class="mt-8 inline-flex items-center gap-3 p-1.5 rounded-2xl bg-slate-100 dark:bg-slate-900 border border-slate-200 dark:border-slate-800">
+        <button type="button" onclick="setPricingBilling(false)" id="btn-billing-monthly" class="px-5 py-2 rounded-xl bg-white dark:bg-slate-800 text-slate-900 dark:text-white font-bold text-xs shadow-sm transition-all cursor-pointer">
+          Monthly
+        </button>
+        <button type="button" onclick="setPricingBilling(true)" id="btn-billing-annual" class="px-5 py-2 rounded-xl text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white font-bold text-xs transition-all cursor-pointer flex items-center gap-1.5">
+          <span>Annual Billing</span>
+          <span class="px-2 py-0.5 rounded-full bg-emerald-500 text-white text-[10px] font-black uppercase tracking-wider">Save 20%</span>
+        </button>
+      </div>
+    </div>
+
+    <!-- 3 Pricing Cards -->
+    <div class="grid grid-cols-1 lg:grid-cols-3 gap-8 items-stretch">
+      
+      <!-- Tier 1: Community -->
+      <div class="vibe-card p-8 flex flex-col justify-between space-y-8">
+        <div class="space-y-4">
+          <div class="inline-block px-3 py-1 rounded-md bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 font-mono text-xs font-bold uppercase">
+            Community
+          </div>
+          <h3 class="text-xl font-bold text-slate-900 dark:text-white">Open Source</h3>
+          <p class="text-xs text-slate-500 leading-relaxed">
+            For independent hackers, researchers, and creators starting their design token journey.
+          </p>
+          <div class="pt-2">
+            <span class="text-4xl font-extrabold text-slate-900 dark:text-white font-mono">$0</span>
+            <span class="text-xs text-slate-400 font-mono"> / forever free</span>
+          </div>
+
+          <div class="border-t border-slate-200/60 dark:border-slate-800/60 pt-6 space-y-3 text-xs text-slate-700 dark:text-slate-300">
+            <div class="flex items-center gap-2.5">
+              <i data-lucide="check" class="w-4 h-4 text-emerald-500 shrink-0"></i>
+              <span>All 11 Visual Design Paradigms</span>
+            </div>
+            <div class="flex items-center gap-2.5">
+              <i data-lucide="check" class="w-4 h-4 text-emerald-500 shrink-0"></i>
+              <span>Full Tailwind CSS Token Output</span>
+            </div>
+            <div class="flex items-center gap-2.5">
+              <i data-lucide="check" class="w-4 h-4 text-emerald-500 shrink-0"></i>
+              <span>Zero-Slop BiDi / RTL Support</span>
+            </div>
+            <div class="flex items-center gap-2.5">
+              <i data-lucide="check" class="w-4 h-4 text-emerald-500 shrink-0"></i>
+              <span>MIT License & Public GitHub Access</span>
+            </div>
+          </div>
+        </div>
+
+        <a href="https://github.com/omid-io/vibe-ui-suite" class="w-full py-3 px-4 text-xs font-bold rounded-xl border border-slate-300 dark:border-slate-700 bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-750 text-slate-900 dark:text-white cursor-pointer text-center transition-colors block">
+          Clone Community Repo
+        </a>
+      </div>
+
+      <!-- Tier 2: Pro / Sovereign (Popular Highlighted) -->
+      <div class="vibe-card p-8 relative flex flex-col justify-between space-y-8 border-2 border-indigo-500 dark:border-indigo-400 shadow-2xl shadow-indigo-500/10">
+        <div class="absolute -top-3.5 left-1/2 transform -translate-x-1/2">
+          <span class="px-3.5 py-1 rounded-full bg-indigo-600 text-white text-[11px] font-black uppercase tracking-wider shadow-lg">
+            Most Popular
+          </span>
+        </div>
+
+        <div class="space-y-4">
+          <div class="inline-block px-3 py-1 rounded-md bg-indigo-50 dark:bg-indigo-950 text-indigo-600 dark:text-indigo-400 font-mono text-xs font-bold uppercase">
+            Pro Sovereign
+          </div>
+          <h3 class="text-xl font-bold text-slate-900 dark:text-white">Autonomous Team</h3>
+          <p class="text-xs text-slate-500 leading-relaxed">
+            For ambitious product teams building high-conversion, award-winning web platforms.
+          </p>
+          <div class="pt-2">
+            <span id="price-pro-display" class="text-4xl font-extrabold text-slate-900 dark:text-white font-mono">$29</span>
+            <span id="price-pro-period" class="text-xs text-slate-400 font-mono"> / seat / month</span>
+          </div>
+
+          <div class="border-t border-slate-200/60 dark:border-slate-800/60 pt-6 space-y-3 text-xs text-slate-700 dark:text-slate-300">
+            <div class="flex items-center gap-2.5 font-semibold text-indigo-600 dark:text-indigo-400">
+              <i data-lucide="sparkles" class="w-4 h-4 shrink-0"></i>
+              <span>Everything in Community, plus:</span>
+            </div>
+            <div class="flex items-center gap-2.5">
+              <i data-lucide="check" class="w-4 h-4 text-emerald-500 shrink-0"></i>
+              <span>Adaptive CLI Agent Suite Integration</span>
+            </div>
+            <div class="flex items-center gap-2.5">
+              <i data-lucide="check" class="w-4 h-4 text-emerald-500 shrink-0"></i>
+              <span>Kinetic Damped Spring Physics Engine</span>
+            </div>
+            <div class="flex items-center gap-2.5">
+              <i data-lucide="check" class="w-4 h-4 text-emerald-500 shrink-0"></i>
+              <span>Automated WCAG AAA Contract Auditing</span>
+            </div>
+            <div class="flex items-center gap-2.5">
+              <i data-lucide="check" class="w-4 h-4 text-emerald-500 shrink-0"></i>
+              <span>Direct Playwright MCP Visual Verifier</span>
+            </div>
+            <div class="flex items-center gap-2.5">
+              <i data-lucide="check" class="w-4 h-4 text-emerald-500 shrink-0"></i>
+              <span>Priority Architectural Support</span>
+            </div>
+          </div>
+        </div>
+
+        <button type="button" onclick="showVibeToast('Redirecting to Pro checkout...', 'success')" class="vibe-btn-primary w-full py-3.5 px-4 text-xs font-bold cursor-pointer text-center shadow-lg shadow-indigo-500/20">
+          Start 14-Day Free Trial
+        </button>
+      </div>
+
+      <!-- Tier 3: Enterprise Protocol -->
+      <div class="vibe-card p-8 flex flex-col justify-between space-y-8">
+        <div class="space-y-4">
+          <div class="inline-block px-3 py-1 rounded-md bg-purple-50 dark:bg-purple-950 text-purple-600 dark:text-purple-400 font-mono text-xs font-bold uppercase">
+            Protocol Enterprise
+          </div>
+          <h3 class="text-xl font-bold text-slate-900 dark:text-white">Mission Critical</h3>
+          <p class="text-xs text-slate-500 leading-relaxed">
+            For global fintech, web3, and enterprise institutions requiring custom tokens and dedicated SLA.
+          </p>
+          <div class="pt-2">
+            <span id="price-ent-display" class="text-4xl font-extrabold text-slate-900 dark:text-white font-mono">$99</span>
+            <span id="price-ent-period" class="text-xs text-slate-400 font-mono"> / seat / month</span>
+          </div>
+
+          <div class="border-t border-slate-200/60 dark:border-slate-800/60 pt-6 space-y-3 text-xs text-slate-700 dark:text-slate-300">
+            <div class="flex items-center gap-2.5 font-semibold text-purple-600 dark:text-purple-400">
+              <i data-lucide="layers" class="w-4 h-4 shrink-0"></i>
+              <span>Everything in Pro, plus:</span>
+            </div>
+            <div class="flex items-center gap-2.5">
+              <i data-lucide="check" class="w-4 h-4 text-emerald-500 shrink-0"></i>
+              <span>Custom Multi-Tenant Design Paradigms</span>
+            </div>
+            <div class="flex items-center gap-2.5">
+              <i data-lucide="check" class="w-4 h-4 text-emerald-500 shrink-0"></i>
+              <span>Private Self-Hosted MCP Connectors</span>
+            </div>
+            <div class="flex items-center gap-2.5">
+              <i data-lucide="check" class="w-4 h-4 text-emerald-500 shrink-0"></i>
+              <span>99.99% Architecture Telemetry SLA</span>
+            </div>
+            <div class="flex items-center gap-2.5">
+              <i data-lucide="check" class="w-4 h-4 text-emerald-500 shrink-0"></i>
+              <span>Dedicated DeepMind Design Engineer</span>
+            </div>
+          </div>
+        </div>
+
+        <button type="button" onclick="showVibeToast('Enterprise briefing requested. Our team will contact you.', 'info')" class="w-full py-3 px-4 text-xs font-bold rounded-xl border border-slate-300 dark:border-slate-700 bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-750 text-slate-900 dark:text-white cursor-pointer text-center transition-colors">
+          Schedule Briefing
+        </button>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ========================================================
+       SECTION 6: INTERACTIVE FAQ ACCORDION
+       ======================================================== -->
+  <section id="faq" class="max-w-4xl mx-auto px-6 py-20 border-t border-slate-200/60 dark:border-slate-800/60">
+    <div class="text-center mb-12">
+      <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-slate-100 dark:bg-slate-900 text-slate-600 dark:text-slate-400 text-xs font-bold font-mono mb-3 border border-slate-200 dark:border-slate-800">
+        <i data-lucide="help-circle" class="w-3.5 h-3.5"></i>
+        <span>Architecture FAQs</span>
+      </div>
+      <h2 class="text-3xl sm:text-4xl font-extrabold text-slate-900 dark:text-white tracking-tight">
+        Frequently Asked Questions
+      </h2>
+      <p class="text-slate-500 dark:text-slate-400 mt-2 text-sm">
+        Technical clarity on our 11-paradigm engine, zero-slop verification, and framework compatibility.
+      </p>
+    </div>
+
+    <div class="space-y-4">
+      <!-- FAQ 1 -->
+      <details class="vibe-card p-6 rounded-2xl group cursor-pointer transition-all" open>
+        <summary class="flex items-center justify-between font-bold text-slate-900 dark:text-white text-base select-none list-none">
+          <span>How does Vibe UI Suite switch between 11 visual paradigms without re-rendering?</span>
+          <i data-lucide="chevron-down" class="faq-chevron w-5 h-5 text-slate-400 transition-transform duration-300 shrink-0 ml-4"></i>
+        </summary>
+        <div class="pt-4 text-xs sm:text-sm text-slate-500 dark:text-slate-400 leading-relaxed border-t border-slate-200/60 dark:border-slate-800/60 mt-4">
+          All 11 paradigms are compiled directly into native CSS custom property token mappings on the root document. When a paradigm is activated via <code class="font-mono text-indigo-500 font-bold">[data-style="..."]</code>, the GPU applies the updated variables instantly across the DOM tree with zero JavaScript virtual-DOM recalculations.
+        </div>
+      </details>
+
+      <!-- FAQ 2 -->
+      <details class="vibe-card p-6 rounded-2xl group cursor-pointer transition-all">
+        <summary class="flex items-center justify-between font-bold text-slate-900 dark:text-white text-base select-none list-none">
+          <span>Can I integrate Vibe UI Suite with React, Next.js, Vue, or Tailwind CSS?</span>
+          <i data-lucide="chevron-down" class="faq-chevron w-5 h-5 text-slate-400 transition-transform duration-300 shrink-0 ml-4"></i>
+        </summary>
+        <div class="pt-4 text-xs sm:text-sm text-slate-500 dark:text-slate-400 leading-relaxed border-t border-slate-200/60 dark:border-slate-800/60 mt-4">
+          Yes. Vibe UI Suite is built on zero-runtime atomic tokens and pure semantic markup. You can copy primitives directly into React, Vue, Svelte, or Vanilla HTML, or use our Tailwind configuration preset that maps Tailwind classes directly to Vibe CSS tokens.
+        </div>
+      </details>
+
+      <!-- FAQ 3 -->
+      <details class="vibe-card p-6 rounded-2xl group cursor-pointer transition-all">
+        <summary class="flex items-center justify-between font-bold text-slate-900 dark:text-white text-base select-none list-none">
+          <span>How does the Zero-Slop and WCAG AAA verification work?</span>
+          <i data-lucide="chevron-down" class="faq-chevron w-5 h-5 text-slate-400 transition-transform duration-300 shrink-0 ml-4"></i>
+        </summary>
+        <div class="pt-4 text-xs sm:text-sm text-slate-500 dark:text-slate-400 leading-relaxed border-t border-slate-200/60 dark:border-slate-800/60 mt-4">
+          Our automated verification pipeline calculates mathematical relative luminance using the WCAG 2.2 and APCA algorithms. Every card, button, and typography token is tested in both Light and Dark modes to guarantee a minimum contrast ratio of 7.0:1 (exceeding AAA standard of 4.5:1), achieving 18.80:1 on average.
+        </div>
+      </details>
+
+      <!-- FAQ 4 -->
+      <details class="vibe-card p-6 rounded-2xl group cursor-pointer transition-all">
+        <summary class="flex items-center justify-between font-bold text-slate-900 dark:text-white text-base select-none list-none">
+          <span>What spring physics engine powers the 3D mockups and micro-interactions?</span>
+          <i data-lucide="chevron-down" class="faq-chevron w-5 h-5 text-slate-400 transition-transform duration-300 shrink-0 ml-4"></i>
+        </summary>
+        <div class="pt-4 text-xs sm:text-sm text-slate-500 dark:text-slate-400 leading-relaxed border-t border-slate-200/60 dark:border-slate-800/60 mt-4">
+          The 3D iPhone 16 Pro mockup and tactile components run on a damped harmonic oscillator spring solver executed via requestAnimationFrame. Gyroscopic Euler angles track pointer velocity and interpolate with critical damping (<code class="font-mono text-indigo-500 font-bold">ζ = 0.85</code>), eliminating unnatural ease jumps.
+        </div>
+      </details>
+
+      <!-- FAQ 5 -->
+      <details class="vibe-card p-6 rounded-2xl group cursor-pointer transition-all">
+        <summary class="flex items-center justify-between font-bold text-slate-900 dark:text-white text-base select-none list-none">
+          <span>Is full RTL (Right-to-Left) and bidirectional text supported?</span>
+          <i data-lucide="chevron-down" class="faq-chevron w-5 h-5 text-slate-400 transition-transform duration-300 shrink-0 ml-4"></i>
+        </summary>
+        <div class="pt-4 text-xs sm:text-sm text-slate-500 dark:text-slate-400 leading-relaxed border-t border-slate-200/60 dark:border-slate-800/60 mt-4">
+          Full native support for Persian, Arabic, and Hebrew layouts using CSS logical properties. Numbers, currencies, and technical identifiers are isolated inside <code class="font-mono text-indigo-500 font-bold">&lt;bdi&gt;</code> tags to prevent BiDi corruption, with strict zero ZWNJ formatting.
+        </div>
+      </details>
+    </div>
+  </section>
+
+  <!-- ========================================================
+       SECTION 7: HIGH-IMPACT CONVERSION PRE-FOOTER CTA
+       ======================================================== -->
+  <section class="max-w-7xl mx-auto px-6 py-20">
+    <div class="vibe-card relative overflow-hidden p-10 sm:p-16 text-center border-2 border-indigo-500/30 dark:border-indigo-500/20 shadow-2xl">
+      <!-- Ambient Glow Behind CTA -->
+      <div class="absolute -top-32 -left-32 w-80 h-80 bg-indigo-500/20 rounded-full blur-3xl pointer-events-none"></div>
+      <div class="absolute -bottom-32 -right-32 w-80 h-80 bg-purple-500/20 rounded-full blur-3xl pointer-events-none"></div>
+
+      <div class="relative z-10 max-w-3xl mx-auto space-y-6">
+        <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-indigo-50 dark:bg-indigo-950/90 text-indigo-600 dark:text-indigo-400 text-xs font-bold font-mono border border-indigo-200 dark:border-indigo-800">
+          <i data-lucide="zap" class="w-3.5 h-3.5"></i>
+          <span>Instant Developer Integration</span>
+        </div>
+
+        <h2 class="text-3xl sm:text-5xl font-black text-slate-900 dark:text-white tracking-tight leading-tight">
+          Start Building with Autonomous Design Intelligence
+        </h2>
+
+        <p class="text-slate-500 dark:text-slate-400 text-sm sm:text-base leading-relaxed max-w-2xl mx-auto">
+          Transform lazy ideas into award-winning user interfaces. Initialize the full suite into your workspace with a single CLI command.
+        </p>
+
+        <!-- Terminal Command Box -->
+        <div class="max-w-md mx-auto p-2 rounded-2xl bg-slate-950 border border-slate-800 shadow-xl flex items-center justify-between gap-3 text-xs font-mono">
+          <div class="flex items-center gap-3 pl-3 text-slate-300">
+            <span class="text-slate-500 select-none">$</span>
+            <span id="cli-command-text">npx vibe-ui-suite@latest init</span>
+          </div>
+          <button type="button" onclick="copyCliCommand(this)" class="px-4 py-2 rounded-xl bg-slate-800 hover:bg-slate-700 text-white font-bold transition-all cursor-pointer flex items-center gap-1.5 shrink-0">
+            <i data-lucide="copy" class="w-3.5 h-3.5"></i>
+            <span id="copy-btn-label">Copy</span>
+          </button>
+        </div>
+
+        <!-- Social Proof Avatars -->
+        <div class="pt-4 flex flex-col sm:flex-row items-center justify-center gap-4 text-xs text-slate-500 dark:text-slate-400">
+          <div class="flex items-center -space-x-2">
+            <img class="w-8 h-8 rounded-full border-2 border-white dark:border-slate-900 shadow-sm" src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=80&q=80" alt="Avatar">
+            <img class="w-8 h-8 rounded-full border-2 border-white dark:border-slate-900 shadow-sm" src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=80&q=80" alt="Avatar">
+            <img class="w-8 h-8 rounded-full border-2 border-white dark:border-slate-900 shadow-sm" src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=80&q=80" alt="Avatar">
+            <img class="w-8 h-8 rounded-full border-2 border-white dark:border-slate-900 shadow-sm" src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=80&q=80" alt="Avatar">
+          </div>
+          <div class="flex items-center gap-1 text-amber-500">
+            <i data-lucide="star" class="w-3.5 h-3.5 fill-current"></i>
+            <i data-lucide="star" class="w-3.5 h-3.5 fill-current"></i>
+            <i data-lucide="star" class="w-3.5 h-3.5 fill-current"></i>
+            <i data-lucide="star" class="w-3.5 h-3.5 fill-current"></i>
+            <i data-lucide="star" class="w-3.5 h-3.5 fill-current"></i>
+            <span class="ml-1 font-bold text-slate-900 dark:text-white">4.98 / 5.0</span>
+            <span class="text-slate-400 font-normal ml-1">(+12,400 developers worldwide)</span>
+          </div>
+        </div>
+
+        <!-- Action Buttons -->
+        <div class="pt-2 flex flex-col sm:flex-row items-center justify-center gap-3">
+          <a href="#hero-section" class="vibe-btn-primary px-8 py-3.5 text-xs font-bold cursor-pointer shadow-lg shadow-indigo-500/20">
+            Explore 11 Paradigms Above
+          </a>
+          <a href="https://github.com/omid-io/vibe-ui-suite" class="px-8 py-3.5 text-xs font-bold rounded-xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-900 text-slate-900 dark:text-white hover:bg-slate-50 dark:hover:bg-slate-800 transition-colors">
+            View on GitHub
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========================================================
+       SECTION 8: COMPREHENSIVE 4-COLUMN FOOTER
+       ======================================================== -->
+  <footer class="border-t border-slate-200/80 dark:border-slate-800/80 pt-16 pb-12 text-slate-600 dark:text-slate-400 text-xs transition-colors bg-slate-50/50 dark:bg-slate-950/60">
+    <div class="max-w-7xl mx-auto px-6">
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-10 pb-12 border-b border-slate-200/60 dark:border-slate-800/60">
+        
+        <!-- Column 1: Brand & Status (Spans 2 cols on lg) -->
+        <div class="lg:col-span-2 space-y-4">
+          <div class="flex items-center gap-2.5">
+            <div class="w-8 h-8 rounded-xl bg-gradient-to-tr from-indigo-600 to-purple-600 flex items-center justify-center text-white shadow-md">
+              <i data-lucide="layers" class="w-4 h-4"></i>
+            </div>
+            <span class="font-extrabold text-base tracking-tight text-slate-900 dark:text-white">Vibe UI Suite</span>
+          </div>
+          <p class="text-xs text-slate-500 leading-relaxed max-w-sm">
+            Contract-driven, autonomous design system and frontend intelligence engine. Bridging prompt intent to mathematical perfection across 11 visual paradigms.
+          </p>
+
+          <!-- Live Operational Status Indicator -->
+          <div class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-emerald-500/10 border border-emerald-500/20 text-emerald-600 dark:text-emerald-400 font-mono text-[11px] font-bold">
+            <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
+            <span>All Systems Operational (99.99%)</span>
+          </div>
+        </div>
+
+        <!-- Column 2: Architectural Suite -->
+        <div class="space-y-3">
+          <p class="text-xs font-bold text-slate-900 dark:text-white uppercase tracking-wider font-mono">Architecture</p>
+          <ul class="space-y-2 text-xs">
+            <li><a href="#hero-section" class="hover:text-indigo-500 transition-colors">11 Visual Paradigms</a></li>
+            <li><a href="#matrix-grid" class="hover:text-indigo-500 transition-colors">Bento Grid Laboratory</a></li>
+            <li><a href="#features" class="hover:text-indigo-500 transition-colors">Token Telemetry</a></li>
+            <li><a href="#features" class="hover:text-indigo-500 transition-colors">Damped Spring Physics</a></li>
+            <li><a href="#components" class="hover:text-indigo-500 transition-colors">Component Sandbox</a></li>
+          </ul>
+        </div>
+
+        <!-- Column 3: Resources & Docs -->
+        <div class="space-y-3">
+          <p class="text-xs font-bold text-slate-900 dark:text-white uppercase tracking-wider font-mono">Resources</p>
+          <ul class="space-y-2 text-xs">
+            <li><a href="https://github.com/omid-io/vibe-ui-suite" class="hover:text-indigo-500 transition-colors">GitHub Repository</a></li>
+            <li><a href="ARCHITECTURE.md" class="hover:text-indigo-500 transition-colors">Architecture Spec</a></li>
+            <li><a href="README.fa.md" class="hover:text-indigo-500 transition-colors flex items-center gap-1.5"><i data-lucide="book-open" class="w-3.5 h-3.5"></i><span>Persian Docs (مستندات فارسی)</span></a></li>
+            <li><a href="PROJECT_STATE.md" class="hover:text-indigo-500 transition-colors flex items-center gap-1.5"><i data-lucide="file-text" class="w-3.5 h-3.5"></i><span>Telemetry Checkpoints</span></a></li>
+            <li><a href="https://playwright.dev" class="hover:text-indigo-500 transition-colors flex items-center gap-1.5"><i data-lucide="check-circle" class="w-3.5 h-3.5"></i><span>MCP Playwright Verifier</span></a></li>
+          </ul>
+        </div>
+
+        <!-- Column 4: Newsletter & Protocol Sync -->
+        <div class="space-y-3">
+          <p class="text-xs font-bold text-slate-900 dark:text-white uppercase tracking-wider font-mono">Stay Synchronized</p>
+          <p class="text-xs text-slate-500">Subscribe for weekly architectural changelog notes.</p>
+          <form onsubmit="handleNewsletterSubmit(event)" class="space-y-2">
+            <input type="email" required placeholder="architect@company.com" class="vibe-input w-full px-3 py-2 text-xs text-slate-900 dark:text-white placeholder-slate-400">
+            <button type="submit" class="vibe-btn-primary w-full py-2 text-xs font-bold cursor-pointer">
+              Subscribe
+            </button>
+            <p id="newsletter-status-msg" class="text-[11px] text-emerald-500 hidden font-semibold">Subscribed to changelog!</p>
+          </form>
+        </div>
+
+      </div>
+
+      <!-- Bottom Bar -->
+      <div class="pt-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs">
+        <p>© 2026 Vibe UI Suite • MIT License • Zero Slop Standard</p>
+        
+        <div class="flex items-center gap-6">
+          <a href="https://github.com/omid-io/vibe-ui-suite" class="hover:text-indigo-500 transition-colors flex items-center gap-1.5">
+            <i data-lucide="github" class="w-4 h-4"></i>
+            <span>GitHub</span>
+          </a>
+          <button type="button" onclick="window.scrollTo({ top: 0, behavior: 'smooth' })" class="hover:text-indigo-500 transition-colors flex items-center gap-1 cursor-pointer">
+            <i data-lucide="arrow-up" class="w-4 h-4"></i>
+            <span>Back to Top</span>
+          </button>
+        </div>
       </div>
     </div>
   </footer>
 
   <!-- ========================================================
+       INTERACTIVE MODAL DIALOG PREVIEW
+       ======================================================== -->
+  <div id="vibePreviewModal" class="fixed inset-0 z-[80000] hidden flex items-center justify-center p-4 bg-slate-950/75 modal-backdrop-blur cursor-pointer" onclick="closeVibeModal()" role="dialog" aria-modal="true" aria-labelledby="modal-preview-title">
+    <div onclick="event.stopPropagation()" class="vibe-card w-full max-w-lg p-6 sm:p-8 animate-modal-in relative shadow-2xl space-y-6 cursor-default">
+      <div class="flex items-center justify-between border-b border-slate-200/60 dark:border-slate-800/60 pb-4">
+        <div class="flex items-center gap-3">
+          <div class="w-10 h-10 rounded-xl bg-indigo-500/10 text-indigo-600 dark:text-indigo-400 flex items-center justify-center font-bold">
+            <i data-lucide="layers" class="w-5 h-5"></i>
+          </div>
+          <div>
+            <h3 id="modal-preview-title" class="font-bold text-lg text-slate-900 dark:text-white">Accessible Modal Primitive</h3>
+            <p class="text-xs text-slate-500">WCAG AAA Keyboard Trapped Dialog</p>
+          </div>
+        </div>
+        <button type="button" onclick="closeVibeModal()" class="w-8 h-8 rounded-lg bg-slate-100 dark:bg-slate-800 text-slate-500 hover:text-slate-900 dark:hover:text-white flex items-center justify-center cursor-pointer transition-colors" aria-label="Close dialog">
+          <i data-lucide="x" class="w-4 h-4"></i>
+        </button>
+      </div>
+
+      <div class="space-y-3 text-xs sm:text-sm text-slate-600 dark:text-slate-300 leading-relaxed">
+        <p>This modal container automatically inherits the active design paradigm’s border-radius, backdrop blur, elevation shadow, and font sizing without touching CSS code.</p>
+        <div class="p-4 rounded-xl bg-slate-100 dark:bg-slate-900 border border-slate-200 dark:border-slate-800 space-y-2 font-mono text-xs">
+          <div class="flex justify-between text-slate-500">
+            <span>Focus Trapping:</span>
+            <span class="text-emerald-500 font-bold">Active</span>
+          </div>
+          <div class="flex justify-between text-slate-500">
+            <span>Hardware Layer:</span>
+            <span class="text-indigo-400 font-bold">GPU Accelerated</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="flex items-center justify-end gap-3 pt-2">
+        <button type="button" onclick="closeVibeModal()" class="px-5 py-2.5 rounded-xl border border-slate-300 dark:border-slate-700 bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 text-xs font-bold cursor-pointer hover:bg-slate-200 dark:hover:bg-slate-750 transition-colors">
+          Dismiss
+        </button>
+        <button type="button" onclick="showVibeToast('Action confirmed inside modal!', 'success'); closeVibeModal();" class="vibe-btn-primary px-5 py-2.5 text-xs font-bold cursor-pointer">
+          Confirm Action
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- FLOATING TOAST NOTIFICATION CONTAINER -->
+  <div id="vibeToastContainer" aria-live="polite"></div>
+
+  <!-- ========================================================
        RUNTIME LOGIC & PARADIGM COMPILER
        ======================================================== -->
   <script>
-    // Initialize Lucide Icons
-    lucide.createIcons();
+    // Initialize Lucide Icons immediately
+    function renderIcons() {
+      if (typeof lucide !== 'undefined') {
+        lucide.createIcons();
+      }
+    }
+    renderIcons();
+    window.addEventListener('DOMContentLoaded', renderIcons);
+    window.addEventListener('load', renderIcons);
 
-    // 1. Mouse Cursor Glow Tracking
-    const glow = document.getElementById('cursor-glow');
-    window.addEventListener('mousemove', (e) => {
-      glow.style.transform = `translate3d(${e.clientX}px, ${e.clientY}px, 0)`;
-    });
+    // =========================================================================
+    // 1. LIGHTSWIND KINETIC TRAILING CHEVRON & LEAD DOT (Tip-Connected Hotspot)
+    // =========================================================================
+    const cursorDot = document.getElementById('vibeCursorDot');
+    const cursorFollower = document.getElementById('vibeCursorFollower');
+    const cursorBadge = document.getElementById('vibeCursorBadge');
+
+    if (cursorDot && cursorFollower && window.matchMedia('(pointer: fine)').matches) {
+      let mouseX = window.innerWidth / 2;
+      let mouseY = window.innerHeight / 2;
+      let prevMouseX = mouseX;
+      let prevMouseY = mouseY;
+      let followerX = mouseX;
+      let followerY = mouseY;
+      let currentAngle = 0;
+      let targetAngle = 0;
+      let cursorVisible = false;
+
+      window.addEventListener('pointermove', (e) => {
+        mouseX = e.clientX;
+        mouseY = e.clientY;
+        if (!cursorVisible) {
+          cursorVisible = true;
+          cursorDot.style.opacity = '1';
+          cursorFollower.style.opacity = '1';
+        }
+        cursorDot.style.transform = `translate(${mouseX}px, ${mouseY}px) translate(-50%, -50%)`;
+        
+        // Ambient Spotlight updates
+        document.documentElement.style.setProperty('--mouse-x', `${mouseX}px`);
+        document.documentElement.style.setProperty('--mouse-y', `${mouseY}px`);
+      });
+
+      document.addEventListener('mouseleave', () => {
+        cursorVisible = false;
+        cursorDot.style.opacity = '0';
+        cursorFollower.style.opacity = '0';
+      });
+
+      document.addEventListener('mousedown', () => {
+        cursorFollower.classList.add('click-active');
+      });
+      document.addEventListener('mouseup', () => {
+        cursorFollower.classList.remove('click-active');
+      });
+
+      // Kinetic physics loop: spring lag + velocity vector angle orientation
+      function renderCursor() {
+        const vx = mouseX - followerX;
+        const vy = mouseY - followerY;
+        followerX += vx * 0.18;
+        followerY += vy * 0.18;
+
+        const dx = mouseX - prevMouseX;
+        const dy = mouseY - prevMouseY;
+        const speed = Math.hypot(dx, dy);
+
+        if (speed > 1.2) {
+          targetAngle = Math.atan2(dy, dx) * (180 / Math.PI) + 90;
+          let diff = targetAngle - currentAngle;
+          if (diff > 180) diff -= 360;
+          if (diff < -180) diff += 360;
+          currentAngle += diff * 0.22;
+        }
+        prevMouseX = mouseX;
+        prevMouseY = mouseY;
+
+        cursorFollower.style.transform = `translate(${followerX.toFixed(2)}px, ${followerY.toFixed(2)}px) translate(-50%, -4px) rotate(${currentAngle.toFixed(2)}deg)`;
+        requestAnimationFrame(renderCursor);
+      }
+      requestAnimationFrame(renderCursor);
+
+      // Hover expansions on interactive elements
+      const hoverTargets = document.querySelectorAll('a, button, .vibe-card, input, [role="button"]');
+      hoverTargets.forEach((el) => {
+        el.addEventListener('pointerenter', () => {
+          cursorDot.classList.add('hover-target');
+          cursorFollower.classList.add('hover-active');
+          if (cursorBadge) {
+            const tag = el.tagName.toLowerCase();
+            if (tag === 'button' || el.classList.contains('vibe-btn-primary') || el.classList.contains('style-btn')) {
+              cursorBadge.textContent = 'ACTIVATE';
+            } else if (tag === 'a') {
+              cursorBadge.textContent = 'EXPLORE';
+            } else if (tag === 'input' && el.type === 'range') {
+              cursorBadge.textContent = 'DRAG';
+            } else if (tag === 'input') {
+              cursorBadge.textContent = 'EDIT';
+            } else if (el.classList.contains('vibe-card')) {
+              cursorBadge.textContent = 'INSPECT';
+            } else {
+              cursorBadge.textContent = 'VIEW';
+            }
+          }
+        });
+        el.addEventListener('pointerleave', () => {
+          cursorDot.classList.remove('hover-target');
+          cursorFollower.classList.remove('hover-active');
+          if (cursorBadge) cursorBadge.textContent = '';
+        });
+      });
+      window.__bindCursorHovers = () => {};
+    }
 
     // 2. Style Names Dictionary
     const styleDisplayNames = {
@@ -986,18 +2871,72 @@
       'spatial-ui': 'Spatial UI (VisionOS Depth)',
       'minimalism': 'Swiss Minimalism / Flat 2.0',
       'y2k-retro': 'Y2K Retro-Futurism Chrome',
-      'dark-glow': 'Dark UI & Ambient Glow',
       'clean-stripe': 'Clean Stripe SaaS'
+    };
+
+    // Style Tokens Dictionary for Live Telemetry
+    const styleTokensMap = {
+      'apple-glass': { radius: '1.5rem', backdrop: 'blur(32px)', shadow: '0 24px 48px' },
+      'neumorphism': { radius: '1.75rem', backdrop: 'none', shadow: '12px 12px 24px' },
+      'claymorphism': { radius: '2.25rem', backdrop: 'none', shadow: '14px 14px 28px' },
+      'neubrutalism': { radius: '0.375rem', backdrop: 'none', shadow: '5px 5px 0px #000' },
+      'bento-grid': { radius: '1.75rem', backdrop: 'none', shadow: '0 8px 30px' },
+      'aurora-ui': { radius: '1.75rem', backdrop: 'blur(40px)', shadow: '0 20px 50px' },
+      'skeuomorphism': { radius: '1.25rem', backdrop: 'none', shadow: 'inset 0 1px 0' },
+      'spatial-ui': { radius: '2rem', backdrop: 'blur(48px)', shadow: '0 32px 64px' },
+      'minimalism': { radius: '0px', backdrop: 'none', shadow: 'none' },
+      'y2k-retro': { radius: '0.75rem', backdrop: 'none', shadow: '0 0 20px #0284c7' },
+      'clean-stripe': { radius: '1rem', backdrop: 'none', shadow: '0 13px 27px' }
     };
 
     // 3. Style Paradigm Switching Engine
     function setStyle(styleName, btnElement) {
       document.documentElement.setAttribute('data-style', styleName);
       
-      // Update badge label
+      // Update header badge label
       const badge = document.getElementById('active-style-name');
       if (badge && styleDisplayNames[styleName]) {
         badge.innerText = styleDisplayNames[styleName];
+      }
+
+      // Update hero artifact badge
+      const heroBadge = document.getElementById('hero-artifact-badge');
+      if (heroBadge && styleDisplayNames[styleName]) {
+        heroBadge.innerText = styleDisplayNames[styleName];
+      }
+
+      // Update live token telemetry in hero & bento inspector
+      const tokens = styleTokensMap[styleName];
+      if (tokens) {
+        const rEl = document.getElementById('tok-radius');
+        const bEl = document.getElementById('tok-backdrop');
+        const sEl = document.getElementById('tok-shadow');
+        if (rEl) rEl.innerText = tokens.radius;
+        if (bEl) bEl.innerText = tokens.backdrop;
+        if (sEl) sEl.innerText = tokens.shadow;
+
+        const irEl = document.getElementById('tok-inspector-radius');
+        const ibEl = document.getElementById('tok-inspector-backdrop');
+        const isEl = document.getElementById('tok-inspector-shadow');
+        if (irEl) irEl.innerText = tokens.radius;
+        if (ibEl) ibEl.innerText = tokens.backdrop;
+        if (isEl) isEl.innerText = tokens.shadow;
+
+        // Update code terminal in feature tab 1
+        const cStyle = document.getElementById('code-token-style');
+        const cRad = document.getElementById('code-tok-radius');
+        const cBack = document.getElementById('code-tok-backdrop');
+        const cShad = document.getElementById('code-tok-shadow');
+        if (cStyle) cStyle.innerText = `"${styleName}"`;
+        if (cRad) cRad.innerText = tokens.radius;
+        if (cBack) cBack.innerText = tokens.backdrop;
+        if (cShad) cShad.innerText = tokens.shadow;
+      }
+
+      // Update inner phone app wallpaper / background depending on paradigm
+      const phoneScreen = document.getElementById('phone-screen-surface');
+      if (phoneScreen) {
+        phoneScreen.setAttribute('data-style', styleName);
       }
 
       // Update active state in dock buttons
@@ -1020,15 +2959,29 @@
       const target = current === 'light' ? 'dark' : 'light';
       document.documentElement.setAttribute('data-theme', target);
       
+      if (target === 'dark') {
+        document.documentElement.classList.add('dark');
+      } else {
+        document.documentElement.classList.remove('dark');
+      }
+
       // Update icons in dock and header
-      const dockIcon = document.getElementById('dock-theme-icon');
       const headerIcon = document.getElementById('header-theme-icon');
       const newIconName = target === 'light' ? 'moon' : 'sun';
-      
-      if (dockIcon) dockIcon.setAttribute('data-lucide', newIconName);
       if (headerIcon) headerIcon.setAttribute('data-lucide', newIconName);
       
-      lucide.createIcons();
+      const dockSvg = document.getElementById('dock-theme-svg');
+      if (dockSvg) {
+        if (target === 'dark') {
+          // Sun Icon SVG
+          dockSvg.innerHTML = '<circle cx="12" cy="12" r="4"/><path d="M12 2v2"/><path d="M12 20v2"/><path d="m4.93 4.93 1.41 1.41"/><path d="m17.66 17.66 1.41 1.41"/><path d="M2 12h2"/><path d="M20 12h2"/><path d="m6.34 17.66-1.41 1.41"/><path d="m19.07 4.93-1.41 1.41"/>';
+        } else {
+          // Moon Icon SVG
+          dockSvg.innerHTML = '<path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"/>';
+        }
+      }
+
+      if (typeof lucide !== 'undefined') lucide.createIcons();
     }
 
     // 5. Tactile Switch Toggle
@@ -1046,6 +2999,438 @@
         btn.classList.add('bg-indigo-600');
       }
     }
+
+    // 6. Living Matrix Interactive Engine
+    function setMatrixArchetype(btn, type) {
+      document.querySelectorAll('.matrix-tab-btn').forEach(b => {
+        b.classList.remove('bg-white', 'dark:bg-slate-900', 'shadow-sm', 'text-indigo-600', 'dark:text-indigo-400', 'font-bold');
+        b.classList.add('text-slate-600', 'dark:text-slate-400');
+      });
+      btn.classList.add('bg-white', 'dark:bg-slate-900', 'shadow-sm', 'text-indigo-600', 'dark:text-indigo-400', 'font-bold');
+      btn.classList.remove('text-slate-600', 'dark:text-slate-400');
+
+      const primaryVal = document.getElementById('matrix-primary-val');
+      const apyVal = document.getElementById('matrix-apy-val');
+      const tvlVal = document.getElementById('matrix-stat-tvl');
+      const sparkLine = document.getElementById('sparkline-line');
+      const sparkArea = document.getElementById('sparkline-area');
+
+      if (type === 'vault') {
+        if (primaryVal) primaryVal.innerHTML = '<span>$1,482,920.00</span>';
+        if (apyVal) apyVal.innerText = '+24.8% APY';
+        if (tvlVal) tvlVal.innerText = '$48.2M';
+        if (sparkLine) sparkLine.setAttribute('d', 'M0,45 Q40,20 80,35 T160,15 T240,30 T320,5');
+        if (sparkArea) sparkArea.setAttribute('d', 'M0,45 Q40,20 80,35 T160,15 T240,30 T320,5 L320,60 L0,60 Z');
+      } else if (type === 'liquidity') {
+        if (primaryVal) primaryVal.innerHTML = '<span>$8,290,140.50</span>';
+        if (apyVal) apyVal.innerText = '+38.4% APR';
+        if (tvlVal) tvlVal.innerText = '$112.5M';
+        if (sparkLine) sparkLine.setAttribute('d', 'M0,50 Q40,35 80,25 T160,30 T240,10 T320,8');
+        if (sparkArea) sparkArea.setAttribute('d', 'M0,50 Q40,35 80,25 T160,30 T240,10 T320,8 L320,60 L0,60 Z');
+      } else if (type === 'governance') {
+        if (primaryVal) primaryVal.innerHTML = '<span>2,400,000 VIBE</span>';
+        if (apyVal) apyVal.innerText = '94.2% Quorum';
+        if (tvlVal) tvlVal.innerText = '$18.9M';
+        if (sparkLine) sparkLine.setAttribute('d', 'M0,35 Q40,40 80,20 T160,25 T240,15 T320,12');
+        if (sparkArea) sparkArea.setAttribute('d', 'M0,35 Q40,40 80,20 T160,25 T240,15 T320,12 L320,60 L0,60 Z');
+      }
+    }
+
+    function updateHeroSlider(val) {
+      const display = document.getElementById('hero-slider-display');
+      if (display) display.innerText = val + '%';
+      const tokShadow = document.getElementById('tok-shadow');
+      if (tokShadow) {
+        const blurRadius = Math.round(val * 0.3);
+        const yOffset = Math.round(val * 0.12);
+        tokShadow.innerText = `0 ${yOffset}px ${blurRadius}px`;
+      }
+    }
+
+    function triggerHeroDeploy(btn) {
+      const label = document.getElementById('hero-deploy-label');
+      if (!label) return;
+      const original = label.innerText;
+      label.innerText = 'Rebalancing Telemetry...';
+      btn.classList.add('opacity-80', 'scale-[0.98]');
+      setTimeout(() => {
+        label.innerText = 'Matrix Rebalanced (Zero Slippage)';
+        btn.classList.remove('opacity-80', 'scale-[0.98]');
+        setTimeout(() => {
+          label.innerText = original;
+        }, 2200);
+      }, 600);
+    }
+
+    // 5. Interactive 3D Physics Gyroscopic Tilt for iPhone Mockup (Galaxy & Apple Card Physics)
+    (function initPhone3DTilt() {
+      const stage = document.querySelector('.hero-phone-perspective-stage');
+      const phone = document.getElementById('hero-phone-mockup');
+      if (!stage || !phone) return;
+
+      let isHovering = false;
+      let targetRotX = 0;
+      let targetRotY = 0;
+      let targetScale = 1;
+      let currentRotX = 0;
+      let currentRotY = 0;
+      let currentScale = 1;
+      let rafId = null;
+
+      function updateTilt() {
+        // Critical damped spring interpolation for rotation and scale
+        currentRotX += (targetRotX - currentRotX) * 0.1;
+        currentRotY += (targetRotY - currentRotY) * 0.1;
+        currentScale += (targetScale - currentScale) * 0.08;
+
+        const isMoving = Math.abs(targetRotX - currentRotX) > 0.02 || 
+                         Math.abs(targetRotY - currentRotY) > 0.02 || 
+                         Math.abs(targetScale - currentScale) > 0.002;
+
+        if (isHovering || isMoving) {
+          phone.style.transform = `perspective(1200px) rotateX(${currentRotX.toFixed(2)}deg) rotateY(${currentRotY.toFixed(2)}deg) scale3d(${currentScale.toFixed(3)}, ${currentScale.toFixed(3)}, 1)`;
+          rafId = requestAnimationFrame(updateTilt);
+        } else {
+          phone.style.transform = '';
+          phone.classList.add('animate-float');
+          rafId = null;
+        }
+      }
+
+      stage.addEventListener('pointerenter', () => {
+        isHovering = true;
+        targetScale = 1.03;
+        phone.classList.remove('reset-spring', 'animate-float');
+        if (!rafId) rafId = requestAnimationFrame(updateTilt);
+      });
+
+      stage.addEventListener('pointermove', (e) => {
+        const rect = stage.getBoundingClientRect();
+        const x = e.clientX - rect.left;
+        const y = e.clientY - rect.top;
+        
+        // Normalize from -1 to 1
+        const normX = (x / rect.width) * 2 - 1;
+        const normY = (y / rect.height) * 2 - 1;
+
+        // Calculate 3D tilt angles (Max 14 deg on X and Y)
+        targetRotX = -normY * 14;
+        targetRotY = normX * 14;
+        targetScale = 1.03;
+
+        if (!rafId) rafId = requestAnimationFrame(updateTilt);
+      });
+
+      stage.addEventListener('pointerleave', () => {
+        isHovering = false;
+        targetRotX = 0;
+        targetRotY = 0;
+        targetScale = 1; // Smoothly damp back to 1.0 without sudden jump
+        if (!rafId) rafId = requestAnimationFrame(updateTilt);
+      });
+    })();
+
+    // 5b. Interactive Before / After Split Lens Engine
+    function updateBeforeAfter(val) {
+      const clip = document.getElementById('beforeAfterClip');
+      const handle = document.getElementById('beforeAfterHandle');
+      if (clip) {
+        clip.style.clipPath = `inset(0 0 0 ${val}%)`;
+      }
+      if (handle) {
+        handle.style.left = `${val}%`;
+      }
+    }
+
+    (function initBeforeAfterDrag() {
+      const container = document.getElementById('beforeAfterContainer');
+      const range = document.getElementById('beforeAfterRange');
+      if (!container) return;
+
+      let isDragging = false;
+      function setPositionFromPointer(e) {
+        const rect = container.getBoundingClientRect();
+        const clientX = e.touches ? e.touches[0].clientX : e.clientX;
+        const x = clientX - rect.left;
+        const percent = Math.min(Math.max((x / rect.width) * 100, 0), 100);
+        updateBeforeAfter(percent);
+        if (range) range.value = percent;
+      }
+
+      container.addEventListener('pointerdown', (e) => {
+        isDragging = true;
+        setPositionFromPointer(e);
+      });
+      window.addEventListener('pointermove', (e) => {
+        if (!isDragging) return;
+        setPositionFromPointer(e);
+      });
+      window.addEventListener('pointerup', () => {
+        isDragging = false;
+      });
+    })();
+
+    // 5c. Gallery Filter Engine
+    function filterGallery(category, btn) {
+      document.querySelectorAll('.gallery-filter-btn').forEach(b => {
+        b.classList.remove('bg-white', 'dark:bg-slate-800', 'text-slate-900', 'dark:text-white', 'shadow-sm', 'font-bold');
+        b.classList.add('text-slate-500', 'dark:text-slate-400');
+      });
+      if (btn) {
+        btn.classList.add('bg-white', 'dark:bg-slate-800', 'text-slate-900', 'dark:text-white', 'shadow-sm', 'font-bold');
+        btn.classList.remove('text-slate-500', 'dark:text-slate-400');
+      }
+
+      const cards = document.querySelectorAll('.gallery-card');
+      cards.forEach(card => {
+        const cat = card.getAttribute('data-category');
+        if (category === 'all' || cat === category) {
+          card.classList.remove('hidden');
+          card.style.opacity = '1';
+          card.style.transform = 'scale(1)';
+        } else {
+          card.classList.add('hidden');
+        }
+      });
+      if (typeof lucide !== 'undefined') lucide.createIcons();
+    }
+
+    // 6. Interactive Feature Tabs Switcher
+    function switchFeatureTab(tabId) {
+      const tabs = ['tokens', 'physics', 'rtl'];
+      tabs.forEach(t => {
+        const panel = document.getElementById(`feature-panel-${t}`);
+        const btn = document.getElementById(`tab-btn-${t}`);
+        if (panel && btn) {
+          if (t === tabId) {
+            panel.classList.remove('hidden');
+            btn.classList.add('bg-white', 'dark:bg-slate-800', 'text-slate-900', 'dark:text-white', 'shadow-sm', 'font-bold');
+            btn.classList.remove('text-slate-500', 'dark:text-slate-400');
+          } else {
+            panel.classList.add('hidden');
+            btn.classList.remove('bg-white', 'dark:bg-slate-800', 'text-slate-900', 'dark:text-white', 'shadow-sm', 'font-bold');
+            btn.classList.add('text-slate-500', 'dark:text-slate-400');
+          }
+        }
+      });
+      if (typeof lucide !== 'undefined') lucide.createIcons();
+    }
+
+    // 7. Interactive Physics Orb Spring Dynamics
+    function pingPhysicsOrb() {
+      const orb = document.getElementById('interactive-physics-orb');
+      if (!orb) return;
+      orb.style.transform = 'scale(0.84) rotate(12deg)';
+      setTimeout(() => {
+        orb.style.transform = 'scale(1.15) rotate(-6deg)';
+        setTimeout(() => {
+          orb.style.transform = 'scale(0.96) rotate(2deg)';
+          setTimeout(() => {
+            orb.style.transform = 'scale(1) rotate(0deg)';
+          }, 140);
+        }, 140);
+      }, 120);
+      showVibeToast('Kinetic spring pulse executed (ζ = 0.82)', 'info');
+    }
+
+    function updateSpringStiffness(val) {
+      const display = document.getElementById('slider-stiffness-val');
+      if (display) display.innerText = val + ' N/m';
+    }
+
+    function updateSpringDamping(val) {
+      const display = document.getElementById('slider-damping-val');
+      if (display) {
+        const ratio = (val / 100).toFixed(2);
+        display.innerText = `${ratio} (${ratio >= 1 ? 'Over-damped' : 'Sub-critical'})`;
+      }
+    }
+
+    // 8. Bidirectional / RTL Preview Toggle
+    function toggleRtlPreview(dir) {
+      const card = document.getElementById('rtl-demo-card');
+      const title = document.getElementById('rtl-card-title');
+      const sub = document.getElementById('rtl-card-sub');
+      const label = document.getElementById('rtl-card-label');
+      const btnLtr = document.getElementById('rtl-btn-ltr');
+      const btnRtl = document.getElementById('rtl-btn-rtl');
+
+      if (!card) return;
+
+      if (dir === 'rtl') {
+        card.setAttribute('dir', 'rtl');
+        if (title) title.innerText = 'تسویه خزانه پروتکل';
+        if (sub) sub.innerText = 'قرارداد هوشمند چند امضایی مستقل';
+        if (label) label.innerText = 'موجودی کل در دسترس';
+        if (btnRtl && btnLtr) {
+          btnRtl.classList.add('bg-indigo-600', 'text-white');
+          btnRtl.classList.remove('bg-slate-200', 'dark:bg-slate-800', 'text-slate-700', 'dark:text-slate-300');
+          btnLtr.classList.remove('bg-indigo-600', 'text-white');
+          btnLtr.classList.add('bg-slate-200', 'dark:bg-slate-800', 'text-slate-700', 'dark:text-slate-300');
+        }
+      } else {
+        card.setAttribute('dir', 'ltr');
+        if (title) title.innerText = 'Treasury Settlement';
+        if (sub) sub.innerText = 'Autonomous Multisig Smart Contract';
+        if (label) label.innerText = 'Total Available Balance';
+        if (btnLtr && btnRtl) {
+          btnLtr.classList.add('bg-indigo-600', 'text-white');
+          btnLtr.classList.remove('bg-slate-200', 'dark:bg-slate-800', 'text-slate-700', 'dark:text-slate-300');
+          btnRtl.classList.remove('bg-indigo-600', 'text-white');
+          btnRtl.classList.add('bg-slate-200', 'dark:bg-slate-800', 'text-slate-700', 'dark:text-slate-300');
+        }
+      }
+      if (typeof lucide !== 'undefined') lucide.createIcons();
+    }
+
+    // 9. Interactive Segmented Switcher & Spring Switch
+    function setSegmented(btn) {
+      const parent = btn.parentElement;
+      if (!parent) return;
+      parent.querySelectorAll('button').forEach(b => {
+        b.classList.remove('bg-white', 'dark:bg-slate-800', 'text-slate-900', 'dark:text-white', 'shadow-sm', 'font-bold');
+        b.classList.add('text-slate-500');
+      });
+      btn.classList.add('bg-white', 'dark:bg-slate-800', 'text-slate-900', 'dark:text-white', 'shadow-sm', 'font-bold');
+      btn.classList.remove('text-slate-500');
+    }
+
+    function toggleVibeSwitch(btn) {
+      const knob = btn.querySelector('span');
+      const isChecked = btn.getAttribute('aria-checked') === 'true';
+      if (isChecked) {
+        btn.setAttribute('aria-checked', 'false');
+        btn.classList.remove('bg-indigo-600');
+        btn.classList.add('bg-slate-300', 'dark:bg-slate-750');
+        if (knob) knob.classList.remove('translate-x-5');
+      } else {
+        btn.setAttribute('aria-checked', 'true');
+        btn.classList.add('bg-indigo-600');
+        btn.classList.remove('bg-slate-300', 'dark:bg-slate-750');
+        if (knob) knob.classList.add('translate-x-5');
+      }
+    }
+
+    // 10. Pricing Annual / Monthly Billing Switcher
+    function setPricingBilling(isAnnual) {
+      const btnM = document.getElementById('btn-billing-monthly');
+      const btnA = document.getElementById('btn-billing-annual');
+      const proPrice = document.getElementById('price-pro-display');
+      const entPrice = document.getElementById('price-ent-display');
+
+      if (isAnnual) {
+        if (btnA) {
+          btnA.classList.add('bg-white', 'dark:bg-slate-800', 'text-slate-900', 'dark:text-white', 'shadow-sm');
+          btnA.classList.remove('text-slate-500', 'dark:text-slate-400');
+        }
+        if (btnM) {
+          btnM.classList.remove('bg-white', 'dark:bg-slate-800', 'text-slate-900', 'dark:text-white', 'shadow-sm');
+          btnM.classList.add('text-slate-500', 'dark:text-slate-400');
+        }
+        if (proPrice) proPrice.innerText = '$24';
+        if (entPrice) entPrice.innerText = '$79';
+      } else {
+        if (btnM) {
+          btnM.classList.add('bg-white', 'dark:bg-slate-800', 'text-slate-900', 'dark:text-white', 'shadow-sm');
+          btnM.classList.remove('text-slate-500', 'dark:text-slate-400');
+        }
+        if (btnA) {
+          btnA.classList.remove('bg-white', 'dark:bg-slate-800', 'text-slate-900', 'dark:text-white', 'shadow-sm');
+          btnA.classList.add('text-slate-500', 'dark:text-slate-400');
+        }
+        if (proPrice) proPrice.innerText = '$29';
+        if (entPrice) entPrice.innerText = '$99';
+      }
+    }
+
+    // 11. Living Toast System
+    function showVibeToast(msg, type = 'info') {
+      const container = document.getElementById('vibeToastContainer');
+      if (!container) return;
+
+      const toast = document.createElement('div');
+      toast.className = 'vibe-toast-item vibe-card px-4 py-3 rounded-xl shadow-2xl flex items-center gap-3 text-xs font-semibold text-slate-900 dark:text-white border border-slate-200/80 dark:border-slate-800/80 max-w-sm';
+
+      let icon = '<i data-lucide="info" class="w-4 h-4 text-indigo-500"></i>';
+      if (type === 'success') icon = '<i data-lucide="check-circle" class="w-4 h-4 text-emerald-500"></i>';
+      if (type === 'warning') icon = '<i data-lucide="alert-triangle" class="w-4 h-4 text-amber-500"></i>';
+
+      toast.innerHTML = `
+        <div class="shrink-0">${icon}</div>
+        <p class="flex-1">${msg}</p>
+        <button type="button" onclick="this.parentElement.remove()" class="text-slate-400 hover:text-slate-600 dark:hover:text-white cursor-pointer ml-1">
+          <i data-lucide="x" class="w-3.5 h-3.5"></i>
+        </button>
+      `;
+
+      container.appendChild(toast);
+      if (typeof lucide !== 'undefined') lucide.createIcons();
+
+      setTimeout(() => {
+        toast.style.transition = 'all 0.3s ease';
+        toast.style.opacity = '0';
+        toast.style.transform = 'translateY(15px)';
+        setTimeout(() => toast.remove(), 300);
+      }, 3500);
+    }
+
+    // 12. Accessible Modal Trigger & ESC Key
+    function openVibeModal() {
+      const modal = document.getElementById('vibePreviewModal');
+      if (modal) {
+        modal.classList.remove('hidden');
+        document.body.style.overflow = 'hidden';
+      }
+    }
+
+    function closeVibeModal() {
+      const modal = document.getElementById('vibePreviewModal');
+      if (modal) {
+        modal.classList.add('hidden');
+        document.body.style.overflow = '';
+      }
+    }
+
+    window.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') closeVibeModal();
+    });
+
+    // 13. Terminal Copy Feedback
+    function copyCliCommand(btn) {
+      const cmdText = document.getElementById('cli-command-text');
+      const label = document.getElementById('copy-btn-label');
+      if (cmdText && navigator.clipboard) {
+        navigator.clipboard.writeText(cmdText.innerText.trim()).catch(() => {});
+        if (label) label.innerText = 'Copied!';
+        showVibeToast('Terminal command copied to clipboard!', 'success');
+        setTimeout(() => {
+          if (label) label.innerText = 'Copy';
+        }, 2200);
+      }
+    }
+
+    // 14. Newsletter Feedback
+    function handleNewsletterSubmit(e) {
+      e.preventDefault();
+      const status = document.getElementById('newsletter-status-msg');
+      if (status) {
+        status.classList.remove('hidden');
+        showVibeToast('Subscribed to weekly telemetry changelog!', 'success');
+      }
+    }
+
+    // Robust Video Autoplay Engine
+    function initAutoplay() {
+      document.querySelectorAll('video').forEach(vid => {
+        vid.muted = true;
+        vid.play().catch(() => {});
+      });
+    }
+    initAutoplay();
+    window.addEventListener('DOMContentLoaded', initAutoplay);
+    window.addEventListener('load', initAutoplay);
+    window.addEventListener('click', initAutoplay, { once: true });
+    window.addEventListener('mousemove', initAutoplay, { once: true });
   </script>
 
 </body>

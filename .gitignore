@@ -61,4 +61,9 @@ data/uiverse-galaxy/
 data/
 
 *.bak
-
+# Test screenshots & scratch videos
+screenshots/
+assets/*_hero.mp4
+assets/hero_ambient_*.mp4
+assets/hero_abstract_ui_loop.mp4
+!assets/hero_abstract_pingpong_loop.mp4
