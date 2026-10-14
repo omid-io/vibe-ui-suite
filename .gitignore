@@ -38,8 +38,9 @@ htmlcov/
 # Packages, builds & agent artifacts
 *.vsix
 .next/
-.agents/
 .test-artifacts/
+.agents/*
+!.agents/skills/
 *.zip
 *.gz
 *.tar

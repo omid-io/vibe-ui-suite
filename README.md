@@ -105,27 +105,28 @@ Just give your AI assistant (Antigravity, Cursor, Hermes, Claude Code) a single 
 - `@vibe-ui-agent design a crypto staking interface with dark terminal HUD aesthetic`
 - `@vibe-ui-agent create a patient booking screen for an aesthetic dental clinic`
 
-**What `vibe-ui-agent` guarantees automatically:**
-- **Zero Raw Emojis:** Replaced with crisp, accessible inline SVG vector icons with `currentColor`.
-- **WCAG AAA Contrast:** Background and foreground colors mathematically calibrated in OKLCH.
-- **BiDi / RTL Isolation:** Numbers, currencies, and technical metrics wrapped in `<bdi>` so English/Persian text never flips.
-- **Ergonomic Touch Targets:** Every button and interactive control meets the minimum 44x44px physical envelope.
-- **Living Spring Physics:** Smooth, critically damped spring transitions (`ease-vibe-spring`) with fast exits (<180ms).
+**What `vibe-ui-agent` guarantees automatically (Lazy-Prompt Protocol & The 5 Gates):**
+- **Mandatory Pre-Edit Visual Audit:** Captures headless browser screenshot (`screenshots/before.png`) before touching code to diagnose spatial and typographic flaws with multimodal vision.
+- **Architectural Paradigm & Trend Anchoring:** Autonomously selects proven paradigms (Bento Grid, Linear Minimal, Stripe Crisp Light, Swiss Editorial) benchmarked from Dribbble, Mobbin, and Awwwards.
+- **Structural DOM & Spatial Rhythm Overhaul:** Re-architects real layout structures and 8pt spatial rhythm (Zero Cosmetic-Only Patch Invariant).
+- **Living Component & Rich Media Synthesis:** Injects tactile Galaxy micro-interactions (shimmer buttons, tactile switches, cyber loaders), ambient hero loops, and authentic photography.
+- **Silent Table-Stakes (Internal Worker Delegation):** OKLCH color math, WCAG AAA contrast, inline SVGs, and `<bdi>` isolation are handled invisibly by internal workers and never clutter primary deliverables.
 
 ---
 
-### Workflow 2: Surgical Redesign & Anti-Slop Rescue (Fix Ugly Existing UI)
-When an existing screen or component looks like generic, cheap "AI slop" (clichéd purple gradients, yellow emojis, poor contrast, or broken RTL):
+### Workflow 2: Structural Redesign & Anti-Slop Rescue (Overhaul Ugly Existing UI)
+When an existing screen looks flat, amateur, or cluttered (unbalanced spacing, dead layouts, or lack of visual hierarchy):
 
 ```text
-@vibe-ui-agent this UI looks ugly and generic. Elevate and polish it using Vibe UI anti-slop standards.
+@vibe-ui-agent this UI feels cluttered and dated. Re-architect and modernize it using Vibe UI structural standards.
 ```
 
-**What gets fixed in seconds:**
-1. Strips all emojis and replaces them with tailored inline SVGs.
-2. Recalculates color contrast to enforce WCAG 2.2 AA (>= 4.5:1) minimum and AAA (>= 7:1) target.
-3. Isolates all numbers and badges inside `<bdi>` tags to permanently prevent bidirectional text corruption.
-4. Upgrades stiff linear CSS transitions to natural, critically damped spring physics.
+**The Agent's Autonomous Multi-Step Pipeline:**
+1. Renders current screen in browser and saves `screenshots/before.png` to audit layout balance and ergonomic flaws.
+2. Dismantles the dead container structure and replaces it with a clean Bento Grid or modern minimal architecture.
+3. Rewires all buttons, inputs, and state into living micro-interaction primitives without breaking existing business logic.
+4. Captures post-implementation screenshots (`screenshots/after.png`, Desktop 1440px / Mobile 390px) for multi-viewport visual verification.
+5. Delivers a report focused 100% on spatial and structural transformation, keeping low-level styling baselines in the background.
 
 ---
 

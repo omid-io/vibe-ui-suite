@@ -111,13 +111,64 @@ def main():
         else:
             errors.append("Could not find **Version:** in ARCHITECTURE.md")
 
+    # 5. Validate packages/vibe-ui-suite/src/cli.ts CONTRACT_RULES Integrity
+    cli_path = ROOT_DIR / "packages" / "vibe-ui-suite" / "src" / "cli.ts"
+    if cli_path.exists():
+        cli_content = cli_path.read_text(encoding="utf-8")
+        required_mandates = [
+            "MANDATORY PRE-EDIT VISUAL AUDIT",
+            "ARCHITECTURAL PARADIGM & TREND BENCHMARKING",
+            "ZERO COSMETIC-ONLY PATCH INVARIANT",
+            "SILENT TABLE-STAKES",
+        ]
+        missing_mandates = [m for m in required_mandates if m not in cli_content]
+        if missing_mandates:
+            errors.append(f"cli.ts CONTRACT_RULES is missing critical v6.1.1 mandates: {missing_mandates}")
+        else:
+            print("  [OK] cli.ts: CONTRACT_RULES contains all 5 Master Execution Gates & Silent Table-Stakes")
+
+    # 6. Validate vibe-ui-agent/AGENT.md Mandate 5
+    agent_path = ROOT_DIR / "vibe-ui-agent" / "AGENT.md"
+    if agent_path.exists():
+        agent_content = agent_path.read_text(encoding="utf-8")
+        if "Autonomous Lazy-Prompt Protocol & Anti-Cosmetic-Patch Invariant" not in agent_content:
+            errors.append("AGENT.md is missing Mandate 5: Autonomous Lazy-Prompt Protocol & Anti-Cosmetic-Patch Invariant")
+        else:
+            print("  [OK] AGENT.md: Contains Mandate 5 Autonomous Lazy-Prompt Protocol")
+
+    # 7. Validate packages/vibe-ui-suite npm distribution skills packaging
+    vibe_pkg_path = ROOT_DIR / "packages" / "vibe-ui-suite" / "package.json"
+    if vibe_pkg_path.exists():
+        vibe_pkg = json.loads(vibe_pkg_path.read_text(encoding="utf-8"))
+        files_list = vibe_pkg.get("files", [])
+        if "skills" not in files_list:
+            errors.append("packages/vibe-ui-suite/package.json 'files' must include 'skills'")
+        else:
+            print("  [OK] package.json: 'skills' included in distribution files")
+
+    # 8. Validate skills synchronization in .agents/skills and packages/vibe-ui-suite/skills
+    required_skills = [
+        "ui-kit", "ui-verifier", "vibe-physics-engine",
+        "visual-chemistry-engine", "autonomous-intent-expander", "conversion-copy-engine"
+    ]
+    for check_dir_name in [".agents/skills", "packages/vibe-ui-suite/skills"]:
+        check_dir = ROOT_DIR / check_dir_name
+        if not check_dir.exists():
+            errors.append(f"Directory {check_dir_name} does not exist")
+        else:
+            missing_s = [s for s in required_skills if not (check_dir / s / "SKILL.md").exists()]
+            if missing_s:
+                errors.append(f"{check_dir_name} is missing skills: {missing_s}")
+            else:
+                print(f"  [OK] {check_dir_name}: Contains all 6 Vibe UI skills")
+
     if errors:
-        print("\n[FAIL] Version Drift Detected:", file=sys.stderr)
+        print("\n[FAIL] Synchronization & Contract Drift Detected:", file=sys.stderr)
         for err in errors:
             print(f"  - {err}", file=sys.stderr)
         return 1
 
-    print("\n[SUCCESS] All package versions synchronized successfully.")
+    print("\n[SUCCESS] All package versions and AI contracts synchronized successfully.")
     return 0
 
 if __name__ == "__main__":

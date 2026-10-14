@@ -31,6 +31,8 @@ function printHelp() {
 
 \x1b[1mCOMMANDS:\x1b[0m
   \x1b[32minit\x1b[0m               Initialize Vibe UI contracts, OKLCH tokens & AI rules in current project
+  \x1b[32msync\x1b[0m               Synchronize existing AI contracts to canonical v6.1.1 master rules
+  \x1b[32minstall-skills\x1b[0m     Install or update Vibe UI agent skills in .agents/skills/
   \x1b[32madd <component>\x1b[0m     Add an accessible, AI-native component template to your project
   \x1b[32mlist\x1b[0m               List all available component primitives in the registry
 
@@ -46,7 +48,8 @@ function printHelp() {
 \x1b[1mEXAMPLES:\x1b[0m
   npx vibe-ui-suite init
   npx vibe-ui-suite init -y
-  npx vibe-ui-suite init --dry-run
+  npx vibe-ui-suite sync
+  npx vibe-ui-suite install-skills
   npx vibe-ui-suite add thinking-drawer
   npx vibe-ui-suite add shimmer-button
   npx vibe-ui-suite add theme-toggle
@@ -79,16 +82,148 @@ function safeWriteFile(filePath: string, content: string, options: CliOptions): 
   return { written: true, skipped: false };
 }
 
-const CONTRACT_RULES = `# Vibe UI Design & Code Quality Contract
-# Generated via npx vibe-ui-suite init
+const CONTRACT_RULES = `# 👑 Vibe UI Master Design & Architecture Contract (v6.1.1)
+# Generated via npx vibe-ui-suite init / sync
 
-Follow strict anti-slop guidelines:
-- Zero raw unicode emojis (use inline SVGs only)
-- Strict WCAG 2.2 AA contrast (>= 4.5:1 body, >= 3.0:1 headings)
-- Use typed OKLCH color spaces for perceptual accuracy
-- Strict maximum of 3 backdrop-filter / glass layers
-- Semantic RTL: preserve physical macro coordinate stability
+## 🏛️ The 5 Master Execution Gates & Autonomous Lazy-Prompt Protocol
+When receiving UI design or redesign prompts (especially lazy prompts: "design this", "redesign this", "make it look good", "make it pop", "craft a modern UI"):
+
+1. 📸 MANDATORY PRE-EDIT VISUAL AUDIT:
+   - Before editing any code, capture an initial browser screenshot (screenshots/before.png).
+   - Visually critique layout flaws, spacing balance, visual hierarchy, and focal points with multimodal vision.
+
+2. 🎨 ARCHITECTURAL PARADIGM & TREND BENCHMARKING:
+   - Benchmark against premier design sources: Dribbble, Figma Community, Mobbin, and Awwwards.
+   - Autonomously select a modern paradigm (Bento Grid, Linear Minimal, Stripe Crisp Light, Swiss Editorial).
+   - Light Mode is the primary default canvas (#ffffff/#f8fafc). Mandatory dual-theme support with accessible Dark Mode toggle.
+
+3. 🧱 STRUCTURAL DOM & SPATIAL OVERHAUL:
+   - ZERO COSMETIC-ONLY PATCH INVARIANT: Strictly forbidden to perform shallow skin-patches (altering only colors, borders, or emojis while leaving dead layouts untouched).
+   - Overhaul structural spatial rhythm, 8pt spacing system, and asymmetric bento card hierarchies.
+   - Inject tactile micro-interactions (shimmer buttons, cyber loaders, tactile switches, holographic cards) and authentic imagery.
+   - CONTEXTUAL CREATIVE MEDIA: Background video is strictly contextual (for creative/cinematic requests only); never force video onto utility SaaS or dashboards. Intelligently evaluate whether curated video, lightweight SVG particles, or static photography deliver the cleanest UX.
+
+4. 👁️ MULTI-VIEWPORT LIVING VISUAL VERIFICATION:
+   - Capture post-edit full-page screenshots (screenshots/after.png, Desktop 1440px / Mobile 390px).
+   - Multimodal self-critique: verify visual rhythm, zero horizontal overflow, and pristine typography hierarchy before handoff.
+
+5. 🧼 SILENT TABLE-STAKES (INTERNAL WORKER BASELINES):
+   - Low-level hygiene (OKLCH color math, WCAG AAA formulas, zero raw unicode emojis -> inline SVGs, <bdi> bidirectional text isolation) are silent worker requirements.
+   - NEVER report these hygiene baselines as headline accomplishments or key deliverables in chat summaries.
+   - Chat summaries MUST lead with architectural layout transformations, aesthetic paradigm chosen, and visual before/after evidence.
 `;
+
+function findSourceSkillsDir(): string | null {
+  const candidates = [
+    path.resolve(__dirname, '..', 'skills'),
+    path.resolve(__dirname, 'skills'),
+    path.resolve(__dirname, '..', '..', '..', 'skills'),
+    path.resolve(process.cwd(), 'skills'),
+  ];
+  for (const c of candidates) {
+    if (fs.existsSync(c) && fs.existsSync(path.join(c, 'ui-kit', 'SKILL.md'))) {
+      return c;
+    }
+  }
+  return null;
+}
+
+function installSkills(targetProjectDir: string, options: CliOptions): { installed: string[]; skipped: string[] } {
+  const srcSkillsDir = findSourceSkillsDir();
+  const installed: string[] = [];
+  const skipped: string[] = [];
+
+  if (!srcSkillsDir) {
+    console.log('  \x1b[33m[warn]\x1b[0m Could not locate Vibe UI skills source directory to install.');
+    return { installed, skipped };
+  }
+
+  const destSkillsDir = path.join(targetProjectDir, '.agents', 'skills');
+
+  if (options.dryRun) {
+    console.log(`  \x1b[34m[dry-run]\x1b[0m Would install Vibe UI skills to: ${path.relative(process.cwd(), destSkillsDir)}`);
+    return { installed, skipped };
+  }
+
+  if (!fs.existsSync(destSkillsDir)) {
+    fs.mkdirSync(destSkillsDir, { recursive: true });
+  }
+
+  const skillsList = fs.readdirSync(srcSkillsDir).filter((f) => {
+    const full = path.join(srcSkillsDir, f);
+    return fs.statSync(full).isDirectory() && fs.existsSync(path.join(full, 'SKILL.md'));
+  });
+
+  for (const skillName of skillsList) {
+    const srcSkillPath = path.join(srcSkillsDir, skillName);
+    const destSkillPath = path.join(destSkillsDir, skillName);
+
+    if (fs.existsSync(destSkillPath) && !options.force) {
+      skipped.push(skillName);
+      continue;
+    }
+
+    if (fs.existsSync(destSkillPath) && options.force) {
+      fs.rmSync(destSkillPath, { recursive: true, force: true });
+    }
+
+    fs.cpSync(srcSkillPath, destSkillPath, { recursive: true });
+    installed.push(skillName);
+  }
+
+  return { installed, skipped };
+}
+
+async function handleInstallSkills(options: CliOptions) {
+  printBanner();
+  console.log('\x1b[36mInstalling Vibe UI Agent Skills into current project workspace (.agents/skills/)...\x1b[0m\n');
+  const cwd = process.cwd();
+  const res = installSkills(cwd, options);
+
+  if (res.installed.length > 0) {
+    console.log(`\n\x1b[32m✔ Successfully installed ${res.installed.length} skill(s) in .agents/skills/:\x1b[0m`);
+    res.installed.forEach((s) => console.log(`  + .agents/skills/${s}`));
+  }
+  if (res.skipped.length > 0) {
+    console.log(`\n\x1b[33mSkipped ${res.skipped.length} existing skill(s) (use --force to overwrite):\x1b[0m`);
+    res.skipped.forEach((s) => console.log(`  - ${s}`));
+  }
+}
+
+async function handleSync(options: CliOptions) {
+  printBanner();
+  console.log('\x1b[36mSynchronizing AI contracts to canonical v6.1.1 Master Architectural Standard...\x1b[0m\n');
+  const cwd = process.cwd();
+  const targetFiles = ['.cursorrules', '.windsurfrules', 'CLAUDE.md'];
+  let updatedCount = 0;
+
+  for (const filename of targetFiles) {
+    const filePath = path.join(cwd, filename);
+    if (fs.existsSync(filePath)) {
+      const res = safeWriteFile(filePath, CONTRACT_RULES, { ...options, force: true });
+      if (res.written) {
+        console.log(`  \x1b[32m✔\x1b[0m Updated \x1b[1m${filename}\x1b[0m to v6.1.1 contract rules`);
+        updatedCount++;
+      }
+    }
+  }
+
+  const destSkills = path.join(cwd, '.agents', 'skills');
+  if (fs.existsSync(destSkills) || updatedCount > 0) {
+    console.log('\n\x1b[36mSynchronizing Vibe UI workspace skills (.agents/skills/):\x1b[0m');
+    const skillRes = installSkills(cwd, { ...options, force: true });
+    if (skillRes.installed.length > 0) {
+      console.log(`  \x1b[32m✔\x1b[0m Synchronized ${skillRes.installed.length} skills in .agents/skills/`);
+    }
+  }
+
+  if (updatedCount === 0) {
+    console.log('  \x1b[33mNo existing AI rule files found in current directory.\x1b[0m');
+    console.log('  Run \x1b[32mnpx vibe-ui-suite init\x1b[0m to initialize contracts from scratch.');
+  } else {
+    console.log(`\n\x1b[32m✔ Successfully synchronized AI rule file(s) and workspace skills to v6.1.1!\x1b[0m`);
+  }
+}
 
 async function handleInit(options: CliOptions) {
   printBanner();
@@ -202,6 +337,19 @@ async function handleInit(options: CliOptions) {
   const cssRes = safeWriteFile(cssPath, cssContent, options);
   if (cssRes.written) createdFiles.push('vibe-tokens.css');
 
+  // 5. Install Vibe UI Workspace Skills into .agents/skills/
+  console.log('\n\x1b[36mInstalling Vibe UI Agent Skills (.agents/skills/):\x1b[0m');
+  const skillRes = installSkills(cwd, options);
+  if (skillRes.installed.length > 0) {
+    skillRes.installed.forEach((s) => {
+      console.log(`  \x1b[32m✔\x1b[0m Installed skill: \x1b[1m${s}\x1b[0m`);
+      createdFiles.push(`.agents/skills/${s}`);
+    });
+  }
+  if (skillRes.skipped.length > 0) {
+    skillRes.skipped.forEach((s) => console.log(`  \x1b[33m[skip]\x1b[0m Skill ${s} already installed (use --force to overwrite)`));
+  }
+
   console.log('\n\x1b[32m✔ Initialized successfully!\x1b[0m');
   if (createdFiles.length > 0) {
     console.log('\x1b[90mGenerated/Updated files:\x1b[0m');
@@ -310,6 +458,14 @@ async function main() {
   switch (cmd) {
     case 'init':
       await handleInit(options);
+      break;
+    case 'sync':
+    case 'update':
+      await handleSync(options);
+      break;
+    case 'install-skills':
+    case 'skills':
+      await handleInstallSkills(options);
       break;
     case 'add':
       handleAdd(filteredArgs[1], options);

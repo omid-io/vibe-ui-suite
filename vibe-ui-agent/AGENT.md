@@ -20,12 +20,12 @@
 - **Multi-Pass Refinement:** Never settle for a flat, uninspired first pass. Inspect visual rhythm, spacing, shadows, micro-borders, and interactive dynamics before delivering the final artifact.
 - **Deep Curated Asset Integration:** Actively generate or curate bespoke, high-resolution visual assets (bespoke AI imagery, curated Unsplash photography, or custom SVG illustrations) rather than placeholder blocks.
 
-### 3. 🎥 Living Ambient Hero Video & Fluid Canvas Loops
-- **Cinematic Ambient Depth:** In hero sections or high-impact focal points where creative atmosphere is warranted, proactively inject lightweight, optimized ambient video loops or fluid interactive canvas shaders.
-- **Execution Standards:**
-  - Video tags must always include: `autoplay loop muted playsinline disablePictureInPicture`.
-  - Use subtle overlay gradients (e.g., `bg-white/70 backdrop-blur-md` in light mode or `bg-slate-950/60` in dark mode) to ensure foreground copy maintains pristine typography contrast.
-  - Fallback smoothly to high-res photography or fluid CSS gradients on unsupported devices.
+### 3. 🎥 Contextual Ambient Media & Creative Hero Dynamics (Video / Particles / Shaders)
+- **Strict Contextual Trigger (Creative Atmosphere Only):** Ambient video loops are strictly prohibited on utility SaaS, data-dense dashboards, admin portals, devops tools, and standard business forms. Video backgrounds are strictly reserved for creative portfolios, luxury fashion, entertainment, or when the user explicitly requests an immersive, creative experience ("creative", "cinematic", "video background", "یه چیز خلاقانه").
+- **Intelligent Creative Modality Selection:** The agent must actively discern the optimal medium:
+  1. *Curated Ambient Video Loop:* When cinematic atmosphere is explicitly warranted, pull lightweight optimized loops from the asset vault or trusted web sources with `autoplay loop muted playsinline disablePictureInPicture` and high-contrast scrim overlays.
+  2. *Lightweight SVG Particle & Canvas Animations:* For modern tech platforms, AI portals, or creative landing pages, construct native, lightweight SVG particle fields, fluid canvas shaders, or CSS mesh gradients rather than forcing heavy video files.
+  3. *Curated High-Res Photography:* Default to crisp Unsplash photography for standard web products. Never force video when SVG particles, canvas, or static photography deliver cleaner UX.
 
 ### 4. 🎨 Trend-First Methodology (Trend -> Tool Mapping -> Implementation)
 - **Sequence of Execution:**
@@ -33,6 +33,12 @@
   2. **Step B (Tool & Asset Mapping):** Survey and map the full suite of available tools (Galaxy micro-interactions, AI image generation, Unsplash HD photography, ambient video, fluid shaders, Lucide vector icons).
   3. **Step C (Implementation & Polish):** Synthesize and implement the layout with rich tactile feel, micro-interactions, and cursor trails.
   4. **Step D (Verification):** Multi-viewport visual inspection in browser before final handoff.
+
+### 5. ⚡ Autonomous Lazy-Prompt Protocol & Anti-Cosmetic-Patch Invariant
+- **The Lazy-Prompt Contract:** When receiving brief or lazy design requests (e.g. "design this", "redesign this", "make it look good", "make it pop", "craft a modern UI"), the agent MUST NOT interrogate the user, stall, or jump blindly into code edits.
+- **Zero Cosmetic-Only Patch Invariant:** Shallow skin patches (replacing raw emojis with SVGs, converting hex colors to OKLCH, or adding 1px borders while leaving dead layouts untouched) are strictly classified as catastrophic task failures. Real redesign mandates structural spatial overhaul, typography hierarchy restructuring, and authentic aesthetic paradigm transformation (Bento Grid, Linear Minimal, Stripe Crisp Light, Swiss Editorial).
+- **Mandatory Pre-Edit Visual Audit:** Before modifying any file, the agent must autonomously capture and inspect a Playwright browser screenshot (`screenshots/before.png`) to identify layout flaws with its own multimodal vision.
+- **Silent Table-Stakes (Internal Worker Delegation):** Low-level hygiene specifications (OKLCH color math, WCAG AAA calculations, zero raw emojis -> inline SVGs, `<bdi>` bidirectional text isolation) are **strictly internal worker baselines** delegated to execution modules (`ui-verifier`, `vibe-physics-engine`, `ui-kit`, `RTL.md`). Agents are strictly forbidden from listing these baseline hygiene items as headline achievements or key deliverables in chat summaries; deliverables must highlight architectural layout transformations, interactive components, and visual before/after screenshot proof.
 
 ---
 
@@ -76,7 +82,7 @@ To eradicate slop, lazy shortcuts, and hallucinated completion, the agent MUST s
    - Select tactile signature elements (shimmer buttons, cyber loaders, holographic cards, tactile switches, ambient glow inputs).
 3. **Bespoke Visual & Media Strategy:**
    - Plan authentic high-resolution visuals from `data/unsplash_assets.json` or bespoke AI art generation.
-   - Integrate subtle ambient video loops or interactive fluid shaders in hero focal points. Zero gray placeholder boxes permitted.
+   - For creative/cinematic requests, evaluate whether ambient video, interactive SVG particle fields, or CSS gradient meshes are optimal. Never force video loops onto standard utility SaaS or dashboards. Zero gray placeholder boxes permitted.
 
 ---
 
