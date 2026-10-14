@@ -132,8 +132,46 @@ class DesignDirector:
         language = "fa" if has_persian else "en"
         languages = ["fa", "en"] if has_persian else ["en"]
 
-        # Smart Lighting / Theme Strategy (Breaking the Dark Mode Bias)
-        theme_bias = user_overrides.get("theme_bias") or blueprint.get("theme_bias", "light")
+        lower_prompt = prompt.lower()
+
+        # Explicit style override detection
+        style_override = None
+        if any(w in lower_prompt for w in ["apple", "cupertino", "ios", "macos", "اپل"]):
+            style_override = "apple_cupertino"
+        elif any(w in lower_prompt for w in ["neobrutalism", "brutalist", "نئوبروتالیسم"]):
+            style_override = "neobrutalism"
+        elif any(w in lower_prompt for w in ["swiss", "editorial", "سوئیس"]):
+            style_override = "minimal_swiss"
+        elif any(w in lower_prompt for w in ["luxury", "obsidian", "لاکچری"]):
+            style_override = "quiet_luxury"
+        elif any(w in lower_prompt for w in ["glass", "glassmorphism", "شیشه"]):
+            style_override = "specular_glass"
+        elif any(w in lower_prompt for w in ["terminal", "cyber", "hud", "ترمینال", "هاد"]):
+            style_override = "data_dense_terminal"
+
+        # Entropy Diversity: if confidence is low or ambiguity is high and no explicit style is given
+        entropy_active = any("entropy_diversity" in str(r) for r in match_reasons)
+        if entropy_active and not style_override and "selected_style" not in user_overrides:
+            entropy_seed = sum(ord(c) for c in norm_prompt) if norm_prompt else 0
+            pick = DIVERSE_FALLBACK_ARCHETYPES[entropy_seed % len(DIVERSE_FALLBACK_ARCHETYPES)]
+            chosen_style = pick["style"]
+        else:
+            chosen_style = user_overrides.get("selected_style") or style_override or matched_domain.get("recommended_styles", ["clean_stripe"])[0]
+
+        # Strict Light-First Mandate & Anti-Dark-Bias Invariant:
+        # Default canvas is ALWAYS Vibrant Light unless:
+        # 1. The prompt explicitly requests dark mode ("dark", "black", "تاریک", "مشکی", "تیره", "شب", "night").
+        # 2. The chosen style is inherently dark (e.g. data_dense_terminal, cyber_terminal, midnight_executive).
+        # In all other cases, theme_strategy must be "light" (with dual_theme dark toggle support).
+        prompt_requests_dark = any(w in lower_prompt for w in ["dark", "black", "تاریک", "مشکی", "تیره", "شب", "night"])
+        style_is_inherently_dark = chosen_style in ["data_dense_terminal", "cyber_terminal", "midnight_executive", "cyberpunk"]
+        
+        if user_overrides.get("theme_bias"):
+            theme_strategy = user_overrides["theme_bias"]
+        elif prompt_requests_dark or style_is_inherently_dark:
+            theme_strategy = "dark"
+        else:
+            theme_strategy = "light"
 
         # Hard constraints extraction
         hard_constraints = [
@@ -141,7 +179,8 @@ class DesignDirector:
             "Zero horizontal overflow on 320px/375px/390px",
             "Touch targets >= 44px (Minimum accessible tap area)",
             "Zero raw unicode emojis in UI (Inline SVGs with stroke='currentColor' only)",
-            "Interactive buttons and switches must have real functional React state"
+            "Interactive buttons and switches must have real functional React state",
+            "Dual-theme support: Light mode as default with elegant dark mode toggle"
         ]
         if has_persian:
             hard_constraints.append("RTL punctuation and numerical isolation via <bdi>")
@@ -159,29 +198,6 @@ class DesignDirector:
             "should_research": confidence_score < 0.60,
             "suggested_query": f"{matched_domain.get('name_en', 'Modern Web')} UI UX trends 2026 Dribbble Mobbin"
         }
-
-        # Explicit style override detection
-        style_override = None
-        lower_prompt = prompt.lower()
-        if any(w in lower_prompt for w in ["apple", "cupertino", "ios", "macos", "اپل"]):
-            style_override = "apple_cupertino"
-        elif any(w in lower_prompt for w in ["neobrutalism", "brutalist", "نئوبروتالیسم"]):
-            style_override = "neobrutalism"
-        elif any(w in lower_prompt for w in ["swiss", "editorial", "سوئیس"]):
-            style_override = "minimal_swiss"
-        elif any(w in lower_prompt for w in ["luxury", "obsidian", "لاکچری"]):
-            style_override = "quiet_luxury"
-        elif any(w in lower_prompt for w in ["glass", "glassmorphism", "شیشه"]):
-            style_override = "specular_glass"
-
-        # Entropy Diversity: if confidence is low or ambiguity is high and no explicit style is given
-        entropy_active = any("entropy_diversity" in str(r) for r in match_reasons)
-        if entropy_active and not style_override and "selected_style" not in user_overrides:
-            entropy_seed = sum(ord(c) for c in norm_prompt) if norm_prompt else 0
-            pick = DIVERSE_FALLBACK_ARCHETYPES[entropy_seed % len(DIVERSE_FALLBACK_ARCHETYPES)]
-            chosen_style = pick["style"]
-        else:
-            chosen_style = user_overrides.get("selected_style") or style_override or matched_domain.get("recommended_styles", ["clean_stripe"])[0]
 
         # Construct Comprehensive DesignIntentContract
         intent = {
@@ -201,7 +217,29 @@ class DesignDirector:
             "business_goal": f"Deliver high-conversion, masterpiece experience for {matched_domain['name_en']}",
             "visual_energy": matched_domain.get("visual_energy", "calm_restrained"),
             "density": user_overrides.get("density") or matched_domain.get("density", "balanced"),
-            "theme_strategy": theme_bias,
+            "theme_strategy": theme_strategy,
+            "theme_mandate": {
+                "primary_theme": theme_strategy,
+                "is_light_first": theme_strategy == "light",
+                "dual_theme_toggle_required": True,
+                "reason": "explicit_request" if prompt_requests_dark else ("inherently_dark_archetype" if style_is_inherently_dark else "strict_vibrant_light_default")
+            },
+            "unrushed_generation_budget": {
+                "mode": "deliberate_deep_craft",
+                "max_refinement_passes": 5,
+                "asset_curation_priority": "bespoke_or_generated",
+                "rush_to_deliver": False
+            },
+            "creative_assets": {
+                "hero_ambient_video_eligible": any(w in lower_prompt for w in ["creative", "showcase", "خلاقانه", "شوکیس", "لندینگ", "hero", "ویدیو", "video", "modern", "مدرن"]),
+                "video_loop_params": "autoplay muted loop playsinline opacity-20 pointer-events-none"
+            },
+            "trend_first_pipeline": {
+                "step_1": "harvest_trends_and_patterns_from_dribbble_figma_galaxy",
+                "step_2": "map_available_tools_and_micro_interactions_to_match_trend",
+                "step_3": "implement_light_canvas_with_dual_theme_and_living_physics",
+                "step_4": "multimodal_and_dom_audit_before_delivery"
+            },
             "platform": ["mobile", "tablet", "desktop"],
             "language": language,
             "languages": languages,
@@ -226,7 +264,7 @@ class DesignDirector:
             "research_hook": research_hook,
             "stack_profile": stack_profile,
             "soft_preferences": [
-                f"Prioritize {theme_bias} mode based on domain psychology",
+                f"Prioritize {theme_strategy} mode based on Light-First Mandate and domain psychology",
                 f"Recommended style family: {chosen_style}",
                 f"Format output as {stack_profile['recommendation']['file_extension']} ({stack_profile['recommendation']['tailwind_syntax']})"
             ],

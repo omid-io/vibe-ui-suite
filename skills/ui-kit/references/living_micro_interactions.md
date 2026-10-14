@@ -432,3 +432,64 @@ export function GlowInput({
   );
 }
 ```
+
+---
+
+### 6. Ambient Hero Video & Fluid Canvas Loop (`ambient-hero-loop`)
+A production-grade, performant video or fluid interactive canvas background that creates an alive, cinematic atmosphere in hero viewports without sacrificing contrast or mobile battery.
+
+#### Accessibility & Contrast Rules:
+1. Always include `autoplay loop muted playsinline disablePictureInPicture`.
+2. Apply a high-contrast gradient/scrim overlay above the video (`bg-white/80 dark:bg-slate-950/80 backdrop-blur-[2px]`) so foreground text maintains $\ge 4.5:1$ contrast.
+3. Respect `prefers-reduced-motion` by freezing or hiding the video in favor of a static hero backdrop.
+
+```tsx
+'use client';
+
+import React from 'react';
+
+export interface AmbientHeroLoopProps {
+  videoSrc?: string;
+  posterSrc?: string;
+  children: React.ReactNode;
+  overlayOpacity?: string;
+}
+
+export function AmbientHeroLoop({
+  videoSrc = 'https://assets.mixkit.co/videos/preview/mixkit-fluid-particles-in-motion-41556-large.mp4',
+  posterSrc,
+  children,
+  overlayOpacity = 'bg-white/75 dark:bg-slate-950/80',
+}: AmbientHeroLoopProps) {
+  return (
+    <section className="relative overflow-hidden min-h-[560px] flex items-center justify-center">
+      {/* Background Ambient Video Layer */}
+      {videoSrc && (
+        <video
+          autoPlay
+          loop
+          muted
+          playsInline
+          disablePictureInPicture
+          poster={posterSrc}
+          className="absolute inset-0 w-full h-full object-cover pointer-events-none transition-opacity duration-700 motion-reduce:hidden"
+        >
+          <source src={videoSrc} type="video/mp4" />
+        </video>
+      )}
+
+      {/* Luminous High-Contrast Scrim Overlay */}
+      <div 
+        aria-hidden="true" 
+        className={`absolute inset-0 ${overlayOpacity} backdrop-blur-[1px] pointer-events-none`} 
+      />
+
+      {/* Foreground Content */}
+      <div className="relative z-10 w-full max-w-7xl mx-auto px-6 py-20">
+        {children}
+      </div>
+    </section>
+  );
+}
+```
+

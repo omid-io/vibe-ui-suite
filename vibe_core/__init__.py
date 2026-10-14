@@ -1,5 +1,5 @@
 """
-vibe_core — Vibe UI Suite v6.1.0 Architecture Engine
+vibe_core — Vibe UI Suite v6.1.1 Architecture Engine
 Autonomous Design Decision Engine, Director, Recommendation & Genome
 """
 

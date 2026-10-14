@@ -447,17 +447,17 @@ class Tier1Tests:
 
     @staticmethod
     def test_t1_26():
-        """T1.26 (F6): Verify version.json has version: '6.1.0'."""
+        """T1.26 (F6): Verify version.json has version: '6.1.1'."""
         v_path = ROOT_DIR / "version.json"
         data = json.loads(v_path.read_text(encoding="utf-8"))
-        assert data.get("version") == "6.1.0", f"version.json version is '{data.get('version')}', expected '6.1.0'"
+        assert data.get("version") == "6.1.1", f"version.json version is '{data.get('version')}', expected '6.1.1'"
 
     @staticmethod
     def test_t1_27():
-        """T1.27 (F6): Verify packages/vibe-ui-suite/package.json has version: '6.1.0'."""
+        """T1.27 (F6): Verify packages/vibe-ui-suite/package.json has version: '6.1.1'."""
         p_path = ROOT_DIR / "packages" / "vibe-ui-suite" / "package.json"
         data = json.loads(p_path.read_text(encoding="utf-8"))
-        assert data.get("version") == "6.1.0", f"vibe-ui-suite package.json is '{data.get('version')}', expected '6.1.0'"
+        assert data.get("version") == "6.1.1", f"vibe-ui-suite package.json is '{data.get('version')}', expected '6.1.1'"
 
     @staticmethod
     def test_t1_28():
@@ -469,17 +469,17 @@ class Tier1Tests:
 
     @staticmethod
     def test_t1_29():
-        """T1.29 (F6): Verify packages/vibe-ui-vscode/package.json has version: '6.1.0'."""
+        """T1.29 (F6): Verify packages/vibe-ui-vscode/package.json has version: '6.1.1'."""
         p_path = ROOT_DIR / "packages" / "vibe-ui-vscode" / "package.json"
         data = json.loads(p_path.read_text(encoding="utf-8"))
-        assert data.get("version") == "6.1.0", f"vibe-ui-vscode package.json is '{data.get('version')}', expected '6.1.0'"
+        assert data.get("version") == "6.1.1", f"vibe-ui-vscode package.json is '{data.get('version')}', expected '6.1.1'"
 
     @staticmethod
     def test_t1_30():
-        """T1.30 (F6): Verify vibe_cli.py --version outputs 'Vibe UI Suite v6.1.0'."""
+        """T1.30 (F6): Verify vibe_cli.py --version outputs 'Vibe UI Suite v6.1.1'."""
         code, out, err = run_cmd([sys.executable, "vibe_cli.py", "--version"])
         assert code == 0, f"vibe_cli.py --version failed: {err}"
-        assert "Vibe UI Suite v6.1.0" in out.strip(), f"Unexpected version string: {out.strip()}"
+        assert "Vibe UI Suite v6.1.1" in out.strip(), f"Unexpected version string: {out.strip()}"
 
     # --- F7: Packaging & Release Readiness (VSIX & Security) ---
 

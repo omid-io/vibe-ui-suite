@@ -5,6 +5,23 @@ All notable changes to the **Vibe UI Skills** repository are documented in this 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [6.1.1] - 2026-10-14
+
+### Added & Hardened — The Four Core Architectural Mandates
+- **Strict Light-First Mandate & Anti-Dark-Bias Invariant (`vibe_core/director.py`, `vibe-ui-agent/AGENT.md`)**:
+  - Primary default canvas strictly defaults to vibrant Light Mode across all archetypes, eliminating contrast engine dark-bias.
+  - Dark Mode is strictly restricted to explicit prompt requests ("dark", "black", "تاریک", "مشکی") or inherently dark archetypes (`data_dense_terminal`, `cyber_terminal`).
+  - Mandatory dual-theme support: an accessible, polished Light/Dark mode toggle switch must be generated on all interfaces.
+- **Unrushed Deep Deliberation & Multi-Pass Inspection Loop**:
+  - Autonomous agents are explicitly commanded to take unbounded deliberation time to plan, self-critique, and refine visuals rather than rushing output.
+- **Living Ambient Hero Video & Fluid Canvas Loops (`skills/ui-kit/references/living_micro_interactions.md`)**:
+  - Standardized integration of lightweight, performant ambient background video loops and interactive canvas shaders in hero viewports.
+  - Contrast scrim overlays (`bg-white/75 dark:bg-slate-950/80 backdrop-blur-[1px]`) guaranteeing $\ge 4.5:1$ WCAG text readability with `prefers-reduced-motion` compliance.
+- **Trend-First Pipeline (Trend Discovery -> Tool Mapping -> Implementation)**:
+  - Strict operational sequence: Benchmark against Dribbble, Figma Community, Mobbin, and Awwwards first, map tools and assets (Galaxy, Unsplash HD, AI art, video), then implement and verify.
+
+---
+
 ## [6.1.0] - 2026-10-14
 
 ### Added & Synthesized — Galaxy Inspiration Engine & Living Micro-Interactions Standard

@@ -4,12 +4,14 @@ description: Streamlined intent expansion engine that synthesizes architectural 
 triggers: ["expand intent", "auto-spec", "read my mind", "full architecture", "scale this", "deepen constraints", "lazy prompt", "complete website design", "requirements spec"]
 ---
 
-# 🧠 Autonomous Intent Expander (v6.0.0 Architecture Core)
+# 🧠 Autonomous Intent Expander (v6.1.1 Architecture Core)
 
 ## 🎯 Purpose & Philosophy
-The `autonomous-intent-expander` skill eliminates friction and interrogation fatigue while preventing blind hallucinations. When a user provides a minimal or ambiguous prompt (e.g., *"Build gym website"*, *"Design aesthetic dental clinic website"*), this engine applies **opinionated default inference** governed by **The Two Golden Pillars**:
-1. **Pillar 1: Deep Trend Research & Inspiration** (Sourcing world-class aesthetic benchmarks from Mobbin, Dribbble, Figma Community, Godly, and Awwwards; establishing domain-tailored visual direction with Vibrant Light Mode as the primary living default).
-2. **Pillar 2: Living Visual Feedback Loop** (Preparing deterministic layout specifications calibrated for headless Playwright multi-viewport screenshot verification and automated visual repair).
+The `autonomous-intent-expander` skill eliminates friction and interrogation fatigue while preventing blind hallucinations. When a user provides a minimal or ambiguous prompt (e.g., *"Build gym website"*, *"Design aesthetic dental clinic website"*), this engine applies **opinionated default inference** governed by **The Four Architectural Mandates (v6.1.1)**:
+1. **Mandate 1: Strict Light-First Canvas & Anti-Dark-Bias Invariant** (Defaulting canvas to crisp, luminous Light Mode unless the prompt explicitly requests dark or the archetype is inherently dark, alongside an accessible Dark Mode toggle).
+2. **Mandate 2: Unrushed, Deliberate Craft & Multi-Pass Inspection** (Unbounded creative refinement loop; allocating cognitive budget to polish visuals and typography).
+3. **Mandate 3: Living Ambient Hero Video & Fluid Canvas Loops** (Proactively planning lightweight, cinematic ambient video loops or fluid interactive canvas backgrounds for hero focal points).
+4. **Mandate 4: Trend-First Pipeline** (Harvesting aesthetic trends from Dribbble, Figma Community, Mobbin, and Awwwards first, then mapping tools and assets to execute).
 
 
 ---
@@ -44,7 +46,7 @@ The `autonomous-intent-expander` skill eliminates friction and interrogation fat
 3. **The 6-Dimensional Streamlined Architecture:**
    Instead of overwhelming the agent's attention window with legacy parameter bloat, the expander synthesizes 6 essential dimensions:
    1. **D1: Domain Archetype & Target Persona** (Operational stakes, trust level, and primary conversion goal).
-   2. **D2: Living Visual Direction & Light Palette Default** (Crisp white canvas `#ffffff` / `oklch(0.99 0.002 260)`, surface `oklch(0.97 0.005 260)`, dark slate text `#0f172a`, and vibrant primary accent `oklch(0.55 0.22 260)`).
+   2. **D2: Living Visual Direction & Vibrant Light Mode Default** (Crisp white canvas `#ffffff` / `oklch(0.99 0.002 260)`, surface `oklch(0.97 0.005 260)`, dark slate text `#0f172a`, and vibrant primary accent `oklch(0.55 0.22 260)`).
    3. **D3: Curated Real Imagery Specification** (High-res Unsplash CDN URLs from `data/unsplash_assets.json` and `skills/ui-kit/references/curated_unsplash_vault.md`).
    4. **D4: Typography & 8pt Spatial Rhythm** (Bold display headers, readable body font, and generous padding).
    5. **D5: Living Micro-States & Components** (Modular cards, active navigation, interactive sliders/tabs from `skills/ui-kit`).

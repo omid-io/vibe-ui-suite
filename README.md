@@ -26,22 +26,22 @@
 
 ---
 
-## ⚖️ Visual Impact: Vanilla AI Slop vs. Vibe UI v6.1 Masterpiece
+## ⚖️ Visual Impact: Vanilla AI Slop vs. Vibe UI v6.1.1 Masterpiece
 
 What happens when you ask a standard AI assistant to generate a frontend component?
 
 ```text
 ┌──────────────────────────────────────┐  vs  ┌──────────────────────────────────────┐
-│ ❌ VANILLA AI SLOP                   │      │ ✨ VIBE UI v6.1 MASTERPIECE          │
+│ ❌ VANILLA AI SLOP                   │      │ ✨ VIBE UI v6.1.1 MASTERPIECE        │
 ├──────────────────────────────────────┤      ├──────────────────────────────────────┤
-│ • Generic purple gradient buttons    │      │ • Vibrant Light Canvas & Brand Glow  │
-│ • Low contrast text (3.2:1 FAILS AA) │      │ • Mathematical WCAG 2.2 AAA (17.8:1) │
-│ • Broken mobile overflow (375px)     │      │ • Headless Multi-Viewport Screenshots│
+│ • Generic purple gradient buttons    │      │ • Strict Light-First Canvas & Depth  │
+│ • Low contrast text (3.2:1 FAILS AA) │      │ • Mathematical WCAG 2.2 AAA (18.8:1) │
+│ • Lazy dark-canvas bias              │      │ • Ambient Hero Video & Fluid Loops   │
 │ • Hallucinated raw emojis            │      │ • Crisp Vector SVGs & Clean Icons    │
-│ • Dead toggle cards & static mockups │      │ • Living React 19 TSX + State Hooks  │
-│ • Missing custom physics & stiff CSS │      │ • Curated 24-Domain Unsplash CDN CDN │
-│ • Empty blank or broken image links  │      │ • Zero Broken Images or 404 URLs     │
-│ • Abrupt page pops & jittery scroll  │      │ • Stagger Scroll Reveals & Marquee   │
+│ • Dead toggle cards & static mockups │      │ • Living React 19 TSX + Dual Theme   │
+│ • Rushed, flat, uninspired output    │      │ • Trend-First Harvest (Dribbble/etc) │
+│ • Empty blank or broken image links  │      │ • Curated 24-Domain Unsplash CDN CDN │
+│ • Broken mobile overflow (375px)     │      │ • Headless Multi-Viewport Screenshots│
 │ • Mixed direction text / numbers     │      │ • On-Demand Scoped RTL & BiDi Guard  │
 └──────────────────────────────────────┘      └──────────────────────────────────────┘
 ```

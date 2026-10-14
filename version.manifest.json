@@ -1,12 +1,12 @@
 {
   "$schema": "./schemas/version-manifest.schema.json",
-  "version": "6.1.0",
-  "codename": "Living Micro-Interactions & Galaxy Inspiration Standard",
+  "version": "6.1.1",
+  "codename": "Light-First Canvas & Ambient Video Loops",
   "release_channel": "stable",
   "packages": {
-    "vibe-ui-suite": "6.1.0",
-    "vibe-ui-vscode": "6.1.0",
-    "vibe-ui-nextjs-starter": "6.1.0"
+    "vibe-ui-suite": "6.1.1",
+    "vibe-ui-vscode": "6.1.1",
+    "vibe-ui-nextjs-starter": "6.1.1"
   },
   "schemas": {
     "intent_contract": "v1",
