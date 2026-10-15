@@ -1,6 +1,6 @@
 {
   "$schema": "../../schemas/benchmark-result.v1.json",
-  "timestamp": "2026-10-14T13:07:10.751353+00:00",
+  "timestamp": "2026-10-14T23:51:37.364224+00:00",
   "suite_version": "4.0.0",
   "scenario_count": 50,
   "benchmark_type": "internal_deterministic_heuristic",
@@ -77,7 +77,7 @@
       "reduction_percent": 100.0
     },
     "avg_time_to_accept_ms": {
-      "candidate": 466.01
+      "candidate": 378.46
     },
     "visual_diversity_index": {
       "candidate": 66.7,
@@ -108,7 +108,7 @@
       "visual_quality_score": 93.2,
       "critic_score": 96.0,
       "verification_status": "PASS",
-      "elapsed_ms": 628.94
+      "elapsed_ms": 489.43
     },
     {
       "scenario_id": "holdout_02",
@@ -130,7 +130,7 @@
       "visual_quality_score": 93.2,
       "critic_score": 96.0,
       "verification_status": "PASS",
-      "elapsed_ms": 523.16
+      "elapsed_ms": 396.76
     },
     {
       "scenario_id": "holdout_03",
@@ -152,7 +152,7 @@
       "visual_quality_score": 93.2,
       "critic_score": 96.0,
       "verification_status": "PASS",
-      "elapsed_ms": 562.28
+      "elapsed_ms": 362.41
     },
     {
       "scenario_id": "holdout_04",
@@ -174,7 +174,7 @@
       "visual_quality_score": 93.2,
       "critic_score": 96.0,
       "verification_status": "PASS",
-      "elapsed_ms": 520.27
+      "elapsed_ms": 389.84
     },
     {
       "scenario_id": "holdout_05",
@@ -196,7 +196,7 @@
       "visual_quality_score": 93.2,
       "critic_score": 96.0,
       "verification_status": "PASS",
-      "elapsed_ms": 575.58
+      "elapsed_ms": 371.02
     },
     {
       "scenario_id": "holdout_06",
@@ -218,7 +218,7 @@
       "visual_quality_score": 93.2,
       "critic_score": 96.0,
       "verification_status": "PASS",
-      "elapsed_ms": 542.94
+      "elapsed_ms": 383.62
     },
     {
       "scenario_id": "holdout_07",
@@ -240,7 +240,7 @@
       "visual_quality_score": 93.2,
       "critic_score": 96.0,
       "verification_status": "PASS",
-      "elapsed_ms": 482.94
+      "elapsed_ms": 366.92
     },
     {
       "scenario_id": "holdout_08",
@@ -262,7 +262,7 @@
       "visual_quality_score": 93.2,
       "critic_score": 96.0,
       "verification_status": "PASS",
-      "elapsed_ms": 462.33
+      "elapsed_ms": 392.68
     },
     {
       "scenario_id": "holdout_09",
@@ -284,7 +284,7 @@
       "visual_quality_score": 93.2,
       "critic_score": 96.0,
       "verification_status": "PASS",
-      "elapsed_ms": 470.46
+      "elapsed_ms": 379.23
     },
     {
       "scenario_id": "holdout_10",
@@ -306,7 +306,7 @@
       "visual_quality_score": 93.2,
       "critic_score": 96.0,
       "verification_status": "PASS",
-      "elapsed_ms": 607.53
+      "elapsed_ms": 384.83
     },
     {
       "scenario_id": "holdout_11",
@@ -328,7 +328,7 @@
       "visual_quality_score": 93.2,
       "critic_score": 96.0,
       "verification_status": "PASS",
-      "elapsed_ms": 554.03
+      "elapsed_ms": 375.8
     },
     {
       "scenario_id": "holdout_12",
@@ -350,7 +350,7 @@
       "visual_quality_score": 93.2,
       "critic_score": 96.0,
       "verification_status": "PASS",
-      "elapsed_ms": 555.44
+      "elapsed_ms": 396.51
     },
     {
       "scenario_id": "holdout_13",
@@ -372,7 +372,7 @@
       "visual_quality_score": 93.2,
       "critic_score": 96.0,
       "verification_status": "PASS",
-      "elapsed_ms": 470.61
+      "elapsed_ms": 360.12
     },
     {
       "scenario_id": "holdout_14",
@@ -394,7 +394,7 @@
       "visual_quality_score": 93.2,
       "critic_score": 96.0,
       "verification_status": "PASS",
-      "elapsed_ms": 442.9
+      "elapsed_ms": 374.64
     },
     {
       "scenario_id": "holdout_15",
@@ -416,7 +416,7 @@
       "visual_quality_score": 93.2,
       "critic_score": 96.0,
       "verification_status": "PASS",
-      "elapsed_ms": 488.61
+      "elapsed_ms": 371.75
     },
     {
       "scenario_id": "holdout_16",
@@ -438,7 +438,7 @@
       "visual_quality_score": 93.2,
       "critic_score": 96.0,
       "verification_status": "PASS",
-      "elapsed_ms": 479.41
+      "elapsed_ms": 369.48
     },
     {
       "scenario_id": "holdout_17",
@@ -460,7 +460,7 @@
       "visual_quality_score": 93.2,
       "critic_score": 96.0,
       "verification_status": "PASS",
-      "elapsed_ms": 492.21
+      "elapsed_ms": 402.11
     },
     {
       "scenario_id": "holdout_18",
@@ -482,7 +482,7 @@
       "visual_quality_score": 93.2,
       "critic_score": 96.0,
       "verification_status": "PASS",
-      "elapsed_ms": 492.47
+      "elapsed_ms": 397.97
     },
     {
       "scenario_id": "holdout_19",
@@ -504,15 +504,15 @@
       "visual_quality_score": 93.2,
       "critic_score": 96.0,
       "verification_status": "PASS",
-      "elapsed_ms": 382.37
+      "elapsed_ms": 347.9
     },
     {
       "scenario_id": "holdout_20",
       "domain": "logistics_supply_chain",
       "prompt": "سامانه رهگیری بار هوایی و جاده‌ای با ثبت بارکد مرسوله پستی، زمان تقریبی تحویل و وضعیت تخلیه بار در انبار مرکزی",
-      "detected_domain": "devops_cloud_terminal",
+      "detected_domain": "general_modern_saas",
       "domain_match": false,
-      "selected_style": "data_dense_terminal",
+      "selected_style": "clean_stripe",
       "candidate_passed_first_pass": true,
       "autonomous_resolved": true,
       "react_tsx_compiled": true,
@@ -526,7 +526,7 @@
       "visual_quality_score": 93.2,
       "critic_score": 96.0,
       "verification_status": "PASS",
-      "elapsed_ms": 367.41
+      "elapsed_ms": 353.19
     },
     {
       "scenario_id": "holdout_21",
@@ -548,7 +548,7 @@
       "visual_quality_score": 93.2,
       "critic_score": 96.0,
       "verification_status": "PASS",
-      "elapsed_ms": 398.74
+      "elapsed_ms": 371.66
     },
     {
       "scenario_id": "holdout_22",
@@ -570,7 +570,7 @@
       "visual_quality_score": 93.2,
       "critic_score": 96.0,
       "verification_status": "PASS",
-      "elapsed_ms": 422.66
+      "elapsed_ms": 360.78
     },
     {
       "scenario_id": "holdout_23",
@@ -592,7 +592,7 @@
       "visual_quality_score": 93.2,
       "critic_score": 96.0,
       "verification_status": "PASS",
-      "elapsed_ms": 484.15
+      "elapsed_ms": 366.88
     },
     {
       "scenario_id": "holdout_24",
@@ -614,7 +614,7 @@
       "visual_quality_score": 93.2,
       "critic_score": 96.0,
       "verification_status": "PASS",
-      "elapsed_ms": 422.48
+      "elapsed_ms": 365.73
     },
     {
       "scenario_id": "holdout_25",
@@ -636,7 +636,7 @@
       "visual_quality_score": 93.2,
       "critic_score": 96.0,
       "verification_status": "PASS",
-      "elapsed_ms": 413.24
+      "elapsed_ms": 369.87
     },
     {
       "scenario_id": "holdout_26",
@@ -658,7 +658,7 @@
       "visual_quality_score": 93.2,
       "critic_score": 96.0,
       "verification_status": "PASS",
-      "elapsed_ms": 436.59
+      "elapsed_ms": 364.96
     },
     {
       "scenario_id": "holdout_27",
@@ -680,7 +680,7 @@
       "visual_quality_score": 89.7,
       "critic_score": 96.0,
       "verification_status": "PASS",
-      "elapsed_ms": 469.64
+      "elapsed_ms": 378.59
     },
     {
       "scenario_id": "holdout_28",
@@ -702,7 +702,7 @@
       "visual_quality_score": 89.7,
       "critic_score": 96.0,
       "verification_status": "PASS",
-      "elapsed_ms": 579.1
+      "elapsed_ms": 376.75
     },
     {
       "scenario_id": "holdout_29",
@@ -724,7 +724,7 @@
       "visual_quality_score": 93.2,
       "critic_score": 96.0,
       "verification_status": "PASS",
-      "elapsed_ms": 513.23
+      "elapsed_ms": 398.36
     },
     {
       "scenario_id": "holdout_30",
@@ -746,7 +746,7 @@
       "visual_quality_score": 93.2,
       "critic_score": 96.0,
       "verification_status": "PASS",
-      "elapsed_ms": 442.4
+      "elapsed_ms": 384.42
     },
     {
       "scenario_id": "holdout_31",
@@ -768,7 +768,7 @@
       "visual_quality_score": 93.2,
       "critic_score": 96.0,
       "verification_status": "PASS",
-      "elapsed_ms": 477.22
+      "elapsed_ms": 378.35
     },
     {
       "scenario_id": "holdout_32",
@@ -790,7 +790,7 @@
       "visual_quality_score": 93.2,
       "critic_score": 96.0,
       "verification_status": "PASS",
-      "elapsed_ms": 403.23
+      "elapsed_ms": 370.04
     },
     {
       "scenario_id": "holdout_33",
@@ -812,7 +812,7 @@
       "visual_quality_score": 93.2,
       "critic_score": 96.0,
       "verification_status": "PASS",
-      "elapsed_ms": 445.6
+      "elapsed_ms": 382.48
     },
     {
       "scenario_id": "holdout_34",
@@ -834,7 +834,7 @@
       "visual_quality_score": 93.2,
       "critic_score": 96.0,
       "verification_status": "PASS",
-      "elapsed_ms": 533.44
+      "elapsed_ms": 362.5
     },
     {
       "scenario_id": "holdout_35",
@@ -856,7 +856,7 @@
       "visual_quality_score": 95.0,
       "critic_score": 96.0,
       "verification_status": "PASS",
-      "elapsed_ms": 528.95
+      "elapsed_ms": 365.25
     },
     {
       "scenario_id": "holdout_36",
@@ -878,7 +878,7 @@
       "visual_quality_score": 95.0,
       "critic_score": 96.0,
       "verification_status": "PASS",
-      "elapsed_ms": 541.55
+      "elapsed_ms": 367.59
     },
     {
       "scenario_id": "holdout_37",
@@ -900,7 +900,7 @@
       "visual_quality_score": 93.2,
       "critic_score": 96.0,
       "verification_status": "PASS",
-      "elapsed_ms": 464.12
+      "elapsed_ms": 369.67
     },
     {
       "scenario_id": "holdout_38",
@@ -922,7 +922,7 @@
       "visual_quality_score": 93.2,
       "critic_score": 96.0,
       "verification_status": "PASS",
-      "elapsed_ms": 384.84
+      "elapsed_ms": 365.47
     },
     {
       "scenario_id": "holdout_39",
@@ -944,7 +944,7 @@
       "visual_quality_score": 93.2,
       "critic_score": 96.0,
       "verification_status": "PASS",
-      "elapsed_ms": 379.38
+      "elapsed_ms": 357.55
     },
     {
       "scenario_id": "holdout_40",
@@ -966,7 +966,7 @@
       "visual_quality_score": 93.2,
       "critic_score": 96.0,
       "verification_status": "PASS",
-      "elapsed_ms": 454.79
+      "elapsed_ms": 374.42
     },
     {
       "scenario_id": "holdout_41",
@@ -988,7 +988,7 @@
       "visual_quality_score": 93.2,
       "critic_score": 96.0,
       "verification_status": "PASS",
-      "elapsed_ms": 401.48
+      "elapsed_ms": 372.27
     },
     {
       "scenario_id": "holdout_42",
@@ -1010,7 +1010,7 @@
       "visual_quality_score": 93.2,
       "critic_score": 96.0,
       "verification_status": "PASS",
-      "elapsed_ms": 383.9
+      "elapsed_ms": 384.03
     },
     {
       "scenario_id": "holdout_43",
@@ -1032,7 +1032,7 @@
       "visual_quality_score": 93.2,
       "critic_score": 96.0,
       "verification_status": "PASS",
-      "elapsed_ms": 384.32
+      "elapsed_ms": 385.26
     },
     {
       "scenario_id": "holdout_44",
@@ -1054,7 +1054,7 @@
       "visual_quality_score": 93.2,
       "critic_score": 96.0,
       "verification_status": "PASS",
-      "elapsed_ms": 366.51
+      "elapsed_ms": 401.44
     },
     {
       "scenario_id": "holdout_45",
@@ -1076,7 +1076,7 @@
       "visual_quality_score": 93.2,
       "critic_score": 96.0,
       "verification_status": "PASS",
-      "elapsed_ms": 442.86
+      "elapsed_ms": 379.65
     },
     {
       "scenario_id": "holdout_46",
@@ -1098,7 +1098,7 @@
       "visual_quality_score": 93.2,
       "critic_score": 96.0,
       "verification_status": "PASS",
-      "elapsed_ms": 503.01
+      "elapsed_ms": 378.03
     },
     {
       "scenario_id": "holdout_47",
@@ -1120,7 +1120,7 @@
       "visual_quality_score": 93.2,
       "critic_score": 96.0,
       "verification_status": "PASS",
-      "elapsed_ms": 449.43
+      "elapsed_ms": 393.3
     },
     {
       "scenario_id": "holdout_48",
@@ -1142,7 +1142,7 @@
       "visual_quality_score": 93.2,
       "critic_score": 96.0,
       "verification_status": "PASS",
-      "elapsed_ms": 416.74
+      "elapsed_ms": 411.2
     },
     {
       "scenario_id": "holdout_49",
@@ -1164,7 +1164,7 @@
       "visual_quality_score": 93.2,
       "critic_score": 96.0,
       "verification_status": "PASS",
-      "elapsed_ms": 327.68
+      "elapsed_ms": 360.15
     },
     {
       "scenario_id": "holdout_50",
@@ -1186,7 +1186,7 @@
       "visual_quality_score": 93.2,
       "critic_score": 96.0,
       "verification_status": "PASS",
-      "elapsed_ms": 327.58
+      "elapsed_ms": 359.86
     }
   ]
 }

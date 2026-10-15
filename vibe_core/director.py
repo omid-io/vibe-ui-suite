@@ -35,33 +35,43 @@ def normalize_text(text: str) -> str:
 DIVERSE_FALLBACK_ARCHETYPES = [
     {
         "id": "creative_portfolio_agency",
-        "style": "neobrutalism",
+        "style": "claymorphism",
         "reason": "entropy_diversity:creative_agency"
     },
     {
         "id": "ai_developer_platform",
-        "style": "apple_cupertino",
+        "style": "apple-glass",
         "reason": "entropy_diversity:ai_platform"
     },
     {
         "id": "crypto_trading_web3",
-        "style": "specular_glass",
+        "style": "bento-grid",
         "reason": "entropy_diversity:crypto_web3"
     },
     {
         "id": "media_editorial_magazine",
-        "style": "minimal_swiss",
+        "style": "minimalism",
         "reason": "entropy_diversity:editorial_magazine"
     },
     {
         "id": "devops_cloud_terminal",
-        "style": "linear_hud",
+        "style": "cyberpunk",
         "reason": "entropy_diversity:devops_terminal"
     },
     {
         "id": "general_modern_saas",
-        "style": "clean_stripe",
+        "style": "clean-stripe",
         "reason": "entropy_diversity:modern_saas"
+    },
+    {
+        "id": "bold_consumer_app",
+        "style": "neubrutalism",
+        "reason": "entropy_diversity:bold_consumer"
+    },
+    {
+        "id": "tactile_hardware_studio",
+        "style": "neumorphism",
+        "reason": "entropy_diversity:hardware_studio"
     }
 ]
 
@@ -134,20 +144,32 @@ class DesignDirector:
 
         lower_prompt = prompt.lower()
 
-        # Explicit style override detection
+        # Explicit style override detection across 11 paradigms
         style_override = None
-        if any(w in lower_prompt for w in ["apple", "cupertino", "ios", "macos", "اپل"]):
-            style_override = "apple_cupertino"
-        elif any(w in lower_prompt for w in ["neobrutalism", "brutalist", "نئوبروتالیسم"]):
-            style_override = "neobrutalism"
-        elif any(w in lower_prompt for w in ["swiss", "editorial", "سوئیس"]):
-            style_override = "minimal_swiss"
-        elif any(w in lower_prompt for w in ["luxury", "obsidian", "لاکچری"]):
-            style_override = "quiet_luxury"
-        elif any(w in lower_prompt for w in ["glass", "glassmorphism", "شیشه"]):
-            style_override = "specular_glass"
-        elif any(w in lower_prompt for w in ["terminal", "cyber", "hud", "ترمینال", "هاد"]):
-            style_override = "data_dense_terminal"
+        if any(w in lower_prompt for w in ["claymorphism", "clay", "کلیمورفیسم", "سافت ۳ بعدی"]):
+            style_override = "claymorphism"
+        elif any(w in lower_prompt for w in ["apple", "cupertino", "ios", "macos", "glass", "glassmorphism", "اپل", "شیشه"]):
+            style_override = "apple-glass"
+        elif any(w in lower_prompt for w in ["neumorphism", "neumorphic", "soft emboss", "نئومورفیسم"]):
+            style_override = "neumorphism"
+        elif any(w in lower_prompt for w in ["neubrutalism", "brutalist", "نئوبروتالیسم"]):
+            style_override = "neubrutalism"
+        elif any(w in lower_prompt for w in ["bento", "bentogrid", "بنتو"]):
+            style_override = "bento-grid"
+        elif any(w in lower_prompt for w in ["cyberpunk", "matrix", "neon", "سایبرپانک"]):
+            style_override = "cyberpunk"
+        elif any(w in lower_prompt for w in ["bauhaus", "باهوس"]):
+            style_override = "bauhaus"
+        elif any(w in lower_prompt for w in ["retrowave", "synthwave", "ریتروویو"]):
+            style_override = "retrowave"
+        elif any(w in lower_prompt for w in ["swiss", "editorial", "minimal", "minimalism", "سوئیس", "مینیمال"]):
+            style_override = "minimalism"
+        elif any(w in lower_prompt for w in ["y2k", "retro", "ویندوز"]):
+            style_override = "y2k-retro"
+        elif any(w in lower_prompt for w in ["stripe", "clean_stripe", "استرایپ"]):
+            style_override = "clean-stripe"
+        elif any(w in lower_prompt for w in ["terminal", "hud", "ترمینال", "هاد"]):
+            style_override = "cyberpunk"
 
         # Entropy Diversity: if confidence is low or ambiguity is high and no explicit style is given
         entropy_active = any("entropy_diversity" in str(r) for r in match_reasons)
@@ -156,15 +178,15 @@ class DesignDirector:
             pick = DIVERSE_FALLBACK_ARCHETYPES[entropy_seed % len(DIVERSE_FALLBACK_ARCHETYPES)]
             chosen_style = pick["style"]
         else:
-            chosen_style = user_overrides.get("selected_style") or style_override or matched_domain.get("recommended_styles", ["clean_stripe"])[0]
+            chosen_style = user_overrides.get("selected_style") or style_override or matched_domain.get("recommended_styles", ["claymorphism"])[0]
 
         # Strict Light-First Mandate & Anti-Dark-Bias Invariant:
         # Default canvas is ALWAYS Vibrant Light unless:
         # 1. The prompt explicitly requests dark mode ("dark", "black", "تاریک", "مشکی", "تیره", "شب", "night").
-        # 2. The chosen style is inherently dark (e.g. data_dense_terminal, cyber_terminal, midnight_executive).
+        # 2. The chosen style is inherently dark (e.g. linear_dark, cyberpunk, apple-glass, retrowave, bento-grid, data_dense_terminal).
         # In all other cases, theme_strategy must be "light" (with dual_theme dark toggle support).
         prompt_requests_dark = any(w in lower_prompt for w in ["dark", "black", "تاریک", "مشکی", "تیره", "شب", "night"])
-        style_is_inherently_dark = chosen_style in ["data_dense_terminal", "cyber_terminal", "midnight_executive", "cyberpunk"]
+        style_is_inherently_dark = chosen_style in ["linear_dark", "cyberpunk", "apple-glass", "retrowave", "bento-grid", "data_dense_terminal", "cyber_terminal", "midnight_executive", "linear_hud"]
         
         if user_overrides.get("theme_bias"):
             theme_strategy = user_overrides["theme_bias"]

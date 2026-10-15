@@ -805,22 +805,25 @@ class Tier3Tests:
 
     @staticmethod
     def test_t3_04():
-        """T3.4: Monorepo Version Sync (F6) -> Packaging (F7): Identical v6.1.0 across CLI & manifests."""
+        """T3.4: Monorepo Version Sync (F6) -> Packaging (F7): Identical canonical version across CLI & manifests."""
+        manifest = json.loads((ROOT_DIR / "version.manifest.json").read_text(encoding="utf-8"))
+        canonical_ver = manifest["version"]
+
         # 1. CLI version
         code, out, _ = run_cmd([sys.executable, "vibe_cli.py", "--version"])
-        assert "6.1.0" in out, f"CLI version drift: {out}"
+        assert canonical_ver in out, f"CLI version drift: {out}"
 
         # 2. version.json
         v_data = json.loads((ROOT_DIR / "version.json").read_text(encoding="utf-8"))
-        assert v_data["version"] == "6.1.0", f"version.json drift: {v_data['version']}"
+        assert v_data["version"] == canonical_ver, f"version.json drift: {v_data['version']}"
 
         # 3. vscode package.json
         vs_pkg = json.loads((ROOT_DIR / "packages" / "vibe-ui-vscode" / "package.json").read_text(encoding="utf-8"))
-        assert vs_pkg["version"] == "6.1.0", f"vscode package.json drift: {vs_pkg['version']}"
+        assert vs_pkg["version"] == canonical_ver, f"vscode package.json drift: {vs_pkg['version']}"
 
         # 4. Built VSIX file naming check
         vsix_file = ROOT_DIR / "packages" / "vibe-ui-vscode" / "vibe-ui-vscode-6.0.0.vsix"
-        assert vsix_file.exists() or (ROOT_DIR / "packages" / "vibe-ui-vscode").glob("*.vsix"), f"Packaged VSIX file missing: {vsix_file}"
+        assert vsix_file.exists() or list((ROOT_DIR / "packages" / "vibe-ui-vscode").glob("*.vsix")), f"Packaged VSIX file missing: {vsix_file}"
 
 # ==============================================================================
 # Tier 4: Real-World Scenarios (3 Test Cases: T4.1 - T4.3)

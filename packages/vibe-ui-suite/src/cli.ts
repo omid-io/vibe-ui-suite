@@ -19,7 +19,7 @@ interface CliOptions {
 function printBanner() {
   console.log(`
 \x1b[35m  ▲ VIBE UI CLI v${VERSION}\x1b[0m
-  \x1b[90mDeterministic UI contracts & component primitives for AI coding assistants\x1b[0m
+  \x1b[90mDeterministic UI contracts, 11 design paradigms & flagship components for AI coding assistants\x1b[0m
 `);
 }
 
@@ -30,8 +30,8 @@ function printHelp() {
   vibe-ui <command> [options]
 
 \x1b[1mCOMMANDS:\x1b[0m
-  \x1b[32minit\x1b[0m               Initialize Vibe UI contracts, OKLCH tokens & AI rules in current project
-  \x1b[32msync\x1b[0m               Synchronize existing AI contracts to canonical v6.1.1 master rules
+  \x1b[32minit\x1b[0m               Initialize Vibe UI contracts, 11 paradigm tokens & AI rules in current project
+  \x1b[32msync\x1b[0m               Synchronize existing AI contracts to canonical v${VERSION} master rules
   \x1b[32minstall-skills\x1b[0m     Install or update Vibe UI agent skills in .agents/skills/
   \x1b[32madd <component>\x1b[0m     Add an accessible, AI-native component template to your project
   \x1b[32mlist\x1b[0m               List all available component primitives in the registry
@@ -50,10 +50,13 @@ function printHelp() {
   npx vibe-ui-suite init -y
   npx vibe-ui-suite sync
   npx vibe-ui-suite install-skills
+  npx vibe-ui-suite add device-mockup
+  npx vibe-ui-suite add before-after-lens
+  npx vibe-ui-suite add specular-card
   npx vibe-ui-suite add thinking-drawer
   npx vibe-ui-suite add shimmer-button
   npx vibe-ui-suite add theme-toggle
-  npx vibe-ui-suite add thinking-drawer --force
+  npx vibe-ui-suite add device-mockup --force
 `);
 }
 

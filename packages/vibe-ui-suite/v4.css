@@ -7,15 +7,15 @@
  */
 
 @theme {
-  /* OKLCH Perceptual Colors — Semantic Palette (Defaults to Light Mode) */
-  --color-vibe-canvas: var(--vibe-canvas, oklch(0.985 0.002 264));
-  --color-vibe-surface: var(--vibe-surface, oklch(1 0 0));
-  --color-vibe-border: var(--vibe-border, oklch(0.90 0.008 264));
-  --color-vibe-primary: var(--vibe-primary-accent, var(--vibe-primary, oklch(0.55 0.22 260)));
+  /* OKLCH Perceptual Colors — Semantic Palette (Defaults to Light Mode / Claymorphism) */
+  --color-vibe-canvas: var(--vibe-canvas, var(--canvas, oklch(0.985 0.002 264)));
+  --color-vibe-surface: var(--vibe-surface, var(--surface, oklch(1 0 0)));
+  --color-vibe-border: var(--vibe-border, var(--border, oklch(0.90 0.008 264)));
+  --color-vibe-primary: var(--vibe-primary-accent, var(--vibe-primary, var(--primary, oklch(0.55 0.22 260))));
   --color-vibe-on-primary: var(--vibe-on-primary, oklch(0.99 0 0));
-  --color-vibe-text-primary: var(--vibe-text-primary, oklch(0.14 0.005 264));
-  --color-vibe-text-muted: var(--vibe-text-muted, oklch(0.48 0.015 264));
-  --color-vibe-ring: var(--vibe-ring, oklch(0.55 0.22 260));
+  --color-vibe-text-primary: var(--vibe-text-primary, var(--text-primary, oklch(0.14 0.005 264)));
+  --color-vibe-text-muted: var(--vibe-text-muted, var(--text-muted, oklch(0.48 0.015 264)));
+  --color-vibe-ring: var(--vibe-ring, var(--primary, oklch(0.55 0.22 260)));
 
   /* Typography Stacks with Vazirmatn Persian Web Font */
   --font-vibe-sans: Vazirmatn, Inter, system-ui, -apple-system, sans-serif;
@@ -28,6 +28,7 @@
   --ease-vibe-glide: cubic-bezier(0.25, 1, 0.5, 1);
 
   /* Elevation & Material Shadows */
+  --shadow-vibe-clay: var(--card-shadow, 20px 20px 40px #d1d9e6, -20px -20px 40px #ffffff);
   --shadow-vibe-brutal: 4px 4px 0px #000000;
   --shadow-vibe-brutal-lg: 6px 6px 0px #000000;
   --shadow-vibe-glass: inset 0 1px 1px rgba(255, 255, 255, 0.15);
@@ -46,6 +47,267 @@
   --vibe-ring: oklch(0.65 0.22 260);
 }
 
+/* ════════════════════════════════════════════════════════════════════════════
+   11 CANONICAL VIBE UI VISUAL PARADIGMS
+   ════════════════════════════════════════════════════════════════════════════ */
+
+/* 1. Claymorphism (3D Soft Tactile) — Default Initial Paradigm */
+:root, [data-style="claymorphism"], [data-vibe-style="claymorphism"] {
+  --canvas: #f0f3f8;
+  --surface: #ffffff;
+  --border: rgba(255, 255, 255, 0.8);
+  --primary: #6366f1;
+  --primary-accent: #8b5cf6;
+  --text-primary: #1e293b;
+  --text-muted: #64748b;
+  --radius: 24px;
+  --card-shadow: 20px 20px 40px #d1d9e6, -20px -20px 40px #ffffff, inset 0 2px 4px rgba(255, 255, 255, 0.9);
+  --card-border: 1px solid rgba(255, 255, 255, 0.6);
+  --header-bg: rgba(240, 243, 248, 0.85);
+
+  --vibe-canvas: #f0f3f8;
+  --vibe-surface: #ffffff;
+  --vibe-border: rgba(255, 255, 255, 0.8);
+  --vibe-primary: #6366f1;
+  --vibe-primary-accent: #8b5cf6;
+  --vibe-text-primary: #1e293b;
+  --vibe-text-muted: #64748b;
+}
+
+/* 2. Apple Glass (Cupertino Specular Glass) */
+[data-style="apple-glass"], [data-vibe-style="apple-glass"] {
+  --canvas: #000000;
+  --surface: rgba(255, 255, 255, 0.05);
+  --border: rgba(255, 255, 255, 0.12);
+  --primary: #2997ff;
+  --primary-accent: #64d2ff;
+  --text-primary: #f5f5f7;
+  --text-muted: #86868b;
+  --radius: 28px;
+  --card-shadow: 0 30px 60px rgba(0,0,0,0.4), inset 0 1px 1px rgba(255,255,255,0.2);
+  --card-border: 1px solid rgba(255, 255, 255, 0.15);
+  --header-bg: rgba(0, 0, 0, 0.7);
+
+  --vibe-canvas: #000000;
+  --vibe-surface: rgba(255, 255, 255, 0.05);
+  --vibe-border: rgba(255, 255, 255, 0.12);
+  --vibe-primary: #2997ff;
+  --vibe-primary-accent: #64d2ff;
+  --vibe-text-primary: #f5f5f7;
+  --vibe-text-muted: #86868b;
+}
+
+/* 3. Neumorphism (Soft Emboss) */
+[data-style="neumorphism"], [data-vibe-style="neumorphism"] {
+  --canvas: #e0e5ec;
+  --surface: #e0e5ec;
+  --border: transparent;
+  --primary: #3b82f6;
+  --primary-accent: #60a5fa;
+  --text-primary: #334155;
+  --text-muted: #64748b;
+  --radius: 20px;
+  --card-shadow: 9px 9px 16px rgba(163,177,198,0.6), -9px -9px 16px rgba(255,255,255,0.5);
+  --card-border: 1px solid rgba(255, 255, 255, 0.2);
+  --header-bg: rgba(224, 229, 236, 0.85);
+
+  --vibe-canvas: #e0e5ec;
+  --vibe-surface: #e0e5ec;
+  --vibe-border: transparent;
+  --vibe-primary: #3b82f6;
+  --vibe-primary-accent: #60a5fa;
+  --vibe-text-primary: #334155;
+  --vibe-text-muted: #64748b;
+}
+
+/* 4. Neubrutalism (Hard Pop Brutal) */
+[data-style="neubrutalism"], [data-vibe-style="neubrutalism"] {
+  --canvas: #fffdf5;
+  --surface: #ffffff;
+  --border: #000000;
+  --primary: #ff5252;
+  --primary-accent: #ffeb3b;
+  --text-primary: #000000;
+  --text-muted: #4b5563;
+  --radius: 0px;
+  --card-shadow: 5px 5px 0px #000000;
+  --card-border: 3px solid #000000;
+  --header-bg: #fffdf5;
+
+  --vibe-canvas: #fffdf5;
+  --vibe-surface: #ffffff;
+  --vibe-border: #000000;
+  --vibe-primary: #ff5252;
+  --vibe-primary-accent: #ffeb3b;
+  --vibe-text-primary: #000000;
+  --vibe-text-muted: #4b5563;
+}
+
+/* 5. Bento Grid (Modular Tech Grid) */
+[data-style="bento-grid"], [data-vibe-style="bento-grid"] {
+  --canvas: #090a0f;
+  --surface: rgba(18, 20, 29, 0.7);
+  --border: rgba(255, 255, 255, 0.08);
+  --primary: #00f2fe;
+  --primary-accent: #4facfe;
+  --text-primary: #f8fafc;
+  --text-muted: #94a3b8;
+  --radius: 20px;
+  --card-shadow: 0 20px 40px rgba(0,0,0,0.6), inset 0 1px 0 rgba(255,255,255,0.1);
+  --card-border: 1px solid rgba(255, 255, 255, 0.08);
+  --header-bg: rgba(9, 10, 15, 0.8);
+
+  --vibe-canvas: #090a0f;
+  --vibe-surface: rgba(18, 20, 29, 0.7);
+  --vibe-border: rgba(255, 255, 255, 0.08);
+  --vibe-primary: #00f2fe;
+  --vibe-primary-accent: #4facfe;
+  --vibe-text-primary: #f8fafc;
+  --vibe-text-muted: #94a3b8;
+}
+
+/* 6. Cyberpunk (Neon Matrix) */
+[data-style="cyberpunk"], [data-vibe-style="cyberpunk"] {
+  --canvas: #050508;
+  --surface: rgba(13, 13, 20, 0.85);
+  --border: #00ffcc;
+  --primary: #ff0055;
+  --primary-accent: #00ffcc;
+  --text-primary: #ffffff;
+  --text-muted: #8a8a9e;
+  --radius: 4px;
+  --card-shadow: 0 0 20px rgba(0, 255, 204, 0.15), inset 0 0 15px rgba(255, 0, 85, 0.1);
+  --card-border: 1px solid rgba(0, 255, 204, 0.4);
+  --header-bg: rgba(5, 5, 8, 0.85);
+
+  --vibe-canvas: #050508;
+  --vibe-surface: rgba(13, 13, 20, 0.85);
+  --vibe-border: #00ffcc;
+  --vibe-primary: #ff0055;
+  --vibe-primary-accent: #00ffcc;
+  --vibe-text-primary: #ffffff;
+  --vibe-text-muted: #8a8a9e;
+}
+
+/* 7. Bauhaus (Geometric Primary) */
+[data-style="bauhaus"], [data-vibe-style="bauhaus"] {
+  --canvas: #f4f1ea;
+  --surface: #ffffff;
+  --border: #111111;
+  --primary: #d12229;
+  --primary-accent: #f2a900;
+  --text-primary: #111111;
+  --text-muted: #555555;
+  --radius: 0px;
+  --card-shadow: 6px 6px 0px #111111;
+  --card-border: 2px solid #111111;
+  --header-bg: #f4f1ea;
+
+  --vibe-canvas: #f4f1ea;
+  --vibe-surface: #ffffff;
+  --vibe-border: #111111;
+  --vibe-primary: #d12229;
+  --vibe-primary-accent: #f2a900;
+  --vibe-text-primary: #111111;
+  --vibe-text-muted: #555555;
+}
+
+/* 8. Retrowave (Synthwave 80s) */
+[data-style="retrowave"], [data-vibe-style="retrowave"] {
+  --canvas: #120424;
+  --surface: rgba(29, 12, 53, 0.8);
+  --border: #ff71ce;
+  --primary: #ff71ce;
+  --primary-accent: #01cdfe;
+  --text-primary: #fffbfe;
+  --text-muted: #b9a0db;
+  --radius: 12px;
+  --card-shadow: 0 0 25px rgba(255, 113, 206, 0.25), inset 0 1px 1px rgba(1, 205, 254, 0.3);
+  --card-border: 1px solid rgba(255, 113, 206, 0.4);
+  --header-bg: rgba(18, 4, 36, 0.85);
+
+  --vibe-canvas: #120424;
+  --vibe-surface: rgba(29, 12, 53, 0.8);
+  --vibe-border: #ff71ce;
+  --vibe-primary: #ff71ce;
+  --vibe-primary-accent: #01cdfe;
+  --vibe-text-primary: #fffbfe;
+  --vibe-text-muted: #b9a0db;
+}
+
+/* 9. Minimalism (Zen Pure Monolithic) */
+[data-style="minimalism"], [data-vibe-style="minimalism"] {
+  --canvas: #ffffff;
+  --surface: #fafafa;
+  --border: #e5e5e5;
+  --primary: #171717;
+  --primary-accent: #525252;
+  --text-primary: #0a0a0a;
+  --text-muted: #737373;
+  --radius: 8px;
+  --card-shadow: 0 1px 3px rgba(0,0,0,0.05);
+  --card-border: 1px solid #e5e5e5;
+  --header-bg: rgba(255, 255, 255, 0.9);
+
+  --vibe-canvas: #ffffff;
+  --vibe-surface: #fafafa;
+  --vibe-border: #e5e5e5;
+  --vibe-primary: #171717;
+  --vibe-primary-accent: #525252;
+  --vibe-text-primary: #0a0a0a;
+  --vibe-text-muted: #737373;
+}
+
+/* 10. Y2K Retro (Cyber Y2K Chrome) */
+[data-style="y2k-retro"], [data-vibe-style="y2k-retro"] {
+  --canvas: #c3c7cb;
+  --surface: #d4d0c8;
+  --border: #ffffff;
+  --primary: #000080;
+  --primary-accent: #008080;
+  --text-primary: #000000;
+  --text-muted: #444444;
+  --radius: 2px;
+  --card-shadow: inset 1px 1px #dfdfdf, 1px 0 #000, 0 1px #000, 1px 1px #000;
+  --card-border: 2px outset #ffffff;
+  --header-bg: #c3c7cb;
+
+  --vibe-canvas: #c3c7cb;
+  --vibe-surface: #d4d0c8;
+  --vibe-border: #ffffff;
+  --vibe-primary: #000080;
+  --vibe-primary-accent: #008080;
+  --vibe-text-primary: #000000;
+  --vibe-text-muted: #444444;
+}
+
+/* 11. Clean Stripe (Crisp Corporate SaaS) */
+[data-style="clean-stripe"], [data-vibe-style="clean-stripe"] {
+  --canvas: #f8fafc;
+  --surface: #ffffff;
+  --border: #e2e8f0;
+  --primary: #635bff;
+  --primary-accent: #00d4aa;
+  --text-primary: #0f172a;
+  --text-muted: #64748b;
+  --radius: 12px;
+  --card-shadow: 0 10px 25px -5px rgba(50,50,93,0.08), 0 5px 15px -5px rgba(0,0,0,0.05);
+  --card-border: 1px solid #e2e8f0;
+  --header-bg: rgba(248, 250, 252, 0.9);
+
+  --vibe-canvas: #f8fafc;
+  --vibe-surface: #ffffff;
+  --vibe-border: #e2e8f0;
+  --vibe-primary: #635bff;
+  --vibe-primary-accent: #00d4aa;
+  --vibe-text-primary: #0f172a;
+  --vibe-text-muted: #64748b;
+}
+
+/* ════════════════════════════════════════════════════════════════════════════
+   UTILITY CLASSES & ACCESSIBILITY RESILIENCE
+   ════════════════════════════════════════════════════════════════════════════ */
+
 /* BiDi Isolation Utility */
 [dir="rtl"] {
   letter-spacing: normal !important;
@@ -53,8 +315,35 @@
 
 /* Glassmorphism GPU utility */
 .vibe-glass {
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+}
+
+/* Claymorphism Card utility */
+.vibe-clay {
+  box-shadow: 20px 20px 40px #d1d9e6, -20px -20px 40px #ffffff, inset 0 2px 4px rgba(255, 255, 255, 0.9);
+  border-radius: var(--radius, 24px);
+}
+
+/* Neumorphism Dual Shadow utility */
+.vibe-neumorphic {
+  box-shadow: 9px 9px 16px rgba(163,177,198,0.6), -9px -9px 16px rgba(255,255,255,0.5);
+  border-radius: var(--radius, 20px);
+}
+
+/* Neubrutalism Hard Offset utility */
+.vibe-brutal {
+  box-shadow: 5px 5px 0px #000000;
+  border: 3px solid #000000;
+  border-radius: 0px;
+}
+
+/* Dynamic Card Surface adhering to active paradigm */
+.vibe-card {
+  background: var(--surface);
+  border: var(--card-border, 1px solid var(--border));
+  border-radius: var(--radius, 16px);
+  box-shadow: var(--card-shadow, 0 4px 6px -1px rgba(0, 0, 0, 0.1));
 }
 
 /* Tailwind CSS v4 Motion & Transition Utilities */
@@ -69,3 +358,4 @@
 @utility transition-vibe-glide {
   transition-timing-function: cubic-bezier(0.25, 1, 0.5, 1);
 }
+

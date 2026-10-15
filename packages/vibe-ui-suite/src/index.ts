@@ -8,7 +8,8 @@ export type VisualChemistryId =
   | 'LUXURY_GLASS_2'
   | 'NEOBRUTALISM'
   | 'SWISS_EDITORIAL'
-  | 'STRIPE_CRISP_LIGHT';
+  | 'STRIPE_CRISP_LIGHT'
+  | 'CLAYMORPHISM';
 
 export interface ChemistryColors {
   canvas: string;
@@ -218,6 +219,41 @@ export const VISUAL_CHEMISTRIES: Record<VisualChemistryId, VisualChemistry> = {
       springStiffness: 320,
       dampingRatio: 0.88,
       lerpAlpha: '1 - Math.exp(-16 * dt)',
+    },
+  },
+  CLAYMORPHISM: {
+    id: 'CLAYMORPHISM',
+    name: 'Claymorphism (3D Soft Tactile)',
+    tagline: 'Tactile inflated surfaces with dual pillowy shadows and vibrant pastel accents',
+    colors: {
+      canvas: 'oklch(0.96 0.01 250)',
+      surface: 'oklch(1 0 0)',
+      border: 'oklch(1 0 0 / 0.8)',
+      primaryAccent: 'oklch(0.58 0.22 265)',
+      onPrimaryAccent: 'oklch(0.99 0 0)',
+      textPrimary: 'oklch(0.24 0.03 260)',
+      textMuted: 'oklch(0.50 0.02 260)',
+      ring: 'oklch(0.58 0.22 265)',
+    },
+    darkColors: {
+      canvas: 'oklch(0.18 0.02 260)',
+      surface: 'oklch(0.24 0.025 260)',
+      border: 'oklch(0.32 0.02 260)',
+      primaryAccent: 'oklch(0.68 0.22 265)',
+      onPrimaryAccent: 'oklch(0.99 0 0)',
+      textPrimary: 'oklch(0.98 0 0)',
+      textMuted: 'oklch(0.70 0.02 260)',
+      ring: 'oklch(0.68 0.22 265)',
+    },
+    typography: {
+      display: 'Vazirmatn, Plus Jakarta Sans, system-ui, sans-serif',
+      body: 'Vazirmatn, Inter, system-ui, sans-serif',
+      mono: 'JetBrains Mono, monospace',
+    },
+    physics: {
+      springStiffness: 240,
+      dampingRatio: 0.82,
+      lerpAlpha: '1 - Math.exp(-14 * dt)',
     },
   },
 };

@@ -713,4 +713,301 @@ export function GlowInput({
 }
 `,
   },
+
+  // ─── Flagship Living Primitives ───────────────────────────────────────
+  'device-mockup': {
+    name: 'device-mockup',
+    filename: 'DeviceMockup.tsx',
+    category: 'living-micro-interactions',
+    description: '3D titanium iPhone frame mockup with gyroscopic hover tilt, dynamic island, and specular glass reflex',
+    code: `'use client';
+
+import React, { useRef, useState } from 'react';
+
+export interface DeviceMockupProps {
+  children?: React.ReactNode;
+  model?: 'iphone-16-pro' | 'minimal-frame';
+  className?: string;
+  enableTilt?: boolean;
+}
+
+export function DeviceMockup({
+  children,
+  model = 'iphone-16-pro',
+  className = '',
+  enableTilt = true,
+}: DeviceMockupProps) {
+  const frameRef = useRef<HTMLDivElement>(null);
+  const [rotate, setRotate] = useState({ x: 0, y: 0 });
+
+  const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
+    if (!enableTilt || !frameRef.current) return;
+    const rect = frameRef.current.getBoundingClientRect();
+    const x = e.clientX - rect.left;
+    const y = e.clientY - rect.top;
+    const centerX = rect.width / 2;
+    const centerY = rect.height / 2;
+
+    const rotX = ((y - centerY) / centerY) * -10;
+    const rotY = ((x - centerX) / centerX) * 10;
+    setRotate({ x: rotX, y: rotY });
+  };
+
+  const handleMouseLeave = () => {
+    if (!enableTilt) return;
+    setRotate({ x: 0, y: 0 });
+  };
+
+  return (
+    <div
+      className={\`relative mx-auto w-full max-w-[340px] select-none \${className}\`}
+      style={{ perspective: '1000px' }}
+      onMouseMove={handleMouseMove}
+      onMouseLeave={handleMouseLeave}
+    >
+      <div
+        ref={frameRef}
+        style={{
+          transform: enableTilt
+            ? \`rotateX(\${rotate.x}deg) rotateY(\${rotate.y}deg)\`
+            : undefined,
+          transition: 'transform 0.4s cubic-bezier(0.25, 1, 0.5, 1), box-shadow 0.4s ease',
+        }}
+        className="relative overflow-hidden rounded-[48px] border-[10px] border-[#1c1c1e] bg-black p-3.5 shadow-2xl shadow-indigo-950/30 ring-1 ring-white/20"
+      >
+        {/* Dynamic Island */}
+        <div className="absolute top-4 left-1/2 -translate-x-1/2 z-30 h-[26px] w-[95px] rounded-full bg-black flex items-center justify-between px-2.5 shadow-sm">
+          <div className="h-2 w-2 rounded-full bg-indigo-950/80 ring-1 ring-indigo-500/30" />
+          <div className="h-2.5 w-2.5 rounded-full bg-emerald-500/20 flex items-center justify-center">
+            <span className="h-1.5 w-1.5 rounded-full bg-emerald-400 animate-pulse" />
+          </div>
+        </div>
+
+        {/* Specular Edge Sheen */}
+        <div
+          aria-hidden="true"
+          className="pointer-events-none absolute inset-0 z-20 rounded-[38px] bg-gradient-to-tr from-white/10 via-transparent to-transparent opacity-60"
+        />
+
+        {/* Screen Content Container */}
+        <div className="relative z-10 min-h-[580px] w-full overflow-hidden rounded-[36px] bg-slate-950 text-white flex flex-col">
+          {children || (
+            <div className="flex flex-1 flex-col items-center justify-center p-6 text-center">
+              <div className="h-12 w-12 rounded-2xl bg-indigo-500/20 border border-indigo-400/30 flex items-center justify-center mb-4 text-indigo-400">
+                <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 18h.01M8 21h8a2 2 0 002-2V5a2 2 0 00-2-2H8a2 2 0 00-2 2v14a2 2 0 002 2z" />
+                </svg>
+              </div>
+              <h4 className="text-base font-semibold text-slate-100 mb-1">Vibe UI Native Screen</h4>
+              <p className="text-xs text-slate-400 max-w-[200px]">
+                Drop any responsive React or Tailwind component inside children.
+              </p>
+            </div>
+          )}
+        </div>
+      </div>
+    </div>
+  );
+}
+`,
+  },
+
+  'before-after-lens': {
+    name: 'before-after-lens',
+    filename: 'BeforeAfterLens.tsx',
+    category: 'living-micro-interactions',
+    description: 'Interactive split-screen comparison slider with drag physics, touch support, and accessible ARIA keyboard navigation',
+    code: `'use client';
+
+import React, { useRef, useState, useCallback } from 'react';
+
+export interface BeforeAfterLensProps {
+  beforeContent?: React.ReactNode;
+  afterContent?: React.ReactNode;
+  beforeLabel?: string;
+  afterLabel?: string;
+  initialPosition?: number;
+  className?: string;
+}
+
+export function BeforeAfterLens({
+  beforeContent,
+  afterContent,
+  beforeLabel = 'Before (Flat Baseline)',
+  afterLabel = 'After (Vibe Masterpiece)',
+  initialPosition = 50,
+  className = '',
+}: BeforeAfterLensProps) {
+  const [sliderPos, setSliderPos] = useState(initialPosition);
+  const [isDragging, setIsDragging] = useState(false);
+  const containerRef = useRef<HTMLDivElement>(null);
+
+  const updatePosition = useCallback((clientX: number) => {
+    if (!containerRef.current) return;
+    const rect = containerRef.current.getBoundingClientRect();
+    const x = clientX - rect.left;
+    const percent = Math.max(5, Math.min(95, (x / rect.width) * 100));
+    setSliderPos(percent);
+  }, []);
+
+  const handleMouseDown = () => setIsDragging(true);
+  const handleMouseUp = () => setIsDragging(false);
+
+  const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
+    if (!isDragging) return;
+    updatePosition(e.clientX);
+  };
+
+  const handleTouchMove = (e: React.TouchEvent<HTMLDivElement>) => {
+    if (e.touches[0]) {
+      updatePosition(e.touches[0].clientX);
+    }
+  };
+
+  const handleKeyDown = (e: React.KeyboardEvent<HTMLDivElement>) => {
+    if (e.key === 'ArrowLeft') {
+      setSliderPos((prev) => Math.max(5, prev - 5));
+    } else if (e.key === 'ArrowRight') {
+      setSliderPos((prev) => Math.min(95, prev + 5));
+    } else if (e.key === 'Home') {
+      setSliderPos(5);
+    } else if (e.key === 'End') {
+      setSliderPos(95);
+    }
+  };
+
+  return (
+    <div
+      ref={containerRef}
+      onMouseMove={handleMouseMove}
+      onMouseUp={handleMouseUp}
+      onTouchMove={handleTouchMove}
+      className={\`relative w-full overflow-hidden rounded-2xl border border-white/10 select-none \${className}\`}
+      style={{ minHeight: '380px' }}
+    >
+      {/* After Layer (Background / Base) */}
+      <div className="absolute inset-0 h-full w-full bg-slate-900 text-white p-6 flex flex-col justify-center">
+        {afterContent || (
+          <div className="max-w-md mx-auto text-center space-y-3">
+            <span className="inline-flex px-3 py-1 rounded-full bg-indigo-500/20 text-indigo-400 text-xs font-mono font-medium border border-indigo-500/30">
+              {afterLabel}
+            </span>
+            <h3 className="text-2xl font-bold text-white tracking-tight">Vibe UI Living Experience</h3>
+            <p className="text-sm text-slate-300">
+              Refined spatial rhythm, OKLCH perceptual colors, tactile micro-interactions, and fluid spring physics.
+            </p>
+          </div>
+        )}
+      </div>
+
+      {/* Before Layer (Foreground clipped by slider percentage) */}
+      <div
+        className="absolute inset-0 h-full w-full bg-slate-950 text-slate-300 p-6 flex flex-col justify-center border-r border-indigo-400/50"
+        style={{ clipPath: \`polygon(0 0, \${sliderPos}% 0, \${sliderPos}% 100%, 0 100%)\` }}
+      >
+        {beforeContent || (
+          <div className="max-w-md mx-auto text-center space-y-3 opacity-70">
+            <span className="inline-flex px-3 py-1 rounded-full bg-slate-800 text-slate-400 text-xs font-mono font-medium border border-slate-700">
+              {beforeLabel}
+            </span>
+            <h3 className="text-2xl font-medium text-slate-400 tracking-tight">Generic AI Code Baseline</h3>
+            <p className="text-sm text-slate-500">
+              Dead layout, generic purple gradients, harsh contrast, raw emojis, and missing accessible states.
+            </p>
+          </div>
+        )}
+      </div>
+
+      {/* Draggable Divider Line & Handle */}
+      <div
+        role="slider"
+        tabIndex={0}
+        aria-label="Before and After visual comparison"
+        aria-valuenow={Math.round(sliderPos)}
+        aria-valuemin={0}
+        aria-valuemax={100}
+        onKeyDown={handleKeyDown}
+        onMouseDown={handleMouseDown}
+        style={{ left: \`\${sliderPos}%\` }}
+        className="absolute top-0 bottom-0 w-1 -ml-0.5 bg-gradient-to-b from-indigo-400 via-white to-indigo-400 cursor-ew-resize flex items-center justify-center z-30 focus:outline-none focus:ring-2 focus:ring-indigo-400"
+      >
+        <div className="h-9 w-9 rounded-full bg-slate-900 border-2 border-indigo-400 shadow-xl flex items-center justify-center text-indigo-300 text-xs transition-transform hover:scale-110 active:scale-95">
+          <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M8 9l-3 3 3 3m8-6l3 3-3 3" />
+          </svg>
+        </div>
+      </div>
+    </div>
+  );
+}
+`,
+  },
+
+  'specular-card': {
+    name: 'specular-card',
+    filename: 'SpecularCard.tsx',
+    category: 'living-micro-interactions',
+    description: 'Photographic visual card with dynamic specular light sweep, category badge, and hover zoom physics',
+    code: `'use client';
+
+import React from 'react';
+
+export interface SpecularCardProps {
+  title: string;
+  category?: string;
+  description?: string;
+  imageSrc?: string;
+  children?: React.ReactNode;
+  className?: string;
+}
+
+export function SpecularCard({
+  title,
+  category,
+  description,
+  imageSrc,
+  children,
+  className = '',
+}: SpecularCardProps) {
+  return (
+    <div
+      className={\`group relative overflow-hidden rounded-2xl border border-white/10 bg-slate-900/80 p-5 text-white shadow-xl backdrop-blur-md transition-all duration-300 hover:-translate-y-1 hover:border-indigo-500/40 hover:shadow-2xl hover:shadow-indigo-500/10 \${className}\`}
+    >
+      {/* Dynamic Specular Sheen Sweep on Hover */}
+      <div
+        aria-hidden="true"
+        className="pointer-events-none absolute inset-0 -translate-x-full bg-gradient-to-r from-transparent via-white/10 to-transparent transition-transform duration-1000 ease-out group-hover:translate-x-full"
+      />
+
+      {imageSrc && (
+        <div className="relative mb-4 h-48 w-full overflow-hidden rounded-xl bg-slate-800">
+          <img
+            src={imageSrc}
+            alt={title}
+            className="h-full w-full object-cover transition-transform duration-500 ease-out group-hover:scale-105"
+            loading="lazy"
+          />
+          <div className="absolute inset-0 bg-gradient-to-t from-slate-950/80 via-transparent to-transparent" />
+        </div>
+      )}
+
+      {category && (
+        <span className="inline-flex items-center text-[11px] font-mono font-medium uppercase tracking-wider text-indigo-400 mb-2">
+          {category}
+        </span>
+      )}
+
+      <h3 className="text-lg font-semibold tracking-tight text-white mb-2">{title}</h3>
+
+      {description && (
+        <p className="text-sm text-slate-400 leading-relaxed mb-4">{description}</p>
+      )}
+
+      {children && <div className="mt-auto">{children}</div>}
+    </div>
+  );
+}
+`,
+  },
 };
+

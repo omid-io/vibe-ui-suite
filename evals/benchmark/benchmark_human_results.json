@@ -1,6 +1,6 @@
 {
   "$schema": "../../schemas/benchmark-result.v1.json",
-  "timestamp": "2026-10-14T13:07:21.788416+00:00",
+  "timestamp": "2026-10-14T23:51:47.753119+00:00",
   "suite_version": "4.0.0",
   "scenario_count": 25,
   "benchmark_type": "internal_deterministic_heuristic",
@@ -77,7 +77,7 @@
       "reduction_percent": 100.0
     },
     "avg_time_to_accept_ms": {
-      "candidate": 398.49
+      "candidate": 377.93
     },
     "visual_diversity_index": {
       "candidate": 66.7,
@@ -108,7 +108,7 @@
       "visual_quality_score": 93.2,
       "critic_score": 96.0,
       "verification_status": "PASS",
-      "elapsed_ms": 520.44
+      "elapsed_ms": 512.35
     },
     {
       "scenario_id": "task_02",
@@ -130,7 +130,7 @@
       "visual_quality_score": 95.0,
       "critic_score": 96.0,
       "verification_status": "PASS",
-      "elapsed_ms": 400.07
+      "elapsed_ms": 410.43
     },
     {
       "scenario_id": "task_03",
@@ -152,7 +152,7 @@
       "visual_quality_score": 93.2,
       "critic_score": 96.0,
       "verification_status": "PASS",
-      "elapsed_ms": 371.4
+      "elapsed_ms": 371.02
     },
     {
       "scenario_id": "task_04",
@@ -174,7 +174,7 @@
       "visual_quality_score": 93.2,
       "critic_score": 96.0,
       "verification_status": "PASS",
-      "elapsed_ms": 392.2
+      "elapsed_ms": 397.42
     },
     {
       "scenario_id": "task_05",
@@ -196,7 +196,7 @@
       "visual_quality_score": 93.2,
       "critic_score": 96.0,
       "verification_status": "PASS",
-      "elapsed_ms": 389.1
+      "elapsed_ms": 369.56
     },
     {
       "scenario_id": "task_06",
@@ -218,7 +218,7 @@
       "visual_quality_score": 93.2,
       "critic_score": 96.0,
       "verification_status": "PASS",
-      "elapsed_ms": 416.76
+      "elapsed_ms": 365.78
     },
     {
       "scenario_id": "task_07",
@@ -240,7 +240,7 @@
       "visual_quality_score": 93.2,
       "critic_score": 96.0,
       "verification_status": "PASS",
-      "elapsed_ms": 370.91
+      "elapsed_ms": 350.2
     },
     {
       "scenario_id": "task_08",
@@ -262,7 +262,7 @@
       "visual_quality_score": 93.2,
       "critic_score": 96.0,
       "verification_status": "PASS",
-      "elapsed_ms": 361.97
+      "elapsed_ms": 364.92
     },
     {
       "scenario_id": "task_09",
@@ -284,7 +284,7 @@
       "visual_quality_score": 93.2,
       "critic_score": 96.0,
       "verification_status": "PASS",
-      "elapsed_ms": 370.76
+      "elapsed_ms": 383.33
     },
     {
       "scenario_id": "task_10",
@@ -306,7 +306,7 @@
       "visual_quality_score": 93.2,
       "critic_score": 96.0,
       "verification_status": "PASS",
-      "elapsed_ms": 365.04
+      "elapsed_ms": 385.11
     },
     {
       "scenario_id": "task_11",
@@ -328,15 +328,15 @@
       "visual_quality_score": 89.7,
       "critic_score": 96.0,
       "verification_status": "PASS",
-      "elapsed_ms": 423.36
+      "elapsed_ms": 402.81
     },
     {
       "scenario_id": "task_12",
       "domain": "real_estate_architecture",
       "prompt": "Build an architectural development analyzer with usable square meters slider dynamically computing structural volume, estimated cap rate percentage, and construction cost per square meter.",
-      "detected_domain": "media_editorial_magazine",
+      "detected_domain": "general_modern_saas",
       "domain_match": false,
-      "selected_style": "editorial_magazine",
+      "selected_style": "clean_stripe",
       "candidate_passed_first_pass": true,
       "autonomous_resolved": true,
       "react_tsx_compiled": true,
@@ -350,7 +350,7 @@
       "visual_quality_score": 93.2,
       "critic_score": 96.0,
       "verification_status": "PASS",
-      "elapsed_ms": 371.1
+      "elapsed_ms": 400.13
     },
     {
       "scenario_id": "task_13",
@@ -372,7 +372,7 @@
       "visual_quality_score": 93.2,
       "critic_score": 96.0,
       "verification_status": "PASS",
-      "elapsed_ms": 358.12
+      "elapsed_ms": 346.63
     },
     {
       "scenario_id": "task_14",
@@ -394,7 +394,7 @@
       "visual_quality_score": 93.2,
       "critic_score": 96.0,
       "verification_status": "PASS",
-      "elapsed_ms": 384.66
+      "elapsed_ms": 335.02
     },
     {
       "scenario_id": "task_15",
@@ -416,7 +416,7 @@
       "visual_quality_score": 93.2,
       "critic_score": 96.0,
       "verification_status": "PASS",
-      "elapsed_ms": 428.7
+      "elapsed_ms": 361.46
     },
     {
       "scenario_id": "task_16",
@@ -438,7 +438,7 @@
       "visual_quality_score": 93.2,
       "critic_score": 96.0,
       "verification_status": "PASS",
-      "elapsed_ms": 388.66
+      "elapsed_ms": 368.62
     },
     {
       "scenario_id": "task_17",
@@ -460,7 +460,7 @@
       "visual_quality_score": 93.2,
       "critic_score": 96.0,
       "verification_status": "PASS",
-      "elapsed_ms": 376.05
+      "elapsed_ms": 390.52
     },
     {
       "scenario_id": "task_18",
@@ -482,7 +482,7 @@
       "visual_quality_score": 93.2,
       "critic_score": 96.0,
       "verification_status": "PASS",
-      "elapsed_ms": 412.98
+      "elapsed_ms": 360.84
     },
     {
       "scenario_id": "task_19",
@@ -504,7 +504,7 @@
       "visual_quality_score": 93.2,
       "critic_score": 96.0,
       "verification_status": "PASS",
-      "elapsed_ms": 421.41
+      "elapsed_ms": 346.58
     },
     {
       "scenario_id": "task_20",
@@ -526,7 +526,7 @@
       "visual_quality_score": 93.2,
       "critic_score": 96.0,
       "verification_status": "PASS",
-      "elapsed_ms": 421.1
+      "elapsed_ms": 368.6
     },
     {
       "scenario_id": "task_21",
@@ -548,7 +548,7 @@
       "visual_quality_score": 93.2,
       "critic_score": 96.0,
       "verification_status": "PASS",
-      "elapsed_ms": 449.2
+      "elapsed_ms": 388.68
     },
     {
       "scenario_id": "task_22",
@@ -570,7 +570,7 @@
       "visual_quality_score": 93.2,
       "critic_score": 96.0,
       "verification_status": "PASS",
-      "elapsed_ms": 413.56
+      "elapsed_ms": 373.85
     },
     {
       "scenario_id": "task_23",
@@ -592,7 +592,7 @@
       "visual_quality_score": 95.0,
       "critic_score": 96.0,
       "verification_status": "PASS",
-      "elapsed_ms": 330.74
+      "elapsed_ms": 351.43
     },
     {
       "scenario_id": "task_24",
@@ -614,7 +614,7 @@
       "visual_quality_score": 93.2,
       "critic_score": 96.0,
       "verification_status": "PASS",
-      "elapsed_ms": 383.18
+      "elapsed_ms": 370.98
     },
     {
       "scenario_id": "task_25",
@@ -636,7 +636,7 @@
       "visual_quality_score": 93.2,
       "critic_score": 96.0,
       "verification_status": "PASS",
-      "elapsed_ms": 440.83
+      "elapsed_ms": 372.07
     }
   ]
 }
