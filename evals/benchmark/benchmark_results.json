@@ -1,6 +1,6 @@
 {
   "$schema": "../../schemas/benchmark-result.v1.json",
-  "timestamp": "2026-10-16T16:19:17.534442+00:00",
+  "timestamp": "2026-10-16T20:03:05.172485+00:00",
   "suite_version": "4.0.0",
   "scenario_count": 100,
   "benchmark_type": "internal_deterministic_heuristic",
@@ -57,8 +57,8 @@
     },
     "domain_resolution_accuracy": {
       "baseline": 56.0,
-      "candidate": 96.0,
-      "delta_percent": 40.0
+      "candidate": 97.0,
+      "delta_percent": 41.0
     },
     "avg_automated_refiner_rounds": {
       "baseline": 2.4,
@@ -77,7 +77,7 @@
       "reduction_percent": 100.0
     },
     "avg_time_to_accept_ms": {
-      "candidate": 336.92
+      "candidate": 338.52
     },
     "visual_diversity_index": {
       "candidate": 66.7,
@@ -105,10 +105,10 @@
       "pixel_buffer_valid": true,
       "in_browser_vision_score": 95,
       "dom_quality_score": 96.0,
-      "visual_quality_score": 93.2,
+      "visual_quality_score": 91.7,
       "critic_score": 96.0,
       "verification_status": "PASS",
-      "elapsed_ms": 455.28
+      "elapsed_ms": 451.71
     },
     {
       "scenario_id": "sc-002",
@@ -127,10 +127,10 @@
       "pixel_buffer_valid": true,
       "in_browser_vision_score": 95,
       "dom_quality_score": 96.0,
-      "visual_quality_score": 93.2,
+      "visual_quality_score": 91.7,
       "critic_score": 96.0,
       "verification_status": "PASS",
-      "elapsed_ms": 365.01
+      "elapsed_ms": 383.22
     },
     {
       "scenario_id": "sc-003",
@@ -148,11 +148,11 @@
       "formula_validation_passed": true,
       "pixel_buffer_valid": true,
       "in_browser_vision_score": 95,
-      "dom_quality_score": 96.0,
-      "visual_quality_score": 93.2,
-      "critic_score": 96.0,
+      "dom_quality_score": 93.0,
+      "visual_quality_score": 91.7,
+      "critic_score": 93.0,
       "verification_status": "PASS",
-      "elapsed_ms": 361.56
+      "elapsed_ms": 389.69
     },
     {
       "scenario_id": "sc-004",
@@ -170,11 +170,11 @@
       "formula_validation_passed": true,
       "pixel_buffer_valid": true,
       "in_browser_vision_score": 95,
-      "dom_quality_score": 96.0,
-      "visual_quality_score": 93.2,
-      "critic_score": 96.0,
+      "dom_quality_score": 93.0,
+      "visual_quality_score": 91.7,
+      "critic_score": 93.0,
       "verification_status": "PASS",
-      "elapsed_ms": 331.41
+      "elapsed_ms": 346.11
     },
     {
       "scenario_id": "sc-005",
@@ -196,7 +196,7 @@
       "visual_quality_score": 93.2,
       "critic_score": 96.0,
       "verification_status": "PASS",
-      "elapsed_ms": 340.8
+      "elapsed_ms": 368.75
     },
     {
       "scenario_id": "sc-006",
@@ -218,7 +218,7 @@
       "visual_quality_score": 93.2,
       "critic_score": 96.0,
       "verification_status": "PASS",
-      "elapsed_ms": 330.01
+      "elapsed_ms": 341.25
     },
     {
       "scenario_id": "sc-007",
@@ -240,7 +240,7 @@
       "visual_quality_score": 93.2,
       "critic_score": 96.0,
       "verification_status": "PASS",
-      "elapsed_ms": 388.94
+      "elapsed_ms": 337.82
     },
     {
       "scenario_id": "sc-008",
@@ -262,7 +262,7 @@
       "visual_quality_score": 93.2,
       "critic_score": 96.0,
       "verification_status": "PASS",
-      "elapsed_ms": 356.08
+      "elapsed_ms": 337.13
     },
     {
       "scenario_id": "sc-009",
@@ -280,11 +280,11 @@
       "formula_validation_passed": true,
       "pixel_buffer_valid": true,
       "in_browser_vision_score": 95,
-      "dom_quality_score": 96.0,
-      "visual_quality_score": 93.2,
-      "critic_score": 96.0,
+      "dom_quality_score": 93.0,
+      "visual_quality_score": 91.7,
+      "critic_score": 93.0,
       "verification_status": "PASS",
-      "elapsed_ms": 345.39
+      "elapsed_ms": 342.01
     },
     {
       "scenario_id": "sc-010",
@@ -302,11 +302,11 @@
       "formula_validation_passed": true,
       "pixel_buffer_valid": true,
       "in_browser_vision_score": 95,
-      "dom_quality_score": 96.0,
-      "visual_quality_score": 93.2,
-      "critic_score": 96.0,
+      "dom_quality_score": 93.0,
+      "visual_quality_score": 91.7,
+      "critic_score": 93.0,
       "verification_status": "PASS",
-      "elapsed_ms": 308.04
+      "elapsed_ms": 314.17
     },
     {
       "scenario_id": "sc-011",
@@ -324,11 +324,11 @@
       "formula_validation_passed": true,
       "pixel_buffer_valid": true,
       "in_browser_vision_score": 95,
-      "dom_quality_score": 96.0,
-      "visual_quality_score": 93.2,
-      "critic_score": 96.0,
+      "dom_quality_score": 93.0,
+      "visual_quality_score": 91.7,
+      "critic_score": 93.0,
       "verification_status": "PASS",
-      "elapsed_ms": 349.29
+      "elapsed_ms": 333.49
     },
     {
       "scenario_id": "sc-012",
@@ -346,11 +346,11 @@
       "formula_validation_passed": true,
       "pixel_buffer_valid": true,
       "in_browser_vision_score": 95,
-      "dom_quality_score": 96.0,
-      "visual_quality_score": 93.2,
-      "critic_score": 96.0,
+      "dom_quality_score": 93.0,
+      "visual_quality_score": 91.7,
+      "critic_score": 93.0,
       "verification_status": "PASS",
-      "elapsed_ms": 330.8
+      "elapsed_ms": 316.74
     },
     {
       "scenario_id": "sc-013",
@@ -368,11 +368,11 @@
       "formula_validation_passed": true,
       "pixel_buffer_valid": true,
       "in_browser_vision_score": 95,
-      "dom_quality_score": 96.0,
-      "visual_quality_score": 93.2,
-      "critic_score": 96.0,
+      "dom_quality_score": 93.0,
+      "visual_quality_score": 91.7,
+      "critic_score": 93.0,
       "verification_status": "PASS",
-      "elapsed_ms": 349.98
+      "elapsed_ms": 339.01
     },
     {
       "scenario_id": "sc-014",
@@ -390,11 +390,11 @@
       "formula_validation_passed": true,
       "pixel_buffer_valid": true,
       "in_browser_vision_score": 95,
-      "dom_quality_score": 96.0,
-      "visual_quality_score": 93.2,
-      "critic_score": 96.0,
+      "dom_quality_score": 93.0,
+      "visual_quality_score": 91.7,
+      "critic_score": 93.0,
       "verification_status": "PASS",
-      "elapsed_ms": 336.36
+      "elapsed_ms": 337.46
     },
     {
       "scenario_id": "sc-015",
@@ -412,11 +412,11 @@
       "formula_validation_passed": true,
       "pixel_buffer_valid": true,
       "in_browser_vision_score": 95,
-      "dom_quality_score": 96.0,
-      "visual_quality_score": 93.2,
-      "critic_score": 96.0,
+      "dom_quality_score": 93.0,
+      "visual_quality_score": 91.7,
+      "critic_score": 93.0,
       "verification_status": "PASS",
-      "elapsed_ms": 347.6
+      "elapsed_ms": 376.99
     },
     {
       "scenario_id": "sc-016",
@@ -434,11 +434,11 @@
       "formula_validation_passed": true,
       "pixel_buffer_valid": true,
       "in_browser_vision_score": 95,
-      "dom_quality_score": 96.0,
-      "visual_quality_score": 93.2,
-      "critic_score": 96.0,
+      "dom_quality_score": 93.0,
+      "visual_quality_score": 91.7,
+      "critic_score": 93.0,
       "verification_status": "PASS",
-      "elapsed_ms": 334.98
+      "elapsed_ms": 334.89
     },
     {
       "scenario_id": "sc-017",
@@ -456,11 +456,11 @@
       "formula_validation_passed": true,
       "pixel_buffer_valid": true,
       "in_browser_vision_score": 95,
-      "dom_quality_score": 96.0,
-      "visual_quality_score": 93.2,
-      "critic_score": 96.0,
+      "dom_quality_score": 93.0,
+      "visual_quality_score": 91.7,
+      "critic_score": 93.0,
       "verification_status": "PASS",
-      "elapsed_ms": 349.76
+      "elapsed_ms": 344.4
     },
     {
       "scenario_id": "sc-018",
@@ -478,11 +478,11 @@
       "formula_validation_passed": true,
       "pixel_buffer_valid": true,
       "in_browser_vision_score": 95,
-      "dom_quality_score": 96.0,
-      "visual_quality_score": 93.2,
-      "critic_score": 96.0,
+      "dom_quality_score": 93.0,
+      "visual_quality_score": 91.7,
+      "critic_score": 93.0,
       "verification_status": "PASS",
-      "elapsed_ms": 345.93
+      "elapsed_ms": 336.42
     },
     {
       "scenario_id": "sc-019",
@@ -501,10 +501,10 @@
       "pixel_buffer_valid": true,
       "in_browser_vision_score": 95,
       "dom_quality_score": 96.0,
-      "visual_quality_score": 93.2,
+      "visual_quality_score": 91.7,
       "critic_score": 96.0,
       "verification_status": "PASS",
-      "elapsed_ms": 341.4
+      "elapsed_ms": 371.37
     },
     {
       "scenario_id": "sc-020",
@@ -523,10 +523,10 @@
       "pixel_buffer_valid": true,
       "in_browser_vision_score": 95,
       "dom_quality_score": 96.0,
-      "visual_quality_score": 93.2,
+      "visual_quality_score": 91.7,
       "critic_score": 96.0,
       "verification_status": "PASS",
-      "elapsed_ms": 315.98
+      "elapsed_ms": 311.47
     },
     {
       "scenario_id": "sc-021",
@@ -544,11 +544,11 @@
       "formula_validation_passed": true,
       "pixel_buffer_valid": true,
       "in_browser_vision_score": 95,
-      "dom_quality_score": 96.0,
-      "visual_quality_score": 93.2,
-      "critic_score": 96.0,
+      "dom_quality_score": 93.0,
+      "visual_quality_score": 91.7,
+      "critic_score": 93.0,
       "verification_status": "PASS",
-      "elapsed_ms": 330.5
+      "elapsed_ms": 330.34
     },
     {
       "scenario_id": "sc-022",
@@ -566,11 +566,11 @@
       "formula_validation_passed": true,
       "pixel_buffer_valid": true,
       "in_browser_vision_score": 95,
-      "dom_quality_score": 96.0,
-      "visual_quality_score": 93.2,
-      "critic_score": 96.0,
+      "dom_quality_score": 93.0,
+      "visual_quality_score": 91.7,
+      "critic_score": 93.0,
       "verification_status": "PASS",
-      "elapsed_ms": 349.76
+      "elapsed_ms": 320.02
     },
     {
       "scenario_id": "sc-023",
@@ -588,11 +588,11 @@
       "formula_validation_passed": true,
       "pixel_buffer_valid": true,
       "in_browser_vision_score": 95,
-      "dom_quality_score": 96.0,
+      "dom_quality_score": 93.0,
       "visual_quality_score": 95.0,
-      "critic_score": 96.0,
+      "critic_score": 93.0,
       "verification_status": "PASS",
-      "elapsed_ms": 365.49
+      "elapsed_ms": 382.06
     },
     {
       "scenario_id": "sc-024",
@@ -610,11 +610,11 @@
       "formula_validation_passed": true,
       "pixel_buffer_valid": true,
       "in_browser_vision_score": 95,
-      "dom_quality_score": 96.0,
+      "dom_quality_score": 93.0,
       "visual_quality_score": 95.0,
-      "critic_score": 96.0,
+      "critic_score": 93.0,
       "verification_status": "PASS",
-      "elapsed_ms": 353.56
+      "elapsed_ms": 366.6
     },
     {
       "scenario_id": "sc-025",
@@ -632,11 +632,11 @@
       "formula_validation_passed": true,
       "pixel_buffer_valid": true,
       "in_browser_vision_score": 95,
-      "dom_quality_score": 96.0,
-      "visual_quality_score": 93.2,
-      "critic_score": 96.0,
+      "dom_quality_score": 93.0,
+      "visual_quality_score": 91.7,
+      "critic_score": 93.0,
       "verification_status": "PASS",
-      "elapsed_ms": 346.16
+      "elapsed_ms": 331.57
     },
     {
       "scenario_id": "sc-026",
@@ -654,11 +654,11 @@
       "formula_validation_passed": true,
       "pixel_buffer_valid": true,
       "in_browser_vision_score": 95,
-      "dom_quality_score": 96.0,
-      "visual_quality_score": 93.2,
-      "critic_score": 96.0,
+      "dom_quality_score": 93.0,
+      "visual_quality_score": 91.7,
+      "critic_score": 93.0,
       "verification_status": "PASS",
-      "elapsed_ms": 314.76
+      "elapsed_ms": 315.84
     },
     {
       "scenario_id": "sc-027",
@@ -676,11 +676,11 @@
       "formula_validation_passed": true,
       "pixel_buffer_valid": true,
       "in_browser_vision_score": 95,
-      "dom_quality_score": 96.0,
-      "visual_quality_score": 93.2,
-      "critic_score": 96.0,
+      "dom_quality_score": 93.0,
+      "visual_quality_score": 91.7,
+      "critic_score": 93.0,
       "verification_status": "PASS",
-      "elapsed_ms": 352.53
+      "elapsed_ms": 344.77
     },
     {
       "scenario_id": "sc-028",
@@ -698,11 +698,11 @@
       "formula_validation_passed": true,
       "pixel_buffer_valid": true,
       "in_browser_vision_score": 95,
-      "dom_quality_score": 96.0,
-      "visual_quality_score": 93.2,
-      "critic_score": 96.0,
+      "dom_quality_score": 93.0,
+      "visual_quality_score": 91.7,
+      "critic_score": 93.0,
       "verification_status": "PASS",
-      "elapsed_ms": 363.31
+      "elapsed_ms": 311.8
     },
     {
       "scenario_id": "sc-029",
@@ -720,11 +720,11 @@
       "formula_validation_passed": true,
       "pixel_buffer_valid": true,
       "in_browser_vision_score": 95,
-      "dom_quality_score": 96.0,
-      "visual_quality_score": 93.2,
-      "critic_score": 96.0,
+      "dom_quality_score": 93.0,
+      "visual_quality_score": 91.7,
+      "critic_score": 93.0,
       "verification_status": "PASS",
-      "elapsed_ms": 335.91
+      "elapsed_ms": 357.48
     },
     {
       "scenario_id": "sc-030",
@@ -742,11 +742,11 @@
       "formula_validation_passed": true,
       "pixel_buffer_valid": true,
       "in_browser_vision_score": 95,
-      "dom_quality_score": 96.0,
-      "visual_quality_score": 93.2,
-      "critic_score": 96.0,
+      "dom_quality_score": 93.0,
+      "visual_quality_score": 91.7,
+      "critic_score": 93.0,
       "verification_status": "PASS",
-      "elapsed_ms": 349.51
+      "elapsed_ms": 345.94
     },
     {
       "scenario_id": "sc-031",
@@ -764,11 +764,11 @@
       "formula_validation_passed": true,
       "pixel_buffer_valid": true,
       "in_browser_vision_score": 95,
-      "dom_quality_score": 96.0,
-      "visual_quality_score": 93.2,
-      "critic_score": 96.0,
+      "dom_quality_score": 93.0,
+      "visual_quality_score": 91.7,
+      "critic_score": 93.0,
       "verification_status": "PASS",
-      "elapsed_ms": 351.77
+      "elapsed_ms": 325.93
     },
     {
       "scenario_id": "sc-032",
@@ -786,11 +786,11 @@
       "formula_validation_passed": true,
       "pixel_buffer_valid": true,
       "in_browser_vision_score": 95,
-      "dom_quality_score": 96.0,
-      "visual_quality_score": 93.2,
-      "critic_score": 96.0,
+      "dom_quality_score": 93.0,
+      "visual_quality_score": 91.7,
+      "critic_score": 93.0,
       "verification_status": "PASS",
-      "elapsed_ms": 344.41
+      "elapsed_ms": 356.03
     },
     {
       "scenario_id": "sc-033",
@@ -808,11 +808,11 @@
       "formula_validation_passed": true,
       "pixel_buffer_valid": true,
       "in_browser_vision_score": 95,
-      "dom_quality_score": 96.0,
-      "visual_quality_score": 89.7,
-      "critic_score": 96.0,
+      "dom_quality_score": 93.0,
+      "visual_quality_score": 88.2,
+      "critic_score": 93.0,
       "verification_status": "PASS",
-      "elapsed_ms": 333.9
+      "elapsed_ms": 362.12
     },
     {
       "scenario_id": "sc-034",
@@ -830,11 +830,11 @@
       "formula_validation_passed": true,
       "pixel_buffer_valid": true,
       "in_browser_vision_score": 95,
-      "dom_quality_score": 96.0,
-      "visual_quality_score": 89.7,
-      "critic_score": 96.0,
+      "dom_quality_score": 93.0,
+      "visual_quality_score": 88.2,
+      "critic_score": 93.0,
       "verification_status": "PASS",
-      "elapsed_ms": 333.47
+      "elapsed_ms": 344.67
     },
     {
       "scenario_id": "sc-035",
@@ -852,11 +852,11 @@
       "formula_validation_passed": true,
       "pixel_buffer_valid": true,
       "in_browser_vision_score": 95,
-      "dom_quality_score": 96.0,
-      "visual_quality_score": 93.2,
-      "critic_score": 96.0,
+      "dom_quality_score": 93.0,
+      "visual_quality_score": 91.7,
+      "critic_score": 93.0,
       "verification_status": "PASS",
-      "elapsed_ms": 357.82
+      "elapsed_ms": 335.08
     },
     {
       "scenario_id": "sc-036",
@@ -874,11 +874,11 @@
       "formula_validation_passed": true,
       "pixel_buffer_valid": true,
       "in_browser_vision_score": 95,
-      "dom_quality_score": 96.0,
-      "visual_quality_score": 93.2,
-      "critic_score": 96.0,
+      "dom_quality_score": 93.0,
+      "visual_quality_score": 91.7,
+      "critic_score": 93.0,
       "verification_status": "PASS",
-      "elapsed_ms": 342.22
+      "elapsed_ms": 354.54
     },
     {
       "scenario_id": "sc-037",
@@ -900,7 +900,7 @@
       "visual_quality_score": 93.2,
       "critic_score": 96.0,
       "verification_status": "PASS",
-      "elapsed_ms": 347.57
+      "elapsed_ms": 366.49
     },
     {
       "scenario_id": "sc-038",
@@ -922,7 +922,7 @@
       "visual_quality_score": 93.2,
       "critic_score": 96.0,
       "verification_status": "PASS",
-      "elapsed_ms": 339.04
+      "elapsed_ms": 365.54
     },
     {
       "scenario_id": "sc-039",
@@ -940,11 +940,11 @@
       "formula_validation_passed": true,
       "pixel_buffer_valid": true,
       "in_browser_vision_score": 95,
-      "dom_quality_score": 96.0,
-      "visual_quality_score": 93.2,
-      "critic_score": 96.0,
+      "dom_quality_score": 93.0,
+      "visual_quality_score": 91.7,
+      "critic_score": 93.0,
       "verification_status": "PASS",
-      "elapsed_ms": 365.37
+      "elapsed_ms": 313.12
     },
     {
       "scenario_id": "sc-040",
@@ -962,11 +962,11 @@
       "formula_validation_passed": true,
       "pixel_buffer_valid": true,
       "in_browser_vision_score": 95,
-      "dom_quality_score": 96.0,
-      "visual_quality_score": 93.2,
-      "critic_score": 96.0,
+      "dom_quality_score": 93.0,
+      "visual_quality_score": 91.7,
+      "critic_score": 93.0,
       "verification_status": "PASS",
-      "elapsed_ms": 351.41
+      "elapsed_ms": 337.9
     },
     {
       "scenario_id": "sc-041",
@@ -984,11 +984,11 @@
       "formula_validation_passed": true,
       "pixel_buffer_valid": true,
       "in_browser_vision_score": 95,
-      "dom_quality_score": 96.0,
-      "visual_quality_score": 93.2,
-      "critic_score": 96.0,
+      "dom_quality_score": 93.0,
+      "visual_quality_score": 91.7,
+      "critic_score": 93.0,
       "verification_status": "PASS",
-      "elapsed_ms": 368.81
+      "elapsed_ms": 363.77
     },
     {
       "scenario_id": "sc-042",
@@ -1006,11 +1006,11 @@
       "formula_validation_passed": true,
       "pixel_buffer_valid": true,
       "in_browser_vision_score": 95,
-      "dom_quality_score": 96.0,
-      "visual_quality_score": 93.2,
-      "critic_score": 96.0,
+      "dom_quality_score": 93.0,
+      "visual_quality_score": 91.7,
+      "critic_score": 93.0,
       "verification_status": "PASS",
-      "elapsed_ms": 333.31
+      "elapsed_ms": 316.41
     },
     {
       "scenario_id": "sc-043",
@@ -1028,11 +1028,11 @@
       "formula_validation_passed": true,
       "pixel_buffer_valid": true,
       "in_browser_vision_score": 95,
-      "dom_quality_score": 96.0,
-      "visual_quality_score": 93.2,
-      "critic_score": 96.0,
+      "dom_quality_score": 93.0,
+      "visual_quality_score": 91.7,
+      "critic_score": 93.0,
       "verification_status": "PASS",
-      "elapsed_ms": 342.93
+      "elapsed_ms": 347.55
     },
     {
       "scenario_id": "sc-044",
@@ -1050,11 +1050,11 @@
       "formula_validation_passed": true,
       "pixel_buffer_valid": true,
       "in_browser_vision_score": 95,
-      "dom_quality_score": 96.0,
-      "visual_quality_score": 93.2,
-      "critic_score": 96.0,
+      "dom_quality_score": 93.0,
+      "visual_quality_score": 91.7,
+      "critic_score": 93.0,
       "verification_status": "PASS",
-      "elapsed_ms": 332.54
+      "elapsed_ms": 330.69
     },
     {
       "scenario_id": "sc-045",
@@ -1076,7 +1076,7 @@
       "visual_quality_score": 93.2,
       "critic_score": 96.0,
       "verification_status": "PASS",
-      "elapsed_ms": 359.74
+      "elapsed_ms": 325.45
     },
     {
       "scenario_id": "sc-046",
@@ -1098,7 +1098,7 @@
       "visual_quality_score": 93.2,
       "critic_score": 96.0,
       "verification_status": "PASS",
-      "elapsed_ms": 342.66
+      "elapsed_ms": 350.32
     },
     {
       "scenario_id": "sc-047",
@@ -1116,11 +1116,11 @@
       "formula_validation_passed": true,
       "pixel_buffer_valid": true,
       "in_browser_vision_score": 95,
-      "dom_quality_score": 96.0,
-      "visual_quality_score": 93.2,
-      "critic_score": 96.0,
+      "dom_quality_score": 93.0,
+      "visual_quality_score": 91.7,
+      "critic_score": 93.0,
       "verification_status": "PASS",
-      "elapsed_ms": 350.27
+      "elapsed_ms": 364.79
     },
     {
       "scenario_id": "sc-048",
@@ -1138,11 +1138,11 @@
       "formula_validation_passed": true,
       "pixel_buffer_valid": true,
       "in_browser_vision_score": 95,
-      "dom_quality_score": 96.0,
-      "visual_quality_score": 93.2,
-      "critic_score": 96.0,
+      "dom_quality_score": 93.0,
+      "visual_quality_score": 91.7,
+      "critic_score": 93.0,
       "verification_status": "PASS",
-      "elapsed_ms": 349.95
+      "elapsed_ms": 364.7
     },
     {
       "scenario_id": "sc-049",
@@ -1161,10 +1161,10 @@
       "pixel_buffer_valid": true,
       "in_browser_vision_score": 95,
       "dom_quality_score": 96.0,
-      "visual_quality_score": 93.2,
+      "visual_quality_score": 91.7,
       "critic_score": 96.0,
       "verification_status": "PASS",
-      "elapsed_ms": 344.68
+      "elapsed_ms": 303.1
     },
     {
       "scenario_id": "sc-050",
@@ -1182,11 +1182,11 @@
       "formula_validation_passed": true,
       "pixel_buffer_valid": true,
       "in_browser_vision_score": 95,
-      "dom_quality_score": 96.0,
-      "visual_quality_score": 93.2,
-      "critic_score": 96.0,
+      "dom_quality_score": 93.0,
+      "visual_quality_score": 91.7,
+      "critic_score": 93.0,
       "verification_status": "PASS",
-      "elapsed_ms": 321.23
+      "elapsed_ms": 355.9
     },
     {
       "scenario_id": "sc-051",
@@ -1208,7 +1208,7 @@
       "visual_quality_score": 93.2,
       "critic_score": 96.0,
       "verification_status": "PASS",
-      "elapsed_ms": 334.21
+      "elapsed_ms": 366.87
     },
     {
       "scenario_id": "sc-052",
@@ -1230,7 +1230,7 @@
       "visual_quality_score": 93.2,
       "critic_score": 96.0,
       "verification_status": "PASS",
-      "elapsed_ms": 322.56
+      "elapsed_ms": 329.93
     },
     {
       "scenario_id": "sc-053",
@@ -1248,11 +1248,11 @@
       "formula_validation_passed": true,
       "pixel_buffer_valid": true,
       "in_browser_vision_score": 95,
-      "dom_quality_score": 96.0,
-      "visual_quality_score": 93.2,
-      "critic_score": 96.0,
+      "dom_quality_score": 93.0,
+      "visual_quality_score": 91.7,
+      "critic_score": 93.0,
       "verification_status": "PASS",
-      "elapsed_ms": 362.13
+      "elapsed_ms": 342.58
     },
     {
       "scenario_id": "sc-054",
@@ -1270,11 +1270,11 @@
       "formula_validation_passed": true,
       "pixel_buffer_valid": true,
       "in_browser_vision_score": 95,
-      "dom_quality_score": 96.0,
-      "visual_quality_score": 93.2,
-      "critic_score": 96.0,
+      "dom_quality_score": 93.0,
+      "visual_quality_score": 91.7,
+      "critic_score": 93.0,
       "verification_status": "PASS",
-      "elapsed_ms": 316.8
+      "elapsed_ms": 305.62
     },
     {
       "scenario_id": "sc-055",
@@ -1292,11 +1292,11 @@
       "formula_validation_passed": true,
       "pixel_buffer_valid": true,
       "in_browser_vision_score": 95,
-      "dom_quality_score": 96.0,
-      "visual_quality_score": 93.2,
-      "critic_score": 96.0,
+      "dom_quality_score": 93.0,
+      "visual_quality_score": 91.7,
+      "critic_score": 93.0,
       "verification_status": "PASS",
-      "elapsed_ms": 349.57
+      "elapsed_ms": 350.1
     },
     {
       "scenario_id": "sc-056",
@@ -1314,11 +1314,11 @@
       "formula_validation_passed": true,
       "pixel_buffer_valid": true,
       "in_browser_vision_score": 95,
-      "dom_quality_score": 96.0,
-      "visual_quality_score": 93.2,
-      "critic_score": 96.0,
+      "dom_quality_score": 93.0,
+      "visual_quality_score": 91.7,
+      "critic_score": 93.0,
       "verification_status": "PASS",
-      "elapsed_ms": 304.73
+      "elapsed_ms": 351.48
     },
     {
       "scenario_id": "sc-057",
@@ -1336,11 +1336,11 @@
       "formula_validation_passed": true,
       "pixel_buffer_valid": true,
       "in_browser_vision_score": 95,
-      "dom_quality_score": 96.0,
-      "visual_quality_score": 93.2,
-      "critic_score": 96.0,
+      "dom_quality_score": 93.0,
+      "visual_quality_score": 91.7,
+      "critic_score": 93.0,
       "verification_status": "PASS",
-      "elapsed_ms": 312.14
+      "elapsed_ms": 326.7
     },
     {
       "scenario_id": "sc-058",
@@ -1359,10 +1359,10 @@
       "pixel_buffer_valid": true,
       "in_browser_vision_score": 95,
       "dom_quality_score": 96.0,
-      "visual_quality_score": 93.2,
+      "visual_quality_score": 91.7,
       "critic_score": 96.0,
       "verification_status": "PASS",
-      "elapsed_ms": 342.27
+      "elapsed_ms": 320.97
     },
     {
       "scenario_id": "sc-059",
@@ -1380,11 +1380,11 @@
       "formula_validation_passed": true,
       "pixel_buffer_valid": true,
       "in_browser_vision_score": 95,
-      "dom_quality_score": 96.0,
-      "visual_quality_score": 93.2,
-      "critic_score": 96.0,
+      "dom_quality_score": 93.0,
+      "visual_quality_score": 91.7,
+      "critic_score": 93.0,
       "verification_status": "PASS",
-      "elapsed_ms": 344.86
+      "elapsed_ms": 342.74
     },
     {
       "scenario_id": "sc-060",
@@ -1402,11 +1402,11 @@
       "formula_validation_passed": true,
       "pixel_buffer_valid": true,
       "in_browser_vision_score": 95,
-      "dom_quality_score": 96.0,
+      "dom_quality_score": 93.0,
       "visual_quality_score": 95.0,
-      "critic_score": 96.0,
+      "critic_score": 93.0,
       "verification_status": "PASS",
-      "elapsed_ms": 345.4
+      "elapsed_ms": 319.95
     },
     {
       "scenario_id": "sc-061",
@@ -1424,11 +1424,11 @@
       "formula_validation_passed": true,
       "pixel_buffer_valid": true,
       "in_browser_vision_score": 95,
-      "dom_quality_score": 96.0,
-      "visual_quality_score": 93.2,
-      "critic_score": 96.0,
+      "dom_quality_score": 93.0,
+      "visual_quality_score": 91.7,
+      "critic_score": 93.0,
       "verification_status": "PASS",
-      "elapsed_ms": 332.35
+      "elapsed_ms": 354.17
     },
     {
       "scenario_id": "sc-062",
@@ -1446,11 +1446,11 @@
       "formula_validation_passed": true,
       "pixel_buffer_valid": true,
       "in_browser_vision_score": 95,
-      "dom_quality_score": 96.0,
-      "visual_quality_score": 93.2,
-      "critic_score": 96.0,
+      "dom_quality_score": 93.0,
+      "visual_quality_score": 91.7,
+      "critic_score": 93.0,
       "verification_status": "PASS",
-      "elapsed_ms": 319.12
+      "elapsed_ms": 331.54
     },
     {
       "scenario_id": "sc-063",
@@ -1468,11 +1468,11 @@
       "formula_validation_passed": true,
       "pixel_buffer_valid": true,
       "in_browser_vision_score": 95,
-      "dom_quality_score": 96.0,
-      "visual_quality_score": 93.2,
-      "critic_score": 96.0,
+      "dom_quality_score": 93.0,
+      "visual_quality_score": 91.7,
+      "critic_score": 93.0,
       "verification_status": "PASS",
-      "elapsed_ms": 332.85
+      "elapsed_ms": 304.15
     },
     {
       "scenario_id": "sc-064",
@@ -1490,11 +1490,11 @@
       "formula_validation_passed": true,
       "pixel_buffer_valid": true,
       "in_browser_vision_score": 95,
-      "dom_quality_score": 96.0,
-      "visual_quality_score": 93.2,
-      "critic_score": 96.0,
+      "dom_quality_score": 93.0,
+      "visual_quality_score": 91.7,
+      "critic_score": 93.0,
       "verification_status": "PASS",
-      "elapsed_ms": 322.3
+      "elapsed_ms": 308.73
     },
     {
       "scenario_id": "sc-065",
@@ -1512,11 +1512,11 @@
       "formula_validation_passed": true,
       "pixel_buffer_valid": true,
       "in_browser_vision_score": 95,
-      "dom_quality_score": 96.0,
-      "visual_quality_score": 89.7,
-      "critic_score": 96.0,
+      "dom_quality_score": 93.0,
+      "visual_quality_score": 88.2,
+      "critic_score": 93.0,
       "verification_status": "PASS",
-      "elapsed_ms": 334.24
+      "elapsed_ms": 322.6
     },
     {
       "scenario_id": "sc-066",
@@ -1534,19 +1534,19 @@
       "formula_validation_passed": true,
       "pixel_buffer_valid": true,
       "in_browser_vision_score": 95,
-      "dom_quality_score": 96.0,
-      "visual_quality_score": 93.2,
-      "critic_score": 96.0,
+      "dom_quality_score": 93.0,
+      "visual_quality_score": 91.7,
+      "critic_score": 93.0,
       "verification_status": "PASS",
-      "elapsed_ms": 355.7
+      "elapsed_ms": 329.15
     },
     {
       "scenario_id": "sc-067",
       "domain": "logistics_supply_chain",
       "prompt": "اپلیکیشن درخواست وانت بار و حمل اثاثیه منزل",
-      "detected_domain": "media_editorial_magazine",
+      "detected_domain": "general_modern_saas",
       "domain_match": false,
-      "selected_style": "editorial_magazine",
+      "selected_style": "clean_stripe",
       "candidate_passed_first_pass": true,
       "autonomous_resolved": true,
       "react_tsx_compiled": true,
@@ -1556,11 +1556,11 @@
       "formula_validation_passed": true,
       "pixel_buffer_valid": true,
       "in_browser_vision_score": 95,
-      "dom_quality_score": 96.0,
-      "visual_quality_score": 93.2,
-      "critic_score": 96.0,
+      "dom_quality_score": 93.0,
+      "visual_quality_score": 91.7,
+      "critic_score": 93.0,
       "verification_status": "PASS",
-      "elapsed_ms": 319.97
+      "elapsed_ms": 338.83
     },
     {
       "scenario_id": "sc-068",
@@ -1578,11 +1578,11 @@
       "formula_validation_passed": true,
       "pixel_buffer_valid": true,
       "in_browser_vision_score": 95,
-      "dom_quality_score": 96.0,
-      "visual_quality_score": 93.2,
-      "critic_score": 96.0,
+      "dom_quality_score": 93.0,
+      "visual_quality_score": 91.7,
+      "critic_score": 93.0,
       "verification_status": "PASS",
-      "elapsed_ms": 314.81
+      "elapsed_ms": 293.34
     },
     {
       "scenario_id": "sc-069",
@@ -1600,11 +1600,11 @@
       "formula_validation_passed": true,
       "pixel_buffer_valid": true,
       "in_browser_vision_score": 95,
-      "dom_quality_score": 96.0,
-      "visual_quality_score": 93.2,
-      "critic_score": 96.0,
+      "dom_quality_score": 93.0,
+      "visual_quality_score": 91.7,
+      "critic_score": 93.0,
       "verification_status": "PASS",
-      "elapsed_ms": 352.07
+      "elapsed_ms": 332.35
     },
     {
       "scenario_id": "sc-070",
@@ -1622,11 +1622,11 @@
       "formula_validation_passed": true,
       "pixel_buffer_valid": true,
       "in_browser_vision_score": 95,
-      "dom_quality_score": 96.0,
-      "visual_quality_score": 93.2,
-      "critic_score": 96.0,
+      "dom_quality_score": 93.0,
+      "visual_quality_score": 91.7,
+      "critic_score": 93.0,
       "verification_status": "PASS",
-      "elapsed_ms": 318.71
+      "elapsed_ms": 334.03
     },
     {
       "scenario_id": "sc-071",
@@ -1648,15 +1648,15 @@
       "visual_quality_score": 93.2,
       "critic_score": 96.0,
       "verification_status": "PASS",
-      "elapsed_ms": 327.78
+      "elapsed_ms": 339.99
     },
     {
       "scenario_id": "sc-072",
       "domain": "general_modern_saas",
       "prompt": "Customer feedback widget and satisfaction survey builder",
-      "detected_domain": "media_editorial_magazine",
-      "domain_match": false,
-      "selected_style": "editorial_magazine",
+      "detected_domain": "general_modern_saas",
+      "domain_match": true,
+      "selected_style": "clean_stripe",
       "candidate_passed_first_pass": true,
       "autonomous_resolved": true,
       "react_tsx_compiled": true,
@@ -1666,11 +1666,11 @@
       "formula_validation_passed": true,
       "pixel_buffer_valid": true,
       "in_browser_vision_score": 95,
-      "dom_quality_score": 96.0,
-      "visual_quality_score": 93.2,
-      "critic_score": 96.0,
+      "dom_quality_score": 93.0,
+      "visual_quality_score": 91.7,
+      "critic_score": 93.0,
       "verification_status": "PASS",
-      "elapsed_ms": 322.5
+      "elapsed_ms": 329.0
     },
     {
       "scenario_id": "sc-073",
@@ -1689,10 +1689,10 @@
       "pixel_buffer_valid": true,
       "in_browser_vision_score": 95,
       "dom_quality_score": 96.0,
-      "visual_quality_score": 93.2,
+      "visual_quality_score": 91.7,
       "critic_score": 96.0,
       "verification_status": "PASS",
-      "elapsed_ms": 323.22
+      "elapsed_ms": 317.35
     },
     {
       "scenario_id": "sc-074",
@@ -1710,11 +1710,11 @@
       "formula_validation_passed": true,
       "pixel_buffer_valid": true,
       "in_browser_vision_score": 95,
-      "dom_quality_score": 96.0,
-      "visual_quality_score": 93.2,
-      "critic_score": 96.0,
+      "dom_quality_score": 93.0,
+      "visual_quality_score": 91.7,
+      "critic_score": 93.0,
       "verification_status": "PASS",
-      "elapsed_ms": 344.81
+      "elapsed_ms": 337.1
     },
     {
       "scenario_id": "sc-075",
@@ -1732,11 +1732,11 @@
       "formula_validation_passed": true,
       "pixel_buffer_valid": true,
       "in_browser_vision_score": 95,
-      "dom_quality_score": 96.0,
-      "visual_quality_score": 93.2,
-      "critic_score": 96.0,
+      "dom_quality_score": 93.0,
+      "visual_quality_score": 91.7,
+      "critic_score": 93.0,
       "verification_status": "PASS",
-      "elapsed_ms": 330.96
+      "elapsed_ms": 338.11
     },
     {
       "scenario_id": "sc-076",
@@ -1758,7 +1758,7 @@
       "visual_quality_score": 93.2,
       "critic_score": 96.0,
       "verification_status": "PASS",
-      "elapsed_ms": 313.09
+      "elapsed_ms": 333.66
     },
     {
       "scenario_id": "sc-077",
@@ -1776,11 +1776,11 @@
       "formula_validation_passed": true,
       "pixel_buffer_valid": true,
       "in_browser_vision_score": 95,
-      "dom_quality_score": 96.0,
-      "visual_quality_score": 93.2,
-      "critic_score": 96.0,
+      "dom_quality_score": 93.0,
+      "visual_quality_score": 91.7,
+      "critic_score": 93.0,
       "verification_status": "PASS",
-      "elapsed_ms": 301.89
+      "elapsed_ms": 338.3
     },
     {
       "scenario_id": "sc-078",
@@ -1798,11 +1798,11 @@
       "formula_validation_passed": true,
       "pixel_buffer_valid": true,
       "in_browser_vision_score": 95,
-      "dom_quality_score": 96.0,
-      "visual_quality_score": 93.2,
-      "critic_score": 96.0,
+      "dom_quality_score": 93.0,
+      "visual_quality_score": 91.7,
+      "critic_score": 93.0,
       "verification_status": "PASS",
-      "elapsed_ms": 319.4
+      "elapsed_ms": 317.95
     },
     {
       "scenario_id": "sc-079",
@@ -1820,11 +1820,11 @@
       "formula_validation_passed": true,
       "pixel_buffer_valid": true,
       "in_browser_vision_score": 95,
-      "dom_quality_score": 96.0,
-      "visual_quality_score": 93.2,
-      "critic_score": 96.0,
+      "dom_quality_score": 93.0,
+      "visual_quality_score": 91.7,
+      "critic_score": 93.0,
       "verification_status": "PASS",
-      "elapsed_ms": 314.63
+      "elapsed_ms": 318.08
     },
     {
       "scenario_id": "sc-080",
@@ -1842,11 +1842,11 @@
       "formula_validation_passed": true,
       "pixel_buffer_valid": true,
       "in_browser_vision_score": 95,
-      "dom_quality_score": 96.0,
-      "visual_quality_score": 93.2,
-      "critic_score": 96.0,
+      "dom_quality_score": 93.0,
+      "visual_quality_score": 91.7,
+      "critic_score": 93.0,
       "verification_status": "PASS",
-      "elapsed_ms": 336.66
+      "elapsed_ms": 343.53
     },
     {
       "scenario_id": "sc-081",
@@ -1864,11 +1864,11 @@
       "formula_validation_passed": true,
       "pixel_buffer_valid": true,
       "in_browser_vision_score": 95,
-      "dom_quality_score": 96.0,
-      "visual_quality_score": 93.2,
-      "critic_score": 96.0,
+      "dom_quality_score": 93.0,
+      "visual_quality_score": 91.7,
+      "critic_score": 93.0,
       "verification_status": "PASS",
-      "elapsed_ms": 343.73
+      "elapsed_ms": 326.84
     },
     {
       "scenario_id": "sc-082",
@@ -1887,10 +1887,10 @@
       "pixel_buffer_valid": true,
       "in_browser_vision_score": 95,
       "dom_quality_score": 96.0,
-      "visual_quality_score": 93.2,
+      "visual_quality_score": 91.7,
       "critic_score": 96.0,
       "verification_status": "PASS",
-      "elapsed_ms": 324.85
+      "elapsed_ms": 346.17
     },
     {
       "scenario_id": "sc-083",
@@ -1908,11 +1908,11 @@
       "formula_validation_passed": true,
       "pixel_buffer_valid": true,
       "in_browser_vision_score": 95,
-      "dom_quality_score": 96.0,
-      "visual_quality_score": 93.2,
-      "critic_score": 96.0,
+      "dom_quality_score": 93.0,
+      "visual_quality_score": 91.7,
+      "critic_score": 93.0,
       "verification_status": "PASS",
-      "elapsed_ms": 314.51
+      "elapsed_ms": 331.39
     },
     {
       "scenario_id": "sc-084",
@@ -1930,19 +1930,19 @@
       "formula_validation_passed": true,
       "pixel_buffer_valid": true,
       "in_browser_vision_score": 95,
-      "dom_quality_score": 96.0,
+      "dom_quality_score": 93.0,
       "visual_quality_score": 95.0,
-      "critic_score": 96.0,
+      "critic_score": 93.0,
       "verification_status": "PASS",
-      "elapsed_ms": 311.54
+      "elapsed_ms": 316.3
     },
     {
       "scenario_id": "sc-085",
       "domain": "media_editorial_magazine",
       "prompt": "Investigative journalism portal with interactive data visualizations",
-      "detected_domain": "ai_developer_platform",
+      "detected_domain": "general_modern_saas",
       "domain_match": false,
-      "selected_style": "linear_dark",
+      "selected_style": "clean_stripe",
       "candidate_passed_first_pass": true,
       "autonomous_resolved": true,
       "react_tsx_compiled": true,
@@ -1952,11 +1952,11 @@
       "formula_validation_passed": true,
       "pixel_buffer_valid": true,
       "in_browser_vision_score": 95,
-      "dom_quality_score": 96.0,
-      "visual_quality_score": 93.2,
-      "critic_score": 96.0,
+      "dom_quality_score": 93.0,
+      "visual_quality_score": 91.7,
+      "critic_score": 93.0,
       "verification_status": "PASS",
-      "elapsed_ms": 315.19
+      "elapsed_ms": 360.79
     },
     {
       "scenario_id": "sc-086",
@@ -1974,11 +1974,11 @@
       "formula_validation_passed": true,
       "pixel_buffer_valid": true,
       "in_browser_vision_score": 95,
-      "dom_quality_score": 96.0,
-      "visual_quality_score": 93.2,
-      "critic_score": 96.0,
+      "dom_quality_score": 93.0,
+      "visual_quality_score": 91.7,
+      "critic_score": 93.0,
       "verification_status": "PASS",
-      "elapsed_ms": 338.33
+      "elapsed_ms": 379.59
     },
     {
       "scenario_id": "sc-087",
@@ -1996,11 +1996,11 @@
       "formula_validation_passed": true,
       "pixel_buffer_valid": true,
       "in_browser_vision_score": 95,
-      "dom_quality_score": 96.0,
-      "visual_quality_score": 93.2,
-      "critic_score": 96.0,
+      "dom_quality_score": 93.0,
+      "visual_quality_score": 91.7,
+      "critic_score": 93.0,
       "verification_status": "PASS",
-      "elapsed_ms": 321.18
+      "elapsed_ms": 329.49
     },
     {
       "scenario_id": "sc-088",
@@ -2018,11 +2018,11 @@
       "formula_validation_passed": true,
       "pixel_buffer_valid": true,
       "in_browser_vision_score": 95,
-      "dom_quality_score": 96.0,
-      "visual_quality_score": 93.2,
-      "critic_score": 96.0,
+      "dom_quality_score": 93.0,
+      "visual_quality_score": 91.7,
+      "critic_score": 93.0,
       "verification_status": "PASS",
-      "elapsed_ms": 326.86
+      "elapsed_ms": 312.73
     },
     {
       "scenario_id": "sc-089",
@@ -2040,11 +2040,11 @@
       "formula_validation_passed": true,
       "pixel_buffer_valid": true,
       "in_browser_vision_score": 95,
-      "dom_quality_score": 96.0,
-      "visual_quality_score": 89.7,
-      "critic_score": 96.0,
+      "dom_quality_score": 93.0,
+      "visual_quality_score": 88.2,
+      "critic_score": 93.0,
       "verification_status": "PASS",
-      "elapsed_ms": 312.36
+      "elapsed_ms": 321.5
     },
     {
       "scenario_id": "sc-090",
@@ -2062,11 +2062,11 @@
       "formula_validation_passed": true,
       "pixel_buffer_valid": true,
       "in_browser_vision_score": 95,
-      "dom_quality_score": 96.0,
-      "visual_quality_score": 93.2,
-      "critic_score": 96.0,
+      "dom_quality_score": 93.0,
+      "visual_quality_score": 91.7,
+      "critic_score": 93.0,
       "verification_status": "PASS",
-      "elapsed_ms": 324.39
+      "elapsed_ms": 364.59
     },
     {
       "scenario_id": "sc-091",
@@ -2088,7 +2088,7 @@
       "visual_quality_score": 93.2,
       "critic_score": 96.0,
       "verification_status": "PASS",
-      "elapsed_ms": 330.73
+      "elapsed_ms": 332.09
     },
     {
       "scenario_id": "sc-092",
@@ -2106,11 +2106,11 @@
       "formula_validation_passed": true,
       "pixel_buffer_valid": true,
       "in_browser_vision_score": 95,
-      "dom_quality_score": 96.0,
-      "visual_quality_score": 93.2,
-      "critic_score": 96.0,
+      "dom_quality_score": 93.0,
+      "visual_quality_score": 91.7,
+      "critic_score": 93.0,
       "verification_status": "PASS",
-      "elapsed_ms": 333.53
+      "elapsed_ms": 300.08
     },
     {
       "scenario_id": "sc-093",
@@ -2128,11 +2128,11 @@
       "formula_validation_passed": true,
       "pixel_buffer_valid": true,
       "in_browser_vision_score": 95,
-      "dom_quality_score": 96.0,
-      "visual_quality_score": 93.2,
-      "critic_score": 96.0,
+      "dom_quality_score": 93.0,
+      "visual_quality_score": 91.7,
+      "critic_score": 93.0,
       "verification_status": "PASS",
-      "elapsed_ms": 314.22
+      "elapsed_ms": 311.94
     },
     {
       "scenario_id": "sc-094",
@@ -2150,11 +2150,11 @@
       "formula_validation_passed": true,
       "pixel_buffer_valid": true,
       "in_browser_vision_score": 95,
-      "dom_quality_score": 96.0,
-      "visual_quality_score": 93.2,
-      "critic_score": 96.0,
+      "dom_quality_score": 93.0,
+      "visual_quality_score": 91.7,
+      "critic_score": 93.0,
       "verification_status": "PASS",
-      "elapsed_ms": 322.01
+      "elapsed_ms": 325.84
     },
     {
       "scenario_id": "sc-095",
@@ -2176,7 +2176,7 @@
       "visual_quality_score": 93.2,
       "critic_score": 96.0,
       "verification_status": "PASS",
-      "elapsed_ms": 326.1
+      "elapsed_ms": 335.5
     },
     {
       "scenario_id": "sc-096",
@@ -2194,11 +2194,11 @@
       "formula_validation_passed": true,
       "pixel_buffer_valid": true,
       "in_browser_vision_score": 95,
-      "dom_quality_score": 96.0,
-      "visual_quality_score": 93.2,
-      "critic_score": 96.0,
+      "dom_quality_score": 93.0,
+      "visual_quality_score": 91.7,
+      "critic_score": 93.0,
       "verification_status": "PASS",
-      "elapsed_ms": 318.47
+      "elapsed_ms": 324.05
     },
     {
       "scenario_id": "sc-097",
@@ -2217,10 +2217,10 @@
       "pixel_buffer_valid": true,
       "in_browser_vision_score": 95,
       "dom_quality_score": 96.0,
-      "visual_quality_score": 93.2,
+      "visual_quality_score": 91.7,
       "critic_score": 96.0,
       "verification_status": "PASS",
-      "elapsed_ms": 330.27
+      "elapsed_ms": 316.98
     },
     {
       "scenario_id": "sc-098",
@@ -2238,11 +2238,11 @@
       "formula_validation_passed": true,
       "pixel_buffer_valid": true,
       "in_browser_vision_score": 95,
-      "dom_quality_score": 96.0,
-      "visual_quality_score": 93.2,
-      "critic_score": 96.0,
+      "dom_quality_score": 93.0,
+      "visual_quality_score": 91.7,
+      "critic_score": 93.0,
       "verification_status": "PASS",
-      "elapsed_ms": 321.16
+      "elapsed_ms": 322.66
     },
     {
       "scenario_id": "sc-099",
@@ -2264,7 +2264,7 @@
       "visual_quality_score": 93.2,
       "critic_score": 96.0,
       "verification_status": "PASS",
-      "elapsed_ms": 318.02
+      "elapsed_ms": 333.24
     },
     {
       "scenario_id": "sc-100",
@@ -2286,7 +2286,7 @@
       "visual_quality_score": 93.2,
       "critic_score": 96.0,
       "verification_status": "PASS",
-      "elapsed_ms": 313.29
+      "elapsed_ms": 336.54
     }
   ]
 }

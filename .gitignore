@@ -49,6 +49,8 @@ htmlcov/
 # Internal Project Tracking
 PROJECT_STATE.md
 AUDIT_BACKLOG.md
+test_dental.html
+scripts/debug_evals_fail.py
 scratch/
 scratch_*
 temp_*

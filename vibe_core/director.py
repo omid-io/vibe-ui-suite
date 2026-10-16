@@ -165,14 +165,8 @@ class DesignDirector:
         elif any(w in lower_prompt for w in ["terminal", "hud"]):
             style_override = "cyberpunk"
 
-        # Entropy Diversity: if confidence is low or ambiguity is high and no explicit style is given
-        entropy_active = any("entropy_diversity" in str(r) for r in match_reasons)
-        if entropy_active and not style_override and "selected_style" not in user_overrides:
-            entropy_seed = sum(ord(c) for c in norm_prompt) if norm_prompt else 0
-            pick = DIVERSE_FALLBACK_ARCHETYPES[entropy_seed % len(DIVERSE_FALLBACK_ARCHETYPES)]
-            chosen_style = pick["style"]
-        else:
-            chosen_style = user_overrides.get("selected_style") or style_override or matched_domain.get("recommended_styles", ["claymorphism"])[0]
+        # Style selection: user override > prompt keyword override > domain recommended style
+        chosen_style = user_overrides.get("selected_style") or style_override or matched_domain.get("recommended_styles", ["clean-stripe"])[0]
 
         # Strict Light-First Mandate & Anti-Dark-Bias Invariant:
         # Default canvas is ALWAYS Vibrant Light unless:
@@ -215,6 +209,7 @@ class DesignDirector:
         }
 
         # Construct Comprehensive DesignIntentContract
+        entropy_active = any("entropy_diversity" in str(r) for r in match_reasons)
         intent = {
             "product_domain": user_overrides.get("product_domain") or domain_id,
             "selected_style": chosen_style,
@@ -368,14 +363,10 @@ class DesignDirector:
                 reasons = matched_aliases
 
         if not best_domain or best_score < 0.20:
-            # Entropy Diversity: avoid falling back to generic SaaS when confidence is low or input is ambiguous
-            entropy_seed = sum(ord(c) for c in text) if text else 0
-            pick = DIVERSE_FALLBACK_ARCHETYPES[entropy_seed % len(DIVERSE_FALLBACK_ARCHETYPES)]
-            fallback = next((d for d in self.taxonomy if d["id"] == pick["id"]), None)
-            if not fallback:
-                fallback = next((d for d in self.taxonomy if d["id"] == "general_modern_saas"), self.taxonomy[0] if self.taxonomy else {})
+            # Dignified fallback: default to high-trust, production-grade SaaS architecture
+            fallback = next((d for d in self.taxonomy if d["id"] == "general_modern_saas"), self.taxonomy[0] if self.taxonomy else {})
             actual_score = round(best_score, 2) if best_domain else 0.0
-            return fallback, actual_score, [pick["reason"], "entropy_diversity_applied"]
+            return fallback, actual_score, ["fallback:general_modern_saas", "clean_modern_baseline"]
 
         return best_domain, best_score, reasons
 

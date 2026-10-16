@@ -3,6 +3,9 @@ name: Automated Multi-Registry Publishing
 on:
   release:
     types: [published]
+  push:
+    tags:
+      - 'v*'
   workflow_dispatch:
 
 permissions:

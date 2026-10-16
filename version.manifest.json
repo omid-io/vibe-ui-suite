@@ -1,12 +1,12 @@
 {
   "$schema": "./schemas/version-manifest.schema.json",
-  "version": "6.2.0",
-  "codename": "Multi-AI Quality Certified & Universal Architecture",
+  "version": "6.3.0",
+  "codename": "Autonomous Maturity & Clean Architecture Extension Sync",
   "release_channel": "stable",
   "packages": {
-    "vibe-ui-suite": "6.2.0",
-    "vibe-ui-vscode": "6.2.0",
-    "vibe-ui-nextjs-starter": "6.2.0"
+    "vibe-ui-suite": "6.3.0",
+    "vibe-ui-vscode": "6.3.0",
+    "vibe-ui-nextjs-starter": "6.3.0"
   },
   "schemas": {
     "intent_contract": "v1",
@@ -23,5 +23,5 @@
     "nextjs": ">=15.0.0",
     "react": ">=19.0.0"
   },
-  "last_updated": "2026-10-16"
+  "last_updated": "2026-10-17"
 }

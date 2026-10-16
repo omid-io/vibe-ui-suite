@@ -3,6 +3,17 @@
 All notable changes to the **Vibe UI (VS Code, Cursor & Open-VSX)** extension will be documented in this file.
 This project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [6.3.0] — 2026-10-17
+
+### Added & Improved
+- **Autonomous Maturity & Lazy-Prompt Architecture:** Full synchronization with v6.3.0 core layout engine, supporting dynamic multi-archetype layout compilation across all 24 domains.
+- **Decoupled Aside Header Chrome:** Replaced hardcoded macOS traffic-light buttons with domain-adaptive badges and authentic clinical/enterprise headers.
+- **Scoped Kinetic Pointer:** Custom kinetic trailing cursor now strictly scoped to creative and gaming archetypes, preserving the user's natural mouse pointer across standard business and medical interfaces.
+- **Eradicated Framework Telemetry in React TSX:** Cleaned Tab 2 component outputs into authentic user-facing capabilities cards.
+- **Multi-Registry Automated Synchronization:** Certified automated pipeline updates across VS Code Marketplace, Open-VSX, and NPM.
+
+---
+
 ## [6.0.0] — 2026-10-13
 
 ### Added

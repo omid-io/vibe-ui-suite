@@ -17,6 +17,7 @@ import re
 from vibe_core.genome import DesignGenomeEngine
 from vibe_core.asset_director import AssetDirector
 from vibe_core.domain_widgets import render_domain_widget
+from vibe_core.sections_compiler import compile_domain_sections, get_domain_nav_links
 
 # 6 Distinct Macro Layout Archetypes mapped to all 24 Canonical Domains (v3.9.0)
 DOMAIN_MACRO_ARCHETYPES: Dict[str, str] = {
@@ -672,7 +673,7 @@ export const {component_name}: React.FC<{component_name}Props> = ({{
   const tabs = [
     {{"id": "overview", "label": "Primary Experience"}},
     {{"id": "telemetry", "label": "Domain Performance"}},
-    {{"id": "architecture", "label": "System Blueprint"}}
+    {{"id": "architecture", "label": "Key Architecture"}}
   ];
 
   return (
@@ -747,41 +748,31 @@ export const {component_name}: React.FC<{component_name}Props> = ({{
           </div>
         )}}
 
-        {{/* Tab Panel 2: Architecture & Domain Blueprint Specification */}}
+        {{/* Tab Panel 2: Product Capabilities & Architecture Solutions */}}
         {{activeTab === 2 && (
           <div role="tabpanel" className="pt-8 space-y-6 animate-fadeIn">
-            <div className="overflow-x-auto">
-              <table className="w-full text-xs text-left rtl:text-right border-collapse">
-                <thead>
-                  <tr className="border-b border-zinc-200 dark:border-zinc-800 text-zinc-400 font-mono uppercase">
-                    <th className="py-2.5 px-3">Blueprint Dimension</th>
-                    <th className="py-2.5 px-3">Resolved Value</th>
-                    <th className="py-2.5 px-3">Invariant Status</th>
-                  </tr>
-                </thead>
-                <tbody className="divide-y divide-zinc-200/60 dark:divide-zinc-800/60 text-zinc-600 dark:text-zinc-300">
-                  <tr>
-                    <td className="py-2.5 px-3 font-semibold">Product Domain</td>
-                    <td className="py-2.5 px-3 font-mono">{domain_id}</td>
-                    <td className="py-2.5 px-3 text-emerald-600 dark:text-emerald-400 font-semibold">MATCH 100%</td>
-                  </tr>
-                  <tr>
-                    <td className="py-2.5 px-3 font-semibold">Visual Chemistry</td>
-                    <td className="py-2.5 px-3 font-mono">{selected_style}</td>
-                    <td className="py-2.5 px-3 text-sky-600 dark:text-sky-400 font-semibold">COMPILED</td>
-                  </tr>
-                  <tr>
-                    <td className="py-2.5 px-3 font-semibold">Lighting Mode</td>
-                    <td className="py-2.5 px-3 font-mono">{theme_strategy}</td>
-                    <td className="py-2.5 px-3 text-emerald-600 dark:text-emerald-400 font-semibold">BALANCED</td>
-                  </tr>
-                  <tr>
-                    <td className="py-2.5 px-3 font-semibold">Text Direction & BiDi</td>
-                    <td className="py-2.5 px-3 font-mono">LTR (Pure English)</td>
-                    <td className="py-2.5 px-3 text-emerald-600 dark:text-emerald-400 font-semibold">&lt;bdi&gt; SECURED</td>
-                  </tr>
-                </tbody>
-              </table>
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+              <div className="{style_cfg['widget_card']}">
+                <div className="size-10 rounded-xl bg-blue-500/10 text-blue-600 dark:text-blue-400 flex items-center justify-center font-bold text-sm">01</div>
+                <h4 className="text-base font-bold text-zinc-900 dark:text-white">Enterprise Scalability</h4>
+                <p className="text-xs text-zinc-500 dark:text-zinc-400 leading-relaxed">
+                  Engineered with sub-millisecond responsiveness and zero-latency state synchronization.
+                </p>
+              </div>
+              <div className="{style_cfg['widget_card']}">
+                <div className="size-10 rounded-xl bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 flex items-center justify-center font-bold text-sm">02</div>
+                <h4 className="text-base font-bold text-zinc-900 dark:text-white">Institutional Security</h4>
+                <p className="text-xs text-zinc-500 dark:text-zinc-400 leading-relaxed">
+                  Continuous cryptographic verification, end-to-end encryption, and full compliance auditing.
+                </p>
+              </div>
+              <div className="{style_cfg['widget_card']}">
+                <div className="size-10 rounded-xl bg-indigo-500/10 text-indigo-600 dark:text-indigo-400 flex items-center justify-center font-bold text-sm">03</div>
+                <h4 className="text-base font-bold text-zinc-900 dark:text-white">Autonomous Ergonomics</h4>
+                <p className="text-xs text-zinc-500 dark:text-zinc-400 leading-relaxed">
+                  Tailored micro-interactions and accessible geometry designed for mission-critical workflows.
+                </p>
+              </div>
             </div>
           </div>
         )}}
@@ -940,506 +931,143 @@ export default {component_name};
 {metrics_block_html}
             </div>"""
 
-        # Determine domain-specific navigation and sections
-        if domain_id == "devops_cloud_terminal":
-            nav_links = [
-                {"href": "#cluster", "label": "Cluster Health"},
-                {"href": "#latency", "label": "P95/P99 Latency"},
-                {"href": "#services", "label": "Services Mesh"},
-                {"href": "#logs", "label": "Live Terminal"}
-            ]
-        elif domain_id in ["beauty_clinical_wellness", "healthcare_clinical_dental", "health_medical_clinic", "healthcare_hospital_medical"]:
-            nav_links = [
-                {"href": "#services", "label": "Treatments & Pricing"},
-                {"href": "#portfolio", "label": "Before & After"},
-                {"href": "#doctors", "label": "Specialists"},
-                {"href": "#booking", "label": "Book Appointment"}
-            ]
-        else:
-            nav_links = [
-                {"href": "#features", "label": "Features"},
-                {"href": "#services", "label": "Services & Pricing"},
-                {"href": "#contact", "label": "Contact"}
-            ]
+        # Determine domain-calibrated navigation and dynamic multi-archetype sections
+        selected_style = decision.get("genome", {}).get("style", "stripe_crisp")
+        theme_strat = decision.get("intent", {}).get("theme_strategy", "light")
+        style_cfg = self._compile_style(selected_style, theme_strat)
 
+        nav_links = get_domain_nav_links(domain_id, blueprint)
         nav_links_html = "\n".join([
-            f'        <a href="{link["href"]}" class="text-sm font-medium hover:text-[var(--accent)] transition-colors min-h-[44px] inline-flex items-center">{link["label"]}</a>'
+            f'            <a href="{link["href"]}" class="text-sm font-medium hover:text-[var(--accent)] transition-colors min-h-[44px] inline-flex items-center">{link["label"]}</a>'
             for link in nav_links
         ])
         nav_links_mobile_html = "\n".join([
-            f'      <a href="{link["href"]}" class="block py-2.5 px-3 rounded-[var(--radius-button)] text-sm font-medium text-[var(--text-main)] hover:bg-[var(--accent)]/10 hover:text-[var(--accent)] transition-colors min-h-[44px] flex items-center">{link["label"]}</a>'
+            f'            <a href="{link["href"]}" class="block py-2.5 px-3 rounded-[var(--radius-button)] text-sm font-medium text-[var(--text-main)] hover:bg-[var(--accent)]/10 hover:text-[var(--accent)] transition-colors min-h-[44px] flex items-center">{link["label"]}</a>'
             for link in nav_links
         ])
 
-        # Generate Domain-Specific Sections HTML
-        if domain_id == "devops_cloud_terminal":
-            domain_sections_html = f"""
-    <!-- DevOps Section 1: Cluster Health -->
-    <section id="cluster" class="mt-12 pt-8 border-t border-[var(--border-subtle)]" aria-labelledby="cluster-heading">
-      <div class="flex items-center justify-between mb-6">
-        <div>
-          <h2 id="cluster-heading" class="text-2xl font-bold tracking-tight">Kubernetes Cluster Status</h2>
-          <p class="text-xs text-[var(--text-muted)] mt-1">Real-time health telemetry across active worker nodes and pods.</p>
-        </div>
-        <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-mono font-semibold bg-emerald-500/10 text-emerald-500 border border-emerald-500/20">
-          <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
-          All Systems Operational (99.99%)
-        </span>
-      </div>
-      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 font-mono text-xs">
-        <div class="p-4 bg-[var(--surface-bg)] {card_border} rounded-[var(--radius-container)] {card_shadow} space-y-2">
-          <div class="flex justify-between text-[var(--text-muted)]"><span>ingress-nginx</span><span class="text-emerald-500 font-bold">READY</span></div>
-          <div class="text-base font-bold text-[var(--text-primary)]">6/6 Pods Running</div>
-          <div class="w-full bg-[var(--canvas-bg)] rounded-full h-1.5"><div class="bg-emerald-500 h-1.5 rounded-full" style="width: 100%"></div></div>
-        </div>
-        <div class="p-4 bg-[var(--surface-bg)] {card_border} rounded-[var(--radius-container)] {card_shadow} space-y-2">
-          <div class="flex justify-between text-[var(--text-muted)]"><span>api-gateway-mesh</span><span class="text-emerald-500 font-bold">READY</span></div>
-          <div class="text-base font-bold text-[var(--text-primary)]">12/12 Pods Running</div>
-          <div class="w-full bg-[var(--canvas-bg)] rounded-full h-1.5"><div class="bg-emerald-500 h-1.5 rounded-full" style="width: 100%"></div></div>
-        </div>
-        <div class="p-4 bg-[var(--surface-bg)] {card_border} rounded-[var(--radius-container)] {card_shadow} space-y-2">
-          <div class="flex justify-between text-[var(--text-muted)]"><span>auth-worker-daemon</span><span class="text-amber-500 font-bold">SYNCING</span></div>
-          <div class="text-base font-bold text-[var(--text-primary)]">4/4 Pods (88% CPU)</div>
-          <div class="w-full bg-[var(--canvas-bg)] rounded-full h-1.5"><div class="bg-amber-500 h-1.5 rounded-full" style="width: 88%"></div></div>
-        </div>
-        <div class="p-4 bg-[var(--surface-bg)] {card_border} rounded-[var(--radius-container)] {card_shadow} space-y-2">
-          <div class="flex justify-between text-[var(--text-muted)]"><span>redis-cluster-cache</span><span class="text-emerald-500 font-bold">READY</span></div>
-          <div class="text-base font-bold text-[var(--text-primary)]">3 Master / 3 Replica</div>
-          <div class="w-full bg-[var(--canvas-bg)] rounded-full h-1.5"><div class="bg-emerald-500 h-1.5 rounded-full" style="width: 100%"></div></div>
-        </div>
-      </div>
-    </section>
+        domain_sections_html = compile_domain_sections(
+            domain_id=domain_id,
+            blueprint=blueprint,
+            style_cfg=style_cfg,
+            card_border=card_border,
+            card_shadow=card_shadow,
+            is_rtl=is_rtl
+        )
 
-    <!-- DevOps Section 2: P95/P99 Latency & SLO -->
-    <section id="latency" class="mt-12 pt-8 border-t border-[var(--border-subtle)]" aria-labelledby="latency-heading">
-      <h2 id="latency-heading" class="text-2xl font-bold tracking-tight mb-6">Throughput & Latency Profiling</h2>
-      <div class="grid grid-cols-1 md:grid-cols-3 gap-6 font-mono">
-        <div class="vibe-spotlight-card p-6 bg-[var(--surface-bg)] {card_border} rounded-[var(--radius-container)] {card_shadow} space-y-2">
-          <div class="text-xs text-[var(--text-muted)] uppercase tracking-wider">Median Latency (p50)</div>
-          <div class="text-3xl font-extrabold text-[var(--accent)]"><bdi>12.4 ms</bdi></div>
-          <div class="text-xs text-emerald-500 flex items-center gap-1.5"><svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><polyline points="20 6 9 17 4 12"></polyline></svg><span>-4.2% vs 7-day average</span></div>
-        </div>
-        <div class="vibe-spotlight-card p-6 bg-[var(--surface-bg)] {card_border} rounded-[var(--radius-container)] {card_shadow} space-y-2">
-          <div class="text-xs text-[var(--text-muted)] uppercase tracking-wider">Tail Latency (p95)</div>
-          <div class="text-3xl font-extrabold text-[var(--accent)]"><bdi>38.2 ms</bdi></div>
-          <div class="text-xs text-emerald-500 flex items-center gap-1.5"><svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><polyline points="20 6 9 17 4 12"></polyline></svg><span>Well within 50ms SLO threshold</span></div>
-        </div>
-        <div class="vibe-spotlight-card p-6 bg-[var(--surface-bg)] {card_border} rounded-[var(--radius-container)] {card_shadow} space-y-2">
-          <div class="text-xs text-[var(--text-muted)] uppercase tracking-wider">Peak Latency (p99)</div>
-          <div class="text-3xl font-extrabold text-amber-500"><bdi>84.1 ms</bdi></div>
-          <div class="text-xs text-[var(--text-muted)]">SLO target: &lt; 100ms</div>
-        </div>
-      </div>
-    </section>
-
-    <!-- DevOps Section 3: Services Mesh -->
-    <section id="services" class="mt-12 pt-8 border-t border-[var(--border-subtle)]" aria-labelledby="services-mesh-heading">
-      <h2 id="services-mesh-heading" class="text-2xl font-bold tracking-tight mb-6">Microservices Mesh Health</h2>
-      <div class="overflow-x-auto {card_border} rounded-[var(--radius-container)] bg-[var(--surface-bg)] {card_shadow}">
-        <table class="w-full text-start text-xs font-mono">
-          <thead class="bg-[var(--canvas-bg)] text-[var(--text-muted)] uppercase border-b border-[var(--border-subtle)]">
-            <tr>
-              <th scope="col" class="px-6 py-3 text-start">Service Name</th>
-              <th scope="col" class="px-6 py-3 text-start">Protocol</th>
-              <th scope="col" class="px-6 py-3 text-start">HTTP Status</th>
-              <th scope="col" class="px-6 py-3 text-start">Uptime</th>
-              <th scope="col" class="px-6 py-3 text-start">Action</th>
-            </tr>
-          </thead>
-          <tbody class="divide-y divide-[var(--border-subtle)]">
-            <tr>
-              <td class="px-6 py-4 font-bold text-[var(--text-primary)]">edge-ingress-proxy</td>
-              <td class="px-6 py-4 text-[var(--text-muted)]">HTTP/3 QUIC</td>
-              <td class="px-6 py-4"><span class="px-2 py-0.5 rounded-full bg-emerald-500/10 text-emerald-500 font-bold">200 OK</span></td>
-              <td class="px-6 py-4"><bdi>99.999%</bdi></td>
-              <td class="px-6 py-4"><button type="button" class="btn-action text-xs text-[var(--accent)] hover:underline min-h-[44px] inline-flex items-center">Inspect Traces</button></td>
-            </tr>
-            <tr>
-              <td class="px-6 py-4 font-bold text-[var(--text-primary)]">billing-event-worker</td>
-              <td class="px-6 py-4 text-[var(--text-muted)]">gRPC / TLS</td>
-              <td class="px-6 py-4"><span class="px-2 py-0.5 rounded-full bg-emerald-500/10 text-emerald-500 font-bold">200 OK</span></td>
-              <td class="px-6 py-4"><bdi>99.985%</bdi></td>
-              <td class="px-6 py-4"><button type="button" class="btn-action text-xs text-[var(--accent)] hover:underline min-h-[44px] inline-flex items-center">Inspect Traces</button></td>
-            </tr>
-            <tr>
-              <td class="px-6 py-4 font-bold text-[var(--text-primary)]">telemetry-aggregator</td>
-              <td class="px-6 py-4 text-[var(--text-muted)]">Kafka / TCP</td>
-              <td class="px-6 py-4"><span class="px-2 py-0.5 rounded-full bg-emerald-500/10 text-emerald-500 font-bold">200 OK</span></td>
-              <td class="px-6 py-4"><bdi>99.994%</bdi></td>
-              <td class="px-6 py-4"><button type="button" class="btn-action text-xs text-[var(--accent)] hover:underline min-h-[44px] inline-flex items-center">Inspect Traces</button></td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-    </section>
-
-    <!-- DevOps Section 4: Live Terminal & Log Stream -->
-    <section id="logs" class="mt-12 pt-8 border-t border-[var(--border-subtle)]" aria-labelledby="logs-heading">
-      <div class="flex items-center justify-between mb-4">
-        <h2 id="logs-heading" class="text-2xl font-bold tracking-tight">Live Kubectl Telemetry Console</h2>
-        <div class="flex gap-2">
-          <button type="button" id="toggle-log-stream" class="px-3 py-1.5 text-xs font-mono font-bold rounded-[var(--radius-button)] bg-[var(--canvas-bg)] border border-[var(--border-subtle)] hover:bg-[var(--surface-bg)] min-h-[44px] transition-colors">
-            Pause Stream
-          </button>
-          <button type="button" id="copy-curl-btn" class="px-3 py-1.5 text-xs font-mono font-bold rounded-[var(--radius-button)] bg-[var(--accent)] text-[var(--vibe-on-primary,#fff)] min-h-[44px] transition-colors">
-            Copy Curl Snippet
-          </button>
-        </div>
-      </div>
-      <div class="p-5 bg-black border border-emerald-900/60 rounded-[var(--radius-container)] font-mono text-xs text-emerald-400 space-y-1.5 overflow-x-auto shadow-inner">
-        <div class="text-zinc-500"># Connected to cluster: us-east-prod-k8s-mesh [Active Context]</div>
-        <div>[2026-09-30T04:00:12Z] INFO  ingress-controller: sync service target 10.244.2.14:8080 (healthy)</div>
-        <div>[2026-09-30T04:00:15Z] INFO  auth-worker: Token verification latency p95=8.2ms, status=AUTHORIZED</div>
-        <div>[2026-09-30T04:00:18Z] DEBUG redis-cache: Cache hit ratio: 98.4% (3.2k ops/sec)</div>
-        <div>[2026-09-30T04:00:22Z] WARN  worker-node-4: Memory saturation approaching 82% threshold; auto-scaler standing by</div>
-        <div class="text-emerald-300 font-bold animate-pulse">&gt; tail -f /var/log/syslog --follow [LIVE STREAMING]</div>
-      </div>
-    </section>
-"""
-        elif domain_id in ["beauty_clinical_wellness", "healthcare_clinical_dental", "health_medical_clinic", "healthcare_hospital_medical"]:
-            domain_sections_html = f"""
-    <!-- Healthcare Section 1: Services & Treatments -->
-    <section id="services" class="mt-12 pt-8 border-t border-[var(--border-subtle)]" aria-labelledby="services-heading">
-      <div class="max-w-2xl mb-8">
-        <h2 id="services-heading" class="text-2xl sm:text-3xl font-bold tracking-tight">Specialized Treatments & Transparent Pricing</h2>
-        <p class="text-sm text-[var(--text-muted)] mt-2">All treatments performed with digital imaging, premium biocompatible materials, and certified warranties.</p>
-      </div>
-      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-        <div class="p-6 bg-[var(--surface-bg)] {card_border} rounded-[var(--radius-container)] {card_shadow} flex flex-col justify-between space-y-4">
-          <div>
-            <span class="inline-flex px-2.5 py-0.5 rounded-full text-xs font-semibold bg-[var(--accent)]/10 text-[var(--accent)] mb-2">Cosmetic</span>
-            <h3 class="text-lg font-bold">Nano-Ceramic Composite</h3>
-            <p class="text-xs text-[var(--text-muted)] mt-1">Non-invasive smile enhancement with ultra-durable natural translucency.</p>
+        # Context-aware aside titlebar (DevOps / Terminal gets console header, all other domains get elegant business badge)
+        is_terminal_domain = domain_id in ["devops_cloud_terminal", "cyber_terminal", "developer_cloud_platform"]
+        if is_terminal_domain:
+            aside_header_html = f"""          <div class="flex items-center space-x-2 rtl:space-x-reverse">
+            <span class="w-3 h-3 rounded-full bg-rose-500/80 inline-block border border-rose-600/40"></span>
+            <span class="w-3 h-3 rounded-full bg-amber-500/80 inline-block border border-amber-600/40"></span>
+            <span class="w-3 h-3 rounded-full bg-emerald-500/80 inline-block border border-emerald-600/40"></span>
           </div>
-          <div class="pt-4 border-t border-[var(--border-subtle)]">
-            <div class="text-xs text-[var(--text-muted)]">Starting from</div>
-            <div class="text-lg font-bold text-[var(--accent)]"><bdi>$350 / tooth</bdi></div>
+          <div class="text-[11px] font-mono text-[var(--text-muted)] flex items-center gap-1.5 opacity-80">
+            <svg class="w-3.5 h-3.5 text-[var(--accent)]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg>
+            <span>{domain_id}.vibe // live</span>
           </div>
-        </div>
-
-        <div class="p-6 bg-[var(--surface-bg)] {card_border} rounded-[var(--radius-container)] {card_shadow} flex flex-col justify-between space-y-4">
-          <div>
-            <span class="inline-flex px-2.5 py-0.5 rounded-full text-xs font-semibold bg-[var(--accent)]/10 text-[var(--accent)] mb-2">Implantology</span>
-            <h3 class="text-lg font-bold">Immediate Digital Implant</h3>
-            <p class="text-xs text-[var(--text-muted)] mt-1">3D surgical guide placement with immediate crown loading.</p>
-          </div>
-          <div class="pt-4 border-t border-[var(--border-subtle)]">
-            <div class="text-xs text-[var(--text-muted)]">Starting from</div>
-            <div class="text-lg font-bold text-[var(--accent)]"><bdi>$950 / unit</bdi></div>
-          </div>
-        </div>
-
-        <div class="p-6 bg-[var(--surface-bg)] {card_border} rounded-[var(--radius-container)] {card_shadow} flex flex-col justify-between space-y-4">
-          <div>
-            <span class="inline-flex px-2.5 py-0.5 rounded-full text-xs font-semibold bg-[var(--accent)]/10 text-[var(--accent)] mb-2">Whitening</span>
-            <h3 class="text-lg font-bold">Laser Office Bleaching</h3>
-            <p class="text-xs text-[var(--text-muted)] mt-1">In-office laser whitening up to 4 shades lighter in 45 minutes.</p>
-          </div>
-          <div class="pt-4 border-t border-[var(--border-subtle)]">
-            <div class="text-xs text-[var(--text-muted)]">Full arch</div>
-            <div class="text-lg font-bold text-[var(--accent)]"><bdi>$280 total</bdi></div>
-          </div>
-        </div>
-
-        <div class="p-6 bg-[var(--surface-bg)] {card_border} rounded-[var(--radius-container)] {card_shadow} flex flex-col justify-between space-y-4">
-          <div>
-            <span class="inline-flex px-2.5 py-0.5 rounded-full text-xs font-semibold bg-[var(--accent)]/10 text-[var(--accent)] mb-2">Orthodontics</span>
-            <h3 class="text-lg font-bold">Clear Aligners</h3>
-            <p class="text-xs text-[var(--text-muted)] mt-1">Discreet teeth alignment using custom removable clear trays.</p>
-          </div>
-          <div class="pt-4 border-t border-[var(--border-subtle)]">
-            <div class="text-xs text-[var(--text-muted)]">Full package</div>
-            <div class="text-lg font-bold text-[var(--accent)]"><bdi>$1,800 package</bdi></div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- Healthcare Section 2: Portfolio Before / After -->
-    <section id="portfolio" class="mt-12 pt-8 border-t border-[var(--border-subtle)]" aria-labelledby="portfolio-heading">
-      <div class="flex items-center justify-between mb-6">
-        <div>
-          <h2 id="portfolio-heading" class="text-2xl font-bold tracking-tight">Clinical Before & After Gallery</h2>
-          <p class="text-xs text-[var(--text-muted)] mt-1">Authentic outcomes documented with patient consent and verified results.</p>
-        </div>
-        <div class="flex gap-2">
-          <button type="button" class="portfolio-tab px-3 py-1.5 text-xs font-semibold rounded-[var(--radius-button)] bg-[var(--accent)] text-[var(--vibe-on-primary,#fff)] min-h-[44px]" data-view="before">Before</button>
-          <button type="button" class="portfolio-tab px-3 py-1.5 text-xs font-semibold rounded-[var(--radius-button)] bg-[var(--canvas-bg)] border border-[var(--border-subtle)] hover:bg-[var(--surface-bg)] min-h-[44px]" data-view="after">After Treatment</button>
-        </div>
-      </div>
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-        <!-- Interactive Drag Slider Card 1 -->
-        <div class="vibe-spotlight-card p-6 bg-[var(--surface-bg)] {card_border} rounded-[var(--radius-container)] {card_shadow} space-y-4">
-          <div class="flex justify-between items-center text-xs font-semibold">
-            <span>10 Units E-Max Veneers</span>
-            <span class="px-2 py-0.5 rounded-full bg-emerald-500/10 text-emerald-500 font-mono text-[10px] font-bold"><bdi>98.4% Match</bdi></span>
-          </div>
-          <!-- Interactive Before / After Split Slider -->
-          <div class="relative h-48 w-full rounded-[var(--radius-base)] overflow-hidden border border-[var(--border-subtle)] bg-[var(--canvas-bg)] select-none">
-            <div class="absolute inset-0 bg-gradient-to-r from-stone-300 to-amber-100 dark:from-stone-800 dark:to-amber-950/40 flex items-center justify-start p-4">
-              <span class="text-xs font-bold text-stone-500 uppercase tracking-widest">Baseline</span>
-            </div>
-            <div id="before-after-layer-1" class="absolute inset-y-0 end-0 bg-gradient-to-l from-emerald-100 to-rose-50 dark:from-emerald-950/40 dark:to-rose-950/20 border-s-2 border-emerald-500 flex items-center justify-end p-4 transition-all duration-75" style="width: 50%">
-              <span class="text-xs font-bold text-emerald-700 dark:text-emerald-400 uppercase tracking-widest">After Result</span>
-            </div>
-            <input type="range" min="0" max="100" value="50" class="before-after-range absolute inset-0 opacity-0 cursor-ew-resize w-full h-full z-20" data-target="before-after-layer-1" data-divider="divider-line-1" aria-label="Before and After Comparison Slider">
-            <div id="divider-line-1" class="absolute inset-y-0 w-1 bg-white shadow-[0_0_10px_rgba(0,0,0,0.4)] pointer-events-none z-10 flex items-center justify-center" style="left: 50%">
-              <div class="w-6 h-6 rounded-full bg-white dark:bg-zinc-900 border border-zinc-300 dark:border-zinc-700 shadow-md flex items-center justify-center">
-                <svg class="w-3.5 h-3.5 text-zinc-500" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><polyline points="7 17 2 12 7 7"></polyline><polyline points="17 7 22 12 17 17"></polyline><line x1="2" y1="12" x2="22" y2="12"></line></svg>
-              </div>
-            </div>
-          </div>
-          <p class="text-xs text-[var(--text-muted)] text-center">Drag the slider to compare baseline versus clinical post-treatment result.</p>
-        </div>
-
-        <!-- Interactive Drag Slider Card 2 -->
-        <div class="vibe-spotlight-card p-6 bg-[var(--surface-bg)] {card_border} rounded-[var(--radius-container)] {card_shadow} space-y-4">
-          <div class="flex justify-between items-center text-xs font-semibold">
-            <span>Immediate Anterior Implant</span>
-            <span class="px-2 py-0.5 rounded-full bg-sky-500/10 text-sky-500 font-mono text-[10px] font-bold"><bdi>100% Titanium Bond</bdi></span>
-          </div>
-          <!-- Interactive Before / After Split Slider -->
-          <div class="relative h-48 w-full rounded-[var(--radius-base)] overflow-hidden border border-[var(--border-subtle)] bg-[var(--canvas-bg)] select-none">
-            <div class="absolute inset-0 bg-gradient-to-r from-zinc-300 to-sky-100 dark:from-zinc-800 dark:to-sky-950/40 flex items-center justify-start p-4">
-              <span class="text-xs font-bold text-zinc-500 uppercase tracking-widest">Baseline</span>
-            </div>
-            <div id="before-after-layer-2" class="absolute inset-y-0 end-0 bg-gradient-to-l from-sky-100 to-indigo-50 dark:from-sky-950/40 dark:to-indigo-950/20 border-s-2 border-sky-500 flex items-center justify-end p-4 transition-all duration-75" style="width: 50%">
-              <span class="text-xs font-bold text-sky-700 dark:text-sky-400 uppercase tracking-widest">Final Crown</span>
-            </div>
-            <input type="range" min="0" max="100" value="50" class="before-after-range absolute inset-0 opacity-0 cursor-ew-resize w-full h-full z-20" data-target="before-after-layer-2" data-divider="divider-line-2" aria-label="Before and After Comparison Slider">
-            <div id="divider-line-2" class="absolute inset-y-0 w-1 bg-white shadow-[0_0_10px_rgba(0,0,0,0.4)] pointer-events-none z-10 flex items-center justify-center" style="left: 50%">
-              <div class="w-6 h-6 rounded-full bg-white dark:bg-zinc-900 border border-zinc-300 dark:border-zinc-700 shadow-md flex items-center justify-center">
-                <svg class="w-3.5 h-3.5 text-zinc-500" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><polyline points="7 17 2 12 7 7"></polyline><polyline points="17 7 22 12 17 17"></polyline><line x1="2" y1="12" x2="22" y2="12"></line></svg>
-              </div>
-            </div>
-          </div>
-          <p class="text-xs text-[var(--text-muted)] text-center">Painless placement with soft tissue graft and certified zirconia crown.</p>
-        </div>
-      </div>
-    </section>
-
-    <!-- Healthcare Section 3: Specialist Doctors -->
-    <section id="doctors" class="mt-12 pt-8 border-t border-[var(--border-subtle)]" aria-labelledby="doctors-heading">
-      <h2 id="doctors-heading" class="text-2xl font-bold tracking-tight mb-6">Specialist Medical Staff</h2>
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-        <div class="p-6 bg-[var(--surface-bg)] {card_border} rounded-[var(--radius-container)] {card_shadow} flex items-start gap-4">
-          <div class="w-14 h-14 rounded-full bg-[var(--accent)]/10 text-[var(--accent)] flex items-center justify-center flex-shrink-0">
-            <svg class="w-7 h-7" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
-          </div>
-          <div class="space-y-1">
-            <h3 class="text-lg font-bold">Dr. Aria Parsa, DDS</h3>
-            <p class="text-xs text-[var(--accent)] font-semibold">Board Certified Aesthetic & Restorative Dentist</p>
-            <p class="text-xs text-[var(--text-muted)] leading-relaxed mt-2">International Fellow in Digital Smile Design with 12+ years clinical experience.</p>
-          </div>
-        </div>
-        <div class="p-6 bg-[var(--surface-bg)] {card_border} rounded-[var(--radius-container)] {card_shadow} flex items-start gap-4">
-          <div class="w-14 h-14 rounded-full bg-[var(--accent)]/10 text-[var(--accent)] flex items-center justify-center flex-shrink-0">
-            <svg class="w-7 h-7" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
-          </div>
-          <div class="space-y-1">
-            <h3 class="text-lg font-bold">Dr. Sara Shams, MS</h3>
-            <p class="text-xs text-[var(--accent)] font-semibold">Oral Surgeon & Digital Implantologist</p>
-            <p class="text-xs text-[var(--text-muted)] leading-relaxed mt-2">European Association for Osseointegration member specializing in guided surgery.</p>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- Healthcare Section 4: Interactive Quick Booking -->
-    <section id="booking" class="mt-12 pt-8 border-t border-[var(--border-subtle)]" aria-labelledby="booking-heading">
-      <div class="p-6 sm:p-10 bg-[var(--surface-bg)] {card_border} rounded-[var(--radius-container)] {card_shadow}">
-        <h2 id="booking-heading" class="text-2xl font-bold tracking-tight mb-2">Book Online Consultation</h2>
-        <p class="text-xs text-[var(--text-muted)] mb-6">Select your preferred appointment date and time for priority confirmation.</p>
-        
-        <form id="quick-booking-form" class="space-y-6">
-          <!-- Day selector -->
-          <div>
-            <label class="block text-xs font-semibold mb-2">Select Appointment Day</label>
-            <div class="flex flex-wrap gap-2">
-              <button type="button" class="day-slot-btn px-4 py-2 text-xs font-bold rounded-[var(--radius-button)] bg-[var(--accent)] text-[var(--vibe-on-primary,#fff)] min-h-[44px]">Saturday</button>
-              <button type="button" class="day-slot-btn px-4 py-2 text-xs font-bold rounded-[var(--radius-button)] bg-[var(--canvas-bg)] border border-[var(--border-subtle)] hover:bg-[var(--surface-bg)] min-h-[44px]">Sunday</button>
-              <button type="button" class="day-slot-btn px-4 py-2 text-xs font-bold rounded-[var(--radius-button)] bg-[var(--canvas-bg)] border border-[var(--border-subtle)] hover:bg-[var(--surface-bg)] min-h-[44px]">Monday</button>
-              <button type="button" class="day-slot-btn px-4 py-2 text-xs font-bold rounded-[var(--radius-button)] bg-[var(--canvas-bg)] border border-[var(--border-subtle)] hover:bg-[var(--surface-bg)] min-h-[44px]">Tuesday</button>
-            </div>
-          </div>
-
-          <!-- Time slot selector -->
-          <div>
-            <label class="block text-xs font-semibold mb-2">Select Time Window</label>
-            <div class="flex flex-wrap gap-2">
-              <button type="button" class="time-slot-btn px-4 py-2 text-xs font-bold rounded-[var(--radius-button)] bg-[var(--accent)] text-[var(--vibe-on-primary,#fff)] min-h-[44px]"><bdi>10:30 AM</bdi></button>
-              <button type="button" class="time-slot-btn px-4 py-2 text-xs font-bold rounded-[var(--radius-button)] bg-[var(--canvas-bg)] border border-[var(--border-subtle)] hover:bg-[var(--surface-bg)] min-h-[44px]"><bdi>12:00 PM</bdi></button>
-              <button type="button" class="time-slot-btn px-4 py-2 text-xs font-bold rounded-[var(--radius-button)] bg-[var(--canvas-bg)] border border-[var(--border-subtle)] hover:bg-[var(--surface-bg)] min-h-[44px]"><bdi>04:30 PM</bdi></button>
-              <button type="button" class="time-slot-btn px-4 py-2 text-xs font-bold rounded-[var(--radius-button)] bg-[var(--canvas-bg)] border border-[var(--border-subtle)] hover:bg-[var(--surface-bg)] min-h-[44px]"><bdi>06:00 PM</bdi></button>
-            </div>
-          </div>
-
-          <!-- Patient information -->
-          <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-            <div>
-              <label for="patient-name" class="block text-xs font-semibold mb-1">Patient Full Name</label>
-              <input type="text" id="patient-name" required placeholder="e.g. John Doe" class="w-full px-4 py-2.5 text-xs rounded-[var(--radius-button)] bg-[var(--canvas-bg)] border border-[var(--border-subtle)] focus:border-[var(--accent)] min-h-[44px] outline-none">
-            </div>
-            <div>
-              <label for="patient-phone" class="block text-xs font-semibold mb-1">Mobile Phone Number</label>
-              <input type="tel" id="patient-phone" required placeholder="+1 (555) 000-0000" class="w-full px-4 py-2.5 text-xs rounded-[var(--radius-button)] bg-[var(--canvas-bg)] border border-[var(--border-subtle)] focus:border-[var(--accent)] min-h-[44px] outline-none">
-            </div>
-          </div>
-
-          <div class="pt-2">
-            <button type="submit" id="submit-booking-btn" class="w-full sm:w-auto inline-flex items-center justify-center px-8 py-3 text-sm font-semibold rounded-[var(--radius-button)] text-[var(--vibe-on-primary,#fff)] bg-[var(--accent)] hover:opacity-90 min-h-[44px] transition-all">
-              Confirm & Reserve Appointment
-            </button>
-          </div>
-        </form>
-      </div>
-    </section>
-"""
+          <div class="flex items-center space-x-1.5 rtl:space-x-reverse">
+            <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-ping"></span>
+            <span class="text-[10px] font-mono text-emerald-500 font-semibold uppercase">SECURE</span>
+          </div>"""
         else:
-            domain_sections_html = f"""
-    <!-- General Section 1: Asymmetric Bento Grid Features -->
-    <section id="features" class="mt-12 pt-8 border-t border-[var(--border-subtle)]" aria-labelledby="features-heading">
-      <div class="flex items-center justify-between mb-8">
-        <div>
-          <h2 id="features-heading" class="text-2xl font-bold tracking-tight">
-            Engineered Capabilities & Bento Architecture
-          </h2>
-          <p class="text-xs text-[var(--text-muted)] mt-1">
-            Built with strict WCAG standards, fluid physics, and sub-millisecond execution.
-          </p>
-        </div>
-        <span class="hidden sm:inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold bg-[var(--accent)]/10 text-[var(--accent)] border border-[var(--accent)]/20">
-          <span class="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse"></span>
-          Vibe UI 6.0.0 Certified
-        </span>
-      </div>
+            aside_header_html = f"""          <div class="flex items-center space-x-2 rtl:space-x-reverse">
+            <span class="size-2 rounded-full bg-[var(--accent)]"></span>
+            <span class="text-xs font-bold text-[var(--text-primary)] tracking-tight">Verified Platform Highlights</span>
+          </div>
+          <div class="flex items-center space-x-1.5 rtl:space-x-reverse">
+            <span class="w-2 h-2 rounded-full bg-emerald-500"></span>
+            <span class="text-[10px] font-medium text-emerald-600 dark:text-emerald-400 uppercase tracking-wider">ACTIVE</span>
+          </div>"""
 
-      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-        <!-- Tile 1: Hero Bento Feature (Span 2) -->
-        <div class="vibe-spotlight-card md:col-span-2 p-6 sm:p-8 bg-[var(--surface-bg)] {card_border} rounded-[var(--radius-container)] {card_shadow} flex flex-col justify-between">
-          <div>
-            <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-semibold bg-[var(--accent)]/10 text-[var(--accent)] mb-4">
-              <svg class="w-4 h-4 text-[var(--accent)]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>
-              <span>Quality Guarantee & Core Engine</span>
-            </div>
-            <h3 class="text-xl font-bold mb-3">Deterministic Architecture Free of AI-Slop</h3>
-            <p class="text-xs sm:text-sm text-[var(--text-muted)] leading-relaxed max-w-xl">
-              Engineered with strict accessibility, responsive geometry, zero inline CSS, and mathematically proven contrast ratios across light and dark modes.
-            </p>
-          </div>
-          <div class="mt-6 pt-4 border-t border-[var(--border-subtle)] flex flex-wrap items-center gap-3 text-xs text-[var(--text-muted)]">
-            <span class="px-2.5 py-1 rounded-md bg-[var(--canvas-bg)] border border-[var(--border-subtle)] font-mono">OKLCH Palette</span>
-            <span class="px-2.5 py-1 rounded-md bg-[var(--canvas-bg)] border border-[var(--border-subtle)] font-mono">BiDi Isolation</span>
-            <span class="px-2.5 py-1 rounded-md bg-[var(--canvas-bg)] border border-[var(--border-subtle)] font-mono">0.01ms Motion Guards</span>
-          </div>
-        </div>
+        # Custom cursor opt-in (strictly for creative portfolios & gaming)
+        enable_custom_cursor = domain_id in ["creative_portfolio_agency", "gaming_entertainment_streaming"] or any(k in prompt_title.lower() for k in ["portfolio", "agency", "creative", "gaming"])
+        cursor_css = """    @media (pointer: fine) {
+      *, *::before, *::after {
+        cursor: none !important;
+      }
+      #vibeCursorDot {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 8px;
+        height: 8px;
+        background-color: var(--accent);
+        border-radius: 9999px;
+        pointer-events: none;
+        z-index: 10000;
+        transform: translate(-50%, -50%);
+        box-shadow: 0 0 10px var(--accent);
+        transition: opacity 0.2s ease, transform 0.15s cubic-bezier(0.16, 1, 0.3, 1), background-color 0.2s ease;
+      }
+      #vibeCursorDot.hover-target {
+        transform: translate(-50%, -50%) scale(1.5);
+        background-color: #ffffff;
+        box-shadow: 0 0 14px var(--accent), 0 0 25px var(--accent);
+      }
+      #vibeCursorFollower {
+        position: fixed;
+        top: 0;
+        left: 0;
+        pointer-events: none;
+        z-index: 9999;
+        will-change: transform;
+        color: var(--accent);
+        filter: drop-shadow(0 0 10px color-mix(in oklch, var(--accent) 55%, transparent));
+        transition: opacity 0.25s ease;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+      }
+      #vibeCursorFollower svg {
+        width: 36px;
+        height: 39px;
+        display: block;
+        transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+      }
+      #vibeCursorFollower.hover-active svg {
+        transform: scale(1.2);
+      }
+      #vibeCursorFollower.click-active svg {
+        transform: scale(0.85);
+      }
+      #vibeCursorBadge {
+        position: absolute;
+        top: 100%;
+        margin-top: 4px;
+        padding: 2px 7px;
+        border-radius: 9999px;
+        background-color: var(--surface-bg);
+        border: 1px solid var(--border-subtle);
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+        font-family: var(--font-body);
+        font-size: 9px;
+        font-weight: 800;
+        color: var(--accent);
+        letter-spacing: 0.05em;
+        opacity: 0;
+        transform: scale(0.85);
+        transition: opacity 0.2s ease, transform 0.2s ease;
+        white-space: nowrap;
+      }
+      #vibeCursorFollower.hover-active #vibeCursorBadge {
+        opacity: 1;
+        transform: scale(1);
+      }
+    }""" if enable_custom_cursor else ""
 
-        <!-- Tile 2: Vital Metric KPI with Inline Sparkline (Span 1) -->
-        <div class="vibe-spotlight-card p-6 bg-[var(--surface-bg)] {card_border} rounded-[var(--radius-container)] {card_shadow} flex flex-col justify-between">
-          <div>
-            <div class="text-xs font-semibold text-[var(--text-muted)] uppercase tracking-wider mb-2">Uptime & Reliability</div>
-            <div class="text-3xl font-extrabold text-emerald-500 mb-2"><bdi>99.98%</bdi></div>
-            <p class="text-xs text-[var(--text-muted)] leading-relaxed">
-              Real-time health verification with automated self-healing resilience.
-            </p>
-          </div>
-          <!-- Inline Vector Sparkline -->
-          <div class="mt-4 pt-4 border-t border-[var(--border-subtle)]">
-            <svg class="w-full h-10 text-emerald-500" viewBox="0 0 120 30" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-              <path d="M0 25 L20 22 L40 24 L60 14 L80 16 L100 8 L120 6"></path>
-              <circle cx="120" cy="6" r="3" fill="currentColor"></circle>
-            </svg>
-            <div class="flex justify-between text-[10px] text-[var(--text-muted)] mt-1 font-mono">
-              <span>-30d</span>
-              <span>Today: 100%</span>
-            </div>
-          </div>
-        </div>
+        cursor_html = """  <!-- Lightswind Trailing Arrow Pointer -->
+  <div id="vibeCursorDot" class="hidden md:block" aria-hidden="true"></div>
+  <div id="vibeCursorFollower" class="hidden md:flex" aria-hidden="true">
+    <svg xmlns="http://www.w3.org/2000/svg" width="36" height="39" viewBox="0 0 50 54" fill="none" class="pointer-events-none drop-shadow-md">
+      <path d="M42.6817 41.1495L27.5103 6.79925C26.7269 5.02557 24.2082 5.02558 23.3927 6.79925L7.59814 41.1495C6.75833 42.9759 8.52712 44.8902 10.4125 44.1954L24.3757 39.0496C24.8829 38.8627 25.4385 38.8627 25.9422 39.0496L39.8121 44.1954C41.6849 44.8902 43.4884 42.9759 42.6817 41.1495Z" fill="currentColor"/>
+      <path d="M43.7146 40.6933L28.5431 6.34306C27.3556 3.65428 23.5772 3.69516 22.3668 6.32755L6.57226 40.6778C5.3134 43.4156 7.97238 46.298 10.803 45.2549L24.7662 40.109C25.0221 40.0147 25.2999 40.0156 25.5494 40.1082L39.4193 45.254C42.2261 46.2953 44.9254 43.4347 43.7146 40.6933Z" stroke="currentColor" stroke-width="1.5"/>
+    </svg>
+    <span id="vibeCursorBadge"></span>
+  </div>""" if enable_custom_cursor else ""
 
-        <!-- Tile 3: Live Latency & Pulse Indicator (Span 1) -->
-        <div class="vibe-spotlight-card p-6 bg-[var(--surface-bg)] {card_border} rounded-[var(--radius-container)] {card_shadow} flex flex-col justify-between">
-          <div>
-            <div class="w-10 h-10 rounded-lg bg-[var(--accent)]/10 text-[var(--accent)] flex items-center justify-center mb-4">
-              <svg class="w-5 h-5 text-[var(--accent)]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon></svg>
-            </div>
-            <h3 class="text-base font-bold mb-2">Speed & Precision</h3>
-            <p class="text-xs text-[var(--text-muted)] leading-relaxed">
-              Optimized for lightning-fast delivery, mobile ergonomics, and seamless user interaction.
-            </p>
-          </div>
-          <div class="mt-4 pt-3 border-t border-[var(--border-subtle)] flex items-center justify-between text-xs">
-            <span class="text-[var(--text-muted)]">Response Time</span>
-            <span class="font-mono font-bold text-[var(--accent)]">&lt; 0.4s</span>
-          </div>
-        </div>
-
-        <!-- Tile 4: Governance & Certifications Bento Card (Span 2) -->
-        <div class="vibe-spotlight-card md:col-span-2 p-6 bg-[var(--surface-bg)] {card_border} rounded-[var(--radius-container)] {card_shadow} flex flex-col justify-between">
-          <div>
-            <div class="w-10 h-10 rounded-lg bg-[var(--accent)]/10 text-[var(--accent)] flex items-center justify-center mb-4">
-              <svg class="w-5 h-5 text-[var(--accent)]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 14 14"></polyline></svg>
-            </div>
-            <h3 class="text-base font-bold mb-2">Enterprise Governance & Security</h3>
-            <p class="text-xs text-[var(--text-muted)] leading-relaxed">
-              Strict data retention policies, zero secrets leakage compliance, and verified enterprise security baselines.
-            </p>
-          </div>
-          <div class="mt-6 pt-4 border-t border-[var(--border-subtle)] grid grid-cols-2 sm:grid-cols-4 gap-2 text-[11px] font-medium text-[var(--text-muted)]">
-            <div class="flex items-center gap-1.5"><svg class="w-3.5 h-3.5 text-emerald-500" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"></polyline></svg><span>WCAG AAA</span></div>
-            <div class="flex items-center gap-1.5"><svg class="w-3.5 h-3.5 text-emerald-500" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"></polyline></svg><span>BiDi Isolated</span></div>
-            <div class="flex items-center gap-1.5"><svg class="w-3.5 h-3.5 text-emerald-500" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"></polyline></svg><span>Zero Slop</span></div>
-            <div class="flex items-center gap-1.5"><svg class="w-3.5 h-3.5 text-emerald-500" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"></polyline></svg><span>100% SVG</span></div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- General Section 2: Services & Pricing -->
-    <section id="services" class="mt-12 pt-8 border-t border-[var(--border-subtle)]" aria-labelledby="general-services-heading">
-      <h2 id="general-services-heading" class="text-2xl font-bold tracking-tight mb-6">Services & Architecture Plans</h2>
-      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-        <div class="p-6 bg-[var(--surface-bg)] {card_border} rounded-[var(--radius-container)] {card_shadow} space-y-3">
-          <h3 class="text-lg font-bold">Core Essentials</h3>
-          <p class="text-xs text-[var(--text-muted)]">Complete foundational setup with certified WCAG compliance.</p>
-          <div class="text-2xl font-bold text-[var(--accent)]"><bdi>Open Source</bdi></div>
-        </div>
-        <div class="p-6 bg-[var(--surface-bg)] {card_border} rounded-[var(--radius-container)] {card_shadow} space-y-3 ring-2 ring-[var(--accent)]">
-          <span class="inline-flex px-2 py-0.5 rounded text-xs font-bold bg-[var(--accent)] text-[var(--vibe-on-primary,#fff)]">RECOMMENDED</span>
-          <h3 class="text-lg font-bold">Professional Studio</h3>
-          <p class="text-xs text-[var(--text-muted)]">AI primitive components, spring physics & telemetry HUD.</p>
-          <div class="text-2xl font-bold text-[var(--accent)]"><bdi>Custom Tier</bdi></div>
-        </div>
-        <div class="p-6 bg-[var(--surface-bg)] {card_border} rounded-[var(--radius-container)] {card_shadow} space-y-3">
-          <h3 class="text-lg font-bold">Enterprise Governance</h3>
-          <p class="text-xs text-[var(--text-muted)]">Deterministic machine contracts, CI/CD integration & SLAs.</p>
-          <div class="text-2xl font-bold text-[var(--accent)]"><bdi>Contact Sales</bdi></div>
-        </div>
-      </div>
-    </section>
-
-    <!-- General Section 3: Contact & Inquiry -->
-    <section id="contact" class="mt-12 pt-8 border-t border-[var(--border-subtle)]" aria-labelledby="contact-heading">
-      <div class="p-6 sm:p-10 bg-[var(--surface-bg)] {card_border} rounded-[var(--radius-container)] {card_shadow} max-w-2xl mx-auto">
-        <h2 id="contact-heading" class="text-2xl font-bold tracking-tight mb-2">Quick Contact & Inquiry</h2>
-        <p class="text-xs text-[var(--text-muted)] mb-6">Leave your information and our engineering team will get back to you promptly.</p>
-        <form id="contact-form" class="space-y-4">
-          <div>
-            <label for="contact-name" class="block text-xs font-semibold mb-1">Full Name</label>
-            <input type="text" id="contact-name" required placeholder="e.g. Alex Miller" class="w-full px-4 py-2.5 text-xs rounded-[var(--radius-button)] bg-[var(--canvas-bg)] border border-[var(--border-subtle)] focus:border-[var(--accent)] min-h-[44px] outline-none">
-          </div>
-          <div>
-            <label for="contact-email" class="block text-xs font-semibold mb-1">Email or Phone Number</label>
-            <input type="text" id="contact-email" required placeholder="user@company.com" class="w-full px-4 py-2.5 text-xs rounded-[var(--radius-button)] bg-[var(--canvas-bg)] border border-[var(--border-subtle)] focus:border-[var(--accent)] min-h-[44px] outline-none">
-          </div>
-          <div class="pt-2">
-            <button type="submit" id="submit-contact-btn" class="w-full sm:w-auto inline-flex items-center justify-center px-8 py-3 text-sm font-semibold rounded-[var(--radius-button)] text-[var(--vibe-on-primary,#fff)] bg-[var(--accent)] hover:opacity-90 min-h-[44px] transition-all">
-              Submit Request
-            </button>
-          </div>
-        </form>
-      </div>
-    </section>
-"""
 
         html = f"""<!DOCTYPE html>
 <html {dir_attr} data-domain="{domain_id}" class="h-full">
@@ -1556,81 +1184,7 @@ export default {component_name};
       transition: left 0.75s ease-in-out;
     }}
 
-    /* Lightswind Trailing Arrow Pointer & Spotlight Physics */
-    @media (pointer: fine) {{
-      *, *::before, *::after {{
-        cursor: none !important;
-      }}
-      #vibeCursorDot {{
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 8px;
-        height: 8px;
-        background-color: var(--accent);
-        border-radius: 9999px;
-        pointer-events: none;
-        z-index: 10000;
-        transform: translate(-50%, -50%);
-        box-shadow: 0 0 10px var(--accent);
-        transition: opacity 0.2s ease, transform 0.15s cubic-bezier(0.16, 1, 0.3, 1), background-color 0.2s ease;
-      }}
-      #vibeCursorDot.hover-target {{
-        transform: translate(-50%, -50%) scale(1.5);
-        background-color: #ffffff;
-        box-shadow: 0 0 14px var(--accent), 0 0 25px var(--accent);
-      }}
-      #vibeCursorFollower {{
-        position: fixed;
-        top: 0;
-        left: 0;
-        pointer-events: none;
-        z-index: 9999;
-        will-change: transform;
-        color: var(--accent);
-        filter: drop-shadow(0 0 10px color-mix(in oklch, var(--accent) 55%, transparent));
-        transition: opacity 0.25s ease;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-      }}
-      #vibeCursorFollower svg {{
-        width: 36px;
-        height: 39px;
-        display: block;
-        transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1);
-      }}
-      #vibeCursorFollower.hover-active svg {{
-        transform: scale(1.2);
-      }}
-      #vibeCursorFollower.click-active svg {{
-        transform: scale(0.85);
-      }}
-      #vibeCursorBadge {{
-        position: absolute;
-        top: 100%;
-        margin-top: 4px;
-        padding: 2px 7px;
-        border-radius: 9999px;
-        background-color: var(--surface-bg);
-        border: 1px solid var(--border-subtle);
-        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-        font-family: var(--font-body);
-        font-size: 9px;
-        font-weight: 800;
-        color: var(--accent);
-        letter-spacing: 0.05em;
-        opacity: 0;
-        transform: scale(0.85);
-        transition: opacity 0.2s ease, transform 0.2s ease;
-        white-space: nowrap;
-      }}
-      #vibeCursorFollower.hover-active #vibeCursorBadge {{
-        opacity: 1;
-        transform: scale(1);
-      }}
-    }}
+{cursor_css}
 
     .ambient-spotlight-layer {{
       position: fixed;
@@ -1670,15 +1224,7 @@ export default {component_name};
   </style>
 </head>
 <body class="min-h-full flex flex-col antialiased relative">
-  <!-- Lightswind Trailing Arrow Pointer -->
-  <div id="vibeCursorDot" class="hidden md:block" aria-hidden="true"></div>
-  <div id="vibeCursorFollower" class="hidden md:flex" aria-hidden="true">
-    <svg xmlns="http://www.w3.org/2000/svg" width="36" height="39" viewBox="0 0 50 54" fill="none" class="pointer-events-none drop-shadow-md">
-      <path d="M42.6817 41.1495L27.5103 6.79925C26.7269 5.02557 24.2082 5.02558 23.3927 6.79925L7.59814 41.1495C6.75833 42.9759 8.52712 44.8902 10.4125 44.1954L24.3757 39.0496C24.8829 38.8627 25.4385 38.8627 25.9422 39.0496L39.8121 44.1954C41.6849 44.8902 43.4884 42.9759 42.6817 41.1495Z" fill="currentColor"/>
-      <path d="M43.7146 40.6933L28.5431 6.34306C27.3556 3.65428 23.5772 3.69516 22.3668 6.32755L6.57226 40.6778C5.3134 43.4156 7.97238 46.298 10.803 45.2549L24.7662 40.109C25.0221 40.0147 25.2999 40.0156 25.5494 40.1082L39.4193 45.254C42.2261 46.2953 44.9254 43.4347 43.7146 40.6933Z" stroke="currentColor" stroke-width="1.5"/>
-    </svg>
-    <span id="vibeCursorBadge"></span>
-  </div>
+{cursor_html}
 
   <!-- Ambient Cursor Spotlight Overlay -->
   <div id="ambientSpotlightOverlay" class="ambient-spotlight-layer" aria-hidden="true"></div>
@@ -1766,19 +1312,7 @@ export default {component_name};
       <aside class="vibe-spotlight-card lg:col-span-5 bg-[var(--surface-bg)] {card_border} {card_shadow} rounded-[var(--radius-container)] overflow-hidden flex flex-col justify-between" aria-label="Domain Highlights">
         <!-- Window Chrome Titlebar -->
         <div class="px-4 py-3 bg-[var(--canvas-bg)]/80 border-b border-[var(--border-subtle)] flex items-center justify-between backdrop-blur-md">
-          <div class="flex items-center space-x-2 rtl:space-x-reverse">
-            <span class="w-3 h-3 rounded-full bg-rose-500/80 inline-block border border-rose-600/40"></span>
-            <span class="w-3 h-3 rounded-full bg-amber-500/80 inline-block border border-amber-600/40"></span>
-            <span class="w-3 h-3 rounded-full bg-emerald-500/80 inline-block border border-emerald-600/40"></span>
-          </div>
-          <div class="text-[11px] font-mono text-[var(--text-muted)] flex items-center gap-1.5 opacity-80">
-            <svg class="w-3.5 h-3.5 text-[var(--accent)]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg>
-            <span>{domain_id}.vibe // live</span>
-          </div>
-          <div class="flex items-center space-x-1.5 rtl:space-x-reverse">
-            <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-ping"></span>
-            <span class="text-[10px] font-mono text-emerald-500 font-semibold uppercase">SECURE</span>
-          </div>
+{aside_header_html}
         </div>
 
         <div class="p-6 flex-1 flex flex-col justify-between">

@@ -1,6 +1,6 @@
 # 🏛️ Vibe UI Suite — System Architecture & Data Contract Specification
 
-**Version:** 6.2.0 (The Two Golden Pillars — Trend Inspiration & Living Visual Feedback)  
+**Version:** 6.3.0 (Autonomous Maturity & Clean Architecture Extension Sync)  
 **Status:** Feature Freeze (Production Certified)  
 **Document Type:** Core Architectural Specification  
 **Machine Contract Reference:** [`schemas/design-spec.v1.schema.json`](schemas/design-spec.v1.schema.json)  

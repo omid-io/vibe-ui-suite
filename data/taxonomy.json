@@ -625,7 +625,14 @@
         "pediatric outpatient",
         "physician appointment booking",
         "telemedicine consultation",
-        "hipaa-compliant"
+        "hipaa-compliant",
+        "dental",
+        "dentist",
+        "dental clinic",
+        "teeth",
+        "orthodontics",
+        "oral care",
+        "dental care"
       ],
       "negative_signals": [
         "پوست و مو",
