@@ -8,6 +8,7 @@ on:
 permissions:
   contents: write
   packages: write
+  id-token: write
 
 jobs:
   publish:
@@ -57,6 +58,25 @@ jobs:
           echo "[INFO] Publishing $VSIX_FILE to Open-VSX..."
           npx --yes ovsx publish "$VSIX_FILE" -p "$OPENVSX_TOKEN"
 
+      - name: Publish to VS Code Marketplace (Microsoft)
+        working-directory: packages/vibe-ui-vscode
+        env:
+          VSCE_PAT: ${{ secrets.VSCE_PAT }}
+          AZURE_CLIENT_ID: ${{ secrets.AZURE_CLIENT_ID }}
+          AZURE_TENANT_ID: ${{ secrets.AZURE_TENANT_ID }}
+        run: |
+          VSIX_FILE=$(ls -v vibe-ui-vscode-*.vsix | tail -n 1)
+          if [ -n "$VSCE_PAT" ]; then
+            echo "[INFO] Publishing $VSIX_FILE to VS Code Marketplace via VSCE_PAT..."
+            npx --yes @vscode/vsce publish --packagePath "$VSIX_FILE" -p "$VSCE_PAT" --skip-duplicate
+          elif [ -n "$AZURE_CLIENT_ID" ] && [ -n "$AZURE_TENANT_ID" ]; then
+            echo "[INFO] Publishing $VSIX_FILE via Azure OIDC credential..."
+            npx --yes @vscode/vsce publish --packagePath "$VSIX_FILE" --azure-credential --skip-duplicate
+          else
+            echo "[WARNING] Neither VSCE_PAT nor Azure OIDC credentials found in repository secrets."
+            echo "[INFO] To enable fully automated VS Code Marketplace publishing in GitHub Actions, add 'VSCE_PAT' to repository secrets."
+          fi
+
       - name: Upload VSIX to GitHub Release
         if: github.event_name == 'release'
         env:
@@ -65,3 +85,4 @@ jobs:
           VSIX_FILE=$(ls -v packages/vibe-ui-vscode/vibe-ui-vscode-*.vsix | tail -n 1)
           echo "[INFO] Uploading $VSIX_FILE to GitHub Release..."
           gh release upload ${{ github.event.release.tag_name }} "$VSIX_FILE" --clobber
+
