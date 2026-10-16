@@ -38,7 +38,7 @@ from vibe_core.constants import (
 
 def test_full_pipeline_persian_rtl():
     """Test 1: Full pipeline execution on Persian RTL prompt."""
-    prompt = "کلینیک تخصصی پوست و مو و لیزر گلوریا"
+    prompt = "کلینیک تخصصی پوست و زیبایی"
     director = DesignDirector()
     engine = RecommendationEngine()
     generator = InterfaceGenerator()

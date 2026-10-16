@@ -13,6 +13,7 @@ Features:
 from typing import Dict, Any, Optional
 from pathlib import Path
 import json
+import re
 from vibe_core.genome import DesignGenomeEngine
 from vibe_core.asset_director import AssetDirector
 from vibe_core.domain_widgets import render_domain_widget
@@ -249,12 +250,12 @@ class InterfaceGenerator:
         archetype = DOMAIN_MACRO_ARCHETYPES.get(domain_id, "classic_structured_saas")
 
         billing_switch = f'''<div className="flex items-center gap-3 pt-2">
-                <span className="text-xs font-medium text-zinc-500">{"ماهانه" if is_rtl else "Monthly"}</span>
+                <span className="text-xs font-medium text-zinc-500">Monthly</span>
                 <button
                   type="button"
                   role="switch"
                   aria-checked={{billingCycle === "annual"}}
-                  aria-label="{"تغییر دوره پرداخت" if is_rtl else "Billing cycle toggle"}"
+                  aria-label="Billing cycle toggle"
                   onClick={{() => setBillingCycle(prev => prev === "annual" ? "monthly" : "annual")}}
                   className="relative inline-flex min-h-[44px] min-w-[48px] items-center justify-center p-2 rounded-full cursor-pointer focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:ring-offset-2"
                 >
@@ -268,9 +269,9 @@ class InterfaceGenerator:
                   </span>
                 </button>
                 <span className="text-xs font-medium text-zinc-900 dark:text-white flex items-center gap-1.5">
-                  <span>{"سالانه" if is_rtl else "Annual"}</span>
+                  <span>Annual</span>
                   <span className="px-2 py-0.5 text-[10px] font-bold rounded-full bg-emerald-500/10 text-emerald-600 border border-emerald-500/20">
-                    {"۲۰٪ تخفیف ویژه" if is_rtl else "Save 20%"}
+                    Save 20%
                   </span>
                 </span>
               </div>'''
@@ -349,7 +350,7 @@ class InterfaceGenerator:
             {{/* Masthead Headline Spread */}}
             <div className="max-w-4xl space-y-4">
               <div className="text-xs font-mono tracking-widest uppercase text-emerald-600 dark:text-emerald-400 font-semibold">
-                {"نسخه اختصاصی حوزه" if is_rtl else "Exclusive Curated Spread"}
+                Exclusive Curated Spread
               </div>
               <h1 className="{style_cfg['headline']}">
                 {headline}
@@ -392,7 +393,7 @@ class InterfaceGenerator:
             {{/* Conversion Stepper Header */}}
             <div className="text-center space-y-4 max-w-3xl mx-auto">
               <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-semibold bg-emerald-500/10 text-emerald-600 border border-emerald-500/20">
-                {"۳ مرحله ساده تا نتیجه" if is_rtl else "3 Step Transactional Flow"}
+                3 Step Transactional Flow
               </div>
               <h1 className="{style_cfg['headline']}">
                 {headline}
@@ -405,13 +406,13 @@ class InterfaceGenerator:
             {{/* Step Indicators */}}
             <div className="grid grid-cols-3 gap-3 text-center text-xs font-medium">
               <div className="p-3 rounded-xl bg-emerald-500/10 border border-emerald-500/30 text-emerald-600 dark:text-emerald-400 font-bold">
-                {"۱. تنظیم پارامترها" if is_rtl else "1. Configure Inputs"}
+                1. Configure Inputs
               </div>
               <div className="p-3 rounded-xl bg-zinc-100 dark:bg-zinc-800/60 border border-zinc-200 dark:border-zinc-700 text-zinc-600 dark:text-zinc-300">
-                {"۲. شبیه سازی زنده" if is_rtl else "2. Real-Time Simulation"}
+                2. Real-Time Simulation
               </div>
               <div className="p-3 rounded-xl bg-zinc-100 dark:bg-zinc-800/60 border border-zinc-200 dark:border-zinc-700 text-zinc-600 dark:text-zinc-300">
-                {"۳. تایید و صدور" if is_rtl else "3. Instant Execution"}
+                3. Instant Execution
               </div>
             </div>
 
@@ -448,7 +449,7 @@ class InterfaceGenerator:
             <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
               <div className="lg:col-span-6 space-y-6">
                 <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider bg-purple-500/10 text-purple-600 dark:text-purple-400 border border-purple-500/20">
-                  {"استودیو تعاملی و خلاق" if is_rtl else "Creative Canvas Showcase"}
+                  Creative Canvas Showcase
                 </span>
                 <h1 className="{style_cfg['headline']}">
                   {headline}
@@ -487,7 +488,7 @@ class InterfaceGenerator:
             <div className="flex items-center justify-between border-b border-zinc-200 dark:border-zinc-800 pb-4">
               <div className="space-y-1">
                 <div className="text-xs font-mono text-emerald-600 dark:text-emerald-400 uppercase tracking-wider">
-                  {"آزمایشگاه پژوهش و کالیبراسیون داده" if is_rtl else "RESEARCH LAB & DIAGNOSTIC STUDIO"}
+                  RESEARCH LAB & DIAGNOSTIC STUDIO
                 </div>
                 <h1 className="{style_cfg['headline']}">
                   {headline}
@@ -620,19 +621,17 @@ class InterfaceGenerator:
         style_cfg = self._compile_style(selected_style, theme_strategy)
 
         mock_data_all = blueprint.get("mock_data", {})
-        mock_data_dict = mock_data_all.get("fa" if is_rtl else "en", {}) if isinstance(mock_data_all.get("en"), dict) else mock_data_all
-        title_fa = mock_data_dict.get("headline", "پلتفرم نوآورانه نسل جدید")
-        title_en = mock_data_dict.get("headline", "Next-Generation Autonomous Intelligence")
-        headline = mock_data_dict.get("headline", title_fa if is_rtl else title_en)
-        subheadline = mock_data_dict.get("subheadline", "تجربه ای منحصربه فرد، بدون کلیشه و مهندسی شده با پیشرفته ترین معیارهای دسترسی پذیری نوری و تعاملات روان." if is_rtl else "Autonomous precision interface engineered with strict WCAG AAA contrast, physics spring motion, and domain priors.")
-        cta_primary = mock_data_dict.get("cta_primary", "شروع آنی پروژه" if is_rtl else "Get Started Now")
-        cta_secondary = mock_data_dict.get("cta_secondary", "مشاهده دموی تعاملی" if is_rtl else "Explore Interactive Demo")
-        sig_widget_name = sig_widget.get("name", "ماژول تعاملی هوشمند" if is_rtl else "Interactive Intelligence Hub")
+        mock_data_dict = mock_data_all.get("en", {}) if isinstance(mock_data_all.get("en"), dict) else mock_data_all
+        headline = mock_data_dict.get("headline", "Next-Generation Autonomous Intelligence")
+        subheadline = mock_data_dict.get("subheadline", "Autonomous precision interface engineered with strict WCAG AAA contrast, physics spring motion, and domain priors.")
+        cta_primary = mock_data_dict.get("cta_primary", "Get Started Now")
+        cta_secondary = mock_data_dict.get("cta_secondary", "Explore Interactive Demo")
+        sig_widget_name = sig_widget.get("name", "Interactive Intelligence Hub")
 
         domain_metrics = mock_data_dict.get("metrics", [])
-        metric1 = domain_metrics[0] if len(domain_metrics) > 0 else {"label": "نرخ انطباق دسترسی پذیری" if is_rtl else "Accessibility Compliance", "value": "100% WCAG AAA"}
-        metric2 = domain_metrics[1] if len(domain_metrics) > 1 else {"label": "زمان پاسخگویی سنسور" if is_rtl else "Sensor Latency", "value": "< 0.5 ms"}
-        metric3 = domain_metrics[2] if len(domain_metrics) > 2 else {"label": "کاهش چرخه های اصلاح" if is_rtl else "Iteration Reduction", "value": "- 78.4%"}
+        metric1 = domain_metrics[0] if len(domain_metrics) > 0 else {"label": "Accessibility Compliance", "value": "100% WCAG AAA"}
+        metric2 = domain_metrics[1] if len(domain_metrics) > 1 else {"label": "Sensor Latency", "value": "< 0.5 ms"}
+        metric3 = domain_metrics[2] if len(domain_metrics) > 2 else {"label": "Iteration Reduction", "value": "- 78.4%"}
 
         domain_widget_code = self._render_domain_widget(domain_id, is_rtl, style_cfg, blueprint)
         media_container_code = self.asset_director.generate_media_container_jsx(domain_id, selected_style, is_rtl)
@@ -671,9 +670,9 @@ export const {component_name}: React.FC<{component_name}Props> = ({{
   const [isLiveActive, setIsLiveActive] = useState<boolean>(true);
 
   const tabs = [
-    {{"id": "overview", "label": "{"نمای اصلی و ویجت تعاملی" if is_rtl else "Primary Experience"}"}},
-    {{"id": "telemetry", "label": "{"شاخص های عملکردی حوزه" if is_rtl else "Domain Performance"}"}},
-    {{"id": "architecture", "label": "{"معماری و مشخصات فنی" if is_rtl else "System Blueprint"}"}}
+    {{"id": "overview", "label": "Primary Experience"}},
+    {{"id": "telemetry", "label": "Domain Performance"}},
+    {{"id": "architecture", "label": "System Blueprint"}}
   ];
 
   return (
@@ -687,7 +686,7 @@ export const {component_name}: React.FC<{component_name}Props> = ({{
           <div className="flex items-center space-x-3 rtl:space-x-reverse">
             <span className="{style_cfg['header_badge']}">
               <span className="size-2 rounded-full bg-emerald-500 animate-pulse" />
-              <span>{"سامانه فعال و تایید شده" if is_rtl else "System Operational"}</span>
+              <span>System Operational</span>
             </span>
             <span className="{style_cfg['version_tag']}">
               <bdi>v3.8.0 • OKLCH AAA</bdi>
@@ -727,7 +726,7 @@ export const {component_name}: React.FC<{component_name}Props> = ({{
               <div className="text-2xl font-bold font-mono text-emerald-600 dark:text-emerald-400">
                 <bdi>{{{json.dumps(metric1['value'], ensure_ascii=False)}}}</bdi>
               </div>
-              <div className="text-xs text-zinc-400">{"شاخص عملکردی تایید شده حوزه" if is_rtl else "Verified production benchmark metric"}</div>
+              <div className="text-xs text-zinc-400">Verified production benchmark metric</div>
             </div>
 
             <div className="{style_cfg['telemetry_card']}">
@@ -735,7 +734,7 @@ export const {component_name}: React.FC<{component_name}Props> = ({{
               <div className="text-2xl font-bold font-mono text-sky-600 dark:text-sky-400">
                 <bdi>{{{json.dumps(metric2['value'], ensure_ascii=False)}}}</bdi>
               </div>
-              <div className="text-xs text-zinc-400">{"پایش لحظه ای و تضمین سطح خدمت" if is_rtl else "Real-time telemetry and SLA assurance"}</div>
+              <div className="text-xs text-zinc-400">Real-time telemetry and SLA assurance</div>
             </div>
 
             <div className="{style_cfg['telemetry_card']}">
@@ -743,7 +742,7 @@ export const {component_name}: React.FC<{component_name}Props> = ({{
               <div className="text-2xl font-bold font-mono text-indigo-600 dark:text-indigo-400">
                 <bdi>{{{json.dumps(metric3['value'], ensure_ascii=False)}}}</bdi>
               </div>
-              <div className="text-xs text-zinc-400">{"بهینه سازی مداوم با رصد الگوریتمی رویدادها" if is_rtl else "Continuously optimized by invariant monitoring"}</div>
+              <div className="text-xs text-zinc-400">Continuously optimized by invariant monitoring</div>
             </div>
           </div>
         )}}
@@ -755,30 +754,30 @@ export const {component_name}: React.FC<{component_name}Props> = ({{
               <table className="w-full text-xs text-left rtl:text-right border-collapse">
                 <thead>
                   <tr className="border-b border-zinc-200 dark:border-zinc-800 text-zinc-400 font-mono uppercase">
-                    <th className="py-2.5 px-3">{"شاخص معماری" if is_rtl else "Blueprint Dimension"}</th>
-                    <th className="py-2.5 px-3">{"مقدار پیکربندی شده" if is_rtl else "Resolved Value"}</th>
-                    <th className="py-2.5 px-3">{"تضمین کیفیت" if is_rtl else "Invariant Status"}</th>
+                    <th className="py-2.5 px-3">Blueprint Dimension</th>
+                    <th className="py-2.5 px-3">Resolved Value</th>
+                    <th className="py-2.5 px-3">Invariant Status</th>
                   </tr>
                 </thead>
                 <tbody className="divide-y divide-zinc-200/60 dark:divide-zinc-800/60 text-zinc-600 dark:text-zinc-300">
                   <tr>
-                    <td className="py-2.5 px-3 font-semibold">{"حوزه تخصصی محصول" if is_rtl else "Product Domain"}</td>
+                    <td className="py-2.5 px-3 font-semibold">Product Domain</td>
                     <td className="py-2.5 px-3 font-mono">{domain_id}</td>
                     <td className="py-2.5 px-3 text-emerald-600 dark:text-emerald-400 font-semibold">MATCH 100%</td>
                   </tr>
                   <tr>
-                    <td className="py-2.5 px-3 font-semibold">{"سبک بصری کانونی" if is_rtl else "Visual Chemistry"}</td>
+                    <td className="py-2.5 px-3 font-semibold">Visual Chemistry</td>
                     <td className="py-2.5 px-3 font-mono">{selected_style}</td>
                     <td className="py-2.5 px-3 text-sky-600 dark:text-sky-400 font-semibold">COMPILED</td>
                   </tr>
                   <tr>
-                    <td className="py-2.5 px-3 font-semibold">{"استراتژی تم و نور" if is_rtl else "Lighting Mode"}</td>
+                    <td className="py-2.5 px-3 font-semibold">Lighting Mode</td>
                     <td className="py-2.5 px-3 font-mono">{theme_strategy}</td>
                     <td className="py-2.5 px-3 text-emerald-600 dark:text-emerald-400 font-semibold">BALANCED</td>
                   </tr>
                   <tr>
-                    <td className="py-2.5 px-3 font-semibold">{"جهت رندر و تایپوگرافی" if is_rtl else "Text Direction & BiDi"}</td>
-                    <td className="py-2.5 px-3 font-mono">{"RTL (Persian Isolated)" if is_rtl else "LTR (Pure English)"}</td>
+                    <td className="py-2.5 px-3 font-semibold">Text Direction & BiDi</td>
+                    <td className="py-2.5 px-3 font-mono">LTR (Pure English)</td>
                     <td className="py-2.5 px-3 text-emerald-600 dark:text-emerald-400 font-semibold">&lt;bdi&gt; SECURED</td>
                   </tr>
                 </tbody>
@@ -845,47 +844,35 @@ export default {component_name};
 
         # Resolve clean display title and navbar brand name
         raw_prompt_indicators = [
-            "میخوام", "بساز", "طراحی", "سایت", "یک", "یه", "برای", "رزرو", "خرید", "سفارش",
-            "نوبت", "سامانه", "اپلیکیشن", "create", "build", "make", "want", "for a", "landing", "app", "book"
+            "create", "build", "make", "want", "for a", "landing", "app", "book", "generate", "design"
         ]
         is_raw_prompt = any(ind in prompt_title.lower() for ind in raw_prompt_indicators) or len(prompt_title.split()) > 3
         display_title = blueprint_headline if (blueprint_headline and is_raw_prompt) else prompt_title
         hero_headline = blueprint_headline or display_title
-        brand_name = (decision.get("intent", {}).get("audience", {}).get("type") or ("پلتفرم تخصصی" if is_rtl else "Vibe Studio")) if is_raw_prompt else prompt_title
-        hero_subheadline = blueprint_subheadline or ("تجربه ای منحصربه فرد با معماری مدرن، سرعت بالا و هماهنگی کامل با نیازهای کسب وکار شما." if is_rtl else "Autonomous precision interface engineered with strict accessibility, responsive geometry, and domain priors.")
-        cta_primary_label = blueprint_cta_primary or ("شروع همکاری" if is_rtl else "Get Started")
-        cta_secondary_label = blueprint_cta_secondary or ("مشاهده خدمات" if is_rtl else "Explore Services")
+        brand_name = (decision.get("intent", {}).get("audience", {}).get("type") or "Vibe Studio") if is_raw_prompt else prompt_title
+        hero_subheadline = blueprint_subheadline or "Autonomous precision interface engineered with strict accessibility, responsive geometry, and domain priors."
+        cta_primary_label = blueprint_cta_primary or "Get Started"
+        cta_secondary_label = blueprint_cta_secondary or "Explore Services"
 
         # Smart sub-intent adaptation for loans and credit in fintech domain
         lower_prompt = prompt_title.lower()
-        if domain_id == "fintech_banking" and any(k in lower_prompt for k in ["وام", "قرض", "تسهیلات", "loan", "credit"]):
-            if is_rtl:
-                hero_headline = "سامانه دریافت آنلاین تسهیلات و وام قرض الحسنه"
-                hero_subheadline = "محاسبه هوشمند اقساط، اعتبارسنجی دیجیتال و واریز سریع تسهیلات بدون ضامن با حداقل کارمزد بانکی."
-                cta_primary_label = "درخواست آنلاین تسهیلات"
-                cta_secondary_label = "محاسبه اقساط و شرایط"
-                blueprint_metrics = [
-                    {"label": "سقف تسهیلات آنلاین", "value": "تا ۵۰۰ میلیون تومان"},
-                    {"label": "مدت زمان اعتبارسنجی", "value": "< ۲۴ ساعت"},
-                    {"label": "کارمزد تسهیلات", "value": "۴٪ سالانه"}
-                ]
-            else:
-                hero_headline = "Fast Digital Loans & Personal Credit Financing"
-                hero_subheadline = "Instant credit scoring, transparent terms, and rapid disbursement directly to your account."
-                cta_primary_label = "Apply for Loan"
-                cta_secondary_label = "Calculate Payments"
-                blueprint_metrics = [
-                    {"label": "Max Loan Amount", "value": "$50,000"},
-                    {"label": "Approval Time", "value": "< 24 Hours"},
-                    {"label": "Starting APR", "value": "4.2% Fixed"}
-                ]
+        if domain_id == "fintech_banking" and any(k in lower_prompt for k in ["loan", "credit", "lending", "financing"]):
+            hero_headline = "Fast Digital Loans & Personal Credit Financing"
+            hero_subheadline = "Instant credit scoring, transparent terms, and rapid disbursement directly to your account."
+            cta_primary_label = "Apply for Loan"
+            cta_secondary_label = "Calculate Payments"
+            blueprint_metrics = [
+                {"label": "Max Loan Amount", "value": "$50,000"},
+                {"label": "Approval Time", "value": "< 24 Hours"},
+                {"label": "Starting APR", "value": "4.2% Fixed"}
+            ]
 
         # Prepare domain metrics cards
         if not blueprint_metrics:
             blueprint_metrics = [
-                {"label": "شاخص اعتماد مشتریان" if is_rtl else "Customer Trust", "value": "۹۹.۴٪" if is_rtl else "99.4%"},
-                {"label": "سرعت پاسخگویی" if is_rtl else "Response Speed", "value": "< ۵ دقیقه" if is_rtl else "< 5 mins"},
-                {"label": "کیفیت خدمات" if is_rtl else "Service Rating", "value": "۴.۹ از ۵" if is_rtl else "4.9 / 5"}
+                {"label": "Customer Trust", "value": "99.4%"},
+                {"label": "Response Speed", "value": "< 5 mins"},
+                {"label": "Service Rating", "value": "4.9 / 5"}
             ]
 
         metrics_html_items = []
@@ -927,25 +914,25 @@ export default {component_name};
             window_chrome_content_html = f"""            <div class="space-y-3">
               <div class="p-3.5 bg-[var(--canvas-bg)] rounded-[var(--radius-base)] border border-[var(--border-subtle)] flex items-center justify-between">
                 <div>
-                  <div class="text-xs text-[var(--text-muted)]">{"وضعیت پذیرش امروز" if is_rtl else "Today's Clinic Availability"}</div>
+                  <div class="text-xs text-[var(--text-muted)]">Today's Clinic Availability</div>
                   <div class="text-sm font-bold text-emerald-500 flex items-center gap-1.5 mt-0.5">
                     <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
-                    <span>{"۳ نوبت مشاوره خالی" if is_rtl else "3 VIP Consultations Open"}</span>
+                    <span>3 VIP Consultations Open</span>
                   </div>
                 </div>
-                <span class="px-2.5 py-1 rounded-full text-[11px] font-bold bg-[var(--accent)]/10 text-[var(--accent)] border border-[var(--accent)]/20">{"پذیرش فوری" if is_rtl else "Express"}</span>
+                <span class="px-2.5 py-1 rounded-full text-[11px] font-bold bg-[var(--accent)]/10 text-[var(--accent)] border border-[var(--accent)]/20">Express</span>
               </div>
               <div class="p-3.5 bg-[var(--canvas-bg)] rounded-[var(--radius-base)] border border-[var(--border-subtle)]">
-                <div class="text-xs text-[var(--text-muted)] mb-2">{"نزدیک ترین ساعات قابل رزرو" if is_rtl else "Next Available Slots"}</div>
+                <div class="text-xs text-[var(--text-muted)] mb-2">Next Available Slots</div>
                 <div class="grid grid-cols-3 gap-2">
-                  <span class="px-2 py-1 text-center text-xs font-semibold rounded bg-[var(--surface-bg)] border border-[var(--border-subtle)] text-[var(--text-primary)]"><bdi>۱۰:۳۰</bdi></span>
-                  <span class="px-2 py-1 text-center text-xs font-semibold rounded bg-[var(--accent)] text-[var(--vibe-on-primary,#fff)]"><bdi>۱۲:۰۰</bdi></span>
-                  <span class="px-2 py-1 text-center text-xs font-semibold rounded bg-[var(--surface-bg)] border border-[var(--border-subtle)] text-[var(--text-primary)]"><bdi>۱۶:۳۰</bdi></span>
+                  <span class="px-2 py-1 text-center text-xs font-semibold rounded bg-[var(--surface-bg)] border border-[var(--border-subtle)] text-[var(--text-primary)]"><bdi>10:30 AM</bdi></span>
+                  <span class="px-2 py-1 text-center text-xs font-semibold rounded bg-[var(--accent)] text-[var(--vibe-on-primary,#fff)]"><bdi>12:00 PM</bdi></span>
+                  <span class="px-2 py-1 text-center text-xs font-semibold rounded bg-[var(--surface-bg)] border border-[var(--border-subtle)] text-[var(--text-primary)]"><bdi>04:30 PM</bdi></span>
                 </div>
               </div>
               <div class="p-3 bg-[var(--surface-bg)] rounded-[var(--radius-base)] border border-amber-500/20 text-xs text-amber-600 dark:text-amber-400 flex items-center gap-2">
                 <svg class="w-4 h-4 text-amber-500 flex-shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>
-                <span>{"ویزیت و اسکن سه بعدی دندان با گارانتی رسمی کلینیک" if is_rtl else "Includes 3D digital scan & specialist warranty"}</span>
+                <span>Includes 3D digital scan & specialist warranty</span>
               </div>
             </div>"""
         else:
@@ -963,20 +950,24 @@ export default {component_name};
             ]
         elif domain_id in ["beauty_clinical_wellness", "healthcare_clinical_dental", "health_medical_clinic", "healthcare_hospital_medical"]:
             nav_links = [
-                {"href": "#services", "label": "خدمات و تعرفه ها" if is_rtl else "Treatments & Pricing"},
-                {"href": "#portfolio", "label": "نمونه کارها" if is_rtl else "Before & After"},
-                {"href": "#doctors", "label": "تیم متخصصین" if is_rtl else "Specialists"},
-                {"href": "#booking", "label": "نوبت دهی آنلاین" if is_rtl else "Book Appointment"}
+                {"href": "#services", "label": "Treatments & Pricing"},
+                {"href": "#portfolio", "label": "Before & After"},
+                {"href": "#doctors", "label": "Specialists"},
+                {"href": "#booking", "label": "Book Appointment"}
             ]
         else:
             nav_links = [
-                {"href": "#features", "label": "ویژگی ها" if is_rtl else "Features"},
-                {"href": "#services", "label": "خدمات و تعرفه ها" if is_rtl else "Services & Pricing"},
-                {"href": "#contact", "label": "ارتباط با ما" if is_rtl else "Contact"}
+                {"href": "#features", "label": "Features"},
+                {"href": "#services", "label": "Services & Pricing"},
+                {"href": "#contact", "label": "Contact"}
             ]
 
         nav_links_html = "\n".join([
             f'        <a href="{link["href"]}" class="text-sm font-medium hover:text-[var(--accent)] transition-colors min-h-[44px] inline-flex items-center">{link["label"]}</a>'
+            for link in nav_links
+        ])
+        nav_links_mobile_html = "\n".join([
+            f'      <a href="{link["href"]}" class="block py-2.5 px-3 rounded-[var(--radius-button)] text-sm font-medium text-[var(--text-main)] hover:bg-[var(--accent)]/10 hover:text-[var(--accent)] transition-colors min-h-[44px] flex items-center">{link["label"]}</a>'
             for link in nav_links
         ])
 
@@ -1110,55 +1101,55 @@ export default {component_name};
     <!-- Healthcare Section 1: Services & Treatments -->
     <section id="services" class="mt-12 pt-8 border-t border-[var(--border-subtle)]" aria-labelledby="services-heading">
       <div class="max-w-2xl mb-8">
-        <h2 id="services-heading" class="text-2xl sm:text-3xl font-bold tracking-tight">{"خدمات تخصصی و تعرفه های شفاف" if is_rtl else "Specialized Treatments & Transparent Pricing"}</h2>
-        <p class="text-sm text-[var(--text-muted)] mt-2">{"کلیه درمان ها با پیشرفته ترین تجهیزات دیجیتال، مواد درجه یک بین المللی و ضمانت کتبی ارائه می شوند." if is_rtl else "All treatments performed with digital imaging, premium biocompatible materials, and certified warranties."}</p>
+        <h2 id="services-heading" class="text-2xl sm:text-3xl font-bold tracking-tight">Specialized Treatments & Transparent Pricing</h2>
+        <p class="text-sm text-[var(--text-muted)] mt-2">All treatments performed with digital imaging, premium biocompatible materials, and certified warranties.</p>
       </div>
       <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
         <div class="p-6 bg-[var(--surface-bg)] {card_border} rounded-[var(--radius-container)] {card_shadow} flex flex-col justify-between space-y-4">
           <div>
-            <span class="inline-flex px-2.5 py-0.5 rounded-full text-xs font-semibold bg-[var(--accent)]/10 text-[var(--accent)] mb-2">{"طراحی لبخند" if is_rtl else "Cosmetic"}</span>
-            <h3 class="text-lg font-bold">{"کامپوزیت ونیر نانو سرامیک" if is_rtl else "Nano-Ceramic Composite"}</h3>
-            <p class="text-xs text-[var(--text-muted)] mt-1">{"اصلاح بدفرمی و بدرنگی دندان ها با استحکام و شفافیت طبیعی بدون تراش." if is_rtl else "Non-invasive smile enhancement with ultra-durable natural translucency."}</p>
+            <span class="inline-flex px-2.5 py-0.5 rounded-full text-xs font-semibold bg-[var(--accent)]/10 text-[var(--accent)] mb-2">Cosmetic</span>
+            <h3 class="text-lg font-bold">Nano-Ceramic Composite</h3>
+            <p class="text-xs text-[var(--text-muted)] mt-1">Non-invasive smile enhancement with ultra-durable natural translucency.</p>
           </div>
           <div class="pt-4 border-t border-[var(--border-subtle)]">
-            <div class="text-xs text-[var(--text-muted)]">{"هزینه هر واحد" if is_rtl else "Starting from"}</div>
-            <div class="text-lg font-bold text-[var(--accent)]"><bdi>{"از ۵,۵۰۰,۰۰۰ تومان" if is_rtl else "$350 / tooth"}</bdi></div>
+            <div class="text-xs text-[var(--text-muted)]">Starting from</div>
+            <div class="text-lg font-bold text-[var(--accent)]"><bdi>$350 / tooth</bdi></div>
           </div>
         </div>
 
         <div class="p-6 bg-[var(--surface-bg)] {card_border} rounded-[var(--radius-container)] {card_shadow} flex flex-col justify-between space-y-4">
           <div>
-            <span class="inline-flex px-2.5 py-0.5 rounded-full text-xs font-semibold bg-[var(--accent)]/10 text-[var(--accent)] mb-2">{"کاشت دندان" if is_rtl else "Implantology"}</span>
-            <h3 class="text-lg font-bold">{"ایمپلنت دیجیتال فوری" if is_rtl else "Immediate Digital Implant"}</h3>
-            <p class="text-xs text-[var(--text-muted)] mt-1">{"جراحی با راهنمای سه بعدی و بارگذاری فوری روکش با کمترین درد و خونریزی." if is_rtl else "3D surgical guide placement with immediate crown loading."}</p>
+            <span class="inline-flex px-2.5 py-0.5 rounded-full text-xs font-semibold bg-[var(--accent)]/10 text-[var(--accent)] mb-2">Implantology</span>
+            <h3 class="text-lg font-bold">Immediate Digital Implant</h3>
+            <p class="text-xs text-[var(--text-muted)] mt-1">3D surgical guide placement with immediate crown loading.</p>
           </div>
           <div class="pt-4 border-t border-[var(--border-subtle)]">
-            <div class="text-xs text-[var(--text-muted)]">{"هزینه هر واحد" if is_rtl else "Starting from"}</div>
-            <div class="text-lg font-bold text-[var(--accent)]"><bdi>{"از ۱۸,۰۰۰,۰۰۰ تومان" if is_rtl else "$950 / unit"}</bdi></div>
+            <div class="text-xs text-[var(--text-muted)]">Starting from</div>
+            <div class="text-lg font-bold text-[var(--accent)]"><bdi>$950 / unit</bdi></div>
           </div>
         </div>
 
         <div class="p-6 bg-[var(--surface-bg)] {card_border} rounded-[var(--radius-container)] {card_shadow} flex flex-col justify-between space-y-4">
           <div>
-            <span class="inline-flex px-2.5 py-0.5 rounded-full text-xs font-semibold bg-[var(--accent)]/10 text-[var(--accent)] mb-2">{"سفید کردن دندان" if is_rtl else "Whitening"}</span>
-            <h3 class="text-lg font-bold">{"بلیچینگ تخصصی با لیزر" if is_rtl else "Laser Office Bleaching"}</h3>
-            <p class="text-xs text-[var(--text-muted)] mt-1">{"روشن سازی دندان ها تا ۴ درجه در یک جلسه کوتاه ۴۵ دقیقه ای." if is_rtl else "In-office laser whitening up to 4 shades lighter in 45 minutes."}</p>
+            <span class="inline-flex px-2.5 py-0.5 rounded-full text-xs font-semibold bg-[var(--accent)]/10 text-[var(--accent)] mb-2">Whitening</span>
+            <h3 class="text-lg font-bold">Laser Office Bleaching</h3>
+            <p class="text-xs text-[var(--text-muted)] mt-1">In-office laser whitening up to 4 shades lighter in 45 minutes.</p>
           </div>
           <div class="pt-4 border-t border-[var(--border-subtle)]">
-            <div class="text-xs text-[var(--text-muted)]">{"هر دو فک" if is_rtl else "Full arch"}</div>
-            <div class="text-lg font-bold text-[var(--accent)]"><bdi>{"۴,۲۰۰,۰۰۰ تومان" if is_rtl else "$280 total"}</bdi></div>
+            <div class="text-xs text-[var(--text-muted)]">Full arch</div>
+            <div class="text-lg font-bold text-[var(--accent)]"><bdi>$280 total</bdi></div>
           </div>
         </div>
 
         <div class="p-6 bg-[var(--surface-bg)] {card_border} rounded-[var(--radius-container)] {card_shadow} flex flex-col justify-between space-y-4">
           <div>
-            <span class="inline-flex px-2.5 py-0.5 rounded-full text-xs font-semibold bg-[var(--accent)]/10 text-[var(--accent)] mb-2">{"ارتودنسی" if is_rtl else "Orthodontics"}</span>
-            <h3 class="text-lg font-bold">{"ارتودنسی نامرئی (الاینر)" if is_rtl else "Clear Aligners"}</h3>
-            <p class="text-xs text-[var(--text-muted)] mt-1">{"مرتب سازی دندان ها با پلاک های شفاف متحرک بدون نیاز به براکت های فلزی." if is_rtl else "Discreet teeth alignment using custom removable clear trays."}</p>
+            <span class="inline-flex px-2.5 py-0.5 rounded-full text-xs font-semibold bg-[var(--accent)]/10 text-[var(--accent)] mb-2">Orthodontics</span>
+            <h3 class="text-lg font-bold">Clear Aligners</h3>
+            <p class="text-xs text-[var(--text-muted)] mt-1">Discreet teeth alignment using custom removable clear trays.</p>
           </div>
           <div class="pt-4 border-t border-[var(--border-subtle)]">
-            <div class="text-xs text-[var(--text-muted)]">{"طرح درمان کامل" if is_rtl else "Full package"}</div>
-            <div class="text-lg font-bold text-[var(--accent)]"><bdi>{"از ۲۹,۰۰۰,۰۰۰ تومان" if is_rtl else "$1,800 package"}</bdi></div>
+            <div class="text-xs text-[var(--text-muted)]">Full package</div>
+            <div class="text-lg font-bold text-[var(--accent)]"><bdi>$1,800 package</bdi></div>
           </div>
         </div>
       </div>
@@ -1168,28 +1159,28 @@ export default {component_name};
     <section id="portfolio" class="mt-12 pt-8 border-t border-[var(--border-subtle)]" aria-labelledby="portfolio-heading">
       <div class="flex items-center justify-between mb-6">
         <div>
-          <h2 id="portfolio-heading" class="text-2xl font-bold tracking-tight">{"نتایج مستند و گالری درمان ها" if is_rtl else "Clinical Before & After Gallery"}</h2>
-          <p class="text-xs text-[var(--text-muted)] mt-1">{"نمونه درمان های انجام شده توسط متخصصین کلینیک با رضایت تایید شده مراجعین." if is_rtl else "Authentic outcomes documented with patient consent and verified results."}</p>
+          <h2 id="portfolio-heading" class="text-2xl font-bold tracking-tight">Clinical Before & After Gallery</h2>
+          <p class="text-xs text-[var(--text-muted)] mt-1">Authentic outcomes documented with patient consent and verified results.</p>
         </div>
         <div class="flex gap-2">
-          <button type="button" class="portfolio-tab px-3 py-1.5 text-xs font-semibold rounded-[var(--radius-button)] bg-[var(--accent)] text-[var(--vibe-on-primary,#fff)] min-h-[44px]" data-view="before">{"تصویر قبل" if is_rtl else "Before"}</button>
-          <button type="button" class="portfolio-tab px-3 py-1.5 text-xs font-semibold rounded-[var(--radius-button)] bg-[var(--canvas-bg)] border border-[var(--border-subtle)] hover:bg-[var(--surface-bg)] min-h-[44px]" data-view="after">{"نتیجه درمان" if is_rtl else "After Treatment"}</button>
+          <button type="button" class="portfolio-tab px-3 py-1.5 text-xs font-semibold rounded-[var(--radius-button)] bg-[var(--accent)] text-[var(--vibe-on-primary,#fff)] min-h-[44px]" data-view="before">Before</button>
+          <button type="button" class="portfolio-tab px-3 py-1.5 text-xs font-semibold rounded-[var(--radius-button)] bg-[var(--canvas-bg)] border border-[var(--border-subtle)] hover:bg-[var(--surface-bg)] min-h-[44px]" data-view="after">After Treatment</button>
         </div>
       </div>
       <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
         <!-- Interactive Drag Slider Card 1 -->
         <div class="vibe-spotlight-card p-6 bg-[var(--surface-bg)] {card_border} rounded-[var(--radius-container)] {card_shadow} space-y-4">
           <div class="flex justify-between items-center text-xs font-semibold">
-            <span>{"۱۰ واحد ونیر سرامیکی E-Max" if is_rtl else "10 Units E-Max Veneers"}</span>
+            <span>10 Units E-Max Veneers</span>
             <span class="px-2 py-0.5 rounded-full bg-emerald-500/10 text-emerald-500 font-mono text-[10px] font-bold"><bdi>98.4% Match</bdi></span>
           </div>
           <!-- Interactive Before / After Split Slider -->
           <div class="relative h-48 w-full rounded-[var(--radius-base)] overflow-hidden border border-[var(--border-subtle)] bg-[var(--canvas-bg)] select-none">
             <div class="absolute inset-0 bg-gradient-to-r from-stone-300 to-amber-100 dark:from-stone-800 dark:to-amber-950/40 flex items-center justify-start p-4">
-              <span class="text-xs font-bold text-stone-500 uppercase tracking-widest">{"قبل از درمان" if is_rtl else "Baseline"}</span>
+              <span class="text-xs font-bold text-stone-500 uppercase tracking-widest">Baseline</span>
             </div>
             <div id="before-after-layer-1" class="absolute inset-y-0 end-0 bg-gradient-to-l from-emerald-100 to-rose-50 dark:from-emerald-950/40 dark:to-rose-950/20 border-s-2 border-emerald-500 flex items-center justify-end p-4 transition-all duration-75" style="width: 50%">
-              <span class="text-xs font-bold text-emerald-700 dark:text-emerald-400 uppercase tracking-widest">{"نتیجه درمان" if is_rtl else "After Result"}</span>
+              <span class="text-xs font-bold text-emerald-700 dark:text-emerald-400 uppercase tracking-widest">After Result</span>
             </div>
             <input type="range" min="0" max="100" value="50" class="before-after-range absolute inset-0 opacity-0 cursor-ew-resize w-full h-full z-20" data-target="before-after-layer-1" data-divider="divider-line-1" aria-label="Before and After Comparison Slider">
             <div id="divider-line-1" class="absolute inset-y-0 w-1 bg-white shadow-[0_0_10px_rgba(0,0,0,0.4)] pointer-events-none z-10 flex items-center justify-center" style="left: 50%">
@@ -1198,22 +1189,22 @@ export default {component_name};
               </div>
             </div>
           </div>
-          <p class="text-xs text-[var(--text-muted)] text-center">{"دستگیره را بکشید تا تغییرات قبل و بعد از درمان را به صورت زنده مقایسه کنید." if is_rtl else "Drag the slider to compare baseline versus clinical post-treatment result."}</p>
+          <p class="text-xs text-[var(--text-muted)] text-center">Drag the slider to compare baseline versus clinical post-treatment result.</p>
         </div>
 
         <!-- Interactive Drag Slider Card 2 -->
         <div class="vibe-spotlight-card p-6 bg-[var(--surface-bg)] {card_border} rounded-[var(--radius-container)] {card_shadow} space-y-4">
           <div class="flex justify-between items-center text-xs font-semibold">
-            <span>{"ایمپلنت فوری دندان جلو" if is_rtl else "Immediate Anterior Implant"}</span>
+            <span>Immediate Anterior Implant</span>
             <span class="px-2 py-0.5 rounded-full bg-sky-500/10 text-sky-500 font-mono text-[10px] font-bold"><bdi>100% Titanium Bond</bdi></span>
           </div>
           <!-- Interactive Before / After Split Slider -->
           <div class="relative h-48 w-full rounded-[var(--radius-base)] overflow-hidden border border-[var(--border-subtle)] bg-[var(--canvas-bg)] select-none">
             <div class="absolute inset-0 bg-gradient-to-r from-zinc-300 to-sky-100 dark:from-zinc-800 dark:to-sky-950/40 flex items-center justify-start p-4">
-              <span class="text-xs font-bold text-zinc-500 uppercase tracking-widest">{"وضعیت اولیه" if is_rtl else "Baseline"}</span>
+              <span class="text-xs font-bold text-zinc-500 uppercase tracking-widest">Baseline</span>
             </div>
             <div id="before-after-layer-2" class="absolute inset-y-0 end-0 bg-gradient-to-l from-sky-100 to-indigo-50 dark:from-sky-950/40 dark:to-indigo-950/20 border-s-2 border-sky-500 flex items-center justify-end p-4 transition-all duration-75" style="width: 50%">
-              <span class="text-xs font-bold text-sky-700 dark:text-sky-400 uppercase tracking-widest">{"کاشت نهایی" if is_rtl else "Final Crown"}</span>
+              <span class="text-xs font-bold text-sky-700 dark:text-sky-400 uppercase tracking-widest">Final Crown</span>
             </div>
             <input type="range" min="0" max="100" value="50" class="before-after-range absolute inset-0 opacity-0 cursor-ew-resize w-full h-full z-20" data-target="before-after-layer-2" data-divider="divider-line-2" aria-label="Before and After Comparison Slider">
             <div id="divider-line-2" class="absolute inset-y-0 w-1 bg-white shadow-[0_0_10px_rgba(0,0,0,0.4)] pointer-events-none z-10 flex items-center justify-center" style="left: 50%">
@@ -1222,23 +1213,23 @@ export default {component_name};
               </div>
             </div>
           </div>
-          <p class="text-xs text-[var(--text-muted)] text-center">{"پایداری بی نقص بافت نرم لثه و انطباق کامل رنگ با دندان های مجاور." if is_rtl else "Painless placement with soft tissue graft and certified zirconia crown."}</p>
+          <p class="text-xs text-[var(--text-muted)] text-center">Painless placement with soft tissue graft and certified zirconia crown.</p>
         </div>
       </div>
     </section>
 
     <!-- Healthcare Section 3: Specialist Doctors -->
     <section id="doctors" class="mt-12 pt-8 border-t border-[var(--border-subtle)]" aria-labelledby="doctors-heading">
-      <h2 id="doctors-heading" class="text-2xl font-bold tracking-tight mb-6">{"تیم پزشکان و متخصصین کلینیک" if is_rtl else "Specialist Medical Staff"}</h2>
+      <h2 id="doctors-heading" class="text-2xl font-bold tracking-tight mb-6">Specialist Medical Staff</h2>
       <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
         <div class="p-6 bg-[var(--surface-bg)] {card_border} rounded-[var(--radius-container)] {card_shadow} flex items-start gap-4">
           <div class="w-14 h-14 rounded-full bg-[var(--accent)]/10 text-[var(--accent)] flex items-center justify-center flex-shrink-0">
             <svg class="w-7 h-7" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
           </div>
           <div class="space-y-1">
-            <h3 class="text-lg font-bold">{"دکتر آریا پارسا" if is_rtl else "Dr. Aria Parsa, DDS"}</h3>
-            <p class="text-xs text-[var(--accent)] font-semibold">{"متخصص دندانپزشکی ترمیمی و زیبایی | نظام پزشکی: ۱۴۸۲۹۱" if is_rtl else "Board Certified Aesthetic & Restorative Dentist"}</p>
-            <p class="text-xs text-[var(--text-muted)] leading-relaxed mt-2">{"فلوشیپ بین المللی طراحی لبخند دیجیتال از دانشگاه زوریخ با بیش از ۱۲ سال تجربه تخصصی." if is_rtl else "International Fellow in Digital Smile Design with 12+ years clinical experience."}</p>
+            <h3 class="text-lg font-bold">Dr. Aria Parsa, DDS</h3>
+            <p class="text-xs text-[var(--accent)] font-semibold">Board Certified Aesthetic & Restorative Dentist</p>
+            <p class="text-xs text-[var(--text-muted)] leading-relaxed mt-2">International Fellow in Digital Smile Design with 12+ years clinical experience.</p>
           </div>
         </div>
         <div class="p-6 bg-[var(--surface-bg)] {card_border} rounded-[var(--radius-container)] {card_shadow} flex items-start gap-4">
@@ -1246,9 +1237,9 @@ export default {component_name};
             <svg class="w-7 h-7" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
           </div>
           <div class="space-y-1">
-            <h3 class="text-lg font-bold">{"دکتر سارا شمس" if is_rtl else "Dr. Sara Shams, MS"}</h3>
-            <p class="text-xs text-[var(--accent)] font-semibold">{"جراح فک و متخصص ایمپلنت های دندانی | نظام پزشکی: ۱۵۳۸۲۰" if is_rtl else "Oral Surgeon & Digital Implantologist"}</p>
-            <p class="text-xs text-[var(--text-muted)] leading-relaxed mt-2">{"رتبه برتر بورد تخصصی، عضو انجمن ایمپلنتولوژی اروپا (EAO) و مجری جراحی های با هدایت سه بعدی." if is_rtl else "European Association for Osseointegration member specializing in guided surgery."}</p>
+            <h3 class="text-lg font-bold">Dr. Sara Shams, MS</h3>
+            <p class="text-xs text-[var(--accent)] font-semibold">Oral Surgeon & Digital Implantologist</p>
+            <p class="text-xs text-[var(--text-muted)] leading-relaxed mt-2">European Association for Osseointegration member specializing in guided surgery.</p>
           </div>
         </div>
       </div>
@@ -1257,47 +1248,47 @@ export default {component_name};
     <!-- Healthcare Section 4: Interactive Quick Booking -->
     <section id="booking" class="mt-12 pt-8 border-t border-[var(--border-subtle)]" aria-labelledby="booking-heading">
       <div class="p-6 sm:p-10 bg-[var(--surface-bg)] {card_border} rounded-[var(--radius-container)] {card_shadow}">
-        <h2 id="booking-heading" class="text-2xl font-bold tracking-tight mb-2">{"رزرو آنلاین نوبت معاینه و مشاوره" if is_rtl else "Book Online Consultation"}</h2>
-        <p class="text-xs text-[var(--text-muted)] mb-6">{"روز و ساعت مورد نظر خود را انتخاب کنید تا نوبت اولیه شما به صورت اختصاصی ثبت شود." if is_rtl else "Select your preferred appointment date and time for priority confirmation."}</p>
+        <h2 id="booking-heading" class="text-2xl font-bold tracking-tight mb-2">Book Online Consultation</h2>
+        <p class="text-xs text-[var(--text-muted)] mb-6">Select your preferred appointment date and time for priority confirmation.</p>
         
         <form id="quick-booking-form" class="space-y-6">
           <!-- Day selector -->
           <div>
-            <label class="block text-xs font-semibold mb-2">{"انتخاب روز ویزیت" if is_rtl else "Select Appointment Day"}</label>
+            <label class="block text-xs font-semibold mb-2">Select Appointment Day</label>
             <div class="flex flex-wrap gap-2">
-              <button type="button" class="day-slot-btn px-4 py-2 text-xs font-bold rounded-[var(--radius-button)] bg-[var(--accent)] text-[var(--vibe-on-primary,#fff)] min-h-[44px]">{"شنبه" if is_rtl else "Saturday"}</button>
-              <button type="button" class="day-slot-btn px-4 py-2 text-xs font-bold rounded-[var(--radius-button)] bg-[var(--canvas-bg)] border border-[var(--border-subtle)] hover:bg-[var(--surface-bg)] min-h-[44px]">{"یکشنبه" if is_rtl else "Sunday"}</button>
-              <button type="button" class="day-slot-btn px-4 py-2 text-xs font-bold rounded-[var(--radius-button)] bg-[var(--canvas-bg)] border border-[var(--border-subtle)] hover:bg-[var(--surface-bg)] min-h-[44px]">{"دوشنبه" if is_rtl else "Monday"}</button>
-              <button type="button" class="day-slot-btn px-4 py-2 text-xs font-bold rounded-[var(--radius-button)] bg-[var(--canvas-bg)] border border-[var(--border-subtle)] hover:bg-[var(--surface-bg)] min-h-[44px]">{"سه شنبه" if is_rtl else "Tuesday"}</button>
+              <button type="button" class="day-slot-btn px-4 py-2 text-xs font-bold rounded-[var(--radius-button)] bg-[var(--accent)] text-[var(--vibe-on-primary,#fff)] min-h-[44px]">Saturday</button>
+              <button type="button" class="day-slot-btn px-4 py-2 text-xs font-bold rounded-[var(--radius-button)] bg-[var(--canvas-bg)] border border-[var(--border-subtle)] hover:bg-[var(--surface-bg)] min-h-[44px]">Sunday</button>
+              <button type="button" class="day-slot-btn px-4 py-2 text-xs font-bold rounded-[var(--radius-button)] bg-[var(--canvas-bg)] border border-[var(--border-subtle)] hover:bg-[var(--surface-bg)] min-h-[44px]">Monday</button>
+              <button type="button" class="day-slot-btn px-4 py-2 text-xs font-bold rounded-[var(--radius-button)] bg-[var(--canvas-bg)] border border-[var(--border-subtle)] hover:bg-[var(--surface-bg)] min-h-[44px]">Tuesday</button>
             </div>
           </div>
 
           <!-- Time slot selector -->
           <div>
-            <label class="block text-xs font-semibold mb-2">{"انتخاب بازه ساعتی" if is_rtl else "Select Time Window"}</label>
+            <label class="block text-xs font-semibold mb-2">Select Time Window</label>
             <div class="flex flex-wrap gap-2">
-              <button type="button" class="time-slot-btn px-4 py-2 text-xs font-bold rounded-[var(--radius-button)] bg-[var(--accent)] text-[var(--vibe-on-primary,#fff)] min-h-[44px]"><bdi>۱۰:۳۰</bdi></button>
-              <button type="button" class="time-slot-btn px-4 py-2 text-xs font-bold rounded-[var(--radius-button)] bg-[var(--canvas-bg)] border border-[var(--border-subtle)] hover:bg-[var(--surface-bg)] min-h-[44px]"><bdi>۱۲:۰۰</bdi></button>
-              <button type="button" class="time-slot-btn px-4 py-2 text-xs font-bold rounded-[var(--radius-button)] bg-[var(--canvas-bg)] border border-[var(--border-subtle)] hover:bg-[var(--surface-bg)] min-h-[44px]"><bdi>۱۶:۳۰</bdi></button>
-              <button type="button" class="time-slot-btn px-4 py-2 text-xs font-bold rounded-[var(--radius-button)] bg-[var(--canvas-bg)] border border-[var(--border-subtle)] hover:bg-[var(--surface-bg)] min-h-[44px]"><bdi>۱۸:۰۰</bdi></button>
+              <button type="button" class="time-slot-btn px-4 py-2 text-xs font-bold rounded-[var(--radius-button)] bg-[var(--accent)] text-[var(--vibe-on-primary,#fff)] min-h-[44px]"><bdi>10:30 AM</bdi></button>
+              <button type="button" class="time-slot-btn px-4 py-2 text-xs font-bold rounded-[var(--radius-button)] bg-[var(--canvas-bg)] border border-[var(--border-subtle)] hover:bg-[var(--surface-bg)] min-h-[44px]"><bdi>12:00 PM</bdi></button>
+              <button type="button" class="time-slot-btn px-4 py-2 text-xs font-bold rounded-[var(--radius-button)] bg-[var(--canvas-bg)] border border-[var(--border-subtle)] hover:bg-[var(--surface-bg)] min-h-[44px]"><bdi>04:30 PM</bdi></button>
+              <button type="button" class="time-slot-btn px-4 py-2 text-xs font-bold rounded-[var(--radius-button)] bg-[var(--canvas-bg)] border border-[var(--border-subtle)] hover:bg-[var(--surface-bg)] min-h-[44px]"><bdi>06:00 PM</bdi></button>
             </div>
           </div>
 
           <!-- Patient information -->
           <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
             <div>
-              <label for="patient-name" class="block text-xs font-semibold mb-1">{"نام و نام خانوادگی مراجع" if is_rtl else "Patient Full Name"}</label>
-              <input type="text" id="patient-name" required placeholder="{"مثال: سهراب سپهری" if is_rtl else "e.g. John Doe"}" class="w-full px-4 py-2.5 text-xs rounded-[var(--radius-button)] bg-[var(--canvas-bg)] border border-[var(--border-subtle)] focus:border-[var(--accent)] min-h-[44px] outline-none">
+              <label for="patient-name" class="block text-xs font-semibold mb-1">Patient Full Name</label>
+              <input type="text" id="patient-name" required placeholder="e.g. John Doe" class="w-full px-4 py-2.5 text-xs rounded-[var(--radius-button)] bg-[var(--canvas-bg)] border border-[var(--border-subtle)] focus:border-[var(--accent)] min-h-[44px] outline-none">
             </div>
             <div>
-              <label for="patient-phone" class="block text-xs font-semibold mb-1">{"شماره تماس مستقیم" if is_rtl else "Mobile Phone Number"}</label>
-              <input type="tel" id="patient-phone" required placeholder="{"۰۹۱۲۳۴۵۶۷۸۹" if is_rtl else "+1 (555) 000-0000"}" class="w-full px-4 py-2.5 text-xs rounded-[var(--radius-button)] bg-[var(--canvas-bg)] border border-[var(--border-subtle)] focus:border-[var(--accent)] min-h-[44px] outline-none">
+              <label for="patient-phone" class="block text-xs font-semibold mb-1">Mobile Phone Number</label>
+              <input type="tel" id="patient-phone" required placeholder="+1 (555) 000-0000" class="w-full px-4 py-2.5 text-xs rounded-[var(--radius-button)] bg-[var(--canvas-bg)] border border-[var(--border-subtle)] focus:border-[var(--accent)] min-h-[44px] outline-none">
             </div>
           </div>
 
           <div class="pt-2">
             <button type="submit" id="submit-booking-btn" class="w-full sm:w-auto inline-flex items-center justify-center px-8 py-3 text-sm font-semibold rounded-[var(--radius-button)] text-[var(--vibe-on-primary,#fff)] bg-[var(--accent)] hover:opacity-90 min-h-[44px] transition-all">
-              {"ثبت قطعی و ارسال تاییدیه نوبت" if is_rtl else "Confirm & Reserve Appointment"}
+              Confirm & Reserve Appointment
             </button>
           </div>
         </form>
@@ -1311,15 +1302,15 @@ export default {component_name};
       <div class="flex items-center justify-between mb-8">
         <div>
           <h2 id="features-heading" class="text-2xl font-bold tracking-tight">
-            {"معماری نوین و قابلیت های بنیادین" if is_rtl else "Engineered Capabilities & Bento Architecture"}
+            Engineered Capabilities & Bento Architecture
           </h2>
           <p class="text-xs text-[var(--text-muted)] mt-1">
-            {"طراحی شده با استانداردهای مدرن فرانت اند، دسترسی پذیری کامل و سرعت بارگذاری آنی." if is_rtl else "Built with strict WCAG standards, fluid physics, and sub-millisecond execution."}
+            Built with strict WCAG standards, fluid physics, and sub-millisecond execution.
           </p>
         </div>
         <span class="hidden sm:inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold bg-[var(--accent)]/10 text-[var(--accent)] border border-[var(--accent)]/20">
           <span class="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse"></span>
-          {"تاییدیه کیفی Vibe UI" if is_rtl else "Vibe UI 6.0.0 Certified"}
+          Vibe UI 6.0.0 Certified
         </span>
       </div>
 
@@ -1329,11 +1320,11 @@ export default {component_name};
           <div>
             <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-semibold bg-[var(--accent)]/10 text-[var(--accent)] mb-4">
               <svg class="w-4 h-4 text-[var(--accent)]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>
-              <span>{"تضمین کیفیت و اصالت مهندسی" if is_rtl else "Quality Guarantee & Core Engine"}</span>
+              <span>Quality Guarantee & Core Engine</span>
             </div>
-            <h3 class="text-xl font-bold mb-3">{"معماری استاندارد بدون کلیشه های هوش مصنوعی" if is_rtl else "Deterministic Architecture Free of AI-Slop"}</h3>
+            <h3 class="text-xl font-bold mb-3">Deterministic Architecture Free of AI-Slop</h3>
             <p class="text-xs sm:text-sm text-[var(--text-muted)] leading-relaxed max-w-xl">
-              {"پایبندی به بالاترین معیارهای تخصصی، استانداردهای دسترسی پذیری نوری WCAG AAA و بهینه سازی ساختار یافته با حذف کدهای اضافه و انیمیشن های مزاحم." if is_rtl else "Engineered with strict accessibility, responsive geometry, zero inline CSS, and mathematically proven contrast ratios across light and dark modes."}
+              Engineered with strict accessibility, responsive geometry, zero inline CSS, and mathematically proven contrast ratios across light and dark modes.
             </p>
           </div>
           <div class="mt-6 pt-4 border-t border-[var(--border-subtle)] flex flex-wrap items-center gap-3 text-xs text-[var(--text-muted)]">
@@ -1346,10 +1337,10 @@ export default {component_name};
         <!-- Tile 2: Vital Metric KPI with Inline Sparkline (Span 1) -->
         <div class="vibe-spotlight-card p-6 bg-[var(--surface-bg)] {card_border} rounded-[var(--radius-container)] {card_shadow} flex flex-col justify-between">
           <div>
-            <div class="text-xs font-semibold text-[var(--text-muted)] uppercase tracking-wider mb-2">{"پایداری و در دسترس بودن" if is_rtl else "Uptime & Reliability"}</div>
+            <div class="text-xs font-semibold text-[var(--text-muted)] uppercase tracking-wider mb-2">Uptime & Reliability</div>
             <div class="text-3xl font-extrabold text-emerald-500 mb-2"><bdi>99.98%</bdi></div>
             <p class="text-xs text-[var(--text-muted)] leading-relaxed">
-              {"پایش مداوم وضعیت سرویس و تضمین پایداری بدون وقفه در مقیاس بالا." if is_rtl else "Real-time health verification with automated self-healing resilience."}
+              Real-time health verification with automated self-healing resilience.
             </p>
           </div>
           <!-- Inline Vector Sparkline -->
@@ -1371,9 +1362,9 @@ export default {component_name};
             <div class="w-10 h-10 rounded-lg bg-[var(--accent)]/10 text-[var(--accent)] flex items-center justify-center mb-4">
               <svg class="w-5 h-5 text-[var(--accent)]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon></svg>
             </div>
-            <h3 class="text-base font-bold mb-2">{"سرعت و سهولت کاربری" if is_rtl else "Speed & Precision"}</h3>
+            <h3 class="text-base font-bold mb-2">Speed & Precision</h3>
             <p class="text-xs text-[var(--text-muted)] leading-relaxed">
-              {"طراحی شده برای بیشترین سرعت بارگذاری، سازگاری کامل با دستگاه های موبایل و رابط کاربری روان." if is_rtl else "Optimized for lightning-fast delivery, mobile ergonomics, and seamless user interaction."}
+              Optimized for lightning-fast delivery, mobile ergonomics, and seamless user interaction.
             </p>
           </div>
           <div class="mt-4 pt-3 border-t border-[var(--border-subtle)] flex items-center justify-between text-xs">
@@ -1388,9 +1379,9 @@ export default {component_name};
             <div class="w-10 h-10 rounded-lg bg-[var(--accent)]/10 text-[var(--accent)] flex items-center justify-center mb-4">
               <svg class="w-5 h-5 text-[var(--accent)]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 14 14"></polyline></svg>
             </div>
-            <h3 class="text-base font-bold mb-2">{"شفافیت و استاندارد سازمانی" if is_rtl else "Enterprise Governance & Security"}</h3>
+            <h3 class="text-base font-bold mb-2">Enterprise Governance & Security</h3>
             <p class="text-xs text-[var(--text-muted)] leading-relaxed">
-              {"فرآیند پیگیری شفاف، پشتیبانی فعال و همراهی در تمامی مراحل استفاده از خدمات مطابق با بالاترین توافق نامه های سطح خدمات." if is_rtl else "Strict data retention policies, zero secrets leakage compliance, and verified enterprise security baselines."}
+              Strict data retention policies, zero secrets leakage compliance, and verified enterprise security baselines.
             </p>
           </div>
           <div class="mt-6 pt-4 border-t border-[var(--border-subtle)] grid grid-cols-2 sm:grid-cols-4 gap-2 text-[11px] font-medium text-[var(--text-muted)]">
@@ -1405,23 +1396,23 @@ export default {component_name};
 
     <!-- General Section 2: Services & Pricing -->
     <section id="services" class="mt-12 pt-8 border-t border-[var(--border-subtle)]" aria-labelledby="general-services-heading">
-      <h2 id="general-services-heading" class="text-2xl font-bold tracking-tight mb-6">{"خدمات و پلن های تخصصی" if is_rtl else "Services & Architecture Plans"}</h2>
+      <h2 id="general-services-heading" class="text-2xl font-bold tracking-tight mb-6">Services & Architecture Plans</h2>
       <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
         <div class="p-6 bg-[var(--surface-bg)] {card_border} rounded-[var(--radius-container)] {card_shadow} space-y-3">
-          <h3 class="text-lg font-bold">{"پلن استاندارد پایه" if is_rtl else "Core Essentials"}</h3>
-          <p class="text-xs text-[var(--text-muted)]">{"مناسب شروع پروژه ها با ساختار استاندارد و دسترسی پذیری کامل." if is_rtl else "Complete foundational setup with certified WCAG compliance."}</p>
-          <div class="text-2xl font-bold text-[var(--accent)]"><bdi>{"شروع رایگان" if is_rtl else "Open Source"}</bdi></div>
+          <h3 class="text-lg font-bold">Core Essentials</h3>
+          <p class="text-xs text-[var(--text-muted)]">Complete foundational setup with certified WCAG compliance.</p>
+          <div class="text-2xl font-bold text-[var(--accent)]"><bdi>Open Source</bdi></div>
         </div>
         <div class="p-6 bg-[var(--surface-bg)] {card_border} rounded-[var(--radius-container)] {card_shadow} space-y-3 ring-2 ring-[var(--accent)]">
           <span class="inline-flex px-2 py-0.5 rounded text-xs font-bold bg-[var(--accent)] text-[var(--vibe-on-primary,#fff)]">RECOMMENDED</span>
-          <h3 class="text-lg font-bold">{"پلن حرفه ای شرکتی" if is_rtl else "Professional Studio"}</h3>
-          <p class="text-xs text-[var(--text-muted)]">{"به همراه کامپوننت های هوش مصنوعی، تله متری زنده و پشتیبانی ویژه." if is_rtl else "AI primitive components, spring physics & telemetry HUD."}</p>
-          <div class="text-2xl font-bold text-[var(--accent)]"><bdi>{"تخصیص اختصاصی" if is_rtl else "Custom Tier"}</bdi></div>
+          <h3 class="text-lg font-bold">Professional Studio</h3>
+          <p class="text-xs text-[var(--text-muted)]">AI primitive components, spring physics & telemetry HUD.</p>
+          <div class="text-2xl font-bold text-[var(--accent)]"><bdi>Custom Tier</bdi></div>
         </div>
         <div class="p-6 bg-[var(--surface-bg)] {card_border} rounded-[var(--radius-container)] {card_shadow} space-y-3">
-          <h3 class="text-lg font-bold">{"پلن سازمانی Enterprise" if is_rtl else "Enterprise Governance"}</h3>
-          <p class="text-xs text-[var(--text-muted)]">{"قراردادهای ماشین دقیق، اعتبارسنجی استقرار و ممیزی های مستمر." if is_rtl else "Deterministic machine contracts, CI/CD integration & SLAs."}</p>
-          <div class="text-2xl font-bold text-[var(--accent)]"><bdi>{"تماس با ما" if is_rtl else "Contact Sales"}</bdi></div>
+          <h3 class="text-lg font-bold">Enterprise Governance</h3>
+          <p class="text-xs text-[var(--text-muted)]">Deterministic machine contracts, CI/CD integration & SLAs.</p>
+          <div class="text-2xl font-bold text-[var(--accent)]"><bdi>Contact Sales</bdi></div>
         </div>
       </div>
     </section>
@@ -1429,20 +1420,20 @@ export default {component_name};
     <!-- General Section 3: Contact & Inquiry -->
     <section id="contact" class="mt-12 pt-8 border-t border-[var(--border-subtle)]" aria-labelledby="contact-heading">
       <div class="p-6 sm:p-10 bg-[var(--surface-bg)] {card_border} rounded-[var(--radius-container)] {card_shadow} max-w-2xl mx-auto">
-        <h2 id="contact-heading" class="text-2xl font-bold tracking-tight mb-2">{"ارتباط و استقرار سریع" if is_rtl else "Quick Contact & Inquiry"}</h2>
-        <p class="text-xs text-[var(--text-muted)] mb-6">{"پیام خود را ارسال کنید تا کارشناسان ما در سریع ترین زمان ممکن با شما گفتگو کنند." if is_rtl else "Leave your information and our engineering team will get back to you promptly."}</p>
+        <h2 id="contact-heading" class="text-2xl font-bold tracking-tight mb-2">Quick Contact & Inquiry</h2>
+        <p class="text-xs text-[var(--text-muted)] mb-6">Leave your information and our engineering team will get back to you promptly.</p>
         <form id="contact-form" class="space-y-4">
           <div>
-            <label for="contact-name" class="block text-xs font-semibold mb-1">{"نام و نام خانوادگی" if is_rtl else "Full Name"}</label>
-            <input type="text" id="contact-name" required placeholder="{"مثال: علی رضایی" if is_rtl else "e.g. Alex Miller"}" class="w-full px-4 py-2.5 text-xs rounded-[var(--radius-button)] bg-[var(--canvas-bg)] border border-[var(--border-subtle)] focus:border-[var(--accent)] min-h-[44px] outline-none">
+            <label for="contact-name" class="block text-xs font-semibold mb-1">Full Name</label>
+            <input type="text" id="contact-name" required placeholder="e.g. Alex Miller" class="w-full px-4 py-2.5 text-xs rounded-[var(--radius-button)] bg-[var(--canvas-bg)] border border-[var(--border-subtle)] focus:border-[var(--accent)] min-h-[44px] outline-none">
           </div>
           <div>
-            <label for="contact-email" class="block text-xs font-semibold mb-1">{"آدرس ایمیل یا شماره تماس" if is_rtl else "Email or Phone Number"}</label>
-            <input type="text" id="contact-email" required placeholder="{"info@example.com" if is_rtl else "user@company.com"}" class="w-full px-4 py-2.5 text-xs rounded-[var(--radius-button)] bg-[var(--canvas-bg)] border border-[var(--border-subtle)] focus:border-[var(--accent)] min-h-[44px] outline-none">
+            <label for="contact-email" class="block text-xs font-semibold mb-1">Email or Phone Number</label>
+            <input type="text" id="contact-email" required placeholder="user@company.com" class="w-full px-4 py-2.5 text-xs rounded-[var(--radius-button)] bg-[var(--canvas-bg)] border border-[var(--border-subtle)] focus:border-[var(--accent)] min-h-[44px] outline-none">
           </div>
           <div class="pt-2">
             <button type="submit" id="submit-contact-btn" class="w-full sm:w-auto inline-flex items-center justify-center px-8 py-3 text-sm font-semibold rounded-[var(--radius-button)] text-[var(--vibe-on-primary,#fff)] bg-[var(--accent)] hover:opacity-90 min-h-[44px] transition-all">
-              {"ارسال پیام و استقرار" if is_rtl else "Submit Request"}
+              Submit Request
             </button>
           </div>
         </form>
@@ -1716,7 +1707,17 @@ export default {component_name};
         <button type="button" id="header-cta-btn" class="inline-flex items-center justify-center px-4 py-2.5 text-sm font-medium rounded-[var(--radius-button)] text-[var(--vibe-on-primary,#fff)] bg-[var(--accent)] hover:opacity-90 min-h-[44px] min-w-[44px] transition-all">
           {cta_primary_label}
         </button>
+        <!-- Mobile Navigation Menu Toggle Button -->
+        <button type="button" id="vibeMobileMenuBtn" class="md:hidden inline-flex items-center justify-center p-2 rounded-[var(--radius-button)] text-[var(--text-main)] hover:bg-[var(--accent)]/10 min-h-[44px] min-w-[44px] border border-[var(--border-subtle)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)]" aria-expanded="false" aria-controls="vibeMobileMenu" aria-label="Toggle navigation menu">
+          <svg class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" aria-hidden="true">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16" />
+          </svg>
+        </button>
       </div>
+    </div>
+    <!-- Responsive Mobile Navigation Drawer -->
+    <div id="vibeMobileMenu" class="md:hidden hidden border-t border-[var(--border-subtle)] bg-[var(--surface-bg)] px-4 pt-3 pb-4 space-y-2" aria-label="Mobile Navigation">
+{nav_links_mobile_html}
     </div>
   </header>
 
@@ -1731,7 +1732,7 @@ export default {component_name};
               <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
               <span class="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
             </span>
-            <span>{"مهندسی دقیق و اصیل" if is_rtl else "Vibe UI Verified"}</span>
+            <span>Vibe UI Verified</span>
           </div>
           <h1 id="hero-title" class="text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight mb-4 vibe-gradient-heading">
             {hero_headline}
@@ -1742,14 +1743,11 @@ export default {component_name};
 
           <!-- Editorial Domain Asset Showcase -->
           <div class="relative w-full h-44 sm:h-56 rounded-[var(--radius-button)] overflow-hidden border border-[var(--border-subtle)] mb-6 shadow-sm">
-            <picture class="w-full h-full block">
-              <source srcset="{hero_webp_url}" type="image/webp">
-              <img src="{hero_image_url}" alt="{hero_image_caption}" class="w-full h-full object-cover" loading="lazy" decoding="async" />
-            </picture>
+            <img src="{hero_image_url}" alt="{hero_image_caption}" class="w-full h-full object-cover" loading="lazy" decoding="async" onerror="this.src='https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=1200&q=80'" />
             <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent pointer-events-none"></div>
             <div class="absolute bottom-2 start-3 end-3 text-[11px] font-mono text-white/95 flex items-center justify-between">
               <span class="truncate"><bdi>{hero_image_caption}</bdi></span>
-              <span class="px-1.5 py-0.5 rounded bg-black/40 text-[10px] uppercase font-mono">Curated WebP</span>
+              <span class="px-1.5 py-0.5 rounded bg-black/40 text-[10px] uppercase font-mono">Verified CDN</span>
             </div>
           </div>
         </div>
@@ -1787,14 +1785,14 @@ export default {component_name};
           <div>
             <h2 class="text-base font-bold mb-4 flex items-center space-x-2 rtl:space-x-reverse">
               <svg class="w-4 h-4 text-[var(--accent)]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M22 12h-4l-3 9L9 3l-3 9H2"></path></svg>
-              <span>{"شاخص های کلیدی و وضعیت" if is_rtl else "Highlights & Status"}</span>
+              <span>Highlights & Status</span>
             </h2>
 {window_chrome_content_html}
           </div>
           <div class="mt-6 pt-4 border-t border-[var(--border-subtle)] text-xs text-[var(--text-muted)] flex items-center justify-between">
             <div class="flex items-center space-x-1.5 rtl:space-x-reverse">
               <span class="w-2 h-2 rounded-full bg-emerald-500"></span>
-              <span>{"سرویس آنلاین و آماده پذیرش" if is_rtl else "Active & Ready"}</span>
+              <span>Active & Ready</span>
             </div>
             <span class="font-mono text-[10px] opacity-70"><bdi>99.99% SLO</bdi></span>
           </div>
@@ -1807,7 +1805,7 @@ export default {component_name};
 
   <footer class="w-full border-t border-[var(--border-subtle)] bg-[var(--surface-bg)] py-6 mt-12">
     <div class="max-w-7xl mx-auto px-4 text-center text-xs text-[var(--text-muted)]">
-      &copy; 2026 {brand_name}. {"تمامی حقوق محفوظ است." if is_rtl else "All rights reserved."}
+      &copy; 2026 {brand_name}. All rights reserved.
     </div>
   </footer>
 
@@ -1908,7 +1906,7 @@ export default {component_name};
             t.className = 'portfolio-tab px-3 py-1.5 text-xs font-semibold rounded-[var(--radius-button)] bg-[var(--canvas-bg)] border border-[var(--border-subtle)] hover:bg-[var(--surface-bg)] min-h-[44px]';
           }});
           tab.className = 'portfolio-tab px-3 py-1.5 text-xs font-semibold rounded-[var(--radius-button)] bg-[var(--accent)] text-[var(--vibe-on-primary,#fff)] min-h-[44px]';
-          showToast(view === 'before' ? 'نمایش تصاویر قبل از درمان' : 'نمایش نتایج نهایی پس از اتمام درمان');
+          showToast(view === 'before' ? 'Showing baseline pre-treatment gallery' : 'Showing post-treatment results gallery');
         }});
       }});
 
@@ -1924,6 +1922,17 @@ export default {component_name};
           if (dividerEl) dividerEl.style.left = val + '%';
         }});
       }});
+
+      // 6.6. Responsive Mobile Navigation Drawer Toggle
+      var mobileBtn = document.getElementById('vibeMobileMenuBtn');
+      var mobileMenu = document.getElementById('vibeMobileMenu');
+      if (mobileBtn && mobileMenu) {{
+        mobileBtn.addEventListener('click', function() {{
+          var isOpen = mobileBtn.getAttribute('aria-expanded') === 'true';
+          mobileBtn.setAttribute('aria-expanded', !isOpen);
+          mobileMenu.classList.toggle('hidden');
+        }});
+      }}
 
       // 7. DevOps Log Stream Toggle & Copy
       var streamToggle = document.getElementById('toggle-log-stream');
@@ -1947,7 +1956,7 @@ export default {component_name};
       if (bookingForm) {{
         bookingForm.addEventListener('submit', function(e) {{
           e.preventDefault();
-          showToast('درخواست نوبت شما با موفقیت ثبت شد. مشاوران کلینیک به زودی با شما تماس خواهند گرفت.');
+          showToast('Appointment request confirmed. A clinic specialist will contact you shortly.');
           bookingForm.reset();
         }});
       }}
@@ -1956,7 +1965,7 @@ export default {component_name};
       if (contactForm) {{
         contactForm.addEventListener('submit', function(e) {{
           e.preventDefault();
-          showToast('درخواست شما با موفقیت ارسال شد. کارشناسان ما به زودی با شما تماس می گیرند.');
+          showToast('Thank you! Your message has been sent successfully.');
           contactForm.reset();
         }});
       }}

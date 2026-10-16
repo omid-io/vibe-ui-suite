@@ -48,19 +48,19 @@ def main():
     # Test Aliases
     for alias, canonical in director.DOMAIN_ALIASES.items():
         spec = director.get_media_spec(alias)
-        expected_spec = director.DOMAIN_MEDIA_SPECS.get(canonical)
+        expected_spec = director.get_media_spec(canonical)
         if spec != expected_spec:
             failures.append(f"Alias '{alias}' did not resolve to canonical spec of '{canonical}'")
-
-    print(f"  [PASS] Verified 24/24 canonical domain media specifications.")
-    print(f"  [PASS] Verified honest synthetic demarcation badge on all media containers.")
-    print(f"  [PASS] Verified {len(director.DOMAIN_ALIASES)} legacy domain aliases.")
 
     if failures:
         print("\n[FAIL] Asset Director Suite Failures:", file=sys.stderr)
         for f in failures:
             print(f"  - {f}", file=sys.stderr)
-        return 1
+        sys.exit(1)
+    else:
+        print(f"  [PASS] Verified 24/24 canonical domain media specifications.")
+        print(f"  [PASS] Verified honest synthetic demarcation badge on all media containers.")
+        print(f"  [PASS] Verified {len(director.DOMAIN_ALIASES)} legacy domain aliases.")
 
     print("\n[SUCCESS] Asset Director test suite passed with 100% compliance.")
     return 0

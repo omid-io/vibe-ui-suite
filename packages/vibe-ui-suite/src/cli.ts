@@ -6,7 +6,7 @@ import * as readline from 'readline';
 import { COMPONENT_REGISTRY } from './registry/components';
 import { VISUAL_CHEMISTRIES } from './index';
 
-const VERSION = '6.1.1';
+const VERSION = '6.2.0';
 
 interface CliOptions {
   force: boolean;
@@ -85,7 +85,7 @@ function safeWriteFile(filePath: string, content: string, options: CliOptions): 
   return { written: true, skipped: false };
 }
 
-const CONTRACT_RULES = `# 👑 Vibe UI Master Design & Architecture Contract (v6.1.1)
+const CONTRACT_RULES = `# 👑 Vibe UI Master Design & Architecture Contract (v6.2.0)
 # Generated via npx vibe-ui-suite init / sync
 
 ## 🏛️ The 5 Master Execution Gates & Autonomous Lazy-Prompt Protocol
@@ -195,7 +195,7 @@ async function handleInstallSkills(options: CliOptions) {
 
 async function handleSync(options: CliOptions) {
   printBanner();
-  console.log('\x1b[36mSynchronizing AI contracts to canonical v6.1.1 Master Architectural Standard...\x1b[0m\n');
+  console.log('\x1b[36mSynchronizing AI contracts to canonical v6.2.0 Master Architectural Standard...\x1b[0m\n');
   const cwd = process.cwd();
   const targetFiles = ['.cursorrules', '.windsurfrules', 'CLAUDE.md'];
   let updatedCount = 0;
@@ -205,7 +205,7 @@ async function handleSync(options: CliOptions) {
     if (fs.existsSync(filePath)) {
       const res = safeWriteFile(filePath, CONTRACT_RULES, { ...options, force: true });
       if (res.written) {
-        console.log(`  \x1b[32m✔\x1b[0m Updated \x1b[1m${filename}\x1b[0m to v6.1.1 contract rules`);
+        console.log(`  \x1b[32m✔\x1b[0m Updated \x1b[1m${filename}\x1b[0m to v6.2.0 contract rules`);
         updatedCount++;
       }
     }
@@ -224,7 +224,7 @@ async function handleSync(options: CliOptions) {
     console.log('  \x1b[33mNo existing AI rule files found in current directory.\x1b[0m');
     console.log('  Run \x1b[32mnpx vibe-ui-suite init\x1b[0m to initialize contracts from scratch.');
   } else {
-    console.log(`\n\x1b[32m✔ Successfully synchronized AI rule file(s) and workspace skills to v6.1.1!\x1b[0m`);
+    console.log(`\n\x1b[32m✔ Successfully synchronized AI rule file(s) and workspace skills to v6.2.0!\x1b[0m`);
   }
 }
 

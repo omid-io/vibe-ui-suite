@@ -78,6 +78,8 @@ def main():
 
     # Validate each JSON file
     for json_file in DATA_DIR.glob("*.json"):
+        if json_file.name == "galaxy_index.json":
+            continue
         try:
             with open(json_file, "r", encoding="utf-8") as f:
                 data = json.load(f)

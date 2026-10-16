@@ -22,7 +22,6 @@ class AssetDirector:
             "role": "clinical_portrait",
             "overlay_style": "subtle_vignette",
             "caption": "Clinical Outcome Visual Slot (Laser Rejuvenation Protocol)",
-            "caption_fa": "فریم نتایج بالینی جوانسازی پوست و پروتکل درمانی",
             "unsplash_url": "https://images.unsplash.com/photo-1629909613654-28e377c37b09?auto=format&fit=crop&w=1200&q=80"
         },
         "fintech_banking": {
@@ -30,7 +29,6 @@ class AssetDirector:
             "role": "capital_portfolio",
             "overlay_style": "subtle_financial_grid",
             "caption": "Smart Capital Allocation & Real-Time Liquidity Chart",
-            "caption_fa": "نمودار تخصیص سرمایه هوشمند و شاخص نقدشوندگی",
             "unsplash_url": "https://images.unsplash.com/photo-1642543492481-44e81e3914a7?auto=format&fit=crop&w=1200&q=80"
         },
         "crypto_trading_web3": {
@@ -38,7 +36,6 @@ class AssetDirector:
             "role": "orderbook_depth",
             "overlay_style": "cyber_matrix_glow",
             "caption": "Aggregated Liquidity Depth & Low-Slippage Routing Matrix",
-            "caption_fa": "عمق نقدینگی صرافی نامتمرکز و ماتریکس مسیریابی",
             "unsplash_url": "https://images.unsplash.com/photo-1639762681485-074b7f938ba0?auto=format&fit=crop&w=1200&q=80"
         },
         "devops_cloud_terminal": {
@@ -46,7 +43,6 @@ class AssetDirector:
             "role": "cluster_topology",
             "overlay_style": "terminal_hud_scanline",
             "caption": "Multi-Region Kubernetes Pod Topology & Egress Flow",
-            "caption_fa": "توپولوژی نودهای ابری کوبرنتیز و مسیرهای شبکه",
             "unsplash_url": "https://images.unsplash.com/photo-1558494949-ef010cbdcc31?auto=format&fit=crop&w=1200&q=80"
         },
         "saas_b2b_enterprise": {
@@ -54,7 +50,6 @@ class AssetDirector:
             "role": "enterprise_dashboard",
             "overlay_style": "corporate_clean_surface",
             "caption": "Unified Enterprise Orchestration & Provisioning Suite",
-            "caption_fa": "داشبورد یکپارچه مدیریت فرآیندهای سازمانی",
             "unsplash_url": "https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=1200&q=80"
         },
         "ai_developer_platform": {
@@ -62,7 +57,6 @@ class AssetDirector:
             "role": "neural_latent_canvas",
             "overlay_style": "deep_space_spectrum",
             "caption": "Transformer Attention Map & Cluster Latency Telemetry",
-            "caption_fa": "نقشه توجه لایه های هوش مصنوعی و تله متری کلاستر GPU",
             "unsplash_url": "https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?auto=format&fit=crop&w=1200&q=80"
         },
         "food_restaurant_cafe": {
@@ -70,7 +64,6 @@ class AssetDirector:
             "role": "sensory_food_editorial",
             "overlay_style": "warm_atmospheric_gradient",
             "caption": "Signature Seasonal Degustation Menu Presentation",
-            "caption_fa": "معرفی منوی فصلی سرآشپز و هنر آشپزی ارگانیک",
             "unsplash_url": "https://images.unsplash.com/photo-1555396273-367ea4eb4db5?auto=format&fit=crop&w=1200&q=80"
         },
         "real_estate_architecture": {
@@ -78,7 +71,6 @@ class AssetDirector:
             "role": "architectural_perspective",
             "overlay_style": "specular_floorplan_tint",
             "caption": "Prime Residential Penthouse Portfolio & Skyline View",
-            "caption_fa": "پلان معماری پنت هاوس اختصاصی و چشم انداز پانوراما",
             "unsplash_url": "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=1200&q=80"
         },
         "healthcare_hospital_medical": {
@@ -86,7 +78,6 @@ class AssetDirector:
             "role": "clinical_diagnostic",
             "overlay_style": "sterile_clinical_soft",
             "caption": "FHIR-Compliant Electronic Health Record & Tele-Triage",
-            "caption_fa": "پرونده الکترونیک سلامت و تریاژ هوشمند بالینی",
             "unsplash_url": "https://images.unsplash.com/photo-1519494026892-80bbd2d6fd0d?auto=format&fit=crop&w=1200&q=80"
         },
         "education_edtech_lms": {
@@ -94,7 +85,6 @@ class AssetDirector:
             "role": "curriculum_interactive",
             "overlay_style": "educational_focus_glow",
             "caption": "Adaptive Learning Graph & Mastery Certification Track",
-            "caption_fa": "مسیر یادگیری انطباقی و گراف تسلط بر مهارت ها",
             "unsplash_url": "https://images.unsplash.com/photo-1523240795612-9a054b0db644?auto=format&fit=crop&w=1200&q=80"
         },
         "creative_portfolio_agency": {
@@ -102,7 +92,6 @@ class AssetDirector:
             "role": "editorial_case_study",
             "overlay_style": "minimal_high_contrast",
             "caption": "Award-Winning Brand Identity & Design System Deliverable",
-            "caption_fa": "نمونه کار هویت بصری جامع و سیستم طراحی برند",
             "unsplash_url": "https://images.unsplash.com/photo-1507238691740-187a5b1d37b8?auto=format&fit=crop&w=1200&q=80"
         },
         "ecommerce_luxury_fashion": {
@@ -110,7 +99,6 @@ class AssetDirector:
             "role": "atelier_lookbook",
             "overlay_style": "editorial_soft_shadow",
             "caption": "Handcrafted Bespoke Atelier Collection • Limited Edition",
-            "caption_fa": "کلکسیون دست دوز آتلیه مد اختصاصی با پارچه های ارگانیک",
             "unsplash_url": "https://images.unsplash.com/photo-1539109136881-3be0616acf4b?auto=format&fit=crop&w=1200&q=80"
         },
         "ecommerce_mass_market": {
@@ -118,7 +106,6 @@ class AssetDirector:
             "role": "product_catalog_showcase",
             "overlay_style": "high_fidelity_storefront",
             "caption": "Dynamic Catalog Showcase with Tiered Volume Discounts",
-            "caption_fa": "کاتالوگ محصولات با اعمال آنی تخفیف های پلکانی",
             "unsplash_url": "https://images.unsplash.com/photo-1441986300917-64674bd600d8?auto=format&fit=crop&w=1200&q=80"
         },
         "media_editorial_magazine": {
@@ -126,7 +113,6 @@ class AssetDirector:
             "role": "longform_journalism",
             "overlay_style": "monochrome_editorial",
             "caption": "Investigative Edition Cover • Independent Journalism",
-            "caption_fa": "گزارش ویژه تحلیلی و روزنامه نگاری مستقل",
             "unsplash_url": "https://images.unsplash.com/photo-1505373877841-8d25f7d46678?auto=format&fit=crop&w=1200&q=80"
         },
         "travel_hospitality_tourism": {
@@ -134,7 +120,6 @@ class AssetDirector:
             "role": "destination_panoramic",
             "overlay_style": "golden_hour_vignette",
             "caption": "Exclusive Coastal Villa Retreat & Private Heliport",
-            "caption_fa": "ویلای ساحلی اختصاصی و چشم انداز طبیعی بکر",
             "unsplash_url": "https://images.unsplash.com/photo-1566073771259-6a8506099945?auto=format&fit=crop&w=1200&q=80"
         },
         "legal_compliance_law": {
@@ -142,7 +127,6 @@ class AssetDirector:
             "role": "statutory_compliance",
             "overlay_style": "sober_navy_tint",
             "caption": "Cross-Border Regulatory Compliance & Audit Assurance",
-            "caption_fa": "ممیزی مقرراتی حقوقی بین المللی و تطبیق استانداردها",
             "unsplash_url": "https://images.unsplash.com/photo-1589829545856-d10d557cf95f?auto=format&fit=crop&w=1200&q=80"
         },
         "gaming_entertainment_streaming": {
@@ -150,7 +134,6 @@ class AssetDirector:
             "role": "gameplay_cinematic",
             "overlay_style": "neon_raytraced_accent",
             "caption": "Real-Time 4K Raytraced Stream & Sub-Millisecond Tickrate",
-            "caption_fa": "استریم با کیفیت 4K و تاخیر شبکه نزدیک به صفر",
             "unsplash_url": "https://images.unsplash.com/photo-1542751371-adc38448a05e?auto=format&fit=crop&w=1200&q=80"
         },
         "automotive_ev_mobility": {
@@ -158,7 +141,6 @@ class AssetDirector:
             "role": "aerodynamic_chassis",
             "overlay_style": "edge_glow_ambient",
             "caption": "Silicon-Carbide 800V Powertrain & Telemetry Matrix",
-            "caption_fa": "شاسی آیرودینامیک و سیستم محرکه پیشرفته ۸۰۰ ولت",
             "unsplash_url": "https://images.unsplash.com/photo-1617814076367-b759c7d7e738?auto=format&fit=crop&w=1200&q=80"
         },
         "logistics_supply_chain": {
@@ -166,7 +148,6 @@ class AssetDirector:
             "role": "supply_telematics",
             "overlay_style": "fleet_corridor_tint",
             "caption": "Autonomous Global Freight Corridor & Fleet Tracking",
-            "caption_fa": "مسیریابی هوشمند ناوگان ترانزیت و نظارت بر بار",
             "unsplash_url": "https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?auto=format&fit=crop&w=1200&q=80"
         },
         "energy_greentech_sustainability": {
@@ -174,7 +155,6 @@ class AssetDirector:
             "role": "renewable_grid",
             "overlay_style": "clean_solar_glow",
             "caption": "Megawatt Solar Array & Battery Energy Storage System (BESS)",
-            "caption_fa": "نیروگاه خورشیدی متصل به شبکه و ذخیره سازی انرژی",
             "unsplash_url": "https://images.unsplash.com/photo-1497435334941-8c899ee9e8e9?auto=format&fit=crop&w=1200&q=80"
         },
         "nonprofit_charity_social": {
@@ -182,7 +162,6 @@ class AssetDirector:
             "role": "humanitarian_impact",
             "overlay_style": "warm_compassion_tint",
             "caption": "On-the-Ground Direct Clean Water Installation & Solar Pump",
-            "caption_fa": "پروژه میدانی دسترسی مستقیم به آب پاک و توسعه پایدار",
             "unsplash_url": "https://images.unsplash.com/photo-1488521787991-ed7bbaae773c?auto=format&fit=crop&w=1200&q=80"
         },
         "personal_branding_creator": {
@@ -190,7 +169,6 @@ class AssetDirector:
             "role": "creator_signature",
             "overlay_style": "editorial_soft_studio",
             "caption": "Curated Thought-Leadership Digest & Audio Studio Edition",
-            "caption_fa": "استودیوی اختصاصی تولید محتوای تخصصی و خبرنامه",
             "unsplash_url": "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=1200&q=80"
         },
         "cybersecurity_identity_auth": {
@@ -198,7 +176,6 @@ class AssetDirector:
             "role": "zero_trust_matrix",
             "overlay_style": "crimson_threat_grid",
             "caption": "Continuous Behavioral Anomaly Detection & Zero-Trust Shield",
-            "caption_fa": "سپر دفاعی احراز هویت بدون گذرواژه و پایش تهدیدات",
             "unsplash_url": "https://images.unsplash.com/photo-1563986768609-322da13575f3?auto=format&fit=crop&w=1200&q=80"
         },
         "general_modern_saas": {
@@ -206,7 +183,6 @@ class AssetDirector:
             "role": "workflow_orchestration",
             "overlay_style": "subtle_gradient",
             "caption": "Autonomous Multi-Agent Workflow Engine & Automation Matrix",
-            "caption_fa": "موتور خودکارسازی فرآیندهای ابری و هوش مصنوعی مولد",
             "unsplash_url": "https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=1200&q=80"
         }
     }
@@ -225,7 +201,6 @@ class AssetDirector:
         "role": "contextual_overview",
         "overlay_style": "subtle_gradient",
         "caption": "Interactive Domain Blueprint Showcase",
-        "caption_fa": "نمای تعاملی معماری و ساختار محصول",
         "unsplash_url": "https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?auto=format&fit=crop&w=1200&q=80"
     }
 
@@ -257,7 +232,7 @@ class AssetDirector:
         """
         spec = self.get_media_spec(domain_id)
         aspect = spec["aspect_ratio"]
-        caption = spec.get("caption_fa" if is_rtl else "caption", spec["caption"])
+        caption = spec["caption"]
         unsplash_url = spec.get("unsplash_url", self.DEFAULT_MEDIA_SPEC["unsplash_url"])
         hero_webp = spec.get("hero_webp", f"assets/curated_webp/{spec.get('canonical_id', 'general_modern_saas')}_hero.webp")
 
@@ -299,4 +274,3 @@ class AssetDirector:
             <p className="text-xs font-semibold text-white/95 leading-snug drop-shadow-sm"><bdi>{caption}</bdi></p>
           </div>
         </div>'''
-

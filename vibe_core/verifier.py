@@ -200,6 +200,7 @@ class VerificationEngine:
         evidence_records = []
         passed = 0
         failed = 0
+        warned = 0
 
         # Parse once with BS4 if available
         soup = _BS4(html_content, "html.parser") if _BS4_AVAILABLE else None
@@ -430,14 +431,57 @@ class VerificationEngine:
                     "threshold": ">= 4.5:1"
                 })
         else:
-            passed += 1
+            warned += 1
             evidence_records.append({
                 "pillar": "WCAG AA Contrast",
                 "check_name": "Body Copy Contrast Ratio",
-                "status": "PASS",
-                "evidence": f"Verified semantic high-contrast design tokens [canvas: {canvas_color or 'theme'}, fg: {body_color or 'theme'}]",
-                "measured_value": "token_verified",
+                "status": "WARN",
+                "evidence": f"Contrast colors unresolved from static CSS [canvas: {canvas_color or 'unresolved'}, fg: {body_color or 'unresolved'}]; runtime browser verification required",
+                "measured_value": "unresolved",
                 "threshold": ">= 4.5:1"
+            })
+
+        # 9. Responsive Mobile Navigation Check
+        has_desktop_nav = bool(re.search(r'<nav[^>]*class=["\'][^"\']*\bhidden\s+md:(?:flex|block)', html_content))
+        has_mobile_counterpart = bool(re.search(r'(?:class=["\'][^"\']*\bmd:hidden|\bid=["\']vibeMobileMenu)', html_content))
+        if has_desktop_nav and not has_mobile_counterpart:
+            failed += 1
+            evidence_records.append({
+                "pillar": "Responsive",
+                "check_name": "Mobile Navigation Counterpart",
+                "status": "FAIL",
+                "evidence": "Desktop nav is hidden below 768px with no md:hidden mobile counterpart",
+                "threshold": "mobile counterpart present"
+            })
+        elif has_desktop_nav:
+            passed += 1
+            evidence_records.append({
+                "pillar": "Responsive",
+                "check_name": "Mobile Navigation Counterpart",
+                "status": "PASS",
+                "evidence": "Responsive mobile navigation counterpart verified",
+                "threshold": "mobile counterpart present"
+            })
+
+        # 10. Asset Media Integrity Check
+        broken_relative_assets = re.findall(r'(?:src|srcset)=["\'](assets/curated_webp/[^"\']+)["\']', html_content)
+        if broken_relative_assets:
+            failed += 1
+            evidence_records.append({
+                "pillar": "Visual Anti-Slop",
+                "check_name": "Asset Media Integrity",
+                "status": "FAIL",
+                "evidence": f"Found unresolved relative asset path(s): {broken_relative_assets[:2]}",
+                "threshold": "zero unbundled relative assets"
+            })
+        else:
+            passed += 1
+            evidence_records.append({
+                "pillar": "Visual Anti-Slop",
+                "check_name": "Asset Media Integrity",
+                "status": "PASS",
+                "evidence": "Zero broken relative asset paths detected; verified asset integrity",
+                "threshold": "zero unbundled relative assets"
             })
 
         overall_status = "PASS" if failed == 0 else "FAIL"
@@ -458,9 +502,10 @@ class VerificationEngine:
                 "WCAG AA Contrast"
             ],
             "checks_summary": {
-                "total": passed + failed,
+                "total": passed + failed + warned,
                 "passed": passed,
-                "failed": failed
+                "failed": failed,
+                "warned": warned
             },
             "evidence_records": evidence_records
         }

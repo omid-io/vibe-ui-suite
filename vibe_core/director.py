@@ -17,19 +17,13 @@ DATA_DIR = ROOT_DIR / "data"
 import unicodedata
 
 def normalize_text(text: str) -> str:
-    """Normalizes Persian and English text for robust semantic matching."""
+    """Normalizes prompt text for robust semantic matching."""
     if not text:
         return ""
     # Unicode NFKC normalization
     text = unicodedata.normalize("NFKC", text)
     text = text.strip().lower()
-    # Normalize Arabic/Persian letter variants & eliminate tatweel / ZWNJ
-    text = text.replace("\u0640", "")  # remove tatweel
-    text = text.replace("\u200c", " ")  # convert ZWNJ to space for token separation
-    text = text.replace("ي", "ی").replace("ك", "ک").replace("ة", "ه")
-    text = text.replace("إ", "ا").replace("أ", "ا")
-    # Remove punctuation while preserving alphanumeric and Persian range
-    text = re.sub(r"[^\w\s\u0600-\u06FF]", " ", text)
+    text = re.sub(r"[^\w\s]", " ", text)
     return " ".join(text.split())
 
 DIVERSE_FALLBACK_ARCHETYPES = [
@@ -137,38 +131,38 @@ class DesignDirector:
             clarification_needed = False
             candidate_directions = self._generate_candidate_directions(matched_domain)
 
-        # Language detection
-        has_persian = bool(re.search(r"[\u0600-\u06FF]", prompt))
-        language = "fa" if has_persian else "en"
-        languages = ["fa", "en"] if has_persian else ["en"]
+        # Script and direction detection (RTL support for Arabic, Hebrew, Persian, Urdu)
+        has_rtl_script = bool(re.search(r"[\u0590-\u08FF]", prompt))
+        language = "fa" if any(c in prompt for c in ["پ", "چ", "گ", "ژ"]) else ("ar" if bool(re.search(r"[\u0600-\u06FF]", prompt)) else ("he" if bool(re.search(r"[\u0590-\u05FF]", prompt)) else "en"))
+        languages = [language, "en"] if has_rtl_script else ["en"]
 
         lower_prompt = prompt.lower()
 
         # Explicit style override detection across 11 paradigms
         style_override = None
-        if any(w in lower_prompt for w in ["claymorphism", "clay", "کلیمورفیسم", "سافت ۳ بعدی"]):
+        if any(w in lower_prompt for w in ["claymorphism", "clay"]):
             style_override = "claymorphism"
-        elif any(w in lower_prompt for w in ["apple", "cupertino", "ios", "macos", "glass", "glassmorphism", "اپل", "شیشه"]):
+        elif any(w in lower_prompt for w in ["apple", "cupertino", "ios", "macos", "glass", "glassmorphism"]):
             style_override = "apple-glass"
-        elif any(w in lower_prompt for w in ["neumorphism", "neumorphic", "soft emboss", "نئومورفیسم"]):
+        elif any(w in lower_prompt for w in ["neumorphism", "neumorphic", "soft emboss"]):
             style_override = "neumorphism"
-        elif any(w in lower_prompt for w in ["neubrutalism", "brutalist", "نئوبروتالیسم"]):
+        elif any(w in lower_prompt for w in ["neubrutalism", "brutalist"]):
             style_override = "neubrutalism"
-        elif any(w in lower_prompt for w in ["bento", "bentogrid", "بنتو"]):
+        elif any(w in lower_prompt for w in ["bento", "bentogrid"]):
             style_override = "bento-grid"
-        elif any(w in lower_prompt for w in ["cyberpunk", "matrix", "neon", "سایبرپانک"]):
+        elif any(w in lower_prompt for w in ["cyberpunk", "matrix", "neon"]):
             style_override = "cyberpunk"
-        elif any(w in lower_prompt for w in ["bauhaus", "باهوس"]):
+        elif any(w in lower_prompt for w in ["bauhaus"]):
             style_override = "bauhaus"
-        elif any(w in lower_prompt for w in ["retrowave", "synthwave", "ریتروویو"]):
+        elif any(w in lower_prompt for w in ["retrowave", "synthwave"]):
             style_override = "retrowave"
-        elif any(w in lower_prompt for w in ["swiss", "editorial", "minimal", "minimalism", "سوئیس", "مینیمال"]):
+        elif any(w in lower_prompt for w in ["swiss", "editorial", "minimal", "minimalism"]):
             style_override = "minimalism"
-        elif any(w in lower_prompt for w in ["y2k", "retro", "ویندوز"]):
+        elif any(w in lower_prompt for w in ["y2k", "retro"]):
             style_override = "y2k-retro"
-        elif any(w in lower_prompt for w in ["stripe", "clean_stripe", "استرایپ"]):
+        elif any(w in lower_prompt for w in ["stripe", "clean_stripe"]):
             style_override = "clean-stripe"
-        elif any(w in lower_prompt for w in ["terminal", "hud", "ترمینال", "هاد"]):
+        elif any(w in lower_prompt for w in ["terminal", "hud"]):
             style_override = "cyberpunk"
 
         # Entropy Diversity: if confidence is low or ambiguity is high and no explicit style is given
@@ -182,10 +176,10 @@ class DesignDirector:
 
         # Strict Light-First Mandate & Anti-Dark-Bias Invariant:
         # Default canvas is ALWAYS Vibrant Light unless:
-        # 1. The prompt explicitly requests dark mode ("dark", "black", "تاریک", "مشکی", "تیره", "شب", "night").
+        # 1. The prompt explicitly requests dark mode ("dark", "black", "night", "darkmode").
         # 2. The chosen style is inherently dark (e.g. linear_dark, cyberpunk, apple-glass, retrowave, bento-grid, data_dense_terminal).
         # In all other cases, theme_strategy must be "light" (with dual_theme dark toggle support).
-        prompt_requests_dark = any(w in lower_prompt for w in ["dark", "black", "تاریک", "مشکی", "تیره", "شب", "night"])
+        prompt_requests_dark = any(w in lower_prompt for w in ["dark", "black", "night", "darkmode", "dark-mode"])
         style_is_inherently_dark = chosen_style in ["linear_dark", "cyberpunk", "apple-glass", "retrowave", "bento-grid", "data_dense_terminal", "cyber_terminal", "midnight_executive", "linear_hud"]
         
         if user_overrides.get("theme_bias"):
@@ -204,9 +198,8 @@ class DesignDirector:
             "Interactive buttons and switches must have real functional React state",
             "Dual-theme support: Light mode as default with elegant dark mode toggle"
         ]
-        if has_persian:
+        if has_rtl_script:
             hard_constraints.append("RTL punctuation and numerical isolation via <bdi>")
-            hard_constraints.append("Vazirmatn / Shabnam Persian web font integration")
 
         # Wireframe-First Thinking: Pre-compute 3-step spatial skeleton
         section_flow = blueprint.get("section_flow", [
@@ -253,7 +246,7 @@ class DesignDirector:
                 "rush_to_deliver": False
             },
             "creative_assets": {
-                "hero_ambient_video_eligible": any(w in lower_prompt for w in ["creative", "showcase", "خلاقانه", "شوکیس", "لندینگ", "hero", "ویدیو", "video", "modern", "مدرن"]),
+                "hero_ambient_video_eligible": any(w in lower_prompt for w in ["creative", "showcase", "hero", "video", "modern"]),
                 "video_loop_params": "autoplay muted loop playsinline opacity-20 pointer-events-none"
             },
             "trend_first_pipeline": {
@@ -265,7 +258,7 @@ class DesignDirector:
             "platform": ["mobile", "tablet", "desktop"],
             "language": language,
             "languages": languages,
-            "language_direction": "rtl" if has_persian else "ltr",
+            "language_direction": "rtl" if has_rtl_script else "ltr",
             "confidence": {
                 "overall": confidence_score,
                 "domain": confidence_score,
@@ -280,7 +273,7 @@ class DesignDirector:
                 "signature_widget": blueprint.get("signature_widget", {}),
                 "layout_flavors": blueprint.get("layout_flavors", []),
                 "ambient_motion": blueprint.get("ambient_motion", {}),
-                "mock_data": blueprint.get("mock_data", {}).get("fa" if has_persian else "en", {})
+                "mock_data": blueprint.get("mock_data", {}).get(language, blueprint.get("mock_data", {}).get("en", {}))
             },
             "wireframe_skeleton": [s["name"] for s in section_flow],
             "research_hook": research_hook,
@@ -307,7 +300,7 @@ class DesignDirector:
         tokens = set(text.split())
         stems = set(tokens)
         for t in tokens:
-            for suffix in ['های', 'ها', 'ان', 'ات', 'ی', 'ین', 'ترین', 'تر', 'مان', 'تان', 'شان', 'ام', 'ات', 'یم', 'ید', 'ند', 'م', 'ت', 'ش', 's', 'es', 'ing', 'ed']:
+            for suffix in ['s', 'es', 'ing', 'ed']:
                 if len(t) > len(suffix) + 2 and t.endswith(suffix):
                     stems.add(t[:-len(suffix)])
 

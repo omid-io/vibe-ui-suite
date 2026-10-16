@@ -36,7 +36,6 @@
       "strong_signals": [
         "کلینیک تخصصی پوست",
         "پوست و مو",
-        "لیزر گلوریا",
         "کاشت ابرو",
         "زیبایی پوست",
         "dermatology",
@@ -83,7 +82,10 @@
         "اعتبار سنجی",
         "treasury",
         "credit score",
-        "accounting"
+        "accounting",
+        "loan",
+        "loans",
+        "lending"
       ],
       "primary_mode": "operate",
       "default_trust_level": "maximum",
@@ -110,7 +112,12 @@
         "treasury dashboard",
         "micro-lending",
         "risk assessment scoring",
-        "bonds"
+        "bonds",
+        "loan",
+        "loans",
+        "lending",
+        "commercial lending",
+        "personal loans"
       ],
       "negative_signals": [
         "ارز دیجیتال",
@@ -316,7 +323,6 @@
         "فاکتور آنلاین",
         "کیف پول",
         "پادکست",
-        "شهرداری",
         "خودرو برقی",
         "بیمارستان"
       ]
@@ -384,7 +390,6 @@
         "refugee",
         "freight",
         "hair",
-        "شهرداری",
         "پادکست"
       ]
     },
@@ -448,7 +453,6 @@
         "خودرو",
         "chalet",
         "اسکی",
-        "مدرسه سازی",
         "کلیدهای رمزنگاری",
         "فاکتور"
       ]
@@ -1037,8 +1041,6 @@
         "supercharger"
       ],
       "negative_signals": [
-        "وانت بار",
-        "حمل اثاثیه",
         "پادکست",
         "مطب",
         "دانش آموزان"
@@ -1078,9 +1080,6 @@
         "رهگیری محموله های بین المللی",
         "رهگیری محموله",
         "انبارداری",
-        "وانت بار و حمل اثاثیه",
-        "وانت بار",
-        "حمل اثاثیه",
         "maritime freight forwarding",
         "container tracking",
         "cold-chain pharmaceutical delivery",
@@ -1174,8 +1173,6 @@
       "strong_signals": [
         "بنیاد نیکوکاری",
         "کودکان بازمانده از تحصیل",
-        "مدرسه سازی در مناطق محروم",
-        "مدرسه سازی",
         "humanitarian refugee aid",
         "clean water foundation",
         "wildlife conservation trust",
@@ -1343,9 +1340,6 @@
         "invoice",
         "municipal",
         "civic services",
-        "خدمات شهروندی",
-        "شهرداری",
-        "پروانه ساختمانی",
         "پروژه‌های تیمی",
         "بردهای کانبان"
       ],
@@ -1371,9 +1365,6 @@
         "team collaboration workspace",
         "invoicing",
         "municipal civic",
-        "خدمات شهروندی",
-        "شهرداری",
-        "پروانه ساختمانی",
         "پروژه‌های تیمی",
         "بردهای کانبان"
       ],

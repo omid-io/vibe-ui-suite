@@ -1,6 +1,6 @@
 {
   "name": "vibe-ui-nextjs-starter",
-  "version": "6.1.1",
+  "version": "6.2.0",
   "private": true,
   "description": "Production-grade Next.js 15 App Router starter showcasing Vibe UI architecture, typed OKLCH tokens, AI primitives, and semantic RTL.",
   "scripts": {

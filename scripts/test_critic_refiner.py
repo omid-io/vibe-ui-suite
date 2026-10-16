@@ -34,14 +34,14 @@ def main():
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <style>
     :root {
-      --accent: #3b82f6;
-      --surface: #ffffff;
-      --text-primary: #111827;
-      --border: #e5e7eb;
-      --canvas: #f9fafb;
+      --accent: oklch(0.65 0.22 260);
+      --surface: oklch(0.99 0.005 240);
+      --text-primary: oklch(0.15 0.02 240);
+      --border: oklch(0.88 0.01 240);
+      --canvas: oklch(0.96 0.005 240);
     }
     body { font-family: 'Inter', sans-serif; }
-    h1 { font-family: 'Inter Display', sans-serif; font-size: var(--text-primary); }
+    h1 { font-family: 'Plus Jakarta Sans', sans-serif; font-size: var(--text-primary); }
     button:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
   </style>
 </head>
@@ -49,6 +49,7 @@ def main():
   <h1 style="color: var(--text-primary);">Clean Page</h1>
   <h2 style="color: var(--accent);">Section</h2>
   <button type="button" style="background: var(--surface); border: 1px solid var(--border);">Action</button>
+  <div class="signature-widget" style="background: var(--surface);">Interactive Core Widget</div>
   <div class="skeleton animate-pulse" style="background: var(--canvas);">Loading...</div>
   <div class="empty" style="color: var(--text-primary);">No records</div>
   <div class="error" style="border: 1px solid var(--border);">Retry connection</div>
@@ -59,7 +60,8 @@ def main():
         failures.append("Test 1 Failed: Clean HTML should pass all hard gates")
     if report1["acceptance_status"] != "ACCEPTED":
         failures.append(f"Test 1 Failed: Expected ACCEPTED, got {report1['acceptance_status']} (score={report1['quality_score']})")
-    print(f"  [PASS] Test 1: Clean HTML passed with Score {report1['quality_score']}/100")
+    else:
+        print(f"  [PASS] Test 1: Clean HTML passed with Score {report1['quality_score']}/100")
 
     # Test 2: Defective HTML (Raw emoji + Missing Viewport)
     defective_html = """<!DOCTYPE html>

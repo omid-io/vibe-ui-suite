@@ -32,8 +32,14 @@ jobs:
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
         run: |
-          node build.js
-          npm publish --access public || echo "[INFO] vibe-ui-suite already published on NPM, proceeding..."
+          OUTPUT=$(npm publish --access public 2>&1) || {
+            if echo "$OUTPUT" | grep -E -q "previously published|EPUBLISHCONFLICT"; then
+              echo "[INFO] vibe-ui-suite version already published on NPM, proceeding..."
+            else
+              echo "[ERROR] NPM publish failed: $OUTPUT" >&2
+              exit 1
+            fi
+          }
 
       - name: Build VS Code & Cursor Extension
         working-directory: packages/vibe-ui-vscode

@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-vibe_cli.py — Vibe UI Suite v6.1.1 Master Unified CLI & Orchestrator
+vibe_cli.py — Vibe UI Suite v6.2.0 Master Unified CLI & Orchestrator
 Production-grade interface connecting Design Director, Recommendation, Genome, Critic, Refiner, Verifier & Visual Auditor.
 """
 
@@ -133,6 +133,12 @@ def cmd_generate(args):
             display_path = out_path.relative_to(ROOT_DIR)
         except ValueError:
             display_path = out_path
+
+        # Validate TSX artifact structural integrity
+        if "export default" not in tsx or tsx.count("{") != tsx.count("}"):
+            print(f"\n[FAIL] TSX artifact failed structural balance check. Saved draft to: {display_path}", file=sys.stderr)
+            sys.exit(1)
+
         print(f"\n[SUCCESS] Completed React 19 TSX pipeline. Artifact saved to: {display_path}")
         return
 
@@ -168,6 +174,10 @@ def cmd_generate(args):
         display_path = out_path.relative_to(ROOT_DIR)
     except ValueError:
         display_path = out_path
+
+    if verification.get("overall_status") != "PASS":
+        print(f"\n[FAIL] Autonomous pipeline failed verification gates ({verification['checks_summary']['failed']} failed). Saved draft to: {display_path}", file=sys.stderr)
+        sys.exit(1)
 
     print(f"\n[SUCCESS] Completed autonomous pipeline. Artifact saved to: {display_path}")
 
@@ -279,8 +289,8 @@ def cmd_assets(args):
         sys.exit(1)
 
 def main():
-    parser = argparse.ArgumentParser(description="Vibe UI Suite v6.1.1 Master CLI")
-    parser.add_argument("--version", action="version", version="Vibe UI Suite v6.1.1")
+    parser = argparse.ArgumentParser(description="Vibe UI Suite v6.2.0 Master CLI")
+    parser.add_argument("--version", action="version", version="Vibe UI Suite v6.2.0")
     subparsers = parser.add_subparsers(dest="command", help="Command to run")
 
     # search
