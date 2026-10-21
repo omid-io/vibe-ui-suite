@@ -15,7 +15,7 @@ set -eo pipefail
 
 AGENT="antigravity"
 TARGET_DIR=""
-VERSION="v3.0.0-alpha.1"
+VERSION="v6.4.1"
 BACKUP=true
 FORCE=false
 TEMP_DIR=""
@@ -51,6 +51,7 @@ if [ -z "$TARGET_DIR" ]; then
         claude)             TARGET_DIR="$(pwd)/.claude/skills" ;;
         cursor)             TARGET_DIR="$(pwd)/.cursor/skills" ;;
         windsurf)           TARGET_DIR="$(pwd)/.windsurf/skills" ;;
+        copilot)            TARGET_DIR="$(pwd)/.agents/skills" ;;
         *)                  TARGET_DIR="$HOME/.gemini/config/skills" ;;
     esac
 fi

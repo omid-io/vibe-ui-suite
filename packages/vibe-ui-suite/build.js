@@ -138,15 +138,18 @@ if (fs.existsSync(v4CssSrc)) {
   fs.copyFileSync(v4CssSrc, path.join(distDir, 'v4.css'));
 }
 
-// Copy canonical skills directory into package root for npm distribution
+// Copy canonical skills directory into package root and .agents/skills
 const rootSkillsDir = path.resolve(__dirname, '../../skills');
 const pkgSkillsDir = path.join(__dirname, 'skills');
+const agentsSkillsDir = path.resolve(__dirname, '../../.agents/skills');
 if (fs.existsSync(rootSkillsDir)) {
-  if (fs.existsSync(pkgSkillsDir)) {
-    fs.rmSync(pkgSkillsDir, { recursive: true, force: true });
-  }
-  fs.cpSync(rootSkillsDir, pkgSkillsDir, { recursive: true });
-  console.log(`📦 Synced ${fs.readdirSync(pkgSkillsDir).length} skills into packages/vibe-ui-suite/skills`);
+  [pkgSkillsDir, agentsSkillsDir].forEach((dest) => {
+    if (fs.existsSync(dest)) {
+      fs.rmSync(dest, { recursive: true, force: true });
+    }
+    fs.cpSync(rootSkillsDir, dest, { recursive: true });
+  });
+  console.log(`📦 Synced ${fs.readdirSync(pkgSkillsDir).length} canonical skills into packages/vibe-ui-suite/skills and .agents/skills`);
 }
 
 console.log('✅ vibe-ui-suite build complete: CLI, ESM, CJS, v4.css, skills, and .d.ts generated in dist/');

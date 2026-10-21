@@ -45,7 +45,7 @@ function printHelp() {
   -f, --force        Overwrite existing files (creates automated .bak backups)
   -y, --yes          Non-interactive mode (use defaults without prompting)
   --chemistry <1-5>  Select visual chemistry in non-interactive mode
-  --editor <1-4>     Select target AI editor in non-interactive mode (1: Cursor, 2: Claude, 3: Windsurf, 4: All)
+  --editor <1-5>     Select target AI editor in non-interactive mode (1: Cursor, 2: Claude, 3: Windsurf, 4: Copilot/Antigravity, 5: All)
   --dry-run          Preview file operations without making actual modifications
   -v, --version      Show CLI version
   -h, --help         Show help menu
@@ -202,7 +202,7 @@ async function handleSync(options: CliOptions) {
   printBanner();
   console.log(`\x1b[36mSynchronizing AI contracts to canonical v${VERSION} Master Architectural Standard...\x1b[0m\n`);
   const cwd = process.cwd();
-  const targetFiles = ['.cursorrules', '.windsurfrules', 'CLAUDE.md'];
+  const targetFiles = ['.cursorrules', '.windsurfrules', 'CLAUDE.md', 'AGENTS.md'];
   let updatedCount = 0;
 
   for (const filename of targetFiles) {
@@ -275,9 +275,10 @@ async function handleInit(options: CliOptions) {
       console.log('  [1] Cursor (.cursorrules - Recommended)');
       console.log('  [2] Claude Code (CLAUDE.md)');
       console.log('  [3] Windsurf (.windsurfrules)');
-      console.log('  [4] All of the above');
+      console.log('  [4] GitHub Copilot & Antigravity (AGENTS.md)');
+      console.log('  [5] All of the above');
 
-      editorChoice = (await prompt(rl, 'Choice [1-4] (default: 1): ')).trim() || '1';
+      editorChoice = (await prompt(rl, 'Choice [1-5] (default: 1): ')).trim() || '1';
     } finally {
       rl.close();
     }
@@ -295,11 +296,11 @@ async function handleInit(options: CliOptions) {
   const cwd = process.cwd();
   const createdFiles: string[] = [];
 
-  if (editorChoice === '1' || editorChoice === '4') {
+  if (editorChoice === '1' || editorChoice === '5') {
     const res = safeWriteFile(path.join(cwd, '.cursorrules'), CONTRACT_RULES, options);
     if (res.written) createdFiles.push('.cursorrules');
   }
-  if (editorChoice === '2' || editorChoice === '4') {
+  if (editorChoice === '2' || editorChoice === '5') {
     const claudePath = path.join(cwd, 'CLAUDE.md');
     if (options.dryRun) {
       console.log('  \x1b[34m[dry-run]\x1b[0m Would update CLAUDE.md');
@@ -311,9 +312,13 @@ async function handleInit(options: CliOptions) {
       if (res.written) createdFiles.push('CLAUDE.md');
     }
   }
-  if (editorChoice === '3' || editorChoice === '4') {
+  if (editorChoice === '3' || editorChoice === '5') {
     const res = safeWriteFile(path.join(cwd, '.windsurfrules'), CONTRACT_RULES, options);
     if (res.written) createdFiles.push('.windsurfrules');
+  }
+  if (editorChoice === '4' || editorChoice === '5') {
+    const res = safeWriteFile(path.join(cwd, 'AGENTS.md'), CONTRACT_RULES, options);
+    if (res.written) createdFiles.push('AGENTS.md');
   }
 
   // 4. Generate Dual-Theme CSS Tokens file safely

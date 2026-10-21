@@ -12,7 +12,7 @@
 - **Light by Default:** The primary default canvas MUST ALWAYS be Light Mode (crisp white/off-white `#ffffff` / `#f8fafc`, luminous neutral surfaces, deep typography with WCAG AAA contrast, and vivid accents).
 - **Dark Mode Exclusion:** Dark canvas is ONLY permitted if:
   1. The user explicitly requests dark mode in their prompt (e.g., "dark", "black", "تاریک", "مشکی"), OR
-  2. The archetype is inherently dark by nature (e.g., `data_dense_terminal`, `cyber_terminal`).
+  2. The archetype or style is inherently dark by nature (e.g., `dense_telemetry_hud`, `data_dense_terminal`, `cyber_terminal`).
 - **Mandatory Dual-Theme Dark Toggle:** In all designs (whether light-first or dark-first), an intuitive, beautifully styled Dark/Light mode toggle button MUST be implemented so the user can fluidly experience both environments.
 
 ### 2. ⏳ Unrushed, Deliberate Craft & Multi-Pass Inspection Loop

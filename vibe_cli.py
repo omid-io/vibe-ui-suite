@@ -29,7 +29,7 @@ from vibe_core.healer import SelfHealingLoop
 from vibe_core.galaxy_engine import GalaxyEngine
 
 def cmd_inspire(args):
-    """Searches or extracts components from the offline Galaxy repository (3000+ items)."""
+    """Searches or extracts components from the Galaxy repository (3,800+ micro-interactions with auto-provisioned offline cache)."""
     engine = GalaxyEngine()
     if not engine.ensure_galaxy_dataset():
         print("[FAIL] Could not access or clone Galaxy repository. Please verify network or clone manually.", file=sys.stderr)
@@ -342,7 +342,7 @@ def main():
     p_assets.add_argument("--output-dir", default=None, help="Output directory for assets")
 
     # inspire (Galaxy offline repository search)
-    p_inspire = subparsers.add_parser("inspire", help="Offline search across 3000+ Uiverse Galaxy micro-interactions (<10ms)")
+    p_inspire = subparsers.add_parser("inspire", help="Sub-10ms search across 3,800+ Uiverse Galaxy micro-interactions (with auto-provisioned offline cache)")
     p_inspire.add_argument("query", nargs="?", default="", help="Search query (e.g. 'neon button', 'loader', 'cyberpunk')")
     p_inspire.add_argument("-c", "--category", help="Category filter (Buttons, Cards, loaders, Inputs, Toggle-switches, etc.)")
     p_inspire.add_argument("-l", "--limit", type=int, default=5, help="Number of results to return (default: 5)")

@@ -22,9 +22,9 @@
 [CmdletBinding()]
 param (
     [string]$TargetDir = "",
-    [ValidateSet("antigravity", "gemini", "claude", "cursor", "windsurf", "custom")]
+    [ValidateSet("antigravity", "gemini", "claude", "cursor", "windsurf", "copilot", "custom")]
     [string]$Agent = "antigravity",
-    [string]$Version = "v3.0.0-alpha.1",
+    [string]$Version = "v6.4.1",
     [switch]$Backup = $true,
     [switch]$Force = $false
 )
@@ -45,6 +45,9 @@ if ([string]::IsNullOrWhiteSpace($TargetDir)) {
         }
         "windsurf" {
             $TargetDir = Join-Path (Get-Location) ".windsurf\skills"
+        }
+        "copilot" {
+            $TargetDir = Join-Path (Get-Location) ".agents\skills"
         }
         Default {
             $TargetDir = Join-Path $env:USERPROFILE ".gemini\config\skills"

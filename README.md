@@ -36,12 +36,12 @@ What happens when you ask a standard AI assistant to generate a frontend compone
 ├──────────────────────────────────────┤      ├──────────────────────────────────────┤
 │ • Generic purple gradient buttons    │      │ • Strict Light-First Canvas & Depth  │
 │ • Low contrast text (3.2:1 FAILS AA) │      │ • Mathematical WCAG 2.2 AAA (18.8:1) │
-│ • Lazy dark-canvas bias              │      │ • Ambient Hero Video & Fluid Loops   │
+│ • Lazy dark-canvas bias              │      │ • Contextual Ambient Hero Loops      │
 │ • Hallucinated raw emojis            │      │ • Crisp Vector SVGs & Clean Icons    │
 │ • Dead toggle cards & static mockups │      │ • Living React 19 TSX + Dual Theme   │
 │ • Rushed, flat, uninspired output    │      │ • Trend-First Harvest (Dribbble/etc) │
 │ • Empty blank or broken image links  │      │ • Curated 24-Domain Unsplash CDN     │
-│ • Broken mobile overflow (375px)     │      │ • Headless Multi-Viewport Screenshots│
+│ • Broken mobile overflow (390px)     │      │ • Headless Multi-Viewport Screenshots│
 │ • Mixed direction text / numbers     │      │ • On-Demand Scoped RTL & BiDi Guard  │
 └──────────────────────────────────────┘      └──────────────────────────────────────┘
 ```
@@ -57,7 +57,7 @@ Instead of relying on fragile prompt engineering ("make this dashboard look clea
 ```text
 User Intent
     ↓
-Intent Expansion (Structured 6-Dimensional Design Contract)
+Intent Expansion (Structured 6-Dimensional Contract • P01-P30 Specs)
     ↓
 Machine-Readable Schema (design-spec.v1.schema.json)
     ↓
@@ -67,7 +67,7 @@ Code Implementation (Next.js 15 / React 19 TSX / Tailwind OKLCH)
     ↓
 Static Evaluation (Schema, luminance math, negative fixtures)
     ↓
-Headless Browser Evaluation (Playwright 375px mobile overflow)
+Headless Browser Evaluation (Playwright 390px mobile overflow)
     ↓
 Verified Output or Actionable Failure Diagnostics
 ```
@@ -87,14 +87,16 @@ flowchart LR
     User["User Prompt<br/>'@vibe-ui-agent ...'"] --> Sensor["Stack Sensor &lt;1ms<br/>(Framework, Tailwind v4, Icons)"]
     Sensor --> Director["Autonomous Director<br/>(Domain, Light/Dark, Archetype)"]
     Director --> AntiSlop["Anti-Slop Compiler<br/>(OKLCH, No Emojis, &lt;bdi&gt; RTL)"]
+    Director --> Galaxy["Galaxy Inspiration Engine<br/>(3,800+ Offline Primitives)"]
     AntiSlop --> ClosedLoop["Closed-Loop Critic<br/>(Headless Chromium &amp; Touch Gate)"]
+    Galaxy --> ClosedLoop
     ClosedLoop --> Output["Production-Grade UI<br/>(Zero Prompt Grind)"]
 ```
 
 ---
 
 ### Workflow 1: Build from Scratch (1-Line Lazy Greenfield)
-Just give your AI assistant (Antigravity, Cursor, Hermes, Claude Code) a single sentence describing what you need:
+Just give your AI assistant (Cursor, Claude Code, Windsurf, Copilot, Antigravity) a single sentence describing what you need:
 
 ```text
 @vibe-ui-agent build a modern, high-conversion landing page for my project.
@@ -109,7 +111,7 @@ Just give your AI assistant (Antigravity, Cursor, Hermes, Claude Code) a single 
 - **Mandatory Pre-Edit Visual Audit:** Captures headless browser screenshot (`screenshots/before.png`) before touching code to diagnose spatial and typographic flaws with multimodal vision.
 - **Architectural Paradigm & Trend Anchoring:** Autonomously selects proven paradigms (Bento Grid, Linear Minimal, Stripe Crisp Light, Swiss Editorial) benchmarked from Dribbble, Mobbin, and Awwwards.
 - **Structural DOM & Spatial Rhythm Overhaul:** Re-architects real layout structures and 8pt spatial rhythm (Zero Cosmetic-Only Patch Invariant).
-- **Living Component & Rich Media Synthesis:** Injects tactile Galaxy micro-interactions (shimmer buttons, tactile switches, cyber loaders), ambient hero loops, and authentic photography.
+- **Living Component & Rich Media Synthesis:** Injects tactile Galaxy micro-interactions (shimmer buttons, tactile switches, cyber loaders), authentic photography, and contextual ambient hero loops for creative portfolios and landing pages.
 - **Silent Table-Stakes (Internal Worker Delegation):** OKLCH color math, WCAG AAA contrast, inline SVGs, and `<bdi>` isolation are handled invisibly by internal workers and never clutter primary deliverables.
 
 ---
@@ -169,7 +171,7 @@ python vibe_cli.py generate "یک سایت کلینیک زیبایی با رزر
 # 2. Generate living React 19 / TypeScript component (.tsx) with stateful hooks:
 python vibe_cli.py generate "A modern developer observability dashboard with latency metrics" -f tsx -o DevDashboard.tsx
 
-# 3. Verify any generated artifact against all 6 production audit gates:
+# 3. Verify any generated artifact against production audit gates:
 python vibe_cli.py verify clinic.html
 ```
 
@@ -237,7 +239,7 @@ npx vibe-ui-suite list
 
 ## 🌌 Galaxy Inspiration Engine (`inspire`)
 
-Tap into a curated offline knowledge graph of over 3,800+ micro-interactions and component patterns directly from your terminal or AI coding agent:
+Tap into a curated knowledge graph of over 3,800+ micro-interactions and component patterns directly from your terminal or AI agent (with auto-provisioned sub-10ms offline cache):
 ```bash
 # Query community components with sub-10ms offline cache:
 python vibe_cli.py inspire "neon cyber button"
@@ -282,8 +284,8 @@ The system is coordinated by a lead architect agent (**`vibe-ui-agent`**) that o
        ▼              ▼               ▼              ▼
 ┌──────────────┐┌──────────────┐┌──────────────┐┌──────────────┐
 │  autonomous- ││   visual-    ││   ui-kit     ││    vibe-     │
-│    intent-   ││  chemistry-  ││  (70+ AI     ││   physics-   │
-│   expander   ││    engine    ││   Recipes)   ││    engine    │
+│    intent-   ││  chemistry-  ││ (18 Templates││   physics-   │
+│   expander   ││    engine    ││  + 50+ Specs)││    engine    │
 └──────┬───────┘└──────┬───────┘└──────┬───────┘└──────┬───────┘
        │               │               │               │
        └───────────────┼───────────────┴───────────────┘
