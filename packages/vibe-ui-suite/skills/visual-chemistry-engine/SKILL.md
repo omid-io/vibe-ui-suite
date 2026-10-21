@@ -1,7 +1,7 @@
 ---
 name: visual-chemistry-engine
 description: The Visual Architecture & Design Chemistry Engine for vibe-ui-agent (v2026). Transforms design specs into production-grade interfaces across 5 distinct visual chemistries (Minimalist SaaS, Luxury Glassmorphism 2.0, Neobrutalism, Swiss Editorial, and Stripe Crisp Light) while enforcing the Anti-Repetition Protocol and Semantic RTL.
-triggers: ["vibe-ui-agent", "mr_ui_designer", "visual chemistry engine", "visual_chemistry_engine", "visual-chemistry", "style engine", "build website", "landing page", "ui style", "design chemistry"]
+triggers: ["vibe-ui-agent", "visual chemistry engine", "visual_chemistry_engine", "visual-chemistry", "style engine", "build website", "landing page", "ui style", "design chemistry"]
 ---
 
 # 🎨 Visual Chemistry Engine (vibe-ui-agent Style Core)

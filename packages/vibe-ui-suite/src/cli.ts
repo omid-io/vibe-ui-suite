@@ -38,6 +38,7 @@ function printHelp() {
   \x1b[32madd <component>\x1b[0m     Add an accessible, AI-native component template to your project
   \x1b[32mlist\x1b[0m               List all available component primitives in the registry
   \x1b[32maudit <file>\x1b[0m        Audit HTML/TSX for WCAG contrast, mobile overflow, emojis & semantics
+  \x1b[32minspire [query]\x1b[0m     Search components & inspiration across registry and Galaxy engine
   \x1b[32mmcp\x1b[0m                 Start standard Model Context Protocol (MCP) JSON-RPC stdio server
 
 \x1b[1mOPTIONS:\x1b[0m
@@ -89,7 +90,7 @@ function safeWriteFile(filePath: string, content: string, options: CliOptions): 
   return { written: true, skipped: false };
 }
 
-const CONTRACT_RULES = `# 👑 Vibe UI Master Design & Architecture Contract (v6.2.0)
+const CONTRACT_RULES = `# 👑 Vibe UI Master Design & Architecture Contract (v${VERSION})
 # Generated via npx vibe-ui-suite init / sync
 
 ## 🏛️ The 5 Master Execution Gates & Autonomous Lazy-Prompt Protocol
@@ -199,7 +200,7 @@ async function handleInstallSkills(options: CliOptions) {
 
 async function handleSync(options: CliOptions) {
   printBanner();
-  console.log('\x1b[36mSynchronizing AI contracts to canonical v6.2.0 Master Architectural Standard...\x1b[0m\n');
+  console.log(`\x1b[36mSynchronizing AI contracts to canonical v${VERSION} Master Architectural Standard...\x1b[0m\n`);
   const cwd = process.cwd();
   const targetFiles = ['.cursorrules', '.windsurfrules', 'CLAUDE.md'];
   let updatedCount = 0;
@@ -209,7 +210,7 @@ async function handleSync(options: CliOptions) {
     if (fs.existsSync(filePath)) {
       const res = safeWriteFile(filePath, CONTRACT_RULES, { ...options, force: true });
       if (res.written) {
-        console.log(`  \x1b[32m✔\x1b[0m Updated \x1b[1m${filename}\x1b[0m to v6.2.0 contract rules`);
+        console.log(`  \x1b[32m✔\x1b[0m Updated \x1b[1m${filename}\x1b[0m to v${VERSION} contract rules`);
         updatedCount++;
       }
     }
@@ -228,7 +229,7 @@ async function handleSync(options: CliOptions) {
     console.log('  \x1b[33mNo existing AI rule files found in current directory.\x1b[0m');
     console.log('  Run \x1b[32mnpx vibe-ui-suite init\x1b[0m to initialize contracts from scratch.');
   } else {
-    console.log(`\n\x1b[32m✔ Successfully synchronized AI rule file(s) and workspace skills to v6.2.0!\x1b[0m`);
+    console.log(`\n\x1b[32m✔ Successfully synchronized AI rule file(s) and workspace skills to v${VERSION}!\x1b[0m`);
   }
 }
 
@@ -482,6 +483,47 @@ function handleList() {
   console.log('');
 }
 
+function handleInspire(query?: string) {
+  printBanner();
+  const q = (query || '').toLowerCase().trim();
+  console.log(`\x1b[1m🔍 Inspiration Search:\x1b[0m ${q ? `"${q}"` : 'All Components'}\n`);
+
+  const results = Object.values(COMPONENT_REGISTRY).filter((c) => {
+    if (!q) return true;
+    return (
+      c.name.toLowerCase().includes(q) ||
+      c.description.toLowerCase().includes(q) ||
+      c.category.toLowerCase().includes(q)
+    );
+  });
+
+  if (results.length > 0) {
+    console.log(`\x1b[36mFound ${results.length} matching component primitive(s) in local registry:\x1b[0m\n`);
+    results.forEach((c) => {
+      console.log(`  \x1b[32m✔\x1b[0m \x1b[1m${c.name.padEnd(22)}\x1b[0m \x1b[90m[${c.category}]\x1b[0m`);
+      console.log(`    \x1b[90m${c.description}\x1b[0m`);
+      console.log(`    \x1b[33m→ npx vibe-ui-suite add ${c.name}\x1b[0m\n`);
+    });
+  } else {
+    console.log(`  \x1b[33mNo direct match in local component registry for "${q}".\x1b[0m`);
+    console.log(`  Run \x1b[32mnpx vibe-ui-suite list\x1b[0m to view all available components.\n`);
+  }
+
+  const vibeCliPath = path.resolve(__dirname, '../../../vibe_cli.py');
+  if (fs.existsSync(vibeCliPath) && q) {
+    try {
+      const { execSync } = require('child_process');
+      const out = execSync(`python "${vibeCliPath}" inspire "${q}"`, { encoding: 'utf-8', timeout: 5000 });
+      if (out && out.trim()) {
+        console.log(`\x1b[36m🌌 Uiverse Galaxy Inspiration Bridge:\x1b[0m\n`);
+        console.log(out);
+      }
+    } catch {
+      // Quiet fallback
+    }
+  }
+}
+
 async function main() {
   const rawArgs = process.argv.slice(2);
   const force = rawArgs.includes('--force') || rawArgs.includes('-f');
@@ -534,6 +576,9 @@ async function main() {
     case 'audit':
     case 'verify':
       handleAudit(filteredArgs[1]);
+      break;
+    case 'inspire':
+      handleInspire(filteredArgs[1]);
       break;
     case 'mcp':
       startMcpServer();

@@ -26,13 +26,13 @@
 
 ---
 
-## ⚖️ Visual Impact: Vanilla AI Slop vs. Vibe UI v6.2.0 Masterpiece
+## ⚖️ Visual Impact: Vanilla AI Slop vs. Vibe UI v6.4.1 Masterpiece
 
 What happens when you ask a standard AI assistant to generate a frontend component?
 
 ```text
 ┌──────────────────────────────────────┐  vs  ┌──────────────────────────────────────┐
-│ ❌ VANILLA AI SLOP                   │      │ ✨ VIBE UI v6.2.0 MASTERPIECE        │
+│ ❌ VANILLA AI SLOP                   │      │ ✨ VIBE UI v6.4.1 MASTERPIECE        │
 ├──────────────────────────────────────┤      ├──────────────────────────────────────┤
 │ • Generic purple gradient buttons    │      │ • Strict Light-First Canvas & Depth  │
 │ • Low contrast text (3.2:1 FAILS AA) │      │ • Mathematical WCAG 2.2 AAA (18.8:1) │
@@ -40,7 +40,7 @@ What happens when you ask a standard AI assistant to generate a frontend compone
 │ • Hallucinated raw emojis            │      │ • Crisp Vector SVGs & Clean Icons    │
 │ • Dead toggle cards & static mockups │      │ • Living React 19 TSX + Dual Theme   │
 │ • Rushed, flat, uninspired output    │      │ • Trend-First Harvest (Dribbble/etc) │
-│ • Empty blank or broken image links  │      │ • Curated 24-Domain Unsplash CDN CDN │
+│ • Empty blank or broken image links  │      │ • Curated 24-Domain Unsplash CDN     │
 │ • Broken mobile overflow (375px)     │      │ • Headless Multi-Viewport Screenshots│
 │ • Mixed direction text / numbers     │      │ • On-Demand Scoped RTL & BiDi Guard  │
 └──────────────────────────────────────┘      └──────────────────────────────────────┘
@@ -72,7 +72,7 @@ Headless Browser Evaluation (Playwright 375px mobile overflow)
 Verified Output or Actionable Failure Diagnostics
 ```
 
-> **Day-One Transparency**: Vibe UI Suite is at `v6.1.0` (built upon `v6.0.0` **The Two Golden Pillars: Trend Inspiration & Living Visual Feedback Loop** with the **Living Micro-Interactions & Galaxy Inspiration Standard**). Anchored on Pillar 1 (deep trend research across Mobbin, Dribbble, Figma Community, and Awwwards with Vibrant Light Mode default) and Pillar 2 (deterministic Playwright multi-viewport screenshot verification across Desktop 1440px and Mobile 390px with zero orphaned processes), Galaxy Inspiration Engine (3,800+ community elements with offline caching), Curated High-Res Unsplash Asset Vault covering all 24 canonical domains with tested HTTP 200 CDN URLs, clean 9-pillar component catalog with living interactive micro-interactions (`shimmer-button`, `cyber-loader`, `holographic-card`, `tactile-switch`, `glow-input`), living React 19 TSX generation (`-f tsx`), and synchronized cross-platform tooling across npm, Python CLI, and VS Code. Constructive criticism, issues, and contributions from frontend engineers and AI researchers are warmly welcomed.
+> **Day-One Transparency**: Vibe UI Suite is at `v6.4.1` (built upon `v6.0.0` **The Two Golden Pillars: Trend Inspiration & Living Visual Feedback Loop** with the **Living Micro-Interactions, Galaxy Inspiration Standard, Section Blocks & MCP Server**). Anchored on Pillar 1 (deep trend research across Mobbin, Dribbble, Figma Community, and Awwwards with Vibrant Light Mode default) and Pillar 2 (deterministic Playwright multi-viewport screenshot verification across Desktop 1440px and Mobile 390px with zero orphaned processes), Galaxy Inspiration Engine (3,800+ community elements with offline caching), Curated High-Res Unsplash Asset Vault covering all 24 canonical domains with tested HTTP 200 CDN URLs, clean component catalog with living interactive micro-interactions (`shimmer-button`, `cyber-loader`, `holographic-card`, `tactile-switch`, `glow-input`), full section blocks (`bento-hero`, `pricing-matrix`, `feature-grid`, `glass-navbar`, `conversion-cta`, `faq-accordion`), living React 19 TSX generation (`-f tsx`), zero-dependency TypeScript audit (`audit`), standard MCP server (`mcp`), and synchronized cross-platform tooling across npm, Python CLI, and VS Code. Constructive criticism, issues, and contributions from frontend engineers and AI researchers are warmly welcomed.
 
 ---
 
@@ -207,12 +207,26 @@ npx vibe-ui-suite add telemetry-hud
 npx vibe-ui-suite add contrast-badge
 npx vibe-ui-suite add theme-toggle
 
-# Living Micro-Interactions (v6.1.0):
+# Full Section Blocks (v6.4.0):
+npx vibe-ui-suite add bento-hero
+npx vibe-ui-suite add pricing-matrix
+npx vibe-ui-suite add feature-grid
+npx vibe-ui-suite add glass-navbar
+npx vibe-ui-suite add conversion-cta
+npx vibe-ui-suite add faq-accordion
+
+# Living Micro-Interactions:
 npx vibe-ui-suite add shimmer-button
 npx vibe-ui-suite add cyber-loader
 npx vibe-ui-suite add holographic-card
 npx vibe-ui-suite add tactile-switch
 npx vibe-ui-suite add glow-input
+
+# Pure TypeScript Zero-Python Audit:
+npx vibe-ui-suite audit src/App.tsx
+
+# Run Model Context Protocol (MCP) Server:
+npx vibe-ui-suite mcp
 ```
 List all available registry components:
 ```bash
@@ -260,7 +274,7 @@ The system is coordinated by a lead architect agent (**`vibe-ui-agent`**) that o
                               │
                               ▼
                ┌──────────────────────────────┐
-               │       vibe-ui-agent         │
+               │        vibe-ui-agent         │
                │  (Lead Frontend Architect)   │
                └──────────────┬───────────────┘
                               │

@@ -162,6 +162,52 @@ def main():
             else:
                 print(f"  [OK] {check_dir_name}: Contains all 6 Vibe UI skills")
 
+    # 9. Validate vibe_cli.py Version
+    vibe_cli_p = ROOT_DIR / "vibe_cli.py"
+    if vibe_cli_p.exists():
+        content = vibe_cli_p.read_text(encoding="utf-8")
+        if f'version="Vibe UI Suite v{canonical_version}"' not in content:
+            errors.append(f"vibe_cli.py version does not match canonical '{canonical_version}'")
+        else:
+            print(f"  [OK] vibe_cli.py: Version {canonical_version} verified")
+
+    # 10. Validate vibe_core/__init__.py __version__
+    core_init_p = ROOT_DIR / "vibe_core" / "__init__.py"
+    if core_init_p.exists():
+        content = core_init_p.read_text(encoding="utf-8")
+        if f'__version__ = "{canonical_version}"' not in content:
+            errors.append(f"vibe_core/__init__.py __version__ does not match canonical '{canonical_version}'")
+        else:
+            print(f"  [OK] vibe_core/__init__.py: __version__ {canonical_version} verified")
+
+    # 11. Validate HTML Showcases (index.html, showcase.html)
+    for html_name in ["index.html", "showcase.html"]:
+        html_p = ROOT_DIR / html_name
+        if html_p.exists():
+            content = html_p.read_text(encoding="utf-8")
+            if f"v{canonical_version}" not in content:
+                errors.append(f"{html_name} title/engine does not reference v{canonical_version}")
+            if "exceeding AAA standard of 4.5:1" in content:
+                errors.append(f"{html_name} contains invalid WCAG contradiction ('exceeding AAA standard of 4.5:1')")
+            else:
+                print(f"  [OK] {html_name}: Version v{canonical_version} and WCAG definitions verified")
+
+    # 12. Validate Zero-Legacy-Agent Invariant in active skills and AGENT.md
+    legacy_patterns = ["mr-ui-designer", "mr_ui_designer"]
+    for skill_name in required_skills:
+        skill_file = ROOT_DIR / "skills" / skill_name / "SKILL.md"
+        if skill_file.exists():
+            s_text = skill_file.read_text(encoding="utf-8").lower()
+            for lp in legacy_patterns:
+                if lp in s_text:
+                    errors.append(f"Legacy identifier '{lp}' found in skills/{skill_name}/SKILL.md")
+    if agent_path.exists():
+        a_text = agent_path.read_text(encoding="utf-8").lower()
+        for lp in legacy_patterns:
+            if lp in a_text:
+                errors.append(f"Legacy identifier '{lp}' found in vibe-ui-agent/AGENT.md")
+    print("  [OK] Zero-Legacy-Agent Invariant: No legacy agent identifiers found in active skills")
+
     if errors:
         print("\n[FAIL] Synchronization & Contract Drift Detected:", file=sys.stderr)
         for err in errors:
