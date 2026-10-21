@@ -5,6 +5,25 @@ All notable changes to the **Vibe UI Skills** repository are documented in this 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [6.4.0] - 2026-10-21
+
+### Model Context Protocol (MCP) Server, Full Section Blocks & Pure TS Audit CLI
+- **Standard Model Context Protocol (MCP) Server (`packages/vibe-ui-suite/src/mcp.ts`)**:
+  - Implemented zero-dependency JSON-RPC 2.0 stdio server (`npx vibe-ui-suite mcp`) providing AI coding agents (Claude Code, Cursor, Windsurf, Antigravity) with direct programmatic tools.
+  - 5 core production tools: `vibe_get_palette`, `vibe_list_components`, `vibe_get_component`, `vibe_audit_code`, and `vibe_expand_intent`.
+- **Full Section Blocks Registry Expansion (`packages/vibe-ui-suite/src/registry/components.ts`)**:
+  - Added 6 production-grade full-page section blocks in React 19 + Tailwind v4 with 0 external dependencies: `bento-hero`, `pricing-matrix`, `feature-grid`, `glass-navbar`, `conversion-cta`, and `faq-accordion`.
+  - Accessible via `npx vibe-ui-suite add <block>` and categorized in `npx vibe-ui-suite list`.
+- **Pure TypeScript Audit & Verification CLI (`packages/vibe-ui-suite/src/audit.ts`, `src/cli.ts`)**:
+  - Pure Node.js / TypeScript verification engine (`npx vibe-ui-suite audit <file>`) with 0 Python runtime dependency.
+  - Mathematical WCAG relative luminance & contrast ratio calculation (>= 4.5:1).
+  - Detection of non-semantic clickable elements, missing `alt` attributes, unlabelled form inputs, raw Unicode emojis (anti-slop rule), fixed-width mobile overflow risks, and mixed RTL `<bdi>` isolation.
+  - Exits with exit code 1/0 for seamless CI/CD and AI agent closed-loop pipelines.
+- **Quality Gates Certification**:
+  - 100% of 16 test suites passed in `scripts/run_all_tests.py` (0 regressions).
+
+---
+
 ## [6.3.0] - 2026-10-17
 
 ### Autonomous Maturity & Lazy-Prompt Architecture — Multi-Registry Extension Sync

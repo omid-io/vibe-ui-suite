@@ -3,6 +3,15 @@
 All notable changes to the **Vibe UI (VS Code, Cursor & Open-VSX)** extension will be documented in this file.
 This project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [6.4.0] — 2026-10-21
+
+### Added & Improved
+- **Model Context Protocol (MCP) Integration:** Direct access to Vibe UI MCP server tools (`vibe_get_palette`, `vibe_list_components`, `vibe_get_component`, `vibe_audit_code`, `vibe_expand_intent`).
+- **Section Blocks Library:** Added 6 production-grade full page architecture blocks (`bento-hero`, `pricing-matrix`, `feature-grid`, `glass-navbar`, `conversion-cta`, `faq-accordion`).
+- **Pure TypeScript Audit:** Seamless integration with `npx vibe-ui-suite audit` for real-time file validation without Python.
+
+---
+
 ## [6.3.0] — 2026-10-17
 
 ### Added & Improved

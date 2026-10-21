@@ -1,6 +1,6 @@
 # 🏛️ Vibe UI Suite — System Architecture & Data Contract Specification
 
-**Version:** 6.3.0 (Autonomous Maturity & Clean Architecture Extension Sync)  
+**Version:** 6.4.0 (Model Context Protocol & Full Section Blocks Architecture)  
 **Status:** Feature Freeze (Production Certified)  
 **Document Type:** Core Architectural Specification  
 **Machine Contract Reference:** [`schemas/design-spec.v1.schema.json`](schemas/design-spec.v1.schema.json)  

@@ -1,12 +1,12 @@
 {
   "$schema": "./schemas/version-manifest.schema.json",
-  "version": "6.3.0",
-  "codename": "Autonomous Maturity & Clean Architecture Extension Sync",
+  "version": "6.4.0",
+  "codename": "Model Context Protocol & Full Section Blocks Architecture",
   "release_channel": "stable",
   "packages": {
-    "vibe-ui-suite": "6.3.0",
-    "vibe-ui-vscode": "6.3.0",
-    "vibe-ui-nextjs-starter": "6.3.0"
+    "vibe-ui-suite": "6.4.0",
+    "vibe-ui-vscode": "6.4.0",
+    "vibe-ui-nextjs-starter": "6.4.0"
   },
   "schemas": {
     "intent_contract": "v1",
@@ -23,5 +23,5 @@
     "nextjs": ">=15.0.0",
     "react": ">=19.0.0"
   },
-  "last_updated": "2026-10-17"
+  "last_updated": "2026-10-21"
 }

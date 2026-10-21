@@ -7,7 +7,7 @@ export interface ComponentTemplate {
   name: string;
   filename: string;
   description: string;
-  category: 'ai-contracts' | 'living-micro-interactions';
+  category: 'ai-contracts' | 'living-micro-interactions' | 'section-blocks';
   code: string;
 }
 
@@ -1009,5 +1009,819 @@ export function SpecularCard({
 }
 `,
   },
+
+  // ─── Section Blocks (Full Page Composable Architecture) ─────────────
+  'bento-hero': {
+    name: 'bento-hero',
+    filename: 'BentoHero.tsx',
+    category: 'section-blocks',
+    description: 'Asymmetric 12-column Bento Grid hero section with live SVG sparkline, action pills & specular highlights',
+    code: `'use client';
+
+import React, { useState } from 'react';
+
+export interface BentoHeroProps {
+  badge?: string;
+  title?: string;
+  highlightedText?: string;
+  description?: string;
+  primaryActionText?: string;
+  secondaryActionText?: string;
+  metricValue?: string;
+  metricLabel?: string;
+  className?: string;
+}
+
+export function BentoHero({
+  badge = 'Next-Gen Interface Protocol',
+  title = 'Autonomous Design Meets',
+  highlightedText = 'Kinetic Precision',
+  description = 'Deterministic design contracts, OKLCH perceptual tokens, and responsive micro-interactions engineered for the modern web.',
+  primaryActionText = 'Deploy Architecture',
+  secondaryActionText = 'Explore Sandbox',
+  metricValue = '$12,480.90',
+  metricLabel = 'Realtime Protocol Yield',
+  className = '',
+}: BentoHeroProps) {
+  const [activeTab, setActiveTab] = useState<'vault' | 'stats'>('vault');
+
+  return (
+    <section className={\`relative w-full overflow-hidden px-4 py-16 md:py-24 lg:py-32 font-sans text-slate-900 dark:text-slate-100 \${className}\`}>
+      {/* Ambient background glow */}
+      <div className="pointer-events-none absolute left-1/2 top-1/4 -translate-x-1/2 -translate-y-1/2 h-96 w-96 rounded-full bg-indigo-500/10 blur-[120px] dark:bg-indigo-500/20" />
+
+      <div className="relative mx-auto max-w-7xl">
+        <div className="grid grid-cols-1 gap-12 lg:grid-cols-12 lg:items-center">
+          {/* Left Column: Hero Copy (Span 7) */}
+          <div className="flex flex-col items-start lg:col-span-7">
+            {badge && (
+              <div className="mb-6 inline-flex items-center gap-2 rounded-full border border-indigo-500/20 bg-indigo-50/50 px-3 py-1 text-xs font-semibold uppercase tracking-wider text-indigo-600 backdrop-blur-sm dark:bg-indigo-950/40 dark:text-indigo-400">
+                <span className="h-1.5 w-1.5 rounded-full bg-indigo-500 animate-pulse" />
+                {badge}
+              </div>
+            )}
+
+            <h1 className="text-4xl font-extrabold tracking-tight sm:text-5xl md:text-6xl lg:text-7xl leading-[1.1]">
+              {title}{' '}
+              <span className="bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 bg-clip-text text-transparent">
+                {highlightedText}
+              </span>
+            </h1>
+
+            <p className="mt-6 max-w-2xl text-lg text-slate-600 dark:text-slate-400 leading-relaxed sm:text-xl">
+              {description}
+            </p>
+
+            <div className="mt-8 flex flex-wrap items-center gap-4">
+              <button
+                type="button"
+                className="inline-flex items-center justify-center rounded-xl bg-indigo-600 px-6 py-3.5 text-sm font-semibold text-white shadow-lg shadow-indigo-600/25 transition-all duration-200 hover:bg-indigo-500 hover:shadow-indigo-600/40 focus:outline-none focus:ring-2 focus:ring-indigo-500/50 active:scale-[0.98]"
+              >
+                {primaryActionText}
+                <svg className="ml-2 h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 5l7 7m0 0l-7 7m7-7H3" />
+                </svg>
+              </button>
+
+              <button
+                type="button"
+                className="inline-flex items-center justify-center rounded-xl border border-slate-300 bg-white/70 px-6 py-3.5 text-sm font-semibold text-slate-700 backdrop-blur-md transition-all duration-200 hover:bg-slate-100 hover:text-slate-900 focus:outline-none focus:ring-2 focus:ring-slate-400/50 active:scale-[0.98] dark:border-slate-800 dark:bg-slate-900/60 dark:text-slate-300 dark:hover:bg-slate-800"
+              >
+                {secondaryActionText}
+              </button>
+            </div>
+          </div>
+
+          {/* Right Column: Polymorphic Bento Matrix (Span 5) */}
+          <div className="w-full lg:col-span-5">
+            <div className="relative rounded-3xl border border-slate-200/80 bg-white/80 p-6 shadow-2xl backdrop-blur-xl dark:border-slate-800/80 dark:bg-slate-900/80 sm:p-8">
+              {/* Card Header & Switcher */}
+              <div className="flex items-center justify-between border-b border-slate-100 pb-5 dark:border-slate-800">
+                <div>
+                  <span className="text-xs font-semibold uppercase tracking-wider text-slate-400 dark:text-slate-500">
+                    Live Telemetry
+                  </span>
+                  <div className="text-2xl font-bold tracking-tight text-slate-900 dark:text-white">
+                    {metricValue}
+                  </div>
+                </div>
+
+                <div className="flex rounded-xl bg-slate-100 p-1 dark:bg-slate-800">
+                  <button
+                    type="button"
+                    onClick={() => setActiveTab('vault')}
+                    className={\`rounded-lg px-3 py-1 text-xs font-medium transition-colors \${
+                      activeTab === 'vault'
+                        ? 'bg-white text-slate-900 shadow-sm dark:bg-slate-700 dark:text-white'
+                        : 'text-slate-500 hover:text-slate-900 dark:text-slate-400 dark:hover:text-white'
+                    }\`}
+                  >
+                    Vault
+                  </button>
+                  <button
+                    type="button"
+                    onClick={() => setActiveTab('stats')}
+                    className={\`rounded-lg px-3 py-1 text-xs font-medium transition-colors \${
+                      activeTab === 'stats'
+                        ? 'bg-white text-slate-900 shadow-sm dark:bg-slate-700 dark:text-white'
+                        : 'text-slate-500 hover:text-slate-900 dark:text-slate-400 dark:hover:text-white'
+                    }\`}
+                  >
+                    Stats
+                  </button>
+                </div>
+              </div>
+
+              {/* Dynamic SVG Sparkline */}
+              <div className="my-6">
+                <div className="mb-2 flex items-center justify-between text-xs text-slate-500">
+                  <span>{metricLabel}</span>
+                  <span className="font-semibold text-emerald-500">+18.4% APY</span>
+                </div>
+                <div className="h-28 w-full overflow-hidden rounded-xl bg-slate-50 p-2 dark:bg-slate-950/50">
+                  <svg className="h-full w-full" viewBox="0 0 300 80" preserveAspectRatio="none">
+                    <defs>
+                      <linearGradient id="bentoGradient" x1="0" y1="0" x2="0" y2="1">
+                        <stop offset="0%" stopColor="#6366f1" stopOpacity="0.4" />
+                        <stop offset="100%" stopColor="#6366f1" stopOpacity="0.0" />
+                      </linearGradient>
+                    </defs>
+                    <path
+                      d="M0,60 C40,55 70,30 110,35 C150,40 180,15 220,20 C260,25 280,5 300,8 L300,80 L0,80 Z"
+                      fill="url(#bentoGradient)"
+                    />
+                    <path
+                      d="M0,60 C40,55 70,30 110,35 C150,40 180,15 220,20 C260,25 280,5 300,8"
+                      fill="none"
+                      stroke="#6366f1"
+                      strokeWidth="2.5"
+                    />
+                  </svg>
+                </div>
+              </div>
+
+              {/* Status Chips */}
+              <div className="grid grid-cols-2 gap-3 pt-2">
+                <div className="flex items-center gap-2 rounded-xl border border-slate-100 bg-slate-50/50 p-3 dark:border-slate-800 dark:bg-slate-950/40">
+                  <span className="h-2 w-2 rounded-full bg-emerald-500" />
+                  <span className="text-xs font-medium text-slate-600 dark:text-slate-300">60 FPS Smooth</span>
+                </div>
+                <div className="flex items-center gap-2 rounded-xl border border-slate-100 bg-slate-50/50 p-3 dark:border-slate-800 dark:bg-slate-950/40">
+                  <span className="h-2 w-2 rounded-full bg-indigo-500" />
+                  <span className="text-xs font-medium text-slate-600 dark:text-slate-300">WCAG AAA Valid</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}
+`,
+  },
+
+  'pricing-matrix': {
+    name: 'pricing-matrix',
+    filename: 'PricingMatrix.tsx',
+    category: 'section-blocks',
+    description: 'Tiered responsive 3-column pricing matrix with monthly/annual discount toggle & highlighted popular tier',
+    code: `'use client';
+
+import React, { useState } from 'react';
+
+export interface PricingTier {
+  id: string;
+  name: string;
+  description: string;
+  priceMonthly: number;
+  priceAnnual: number;
+  features: string[];
+  isPopular?: boolean;
+  ctaText?: string;
+}
+
+export interface PricingMatrixProps {
+  title?: string;
+  subtitle?: string;
+  annualDiscountLabel?: string;
+  tiers?: PricingTier[];
+  className?: string;
+}
+
+const DEFAULT_TIERS: PricingTier[] = [
+  {
+    id: 'starter',
+    name: 'Developer Community',
+    description: 'Essential tokens and components for independent hackers & open source builders.',
+    priceMonthly: 0,
+    priceAnnual: 0,
+    features: ['11 Visual Paradigms', 'React 19 & Tailwind v4 Primitives', 'WCAG AA Auto-Check', 'Community Discord Support'],
+    ctaText: 'Get Started Free',
+  },
+  {
+    id: 'pro',
+    name: 'Pro Sovereign',
+    description: 'Autonomous AI design tokens, full micro-interactions and unlimited code audits.',
+    priceMonthly: 29,
+    priceAnnual: 24,
+    isPopular: true,
+    features: [
+      'Everything in Community',
+      'Full 12-Column Bento Primitives',
+      'Continuous Headless Playwright Audits',
+      'Zero-JS Height Transitions',
+      'Priority Agent Skills Sync',
+    ],
+    ctaText: 'Start Pro Trial',
+  },
+  {
+    id: 'enterprise',
+    name: 'Protocol Enterprise',
+    description: 'Dedicated design systems, custom archetype compilers, and 24/7 SLA.',
+    priceMonthly: 99,
+    priceAnnual: 79,
+    features: [
+      'Everything in Pro Sovereign',
+      'Custom Design Token Compilers',
+      'Enterprise SSO & Team Workspaces',
+      'Custom LLM Fine-Tuned Models',
+      'Dedicated Design Architect',
+    ],
+    ctaText: 'Contact Architecture Team',
+  },
+];
+
+export function PricingMatrix({
+  title = 'Predictable, Transparent Pricing',
+  subtitle = 'Choose the architectural capacity that scales with your autonomous engineering velocity.',
+  annualDiscountLabel = 'Save 20%',
+  tiers = DEFAULT_TIERS,
+  className = '',
+}: PricingMatrixProps) {
+  const [isAnnual, setIsAnnual] = useState(true);
+
+  return (
+    <section className={\`relative w-full px-4 py-16 md:py-24 font-sans text-slate-900 dark:text-slate-100 \${className}\`}>
+      <div className="mx-auto max-w-7xl">
+        {/* Header & Toggle */}
+        <div className="text-center max-w-3xl mx-auto">
+          <h2 className="text-3xl font-extrabold tracking-tight sm:text-4xl md:text-5xl">
+            {title}
+          </h2>
+          <p className="mt-4 text-base text-slate-600 dark:text-slate-400 sm:text-lg">
+            {subtitle}
+          </p>
+
+          {/* Billing Switcher */}
+          <div className="mt-8 inline-flex items-center gap-3 rounded-full border border-slate-200 bg-slate-50 p-1.5 dark:border-slate-800 dark:bg-slate-900">
+            <button
+              type="button"
+              onClick={() => setIsAnnual(false)}
+              className={\`rounded-full px-4 py-2 text-sm font-semibold transition-all \${
+                !isAnnual
+                  ? 'bg-white text-slate-900 shadow-md dark:bg-slate-800 dark:text-white'
+                  : 'text-slate-600 hover:text-slate-900 dark:text-slate-400 dark:hover:text-white'
+              }\`}
+            >
+              Monthly
+            </button>
+            <button
+              type="button"
+              onClick={() => setIsAnnual(true)}
+              className={\`inline-flex items-center gap-2 rounded-full px-4 py-2 text-sm font-semibold transition-all \${
+                isAnnual
+                  ? 'bg-white text-slate-900 shadow-md dark:bg-slate-800 dark:text-white'
+                  : 'text-slate-600 hover:text-slate-900 dark:text-slate-400 dark:hover:text-white'
+              }\`}
+            >
+              <span>Annual</span>
+              <span className="rounded-full bg-emerald-100 px-2 py-0.5 text-[11px] font-bold text-emerald-700 dark:bg-emerald-950 dark:text-emerald-300">
+                {annualDiscountLabel}
+              </span>
+            </button>
+          </div>
+        </div>
+
+        {/* 3-Column Tier Grid */}
+        <div className="mt-16 grid grid-cols-1 gap-8 lg:grid-cols-3 items-stretch">
+          {tiers.map((tier) => {
+            const price = isAnnual ? tier.priceAnnual : tier.priceMonthly;
+
+            return (
+              <div
+                key={tier.id}
+                className={\`relative flex flex-col justify-between rounded-3xl p-8 transition-all duration-300 \${
+                  tier.isPopular
+                    ? 'border-2 border-indigo-500 bg-white/90 shadow-2xl shadow-indigo-500/10 dark:bg-slate-900/90 dark:border-indigo-500 lg:-translate-y-2'
+                    : 'border border-slate-200/80 bg-white/60 shadow-lg dark:border-slate-800/80 dark:bg-slate-900/60'
+                }\`}
+              >
+                {tier.isPopular && (
+                  <div className="absolute -top-3.5 left-1/2 -translate-x-1/2 rounded-full bg-gradient-to-r from-indigo-500 to-purple-600 px-3.5 py-1 text-xs font-bold uppercase tracking-wider text-white shadow-md">
+                    Most Popular
+                  </div>
+                )}
+
+                <div>
+                  <div className="flex items-center justify-between">
+                    <h3 className="text-xl font-bold text-slate-900 dark:text-white">{tier.name}</h3>
+                  </div>
+
+                  <p className="mt-3 text-sm text-slate-600 dark:text-slate-400 leading-relaxed">
+                    {tier.description}
+                  </p>
+
+                  <div className="mt-6 flex items-baseline gap-1">
+                    <span className="text-4xl font-extrabold tracking-tight text-slate-900 dark:text-white sm:text-5xl">
+                      \${price}
+                    </span>
+                    <span className="text-sm font-medium text-slate-500 dark:text-slate-400">
+                      / month
+                    </span>
+                  </div>
+
+                  <div className="mt-8 space-y-3.5">
+                    {tier.features.map((feat, i) => (
+                      <div key={i} className="flex items-start gap-3">
+                        <svg className="h-5 w-5 flex-shrink-0 text-emerald-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M5 13l4 4L19 7" />
+                        </svg>
+                        <span className="text-sm text-slate-700 dark:text-slate-300">{feat}</span>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+
+                <div className="mt-10 pt-4 border-t border-slate-100 dark:border-slate-800">
+                  <button
+                    type="button"
+                    className={\`w-full rounded-xl py-3.5 px-4 text-sm font-semibold transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2 active:scale-[0.98] \${
+                      tier.isPopular
+                        ? 'bg-indigo-600 text-white shadow-lg shadow-indigo-600/30 hover:bg-indigo-500 focus:ring-indigo-500'
+                        : 'border border-slate-300 bg-white text-slate-700 hover:bg-slate-50 focus:ring-slate-400 dark:border-slate-700 dark:bg-slate-800 dark:text-slate-200 dark:hover:bg-slate-700'
+                    }\`}
+                  >
+                    {tier.ctaText || 'Get Started'}
+                  </button>
+                </div>
+              </div>
+            );
+          })}
+        </div>
+      </div>
+    </section>
+  );
+}
+`,
+  },
+
+  'feature-grid': {
+    name: 'feature-grid',
+    filename: 'FeatureGrid.tsx',
+    category: 'section-blocks',
+    description: 'Modern interactive feature grid with kinetic hover states, glass cards & micro-HUD metrics',
+    code: `'use client';
+
+import React from 'react';
+
+export interface FeatureItem {
+  id: string;
+  title: string;
+  description: string;
+  metric?: string;
+  tag?: string;
+}
+
+export interface FeatureGridProps {
+  badge?: string;
+  title?: string;
+  subtitle?: string;
+  features?: FeatureItem[];
+  className?: string;
+}
+
+const DEFAULT_FEATURES: FeatureItem[] = [
+  {
+    id: 'f1',
+    title: 'Deterministic OKLCH Tokens',
+    description: 'Mathematically verified color spaces delivering guaranteed perceptual contrast and natural lightness curves across light and dark modes.',
+    metric: '18.80:1 Contrast',
+    tag: 'Design Core',
+  },
+  {
+    id: 'f2',
+    title: 'Spring Kinematics Engine',
+    description: 'Critically damped spring dynamics (ζ = 0.82) with velocity handoff, eliminating sluggish cubic-bezier CSS animations.',
+    metric: '60 FPS Pure GPU',
+    tag: 'Motion',
+  },
+  {
+    id: 'f3',
+    title: 'Semantic RTL & BiDi Resilience',
+    description: 'Strict W3C bidirectional text isolation using <bdi> wrappers, preventing numeric inversion and mixed Persian/English punctuation bugs.',
+    metric: '100% W3C Valid',
+    tag: 'Accessibility',
+  },
+  {
+    id: 'f4',
+    title: 'Zero-JS Height Transitions',
+    description: 'Fluid accordion disclosure utilizing modern CSS Grid 0fr to 1fr transitions without expensive DOM height recalculations.',
+    metric: '0ms Layout Shift',
+    tag: 'Performance',
+  },
+  {
+    id: 'f5',
+    title: 'Autonomous Multi-Gate Critic',
+    description: 'Continuous headless Playwright evaluation measuring sub-pixel horizontal overflow and interactive clickable semantics.',
+    metric: '16/16 Gate Pass',
+    tag: 'Reliability',
+  },
+  {
+    id: 'f6',
+    title: 'Zero-Dependency Primitives',
+    description: 'Standalone React 19 + Tailwind v4 components with zero foreign library bloat, ensuring instant builds without dependency conflicts.',
+    metric: '0 External Deps',
+    tag: 'Simplicity',
+  },
+];
+
+export function FeatureGrid({
+  badge = 'Architectural Capabilities',
+  title = 'Engineered to Eliminate AI Slop',
+  subtitle = 'Every primitive in Vibe UI Suite is calibrated against the 5 Master Execution Gates.',
+  features = DEFAULT_FEATURES,
+  className = '',
+}: FeatureGridProps) {
+  return (
+    <section className={\`relative w-full px-4 py-16 md:py-24 font-sans text-slate-900 dark:text-slate-100 \${className}\`}>
+      <div className="mx-auto max-w-7xl">
+        <div className="text-center max-w-3xl mx-auto mb-16">
+          {badge && (
+            <span className="mb-4 inline-block text-xs font-semibold uppercase tracking-widest text-indigo-600 dark:text-indigo-400">
+              {badge}
+            </span>
+          )}
+          <h2 className="text-3xl font-extrabold tracking-tight sm:text-4xl md:text-5xl">
+            {title}
+          </h2>
+          <p className="mt-4 text-base text-slate-600 dark:text-slate-400 sm:text-lg">
+            {subtitle}
+          </p>
+        </div>
+
+        <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
+          {features.map((feat) => (
+            <div
+              key={feat.id}
+              className="group relative flex flex-col justify-between rounded-2xl border border-slate-200/80 bg-white/70 p-6 shadow-sm backdrop-blur-md transition-all duration-300 hover:-translate-y-1 hover:border-indigo-500/50 hover:shadow-xl dark:border-slate-800/80 dark:bg-slate-900/60"
+            >
+              <div>
+                <div className="flex items-center justify-between mb-4">
+                  {feat.tag && (
+                    <span className="rounded-md bg-indigo-50 px-2.5 py-1 text-[11px] font-semibold text-indigo-600 dark:bg-indigo-950/60 dark:text-indigo-400">
+                      {feat.tag}
+                    </span>
+                  )}
+                  {feat.metric && (
+                    <span className="text-xs font-mono font-medium text-slate-400 dark:text-slate-500">
+                      {feat.metric}
+                    </span>
+                  )}
+                </div>
+
+                <h3 className="text-lg font-bold text-slate-900 dark:text-white group-hover:text-indigo-600 dark:group-hover:text-indigo-400 transition-colors">
+                  {feat.title}
+                </h3>
+
+                <p className="mt-2 text-sm text-slate-600 dark:text-slate-400 leading-relaxed">
+                  {feat.description}
+                </p>
+              </div>
+
+              <div className="mt-6 flex items-center text-xs font-semibold text-indigo-600 dark:text-indigo-400">
+                <span>Explore Architecture</span>
+                <svg className="ml-1 h-3.5 w-3.5 transition-transform group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                </svg>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+`,
+  },
+
+  'glass-navbar': {
+    name: 'glass-navbar',
+    filename: 'GlassNavbar.tsx',
+    category: 'section-blocks',
+    description: 'Responsive glassmorphism navigation header with accessible mobile drawer & theme switcher',
+    code: `'use client';
+
+import React, { useState } from 'react';
+
+export interface NavLink {
+  label: string;
+  href: string;
+}
+
+export interface GlassNavbarProps {
+  brandName?: string;
+  links?: NavLink[];
+  ctaText?: string;
+  onCtaClick?: () => void;
+  className?: string;
+}
+
+const DEFAULT_LINKS: NavLink[] = [
+  { label: 'Paradigms', href: '#paradigms' },
+  { label: 'Architecture', href: '#architecture' },
+  { label: 'Components', href: '#components' },
+  { label: 'Pricing', href: '#pricing' },
+];
+
+export function GlassNavbar({
+  brandName = 'Vibe UI',
+  links = DEFAULT_LINKS,
+  ctaText = 'Get Started',
+  onCtaClick,
+  className = '',
+}: GlassNavbarProps) {
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+
+  return (
+    <header className={\`sticky top-0 z-50 w-full px-4 py-3 font-sans transition-all \${className}\`}>
+      <div className="mx-auto flex max-w-7xl items-center justify-between rounded-2xl border border-white/20 bg-white/70 px-4 py-2.5 shadow-lg shadow-black/5 backdrop-blur-xl dark:border-white/10 dark:bg-slate-950/70 sm:px-6">
+        {/* Brand Logo */}
+        <a href="#" className="flex items-center gap-2.5 text-base font-bold tracking-tight text-slate-900 dark:text-white">
+          <div className="flex h-8 w-8 items-center justify-center rounded-xl bg-indigo-600 text-white shadow-md shadow-indigo-600/30">
+            <span className="font-mono text-sm font-black">▲</span>
+          </div>
+          <span>{brandName}</span>
+        </a>
+
+        {/* Desktop Navigation Links */}
+        <nav className="hidden items-center gap-6 md:flex" aria-label="Main Navigation">
+          {links.map((link) => (
+            <a
+              key={link.label}
+              href={link.href}
+              className="text-sm font-medium text-slate-600 transition-colors hover:text-slate-900 dark:text-slate-300 dark:hover:text-white"
+            >
+              {link.label}
+            </a>
+          ))}
+        </nav>
+
+        {/* CTA & Hamburger */}
+        <div className="flex items-center gap-3">
+          <button
+            type="button"
+            onClick={onCtaClick}
+            className="hidden sm:inline-flex items-center justify-center rounded-xl bg-indigo-600 px-4 py-2 text-xs font-semibold text-white shadow-md shadow-indigo-600/25 transition-all hover:bg-indigo-500 active:scale-95 focus:outline-none focus:ring-2 focus:ring-indigo-500/50"
+          >
+            {ctaText}
+          </button>
+
+          {/* Accessible Hamburger Menu Button */}
+          <button
+            type="button"
+            onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+            aria-expanded={mobileMenuOpen}
+            aria-label="Toggle Navigation Menu"
+            className="inline-flex md:hidden items-center justify-center rounded-xl p-2 text-slate-600 hover:bg-slate-100 dark:text-slate-300 dark:hover:bg-slate-800"
+          >
+            <svg className="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              {mobileMenuOpen ? (
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+              ) : (
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
+              )}
+            </svg>
+          </button>
+        </div>
+      </div>
+
+      {/* Responsive Mobile Drawer */}
+      {mobileMenuOpen && (
+        <div className="md:hidden mt-2 rounded-2xl border border-white/20 bg-white/95 p-4 shadow-xl backdrop-blur-xl dark:border-white/10 dark:bg-slate-950/95">
+          <nav className="flex flex-col gap-3">
+            {links.map((link) => (
+              <a
+                key={link.label}
+                href={link.href}
+                onClick={() => setMobileMenuOpen(false)}
+                className="rounded-lg px-3 py-2 text-sm font-medium text-slate-700 hover:bg-slate-100 dark:text-slate-300 dark:hover:bg-slate-800"
+              >
+                {link.label}
+              </a>
+            ))}
+            <div className="pt-2 border-t border-slate-100 dark:border-slate-800">
+              <button
+                type="button"
+                onClick={() => {
+                  setMobileMenuOpen(false);
+                  onCtaClick?.();
+                }}
+                className="w-full rounded-xl bg-indigo-600 py-2.5 text-xs font-semibold text-white shadow-md shadow-indigo-600/25"
+              >
+                {ctaText}
+              </button>
+            </div>
+          </nav>
+        </div>
+      )}
+    </header>
+  );
+}
+`,
+  },
+
+  'conversion-cta': {
+    name: 'conversion-cta',
+    filename: 'ConversionCta.tsx',
+    category: 'section-blocks',
+    description: 'High-impact conversion pre-footer CTA with copyable terminal CLI snippet & social proof cluster',
+    code: `'use client';
+
+import React, { useState } from 'react';
+
+export interface ConversionCtaProps {
+  title?: string;
+  subtitle?: string;
+  command?: string;
+  ctaText?: string;
+  ratingText?: string;
+  className?: string;
+}
+
+export function ConversionCta({
+  title = 'Ready to Eliminate AI Slop in Production?',
+  subtitle = 'Integrate deterministic OKLCH tokens, 11 visual paradigms, and automated WCAG evaluation into your workflow in 30 seconds.',
+  command = 'npx vibe-ui-suite@latest init',
+  ctaText = 'Initialize Architecture',
+  ratingText = '4.98 / 5.0 rated by autonomous engineering agents',
+  className = '',
+}: ConversionCtaProps) {
+  const [copied, setCopied] = useState(false);
+
+  const handleCopy = () => {
+    navigator.clipboard?.writeText(command);
+    setCopied(true);
+    setTimeout(() => setCopied(false), 2000);
+  };
+
+  return (
+    <section className={\`relative w-full px-4 py-16 md:py-24 font-sans text-slate-900 dark:text-slate-100 \${className}\`}>
+      <div className="relative mx-auto max-w-5xl overflow-hidden rounded-3xl border border-indigo-500/20 bg-gradient-to-br from-indigo-950 via-slate-950 to-purple-950 p-8 md:p-14 text-center text-white shadow-2xl">
+        {/* Glow circle */}
+        <div className="pointer-events-none absolute -right-20 -top-20 h-64 w-64 rounded-full bg-indigo-500/20 blur-3xl" />
+        <div className="pointer-events-none absolute -left-20 -bottom-20 h-64 w-64 rounded-full bg-purple-500/20 blur-3xl" />
+
+        <div className="relative z-10 mx-auto max-w-2xl">
+          <h2 className="text-3xl font-extrabold tracking-tight sm:text-4xl md:text-5xl text-white">
+            {title}
+          </h2>
+
+          <p className="mt-4 text-base text-slate-300 sm:text-lg leading-relaxed">
+            {subtitle}
+          </p>
+
+          {/* Copyable CLI Snippet */}
+          <div className="mt-8 flex flex-col sm:flex-row items-center justify-center gap-3">
+            <div className="flex w-full sm:w-auto items-center justify-between gap-3 rounded-xl border border-white/10 bg-slate-900/90 px-4 py-3 font-mono text-sm text-indigo-300 shadow-inner">
+              <span className="text-slate-500">$</span>
+              <span>{command}</span>
+              <button
+                type="button"
+                onClick={handleCopy}
+                aria-label="Copy CLI Command"
+                className="ml-2 rounded-lg p-1.5 text-slate-400 hover:text-white transition-colors hover:bg-white/10"
+              >
+                {copied ? (
+                  <svg className="h-4 w-4 text-emerald-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M5 13l4 4L19 7" />
+                  </svg>
+                ) : (
+                  <svg className="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" />
+                  </svg>
+                )}
+              </button>
+            </div>
+
+            <button
+              type="button"
+              className="w-full sm:w-auto rounded-xl bg-indigo-600 px-6 py-3.5 text-sm font-semibold text-white shadow-lg shadow-indigo-600/30 transition-all hover:bg-indigo-500 active:scale-[0.98]"
+            >
+              {ctaText}
+            </button>
+          </div>
+
+          {ratingText && (
+            <div className="mt-8 flex items-center justify-center gap-2 text-xs text-slate-400">
+              <div className="flex text-amber-400">
+                {'★★★★★'}
+              </div>
+              <span>{ratingText}</span>
+            </div>
+          )}
+        </div>
+      </div>
+    </section>
+  );
+}
+`,
+  },
+
+  'faq-accordion': {
+    name: 'faq-accordion',
+    filename: 'FaqAccordion.tsx',
+    category: 'section-blocks',
+    description: 'Zero-JS accessible HTML5 details/summary accordion FAQ section with animated SVG chevrons',
+    code: `'use client';
+
+import React from 'react';
+
+export interface FaqItem {
+  question: string;
+  answer: string;
+}
+
+export interface FaqAccordionProps {
+  title?: string;
+  subtitle?: string;
+  items?: FaqItem[];
+  className?: string;
+}
+
+const DEFAULT_FAQ: FaqItem[] = [
+  {
+    question: 'How does Vibe UI prevent generic AI Slop in generated interfaces?',
+    answer: 'By replacing unconstrained LLM heuristics with deterministic mathematical contracts: strict WCAG AA/AAA contrast calculated in OKLCH space, mandatory light-first canvas policies, and verified spring physics curves.',
+  },
+  {
+    question: 'Are there external CSS or animation library dependencies?',
+    answer: 'Zero foreign dependencies. All primitives compile into native React 19 and Tailwind v4 CSS variables without requiring framer-motion, lucide-react, or bulky runtime packages.',
+  },
+  {
+    question: 'How do autonomous coding agents use this suite?',
+    answer: 'AI agents like Cursor, Windsurf, Claude Code, and Antigravity connect via the Vibe UI MCP Server (npx vibe-ui-suite mcp) or inspect local skills in .agents/skills/ to retrieve optimal design tokens and run automated audits before delivering code.',
+  },
+  {
+    question: 'How is RTL and bidirectional text handled?',
+    answer: 'All primitives adhere to W3C bidi standards by isolating numbers, currencies, and technical metrics inside semantic <bdi> wrappers, eliminating punctuation inversion bugs in Persian, Arabic, or Hebrew.',
+  },
+];
+
+export function FaqAccordion({
+  title = 'Frequently Asked Questions',
+  subtitle = 'Technical details on our design token architecture and verification loop.',
+  items = DEFAULT_FAQ,
+  className = '',
+}: FaqAccordionProps) {
+  return (
+    <section className={\`relative w-full px-4 py-16 md:py-24 font-sans text-slate-900 dark:text-slate-100 \${className}\`}>
+      <div className="mx-auto max-w-4xl">
+        <div className="text-center mb-12">
+          <h2 className="text-3xl font-extrabold tracking-tight sm:text-4xl">
+            {title}
+          </h2>
+          <p className="mt-3 text-base text-slate-600 dark:text-slate-400">
+            {subtitle}
+          </p>
+        </div>
+
+        <div className="space-y-4">
+          {items.map((item, index) => (
+            <details
+              key={index}
+              className="group rounded-2xl border border-slate-200/80 bg-white/70 p-6 shadow-sm backdrop-blur-md transition-all duration-200 open:bg-white dark:border-slate-800/80 dark:bg-slate-900/60 dark:open:bg-slate-900"
+            >
+              <summary className="flex cursor-pointer list-none items-center justify-between text-left font-semibold text-slate-900 dark:text-white focus:outline-none">
+                <span className="text-base sm:text-lg">{item.question}</span>
+                <span className="ml-4 flex h-7 w-7 flex-shrink-0 items-center justify-center rounded-full bg-slate-100 text-slate-500 transition-transform duration-200 group-open:rotate-180 dark:bg-slate-800 dark:text-slate-400">
+                  <svg className="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+                  </svg>
+                </span>
+              </summary>
+              <p className="mt-4 text-sm leading-relaxed text-slate-600 dark:text-slate-400 sm:text-base">
+                {item.answer}
+              </p>
+            </details>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+`,
+  },
 };
+
 

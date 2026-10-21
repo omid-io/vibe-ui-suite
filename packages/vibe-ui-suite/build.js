@@ -22,6 +22,8 @@ const files = [
   path.join(__dirname, 'src', 'index.ts'),
   path.join(__dirname, 'src', 'tailwind.ts'),
   path.join(__dirname, 'src', 'registry', 'components.ts'),
+  path.join(__dirname, 'src', 'audit.ts'),
+  path.join(__dirname, 'src', 'mcp.ts'),
   path.join(__dirname, 'src', 'cli.ts')
 ];
 

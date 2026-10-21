@@ -284,3 +284,5 @@ export function getContrastRatio(lumA: number, lumB: number): number {
 
 // Re-export Component Registry and templates
 export { COMPONENT_REGISTRY, type ComponentTemplate } from './registry/components';
+export { auditCode, type AuditResult, type AuditFinding } from './audit';
+export { startMcpServer } from './mcp';

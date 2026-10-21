@@ -5,8 +5,10 @@ import * as path from 'path';
 import * as readline from 'readline';
 import { COMPONENT_REGISTRY } from './registry/components';
 import { VISUAL_CHEMISTRIES } from './index';
+import { auditCode } from './audit';
+import { startMcpServer } from './mcp';
 
-const VERSION = '6.2.0';
+const VERSION = '6.4.0';
 
 interface CliOptions {
   force: boolean;
@@ -35,6 +37,8 @@ function printHelp() {
   \x1b[32minstall-skills\x1b[0m     Install or update Vibe UI agent skills in .agents/skills/
   \x1b[32madd <component>\x1b[0m     Add an accessible, AI-native component template to your project
   \x1b[32mlist\x1b[0m               List all available component primitives in the registry
+  \x1b[32maudit <file>\x1b[0m        Audit HTML/TSX for WCAG contrast, mobile overflow, emojis & semantics
+  \x1b[32mmcp\x1b[0m                 Start standard Model Context Protocol (MCP) JSON-RPC stdio server
 
 \x1b[1mOPTIONS:\x1b[0m
   -f, --force        Overwrite existing files (creates automated .bak backups)
@@ -409,6 +413,49 @@ function handleAdd(componentName?: string, options: CliOptions = { force: false,
   }
 }
 
+
+function handleAudit(filePath?: string) {
+  if (!filePath) {
+    console.log('\x1b[31mError: Please specify a file path to audit.\x1b[0m');
+    console.log('Usage: npx vibe-ui-suite audit <file.html|file.tsx>');
+    process.exit(1);
+  }
+  const absPath = path.resolve(process.cwd(), filePath);
+  if (!fs.existsSync(absPath)) {
+    console.log('\x1b[31mError: File not found: ' + filePath + '\x1b[0m');
+    process.exit(1);
+  }
+  const content = fs.readFileSync(absPath, 'utf-8');
+  printBanner();
+  console.log('  \x1b[1mAuditing:\x1b[0m \x1b[36m' + filePath + '\x1b[0m\n');
+  const result = auditCode(content, filePath);
+
+  if (result.findings.length === 0) {
+    console.log('  \x1b[32m[PASS] 100% CLEAN — Zero accessibility, contrast, or anti-slop violations found!\x1b[0m');
+    console.log('  \x1b[1mScore:\x1b[0m \x1b[32m' + result.score + '/100 [PASS]\x1b[0m\n');
+    process.exit(0);
+  }
+
+  result.findings.forEach((f) => {
+    const badge = f.severity === 'FAIL' ? '\x1b[41m\x1b[37m FAIL \x1b[0m' : '\x1b[43m\x1b[30m WARN \x1b[0m';
+    const loc = f.line ? ('Line ' + f.line + ': ') : '';
+    console.log('  ' + badge + ' \x1b[1m[' + f.category.toUpperCase() + ']\x1b[0m ' + loc + f.message);
+    if (f.snippet) {
+      console.log('         \x1b[90m' + f.snippet + '\x1b[0m');
+    }
+  });
+
+  console.log('\n  \x1b[1mAudit Summary:\x1b[0m ' + result.counts.fail + ' failed, ' + result.counts.warn + ' warnings.');
+  const scoreColor = result.pass ? '32' : '31';
+  const passText = result.pass ? 'PASS' : 'FAIL';
+  console.log('  \x1b[1mOverall Quality Score:\x1b[0m \x1b[' + scoreColor + 'm' + result.score + '/100 [' + passText + ']\x1b[0m\n');
+
+  if (!result.pass) {
+    process.exit(1);
+  }
+}
+
+
 function handleList() {
   console.log('\x1b[1mAvailable Vibe UI Components:\x1b[0m\n');
 
@@ -424,6 +471,13 @@ function handleList() {
     .filter((comp) => comp.category === 'living-micro-interactions')
     .forEach((comp) => {
       console.log(`    \x1b[32m${comp.name.padEnd(20)}\x1b[0m \x1b[90m${comp.description}\x1b[0m`);
+    });
+
+  console.log('\n  \x1b[1;34mSection Blocks (Full Page Architecture):\x1b[0m');
+  Object.values(COMPONENT_REGISTRY)
+    .filter((comp) => comp.category === 'section-blocks')
+    .forEach((comp) => {
+      console.log('    \x1b[32m' + comp.name.padEnd(20) + '\x1b[0m \x1b[90m' + comp.description + '\x1b[0m');
     });
   console.log('');
 }
@@ -476,6 +530,13 @@ async function main() {
     case 'list':
       printBanner();
       handleList();
+      break;
+    case 'audit':
+    case 'verify':
+      handleAudit(filteredArgs[1]);
+      break;
+    case 'mcp':
+      startMcpServer();
       break;
     default:
       console.log(`\x1b[31mUnknown command "${cmd}".\x1b[0m`);
