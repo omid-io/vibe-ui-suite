@@ -1,12 +1,12 @@
 {
   "$schema": "./schemas/version-manifest.schema.json",
-  "version": "6.4.0",
+  "version": "6.4.1",
   "codename": "Model Context Protocol & Full Section Blocks Architecture",
   "release_channel": "stable",
   "packages": {
-    "vibe-ui-suite": "6.4.0",
-    "vibe-ui-vscode": "6.4.0",
-    "vibe-ui-nextjs-starter": "6.4.0"
+    "vibe-ui-suite": "6.4.1",
+    "vibe-ui-vscode": "6.4.1",
+    "vibe-ui-nextjs-starter": "6.4.1"
   },
   "schemas": {
     "intent_contract": "v1",

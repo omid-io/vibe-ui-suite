@@ -36,6 +36,8 @@ jobs:
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
         run: |
+          npm install typescript
+          node build.js
           OUTPUT=$(npm publish --access public 2>&1) || {
             if echo "$OUTPUT" | grep -E -q "previously published|EPUBLISHCONFLICT"; then
               echo "[INFO] vibe-ui-suite version already published on NPM, proceeding..."
@@ -44,6 +46,7 @@ jobs:
               exit 1
             fi
           }
+          echo "$OUTPUT"
 
       - name: Build VS Code & Cursor Extension
         working-directory: packages/vibe-ui-vscode
