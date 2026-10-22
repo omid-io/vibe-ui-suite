@@ -37,7 +37,11 @@
 ### 5. ⚡ Autonomous Lazy-Prompt Protocol & Anti-Cosmetic-Patch Invariant
 - **The Lazy-Prompt Contract:** When receiving brief or lazy design requests (e.g. "design this", "redesign this", "make it look good", "make it pop", "craft a modern UI"), the agent MUST NOT interrogate the user, stall, or jump blindly into code edits.
 - **Zero Cosmetic-Only Patch Invariant:** Shallow skin patches (replacing raw emojis with SVGs, converting hex colors to OKLCH, or adding 1px borders while leaving dead layouts untouched) are strictly classified as catastrophic task failures. Real redesign mandates structural spatial overhaul, typography hierarchy restructuring, and authentic aesthetic paradigm transformation (Bento Grid, Linear Minimal, Stripe Crisp Light, Swiss Editorial).
-- **Mandatory Pre-Edit Visual Audit:** Before modifying any file, the agent must autonomously capture and inspect a Playwright browser screenshot (`screenshots/before.png`) to identify layout flaws with its own multimodal vision.
+- **Conditional & Non-Intrusive Visual Verification (Zero Blind Browser Attachment):**
+  - **Strict Prohibition of Eager Browser Attachment:** The agent MUST NEVER connect to the browser or invoke Playwright tools (`browser_*`) on agent launch, during routine styling, or when the target is not an actively running web app.
+  - **No Browser for Routine Styling or Non-Web Projects:** For pure styling tasks, CSS/SCSS updates, class refactoring, desktop apps (e.g. AutoHotkey, CLI, native desktop UI), or projects without an active local dev server, connecting to the browser is strictly forbidden.
+  - **Headless Screenshot Isolation Only:** When visual verification of web markup is strictly required, use isolated headless capture (via `python scripts/screenshot_audit.py <file>` or isolated headless Chromium) to `.test-artifacts/screenshots/`. NEVER route automation or open tabs in the user's personal Chrome window (`connect.html` / "Welcome" tab).
+  - **Main Browser Immunity:** Direct connection to the user's primary Chrome browser via Playwright MCP is exclusively reserved for when the user explicitly requests it in chat.
 - **Silent Table-Stakes (Internal Worker Delegation):** Low-level hygiene specifications (OKLCH color math, WCAG AAA calculations, zero raw emojis -> inline SVGs, `<bdi>` bidirectional text isolation) are **strictly internal worker baselines** delegated to execution modules (`ui-verifier`, `vibe-physics-engine`, `ui-kit`, `RTL.md`). Agents are strictly forbidden from listing these baseline hygiene items as headline achievements or key deliverables in chat summaries; deliverables must highlight architectural layout transformations, interactive components, and visual before/after screenshot proof.
 
 ---
@@ -99,8 +103,10 @@ To eradicate slop, lazy shortcuts, and hallucinated completion, the agent MUST s
 ---
 
 ### 👁️ Gate 4: Multi-Viewport Living Visual Audit (دیدن خروجی با چشم ایجنت)
-1. **Render Real Artifact in Browser:**
-   - Spin up local preview server and navigate via Playwright in the user's browser or headless Chromium.
+1. **Render Artifact Responsibly (Conditional Web Previews Only):**
+   - For web projects with an active dev server or static HTML files, capture screenshots using headless Chromium (scripts/screenshot_audit.py or isolated headless mode) into screenshots/.
+   - Never open or attach to the user's personal working Chrome window.
+   - For non-web projects (desktop UI, scripts, CSS-only edits), skip browser rendering entirely; verify syntax and mathematical layout properties statically.
 2. **Multi-Viewport Visual Captures:**
    - Take mandatory Desktop (1440px) and Mobile (390px) screenshots into designated `screenshots/` directory (Zero root pollution).
 3. **Multimodal Self-Inspection & Critique:**
