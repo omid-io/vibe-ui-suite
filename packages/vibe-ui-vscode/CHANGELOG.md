@@ -3,6 +3,17 @@
 All notable changes to the **Vibe UI (VS Code, Cursor & Open-VSX)** extension will be documented in this file.
 This project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [6.4.2] — 2026-10-28
+
+### Added & Improved
+- **Asymmetric Pod Swarm Synchronization:** Full support for the 3-tier Vibe Studio agent pod (`vibe-curator` -> `vibe-ui-agent` -> `vibe-auditor`).
+- **High-Density Dashboard Catalog Integration:** Added snippets and recipes for dense operational metrics cards, sortable table views, and 3-state containers.
+- **Style 8 (Monochrome Graphite & Laser Mint):** Added new visual chemistry with laser mint (`#00f5a0`) telemetry into the chemistry explorer sidebar.
+- **Static Polish & Token Audit:** Integrated sub-second static inspection to detect 2px rounding drifts, unstyled table states, and color mismatches directly within the editor.
+- **Enhanced Contrast Gate:** Upgraded contrast verification with null-safe luminance handling, preventing false passes on non-standard color classes.
+
+---
+
 ## [6.4.0] — 2026-10-21
 
 ### Added & Improved

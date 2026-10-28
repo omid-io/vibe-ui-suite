@@ -984,9 +984,7 @@ export default {component_name};
         # Custom cursor opt-in (strictly for creative portfolios & gaming)
         enable_custom_cursor = domain_id in ["creative_portfolio_agency", "gaming_entertainment_streaming"] or any(k in prompt_title.lower() for k in ["portfolio", "agency", "creative", "gaming"])
         cursor_css = """    @media (pointer: fine) {
-      *, *::before, *::after {
-        cursor: none !important;
-      }
+      /* Non-destructive cursor dot enhancement without suppressing native cursor */
       #vibeCursorDot {
         position: fixed;
         top: 0;

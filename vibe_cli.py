@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-vibe_cli.py — Vibe UI Suite v6.4.1 Master Unified CLI & Orchestrator
+vibe_cli.py — Vibe UI Suite v6.4.2 Master Unified CLI & Orchestrator
 Production-grade interface connecting Design Director, Recommendation, Genome, Critic, Refiner, Verifier & Visual Auditor.
 """
 
@@ -202,9 +202,60 @@ def cmd_verify(args):
     mode = "strict" if getattr(args, "strict", False) else "fast"
     verifier = VerificationEngine()
     report = verifier.verify_html(content, path.name, mode=mode)
-    print(json.dumps(report, indent=2, ensure_ascii=False))
+    if getattr(args, "summary", False):
+        print_scorecard(report)
+    else:
+        print(json.dumps(report, indent=2, ensure_ascii=False))
     if report["overall_status"] == "FAIL":
         sys.exit(1)
+
+
+def cmd_inspect(args):
+    """Fast sub-second static polish, token and responsive inspection."""
+    path = Path(args.file)
+    if not path.exists():
+        print(f"[FAIL] File not found: {args.file}", file=sys.stderr)
+        sys.exit(1)
+    with open(path, "r", encoding="utf-8") as f:
+        content = f.read()
+    verifier = VerificationEngine()
+    report = verifier.verify_html(content, path.name, mode="fast")
+    if getattr(args, "json", False):
+        print(json.dumps(report, indent=2, ensure_ascii=False))
+    else:
+        print_scorecard(report)
+    if report["overall_status"] == "FAIL":
+        sys.exit(1)
+
+
+def print_scorecard(report: dict):
+    """Outputs a human-readable ASCII scorecard for verification results."""
+    status = report.get("overall_status", "UNKNOWN")
+    summary = report.get("checks_summary", {})
+    records = report.get("evidence_records", [])
+
+    print("┌─────────────────────────────────────────────────────────────────┐")
+    print(f"│                 📊 UI-VERIFIER AUDIT SCORECARD                  │")
+    print("├─────────────────────────────────────────────────────────────────┤")
+    print(f"│ Target: {report.get('target_artifact', 'unknown'):<46}  Status: [{status}] │")
+    print(f"│ Passed: {summary.get('passed', 0):<2}  |  Failed: {summary.get('failed', 0):<2}  |  Warned: {summary.get('warned', 0):<2}  |  Total: {summary.get('total', 0):<2}           │")
+    print("├─────────────────────────────────────────────────────────────────┤")
+    
+    current_pillar = None
+    for r in records:
+        pillar = r.get("pillar", "General")
+        if pillar != current_pillar:
+            current_pillar = pillar
+            print(f"│ ▶ {pillar:<60} │")
+        st = r.get("status", "INFO")
+        name = r.get("check_name", "")
+        symbol = "✓ PASS" if st == "PASS" else ("⚠ WARN" if st == "WARN" else "✗ FAIL")
+        print(f"│   [{symbol}] {name:<35}               │")
+        ev = r.get("evidence", "")
+        if len(ev) > 56:
+            ev = ev[:53] + "..."
+        print(f"│       ↳ {ev:<56} │")
+    print("└─────────────────────────────────────────────────────────────────┘")
 
 
 def cmd_heal(args):
@@ -289,8 +340,8 @@ def cmd_assets(args):
         sys.exit(1)
 
 def main():
-    parser = argparse.ArgumentParser(description="Vibe UI Suite v6.4.1 Master CLI")
-    parser.add_argument("--version", action="version", version="Vibe UI Suite v6.4.1")
+    parser = argparse.ArgumentParser(description="Vibe UI Suite v6.4.2 Master CLI")
+    parser.add_argument("--version", action="version", version="Vibe UI Suite v6.4.2")
     subparsers = parser.add_subparsers(dest="command", help="Command to run")
 
     # search
@@ -319,6 +370,12 @@ def main():
     p_ver = subparsers.add_parser("verify", help="Run Verification 2.0 evidence checks on HTML file")
     p_ver.add_argument("file", help="Path to HTML file")
     p_ver.add_argument("--strict", action="store_true", help="Add Playwright headless DOM runtime assertions")
+    p_ver.add_argument("--summary", action="store_true", help="Display readable ASCII audit scorecard")
+
+    # inspect
+    p_insp = subparsers.add_parser("inspect", help="Sub-second static polish & token inspection on UI file")
+    p_insp.add_argument("file", help="Path to HTML file")
+    p_insp.add_argument("--json", action="store_true", help="Output raw JSON instead of ASCII scorecard")
 
     # heal
     p_heal = subparsers.add_parser("heal", help="Run Self-Healing Loop on an existing HTML artifact")
@@ -364,6 +421,8 @@ def main():
         cmd_critique(args)
     elif args.command == "verify":
         cmd_verify(args)
+    elif args.command == "inspect":
+        cmd_inspect(args)
     elif args.command == "heal":
         cmd_heal(args)
     elif args.command == "screenshot":

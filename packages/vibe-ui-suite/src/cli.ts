@@ -8,7 +8,7 @@ import { VISUAL_CHEMISTRIES } from './index';
 import { auditCode } from './audit';
 import { startMcpServer } from './mcp';
 
-const VERSION = '6.4.1';
+const VERSION = '6.4.2';
 
 interface CliOptions {
   force: boolean;
@@ -69,6 +69,19 @@ function prompt(rl: readline.Interface, query: string): Promise<string> {
   return new Promise((resolve) => rl.question(query, resolve));
 }
 
+const VIBE_START_MARKER = '<!-- vibe-ui:start -->';
+const VIBE_END_MARKER = '<!-- vibe-ui:end -->';
+
+function mergeVibeRules(existingContent: string, newRules: string): string {
+  const startIdx = existingContent.indexOf(VIBE_START_MARKER);
+  const endIdx = existingContent.indexOf(VIBE_END_MARKER);
+  const wrapped = `${VIBE_START_MARKER}\n${newRules.trim()}\n${VIBE_END_MARKER}`;
+  if (startIdx !== -1 && endIdx !== -1 && endIdx > startIdx) {
+    return existingContent.substring(0, startIdx) + wrapped + existingContent.substring(endIdx + VIBE_END_MARKER.length);
+  }
+  return `${wrapped}\n\n${existingContent.trim()}\n`;
+}
+
 function safeWriteFile(filePath: string, content: string, options: CliOptions): { written: boolean; skipped: boolean; backup?: string } {
   const relPath = path.relative(process.cwd(), filePath);
   if (options.dryRun) {
@@ -76,17 +89,18 @@ function safeWriteFile(filePath: string, content: string, options: CliOptions): 
     return { written: false, skipped: false };
   }
   if (fs.existsSync(filePath) && !options.force) {
-    console.log(`  \x1b[33m[skip]\x1b[0m ${relPath} already exists. (Use --force to overwrite)`);
+    console.log(`  \x1b[33m[skip]\x1b[0m ${relPath} already exists. (Use --force to update)`);
     return { written: false, skipped: true };
   }
   if (fs.existsSync(filePath) && options.force) {
-    const backupPath = `${filePath}.bak`;
-    fs.copyFileSync(filePath, backupPath);
-    fs.writeFileSync(filePath, content, 'utf-8');
-    console.log(`  \x1b[35m[backup]\x1b[0m Backed up existing file to ${path.relative(process.cwd(), backupPath)}`);
-    return { written: true, skipped: false, backup: backupPath };
+    const existing = fs.readFileSync(filePath, 'utf-8');
+    const merged = mergeVibeRules(existing, content);
+    fs.writeFileSync(filePath, merged, 'utf-8');
+    console.log(`  \x1b[32m[merged]\x1b[0m Preserved existing custom rules and merged Vibe UI contract in ${relPath}`);
+    return { written: true, skipped: false };
   }
-  fs.writeFileSync(filePath, content, 'utf-8');
+  const wrapped = `${VIBE_START_MARKER}\n${content.trim()}\n${VIBE_END_MARKER}\n`;
+  fs.writeFileSync(filePath, wrapped, 'utf-8');
   return { written: true, skipped: false };
 }
 
@@ -517,8 +531,8 @@ function handleInspire(query?: string) {
   const vibeCliPath = path.resolve(__dirname, '../../../vibe_cli.py');
   if (fs.existsSync(vibeCliPath) && q) {
     try {
-      const { execSync } = require('child_process');
-      const out = execSync(`python "${vibeCliPath}" inspire "${q}"`, { encoding: 'utf-8', timeout: 5000 });
+      const { execFileSync } = require('child_process');
+      const out = execFileSync('python', [vibeCliPath, 'inspire', q], { encoding: 'utf-8', timeout: 5000 });
       if (out && out.trim()) {
         console.log(`\x1b[36m🌌 Uiverse Galaxy Inspiration Bridge:\x1b[0m\n`);
         console.log(out);

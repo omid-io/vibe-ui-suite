@@ -1,5 +1,5 @@
 {
-  "version": "6.4.1",
+  "version": "6.4.2",
   "generated_at": "2026-10-10T16:30:00Z",
   "description": "Curated high-resolution Unsplash CDN photographic asset catalog for all 24 canonical domains in Vibe UI Suite.",
   "cdn_base": "https://images.unsplash.com",

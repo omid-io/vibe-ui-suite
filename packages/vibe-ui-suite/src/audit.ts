@@ -156,7 +156,29 @@ export function auditCode(content: string, filePath = '<inline-code>'): AuditRes
         });
       }
     }
-  });
+
+
+    // Check 7: Mathematical WCAG AA Contrast Evaluation on declared color pairs
+    const fgMatch = line.match(/(?:^|[;\s{])color\s*:\s*(#[0-9a-fA-F]{3,6})/i);
+    const bgMatch = line.match(/(?:^|[;\s{])background(?:-color)?\s*:\s*(#[0-9a-fA-F]{3,6})/i);
+    if (fgMatch && bgMatch) {
+      const fgRgb = hexToRgb(fgMatch[1]);
+      const bgRgb = hexToRgb(bgMatch[1]);
+      if (fgRgb && bgRgb) {
+        const fgLum = relativeLuminance(fgRgb.r, fgRgb.g, fgRgb.b);
+        const bgLum = relativeLuminance(bgRgb.r, bgRgb.g, bgRgb.b);
+        const cr = contrastRatio(fgLum, bgLum);
+        if (cr < 4.5) {
+          findings.push({
+            severity: 'FAIL',
+            category: 'contrast',
+            message: `WCAG AA Contrast violation: ${cr.toFixed(2)}:1 is below the required 4.5:1 minimum (${fgMatch[1]} on ${bgMatch[1]}).`,
+            line: lineNum,
+            snippet: line.trim(),
+          });
+        }
+      }
+    }  });
 
   // 7. General Responsive Layout & Navigation Check
   if (/<nav\b/i.test(content)) {

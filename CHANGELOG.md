@@ -5,6 +5,43 @@ All notable changes to the **Vibe UI Skills** repository are documented in this 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [6.4.2] - 2026-10-28
+
+### Asymmetric Pod Swarm, High-Density Dashboards & Sovereign Visual Chemistries
+- **3-Tier Asymmetric Pod Swarm Architecture**:
+  - Replaced single monolithic agent execution with a specialized 3-tier pod swarm:
+    1. `vibe-curator` (Upstream Asset & Living Component Curator): Pre-mines Unsplash Vault, 131-asset Cinematic Media Shelf, 3,800+ Galaxy micro-interactions, and UI-Kit catalogs to generate an `Asset & Style Manifest` before code generation begins.
+    2. `vibe-ui-agent` (Master UI/UX & Frontend Architect): Executes unified, globally coupled HTML/React code generation adhering to the Anti-Cosmetic-Patch Invariant and structural Bento paradigms.
+    3. `vibe-auditor` (Downstream Adversarial Quality Inspector): Conducts ruthless, unbiased multi-viewport visual audits, mathematical WCAG AA contrast verification, and 0px overflow checks.
+  - Eliminates context exhaustion, asset skipping, and multi-author HTML seam defects ("Frankenstein UI").
+- **Sub-Second Static Polish & Token Inspector (`vibe_cli.py inspect`, `packages/vibe-ui-suite/src/audit.ts`)**:
+  - Integrated sub-second static regex and token audits detecting:
+    - 2px rounding errors and unbalanced padding (`p-3 pl-4` without intent).
+    - Hardcoded color drifts breaking theme consistency (`#111` next to `--bg-surface`).
+    - Orphan hover states on touch-primary viewports.
+    - Hero LCP non-lazy image optimization flags.
+  - Added CLI command: `vibe_cli.py inspect <path>` with ASCII scorecard breakdown.
+- **High-Density Dashboard & Operational Metrics Catalog (Catalog 10)**:
+  - Added `E:\programming\vibe-ui-suite\.agents\skills\ui-kit\references\high_density_dashboard_catalog.md`.
+  - Implements the Anti-Raw-Metric invariant: every metric card requires delta badges, sparkline context, and threshold coloring.
+  - Responsive dense tables (8 columns on desktop, auto-collapsing to 4 key columns on tablet).
+  - Standardized 3-state containers (skeleton loading, empty state with illustrated SVG, and retryable error boundary).
+- **Style 8: Monochrome Graphite & Laser Mint**:
+  - Added to `.agents/skills/visual-chemistry-engine/SKILL.md`.
+  - Dark base (`#09090b` page, `#121214` surface, `#27272a` borders) paired with laser mint (`#00f5a0`) and cyan (`#22d3ee`) telemetry.
+  - Geometric sans body paired with editorial italic serif headings for high-prestige developer and finance tools.
+- **P0 Security, Accessibility & Reliability Fixes**:
+  - Resolved RCE vulnerability in `packages/vibe-ui-suite/src/cli.ts` by replacing `execSync` with parameterized `execFileSync`.
+  - Added non-destructive AI config merging: user custom instructions in `.cursorrules`, `CLAUDE.md`, and `AGENTS.md` are safely preserved using `<!-- vibe-ui:start -->` and `<!-- vibe-ui:end -->` boundary markers.
+  - Fixed false-PASS contrast bug in `vibe_core/verifier.py` and `packages/vibe-ui-suite/src/audit.ts`: unknown colors report `WARN` instead of defaulting to `0.0` (which previously produced fake 21:1 on white).
+  - Removed `cursor: none !important` from `vibe_core/generator.py` to restore native mouse accessibility across all operating systems.
+- **Modernized Rule Boundaries in `vibe-ui-agent/AGENT.md`**:
+  - First-class support for domain-native dark canvases (Cinematic, Monochrome Laser Mint, Terminal/Cyber) with accessible dual-theme Light/Dark toggle.
+  - Relaxed touch target constraints: 44px mobile touchscreens vs compact 28-32px desktop table buttons.
+  - Synchronized blur budget ceiling to 8 surfaces on desktop (`constants.MAX_BLUR_SURFACES`).
+
+---
+
 ## [6.4.0] - 2026-10-21
 
 ### Model Context Protocol (MCP) Server, Full Section Blocks & Pure TS Audit CLI

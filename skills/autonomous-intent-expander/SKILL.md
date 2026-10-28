@@ -4,7 +4,7 @@ description: Streamlined intent expansion engine that synthesizes architectural 
 triggers: ["expand intent", "auto-spec", "read my mind", "full architecture", "scale this", "deepen constraints", "lazy prompt", "complete website design", "requirements spec"]
 ---
 
-# 🧠 Autonomous Intent Expander (v6.4.1 Architecture Core)
+# 🧠 Autonomous Intent Expander (v6.4.2 Architecture Core)
 
 ## 🎯 Purpose & Philosophy
 The `autonomous-intent-expander` skill eliminates friction and interrogation fatigue while preventing blind hallucinations. When a user provides a minimal or ambiguous prompt (e.g., *"Build gym website"*, *"Design aesthetic dental clinic website"*), this engine applies **opinionated default inference** strictly governed by **The 5 Immutable Execution Gates (پروتکل ۵ مرحله ای مهندسی شاهکار)**:
@@ -62,7 +62,7 @@ When requested or when compiling specs for downstream build pipelines, `autonomo
 ```json
 {
   "$schema": "../../schemas/design-spec.v1.schema.json",
-  "spec_version": "6.4.1",
+  "spec_version": "6.4.2",
   "domain_archetype": "HIGH_PERFORMANCE_SAAS",
   "visual_chemistry": "STRIPE_CRISP_LIGHT",
   "core_parameters": {

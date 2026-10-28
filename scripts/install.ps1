@@ -24,7 +24,7 @@ param (
     [string]$TargetDir = "",
     [ValidateSet("antigravity", "gemini", "claude", "cursor", "windsurf", "copilot", "custom")]
     [string]$Agent = "antigravity",
-    [string]$Version = "v6.4.1",
+    [string]$Version = "v6.4.2",
     [switch]$Backup = $true,
     [switch]$Force = $false
 )

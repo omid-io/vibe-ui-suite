@@ -4,7 +4,7 @@ description: Physics-based UI motion, anti-template visual architecture, Apple/L
 triggers: ["vibe coding", "add physics", "animate", "smooth UI", "framer motion", "gsap", "fluid motion", "lenis", "oklch", "spring physics", "motion review"]
 ---
 
-# ⚡ Vibe Motion & Physics Engine (v6.4.1 Core)
+# ⚡ Vibe Motion & Physics Engine (v6.4.2 Core)
 
 ## 🎯 Purpose
 The `vibe-physics-engine` powers bespoke, high-framerate visual and interactive experiences anchored in **The Two Golden Pillars**:

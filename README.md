@@ -26,13 +26,13 @@
 
 ---
 
-## ⚖️ Visual Impact: Vanilla AI Slop vs. Vibe UI v6.4.1 Masterpiece
+## ⚖️ Visual Impact: Vanilla AI Slop vs. Vibe UI v6.4.2 Masterpiece
 
 What happens when you ask a standard AI assistant to generate a frontend component?
 
 ```text
 ┌──────────────────────────────────────┐  vs  ┌──────────────────────────────────────┐
-│ ❌ VANILLA AI SLOP                   │      │ ✨ VIBE UI v6.4.1 MASTERPIECE        │
+│ ❌ VANILLA AI SLOP                   │      │ ✨ VIBE UI v6.4.2 MASTERPIECE        │
 ├──────────────────────────────────────┤      ├──────────────────────────────────────┤
 │ • Generic purple gradient buttons    │      │ • Strict Light-First Canvas & Depth  │
 │ • Low contrast text (3.2:1 FAILS AA) │      │ • Mathematical WCAG 2.2 AAA (18.8:1) │
@@ -72,7 +72,7 @@ Headless Browser Evaluation (Playwright 390px mobile overflow)
 Verified Output or Actionable Failure Diagnostics
 ```
 
-> **Day-One Transparency**: Vibe UI Suite is at `v6.4.1` (built upon `v6.0.0` **The Two Golden Pillars: Trend Inspiration & Living Visual Feedback Loop** with the **Living Micro-Interactions, Galaxy Inspiration Standard, Section Blocks & MCP Server**). Anchored on Pillar 1 (deep trend research across Mobbin, Dribbble, Figma Community, and Awwwards with Vibrant Light Mode default) and Pillar 2 (deterministic Playwright multi-viewport screenshot verification across Desktop 1440px and Mobile 390px with zero orphaned processes), Galaxy Inspiration Engine (3,800+ community elements with offline caching), Curated High-Res Unsplash Asset Vault covering all 24 canonical domains with tested HTTP 200 CDN URLs, clean component catalog with living interactive micro-interactions (`shimmer-button`, `cyber-loader`, `holographic-card`, `tactile-switch`, `glow-input`), full section blocks (`bento-hero`, `pricing-matrix`, `feature-grid`, `glass-navbar`, `conversion-cta`, `faq-accordion`), living React 19 TSX generation (`-f tsx`), zero-dependency TypeScript audit (`audit`), standard MCP server (`mcp`), and synchronized cross-platform tooling across npm, Python CLI, and VS Code. Constructive criticism, issues, and contributions from frontend engineers and AI researchers are warmly welcomed.
+> **Day-One Transparency**: Vibe UI Suite is at `v6.4.2` (built upon `v6.0.0` **The Two Golden Pillars: Trend Inspiration & Living Visual Feedback Loop** with the **Living Micro-Interactions, Galaxy Inspiration Standard, Section Blocks & MCP Server**). Anchored on Pillar 1 (deep trend research across Mobbin, Dribbble, Figma Community, and Awwwards with Vibrant Light Mode default) and Pillar 2 (deterministic Playwright multi-viewport screenshot verification across Desktop 1440px and Mobile 390px with zero orphaned processes), Galaxy Inspiration Engine (3,800+ community elements with offline caching), Curated High-Res Unsplash Asset Vault covering all 24 canonical domains with tested HTTP 200 CDN URLs, clean component catalog with living interactive micro-interactions (`shimmer-button`, `cyber-loader`, `holographic-card`, `tactile-switch`, `glow-input`), full section blocks (`bento-hero`, `pricing-matrix`, `feature-grid`, `glass-navbar`, `conversion-cta`, `faq-accordion`), living React 19 TSX generation (`-f tsx`), zero-dependency TypeScript audit (`audit`), standard MCP server (`mcp`), and synchronized cross-platform tooling across npm, Python CLI, and VS Code. Constructive criticism, issues, and contributions from frontend engineers and AI researchers are warmly welcomed.
 
 ---
 
@@ -146,7 +146,7 @@ Install and configure vibe-ui-suite in this project and activate vibe-ui-agent r
 
 ---
 
-### 🎨 The 7 Canonical Visual Archetypes (Autonomous or User-Specified)
+### 🎨 The 8 Canonical Visual Archetypes (Autonomous or User-Specified)
 You never need to choose a style—`vibe-ui-agent` automatically selects the ideal archetype based on your domain. However, you can explicitly request any archetype from the **Design Vault** (`data/design_vault/archetypes.json`):
 
 | Macro Archetype | Visual Philosophy | Key Surface & Lighting Physics | Best Suited For |
@@ -158,6 +158,7 @@ You never need to choose a style—`vibe-ui-agent` automatically selects the ide
 | **`Quiet Luxury`** | Warm champagne/stone palettes, tactile serif accents, clinical precision | Interactive Before/After drag split sliders, certified badge seals | Aesthetic healthcare, dental clinics, bespoke commerce |
 | **`Cyber Terminal`** | Retro-futuristic phosphor green/amber, scanline telemetry, high density | Monospace HUD matrices, live status indicators, zero fluff | Web3, security auditing, hardware interfaces |
 | **`Centered Stage`** | Single focal product presentation, large bold typography, floating 3D stage | Radial mesh glow cone (`blur-[140px]`), atmospheric canvas vector grid | High-conversion landing pages, product debuts |
+| **`Monochrome Laser Mint`** | Ultra-dark graphite canvases, laser mint & cyan telemetry, editorial serif headings | Hairline `#27272a` borders, `#00f5a0` telemetry, deep `#09090b` obsidian | High-frequency trading, Web3, developer security |
 
 ---
 
@@ -173,6 +174,9 @@ python vibe_cli.py generate "A modern developer observability dashboard with lat
 
 # 3. Verify any generated artifact against production audit gates:
 python vibe_cli.py verify clinic.html
+
+# 4. Run sub-second static inspection & token audit (2px drift, color drift, orphan hover):
+python vibe_cli.py inspect clinic.html
 ```
 
 ---

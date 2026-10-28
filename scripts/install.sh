@@ -15,7 +15,7 @@ set -eo pipefail
 
 AGENT="antigravity"
 TARGET_DIR=""
-VERSION="v6.4.1"
+VERSION="v6.4.2"
 BACKUP=true
 FORCE=false
 TEMP_DIR=""

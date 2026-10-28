@@ -1,12 +1,12 @@
 {
   "$schema": "./schemas/version-manifest.schema.json",
-  "version": "6.4.1",
-  "codename": "Model Context Protocol & Full Section Blocks Architecture",
+  "version": "6.4.2",
+  "codename": "Asymmetric Pod Swarm, High-Density Dashboards & Sovereign Visual Chemistries",
   "release_channel": "stable",
   "packages": {
-    "vibe-ui-suite": "6.4.1",
-    "vibe-ui-vscode": "6.4.1",
-    "vibe-ui-nextjs-starter": "6.4.1"
+    "vibe-ui-suite": "6.4.2",
+    "vibe-ui-vscode": "6.4.2",
+    "vibe-ui-nextjs-starter": "6.4.2"
   },
   "schemas": {
     "intent_contract": "v1",
@@ -23,5 +23,5 @@
     "nextjs": ">=15.0.0",
     "react": ">=19.0.0"
   },
-  "last_updated": "2026-10-21"
+  "last_updated": "2026-10-28"
 }

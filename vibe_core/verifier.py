@@ -106,9 +106,11 @@ def parse_color_to_luminance(color_str: str) -> float:
         g = srgb_to_linear(int(h[2:4], 16))
         b = srgb_to_linear(int(h[4:6], 16))
         return 0.2126 * r + 0.7152 * g + 0.0722 * b
-    return 0.0
+    return None
 
-def contrast_ratio(lum1: float, lum2: float) -> float:
+def contrast_ratio(lum1: Optional[float], lum2: Optional[float]) -> Optional[float]:
+    if lum1 is None or lum2 is None:
+        return None
     l1 = max(lum1, lum2)
     l2 = min(lum1, lum2)
     return (l1 + 0.05) / (l2 + 0.05)
@@ -406,10 +408,11 @@ class VerificationEngine:
 
         # 8. Mathematical WCAG AA Contrast Evaluation
         canvas_color, body_color = extract_html_colors(html_content)
-        if canvas_color and body_color:
-            lum_c = parse_color_to_luminance(canvas_color)
-            lum_b = parse_color_to_luminance(body_color)
-            cr = contrast_ratio(lum_c, lum_b)
+        lum_c = parse_color_to_luminance(canvas_color) if canvas_color else None
+        lum_b = parse_color_to_luminance(body_color) if body_color else None
+        cr = contrast_ratio(lum_c, lum_b)
+
+        if cr is not None:
             if cr >= 4.5:
                 passed += 1
                 evidence_records.append({
@@ -484,6 +487,113 @@ class VerificationEngine:
                 "threshold": "zero unbundled relative assets"
             })
 
+        # 11. 2px Rounding Error / Off-Grid Spacing Check (Skillry Polish Invariant)
+        # Scan inline styles and custom classes for odd pixel padding/margin (13px, 15px, 17px, 19px, 21px, 23px)
+        odd_spacing_matches = re.findall(
+            r'(?:padding|margin)(?:-[a-z]+)?\s*:\s*[^;}]*?\b(1[13579]|2[13579]|3[13579])px\b',
+            html_content,
+            re.IGNORECASE
+        )
+        if not odd_spacing_matches:
+            passed += 1
+            evidence_records.append({
+                "pillar": "Visual Polish & Rhythm",
+                "check_name": "Grid Cadence & 2px Rounding",
+                "status": "PASS",
+                "evidence": "All spacing values adhere to 4px/8px rhythm; zero 2px rounding anomalies",
+                "threshold": "even 4px/8px grid scale"
+            })
+        else:
+            warned += 1
+            evidence_records.append({
+                "pillar": "Visual Polish & Rhythm",
+                "check_name": "Grid Cadence & 2px Rounding",
+                "status": "WARN",
+                "evidence": f"Detected {len(odd_spacing_matches)} odd off-grid spacing values (e.g. {odd_spacing_matches[:3]}px). Align to 4px/8px grid scale.",
+                "threshold": "even 4px/8px grid scale"
+            })
+
+        # 12. Hardcoded Color Drift Check
+        # Extract raw hex colors to detect token drift and inconsistent palette sprawl
+        hex_colors = set(c.lower() for c in re.findall(r'#[0-9a-fA-F]{6}\b', html_content))
+        # Allow reasonable palette size (canvas, cards, borders, text levels, primary accents)
+        if len(hex_colors) <= 12:
+            passed += 1
+            evidence_records.append({
+                "pillar": "Design System Cohesion",
+                "check_name": "Color Token Drift",
+                "status": "PASS",
+                "evidence": f"{len(hex_colors)} discrete hex color(s) detected; tightly bounded design tokens",
+                "measured_value": f"{len(hex_colors)} hex tokens",
+                "threshold": "<= 12 discrete hex tokens"
+            })
+        else:
+            warned += 1
+            evidence_records.append({
+                "pillar": "Design System Cohesion",
+                "check_name": "Color Token Drift",
+                "status": "WARN",
+                "evidence": f"{len(hex_colors)} discrete hex colors detected. Suggest consolidating palette into semantic CSS variables.",
+                "measured_value": f"{len(hex_colors)} hex tokens",
+                "threshold": "<= 12 discrete hex tokens"
+            })
+
+        # 13. Interactive State Completeness (Hover & Focus Coverage)
+        has_buttons = bool(re.search(r'<button|<a\b', html_content, re.IGNORECASE))
+        has_hover_styles = bool(re.search(r':hover\b|\bhover:', html_content, re.IGNORECASE))
+        if not has_buttons:
+            passed += 1
+            evidence_records.append({
+                "pillar": "Accessibility",
+                "check_name": "Interactive State Completeness",
+                "status": "PASS",
+                "evidence": "Zero interactive buttons/links declared — hover states not required",
+                "threshold": "hover declared when interactive elements present"
+            })
+        elif has_buttons and has_hover_styles:
+            passed += 1
+            evidence_records.append({
+                "pillar": "Accessibility",
+                "check_name": "Interactive State Completeness",
+                "status": "PASS",
+                "evidence": "Interactive elements declared with active hover state transitions",
+                "threshold": "hover declared when interactive elements present"
+            })
+        else:
+            failed += 1
+            evidence_records.append({
+                "pillar": "Accessibility",
+                "check_name": "Interactive State Completeness",
+                "status": "FAIL",
+                "evidence": "Buttons/links present but no hover states (:hover or hover:) declared",
+                "threshold": "hover declared when interactive elements present"
+            })
+
+        # 14. Hero LCP Image Optimization (Core Web Vitals Guardrail)
+        # Skillry invariant: Hero image must never be lazy-loaded to prevent delayed LCP
+        first_img = re.search(r'<img\b([^>]*)>', html_content, re.IGNORECASE)
+        if first_img:
+            img_attrs = first_img.group(1)
+            is_lazy = 'loading="lazy"' in img_attrs or "loading='lazy'" in img_attrs
+            if is_lazy:
+                warned += 1
+                evidence_records.append({
+                    "pillar": "Performance Budget",
+                    "check_name": "Hero LCP Image Optimization",
+                    "status": "WARN",
+                    "evidence": "First/hero <img> contains loading='lazy'. LCP images should load eagerly to prevent metric regression.",
+                    "threshold": "hero img loading != lazy"
+                })
+            else:
+                passed += 1
+                evidence_records.append({
+                    "pillar": "Performance Budget",
+                    "check_name": "Hero LCP Image Optimization",
+                    "status": "PASS",
+                    "evidence": "Hero <img> is eagerly loaded; optimal for Largest Contentful Paint (LCP)",
+                    "threshold": "hero img loading != lazy"
+                })
+
         overall_status = "PASS" if failed == 0 else "FAIL"
 
         return {
@@ -496,6 +606,8 @@ class VerificationEngine:
                 "Responsive",
                 "Accessibility",
                 "Visual Anti-Slop",
+                "Visual Polish & Rhythm",
+                "Design System Cohesion",
                 "Performance Budget",
                 "Motion & Physics",
                 "Semantic RTL",

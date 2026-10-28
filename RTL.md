@@ -81,6 +81,24 @@ By declaring the English font *first* in the CSS `font-family` stack:
 
 ---
 
+### ⚠️ The Latin Display Font Fallback Trap & Persian Typography Integrity
+- **The Latin Fallback Trap:** Latin display and serif fonts (`Instrument Serif`, `Cormorant Garamond`, `Playfair Display`, `Cinzel`) do **NOT** contain Persian/Arabic glyphs.
+- Leaving a Latin display font on a heading when text switches to Persian causes browsers to fall back to ugly system fonts (`Times New Roman` or `Tahoma`).
+- Furthermore, Latin typographic styling like `letter-spacing: -0.05em` and `font-style: italic` destroy cursive Persian letter connections (ligatures).
+- **Mandatory CSS Rule for Persian Headings:**
+  ```css
+  /* Scoped Persian Heading Override */
+  .fa-active h1, .persian-heading, [lang="fa"] h1, [lang="fa"] h2 {
+    font-family: 'Vazirmatn', sans-serif !important;
+    font-weight: 800 !important;
+    letter-spacing: 0 !important;
+    font-style: normal !important;
+    line-height: 1.35 !important;
+  }
+  ```
+
+---
+
 ## 🛡️ 4. BiDi Punctuation & Token Isolation (`<bdi>`)
 
 When English terms, metrics, numbers, or technical acronyms appear inside Persian sentences:

@@ -1,6 +1,6 @@
 # 🏛️ Vibe UI Suite — System Architecture & Data Contract Specification
 
-**Version:** 6.4.1 (Model Context Protocol & Full Section Blocks Architecture)  
+**Version:** 6.4.2 (Asymmetric Pod Swarm, High-Density Dashboards & Sovereign Visual Chemistries)
 **Status:** Feature Freeze (Production Certified)  
 **Document Type:** Core Architectural Specification  
 **Machine Contract Reference:** [`schemas/design-spec.v1.schema.json`](schemas/design-spec.v1.schema.json)  

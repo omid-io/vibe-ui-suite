@@ -8,12 +8,10 @@
 
 ## 🏛️ The Core Architectural Mandates (v6.4.1)
 
-### 1. ☀️ Strict Light-First Mandate & Anti-Dark-Bias Invariant
-- **Light by Default:** The primary default canvas MUST ALWAYS be Light Mode (crisp white/off-white `#ffffff` / `#f8fafc`, luminous neutral surfaces, deep typography with WCAG AAA contrast, and vivid accents).
-- **Dark Mode Exclusion:** Dark canvas is ONLY permitted if:
-  1. The user explicitly requests dark mode in their prompt (e.g., "dark", "black", "تاریک", "مشکی"), OR
-  2. The archetype or style is inherently dark by nature (e.g., `dense_telemetry_hud`, `data_dense_terminal`, `cyber_terminal`).
-- **Mandatory Dual-Theme Dark Toggle:** In all designs (whether light-first or dark-first), an intuitive, beautifully styled Dark/Light mode toggle button MUST be implemented so the user can fluidly experience both environments.
+### 1. ☀️ Intelligent Lighting Calibration & Dual-Theme Invariant
+- **Vibrant Light Canvas by Default:** General business interfaces (Healthcare, B2B SaaS, E-commerce, Education, Portfolios, Marketing, Agencies) default to a crisp, high-contrast Light Theme (`#ffffff` / `#f8fafc`, luminous neutral surfaces, deep slate typography `#09090b` with WCAG AAA contrast, and vivid accents).
+- **First-Class Domain-Native Dark Themes:** Deep atmospheric dark canvases are fully first-class for naturally dark domains and visual chemistries (including `Style 7: Cinematic Motion & Depth`, `Style 8: Monochrome Graphite & Laser Mint`, Crypto/Web3, Gaming, Terminal/Hacker HUD, Cybersecurity, and Nightlife/Entertainment), or whenever explicitly requested in the prompt.
+- **Mandatory Dual-Theme Dark/Light Toggle:** In all designs (whether light-first or dark-first), an intuitive, beautifully styled Dark/Light mode toggle button MUST be implemented so the user can fluidly experience both environments without friction.
 
 ### 2. ⏳ Unrushed, Deliberate Craft & Multi-Pass Inspection Loop
 - **Zero Rush Mandate:** There is no rush to dump code quickly. The agent is explicitly empowered and commanded to take deliberate time, loop through multiple inspection passes, self-critique, and craft visual assets thoroughly.
@@ -21,11 +19,11 @@
 - **Deep Curated Asset Integration:** Actively generate or curate bespoke, high-resolution visual assets (bespoke AI imagery, curated Unsplash photography, or custom SVG illustrations) rather than placeholder blocks.
 
 ### 3. 🎥 Contextual Ambient Media & Creative Hero Dynamics (Video / Particles / Shaders)
-- **Strict Contextual Trigger (Creative Atmosphere Only):** Ambient video loops are strictly prohibited on utility SaaS, data-dense dashboards, admin portals, devops tools, and standard business forms. Video backgrounds are strictly reserved for creative portfolios, luxury fashion, entertainment, or when the user explicitly requests an immersive, creative experience ("creative", "cinematic", "video background", "یه چیز خلاقانه").
-- **Intelligent Creative Modality Selection:** The agent must actively discern the optimal medium:
-  1. *Curated Ambient Video Loop:* When cinematic atmosphere is explicitly warranted, pull lightweight optimized loops from the asset vault or trusted web sources with `autoplay loop muted playsinline disablePictureInPicture` and high-contrast scrim overlays.
-  2. *Lightweight SVG Particle & Canvas Animations:* For modern tech platforms, AI portals, or creative landing pages, construct native, lightweight SVG particle fields, fluid canvas shaders, or CSS mesh gradients rather than forcing heavy video files.
-  3. *Curated High-Res Photography:* Default to crisp Unsplash photography for standard web products. Never force video when SVG particles, canvas, or static photography deliver cleaner UX.
+- **High-Impact Ambient Media Integration:** Curated ambient video loops (from `assets/cinematic_media_shelf.json` with 50+ optimized loops and 30 3D cutouts) are powerful visual assets for Hero sections, bento feature highlights, brand storytelling, and luxury/cinematic experiences.
+- **Intelligent Modality Selection & Performance:**
+  1. *Curated Ambient Video Loop:* Pull lightweight optimized loops from `assets/cinematic_media_shelf.json` with `autoplay loop muted playsinline disablePictureInPicture` and high-contrast scrim overlays (`linear-gradient(to bottom, rgba(0,0,0,0.3) 0%, rgba(0,0,0,0.85) 100%)`). Avoid cluttering data-dense operational tables or administrative forms with background video.
+  2. *Lightweight SVG Particle & Canvas Animations:* For AI portals, devtools, or creative landing pages, construct native, lightweight SVG particle fields, fluid canvas shaders, or CSS mesh gradients.
+  3. *Curated High-Res Photography:* Leverage the 24-domain Unsplash vault (`data/unsplash_assets.json` and `skills/ui-kit/references/curated_unsplash_vault.md`) for crisp, real-world focal photography. Zero empty gray placeholder boxes permitted.
 
 ### 4. 🎨 Trend-First Methodology (Trend -> Tool Mapping -> Implementation)
 - **Sequence of Execution:**
@@ -134,12 +132,16 @@ To eradicate slop, lazy shortcuts, and hallucinated completion, the agent MUST s
 
 ## 🛡️ Zero-Hallucination Guardrail & Anti-Slop Contract
 - **Zero Imaginary Packages:** Never invent non-existent libraries or packages (e.g. `framer-motion-extra`, `vibe-magic-glow`, or fake lucide icon names). Use React 19 standard hooks, standard Tailwind v4 classes, or inline SVGs.
-- **Strict Visual Token Integrity:** Use typed OKLCH color palettes and maintain at least 4.5:1 contrast for body copy and 3.0:1 for headings. Maximum of 3 backdrop-blur layers per viewport.
+- **Strict Visual Token Integrity:** Use typed OKLCH color palettes and maintain at least 4.5:1 contrast for body copy and 3.0:1 for headings. Backdrop Blur Budget: Maximum of 8 backdrop-blur layers on desktop (calibrated to modern GPU composites and constants.MAX_BLUR_SURFACES), reduced to maximum 3 layers on mobile.
+- **Anti-Verbatim Cloning Invariant (Creative Synthesis Standard):** Never copy brand names, copy text, specific asset URLs, or exact layouts verbatim from benchmark skills or prompt libraries (e.g. MotionSites, Dribbble, Awwwards). Always extract underlying motion mechanics and synthesize a completely original, bespoke concept tailored to the user's domain.
 - **Absolute Prohibition of ZWNJ:** In Persian copy, comments, and strings, never use zero-width non-joiners (نیم فاصله); use standard spaces exclusively.
 
 ---
 
 ## 🌐 On-Demand Language & RTL Protocol
+- **The Non-Mirrored Layout Law (RTL.md Compliance):** The root container (`html`, `body`) MUST permanently retain `dir="ltr"`. Switching to Persian NEVER inverts the navbar, logo position (left), or interactive controls. Only Persian text content receives scoped `dir="rtl"`.
+- **Persian Typography Guardrail:** Latin display/serif fonts (`Instrument Serif`, `Cormorant`) lack Arabic/Persian glyphs. When Persian is active, headings MUST explicitly override font-family to `Vazirmatn` (weight 700-800), reset `letter-spacing: 0` (no negative tracking!), and reset `font-style: normal` (never apply Latin italics).
+
 - **English / LTR (Default):** Natural left-to-right layout with modern typography (Inter, Geist, Plus Jakarta Sans). Zero RTL overhead.
 - **Persian / Arabic (On-Demand Only):** When the prompt or user explicitly requests Persian/RTL:
   - Apply `dir="rtl"` to text blocks and sections.
@@ -150,7 +152,7 @@ To eradicate slop, lazy shortcuts, and hallucinated completion, the agent MUST s
 ---
 
 ## 🧼 Silent Baseline Hygiene (Keep in Background)
-- Keep buttons comfortably touch-friendly on mobile screens (44px × 44px minimum bounding box).
+- Keep buttons comfortably touch-friendly on mobile screens (44px × 44px minimum bounding box per WCAG AA). On desktop telemetry tables and dense toolbars, compact action triggers (28px - 32px) are permitted with clear tooltips and accessible padding.
 - Use vector SVGs for clean, professional iconography.
 - Maintain comfortable contrast between text and background.
 
