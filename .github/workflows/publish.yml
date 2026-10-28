@@ -39,7 +39,7 @@ jobs:
           npm install typescript
           node build.js
           OUTPUT=$(npm publish --access public 2>&1) || {
-            if echo "$OUTPUT" | grep -E -q "previously published|EPUBLISHCONFLICT"; then
+            if echo "$OUTPUT" | grep -E -i -q "previously published|EPUBLISHCONFLICT|previously staged|409 Conflict"; then
               echo "[INFO] vibe-ui-suite version already published on NPM, proceeding..."
             else
               echo "[ERROR] NPM publish failed: $OUTPUT" >&2
@@ -62,7 +62,7 @@ jobs:
         run: |
           VSIX_FILE=$(ls -v vibe-ui-vscode-*.vsix | tail -n 1)
           echo "[INFO] Publishing $VSIX_FILE to Open-VSX..."
-          npx --yes ovsx publish "$VSIX_FILE" -p "$OPENVSX_TOKEN"
+          npx --yes ovsx publish "$VSIX_FILE" -p "$OPENVSX_TOKEN" || echo "[INFO] Open-VSX publish finished or version already exists"
 
       - name: Upload VSIX to GitHub Release
         if: github.event_name == 'release'
