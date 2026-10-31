@@ -495,8 +495,8 @@ When deploying components across Persian, Arabic, or bilingual viewports:
    ```html
    <p><bdi>کلینیک زیبایی، پوست و سلامت (Clinical Outcome Protocol)</bdi></p>
    ```
-3. **Strict Zero ZWNJ Protocol**:
-   All Persian strings in code, configuration, and documentation must use standard spaces exclusively. The zero-width non-joiner character (`\u200c`) is strictly prohibited.
+3. **Persian Typography Protocol**:
+   Persian text in copy, labels, and documentation follows standard Persian orthography; half-space (ZWNJ) is permitted for natural readability.
 4. **Directional CSS Logical Properties**:
    Use `start-*`, `end-*`, `ms-*`, and `me-*` instead of static `left-*` and `right-*` to ensure natural bidirectional adaptation.
 

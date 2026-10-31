@@ -198,7 +198,7 @@ class DesignDirector:
         # Wireframe-First Thinking: Pre-compute 3-step spatial skeleton
         section_flow = blueprint.get("section_flow", [
             {"id": "hero", "name": "Hero Section", "type": "split_hero"},
-            {"id": "features", "name": "Core Features", "type": "bento_grid"},
+            {"id": "features", "name": "Core Features", "type": "domain_feature_grid"},
             {"id": "footer", "name": "Footer Hub", "type": "standard_footer"}
         ])
 

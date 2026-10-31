@@ -3,6 +3,15 @@
 All notable changes to the **Vibe UI (VS Code, Cursor & Open-VSX)** extension will be documented in this file.
 This project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [6.4.3] — 2026-10-31
+
+### Added & Improved
+- **Anti-Slop Hard Gate Quality Verification:** Integrated Checks 15-17 (Media Layout Sizing for zero CLS, Zero Em-Dash Syntactic AI-Slop, and Navigation Anchor Integrity).
+- **Domain-Authentic Architecture Synchronization:** Synchronized with the 24-domain blueprint redesign, eradicating default bento-grid bias in favor of editorial, lookbook, and accordion archetypes.
+- **Copywriting Hygiene Standard:** Automatic detection of synthetic em dashes (`—`) and unverified metric statistics.
+
+---
+
 ## [6.4.2] — 2026-10-28
 
 ### Added & Improved

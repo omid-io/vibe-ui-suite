@@ -569,12 +569,13 @@ class VerificationEngine:
                 "threshold": "hover declared when interactive elements present"
             })
 
-        # 14. Hero LCP Image Optimization (Core Web Vitals Guardrail)
+        # 14. Hero LCP Image Optimization (Core Web Vitals Guardrail - Anti-Slop R-40)
         # Skillry invariant: Hero image must never be lazy-loaded to prevent delayed LCP
         first_img = re.search(r'<img\b([^>]*)>', html_content, re.IGNORECASE)
         if first_img:
             img_attrs = first_img.group(1)
             is_lazy = 'loading="lazy"' in img_attrs or "loading='lazy'" in img_attrs
+            has_fetchpriority = 'fetchpriority="high"' in img_attrs or "fetchpriority='high'" in img_attrs
             if is_lazy:
                 warned += 1
                 evidence_records.append({
@@ -586,13 +587,141 @@ class VerificationEngine:
                 })
             else:
                 passed += 1
+                evidence_msg = "Hero <img> is eagerly loaded"
+                if has_fetchpriority:
+                    evidence_msg += " with fetchpriority='high'"
+                evidence_msg += "; optimal for Largest Contentful Paint (LCP)"
                 evidence_records.append({
                     "pillar": "Performance Budget",
                     "check_name": "Hero LCP Image Optimization",
                     "status": "PASS",
-                    "evidence": "Hero <img> is eagerly loaded; optimal for Largest Contentful Paint (LCP)",
+                    "evidence": evidence_msg,
                     "threshold": "hero img loading != lazy"
                 })
+
+        # 15. Media Layout Sizing & CLS Prevention (Anti-Slop R-40 Hard Gate)
+        # Verify <img> elements declare dimensions or aspect-ratio to prevent layout shifts
+        if soup:
+            _soup_imgs = soup.find_all("img")
+            unconstrained_imgs = []
+            for img in _soup_imgs:
+                has_dims = img.get("width") and img.get("height")
+                style_attr = img.get("style", "")
+                class_attr = img.get("class", [])
+                classes_str = " ".join(class_attr) if isinstance(class_attr, list) else str(class_attr)
+                has_aspect = "aspect-ratio" in style_attr or "aspect-" in classes_str
+                has_explicit_size = ("w-" in classes_str and "h-" in classes_str) or ("width:" in style_attr and "height:" in style_attr)
+                if not (has_dims or has_aspect or has_explicit_size):
+                    unconstrained_imgs.append(str(img)[:60])
+            total_imgs = len(_soup_imgs)
+        else:
+            all_imgs = re.findall(r'<img\b([^>]*)>', html_content, re.IGNORECASE)
+            unconstrained_imgs = [
+                img for img in all_imgs
+                if not (('width=' in img and 'height=' in img) or 'aspect-' in img or 'aspect-ratio' in img)
+            ]
+            total_imgs = len(all_imgs)
+
+        if total_imgs == 0:
+            passed += 1
+            evidence_records.append({
+                "pillar": "Performance Budget",
+                "check_name": "Media Layout Sizing (CLS)",
+                "status": "PASS",
+                "evidence": "Zero static <img> tags present; zero Cumulative Layout Shift risk",
+                "threshold": "img dimensions or aspect-ratio declared"
+            })
+        elif not unconstrained_imgs:
+            passed += 1
+            evidence_records.append({
+                "pillar": "Performance Budget",
+                "check_name": "Media Layout Sizing (CLS)",
+                "status": "PASS",
+                "evidence": f"100% of static images ({total_imgs} tags) declare explicit dimensions or aspect-ratios",
+                "threshold": "img dimensions or aspect-ratio declared"
+            })
+        else:
+            warned += 1
+            evidence_records.append({
+                "pillar": "Performance Budget",
+                "check_name": "Media Layout Sizing (CLS)",
+                "status": "WARN",
+                "evidence": f"{len(unconstrained_imgs)} of {total_imgs} <img> tag(s) lack explicit dimensions or aspect-ratio. May induce layout shifts.",
+                "threshold": "img dimensions or aspect-ratio declared"
+            })
+
+        # 16. Zero Em-Dash Syntactic AI-Slop (Anti-Slop R-02 Hard Gate)
+        # LLMs routinely overuse em-dashes (—) as syntactic filler in marketing copy
+        if soup:
+            _soup_text = _BS4(html_content, "html.parser")
+            for tag in _soup_text.find_all(["script", "style", "svg"]):
+                tag.decompose()
+            clean_copy = _soup_text.get_text()
+        else:
+            clean_copy = re.sub(r'<(script|style|svg)[^>]*>.*?</\1>', '', html_content, flags=re.DOTALL | re.IGNORECASE)
+
+        has_em_dash = "\u2014" in clean_copy
+        if not has_em_dash:
+            passed += 1
+            evidence_records.append({
+                "pillar": "Visual Anti-Slop",
+                "check_name": "Zero Em-Dash Syntactic Slop",
+                "status": "PASS",
+                "evidence": "0 em dashes (—) detected in copy; conforms to human copywriting standard",
+                "threshold": "0 em dashes"
+            })
+        else:
+            warned += 1
+            evidence_records.append({
+                "pillar": "Visual Anti-Slop",
+                "check_name": "Zero Em-Dash Syntactic Slop",
+                "status": "WARN",
+                "evidence": "Detected em dash (—) character in UI copy. Replace with natural punctuation (comma, colon, or period).",
+                "threshold": "0 em dashes"
+            })
+
+        # 17. Navigation Anchor Integrity (Anti-Slop R-24 & R-26)
+        # Navbar anchors pointing to #hash must match an existing DOM id
+        if soup:
+            _navs = soup.find_all("nav")
+            nav_anchors = []
+            for nav in _navs:
+                for a in nav.find_all("a", href=True):
+                    href = a["href"].strip()
+                    if href.startswith("#") and len(href) > 1 and not href.startswith("#!"):
+                        nav_anchors.append(href[1:])
+            missing_targets = [target_id for target_id in nav_anchors if not soup.find(id=target_id)]
+        else:
+            nav_anchors = re.findall(r"""<nav\b[^>]*>.*?<a\b[^>]*href=['"]#([a-zA-Z0-9_-]+)['"]""", html_content, re.DOTALL | re.IGNORECASE)
+            missing_targets = [target_id for target_id in nav_anchors if f'id="{target_id}"' not in html_content and f"id='{target_id}'" not in html_content]
+
+        if not nav_anchors:
+            passed += 1
+            evidence_records.append({
+                "pillar": "Accessibility",
+                "check_name": "Navigation Anchor Integrity",
+                "status": "PASS",
+                "evidence": "No hash-based navbar anchor targets declared; check not applicable",
+                "threshold": "0 ghost navbar links"
+            })
+        elif not missing_targets:
+            passed += 1
+            evidence_records.append({
+                "pillar": "Accessibility",
+                "check_name": "Navigation Anchor Integrity",
+                "status": "PASS",
+                "evidence": f"100% of navbar anchors ({len(nav_anchors)} targets) resolve to physical DOM section IDs (0 ghost links)",
+                "threshold": "0 ghost navbar links"
+            })
+        else:
+            failed += 1
+            evidence_records.append({
+                "pillar": "Accessibility",
+                "check_name": "Navigation Anchor Integrity",
+                "status": "FAIL",
+                "evidence": f"Ghost nav link(s) detected pointing to non-existent section IDs: {missing_targets}",
+                "threshold": "0 ghost navbar links"
+            })
 
         overall_status = "PASS" if failed == 0 else "FAIL"
 

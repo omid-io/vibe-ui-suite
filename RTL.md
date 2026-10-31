@@ -125,12 +125,11 @@ The following elements **MUST ALWAYS** have `direction: ltr !important` and `tex
 
 ---
 
-## 🚫 6. Absolute Zero ZWNJ Rule (نیم فاصله مطلقا ممنوع)
+## 🌐 6. Persian Typography & Orthography Protocol
 
-In all Persian text (UI copy, comments, documentation, and chat output):
-- The zero-width non-joiner (ZWNJ / `\u200c` / نیم فاصله) is **strictly forbidden**.
-- Standard ASCII space (`\u0020`) must be used exclusively.
-- Example: Write `می شود` (never `می شود`), `طراحی شده` (never `طراحی شده`).
+In Persian text (UI copy, user-facing communications, and documentation):
+- Standard Persian typography and orthography with zero-width non-joiner (ZWNJ / `\u200c` / نیم‌فاصله) are fully permitted for natural readability (e.g., `می‌شود`, `طراحی‌شده`).
+- Keep code, system keys, filenames, and internal variables strictly in standard English LTR.
 
 ---
 
@@ -144,4 +143,4 @@ In all Persian text (UI copy, comments, documentation, and chat output):
 | **Persian Typography** | Persian text renders in Vazirmatn via font fallback or scoped class | Mandatory |
 | **Token Isolation** | Mixed Latin tokens inside Persian wrapped in `<bdi>` | Mandatory |
 | **Monospace / Code** | Code blocks & terminals strictly locked in LTR | Mandatory |
-| **ZWNJ** | 0 ZWNJ characters (standard space only) | Mandatory |
+| **Typography** | Natural Persian orthography & ZWNJ permitted | Standard |

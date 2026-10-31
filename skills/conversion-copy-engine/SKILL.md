@@ -47,19 +47,21 @@ Move high-intent traffic into direct 1-on-1 conversations using context-aware, p
 
 ---
 
-## 🛡️ 3. Inviolable Anti-Dark-Pattern Policy
+## 🛡️ 3. Inviolable Anti-Dark-Pattern & Anti-Slop Policy
 
-High conversion is built on radical trust, not deceptive manipulation:
-1. **Zero Synthetic Social Proof:** Never fabricate customer testimonials, invent user avatars, or generate fake reviews.
+High conversion is built on radical trust, not deceptive manipulation or recognizable AI fluff:
+1. **Zero Synthetic Social Proof (R-18):** Never fabricate customer testimonials, invent user avatars, fictional company names, or generate fake reviews. If verified case studies do not exist, omit the testimonials section entirely or use honest structural placeholders (`[CUSTOMER_QUOTE]`).
 2. **Zero Fake Scarcity or Urgency:** Never generate countdown timers that reset on page reload, or false stock counters ("Only 1 seat left!").
-3. **Zero Unsubstantiated ROI Claims:** Never promise arbitrary financial multiples ("300% guaranteed ROI in 7 days") unless backed by verifiable customer case studies.
-4. **Transparent Cancellation & Terms:** Clearly state trial periods, billing cadences, and cancellation rights.
+3. **Zero Unsubstantiated ROI & Metrics Claims (R-17, R-36):** Never promise arbitrary financial multiples ("300% guaranteed ROI in 7 days", "10,000% synergy") or invent unmeasured metrics ("99.9% uptime", "10K+ engineers", "500M requests") without empirical backing. If data is unmeasured, omit it or clearly label as `[REAL METRICS]`.
+4. **Zero Em Dashes in Copy (R-02 Hard Gate):** Strictly forbidden to use em dashes (`—`) in headlines, subheads, bullet lists, or body text. LLMs routinely overuse em dashes as syntactic filler. Use natural punctuation: commas, periods, colons, or parentheses.
+5. **Product-Specific FAQ Mandate (R-28):** Every question in an FAQ section must resolve acute, technical, or financial concerns specific to that product. Generic template FAQs ("Is my data safe?", "Can I cancel anytime?") without domain depth erode buyer trust and are prohibited.
+6. **Transparent Cancellation & Terms:** Clearly state trial periods, billing cadences, and cancellation rights.
 
 ---
 
-## 🌐 4. Multilingual & Persian Copy Protocol (Zero ZWNJ Standard)
+## 🌐 4. Multilingual & Persian Copy Protocol (Standard Typography)
 
 When synthesizing Persian or bilingual conversion copy:
 1. **Natural Standard Persian:** Write compelling, fluent copy using standard Persian with regular spaces exclusively.
-2. **Absolute Prohibition of ZWNJ:** Never use the zero-width non-joiner (`\u200c` / half-space) in any headline, body text, or CTA label per User Global Rule 9. Standard spaces must be used exclusively (e.g., `ثبت نام سریع`, `شروع رایگان`, `پشتیبانی مداوم`).
+2. **Natural Persian Orthography:** Use standard Persian typography and half-space (ZWNJ) where appropriate for natural, professional phrasing (e.g., `ثبت‌نام سریع`, `شروع رایگان`, `پشتیبانی مداوم`).
 3. **On-Demand `<bdi>` Isolation:** Wrap Latin brand tokens, acronyms, and product terms inside `<bdi>` elements when embedded within Persian phrases to prevent bidirectional text reversals.

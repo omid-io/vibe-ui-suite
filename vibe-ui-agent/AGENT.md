@@ -134,7 +134,7 @@ To eradicate slop, lazy shortcuts, and hallucinated completion, the agent MUST s
 - **Zero Imaginary Packages:** Never invent non-existent libraries or packages (e.g. `framer-motion-extra`, `vibe-magic-glow`, or fake lucide icon names). Use React 19 standard hooks, standard Tailwind v4 classes, or inline SVGs.
 - **Strict Visual Token Integrity:** Use typed OKLCH color palettes and maintain at least 4.5:1 contrast for body copy and 3.0:1 for headings. Backdrop Blur Budget: Maximum of 8 backdrop-blur layers on desktop (calibrated to modern GPU composites and constants.MAX_BLUR_SURFACES), reduced to maximum 3 layers on mobile.
 - **Anti-Verbatim Cloning Invariant (Creative Synthesis Standard):** Never copy brand names, copy text, specific asset URLs, or exact layouts verbatim from benchmark skills or prompt libraries (e.g. MotionSites, Dribbble, Awwwards). Always extract underlying motion mechanics and synthesize a completely original, bespoke concept tailored to the user's domain.
-- **Absolute Prohibition of ZWNJ:** In Persian copy, comments, and strings, never use zero-width non-joiners (نیم فاصله); use standard spaces exclusively.
+- **Persian Orthography Standard:** In Persian copy and strings, natural Persian orthography and half-space (ZWNJ) are permitted for proper rendering and typography.
 
 ---
 

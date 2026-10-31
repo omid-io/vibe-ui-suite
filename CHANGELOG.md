@@ -5,6 +5,26 @@ All notable changes to the **Vibe UI Skills** repository are documented in this 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [6.4.3] - 2026-10-31
+
+### Anti-Slop Integration, Bento-Dogma Purge & Authentic 24-Domain Architecture
+- **Eradication of Bento-Grid Bias & Universal AI Slop Defaults**:
+  - Replaced hardcoded fallback in `vibe_core/director.py` with content-driven `domain_feature_grid`.
+  - Completely replaced the 13 generic `bento_grid` blueprints with authentic, domain-tailored section architectures (e.g. lookbook streams for fashion, practice area accordions for legal, longform column spreads for editorial, and freight pipelines for logistics).
+  - Purged repetitive AI clichés: eradicated `"Next-Generation ... Platform"` and fabricated `"99.99% Uptime"` metrics in mock data across all 24 blueprints.
+- **Core Web Vitals & Media Layout Sizing Gates (R-40)**:
+  - Enforced explicit media dimensions (`width`/`height` or `aspect-ratio`) across all `<img>`, `<video>`, and `<iframe>` elements to permanently eliminate Cumulative Layout Shift (CLS).
+  - Enforced Hero Image Contract: above-the-fold heroes must be native `<img>` elements with `fetchpriority="high"` and zero `loading="lazy"`.
+- **Anti-Slop Copywriting & Functional Completeness Standard (R-02, R-17, R-24, R-26, R-36)**:
+  - Hard Gate ban on syntactic em dashes (`—`) in AI copy in `conversion-copy-engine`.
+  - Zero dead controls: all interactive elements must have functioning state handlers, modal escape dismissals, and verified non-ghost navigation anchors.
+- **Automated Verification Engine 2.1 (`vibe_core/verifier.py`)**:
+  - Added Check 15: Media Layout Sizing & CLS Prevention.
+  - Added Check 16: Zero Em-Dash Syntactic AI-Slop Detection.
+  - Added Check 17: Navigation Anchor Integrity Verification.
+
+---
+
 ## [6.4.2] - 2026-10-28
 
 ### Asymmetric Pod Swarm, High-Density Dashboards & Sovereign Visual Chemistries

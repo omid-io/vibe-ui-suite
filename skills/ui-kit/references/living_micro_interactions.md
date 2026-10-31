@@ -33,7 +33,7 @@ To eliminate code generation errors and phantom dependencies:
 4. **Touch Target Sizing:**
    - Interactive triggers (`button`, `a`, `[role="switch"]`) must maintain a minimum physical hit area of **44px × 44px**.
 5. **Persian & RTL Language Contract:**
-   - Persian text must strictly avoid ZWNJ (نیم فاصله); use standard spaces exclusively.
+   - Persian text follows standard Persian orthography; half-space (ZWNJ) is permitted for natural readability.
    - Numerical telemetry, code, and latency metrics must remain isolated in LTR (`dir="ltr"`).
 
 ---

@@ -41,18 +41,23 @@ Whenever asked to audit, verify, or review any web page, component, or frontend 
   - **Tablet (768px):** Asymmetric Bento grids collapse gracefully into balanced 1-column or 2-column stacks.
   - **Desktop (1440px+):** Max-width containers (`max-w-7xl` or equivalent) prevent awkward stretching.
 
-### Pillar 3: Accessibility & WCAG 2.2 AA Compliance
-- **Measurement Method:** Count interactive elements, check contrast, verify ARIA states.
+### Pillar 3: Accessibility & WCAG 2.2 AA Compliance (Affordance & Functional Integrity)
+- **Measurement Method:** Count interactive elements, check contrast, verify ARIA states, test keyboard traversal and escape-to-close behavior.
 - **Evidence Required:**
-  - **Semantic Controls:** $X/X$ clickables use `<button type="button">` or `<a href="...">` (zero `<div onclick>`).
-  - **Visible Focus Rings:** $X/X$ interactive elements feature `focus-visible:ring-2` with sufficient contrast.
+  - **Semantic Controls (R-39):** $X/X$ clickables use `<button type="button">` or `<a href="...">` (zero `<div onclick>`). Enabled controls declare `cursor: pointer` in CSS; disabled controls declare `cursor: not-allowed`.
+  - **Functional Completeness (R-26):** Every clickable button/link triggers a real behavior (modal disclosure, accordion toggle, smooth scroll to existent section ID, or form validation). Zero dead buttons. Modals/drawers must support `Escape` key dismissal.
+  - **Navbar Link Integrity (R-24):** 100% of navbar links point to sections that physically exist in the DOM (zero ghost navigation).
+  - **Visible Focus Rings (R-32):** $X/X$ interactive elements feature `focus-visible:ring-2` with sufficient contrast.
   - **State Semantics:** Dynamic disclosures, accordions, and sheets provide `aria-expanded` and `aria-controls`.
-  - **Color Contrast:** Sampled text nodes meet minimum $4.5:1$ contrast ratio against background tokens.
+  - **Color Contrast (R-25):** Sampled text nodes meet minimum $4.5:1$ contrast ratio against background tokens across full gradient bounds.
   - **Functional Reduced Motion:** Non-essential decorative loops, parallax, and ambient meshes disabled via `@media (prefers-reduced-motion: reduce)`; functional state feedback transitions preserved with snappy durations ($\le 150\text{ms}$).
 
-### Pillar 4: Performance & Rendering Compositing Budget
-- **Measurement Method:** Count stacked blur layers, inspect SVG icons, verify animation drivers.
+### Pillar 4: Performance & Web Vitals Budget (Core Web Vitals & Compositing)
+- **Measurement Method:** Inspect media tags for dimensions/aspect-ratio, hero loading attributes, stacked blur layers, vector icons, and script tags.
 - **Evidence Required:**
+  - **Explicit Media Sizing (R-40 CLS Prevention):** 100% of `<img>`, `<video>`, and `<iframe>` elements declare explicit `width` and `height` attributes or CSS `aspect-ratio` to reserve layout bounds and eliminate Cumulative Layout Shift.
+  - **Hero Image Contract (R-40 LCP Budget):** Above-the-fold hero image is a native `<img>` tag in the HTML, never `loading="lazy"`, with `fetchpriority="high"` declared.
+  - **Zero Render-Blocking Scripts (R-40):** Zero render-blocking third-party scripts in `<head>`. Non-critical scripts use `defer`/`async` or load on interaction.
   - **Backdrop Blur Layers:** Detected active `backdrop-filter: blur(...)` elements (Threshold: $\le 5$ active layers simultaneously, reduced to $\le 2$ on mobile).
   - **Zero Emojis:** Zero raw unicode emojis used as interface icons; verified inline SVG vector paths.
   - **Frame Driver:** Continuous interactive elements (sliders, spring tilts) driven via `requestAnimationFrame`.
@@ -89,16 +94,17 @@ When evaluating or generating any frontend code, `ui-verifier` outputs a structu
 │    [PASS] Touch Targets      : Meets WCAG AA (>= 24px, CTA 44px)│
 │    [PASS] Desktop 1440px     : max-w-7xl container bounded      │
 │                                                                 │
-│ 3. Accessibility & WCAG 2.2 AA                                  │
-│    [PASS] Keyboard Traversal : 12/12 elements keyboard reachable│
-│    [PASS] Focus Rings        : 12/12 have focus-visible states  │
-│    [PASS] Color Contrast     : Min 5.4:1 (exceeds 4.5:1 minimum)│
-│    [PASS] Functional Motion  : prefers-reduced-motion enforced  │
+│ 3. Accessibility & WCAG 2.2 AA (Functional Integrity)           │
+│    [PASS] Semantic Clickables: 12/12 buttons/anchors (0 div onclick)│
+│    [PASS] Functional Actions : 12/12 elements active (0 dead controls)│
+│    [PASS] Navbar Link Targets: 5/5 nav items point to real DOM IDs│
+│    [PASS] Focus Rings & A11y : 12/12 focus-visible & contrast ok│
 │                                                                 │
-│ 4. Performance & Compositing Budget                             │
-│    [PASS] Backdrop Blur Layers: 2 active layers (budget max: 5) │
+│ 4. Performance & Web Vitals Budget                              │
+│    [PASS] Media Layout Sizing: 100% img/video have explicit dims│
+│    [PASS] Hero LCP Contract  : fetchpriority="high", no lazy img│
+│    [PASS] Backdrop Blur      : 2 active layers (budget max: 5)  │
 │    [PASS] Vector Iconography : 0 raw emojis, inline SVGs used   │
-│    [PASS] Motion Driver      : rAF-based sub-pixel interpolation│
 │                                                                 │
 │ 5. Semantic RTL & BiDi Stability                                │
 │    [PASS / N/A (LTR Default)] Macro Layout : Coordinate grid locked │

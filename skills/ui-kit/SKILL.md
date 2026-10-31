@@ -67,8 +67,8 @@ RTL layout rules and `<bdi>` bidirectional contracts are strictly scoped to on-d
 4. **BiDi Resilience & Strict Monospace LTR:**
    Mixed English brand names or tech terms inside Persian sentences must not scramble punctuation (`unicode-bidi: plaintext` or `<bdi>`).
    Code blocks, numbers, metric counters (`99.98%`), and URLs always stay strictly `direction: ltr !important; text-align: left !important`.
-5. **Zero ZWNJ Protocol:**
-   All Persian text in copy, comments, and configuration must use standard spaces exclusively. The zero-width non-joiner (`\u200c`) is strictly forbidden.
+5. **Persian Typography Protocol:**
+   Persian text in copy, labels, and documentation follows standard Persian orthography; half-space (ZWNJ) is permitted for natural readability.
 
 ---
 
