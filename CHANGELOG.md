@@ -5,6 +5,22 @@ All notable changes to the **Vibe UI Skills** repository are documented in this 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [6.4.4] - 2026-11-01
+
+### Sovereign Multi-Agent Pod Swarm Mandate & Universal Ecosystem Synchronization
+- **Mandatory 3-Tier Asymmetric Swarm Execution**:
+  - Permanently codified mandatory 3-tier swarm orchestration across `GEMINI.md` (Constitution Rule 3) and `MASTER_PROJECT_RULES.md` (Rule 11).
+  - Strict prohibition of solo execution: `vibe-ui-agent` no longer performs curation, styling, and verification as an isolated actor.
+  - Enforced sequential handoff:
+    1. `vibe-curator`: Upstream curation of 24-domain Unsplash Vault, 131 Cinematic Assets, 3,800+ Galaxy micro-interactions, and 10 UI-Kit catalogs -> `Asset & Style Manifest`.
+    2. `vibe-ui-agent`: Master Frontend Builder synthesizing the curated manifest into unified HTML/React code.
+    3. `vibe-auditor`: Downstream adversarial inspector executing headless screenshots (1440px/390px), WCAG AA contrast verification, and 0px overflow checks with closed-loop punch list remediation.
+- **Contract & Agent Synchronization**:
+  - Upgraded `vibe-ui-agent/AGENT.md` to v6.4.4 with Mandate 5 and explicit 3-tier swarm integration.
+  - Synchronized `custom-agents` definitions and updated `subagent-orchestrator` skill roster.
+
+---
+
 ## [6.4.3] - 2026-10-31
 
 ### Anti-Slop Integration, Bento-Dogma Purge & Authentic 24-Domain Architecture

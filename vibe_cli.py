@@ -341,7 +341,7 @@ def cmd_assets(args):
 
 def main():
     parser = argparse.ArgumentParser(description="Vibe UI Suite v6.4.2 Master CLI")
-    parser.add_argument("--version", action="version", version="Vibe UI Suite v6.4.3")
+    parser.add_argument("--version", action="version", version="Vibe UI Suite v6.4.4")
     subparsers = parser.add_subparsers(dest="command", help="Command to run")
 
     # search

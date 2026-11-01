@@ -3,6 +3,14 @@
 All notable changes to the **Vibe UI (VS Code, Cursor & Open-VSX)** extension will be documented in this file.
 This project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [6.4.4] — 2026-11-01
+
+### Added & Improved
+- **Mandatory Multi-Agent Pod Swarm**: Codified strict prohibition of solo UI execution; UI architecture is permanently governed by the 3-tier swarm (`vibe-curator` -> `vibe-ui-agent` -> `vibe-auditor`).
+- **Closed-Loop Quality Remediation**: Automated adversarial review pass with headless screenshots and static contract verification.
+
+---
+
 ## [6.4.3] — 2026-10-31
 
 ### Added & Improved

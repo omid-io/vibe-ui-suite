@@ -1,12 +1,12 @@
 {
   "$schema": "./schemas/version-manifest.schema.json",
-  "version": "6.4.3",
+  "version": "6.4.4",
   "codename": "Asymmetric Pod Swarm, High-Density Dashboards & Sovereign Visual Chemistries",
   "release_channel": "stable",
   "packages": {
-    "vibe-ui-suite": "6.4.3",
-    "vibe-ui-vscode": "6.4.3",
-    "vibe-ui-nextjs-starter": "6.4.3"
+    "vibe-ui-suite": "6.4.4",
+    "vibe-ui-vscode": "6.4.4",
+    "vibe-ui-nextjs-starter": "6.4.4"
   },
   "schemas": {
     "intent_contract": "v1",
@@ -23,5 +23,5 @@
     "nextjs": ">=15.0.0",
     "react": ">=19.0.0"
   },
-  "last_updated": "2026-10-28"
+  "last_updated": "2026-11-01"
 }
