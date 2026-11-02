@@ -134,7 +134,7 @@ def main():
     print("\n💡 Operational Workflow:")
     print("  1. In Chrome, navigate to: https://marketplace.visualstudio.com/manage/publishers/omid-io")
     print("  2. Click 'More Actions...' () next to 'Vibe UI Studio & Contrast Gate' -> Click 'Update'")
-    print("  3. Run either via Antigravity: call_mcp_tool(browser_run_code_unsafe, filename='run_upload.js')")
+    print("  3. Drag and drop the generated VSIX or upload via the publisher dashboard.")
     print("     OR simply open DevTools Console (F12) in Chrome and press Ctrl+V -> Enter!")
     print("=" * 70)
 

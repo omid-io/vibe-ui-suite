@@ -19,7 +19,7 @@ if hasattr(sys.stdout, "reconfigure"):
 if hasattr(sys.stderr, "reconfigure"):
     sys.stderr.reconfigure(encoding="utf-8", errors="replace")
 
-SUITE_VERSION = "6.4.4"
+SUITE_VERSION = "6.4.5"
 
 # ==============================================================================
 # Mathematical WCAG Relative Luminance & Contrast Engine

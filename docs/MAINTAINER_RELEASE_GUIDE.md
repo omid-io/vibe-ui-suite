@@ -62,13 +62,5 @@ No Personal Access Token (PAT) required. Uses the user's active Chrome publisher
    ```bash
    python scripts/publish_marketplace_browser.py
    ```
-4. In Antigravity main chat, execute:
-   ```python
-   call_mcp_tool(
-       ServerName="playwright",
-       ToolName="browser_run_code_unsafe",
-       Arguments={"filename": "run_upload.js"}
-   )
-   ```
-   *The script mounts the VSIX into memory, populates the file input via DOM `DataTransfer`, dispatches React synthetic `onChange`, and auto-clicks `Upload`.*
+4. Alternatively, upload the generated VSIX directly via the publisher dashboard (`https://marketplace.visualstudio.com/manage/publishers/omid-io`).
 5. Confirm Microsoft verification status: `4.x.xVerifying4.y.y` -> Published.

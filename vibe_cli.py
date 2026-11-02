@@ -27,6 +27,7 @@ from vibe_core.refiner import AutoRefiner
 from vibe_core.verifier import VerificationEngine
 from vibe_core.healer import SelfHealingLoop
 from vibe_core.galaxy_engine import GalaxyEngine
+from vibe_core.swarm import ForemanSwarmOrchestrator
 
 def cmd_inspire(args):
     """Searches or extracts components from the Galaxy repository (3,800+ micro-interactions with auto-provisioned offline cache)."""
@@ -339,10 +340,50 @@ def cmd_assets(args):
     if not success:
         sys.exit(1)
 
+
+def cmd_swarm(args):
+    """Executes the full 5-station Foreman Multi-Agent Swarm pipeline."""
+    orchestrator = ForemanSwarmOrchestrator(workspace_root=ROOT_DIR)
+    prompt = args.prompt or "Modern high-converting web interface"
+    result = orchestrator.run_swarm(
+        prompt=prompt,
+        target_output=args.output,
+        style_override=args.style,
+        output_format=getattr(args, "format", "html") or "html"
+    )
+    if getattr(args, "json", False):
+        print(json.dumps(result, indent=2, ensure_ascii=False))
+    else:
+        print("\n" + "═" * 60)
+        print(f"✨ SWARM EXECUTION COMPLETE: [{result['status']}]")
+        print(f"📄 Artifact: {result['artifact_path']}")
+        shots = result.get('screenshots', {})
+        if shots.get('desktop'):
+            print(f"🖥️  Desktop Screenshot: {shots['desktop']}")
+        if shots.get('mobile'):
+            print(f"📱 Mobile Screenshot: {shots['mobile']}")
+        print("═" * 60)
+
 def main():
     parser = argparse.ArgumentParser(description="Vibe UI Suite v6.4.2 Master CLI")
-    parser.add_argument("--version", action="version", version="Vibe UI Suite v6.4.4")
+    parser.add_argument("--version", action="version", version="Vibe UI Suite v6.4.5")
     subparsers = parser.add_subparsers(dest="command", help="Command to run")
+
+    # swarm (Foreman Multi-Agent Swarm)
+    p_swarm = subparsers.add_parser("swarm", help="Run the full 5-station Foreman Multi-Agent Swarm from prompt to verified screenshots")
+    p_swarm.add_argument("prompt", nargs="?", default="", help="User design prompt or goal")
+    p_swarm.add_argument("-o", "--output", help="Target output file path")
+    p_swarm.add_argument("-s", "--style", help="Style chemistry override")
+    p_swarm.add_argument("--format", choices=["html", "tsx"], default="html", help="Output format: html or tsx")
+    p_swarm.add_argument("--json", action="store_true", help="Output execution results strictly as JSON")
+
+    # run (alias for swarm)
+    p_run = subparsers.add_parser("run", help="Alias for swarm command")
+    p_run.add_argument("prompt", nargs="?", default="", help="User design prompt or goal")
+    p_run.add_argument("-o", "--output", help="Target output file path")
+    p_run.add_argument("-s", "--style", help="Style chemistry override")
+    p_run.add_argument("--format", choices=["html", "tsx"], default="html", help="Output format: html or tsx")
+    p_run.add_argument("--json", action="store_true", help="Output execution results strictly as JSON")
 
     # search
     p_search = subparsers.add_parser("search", help="Search Knowledge Base (<10ms)")
@@ -411,7 +452,9 @@ def main():
         parser.print_help()
         sys.exit(1)
 
-    if args.command == "search":
+    if args.command in ["swarm", "run"]:
+        cmd_swarm(args)
+    elif args.command == "search":
         cmd_search(args)
     elif args.command == "plan":
         cmd_plan(args)

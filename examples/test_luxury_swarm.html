@@ -1,0 +1,700 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en" data-domain="ecommerce_luxury_fashion" class="h-full">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Timeless Silhouette, Artisanal Tailoring & Quiet Elegance</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Playfair+Display:ital,wght@0,600;1,400&family=Vazirmatn:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+:root {
+  --canvas-bg: oklch(0.98 0.005 85);
+  --surface-bg: oklch(0.95 0.01 85);
+  --accent: oklch(0.65 0.09 75);
+  --vibe-on-primary: oklch(0.12 0.02 85);
+  --border-subtle: oklch(0.88 0.01 85);
+  --text-primary: oklch(0.20 0.015 60);
+  --text-muted: oklch(0.48 0.015 60);
+  --radius-base: 4px;
+  --radius-container: 12px;
+  --radius-button: 8px;
+  --font-display: 'Playfair Display', 'Vazirmatn', sans-serif;
+  --font-body: 'Inter', 'Vazirmatn', sans-serif;
+  --motion-lambda: 10;
+  --transition-duration: 200ms;
+}
+
+    body {
+      background-color: var(--canvas-bg);
+      color: var(--text-primary);
+      font-family: var(--font-body);
+      overflow-x: hidden;
+      unicode-bidi: plaintext;
+    }
+
+    bdi, .ltr-code {
+      direction: ltr !important;
+      unicode-bidi: isolate;
+    }
+
+    h1, h2, h3, .display-font {
+      font-family: var(--font-display);
+    }
+
+    button:focus-visible, a:focus-visible, input:focus-visible {
+      outline: 2px solid var(--accent);
+      outline-offset: 2px;
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, ::before, ::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+      }
+    }
+
+    /* Masterpiece Visual Engine: Atmospheric Lighting & Specular Physics */
+    .vibe-gradient-heading {
+      background: linear-gradient(180deg, var(--text-primary) 0%, color-mix(in oklch, var(--text-primary) 72%, transparent) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .vibe-spotlight-card {
+      position: relative;
+      overflow: hidden;
+      transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .vibe-spotlight-card::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      top: 0;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.22), transparent);
+      z-index: 10;
+      pointer-events: none;
+    }
+
+    .vibe-spotlight-card::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      border-radius: inherit;
+      background: radial-gradient(450px circle at var(--mouse-x, 50%) var(--mouse-y, 50%), color-mix(in oklch, var(--accent) 10%, transparent), transparent 75%);
+      pointer-events: none;
+      opacity: 0;
+      transition: opacity 0.35s ease;
+      z-index: 5;
+    }
+
+    .vibe-spotlight-card:hover::after {
+      opacity: 1;
+    }
+
+    .vibe-shimmer-btn {
+      position: relative;
+      overflow: hidden;
+      transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .vibe-shimmer-btn:hover {
+      box-shadow: 0 0 25px -4px var(--accent);
+    }
+
+    .vibe-shimmer-btn:active {
+      transform: scale(0.98);
+    }
+
+    .vibe-shimmer-btn::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 60%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.28), transparent);
+      transform: skewX(-20deg);
+      transition: none;
+      pointer-events: none;
+    }
+
+    .vibe-shimmer-btn:hover::after {
+      left: 140%;
+      transition: left 0.75s ease-in-out;
+    }
+
+
+
+    .ambient-spotlight-layer {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 1;
+      background: radial-gradient(550px circle at var(--mouse-x, 50%) var(--mouse-y, 50%), color-mix(in oklch, var(--accent) 6%, transparent), transparent 70%);
+      transition: opacity 0.3s ease;
+    }
+
+    /* Scroll-Driven Kinetic Stagger Reveal & Lazy Loading Standard */
+    .vibe-reveal-node {
+      opacity: 0;
+      transform: translateY(28px);
+      transition: opacity 0.75s cubic-bezier(0.16, 1, 0.3, 1), transform 0.75s cubic-bezier(0.16, 1, 0.3, 1);
+      will-change: opacity, transform;
+    }
+    .vibe-reveal-node.vibe-revealed {
+      opacity: 1 !important;
+      transform: translateY(0) !important;
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .vibe-reveal-node {
+        opacity: 1 !important;
+        transform: none !important;
+        transition: none !important;
+      }
+    }
+    /* Lazy Editorial Image Smooth Fade-In */
+    img[loading="lazy"] {
+      opacity: 0;
+      transition: opacity 0.6s ease-in-out;
+    }
+    img[loading="lazy"].loaded {
+      opacity: 1 !important;
+    }
+  </style>
+</head>
+<body class="min-h-full flex flex-col antialiased relative">
+
+
+  <!-- Ambient Cursor Spotlight Overlay -->
+  <div id="ambientSpotlightOverlay" class="ambient-spotlight-layer" aria-hidden="true"></div>
+
+  <!-- Atmospheric Canvas Background: Ambient Lighting & Grid System -->
+  <div class="fixed inset-0 pointer-events-none z-0 overflow-hidden" aria-hidden="true">
+    <div class="absolute inset-0 bg-[linear-gradient(to_right,rgba(128,128,128,0.06)_1px,transparent_1px),linear-gradient(to_bottom,rgba(128,128,128,0.06)_1px,transparent_1px)] bg-[size:36px_36px] [mask-image:radial-gradient(ellipse_60%_50%_at_50%_0%,#000_70%,transparent_100%)]"></div>
+    <div class="absolute -top-32 start-1/2 -translate-x-1/2 rtl:translate-x-1/2 w-[760px] h-[520px] bg-[var(--accent)]/[0.08] blur-[140px] rounded-full"></div>
+  </div>
+
+  <!-- Top Navigation Bar -->
+  <header class="w-full border-b border-[var(--border-subtle)] bg-[var(--surface-bg)]/85 backdrop-blur-md sticky top-0 z-30">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
+      <div class="flex items-center space-x-3 rtl:space-x-reverse">
+        <svg class="w-8 h-8 text-[var(--accent)]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <polygon points="12 2 2 7 12 12 22 7 12 2"></polygon>
+          <polyline points="2 17 12 22 22 17"></polyline>
+          <polyline points="2 12 12 17 22 12"></polyline>
+        </svg>
+        <span class="text-xl font-bold tracking-tight display-font">Vibe Studio</span>
+      </div>
+      <nav class="hidden md:flex items-center space-x-6 rtl:space-x-reverse" aria-label="Main Navigation">
+            <a href="#curated" class="text-sm font-medium hover:text-[var(--accent)] transition-colors min-h-[44px] inline-flex items-center">Curated Portfolio</a>
+            <a href="#monograph" class="text-sm font-medium hover:text-[var(--accent)] transition-colors min-h-[44px] inline-flex items-center">Editorial Thesis</a>
+            <a href="#inquire" class="text-sm font-medium hover:text-[var(--accent)] transition-colors min-h-[44px] inline-flex items-center">Private Inquiries</a>
+      </nav>
+      <div class="flex items-center space-x-3 rtl:space-x-reverse">
+        <button type="button" id="header-cta-btn" class="inline-flex items-center justify-center px-4 py-2.5 text-sm font-medium rounded-[var(--radius-button)] text-[var(--vibe-on-primary,#fff)] bg-[var(--accent)] hover:opacity-90 min-h-[44px] min-w-[44px] transition-all">
+          Explore Autumn/Winter Lookbook
+        </button>
+        <!-- Mobile Navigation Menu Toggle Button -->
+        <button type="button" id="vibeMobileMenuBtn" class="md:hidden inline-flex items-center justify-center p-2 rounded-[var(--radius-button)] text-[var(--text-main)] hover:bg-[var(--accent)]/10 min-h-[44px] min-w-[44px] border border-[var(--border-subtle)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)]" aria-expanded="false" aria-controls="vibeMobileMenu" aria-label="Toggle navigation menu">
+          <svg class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" aria-hidden="true">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16" />
+          </svg>
+        </button>
+      </div>
+    </div>
+    <!-- Responsive Mobile Navigation Drawer -->
+    <div id="vibeMobileMenu" class="md:hidden hidden border-t border-[var(--border-subtle)] bg-[var(--surface-bg)] px-4 pt-3 pb-4 space-y-2" aria-label="Mobile Navigation">
+            <a href="#curated" class="block py-2.5 px-3 rounded-[var(--radius-button)] text-sm font-medium text-[var(--text-main)] hover:bg-[var(--accent)]/10 hover:text-[var(--accent)] transition-colors min-h-[44px] flex items-center">Curated Portfolio</a>
+            <a href="#monograph" class="block py-2.5 px-3 rounded-[var(--radius-button)] text-sm font-medium text-[var(--text-main)] hover:bg-[var(--accent)]/10 hover:text-[var(--accent)] transition-colors min-h-[44px] flex items-center">Editorial Thesis</a>
+            <a href="#inquire" class="block py-2.5 px-3 rounded-[var(--radius-button)] text-sm font-medium text-[var(--text-main)] hover:bg-[var(--accent)]/10 hover:text-[var(--accent)] transition-colors min-h-[44px] flex items-center">Private Inquiries</a>
+    </div>
+  </header>
+
+  <!-- Main Hero & Content Section -->
+  <main class="flex-1 max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-12 lg:py-16 relative z-10">
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-stretch">
+      <!-- Main Bento Hero Card with Asymmetric Layout -->
+      <section class="vibe-spotlight-card lg:col-span-7 bg-[var(--surface-bg)] border border-[var(--border-subtle)] shadow-sm hover:shadow-md transition-shadow rounded-[var(--radius-container)] p-6 sm:p-8 lg:p-10 flex flex-col justify-between" aria-labelledby="hero-title">
+        <div>
+          <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-semibold bg-[var(--accent)]/10 text-[var(--accent)] border border-[var(--accent)]/20 mb-4 shadow-sm">
+            <span class="relative flex h-2 w-2">
+              <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+              <span class="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
+            </span>
+            <span>Vibe UI Verified</span>
+          </div>
+          <h1 id="hero-title" class="text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight mb-4 vibe-gradient-heading">
+            Timeless Silhouette, Artisanal Tailoring & Quiet Elegance
+          </h1>
+          <p class="text-[var(--text-muted)] text-base sm:text-lg leading-relaxed max-w-2xl mb-6">
+            Limited atelier collections handcrafted from certified organic silks and virgin wools.
+          </p>
+
+          <!-- Editorial Domain Asset Showcase -->
+          <div class="relative w-full h-44 sm:h-56 rounded-[var(--radius-button)] overflow-hidden border border-[var(--border-subtle)] mb-6 shadow-sm">
+            <img src="https://images.unsplash.com/photo-1539109136881-3be0616acf4b?auto=format&fit=crop&w=1200&q=80" alt="Handcrafted Bespoke Atelier Collection • Limited Edition" class="w-full h-full object-cover" loading="lazy" decoding="async" onerror="this.src='https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=1200&q=80'" />
+            <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent pointer-events-none"></div>
+            <div class="absolute bottom-2 start-3 end-3 text-[11px] font-mono text-white/95 flex items-center justify-between">
+              <span class="truncate"><bdi>Handcrafted Bespoke Atelier Collection • Limited Edition</bdi></span>
+              <span class="px-1.5 py-0.5 rounded bg-black/40 text-[10px] uppercase font-mono">Verified CDN</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="flex flex-wrap gap-4 items-center pt-4 border-t border-[var(--border-subtle)]">
+          <button type="button" id="hero-primary-btn" class="vibe-shimmer-btn inline-flex items-center justify-center px-6 py-3 text-base font-semibold rounded-[var(--radius-button)] text-[var(--vibe-on-primary,#fff)] bg-[var(--accent)] min-h-[44px]">
+            Explore Autumn/Winter Lookbook
+          </button>
+          <button type="button" id="hero-secondary-btn" class="inline-flex items-center justify-center px-6 py-3 text-base font-semibold rounded-[var(--radius-button)] text-[var(--text-primary)] border border-[var(--border-subtle)] bg-[var(--canvas-bg)] hover:bg-[var(--surface-bg)] min-h-[44px] transition-all hover:scale-[1.02] active:scale-[0.98]">
+            Request Private Fitting
+          </button>
+        </div>
+      </section>
+
+      <!-- Secondary Domain Highlights: Ultra-Crisp macOS Window Chrome Mockup -->
+      <aside class="vibe-spotlight-card lg:col-span-5 bg-[var(--surface-bg)] border border-[var(--border-subtle)] shadow-sm hover:shadow-md transition-shadow rounded-[var(--radius-container)] overflow-hidden flex flex-col justify-between" aria-label="Domain Highlights">
+        <!-- Window Chrome Titlebar -->
+        <div class="px-4 py-3 bg-[var(--canvas-bg)]/80 border-b border-[var(--border-subtle)] flex items-center justify-between backdrop-blur-md">
+          <div class="flex items-center space-x-2 rtl:space-x-reverse">
+            <span class="size-2 rounded-full bg-[var(--accent)]"></span>
+            <span class="text-xs font-bold text-[var(--text-primary)] tracking-tight">Verified Platform Highlights</span>
+          </div>
+          <div class="flex items-center space-x-1.5 rtl:space-x-reverse">
+            <span class="w-2 h-2 rounded-full bg-emerald-500"></span>
+            <span class="text-[10px] font-medium text-emerald-600 dark:text-emerald-400 uppercase tracking-wider">ACTIVE</span>
+          </div>
+        </div>
+
+        <div class="p-6 flex-1 flex flex-col justify-between">
+          <div>
+            <h2 class="text-base font-bold mb-4 flex items-center space-x-2 rtl:space-x-reverse">
+              <svg class="w-4 h-4 text-[var(--accent)]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M22 12h-4l-3 9L9 3l-3 9H2"></path></svg>
+              <span>Highlights & Status</span>
+            </h2>
+            <div class="space-y-3">
+            <div class="p-3.5 bg-[var(--canvas-bg)] rounded-[var(--radius-base)] border border-[var(--border-subtle)]">
+              <div class="text-xs text-[var(--text-muted)] mb-1">Atelier Origin</div>
+              <div class="text-2xl font-bold text-[var(--accent)]"><bdi>Milan & Paris</bdi></div>
+            </div>
+            <div class="p-3.5 bg-[var(--canvas-bg)] rounded-[var(--radius-base)] border border-[var(--border-subtle)]">
+              <div class="text-xs text-[var(--text-muted)] mb-1">Crafting Hours / Piece</div>
+              <div class="text-2xl font-bold text-[var(--accent)]"><bdi>42h</bdi></div>
+            </div>
+            <div class="p-3.5 bg-[var(--canvas-bg)] rounded-[var(--radius-base)] border border-[var(--border-subtle)]">
+              <div class="text-xs text-[var(--text-muted)] mb-1">Certified Natural Fibers</div>
+              <div class="text-2xl font-bold text-[var(--accent)]"><bdi>100%</bdi></div>
+            </div>
+            </div>
+          </div>
+          <div class="mt-6 pt-4 border-t border-[var(--border-subtle)] text-xs text-[var(--text-muted)] flex items-center justify-between">
+            <div class="flex items-center space-x-1.5 rtl:space-x-reverse">
+              <span class="w-2 h-2 rounded-full bg-emerald-500"></span>
+              <span>Active & Ready</span>
+            </div>
+            <span class="font-mono text-[10px] opacity-70"><bdi>99.99% SLO</bdi></span>
+          </div>
+        </div>
+      </aside>
+    </div>
+
+
+    <!-- Archetype 2: Editorial Asymmetric Spread -> Curated Feature Exhibition -->
+    <section id="curated" class="mt-16 pt-10 border-t border-[var(--border-subtle)]" aria-labelledby="curated-heading">
+      <div class="max-w-3xl mb-12">
+        <span class="text-xs font-bold uppercase tracking-widest text-[var(--accent)] mb-3 block">Curated Edition // 2026</span>
+        <h2 id="curated-heading" class="text-3xl sm:text-4xl font-serif font-medium tracking-tight text-[var(--text-primary)] leading-tight">
+          Seasonal Haute Couture & Rare Editions
+        </h2>
+        <p class="text-base text-[var(--text-muted)] mt-4 font-serif italic leading-relaxed">
+          Crafted with uncompromising discipline, rare materials, and geometric harmony for discerning patrons.
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-12 gap-8 items-stretch">
+        <div class="md:col-span-7 p-8 bg-[var(--surface-bg)] border border-[var(--border-subtle)] rounded-[var(--radius-container)] shadow-sm hover:shadow-md transition-shadow flex flex-col justify-between space-y-6">
+          <div class="space-y-4">
+            <span class="inline-flex px-3 py-1 rounded-full text-xs font-serif italic bg-[var(--accent)]/10 text-[var(--accent)]">Special Commission</span>
+            <h3 class="text-2xl font-serif font-bold text-[var(--text-primary)]">The Sovereign Collection</h3>
+            <p class="text-sm text-[var(--text-muted)] leading-relaxed font-sans">
+              Every detail is calibrated to enduring timelessness. Rigorous provenance, bespoke craftsmanship, and acoustic mastery.
+            </p>
+          </div>
+          <div class="pt-6 border-t border-[var(--border-subtle)] flex items-center justify-between">
+            <div>
+              <div class="text-xs uppercase tracking-wider text-[var(--text-muted)]">Private Valuation</div>
+              <div class="text-2xl font-serif font-bold text-[var(--accent)]"><bdi>Available by Consultation</bdi></div>
+            </div>
+            <a href="#inquire" class="px-5 py-2.5 text-xs font-medium uppercase tracking-wider rounded-[var(--radius-button)] bg-[var(--accent)] text-[var(--vibe-on-primary,#fff)] min-h-[44px] inline-flex items-center transition-opacity hover:opacity-90">
+              Request Dossier
+            </a>
+          </div>
+        </div>
+
+        <div class="md:col-span-5 p-8 bg-[var(--surface-bg)] border border-[var(--border-subtle)] rounded-[var(--radius-container)] shadow-sm hover:shadow-md transition-shadow flex flex-col justify-between space-y-6">
+          <div class="space-y-3">
+            <span class="text-xs uppercase tracking-widest text-[var(--text-muted)]">Editorial Thesis</span>
+            <blockquote class="text-lg font-serif italic text-[var(--text-primary)] leading-relaxed border-s-2 border-[var(--accent)] ps-4 my-4">
+              "True luxury is quiet, absolute in execution, and void of superficial ornament."
+            </blockquote>
+            <p class="text-xs text-[var(--text-muted)]">— Curatorial Monograph, Vol. IX</p>
+          </div>
+          <div class="pt-4 border-t border-[var(--border-subtle)]">
+            <div class="text-xs font-semibold text-[var(--accent)] flex items-center gap-1.5">
+              <span class="size-1.5 rounded-full bg-[var(--accent)]"></span>
+              Verified Provenance & Certified Authenticity
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Archetype 2: Monograph & Materials Exploration -->
+    <section id="monograph" class="mt-16 pt-10 border-t border-[var(--border-subtle)]" aria-labelledby="monograph-heading">
+      <div class="max-w-2xl mb-8">
+        <h2 id="monograph-heading" class="text-3xl font-serif font-bold text-[var(--text-primary)]">Material Monograph</h2>
+        <p class="text-sm text-[var(--text-muted)] mt-2 font-serif italic">Disciplined materiality sourced from heritage ateliers.</p>
+      </div>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <div class="p-6 bg-[var(--surface-bg)] border border-[var(--border-subtle)] rounded-[var(--radius-container)] shadow-sm hover:shadow-md transition-shadow space-y-2">
+          <div class="text-xs font-serif uppercase tracking-widest text-[var(--accent)]">Element I</div>
+          <h3 class="text-lg font-serif font-bold">Honed Titanium</h3>
+          <p class="text-xs text-[var(--text-muted)] leading-relaxed">Aerospace-grade durability hand-brushed with microscopic satin finish.</p>
+        </div>
+        <div class="p-6 bg-[var(--surface-bg)] border border-[var(--border-subtle)] rounded-[var(--radius-container)] shadow-sm hover:shadow-md transition-shadow space-y-2">
+          <div class="text-xs font-serif uppercase tracking-widest text-[var(--accent)]">Element II</div>
+          <h3 class="text-lg font-serif font-bold">Italian Full-Grain</h3>
+          <p class="text-xs text-[var(--text-muted)] leading-relaxed">Vegetable-tanned leather conditioned with natural beeswax patina.</p>
+        </div>
+        <div class="p-6 bg-[var(--surface-bg)] border border-[var(--border-subtle)] rounded-[var(--radius-container)] shadow-sm hover:shadow-md transition-shadow space-y-2">
+          <div class="text-xs font-serif uppercase tracking-widest text-[var(--accent)]">Element III</div>
+          <h3 class="text-lg font-serif font-bold">Acoustic Crystal</h3>
+          <p class="text-xs text-[var(--text-muted)] leading-relaxed">Hand-blown borosilicate crystal engineered for zero harmonic distortion.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Archetype 2: Inquire Form Section -->
+    <section id="inquire" class="mt-16 pt-10 border-t border-[var(--border-subtle)]" aria-labelledby="inquire-heading">
+      <div class="max-w-xl mx-auto p-8 bg-[var(--surface-bg)] border border-[var(--border-subtle)] rounded-[var(--radius-container)] shadow-sm hover:shadow-md transition-shadow text-center space-y-6">
+        <h2 id="inquire-heading" class="text-2xl font-serif font-bold text-[var(--text-primary)]">Private Salon Consultation</h2>
+        <p class="text-xs text-[var(--text-muted)] font-serif italic">Appointments are reserved exclusively for private collectors and corporate acquisitions.</p>
+        <form class="space-y-4 text-start" onsubmit="event.preventDefault();">
+          <div>
+            <label for="curated-email" class="block text-xs font-medium text-[var(--text-muted)] mb-1">Direct Liaison Email</label>
+            <input type="email" id="curated-email" required placeholder="patron@private-family.com" class="w-full px-4 py-2.5 text-xs rounded-[var(--radius-button)] bg-[var(--canvas-bg)] border border-[var(--border-subtle)] focus:border-[var(--accent)] min-h-[44px] outline-none">
+          </div>
+          <button type="submit" class="w-full py-3 text-xs font-serif font-medium uppercase tracking-widest rounded-[var(--radius-button)] bg-[var(--accent)] text-[var(--vibe-on-primary,#fff)] min-h-[44px]">Request Confidential Dialogue</button>
+        </form>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="w-full border-t border-[var(--border-subtle)] bg-[var(--surface-bg)] py-6 mt-12">
+    <div class="max-w-7xl mx-auto px-4 text-center text-xs text-[var(--text-muted)]">
+      &copy; 2026 Vibe Studio. All rights reserved.
+    </div>
+  </footer>
+
+  <!-- Interactive Client-side Script (Zero Dead Buttons & Zero Broken Anchors) -->
+  <script>
+    (function() {
+      // 1. Toast Notification Utility
+      function showToast(message) {
+        let toast = document.getElementById('vibe-toast');
+        if (!toast) {
+          toast = document.createElement('div');
+          toast.id = 'vibe-toast';
+          toast.setAttribute('role', 'status');
+          toast.setAttribute('aria-live', 'polite');
+          toast.className = 'fixed bottom-5 end-5 z-50 px-5 py-3 rounded-lg shadow-xl text-xs font-semibold transition-all transform duration-300 opacity-0 translate-y-2 pointer-events-none border';
+          document.body.appendChild(toast);
+        }
+        toast.style.backgroundColor = 'var(--surface-bg)';
+        toast.style.color = 'var(--text-primary)';
+        toast.style.borderColor = 'var(--accent)';
+        toast.textContent = message;
+        toast.classList.remove('opacity-0', 'translate-y-2', 'pointer-events-none');
+        setTimeout(function() {
+          toast.classList.add('opacity-0', 'translate-y-2', 'pointer-events-none');
+        }, 3500);
+      }
+
+      // 2. Smooth Scrolling for all Internal Anchors
+      document.querySelectorAll('a[href^="#"]').forEach(function(anchor) {
+        anchor.addEventListener('click', function(e) {
+          var targetId = anchor.getAttribute('href');
+          var targetEl = document.querySelector(targetId);
+          if (targetEl) {
+            e.preventDefault();
+            targetEl.scrollIntoView({ behavior: 'smooth' });
+          }
+        });
+      });
+
+      // 3. Header & Hero CTAs
+      var headerCta = document.getElementById('header-cta-btn');
+      var heroPrimary = document.getElementById('hero-primary-btn');
+      var heroSecondary = document.getElementById('hero-secondary-btn');
+
+      if (headerCta) {
+        headerCta.addEventListener('click', function() {
+          var bookingEl = document.getElementById('booking') || document.getElementById('services') || document.getElementById('contact');
+          if (bookingEl) bookingEl.scrollIntoView({ behavior: 'smooth' });
+          else showToast('Explore Autumn/Winter Lookbook - Active');
+        });
+      }
+      if (heroPrimary) {
+        heroPrimary.addEventListener('click', function() {
+          var bookingEl = document.getElementById('booking') || document.getElementById('services') || document.getElementById('contact');
+          if (bookingEl) bookingEl.scrollIntoView({ behavior: 'smooth' });
+          else showToast('Explore Autumn/Winter Lookbook - Started');
+        });
+      }
+      if (heroSecondary) {
+        heroSecondary.addEventListener('click', function() {
+          var targetEl = document.getElementById('portfolio') || document.getElementById('services') || document.getElementById('features') || document.getElementById('cluster');
+          if (targetEl) targetEl.scrollIntoView({ behavior: 'smooth' });
+          else showToast('Request Private Fitting');
+        });
+      }
+
+      // 4. Interactive Action Buttons
+      document.querySelectorAll('.btn-action').forEach(function(btn) {
+        btn.addEventListener('click', function() {
+          showToast('Telemetry traces inspection opened.');
+        });
+      });
+
+      // 5. Booking Day & Time Slot Selection
+      document.querySelectorAll('.day-slot-btn').forEach(function(btn) {
+        btn.addEventListener('click', function() {
+          document.querySelectorAll('.day-slot-btn').forEach(function(b) {
+            b.className = 'day-slot-btn px-4 py-2 text-xs font-bold rounded-[var(--radius-button)] bg-[var(--canvas-bg)] border border-[var(--border-subtle)] hover:bg-[var(--surface-bg)] min-h-[44px]';
+          });
+          btn.className = 'day-slot-btn px-4 py-2 text-xs font-bold rounded-[var(--radius-button)] bg-[var(--accent)] text-[var(--vibe-on-primary,#fff)] min-h-[44px]';
+        });
+      });
+
+      document.querySelectorAll('.time-slot-btn').forEach(function(btn) {
+        btn.addEventListener('click', function() {
+          document.querySelectorAll('.time-slot-btn').forEach(function(b) {
+            b.className = 'time-slot-btn px-4 py-2 text-xs font-bold rounded-[var(--radius-button)] bg-[var(--canvas-bg)] border border-[var(--border-subtle)] hover:bg-[var(--surface-bg)] min-h-[44px]';
+          });
+          btn.className = 'time-slot-btn px-4 py-2 text-xs font-bold rounded-[var(--radius-button)] bg-[var(--accent)] text-[var(--vibe-on-primary,#fff)] min-h-[44px]';
+        });
+      });
+
+      // 6. Portfolio Before/After Tab Switching
+      document.querySelectorAll('.portfolio-tab').forEach(function(tab) {
+        tab.addEventListener('click', function() {
+          var view = tab.getAttribute('data-view');
+          document.querySelectorAll('.portfolio-tab').forEach(function(t) {
+            t.className = 'portfolio-tab px-3 py-1.5 text-xs font-semibold rounded-[var(--radius-button)] bg-[var(--canvas-bg)] border border-[var(--border-subtle)] hover:bg-[var(--surface-bg)] min-h-[44px]';
+          });
+          tab.className = 'portfolio-tab px-3 py-1.5 text-xs font-semibold rounded-[var(--radius-button)] bg-[var(--accent)] text-[var(--vibe-on-primary,#fff)] min-h-[44px]';
+          showToast(view === 'before' ? 'Showing baseline pre-treatment gallery' : 'Showing post-treatment results gallery');
+        });
+      });
+
+      // 6.5. Interactive Before/After Split Comparison Sliders
+      document.querySelectorAll('.before-after-range').forEach(function(slider) {
+        slider.addEventListener('input', function(e) {
+          var targetId = slider.getAttribute('data-target');
+          var dividerId = slider.getAttribute('data-divider');
+          var targetEl = document.getElementById(targetId);
+          var dividerEl = document.getElementById(dividerId);
+          var val = e.target.value;
+          if (targetEl) targetEl.style.width = (100 - val) + '%';
+          if (dividerEl) dividerEl.style.left = val + '%';
+        });
+      });
+
+      // 6.6. Responsive Mobile Navigation Drawer Toggle
+      var mobileBtn = document.getElementById('vibeMobileMenuBtn');
+      var mobileMenu = document.getElementById('vibeMobileMenu');
+      if (mobileBtn && mobileMenu) {
+        mobileBtn.addEventListener('click', function() {
+          var isOpen = mobileBtn.getAttribute('aria-expanded') === 'true';
+          mobileBtn.setAttribute('aria-expanded', !isOpen);
+          mobileMenu.classList.toggle('hidden');
+        });
+      }
+
+      // 7. DevOps Log Stream Toggle & Copy
+      var streamToggle = document.getElementById('toggle-log-stream');
+      if (streamToggle) {
+        var isStreaming = true;
+        streamToggle.addEventListener('click', function() {
+          isStreaming = !isStreaming;
+          streamToggle.textContent = isStreaming ? 'Pause Stream' : 'Resume Stream';
+          showToast(isStreaming ? 'Live log telemetry resumed' : 'Log stream paused for inspection');
+        });
+      }
+      var copyCurlBtn = document.getElementById('copy-curl-btn');
+      if (copyCurlBtn) {
+        copyCurlBtn.addEventListener('click', function() {
+          showToast('curl command copied to clipboard');
+        });
+      }
+
+      // 8. Forms Submission with Feedback
+      var bookingForm = document.getElementById('quick-booking-form');
+      if (bookingForm) {
+        bookingForm.addEventListener('submit', function(e) {
+          e.preventDefault();
+          showToast('Appointment request confirmed. A clinic specialist will contact you shortly.');
+          bookingForm.reset();
+        });
+      }
+
+      var contactForm = document.getElementById('contact-form');
+      if (contactForm) {
+        contactForm.addEventListener('submit', function(e) {
+          e.preventDefault();
+          showToast('Thank you! Your message has been sent successfully.');
+          contactForm.reset();
+        });
+      }
+
+      // 9. Mouse-tracking Spotlight Cards (Guarded for Mobile Performance)
+      if (window.matchMedia('(hover: hover) and (pointer: fine)').matches) {
+        document.querySelectorAll('.vibe-spotlight-card').forEach(function(card) {
+          card.addEventListener('mousemove', function(e) {
+            var rect = card.getBoundingClientRect();
+            var x = e.clientX - rect.left;
+            var y = e.clientY - rect.top;
+            card.style.setProperty('--mouse-x', x + 'px');
+            card.style.setProperty('--mouse-y', y + 'px');
+          });
+        });
+      }
+
+      // 10. Lightswind Kinetic Trailing Arrow Pointer Engine
+      var cursorDot = document.getElementById('vibeCursorDot');
+      var cursorFollower = document.getElementById('vibeCursorFollower');
+      var cursorBadge = document.getElementById('vibeCursorBadge');
+
+      if (cursorDot && cursorFollower && window.matchMedia('(pointer: fine)').matches) {
+        var mouseX = window.innerWidth / 2;
+        var mouseY = window.innerHeight / 2;
+        var prevMouseX = mouseX;
+        var prevMouseY = mouseY;
+        var followerX = mouseX;
+        var followerY = mouseY;
+        var currentAngle = 0;
+        var targetAngle = 0;
+        var cursorVisible = false;
+
+        window.addEventListener('pointermove', function(e) {
+          mouseX = e.clientX;
+          mouseY = e.clientY;
+          if (!cursorVisible) {
+            cursorVisible = true;
+            cursorDot.style.opacity = '1';
+            cursorFollower.style.opacity = '1';
+          }
+          cursorDot.style.transform = 'translate(' + mouseX + 'px, ' + mouseY + 'px) translate(-50%, -50%)';
+          document.documentElement.style.setProperty('--mouse-x', mouseX + 'px');
+          document.documentElement.style.setProperty('--mouse-y', mouseY + 'px');
+        });
+
+        document.addEventListener('mouseleave', function() {
+          cursorVisible = false;
+          cursorDot.style.opacity = '0';
+          cursorFollower.style.opacity = '0';
+        });
+
+        document.addEventListener('mousedown', function() {
+          cursorFollower.classList.add('click-active');
+        });
+        document.addEventListener('mouseup', function() {
+          cursorFollower.classList.remove('click-active');
+        });
+
+        function renderKineticFollower() {
+          var vx = mouseX - followerX;
+          var vy = mouseY - followerY;
+          followerX += vx * 0.18;
+          followerY += vy * 0.18;
+
+          var dx = mouseX - prevMouseX;
+          var dy = mouseY - prevMouseY;
+          var speed = Math.hypot(dx, dy);
+
+          if (speed > 1.2) {
+            targetAngle = Math.atan2(dy, dx) * (180 / Math.PI) + 90;
+            var diff = targetAngle - currentAngle;
+            if (diff > 180) diff -= 360;
+            if (diff < -180) diff += 360;
+            currentAngle += diff * 0.22;
+          }
+          prevMouseX = mouseX;
+          prevMouseY = mouseY;
+
+          cursorFollower.style.transform = 'translate(' + followerX.toFixed(2) + 'px, ' + followerY.toFixed(2) + 'px) translate(-50%, -50%) rotate(' + currentAngle.toFixed(2) + 'deg)';
+          requestAnimationFrame(renderKineticFollower);
+        }
+        requestAnimationFrame(renderKineticFollower);
+
+        document.querySelectorAll('a, button, input, .vibe-spotlight-card').forEach(function(el) {
+          el.addEventListener('pointerenter', function() {
+            cursorDot.classList.add('hover-target');
+            cursorFollower.classList.add('hover-active');
+            if (cursorBadge) {
+              if (el.tagName.toLowerCase() === 'button') cursorBadge.textContent = 'ACTIVATE';
+              else if (el.tagName.toLowerCase() === 'a') cursorBadge.textContent = 'EXPLORE';
+              else cursorBadge.textContent = 'VIEW';
+            }
+          });
+          el.addEventListener('pointerleave', function() {
+            cursorDot.classList.remove('hover-target');
+            cursorFollower.classList.remove('hover-active');
+            if (cursorBadge) cursorBadge.textContent = '';
+          });
+        });
+      }
+
+      // 11. Scroll-Driven Kinetic Stagger Entrance Observers
+      var revealTargets = document.querySelectorAll('section > div:not(.animate-marquee), .vibe-spotlight-card');
+      revealTargets.forEach(function(el, index) {
+        if (el.classList.contains('animate-marquee') || el.closest('.animate-marquee')) return;
+        el.classList.add('vibe-reveal-node');
+        var delay = (index % 3) * 0.08;
+        if (delay > 0) {
+          el.style.transitionDelay = delay.toFixed(2) + 's';
+        }
+      });
+
+      var scrollObserver = new IntersectionObserver(function(entries) {
+        entries.forEach(function(entry) {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('vibe-revealed');
+            scrollObserver.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.08, rootMargin: '0px 0px -30px 0px' });
+
+      revealTargets.forEach(function(el) {
+        scrollObserver.observe(el);
+      });
+
+      // Lazy Loading Image Progressive Fade-In
+      var lazyImages = document.querySelectorAll('img[loading="lazy"]');
+      lazyImages.forEach(function(img) {
+        if (img.complete) {
+          img.classList.add('loaded');
+        } else {
+          img.addEventListener('load', function() { img.classList.add('loaded'); });
+          img.addEventListener('error', function() { img.classList.add('loaded'); });
+        }
+      });
+    })();
+  </script>
+</body>
+</html>

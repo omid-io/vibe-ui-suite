@@ -4,9 +4,9 @@ from pathlib import Path
 import shutil
 
 ROOT_DIR = Path(r"E:\programming\vibe-ui-suite")
-OLD_V = "6.4.3"
-NEW_V = "6.4.4"
-DATE_STR = "2026-11-01"
+OLD_V = "6.4.4"
+NEW_V = "6.4.5"
+DATE_STR = "2026-11-02"
 
 print(f"Bumping version from {OLD_V} to {NEW_V}...")
 
@@ -209,22 +209,26 @@ print("  - Synchronized skills to .agents/skills and packages/vibe-ui-suite/skil
 changelog_entry = f"""
 ## [{NEW_V}] - {DATE_STR}
 
-### Sovereign Multi-Agent Pod Swarm Mandate & Universal Ecosystem Synchronization
-- **Mandatory 3-Tier Asymmetric Swarm Execution**:
-  - Permanently codified mandatory 3-tier swarm orchestration across `GEMINI.md` (Constitution Rule 3) and `MASTER_PROJECT_RULES.md` (Rule 11).
-  - Strict prohibition of solo execution: `vibe-ui-agent` no longer performs curation, styling, and verification as an isolated actor.
-  - Enforced sequential handoff:
-    1. `vibe-curator`: Upstream curation of 24-domain Unsplash Vault, 131 Cinematic Assets, 3,800+ Galaxy micro-interactions, and 10 UI-Kit catalogs -> `Asset & Style Manifest`.
-    2. `vibe-ui-agent`: Master Frontend Builder synthesizing the curated manifest into unified HTML/React code.
-    3. `vibe-auditor`: Downstream adversarial inspector executing headless screenshots (1440px/390px), WCAG AA contrast verification, and 0px overflow checks with closed-loop punch list remediation.
-- **Contract & Agent Synchronization**:
-  - Upgraded `vibe-ui-agent/AGENT.md` to v{NEW_V} with Mandate 5 and explicit 3-tier swarm integration.
-  - Synchronized `custom-agents` definitions and updated `subagent-orchestrator` skill roster.
+### Sovereign Foreman Multi-Agent Swarm & Universal Portability Architecture
+- **Dedicated Foreman Orchestrator Swarm (`vibe-foreman`)**:
+  - Implemented 6 specialized autonomous roles under the command of `vibe-foreman`:
+    1. `vibe-concept-architect`: Expands sparse, 1-line user prompts into macro product domains and psychographic profiles.
+    2. `vibe-trend-hunter`: Mines top-starred GitHub UI repositories (>10k stars like shadcn, aceternity, magicui) and top-liked Uiverse components via `vibe_core/trend_hunter.py`.
+    3. `vibe-art-director`: Synthesizes OKLCH color tokens, typography scales, and binding Design Style Blueprints.
+    4. `vibe-master-builder`: Authors clean HTML/TSX code with spring physics and zero Frankenstein seams.
+    5. `vibe-visual-auditor` & `vibe-tech-auditor`: Dual adversarial inspectors running headless Chromium screenshot audits (Desktop 1440px and Mobile 390px) and WCAG AA contrast / 0px overflow checks.
+- **Universal Portability & Zero User-Path Dependency**:
+  - Centralized all agent definitions inside the repository root (`agents/`). Eliminates hardcoded dependencies on host user directories.
+- **Playwright MCP Eradication & On-Demand Stealth Crawler**:
+  - Globally banned `browser_run_code_unsafe` and RCE proxying.
+  - Added `scripts/stealth_crawler.py` with on-demand Patchright support and graceful HTTP fallback.
+- **Unified Swarm Command**:
+  - Added `vibe_cli.py swarm` (alias `vibe_cli.py run`) powered by `vibe_core/swarm.py` with automated screenshot audits and closed-loop healing.
 """
 
 cl_p = ROOT_DIR / "CHANGELOG.md"
 cl_txt = cl_p.read_text(encoding="utf-8")
-insert_idx = cl_txt.find("## [6.4.3]")
+insert_idx = cl_txt.find("## [6.4.4]")
 if insert_idx != -1:
     cl_txt = cl_txt[:insert_idx] + changelog_entry.strip() + "\n\n---\n\n" + cl_txt[insert_idx:]
     cl_p.write_text(cl_txt, encoding="utf-8")
@@ -232,15 +236,15 @@ if insert_idx != -1:
 
 vscode_cl_p = ROOT_DIR / "packages" / "vibe-ui-vscode" / "CHANGELOG.md"
 vscode_cl_txt = vscode_cl_p.read_text(encoding="utf-8")
-insert_idx2 = vscode_cl_txt.find("## [6.4.3]")
-if insert_idx2 == -1:
-    insert_idx2 = vscode_cl_txt.find("## [6.4.2]")
+insert_idx2 = vscode_cl_txt.find("## [6.4.4]")
 if insert_idx2 != -1:
     vscode_cl_entry = f"""## [{NEW_V}] — {DATE_STR}
 
 ### Added & Improved
-- **Mandatory Multi-Agent Pod Swarm**: Codified strict prohibition of solo UI execution; UI architecture is permanently governed by the 3-tier swarm (`vibe-curator` -> `vibe-ui-agent` -> `vibe-auditor`).
-- **Closed-Loop Quality Remediation**: Automated adversarial review pass with headless screenshots and static contract verification.
+- **Foreman Multi-Agent Swarm**: Fully autonomous 6-station swarm architecture coordinated by `vibe-foreman` (`concept_architect` -> `trend_hunter` -> `art_director` -> `master_builder` -> `visual_auditor` & `tech_auditor`).
+- **Trend Hunter Integration**: Automatic discovery of top-starred GitHub repositories (>10k stars) and top Uiverse Galaxy components.
+- **Zero-Dependency Headless Audits**: Direct Desktop & Mobile screenshots with 0px overflow and WCAG AA contrast verification.
+- **Stealth Crawler**: On-demand Patchright crawler with graceful HTTP fallback.
 
 ---
 

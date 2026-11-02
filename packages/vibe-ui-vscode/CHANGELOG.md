@@ -3,6 +3,24 @@
 All notable changes to the **Vibe UI (VS Code, Cursor & Open-VSX)** extension will be documented in this file.
 This project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [6.4.5] — 2026-11-02
+
+### Added & Improved
+- **Foreman Multi-Agent Swarm**: Fully autonomous 6-station swarm architecture coordinated by `vibe-foreman` (`concept_architect` -> `trend_hunter` -> `art_director` -> `master_builder` -> `visual_auditor` & `tech_auditor`).
+- **Trend Hunter Integration**: Automatic discovery of top-starred GitHub repositories (>10k stars) and top Uiverse Galaxy components.
+- **Zero-Dependency Headless Audits**: Direct Desktop & Mobile screenshots with 0px overflow and WCAG AA contrast verification.
+- **Stealth Crawler**: On-demand Patchright crawler with graceful HTTP fallback.
+
+---
+
+## [6.4.4] — 2026-11-01
+
+### Added & Improved
+- **Mandatory Multi-Agent Pod Swarm**: Codified strict prohibition of solo UI execution; UI architecture is permanently governed by the 3-tier swarm (`vibe-curator` -> `vibe-ui-agent` -> `vibe-auditor`).
+- **Closed-Loop Quality Remediation**: Automated adversarial review pass with headless screenshots and static contract verification.
+
+---
+
 ## [6.4.4] — 2026-11-01
 
 ### Added & Improved
