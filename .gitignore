@@ -57,6 +57,8 @@ scratch/
 scratch_*
 temp_*
 scripts/run_upload.js
+scripts/inject_payload.js
+scripts/prepare_eval_script.py
 scripts/upload_*
 scripts/build_upload_action.py
 scripts/generate_playwright_snippet.py
