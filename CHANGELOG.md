@@ -5,6 +5,31 @@ All notable changes to the **Vibe UI Skills** repository are documented in this 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [6.5.0] - 2026-11-03
+
+### Universal Multi-Agent Swarm Harmonization & Multi-Harness Portability
+- **Sovereign Lead Orchestrator Harmonization (`vibe-ui-agent`)**:
+  - Unified entry point under `vibe-ui-agent` as the master orchestrator / foreman.
+  - Codified the **Zero Direct Code Writing Invariant**: orchestrator coordinates the 5-phase swarm and never writes HTML/CSS directly in chat.
+  - Streamlined 5-phase specialist swarm:
+    1. `vibe-concept-architect` (Psychographics & Intent expansion)
+    2. `vibe-trend-hunter` (GitHub >10k stars & Uiverse Galaxy micro-interactions)
+    3. `vibe-art-director` (OKLCH tokens & Design Style Blueprint)
+    4. `vibe-master-builder` (Single-author clean code authoring)
+    5. Dual adversarial inspection swarm (`vibe-visual-auditor` & `vibe-tech-auditor`)
+- **Universal Multi-Harness Portability (Zero Host Path Dependency)**:
+  - Antigravity: Configured project-local plugin in `.agents/plugins/vibe-ui/` with dynamic runtime `define_subagent` capability.
+  - Claude Code: Configured `.claude/agents/` for native subagent discovery.
+  - Cursor / Windsurf: Updated root `AGENTS.md`.
+  - NPM: Included `agents/` in `package.json` distribution files and automated build synchronization.
+- **Mandatory Pre-Release Adversarial Inspector Agent Gate**:
+  - Enforced mandatory rule across `AGENTS.md`, `PROJECT.md`, `ARCHITECTURE.md`, `MAINTAINER_RELEASE_GUIDE.md`, and `RELEASE_RUNBOOK.md` to block releases without an independent regression audit.
+- **Version Harmonization & Bump Hardening**:
+  - Synchronized CLI (`cli.ts`), MCP server (`mcp.ts`), and plugin manifests to canonical version.
+  - Rewrote `scripts/bump_version.py` to eliminate obsolete hardcoded templates and automate cross-harness synchronization.
+
+---
+
 ## [6.4.5] - 2026-11-02
 
 ### Sovereign Foreman Multi-Agent Swarm & Universal Portability Architecture

@@ -6,3 +6,7 @@ package_vsix.py
 test.vsix
 tsconfig.json
 .git*
+%USERPROFILE%/**
+__pycache__/**
+*.pyc
+*.vsix

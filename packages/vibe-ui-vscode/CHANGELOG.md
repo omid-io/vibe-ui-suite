@@ -3,6 +3,15 @@
 All notable changes to the **Vibe UI (VS Code, Cursor & Open-VSX)** extension will be documented in this file.
 This project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [6.5.0] — 2026-11-03
+
+### Added & Improved
+- **Multi-Agent Swarm Harmonization**: Unified `vibe-ui-agent` as the master orchestrator enforcing zero direct code writing and coordinating the 5-phase specialist swarm.
+- **Universal Multi-Harness Portability**: Support for project-local Antigravity plugins, Claude Code (`.claude/agents`), Cursor/Windsurf (`AGENTS.md`), and NPM distribution.
+- **Pre-Release Inspector Gate**: Enforced regression and compatibility audit before releases.
+
+---
+
 ## [6.4.5] — 2026-11-02
 
 ### Added & Improved

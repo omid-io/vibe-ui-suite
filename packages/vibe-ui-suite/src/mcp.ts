@@ -30,7 +30,7 @@ interface JsonRpcResponse {
 }
 
 const SERVER_NAME = 'vibe-ui-mcp';
-const SERVER_VERSION = '6.4.2';
+const SERVER_VERSION = '6.5.0';
 
 // Standard 11 visual paradigms data
 const PARADIGM_SPECS: Record<string, { description: string; mood: string; bestFor: string; oklchTokens: Record<string, string> }> = {

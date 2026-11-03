@@ -15,7 +15,7 @@ set -eo pipefail
 
 AGENT="antigravity"
 TARGET_DIR=""
-VERSION="v6.4.2"
+VERSION="v6.5.0"
 BACKUP=true
 FORCE=false
 TEMP_DIR=""
@@ -26,7 +26,7 @@ while [[ "$#" -gt 0 ]]; do
     case $1 in
         --agent) AGENT="$2"; shift ;;
         --target) TARGET_DIR="$2"; shift ;;
-        --version) VERSION="$2"; shift ;;
+        --version) VERSION="v6.5.0"; shift ;;
         --force) FORCE=true; BACKUP=false ;;
         --no-backup) BACKUP=false ;;
         -h|--help)

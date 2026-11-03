@@ -208,6 +208,53 @@ def main():
                 errors.append(f"Legacy identifier '{lp}' found in vibe-ui-agent/AGENT.md")
     print("  [OK] Zero-Legacy-Agent Invariant: No legacy agent identifiers found in active skills")
 
+    # 13. Validate packages/vibe-ui-suite/src/cli.ts and mcp.ts versions
+    if cli_path.exists():
+        match = re.search(r"const VERSION = '([^']+)';", cli_content)
+        if match and match.group(1) != canonical_version:
+            errors.append(f"packages/vibe-ui-suite/src/cli.ts VERSION '{match.group(1)}' does not match canonical '{canonical_version}'")
+        else:
+            print(f"  [OK] cli.ts: VERSION {canonical_version} verified")
+
+    mcp_path = ROOT_DIR / "packages" / "vibe-ui-suite" / "src" / "mcp.ts"
+    if mcp_path.exists():
+        mcp_content = mcp_path.read_text(encoding="utf-8")
+        match = re.search(r"const SERVER_VERSION = '([^']+)';", mcp_content)
+        if match and match.group(1) != canonical_version:
+            errors.append(f"packages/vibe-ui-suite/src/mcp.ts SERVER_VERSION '{match.group(1)}' does not match canonical '{canonical_version}'")
+        else:
+            print(f"  [OK] mcp.ts: SERVER_VERSION {canonical_version} verified")
+
+    # 14. Validate .agents/plugins/vibe-ui/plugin.json
+    local_plugin_p = ROOT_DIR / ".agents" / "plugins" / "vibe-ui" / "plugin.json"
+    if local_plugin_p.exists():
+        try:
+            p_data = json.loads(local_plugin_p.read_text(encoding="utf-8"))
+            if p_data.get("version") != canonical_version:
+                errors.append(f".agents/plugins/vibe-ui/plugin.json version '{p_data.get('version')}' does not match canonical '{canonical_version}'")
+            else:
+                print(f"  [OK] plugin.json: Version {canonical_version} verified")
+        except Exception as e:
+            errors.append(f"Malformed .agents/plugins/vibe-ui/plugin.json: {e}")
+
+    # 15. Validate Canonical Agents Consistency
+    expected_agents = [
+        "vibe-ui-agent.md",
+        "vibe-concept-architect.md",
+        "vibe-trend-hunter.md",
+        "vibe-art-director.md",
+        "vibe-master-builder.md",
+        "vibe-visual-auditor.md",
+        "vibe-tech-auditor.md"
+    ]
+    agents_dir = ROOT_DIR / "agents"
+    if agents_dir.exists():
+        present_agents = sorted([f.name for f in agents_dir.glob("*.md")])
+        if present_agents != sorted(expected_agents):
+            errors.append(f"agents/ mismatch: found {present_agents}, expected {sorted(expected_agents)}")
+        else:
+            print(f"  [OK] agents/: All {len(expected_agents)} canonical agent specifications verified (0 duplicates)")
+
     if errors:
         print("\n[FAIL] Synchronization & Contract Drift Detected:", file=sys.stderr)
         for err in errors:

@@ -19,15 +19,16 @@
 
 ---
 
-## ⚡ Extension Update Checklist ("افزونه ها رو آپدیت کن")
+## ⚡ Extension & Monorepo Release Checklist ("افزونه ها رو آپدیت کن" / "منتشر کن")
 
-Whenever the user instructs to update the extensions, execute this 4-step deployment cycle without omitting any target:
+Whenever the user instructs to publish or update releases, execute this 5-step deployment cycle without omitting any target:
 
-### Step 1: Bump & Document Extension Changelog
-1. Bump `version` in `packages/vibe-ui-vscode/package.json` to canonical release version.
-2. Document all user-facing changes in `packages/vibe-ui-vscode/CHANGELOG.md` under `[x.y.z]`.
-3. Synchronize `CHANGELOG.md` at repository root.
-4. Compile extension bundle:
+### Step 1: Bump & Document Changelog
+1. Bump canonical version across manifests (`version.manifest.json`, `version.json`, `packages/vibe-ui-suite/package.json`, `packages/vibe-ui-vscode/package.json`).
+2. Document all user-facing changes in `CHANGELOG.md` and `packages/vibe-ui-vscode/CHANGELOG.md` under `[x.y.z]`.
+3. Synchronize skills to `.agents/skills` and `packages/vibe-ui-suite/skills`.
+4. Synchronize agent definitions to `agents/`, `.agents/plugins/vibe-ui/agents/`, `.claude/agents/`, and `packages/vibe-ui-suite/agents/`.
+5. Compile extension bundle:
    ```bash
    cd packages/vibe-ui-vscode
    node build.js
@@ -35,7 +36,15 @@ Whenever the user instructs to update the extensions, execute this 4-step deploy
    ```
    *(Produces `vibe-ui-vscode-{version}.vsix` certified with `<GalleryFlags>Public</GalleryFlags>`)*
 
-### Step 2: Publish Flagship NPM Package (`vibe-ui-suite`)
+### Step 2: Mandatory Pre-Release Adversarial Inspector Agent Gate
+- **Zero-Regression Law:** Dispatch an independent Inspector/Auditor Agent to perform a full diff audit against the previous release.
+- **Verification Criteria:**
+  1. No regressions or conflicts introduced by new features or CLI commands against existing components, templates, or legacy workflows.
+  2. 100% pass on `python scripts/validate_versions.py` and `python evals/run_evals.py --json`.
+  3. Gitleaks scan (`E:\programming\Tools\gitleaks\gitleaks.exe`) yields 0 leaks.
+- *Publishing is strictly blocked until the Inspector Agent returns a definitive PASS verdict.*
+
+### Step 3: Publish Flagship NPM Package (`vibe-ui-suite`)
 1. Sync `packages/vibe-ui-suite/package.json` to canonical version.
 2. Build and publish:
    ```bash
@@ -44,7 +53,7 @@ Whenever the user instructs to update the extensions, execute this 4-step deploy
    npm publish --access public
    ```
 
-### Step 3: Publish to Open-VSX Registry
+### Step 4: Publish to Open-VSX Registry
 1. Automated via GitHub Actions workflow (`.github/workflows/publish.yml`) using `OPENVSX_TOKEN` secret:
    ```bash
    gh workflow run publish.yml
@@ -54,7 +63,7 @@ Whenever the user instructs to update the extensions, execute this 4-step deploy
    npx --yes ovsx publish packages/vibe-ui-vscode/vibe-ui-vscode-{version}.vsix -p <OPENVSX_TOKEN>
    ```
 
-### Step 4: Zero-Token Visual Studio Marketplace Deployment
+### Step 5: Zero-Token Visual Studio Marketplace Deployment
 No Personal Access Token (PAT) required. Uses the user's active Chrome publisher session on Microsoft Visual Studio Marketplace:
 1. Ensure the user's Chrome is on: `https://marketplace.visualstudio.com/manage/publishers/omid-io`
 2. Open the Update dialog: Click `More Actions...` () next to `Vibe UI Studio & Contrast Gate` -> `Update`.

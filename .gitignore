@@ -41,6 +41,8 @@ htmlcov/
 .test-artifacts/
 .agents/*
 !.agents/skills/
+!.agents/plugins/
+%USERPROFILE%/
 *.zip
 *.gz
 *.tar

@@ -8,7 +8,7 @@ import { VISUAL_CHEMISTRIES } from './index';
 import { auditCode } from './audit';
 import { startMcpServer } from './mcp';
 
-const VERSION = '6.4.2';
+const VERSION = '6.5.0';
 
 interface CliOptions {
   force: boolean;

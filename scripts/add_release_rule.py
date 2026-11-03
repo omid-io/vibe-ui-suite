@@ -9,9 +9,10 @@ protocol = """
 Whenever prompted to publish or release ("منتشر کن"), the agent must strictly execute the full 5-stage deployment:
 1. **Version Bump & Skill Sync**: Update canonical version across manifests and synchronize all 6 skills.
 2. **Documentation & Changelog**: Append release notes in root `CHANGELOG.md` and `packages/vibe-ui-vscode/CHANGELOG.md`. Update `README.md` / `README.fa.md` if options or architectures changed.
-3. **Build & Automated Testing**: Validate versions (`python scripts/validate_versions.py`) and evals (`python evals/run_evals.py --json`).
-4. **NPM & Open-VSX**: Build `packages/vibe-ui-suite` and package `vibe-ui-vscode-*.vsix`. Commit, tag (`vX.Y.Z`), push to GitHub triggering `.github/workflows/publish.yml`.
-5. **Microsoft Visual Studio Marketplace**: Run `python scripts/publish_marketplace_browser.py` or upload the generated VSIX directly via the publisher dashboard (`https://marketplace.visualstudio.com/manage/publishers/omid-io`), then verify status reaches "Verifying" or "Published".
+3. **Inspector Agent Regression & Compatibility Audit**: Always dispatch an independent Inspector/Auditor Agent to inspect the code diff and verify that newly added features or modifications do not introduce regressions, break backwards compatibility, or cause conflicts with existing components, templates, CLI commands, tokens, or prior architectural standards.
+4. **Build & Automated Testing**: Validate versions (`python scripts/validate_versions.py`) and evals (`python evals/run_evals.py --json`).
+5. **NPM & Open-VSX**: Build `packages/vibe-ui-suite` and package `vibe-ui-vscode-*.vsix`. Commit, tag (`vX.Y.Z`), push to GitHub triggering `.github/workflows/publish.yml`.
+6. **Microsoft Visual Studio Marketplace**: Run `python scripts/publish_marketplace_browser.py` or upload the generated VSIX directly via the publisher dashboard (`https://marketplace.visualstudio.com/manage/publishers/omid-io`), then verify status reaches "Verifying" or "Published".
 """
 
 if "Mandatory Multi-Registry Release Protocol" not in proj:
