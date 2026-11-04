@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """
 vibe_core/trend_hunter.py — Dual Trend & High-Star UI Pattern Explorer
-Vibe UI Suite v6.4.2
+Vibe UI Suite
 
 Discovers and filters world-class UI patterns based on verified popularity:
 1. GitHub Trending UI repositories (>10k stars) via public API.

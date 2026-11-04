@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """
 vibe_core/swarm.py — Master Foreman Multi-Agent Swarm Orchestrator
-Vibe UI Suite v6.4.2
+Vibe UI Suite
 
 Coordinates the 5-phase sequential multi-agent pipeline:
 1. Concept Architect (Intent expansion & macro domain definition)

@@ -1,7 +1,8 @@
 #!/usr/bin/env python3
 """
 validate_versions.py — Vibe UI Version Consistency Validator
-Ensures all package.json files, manifests, and documentation match the canonical version.
+Ensures all package.json files, manifests, documentation, and agent specifications
+match the canonical version, and enforces the Zero-Unsolicited-Version Invariant.
 """
 
 import sys
@@ -28,6 +29,11 @@ PACKAGE_FILES = [
 ]
 
 def main():
+    if "--fix" in sys.argv:
+        print("[INFO] --fix flag supplied. Running automated synchronization...")
+        import subprocess
+        subprocess.run([sys.executable, str(ROOT_DIR / "scripts" / "sync_agents_and_versions.py")], check=True)
+
     if not MANIFEST_PATH.exists():
         print(f"[FAIL] Manifest not found at {MANIFEST_PATH}", file=sys.stderr)
         return 1
@@ -123,11 +129,11 @@ def main():
         ]
         missing_mandates = [m for m in required_mandates if m not in cli_content]
         if missing_mandates:
-            errors.append(f"cli.ts CONTRACT_RULES is missing critical v6.1.1 mandates: {missing_mandates}")
+            errors.append(f"cli.ts CONTRACT_RULES is missing critical mandates: {missing_mandates}")
         else:
-            print("  [OK] cli.ts: CONTRACT_RULES contains all 5 Master Execution Gates & Silent Table-Stakes")
+            print("  [OK] cli.ts: CONTRACT_RULES contains all Master Execution Gates & Silent Table-Stakes")
 
-    # 6. Validate vibe-ui-agent/AGENT.md Mandate 5
+    # 6. Validate vibe-ui-agent/AGENT.md Mandate 5 & Invariants
     agent_path = ROOT_DIR / "vibe-ui-agent" / "AGENT.md"
     if agent_path.exists():
         agent_content = agent_path.read_text(encoding="utf-8")
@@ -135,6 +141,11 @@ def main():
             errors.append("AGENT.md is missing Mandate 5: Autonomous Lazy-Prompt Protocol & Anti-Cosmetic-Patch Invariant")
         else:
             print("  [OK] AGENT.md: Contains Mandate 5 Autonomous Lazy-Prompt Protocol")
+
+        if "Zero-Unsolicited-Version Invariant" not in agent_content:
+            errors.append("AGENT.md is missing Zero-Unsolicited-Version Invariant")
+        else:
+            print("  [OK] AGENT.md: Contains Zero-Unsolicited-Version Invariant")
 
     # 7. Validate packages/vibe-ui-suite npm distribution skills packaging
     vibe_pkg_path = ROOT_DIR / "packages" / "vibe-ui-suite" / "package.json"
@@ -237,7 +248,7 @@ def main():
         except Exception as e:
             errors.append(f"Malformed .agents/plugins/vibe-ui/plugin.json: {e}")
 
-    # 15. Validate Canonical Agents Consistency
+    # 15. Validate Canonical Agents Consistency and Zero-Unsolicited-Version Invariant
     expected_agents = [
         "vibe-ui-agent.md",
         "vibe-concept-architect.md",
@@ -254,6 +265,51 @@ def main():
             errors.append(f"agents/ mismatch: found {present_agents}, expected {sorted(expected_agents)}")
         else:
             print(f"  [OK] agents/: All {len(expected_agents)} canonical agent specifications verified (0 duplicates)")
+
+        # Verify no hardcoded versions in agent descriptions or titles
+        for af in agents_dir.glob("*.md"):
+            txt = af.read_text(encoding="utf-8")
+            # Check frontmatter description
+            desc_match = re.search(r'description:\s*"([^"]+)"', txt)
+            if desc_match and re.search(r'v\d+\.\d+', desc_match.group(1)):
+                errors.append(f"Hardcoded version found in agent description of {af.name}: '{desc_match.group(1)}'")
+            # Check main H1 heading
+            h1_match = re.search(r'^#\s+.*', txt, re.MULTILINE)
+            if h1_match and re.search(r'\(v\d+\.\d+', h1_match.group(0)):
+                errors.append(f"Hardcoded version found in H1 title of {af.name}: '{h1_match.group(0)}'")
+        if not errors:
+            print("  [OK] agents/: Zero-Unsolicited-Version Invariant verified across all agent specifications")
+
+    # 16. Validate Data JSON Manifests
+    for jf in ["assets/curated_webp/manifest.json", "data/design_vault/archetypes.json", "data/unsplash_assets.json"]:
+        jp = ROOT_DIR / jf
+        if jp.exists():
+            try:
+                jd = json.loads(jp.read_text(encoding="utf-8"))
+                if jd.get("version") != canonical_version:
+                    errors.append(f"{jf} version '{jd.get('version')}' does not match canonical '{canonical_version}'")
+                else:
+                    print(f"  [OK] {jf}: Version {canonical_version} matches manifest")
+            except Exception as e:
+                errors.append(f"Invalid JSON in {jf}: {e}")
+
+    # 17. Validate Global Antigravity custom-agents synchronization
+    antigravity_agents_dir = Path.home() / ".gemini" / "config" / "plugins" / "custom-agents" / "agents"
+    if antigravity_agents_dir.exists():
+        for name in expected_agents:
+            target_f = antigravity_agents_dir / name
+            if not target_f.exists():
+                errors.append(f"Missing canonical agent in Antigravity global custom-agents: {name}")
+            else:
+                txt = target_f.read_text(encoding="utf-8")
+                if re.search(r'\(v\d+\.\d+', txt):
+                    errors.append(f"Antigravity global agent {name} contains hardcoded version in title/description")
+        # Check for obsolete agents
+        for obs in ["vibe-curator.md", "vibe-auditor.md"]:
+            if (antigravity_agents_dir / obs).exists():
+                errors.append(f"Obsolete agent {obs} still present in Antigravity global custom-agents")
+        if not any("Antigravity global" in e for e in errors):
+            print("  [OK] Antigravity global custom-agents: 100% synchronized and sanitized")
 
     if errors:
         print("\n[FAIL] Synchronization & Contract Drift Detected:", file=sys.stderr)

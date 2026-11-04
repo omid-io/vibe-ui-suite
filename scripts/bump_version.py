@@ -4,6 +4,9 @@ scripts/bump_version.py — Vibe UI Ecosystem Semantic Version Synchronizer
 Safely bumps and synchronizes versions across all monorepo manifests, configs,
 CLI binaries, MCP servers, agent specifications, and changelogs without breaking
 architectural invariants.
+
+Also strips unnecessary version numbers from agent descriptions/titles and ensures
+seamless synchronization with global Antigravity custom-agents.
 """
 
 import sys
@@ -13,6 +16,34 @@ import shutil
 from pathlib import Path
 
 ROOT_DIR = Path(__file__).resolve().parent.parent
+
+def clean_agent_text(text: str) -> str:
+    """Removes version annotations from agent descriptions and headers."""
+    text = re.sub(r'\(v\d+\.\d+(\.\d+)?\):\s*', '', text)
+    text = re.sub(r'\(Vibe UI Suite v\d+\.\d+(\.\d+)?\):\s*', '', text)
+    text = re.sub(r'\(v\d+\.\d+(\.\d+)?\)', '', text)
+    text = re.sub(r'\(Vibe UI Suite v\d+\.\d+(\.\d+)?\)', '', text)
+    text = re.sub(r'\s+:', ':', text)
+    text = re.sub(r'# 👑 vibe-ui-agent — Master UI/UX & Frontend Architect Agent(\s*\(v[^\)]+\))?', '# 👑 vibe-ui-agent — Master UI/UX & Frontend Architect Agent', text)
+    return text
+
+def ensure_invariant_in_agent(text: str) -> str:
+    """Guarantees Zero-Unsolicited-Version Invariant is present in vibe-ui-agent."""
+    invariant_block = """### 2. Zero-Unsolicited-Version Invariant (No Version Spam)
+- `vibe-ui-agent` and all swarm workers **MUST NEVER mention, announce, or quote version numbers** (e.g. "v6.5.0", "نسخه 6.4.2") in greetings, chat introductions, status banners, or routine dialogues.
+- Versions belong exclusively in machine-readable manifests (`version.manifest.json`, `package.json`), CLI `--version` flags, and release changelogs.
+- Never state or recite the version unless the user explicitly asks a direct question regarding the version (e.g. "نسخه چند است؟" or "what version is running?")."""
+
+    if "Zero-Unsolicited-Version Invariant" not in text:
+        target = "## 🚫 The Absolute Invariant: Zero Direct Code Writing"
+        replacement = "## 🚫 The Invariants\n\n### 1. The Absolute Invariant: Zero Direct Code Writing"
+        if target in text:
+            text = text.replace(target, replacement)
+        
+        insert_after = "- **Zero Solo Shortcut:** Under no circumstances should `vibe-ui-agent` bypass the multi-agent swarm by performing curation, styling, coding, and auditing as an isolated solo actor."
+        if insert_after in text:
+            text = text.replace(insert_after, f"{insert_after}\n\n{invariant_block}")
+    return text
 
 def bump(old_v: str, new_v: str, date_str: str = "2026-11-03"):
     print(f"Bumping version from {old_v} to {new_v}...")
@@ -141,15 +172,25 @@ def bump(old_v: str, new_v: str, date_str: str = "2026-11-03"):
         th_p.write_text(txt, encoding="utf-8")
         print("  - Updated vibe_core/trend_hunter.py")
 
-    # 13. Update version headers in vibe-ui-agent/AGENT.md (preserving full invariant body)
-    agent_p = ROOT_DIR / "vibe-ui-agent" / "AGENT.md"
-    if agent_p.exists():
-        txt = agent_p.read_text(encoding="utf-8")
-        txt = re.sub(r'\(v\d+\.\d+\.\d+\)', f'(v{new_v})', txt)
-        agent_p.write_text(txt, encoding="utf-8")
-        print("  - Updated version in vibe-ui-agent/AGENT.md")
+    # 13. Update data and manifest JSON files
+    for jf in ["assets/curated_webp/manifest.json", "data/design_vault/archetypes.json", "data/unsplash_assets.json"]:
+        jp = ROOT_DIR / jf
+        if jp.exists():
+            d = json.loads(jp.read_text(encoding="utf-8"))
+            if "version" in d:
+                d["version"] = new_v
+                jp.write_text(json.dumps(d, indent=2, ensure_ascii=False) + "\n", encoding="utf-8")
+                print(f"  - Updated {jf}")
 
-    # 14. Skills synchronization
+    # 14. Update packages/vibe-ui-vscode/README.md
+    vscode_readme = ROOT_DIR / "packages" / "vibe-ui-vscode" / "README.md"
+    if vscode_readme.exists():
+        t = vscode_readme.read_text(encoding="utf-8")
+        t = re.sub(r'vibe-ui-vscode-\d+\.\d+\.\d+\.vsix', f'vibe-ui-vscode-{new_v}.vsix', t)
+        vscode_readme.write_text(t, encoding="utf-8")
+        print("  - Updated packages/vibe-ui-vscode/README.md")
+
+    # 15. Skills synchronization
     skills_src = ROOT_DIR / "skills"
     skills_dest1 = ROOT_DIR / ".agents" / "skills"
     skills_dest2 = ROOT_DIR / "packages" / "vibe-ui-suite" / "skills"
@@ -172,28 +213,49 @@ def bump(old_v: str, new_v: str, date_str: str = "2026-11-03"):
                     shutil.copy2(f, t2)
     print("  - Synchronized skills to .agents/skills and packages/vibe-ui-suite/skills")
 
-    # 15. Agent definitions synchronization
+    # 16. Agent definitions sanitization & multi-destination synchronization
+    agent_p = ROOT_DIR / "vibe-ui-agent" / "AGENT.md"
     agents_src = ROOT_DIR / "agents"
     agents_dest_plugin = ROOT_DIR / ".agents" / "plugins" / "vibe-ui" / "agents"
     agents_dest_claude = ROOT_DIR / ".claude" / "agents"
     agents_dest_pkg = ROOT_DIR / "packages" / "vibe-ui-suite" / "agents"
+    antigravity_custom_agents = Path.home() / ".gemini" / "config" / "plugins" / "custom-agents" / "agents"
 
-    # Ensure vibe-ui-agent.md is updated from vibe-ui-agent/AGENT.md
+    # Sanitize vibe-ui-agent/AGENT.md (Remove version spam & guarantee invariant)
     if agent_p.exists():
-        shutil.copy2(agent_p, agents_src / "vibe-ui-agent.md")
+        raw_agent = agent_p.read_text(encoding="utf-8")
+        cleaned_agent = clean_agent_text(raw_agent)
+        cleaned_agent = ensure_invariant_in_agent(cleaned_agent)
+        agent_p.write_text(cleaned_agent, encoding="utf-8")
+        (agents_src / "vibe-ui-agent.md").write_text(cleaned_agent, encoding="utf-8")
 
-    for dest_dir in [agents_dest_plugin, agents_dest_claude, agents_dest_pkg]:
+    # Sanitize all agent files in agents/
+    for af in agents_src.glob("*.md"):
+        txt = af.read_text(encoding="utf-8")
+        af.write_text(clean_agent_text(txt), encoding="utf-8")
+
+    canonical_agent_names = [f.name for f in agents_src.glob("*.md")]
+    obsolete_agents = ["vibe-curator.md", "vibe-auditor.md"]
+
+    target_agent_dirs = [agents_dest_plugin, agents_dest_claude, agents_dest_pkg]
+    if antigravity_custom_agents.exists():
+        target_agent_dirs.append(antigravity_custom_agents)
+
+    for dest_dir in target_agent_dirs:
         dest_dir.mkdir(parents=True, exist_ok=True)
-        # Clean obsolete files in destination
-        for existing in dest_dir.glob("*.md"):
-            if not (agents_src / existing.name).exists():
-                existing.unlink()
+        # Remove obsolete Vibe agents
+        for obs in obsolete_agents:
+            obs_f = dest_dir / obs
+            if obs_f.exists():
+                obs_f.unlink()
         # Copy canonical agents
-        for f in agents_src.glob("*.md"):
-            shutil.copy2(f, dest_dir / f.name)
-    print("  - Synchronized agents across .agents/plugins/vibe-ui, .claude, and packages/vibe-ui-suite")
+        for name in canonical_agent_names:
+            src_f = agents_src / name
+            if src_f.exists():
+                shutil.copy2(src_f, dest_dir / name)
 
-    print(f"\n[DONE] Version {new_v} bump completed successfully.")
+    print("  - Sanitized and synchronized agents across .agents/plugins, .claude, packages, and Antigravity custom-agents")
+    print(f"\n[DONE] Version {new_v} bump and full synchronization completed successfully.")
 
 if __name__ == "__main__":
     current_manifest = json.loads((ROOT_DIR / "version.manifest.json").read_text(encoding="utf-8"))

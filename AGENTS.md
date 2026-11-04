@@ -42,3 +42,10 @@ Whenever publishing or releasing this suite:
   2. Verify that newly introduced capabilities, agents, or CLI arguments do not break legacy workflows, component contracts, or starter examples (`examples/nextjs-starter`).
   3. Ensure token names, schema versions, and manifest exports maintain seamless consistency and backwards compatibility across the monorepo.
   4. If any conflict, regression, or inconsistency is detected, deployment is strictly blocked until the defect is resolved.
+
+---
+
+## 5. Zero-Unsolicited-Version Invariant (No Version Spam)
+- Agents and swarm orchestrators must **NEVER mention, quote, or announce version numbers** in greetings, chat introductions, status banners, or conversational responses unless the user explicitly asks for the version.
+- Version numbers belong exclusively in canonical machine manifests (`version.manifest.json`, `package.json`), CLI `--version` output, and release changelogs.
+- Agent specification files, frontmatter descriptions, and prompt headers must never hardcode version numbers.

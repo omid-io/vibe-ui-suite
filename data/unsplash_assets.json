@@ -1,5 +1,5 @@
 {
-  "version": "6.4.2",
+  "version": "6.5.0",
   "generated_at": "2026-10-10T16:30:00Z",
   "description": "Curated high-resolution Unsplash CDN photographic asset catalog for all 24 canonical domains in Vibe UI Suite.",
   "cdn_base": "https://images.unsplash.com",
@@ -34,7 +34,13 @@
         "caption_fa": "خدمات زیبایی و مراقبت تخصصی پوست",
         "alt": "Dermatological care and aesthetic treatment room"
       },
-      "tags": ["beauty", "clinical", "wellness", "dermatology", "skincare"]
+      "tags": [
+        "beauty",
+        "clinical",
+        "wellness",
+        "dermatology",
+        "skincare"
+      ]
     },
     "fintech_banking": {
       "domain_id": "fintech_banking",
@@ -60,7 +66,13 @@
         "caption_fa": "بانکداری دیجیتال و مدیریت نقدینگی",
         "alt": "Digital banking and investment portfolio analytics"
       },
-      "tags": ["fintech", "banking", "finance", "liquidity", "investments"]
+      "tags": [
+        "fintech",
+        "banking",
+        "finance",
+        "liquidity",
+        "investments"
+      ]
     },
     "crypto_trading_web3": {
       "domain_id": "crypto_trading_web3",
@@ -86,7 +98,13 @@
         "caption_fa": "نقدینگی نامتمرکز و تبادل توکن",
         "alt": "Web3 decentralized token exchange visualization"
       },
-      "tags": ["crypto", "web3", "defi", "trading", "blockchain"]
+      "tags": [
+        "crypto",
+        "web3",
+        "defi",
+        "trading",
+        "blockchain"
+      ]
     },
     "devops_cloud_terminal": {
       "domain_id": "devops_cloud_terminal",
@@ -112,7 +130,13 @@
         "caption_fa": "تله متری نودهای کلاستر و نظارت بر ترافیک شبکه",
         "alt": "Cloud infrastructure server racks and node status"
       },
-      "tags": ["devops", "cloud", "infrastructure", "kubernetes", "servers"]
+      "tags": [
+        "devops",
+        "cloud",
+        "infrastructure",
+        "kubernetes",
+        "servers"
+      ]
     },
     "saas_b2b_enterprise": {
       "domain_id": "saas_b2b_enterprise",
@@ -138,7 +162,13 @@
         "caption_fa": "هوش تجاری و تحلیل جریان های کاری سازمانی",
         "alt": "Business growth charts and enterprise workflow metrics"
       },
-      "tags": ["saas", "enterprise", "b2b", "analytics", "dashboard"]
+      "tags": [
+        "saas",
+        "enterprise",
+        "b2b",
+        "analytics",
+        "dashboard"
+      ]
     },
     "ai_developer_platform": {
       "domain_id": "ai_developer_platform",
@@ -164,7 +194,13 @@
         "caption_fa": "وزن های استنتاج مدل و هندسه فضاهای پنهان",
         "alt": "Neural vector space dynamic gradient visualization"
       },
-      "tags": ["ai", "machine_learning", "neural_networks", "developer", "platform"]
+      "tags": [
+        "ai",
+        "machine_learning",
+        "neural_networks",
+        "developer",
+        "platform"
+      ]
     },
     "ecommerce_luxury_fashion": {
       "domain_id": "ecommerce_luxury_fashion",
@@ -190,7 +226,13 @@
         "caption_fa": "لوک بوک تحلیلی مد فاخر و اکسسوری های دست ساز",
         "alt": "Bespoke fashion garments and luxury runway collection"
       },
-      "tags": ["luxury", "fashion", "haute_couture", "atelier", "editorial"]
+      "tags": [
+        "luxury",
+        "fashion",
+        "haute_couture",
+        "atelier",
+        "editorial"
+      ]
     },
     "ecommerce_mass_market": {
       "domain_id": "ecommerce_mass_market",
@@ -216,7 +258,13 @@
         "caption_fa": "موجودی انبار و کاتالوگ ارسال سریع کالا",
         "alt": "Organized boutique retail display and merchandise"
       },
-      "tags": ["ecommerce", "retail", "shopping", "storefront", "products"]
+      "tags": [
+        "ecommerce",
+        "retail",
+        "shopping",
+        "storefront",
+        "products"
+      ]
     },
     "real_estate_architecture": {
       "domain_id": "real_estate_architecture",
@@ -242,7 +290,13 @@
         "caption_fa": "نمای مدرن ویلا و محوطه سازی اختصاصی",
         "alt": "Modern architectural luxury home exterior and pool"
       },
-      "tags": ["real_estate", "architecture", "interior_design", "luxury_homes", "property"]
+      "tags": [
+        "real_estate",
+        "architecture",
+        "interior_design",
+        "luxury_homes",
+        "property"
+      ]
     },
     "healthcare_hospital_medical": {
       "domain_id": "healthcare_hospital_medical",
@@ -268,7 +322,13 @@
         "caption_fa": "مرکز تشخیصی آزمایشگاهی و پایش سلامت بیمار",
         "alt": "State-of-the-art clinical healthcare facility"
       },
-      "tags": ["healthcare", "hospital", "medical", "diagnostics", "telehealth"]
+      "tags": [
+        "healthcare",
+        "hospital",
+        "medical",
+        "diagnostics",
+        "telehealth"
+      ]
     },
     "education_edtech_lms": {
       "domain_id": "education_edtech_lms",
@@ -294,7 +354,13 @@
         "caption_fa": "یادگیری مشارکتی و کارگاه های تخصصی دانشجویی",
         "alt": "Students engaged in collaborative educational study"
       },
-      "tags": ["education", "edtech", "learning", "university", "curriculum"]
+      "tags": [
+        "education",
+        "edtech",
+        "learning",
+        "university",
+        "curriculum"
+      ]
     },
     "creative_portfolio_agency": {
       "domain_id": "creative_portfolio_agency",
@@ -320,7 +386,13 @@
         "caption_fa": "راهنمای هویت بصری و دیزاین سیستم خلاق",
         "alt": "Design agency brand system development on desk"
       },
-      "tags": ["portfolio", "creative", "design_agency", "branding", "ui_ux"]
+      "tags": [
+        "portfolio",
+        "creative",
+        "design_agency",
+        "branding",
+        "ui_ux"
+      ]
     },
     "media_editorial_magazine": {
       "domain_id": "media_editorial_magazine",
@@ -346,7 +418,13 @@
         "caption_fa": "جلسات اتاق خبر و مقالات تحقیقی تحلیلی",
         "alt": "Auditorium press conference and keynote address"
       },
-      "tags": ["media", "editorial", "journalism", "magazine", "publishing"]
+      "tags": [
+        "media",
+        "editorial",
+        "journalism",
+        "magazine",
+        "publishing"
+      ]
     },
     "food_restaurant_cafe": {
       "domain_id": "food_restaurant_cafe",
@@ -372,7 +450,13 @@
         "caption_fa": "هنر چیدمان میز غذا و چشیدن طعم های فصلی",
         "alt": "Elegant dining room ambiance and culinary table settings"
       },
-      "tags": ["food", "restaurant", "cafe", "culinary", "gastronomy"]
+      "tags": [
+        "food",
+        "restaurant",
+        "cafe",
+        "culinary",
+        "gastronomy"
+      ]
     },
     "travel_hospitality_tourism": {
       "domain_id": "travel_hospitality_tourism",
@@ -398,7 +482,13 @@
         "caption_fa": "سوئیت های اختصاصی ریزورت و خدمات اقامتی تشریفاتی",
         "alt": "Tropical luxury resort suite and palm ocean scenery"
       },
-      "tags": ["travel", "hospitality", "tourism", "resort", "vacation"]
+      "tags": [
+        "travel",
+        "hospitality",
+        "tourism",
+        "resort",
+        "vacation"
+      ]
     },
     "legal_compliance_law": {
       "domain_id": "legal_compliance_law",
@@ -424,7 +514,13 @@
         "caption_fa": "مشاوره حاکمیت شرکتی و انطباق با قوانین دادگستری",
         "alt": "Statutory legal scales of justice and corporate law books"
       },
-      "tags": ["legal", "compliance", "law", "attorney", "regulatory"]
+      "tags": [
+        "legal",
+        "compliance",
+        "law",
+        "attorney",
+        "regulatory"
+      ]
     },
     "gaming_entertainment_streaming": {
       "domain_id": "gaming_entertainment_streaming",
@@ -450,7 +546,13 @@
         "caption_fa": "پخش زنده تعاملی و گفتگوی برخط گیمرها",
         "alt": "Ultrawide gaming monitor setup with mechanical keyboard"
       },
-      "tags": ["gaming", "esports", "streaming", "entertainment", "battlestation"]
+      "tags": [
+        "gaming",
+        "esports",
+        "streaming",
+        "entertainment",
+        "battlestation"
+      ]
     },
     "automotive_ev_mobility": {
       "domain_id": "automotive_ev_mobility",
@@ -476,7 +578,13 @@
         "caption_fa": "تله متری خودروی الکتریکی و شبکه شارژ سریع",
         "alt": "Modern electric concept vehicle exterior lines"
       },
-      "tags": ["automotive", "electric_vehicles", "mobility", "transportation", "clean_energy"]
+      "tags": [
+        "automotive",
+        "electric_vehicles",
+        "mobility",
+        "transportation",
+        "clean_energy"
+      ]
     },
     "logistics_supply_chain": {
       "domain_id": "logistics_supply_chain",
@@ -502,7 +610,13 @@
         "caption_fa": "پایانه کانتینری و مدیریت گمرکی ترانزیت کالا",
         "alt": "Global cargo shipping distribution warehouse"
       },
-      "tags": ["logistics", "supply_chain", "freight", "warehouse", "transportation"]
+      "tags": [
+        "logistics",
+        "supply_chain",
+        "freight",
+        "warehouse",
+        "transportation"
+      ]
     },
     "energy_greentech_sustainability": {
       "domain_id": "energy_greentech_sustainability",
@@ -528,7 +642,13 @@
         "caption_fa": "اینورترهای خورشیدی و شبکه هوشمند توزیع برق",
         "alt": "Renewable solar energy generation facility"
       },
-      "tags": ["energy", "greentech", "sustainability", "solar", "clean_power"]
+      "tags": [
+        "energy",
+        "greentech",
+        "sustainability",
+        "solar",
+        "clean_power"
+      ]
     },
     "nonprofit_charity_social": {
       "domain_id": "nonprofit_charity_social",
@@ -554,7 +674,13 @@
         "caption_fa": "امدادرسانی مستقیم و پشتیبانی از جوامع محلی",
         "alt": "Humanitarian volunteer workers delivering direct social aid"
       },
-      "tags": ["nonprofit", "charity", "humanitarian", "social_impact", "community"]
+      "tags": [
+        "nonprofit",
+        "charity",
+        "humanitarian",
+        "social_impact",
+        "community"
+      ]
     },
     "personal_branding_creator": {
       "domain_id": "personal_branding_creator",
@@ -580,7 +706,13 @@
         "caption_fa": "استودیو ضبط پادکست و معرفی نویسنده تخصصی",
         "alt": "Editorial portrait of creative entrepreneur in modern studio"
       },
-      "tags": ["personal_branding", "creator", "podcast", "thought_leadership", "portfolio"]
+      "tags": [
+        "personal_branding",
+        "creator",
+        "podcast",
+        "thought_leadership",
+        "portfolio"
+      ]
     },
     "cybersecurity_identity_auth": {
       "domain_id": "cybersecurity_identity_auth",
@@ -606,7 +738,13 @@
         "caption_fa": "پایش بلادرنگ تهدیدات سایبری و سپر امنیتی احراز هویت",
         "alt": "Network security monitor with cyber threat indicators"
       },
-      "tags": ["cybersecurity", "zero_trust", "identity", "authentication", "infosec"]
+      "tags": [
+        "cybersecurity",
+        "zero_trust",
+        "identity",
+        "authentication",
+        "infosec"
+      ]
     },
     "general_modern_saas": {
       "domain_id": "general_modern_saas",
@@ -632,7 +770,13 @@
         "caption_fa": "شاخص های عملکردی برخط و فرآیندهای چندعاملی",
         "alt": "Cloud workflow automation analytics dashboard"
       },
-      "tags": ["saas", "cloud", "automation", "workflow", "dashboard"]
+      "tags": [
+        "saas",
+        "cloud",
+        "automation",
+        "workflow",
+        "dashboard"
+      ]
     }
   }
 }

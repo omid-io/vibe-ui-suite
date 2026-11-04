@@ -26,13 +26,13 @@
 
 ---
 
-## ⚖️ Visual Impact: Vanilla AI Slop vs. Vibe UI v6.4.5 Masterpiece
+## ⚖️ Visual Impact: Vanilla AI Slop vs. Vibe UI v6.5.0 Masterpiece
 
 What happens when you ask a standard AI assistant to generate a frontend component?
 
 ```text
 ┌──────────────────────────────────────┐  vs  ┌──────────────────────────────────────┐
-│ ❌ VANILLA AI SLOP                   │      │ ✨ VIBE UI v6.4.5 MASTERPIECE        │
+│ ❌ VANILLA AI SLOP                   │      │ ✨ VIBE UI v6.5.0 MASTERPIECE        │
 ├──────────────────────────────────────┤      ├──────────────────────────────────────┤
 │ • Generic purple gradient buttons    │      │ • Strict Light-First Canvas & Depth  │
 │ • Low contrast text (3.2:1 FAILS AA) │      │ • Mathematical WCAG 2.2 AAA (18.8:1) │
@@ -72,35 +72,35 @@ Headless Browser Evaluation (Playwright 390px mobile overflow)
 Verified Output or Actionable Failure Diagnostics
 ```
 
-> **Day-One Transparency**: Vibe UI Suite is at `v6.4.5` (built upon `v6.0.0` **The Two Golden Pillars: Trend Inspiration & Living Visual Feedback Loop** with the **Living Micro-Interactions, Galaxy Inspiration Standard, Section Blocks & MCP Server**). Anchored on Pillar 1 (deep trend research across Mobbin, Dribbble, Figma Community, and Awwwards with Vibrant Light Mode default) and Pillar 2 (deterministic Playwright multi-viewport screenshot verification across Desktop 1440px and Mobile 390px with zero orphaned processes), Galaxy Inspiration Engine (3,800+ community elements with offline caching), Curated High-Res Unsplash Asset Vault covering all 24 canonical domains with tested HTTP 200 CDN URLs, clean component catalog with living interactive micro-interactions (`shimmer-button`, `cyber-loader`, `holographic-card`, `tactile-switch`, `glow-input`), full section blocks (`bento-hero`, `pricing-matrix`, `feature-grid`, `glass-navbar`, `conversion-cta`, `faq-accordion`), living React 19 TSX generation (`-f tsx`), zero-dependency TypeScript audit (`audit`), standard MCP server (`mcp`), and synchronized cross-platform tooling across npm, Python CLI, and VS Code. Constructive criticism, issues, and contributions from frontend engineers and AI researchers are warmly welcomed.
+> **Day-One Transparency**: Vibe UI Suite is at `v6.5.0` (built upon `v6.0.0` **The Two Golden Pillars: Trend Inspiration & Living Visual Feedback Loop** with the **Living Micro-Interactions, Galaxy Inspiration Standard, Section Blocks & MCP Server**). Anchored on Pillar 1 (deep trend research across Mobbin, Dribbble, Figma Community, and Awwwards with Vibrant Light Mode default) and Pillar 2 (deterministic Playwright multi-viewport screenshot verification across Desktop 1440px and Mobile 390px with zero orphaned processes), Galaxy Inspiration Engine (3,800+ community elements with offline caching), Curated High-Res Unsplash Asset Vault covering all 24 canonical domains with tested HTTP 200 CDN URLs, clean component catalog with living interactive micro-interactions (`shimmer-button`, `cyber-loader`, `holographic-card`, `tactile-switch`, `glow-input`), full section blocks (`bento-hero`, `pricing-matrix`, `feature-grid`, `glass-navbar`, `conversion-cta`, `faq-accordion`), living React 19 TSX generation (`-f tsx`), zero-dependency TypeScript audit (`audit`), standard MCP server (`mcp`), and synchronized cross-platform tooling across npm, Python CLI, and VS Code. Constructive criticism, issues, and contributions from frontend engineers and AI researchers are warmly welcomed.
 
 ---
 
-## 👑 Sovereign Multi-Agent Swarm Architecture (v6.4.5)
+## 👑 Sovereign Multi-Agent Swarm Architecture (v6.5.0)
 
 > **Eliminating the "Solo Shortcut":** Single AI models attempting to design, curate, code, and test simultaneously suffer from confirmation bias and hallucinated shortcuts.  
-> Vibe UI v6.4.5 introduces the **Foreman Swarm** (`agents/foreman.md`): a 6-station autonomous pipeline where a non-coding supervisor manages specialized agents with zero human micromanagement.
+> Vibe UI v6.5.0 introduces the **Sovereign Multi-Agent Swarm** led by `vibe-ui-agent` (`agents/vibe-ui-agent.md`): a 5-phase autonomous pipeline where a non-coding supervisor orchestrates specialized agents with zero human micromanagement and universal multi-harness portability.
 
 ```mermaid
 flowchart TD
-    User(["👤 User: 'Make my web UI look incredible'"]) --> Foreman["👑 vibe-foreman<br/>(Master Orchestrator • Zero Code Writing)"]
+    User(["👤 User: 'Make my web UI look incredible'"]) --> Orchestrator["👑 vibe-ui-agent<br/>(Sovereign Orchestrator • Zero Code Writing)"]
     
-    subgraph SwarmPipeline ["The 5-Station Autonomous Swarm (agents/)"]
-        Foreman --> S1["💡 vibe-concept-architect<br/>Expands 1-line lazy prompts into psychographics & layout archetypes"]
-        S1 --> S2["🔍 vibe-trend-hunter<br/>Mines GitHub Stars (>10k shadcn/aceternity) & Uiverse Likes"]
-        S2 --> S3["🎨 vibe-art-director<br/>Synthesizes OKLCH color tokens, typography & Design Blueprint"]
-        S3 --> S4["🛠️ vibe-master-builder<br/>Single-author HTML / React 19 TSX synthesis with spring physics"]
-        S4 --> S5["📸 Isolated Headless Chromium<br/>Captures Desktop (1440px) & Mobile (390px) screenshots"]
-        S5 --> S6["👁️ vibe-visual-auditor & 🛡️ vibe-tech-auditor<br/>Adversarial Inspection: WCAG AA, 0px overflow, visual harmony"]
+    subgraph SwarmPipeline ["The 5-Phase Autonomous Swarm (agents/)"]
+        Orchestrator --> P1["💡 Phase 1: vibe-concept-architect<br/>Expands 1-line lazy prompts into psychographics & layout archetypes"]
+        P1 --> P2["🔍 Phase 2: vibe-trend-hunter<br/>Mines GitHub Stars (>10k shadcn/aceternity) & Uiverse Likes"]
+        P2 --> P3["🎨 Phase 3: vibe-art-director<br/>Synthesizes OKLCH color tokens, typography & Design Blueprint"]
+        P3 --> P4["🛠️ Phase 4: vibe-master-builder<br/>Single-author HTML / React 19 TSX synthesis with spring physics"]
+        P4 --> P5["📸 Isolated Headless Chromium<br/>Captures Desktop (1440px) & Mobile (390px) screenshots"]
+        P5 --> P6["👁️ Phase 5: vibe-visual-auditor & 🛡️ vibe-tech-auditor<br/>Adversarial Inspection: WCAG AA, 0px overflow, visual harmony"]
     end
     
-    S6 -- "Defects Detected (Max 3 Loops)" --> PunchList["Atomic 3-Item Punch List"]
-    PunchList --> S4
-    S6 -- "PASS" --> Delivery(["✨ Verified Production Artifact + Dual-Viewport Screenshots"])
+    P6 -- "Defects Detected (Max 3 Loops)" --> PunchList["Atomic 3-Item Punch List"]
+    PunchList --> P4
+    P6 -- "PASS" --> Delivery(["✨ Verified Production Artifact + Dual-Viewport Screenshots"])
 ```
 
 ### ⚡ One-Liner Swarm Quickstart
-Run the complete 6-agent swarm from your terminal, Cursor, Claude Code, or Antigravity:
+Run the complete swarm from your terminal, Cursor, Claude Code, or Antigravity:
 
 ```bash
 # Direct execution via npx (Zero Setup)
@@ -110,14 +110,21 @@ npx vibe-ui-suite swarm "Modern Dark Luxury Real Estate Showcase"
 python vibe_cli.py swarm "High-velocity AI developer platform" -o landing.html
 ```
 
-### 🏛️ The 6 Specialized Swarm Agents (`agents/`)
+### 🏛️ The Specialized Swarm Roles (`agents/`)
 Every agent is defined as an independent, portable specification in `agents/` ready to drop into any AI IDE:
-- **`vibe-foreman`**: The gatekeeper. Enforces station progression and never writes code.
-- **`vibe-concept-architect`**: Solves lazy prompts by determining product domain, audience, and mood.
-- **`vibe-trend-hunter`**: Discovers top-starred benchmarks (>10k stars) and 3,800+ offline Galaxy components.
-- **`vibe-art-director`**: Compiles the binding `Design Style Blueprint` with OKLCH palettes.
-- **`vibe-master-builder`**: Authors seamless code without Frankenstein seams.
-- **`vibe-visual-auditor` & `vibe-tech-auditor`**: Ruthless adversarial quality inspection.
+- **`vibe-ui-agent`**: Sovereign Swarm Orchestrator. Coordinates execution state, enforces phase progression, and strictly obeys the **Zero Direct Code Writing Invariant**.
+- **`vibe-concept-architect`** (Phase 1): Solves lazy prompts by determining product domain, audience psychographics, and spatial layout archetypes.
+- **`vibe-trend-hunter`** (Phase 2): Discovers top-starred benchmarks (>10k stars like shadcn/aceternity) and 3,800+ offline Galaxy components.
+- **`vibe-art-director`** (Phase 3): Compiles the binding `Design Style Blueprint` with calibrated OKLCH palettes and typography scales.
+- **`vibe-master-builder`** (Phase 4): The sole code author, producing pristine HTML / React 19 TSX with spring physics and zero seams.
+- **`vibe-visual-auditor` & `vibe-tech-auditor`** (Phase 5): Dual adversarial inspectors enforcing WCAG AA contrast (>=4.5:1), 0px mobile overflow, and visual hierarchy.
+
+### 🌐 Universal Multi-Harness Portability
+Vibe UI v6.5.0 ships with zero host-path dependencies across all major AI harnesses:
+- **Antigravity**: Local project plugin at `.agents/plugins/vibe-ui/` with dynamic runtime `define_subagent` registration.
+- **Claude Code**: Native subagent discovery from `.claude/agents/`.
+- **Cursor & Windsurf**: Direct workspace orchestration from root `AGENTS.md`.
+- **NPM Package**: Distributed with all agent specifications packaged under `agents/`.
 
 ---
 
@@ -349,15 +356,18 @@ The system is coordinated by a lead architect agent (**`vibe-ui-agent`**) that o
 
 ---
 
-## 🎨 Five Visual Chemistries
+## 🎨 The Eight Canonical Visual Chemistries
 
-Vibe UI defines five visual systems for consistent design decisions:
+Vibe UI defines eight visual systems for consistent design decisions:
 
-1. **Minimalist SaaS**: Monochrome restraint, precision borders, high information density, functional typography (`oklch(0.12 0.01 260)`).
-2. **Luxury Obsidian / Glass 2.0**: Dark substrates, specular Fresnel highlights, subtle gold accents, controlled GPU backdrop blur budget (`oklch(0.08 0.02 270)`).
-3. **Neobrutalism**: High-contrast saturated cards, hard 3px black offset geometric drop-shadows, zero blur, explicit physical boundaries (`oklch(0.98 0.02 95)`).
-4. **Swiss Editorial**: Asymmetric typographic grid, content-first layout inspired by the International Typographic Style (`oklch(0.97 0.005 80)`).
+1. **Minimalist SaaS**: Monochrome restraint, precision borders, high information density, Geist/Inter functional typography (`oklch(0.12 0.01 260)`).
+2. **Luxury Glassmorphism 2.0**: Dark substrates, specular Fresnel highlights, subtle gold accents, up to 8 controlled GPU backdrop blur layers (`oklch(0.08 0.02 270)`).
+3. **Neobrutalism**: High-contrast saturated cards, hard 3-4px black offset geometric drop-shadows, zero blur, explicit physical boundaries (`oklch(0.98 0.02 95)`).
+4. **Swiss Editorial**: Asymmetric typographic grid, generous negative space, International Typographic Style with serif/sans harmony (`oklch(0.97 0.005 80)`).
 5. **Stripe Crisp Light**: Developer-first documentation aesthetic, micro-borders, clean typography, subtle shadows (`oklch(0.99 0.002 250)`).
+6. **Apple Cupertino Fluid**: Continuous corner curvature (`squircle`), tactile spring physics, translucent materials, dynamic responsive states.
+7. **Cinematic Motion & Depth**: Nocturnal void (`#050508`), ambient looping media from `cinematic_media_shelf.json`, high-contrast text scrims.
+8. **Monochrome Graphite & Laser Mint**: Deep obsidian/graphite (`#09090b`), laser mint (`#00f5a0`) / cyan (`#22d3ee`) telemetry, geometric sans paired with editorial italic serifs.
 
 ---
 

@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """
 scripts/stealth_crawler.py — On-Demand Stealth Crawler using Patchright / Native Fallback
-Vibe UI Suite v6.4.2
+Vibe UI Suite
 
 Provides bot-undetected web inspection without requiring persistent browser sessions or Playwright MCP.
 Gracefully detects Patchright, falls back to standard HTTP requests if not installed,
