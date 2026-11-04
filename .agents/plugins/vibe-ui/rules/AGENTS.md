@@ -48,4 +48,4 @@ Whenever publishing or releasing this suite:
 ## 5. Zero-Unsolicited-Version Invariant (No Version Spam)
 - Agents and swarm orchestrators must **NEVER mention, quote, or announce version numbers** in greetings, chat introductions, status banners, or conversational responses unless the user explicitly asks for the version.
 - Version numbers belong exclusively in canonical machine manifests (`version.manifest.json`, `package.json`), CLI `--version` output, and release changelogs.
-- Agent specification files, frontmatter descriptions, and prompt headers must never hardcode version numbers.
+- Agent specification files, frontmatter descriptions, prompt headers, and README documentation must never hardcode version numbers (`README.md`, `README.fa.md`, and package READMEs remain strictly evergreen).

@@ -52,7 +52,7 @@ npx vibe-ui-suite add telemetry-hud
 npx vibe-ui-suite add contrast-badge
 npx vibe-ui-suite add theme-toggle
 
-# Living Micro-Interactions (v6.1.0):
+# Living Micro-Interactions:
 npx vibe-ui-suite add shimmer-button
 npx vibe-ui-suite add cyber-loader
 npx vibe-ui-suite add holographic-card

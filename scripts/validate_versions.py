@@ -311,6 +311,22 @@ def main():
         if not any("Antigravity global" in e for e in errors):
             print("  [OK] Antigravity global custom-agents: 100% synchronized and sanitized")
 
+    # 18. Validate Zero-Version-In-README Invariant
+    readme_files = [
+        ROOT_DIR / "README.md",
+        ROOT_DIR / "README.fa.md",
+        ROOT_DIR / "packages" / "vibe-ui-suite" / "README.md",
+        ROOT_DIR / "packages" / "vibe-ui-vscode" / "README.md"
+    ]
+    for rmf in readme_files:
+        if rmf.exists():
+            rtxt = rmf.read_text(encoding="utf-8")
+            v_matches = re.findall(r'\bv?6\.\d+(?:\.\d+)?\b', rtxt)
+            if v_matches:
+                errors.append(f"Hardcoded suite version found in {rmf.relative_to(ROOT_DIR)}: {v_matches}")
+    if not any("Hardcoded suite version" in e for e in errors):
+        print("  [OK] README files: Zero-Version-In-README Invariant verified across all documentation")
+
     if errors:
         print("\n[FAIL] Synchronization & Contract Drift Detected:", file=sys.stderr)
         for err in errors:

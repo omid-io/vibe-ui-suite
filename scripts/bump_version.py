@@ -182,15 +182,7 @@ def bump(old_v: str, new_v: str, date_str: str = "2026-11-03"):
                 jp.write_text(json.dumps(d, indent=2, ensure_ascii=False) + "\n", encoding="utf-8")
                 print(f"  - Updated {jf}")
 
-    # 14. Update packages/vibe-ui-vscode/README.md
-    vscode_readme = ROOT_DIR / "packages" / "vibe-ui-vscode" / "README.md"
-    if vscode_readme.exists():
-        t = vscode_readme.read_text(encoding="utf-8")
-        t = re.sub(r'vibe-ui-vscode-\d+\.\d+\.\d+\.vsix', f'vibe-ui-vscode-{new_v}.vsix', t)
-        vscode_readme.write_text(t, encoding="utf-8")
-        print("  - Updated packages/vibe-ui-vscode/README.md")
-
-    # 15. Skills synchronization
+    # 14. Skills synchronization
     skills_src = ROOT_DIR / "skills"
     skills_dest1 = ROOT_DIR / ".agents" / "skills"
     skills_dest2 = ROOT_DIR / "packages" / "vibe-ui-suite" / "skills"

@@ -73,9 +73,9 @@ codium --install-extension omid-io.vibe-ui-vscode
 ```
 
 ### From VSIX Package:
-Download the latest `vibe-ui-vscode-6.5.0.vsix` from [GitHub Releases](https://github.com/omid-io/vibe-ui-suite/releases), then:
+Download the latest `vibe-ui-vscode-*.vsix` from [GitHub Releases](https://github.com/omid-io/vibe-ui-suite/releases), then:
 ```bash
-code --install-extension vibe-ui-vscode-6.5.0.vsix
+code --install-extension vibe-ui-vscode-*.vsix
 ```
 
 ---
