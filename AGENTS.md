@@ -4,14 +4,16 @@
 
 ---
 
-## 1. Core Architecture: Sovereign Multi-Agent Swarm
-All UI design in this repository executes via the 5-phase autonomous swarm commanded by `vibe-ui-agent` (Sovereign Swarm Orchestrator):
-- **Zero Direct Code Writing Invariant:** `vibe-ui-agent` never authors HTML/CSS code directly; it orchestrates execution state and dispatches specialized subagents:
-  1. **Phase 1 (Concept & Intent):** `vibe-concept-architect` expands raw prompts into a Macro Concept Manifest.
-  2. **Phase 2 (Trend & Asset Mining):** `vibe-trend-hunter` curates GitHub >10k stars, Uiverse micro-interactions, and the Unsplash Vault.
-  3. **Phase 3 (Art Direction):** `vibe-art-director` synthesizes OKLCH color tokens, typography scales, and the Design Style Blueprint.
-  4. **Phase 4 (Master Engineering Build):** `vibe-master-builder` writes pristine, single-author HTML/React code with spring physics and zero seams.
-  5. **Phase 5 (Adversarial Inspection Gate):** `vibe-visual-auditor` and `vibe-tech-auditor` run headless screenshot audits (Desktop 1440px / Mobile 390px), WCAG AA contrast (>=4.5:1), and 0px overflow checks with closed-loop healing (<=3 loops).
+## 1. Core Architecture: Sovereign Foreman & Background Swarm
+All UI design in this repository executes via `vibe-ui-agent` (Sovereign Swarm Foreman):
+- **Single Point of Contact & Zero-Chat-Spam Invariant:** The host agent dispatches `vibe-ui-agent` via `invoke_subagent`. `vibe-ui-agent` executes the 5-phase swarm silently in the background (via `python vibe_cli.py swarm "<prompt>" --json`) without polluting the primary conversation with intermediate subagent turns.
+- **The 5 Autonomous Stations:**
+  1. **Phase 1 (Concept & Intent):** Macro Concept Manifest (Domain, Psychographics, Spatial Flow).
+  2. **Phase 2 (Trend & Asset Mining):** GitHub >10k stars, Uiverse micro-interactions, and Living Media Shelf.
+  3. **Phase 3 (Art Direction):** Binding Design Style Blueprint (OKLCH tokens, typography scales, hierarchy).
+  4. **Phase 4 (Master Engineering Build):** Pristine single-author HTML/React markup with spring physics and zero seams.
+  5. **Phase 5 (Adversarial Inspection Gate):** Multi-viewport headless screenshots (1440px / 390px), WCAG AA contrast (>=4.5:1), and 0px overflow closed-loop healing (<=3 loops).
+- **Consolidated Delivery:** `vibe-ui-agent` delivers the final verified artifact, screenshots, and audit metrics in a single consolidated presentation.
 
 ---
 

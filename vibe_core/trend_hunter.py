@@ -62,7 +62,7 @@ class TrendHunter:
         """
         api_url = f"https://api.github.com/search/repositories?q={urllib.parse.quote(query)}+topic:ui+stars:>5000&sort=stars&order=desc&per_page={limit}"
         headers = {
-            "User-Agent": "Vibe-UI-TrendHunter/6.5.0",
+            "User-Agent": "Vibe-UI-TrendHunter/6.5.1",
             "Accept": "application/vnd.github.v3+json"
         }
         req = urllib.request.Request(api_url, headers=headers)

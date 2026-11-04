@@ -5,6 +5,23 @@ All notable changes to the **Vibe UI Skills** repository are documented in this 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [6.5.1] - 2026-11-04
+
+### Encapsulated Background Swarm Architecture & Multi-Harness Adapters
+- **Foreman Background Encapsulation (Zero-Chat-Spam Invariant)**:
+  - Eliminated noisy chat subagent spam by encapsulating the entire 5-phase swarm inside `vibe-ui-agent` (Sovereign Foreman).
+  - Executed the deterministic 5-phase pipeline via `python vibe_cli.py swarm` in an isolated background process.
+  - Intermediate phase handoffs and raw logs are completely hidden from the user's primary chat; delivers a single consolidated presentation with clickable local previews, design tokens, and desktop/mobile headless screenshots.
+- **Universal Multi-Harness Adapters**:
+  - Antigravity: Workspace and global custom-agents synchronized to encapsulated background execution.
+  - Claude Code: Updated `.claude/agents/vibe-ui-agent.md` for seamless background CLI execution.
+  - Cursor / Windsurf: Added dedicated `.cursor/rules/vibe-ui.mdc` for autonomous CLI swarm invocation.
+  - NPM & VS Code: Synchronized manifests, CLI, MCP server, and agent definitions across monorepo packages.
+- **Global Config Sanitization**:
+  - Reverted project-specific rules from global `GEMINI.md` and `MASTER_PROJECT_RULES.md` in strict compliance with the Zero Global Pollution Mandate (Rule 2).
+
+---
+
 ## [6.5.0] - 2026-11-03
 
 ### Universal Multi-Agent Swarm Harmonization & Multi-Harness Portability

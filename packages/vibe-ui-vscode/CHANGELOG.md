@@ -3,6 +3,15 @@
 All notable changes to the **Vibe UI (VS Code, Cursor & Open-VSX)** extension will be documented in this file.
 This project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [6.5.1] — 2026-11-04
+
+### Added & Improved
+- **Encapsulated Background Swarm**: Replaced noisy multi-agent chat spam with silent background execution via `vibe_cli.py swarm`, returning a single consolidated deliverable.
+- **Cross-Harness Adapters**: Added `.cursor/rules/vibe-ui.mdc` alongside Claude Code and Antigravity specifications.
+- **Zero-Pollution Compliance**: Full self-containment without external global rule dependencies.
+
+---
+
 ## [6.5.0] — 2026-11-03
 
 ### Added & Improved

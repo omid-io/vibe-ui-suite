@@ -1,12 +1,12 @@
 {
   "$schema": "./schemas/version-manifest.schema.json",
-  "version": "6.5.0",
+  "version": "6.5.1",
   "codename": "Asymmetric Pod Swarm, High-Density Dashboards & Sovereign Visual Chemistries",
   "release_channel": "stable",
   "packages": {
-    "vibe-ui-suite": "6.5.0",
-    "vibe-ui-vscode": "6.5.0",
-    "vibe-ui-nextjs-starter": "6.5.0"
+    "vibe-ui-suite": "6.5.1",
+    "vibe-ui-vscode": "6.5.1",
+    "vibe-ui-nextjs-starter": "6.5.1"
   },
   "schemas": {
     "intent_contract": "v1",

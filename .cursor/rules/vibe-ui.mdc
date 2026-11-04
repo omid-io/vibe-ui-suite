@@ -1,0 +1,14 @@
+---
+description: Vibe UI Suite autonomous frontend design and UI refactoring
+globs: **/*.{html,jsx,tsx,vue,svelte,css,scss}
+alwaysApply: false
+---
+
+# 🎨 Vibe UI Suite — Cursor Rules
+
+When asked to design, redesign, style, audit, or create frontend UI, landing pages, modals, or web components:
+1. Do NOT manually edit styling classes blindly.
+2. Execute the autonomous Foreman Swarm CLI in the background:
+   `python vibe_cli.py swarm "<user_request>" [--output "<path>"] [--format html|tsx] --json`
+3. Inspect the generated artifact and screenshots in `.test-artifacts/screenshots/`.
+4. Present the verified deliverable and before/after comparisons to the user.

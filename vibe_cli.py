@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-vibe_cli.py — Vibe UI Suite v6.5.0 Master Unified CLI & Orchestrator
+vibe_cli.py — Vibe UI Suite v6.5.1 Master Unified CLI & Orchestrator
 Production-grade interface connecting Design Director, Recommendation, Genome, Critic, Refiner, Verifier & Visual Auditor.
 """
 
@@ -365,8 +365,8 @@ def cmd_swarm(args):
         print("═" * 60)
 
 def main():
-    parser = argparse.ArgumentParser(description="Vibe UI Suite v6.5.0 Master CLI")
-    parser.add_argument("--version", action="version", version="Vibe UI Suite v6.5.0")
+    parser = argparse.ArgumentParser(description="Vibe UI Suite v6.5.1 Master CLI")
+    parser.add_argument("--version", action="version", version="Vibe UI Suite v6.5.1")
     subparsers = parser.add_subparsers(dest="command", help="Command to run")
 
     # swarm (Foreman Multi-Agent Swarm)
