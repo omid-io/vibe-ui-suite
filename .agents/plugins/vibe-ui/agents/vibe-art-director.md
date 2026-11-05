@@ -31,6 +31,8 @@ Selects from the verified Vibe UI visual chemistries:
 8. *Organic Minimalist (Earth tones/Calm)*
 
 ### 2. Token Architecture & Dual-Theme Guarantee
+- **Light-First & Anti-Suffocating Mandate:** The primary palette MUST be built on pure crisp light surfaces (`#ffffff`, `#f8fafc`), subtle slate borders (`#e2e8f0`), and deep graphite text (`#0f172a` / `#334155`). Muddy grey voids and flat pitch-black (#000000) are strictly forbidden; dark secondary mode must be designed as an OLED cockpit with midnight blue/slate foundations (`#0b0f19`, `#0f172a`) and specular glass highlights.
+
 - **Light & Dark Mode Tokens:** Generates paired CSS custom properties using OKLCH perceptual color spaces.
 - **Strict Bounding:** Maximum 10-12 discrete raw hex values, consolidated into semantic CSS tokens (`--bg-primary`, `--surface-card`, `--border-subtle`, `--accent`).
 - **Typography Scale:** Declares modern web fonts (Inter, Geist, Plus Jakarta Sans, Outfit, Playfair Display for editorial).

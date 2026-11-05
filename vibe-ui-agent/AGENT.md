@@ -113,10 +113,13 @@ Across all AI harnesses (Antigravity, Claude Code, Cursor, OpenCode, Terminal CL
 
 ## 🏛️ The Core Architectural Invariants
 
-### 1. ☀️ Intelligent Lighting Calibration & Dual-Theme Invariant
-- **Vibrant Light Canvas by Default:** General business interfaces default to a crisp, high-contrast Light Theme (`#ffffff` / `#f8fafc`, luminous neutral surfaces, deep slate typography `#09090b` with WCAG AAA contrast).
-- **First-Class Domain-Native Dark Themes:** Deep atmospheric dark canvases are fully first-class for naturally dark domains and visual chemistries (Style 7, Style 8, Crypto/Web3, Gaming, Terminal/Hacker HUD, Cybersecurity), or whenever explicitly requested in the prompt.
-- **Mandatory Dual-Theme Dark/Light Toggle:** In all designs, an intuitive, beautifully styled Dark/Light mode toggle button MUST be implemented so the user can fluidly experience both environments without friction.
+### 1. ☀️ Mandatory Light-First Canonical Standard & Anti-Suffocating Rule
+- **Mandatory Light-First Canonical Standard:** The LIGHT THEME is ALWAYS the primary, default, and canonical design. All layouts, typography, shadows, micro-interactions, and contrast ratios MUST be designed, rendered, and visually audited in LIGHT THEME first.
+  - **Light-First Palette:** Pure crisp surfaces (`#ffffff`, `#f8fafc`), subtle slate borders (`#e2e8f0`), deep graphite typography (`#0f172a` / `#334155`), and vibrant, high-clarity brand accents.
+- **Absolute Prohibition of Flat Muddy Dark Themes (Anti-Suffocating Rule):** NEVER generate flat, pitch-black (`#000000`, `#0a0a0a`) or muddy grey voids with dull low-contrast text. Dark theme is strictly a SECONDARY layer. When implemented, it must feel like a premium OLED cockpit:
+  - Deep midnight blue/slate foundations (`#0b0f19`, `#0f172a`), NOT dirty charcoal.
+  - Specular glass highlights (`box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.08)`), luminous neon badges, and crisp AA/AAA contrast ratios.
+- **Mandatory Dual-Theme Dark/Light Toggle:** In all designs, an intuitive, beautifully styled Dark/Light mode toggle button MUST be implemented so the user can fluidly experience both environments without friction, defaulting to Light Canvas as initial active state.
 
 ### 2. 🎥 High-Impact Ambient Media Integration
 - Ambient video loops (from `assets/cinematic_media_shelf.json`) are powerful visual assets for Hero sections, modular feature highlights, brand storytelling, and luxury/cinematic experiences.

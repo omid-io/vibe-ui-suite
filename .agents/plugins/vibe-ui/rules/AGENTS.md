@@ -18,13 +18,15 @@ All UI design in this repository executes via `vibe-ui-agent` (Sovereign Swarm F
 ---
 
 ## 2. Spatial & Aesthetic Standards
-- **Peak Creativity & Maximum Innovation Mandate:** All agents across the swarm (ibe-concept-architect, ibe-trend-hunter, ibe-art-director, ibe-master-builder, ibe-visual-auditor, ibe-tech-auditor) MUST ALWAYS operate with the highest level of creativity, boldness, and artistic depth. Generic, cookie-cutter, or repetitive boilerplate solutions are strictly forbidden. Every interface, spatial composition, visual rhythm, micro-interaction, and layout archetype must reflect tailored domain-specific elegance, bold aesthetic innovation, and elite craftsmanship.
+- **Peak Creativity & Maximum Innovation Mandate:** All agents across the swarm (`vibe-concept-architect`, `vibe-trend-hunter`, `vibe-art-director`, `vibe-master-builder`, `vibe-visual-auditor`, `vibe-tech-auditor`) MUST ALWAYS operate with the highest level of creativity, boldness, and artistic depth. Generic, cookie-cutter, or repetitive boilerplate solutions are strictly forbidden. Every interface, spatial composition, visual rhythm, micro-interaction, and layout archetype must reflect tailored domain-specific elegance, bold aesthetic innovation, and elite craftsmanship.
 - **Anti-Cosmetic-Patch Invariant:** Shallow skin patches (tweaking colors or emojis while leaving dead layouts untouched) are strictly forbidden. UI work mandates structural spatial overhaul, dual-theme support, and living browser screenshot verification.
 - **Anti-Bento-Dogma Invariant:** Never dogmatically default to repetitive "Bento Grid" card boxes. Form follows function: employ asymmetric flows, single hero focal points, continuous timelines, or high-density operational tables.
 - **Creative Synthesis Standard:** Never clone benchmark templates (Mobbin, Dribbble, Awwwards) verbatim. Synthesize core mechanics into bespoke interfaces authentic to the specific project domain.
-- **Universal Dual-Theme Mandate (Light + Dark):** Every interface must natively support semantic light/dark themes with zero gravitational dark bias (calibrate daylight ivory, golden hour, twilight based on domain context).
+- **Mandatory Light-First Canonical Standard:** The LIGHT THEME is ALWAYS the primary, default, and canonical design. All layouts, typography, shadows, micro-interactions, and contrast ratios MUST be designed, rendered, and visually audited in LIGHT THEME first. Palette: Pure crisp surfaces (`#ffffff`, `#f8fafc`), subtle slate borders (`#e2e8f0`), deep graphite typography (`#0f172a` / `#334155`), and vibrant, high-clarity brand accents.
+- **Anti-Suffocating Rule (Absolute Prohibition of Flat Muddy Dark Themes):** NEVER generate flat, pitch-black (`#000000`, `#0a0a0a`) or muddy grey voids with dull low-contrast text. Dark theme is strictly a SECONDARY layer. When implemented, it must feel like a premium OLED cockpit:
+  - Deep midnight blue/slate foundations (`#0b0f19`, `#0f172a`), NOT dirty charcoal.
+  - Specular glass highlights (`box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.08)`), luminous neon badges, and crisp AA/AAA contrast ratios.
 - **On-Demand RTL Protocol:** Root stays `dir="ltr"`. Persian text is scoped with Vazirmatn fallback, `<bdi>` token isolation, and non-mirrored coordinates per `RTL.md`.
-
 ---
 
 ## 3. Mandatory Multi-Registry Release Law ("Publish")

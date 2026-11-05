@@ -18,7 +18,8 @@ A truly world-class UI designer does not treat visual design as mechanical decor
 
 1. **Pillar 1: Deep Trend Research & Award-Winning Inspiration (الهام گیری و پژوهش روندهای برتر طراحی):**
    - **Semantic Understanding First (فهم عمیق موضوع صفحه):** Before writing any CSS or selecting tokens, deeply analyze: *What is this product? What emotional and operational state is the user in when viewing this screen? What is the primary job-to-be-done?* Research domain benchmarks from Mobbin, Dribbble, Figma Community, Godly, and Awwwards.
-   - **Vibrant Light Aesthetic as Default (پیش فرض تم روشن و باطراوت):** General business interfaces (Healthcare, SaaS, E-commerce, Education, Portfolios, Agencies) default to a **crisp, vibrant, high-contrast Light Theme** (`#ffffff`, `#f8fafc`, deep slate `#0f172a` text, sharp accent). Dark Theme is reserved for domain-native contexts (Crypto/Web3, Gaming, Terminal/Hacker HUD, Cybersecurity) or explicit user requests. An optional clean theme toggle can be provided without bloating the codebase with redundant token scaffolding.
+   - **Mandatory Light-First Canonical Standard (پیش فرض تم روشن استاندارد کانونیکال):** The LIGHT THEME is ALWAYS the primary, default, and canonical design. All layouts, typography, shadows, micro-interactions, and contrast ratios MUST be designed, rendered, and visually audited in LIGHT THEME first. Palette: Pure crisp surfaces (`#ffffff`, `#f8fafc`), subtle slate borders (`#e2e8f0`), deep graphite typography (`#0f172a` / `#334155`), and vibrant, high-clarity brand accents.
+   - **Anti-Suffocating Rule — Absolute Prohibition of Flat Muddy Dark Themes (قانون ضدتنگی نفس و منع فضاهای تیره مرده):** NEVER generate flat, pitch-black (`#000000`, `#0a0a0a`) or muddy grey voids with dull low-contrast text. Dark theme is strictly a SECONDARY layer. When implemented, it must feel like a premium OLED cockpit: deep midnight blue/slate foundations (`#0b0f19`, `#0f172a`), NOT dirty charcoal, paired with specular glass highlights (`box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.08)`), luminous neon badges, and crisp AA/AAA contrast ratios.
 
 2. **Pillar 2: Living Visual Feedback Loop (چرخه بازخورد بصری زنده و ممیزی اسکرین شات):**
    - **Automated Multi-Viewport Screenshot Capture:** Never consider a UI complete until executing automated headless Chromium rendering via `scripts/screenshot_audit.py` (or `vibe_cli.py screenshot`) capturing both **Desktop (1440px)** and **Mobile (390px)** into `.test-artifacts/screenshots/`, plus full-page vertical verification.
@@ -47,7 +48,7 @@ PROMPT / DOMAIN ──┼─► 3. Neobrutalism & Playful High-Contrast (Creativ
 
 ### 1. ⚡ Minimalist High-Performance SaaS (Linear / Vercel Style)
 *Best for: Developer tools, B2B SaaS, Analytics, Modern Dashboards.*
-- **Canvas:** Pure Charcoal / Pitch Zinc (`#09090b` or `#000000`)
+- **Canvas:** Crisp Porcelain Light (`#ffffff` / `#f8fafc`) canonical primary, with Deep Midnight Slate (`#0b0f19`) secondary OLED cockpit layer
 - **Borders:** Crisp, razor-sharp 1px borders (`border: 1px solid rgba(255, 255, 255, 0.08)`)
 - **Lighting:** Ultra-subtle directional linear gradients (`linear-gradient(180deg, rgba(255,255,255,0.03) 0%, transparent 100%)`)
 - **Typography:** Inter / Geist / JetBrains Mono for metrics.

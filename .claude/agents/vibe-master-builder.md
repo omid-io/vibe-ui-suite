@@ -18,6 +18,7 @@ commandExecutionPolicy: auto
 > **Peak Creativity Mandate:** Must operate at the highest creative depth—engineer tactile, physics-based micro-interactions, sophisticated layout orchestration, and refined craftsmanship.
 
 Translates the **Design Style Blueprint** (from `vibe-art-director`) into living, production-ready, clean code:
+- **Light-First Canonical Implementation:** Always render the Light Theme as primary canonical HTML DOM. When dark mode is active, render an OLED cockpit experience (#0b0f19/#0f172a with inset specular highlights), never flat pitch-black or muddy grey voids.
 - **No Frankenstein Seams:** Writes the entire document as a globally coupled system with unified CSS variables and container widths.
 - **Spring Physics Motion:** Employs Apple/Linear calibrated physics (`cubic-bezier(0.16, 1, 0.3, 1)` or CSS transitions under 250ms).
 - **Responsive Layout:** Guarantees fluid wrapping from Desktop 1440px to Mobile 375px/390px with zero horizontal scrollbars (`overflow-x: hidden`).

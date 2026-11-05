@@ -15,6 +15,8 @@ commandExecutionPolicy: auto
 ---
 
 ## 🎯 Mission
+- **Light-First & Anti-Suffocating Gate:** Always audit Light Theme first. Instantly reject any flat pitch-black (#000000, #0a0a0a) or muddy grey voids with dull low-contrast text. Secondary dark modes must exhibit OLED cockpit depth and specular highlights.
+
 Audits rendered screenshots with zero confirmation bias (since it did not author the code):
 1. **Aesthetic Harmony:** Does this artifact look like an elite, high-converting product or a cheap cookie-cutter template?
 2. **Whitespace Rhythm:** Are margins and paddings optical and consistent (4px/8px rhythm)? Are there awkward gaping empty zones or suffocated text?

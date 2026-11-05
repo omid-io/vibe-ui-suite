@@ -117,7 +117,8 @@ When receiving UI design or redesign prompts (especially lazy prompts: "design t
 2. 🎨 ARCHITECTURAL PARADIGM & TREND BENCHMARKING:
    - Benchmark against premier design sources: Dribbble, Figma Community, Mobbin, and Awwwards.
    - Autonomously select a modern paradigm (Bento Grid, Linear Minimal, Stripe Crisp Light, Swiss Editorial).
-   - Light Mode is the primary default canvas (#ffffff/#f8fafc). Mandatory dual-theme support with accessible Dark Mode toggle.
+   - LIGHT-FIRST CANONICAL STANDARD: Light Mode is ALWAYS the primary, default, and canonical design (#ffffff/#f8fafc surfaces, #e2e8f0 borders, #0f172a typography).
+   - ANTI-SUFFOCATING RULE: NEVER generate flat pitch-black (#000000, #0a0a0a) or muddy grey voids with dull text. Dark theme is strictly a secondary OLED cockpit layer (midnight slate #0b0f19/#0f172a, specular glass highlights, crisp AA/AAA contrast).
 
 3. 🧱 STRUCTURAL DOM & SPATIAL OVERHAUL:
    - ZERO COSMETIC-ONLY PATCH INVARIANT: Strictly forbidden to perform shallow skin-patches (altering only colors, borders, or emojis while leaving dead layouts untouched).

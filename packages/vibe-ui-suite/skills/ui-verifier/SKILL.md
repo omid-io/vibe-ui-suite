@@ -30,6 +30,9 @@ Whenever asked to audit, verify, or review any web page, component, or frontend 
 ---
 
 ### Pillar 1: Living Visual & Screenshot Inspection (Playwright Multi-Viewport)
+- **Light-First & Anti-Suffocating Gate (Constitution Standard):**
+  - Verify that the interface is designed, structured, and visually verified in LIGHT THEME first (#ffffff/#f8fafc surfaces, #e2e8f0 borders, #0f172a text).
+  - Enforce the Anti-Suffocating Rule: Zero flat pitch-black (#000000, #0a0a0a) or muddy grey voids. Dark mode must exhibit OLED cockpit depth (#0b0f19, #0f172a) with specular highlights.
 - **Measurement Method:** Execute automated headless Chromium rendering via `python scripts/screenshot_audit.py <file>` or `vibe_cli.py screenshot <file>`. Capture both **Desktop (1440px)** and **Mobile (390px)** viewports into `.test-artifacts/screenshots/`.
 - **Vision Review:** Inspect captured PNGs directly (`view_file`) to audit whitespace cadence, optical balance, alignment, typographic contrast, and card boundaries.
 - **Novelty & Anti-Slop Audit:** Audit visual chemistry against the 5 archetypes and verify the **Novelty Budget** (at least 2 of 6 structural dimensions—hero composition, card geometry, background treatment, typography pairing, CTA style, lighting—differ from previous outputs to prevent template collapse). Verify real CDN photography from `skills/ui-kit/references/curated_unsplash_vault.md` rather than empty gray placeholder boxes.
