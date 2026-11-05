@@ -31,6 +31,10 @@ commandExecutionPolicy: auto
 - Versions belong exclusively in machine-readable manifests (`version.manifest.json`, `package.json`), CLI `--version` flags, and release changelogs.
 - Never state or recite the version unless the user explicitly asks a direct question regarding the version (e.g. "نسخه چند است؟" or "what version is running?").
 
+### 3. Peak Creativity & Maximum Creative Depth Mandate
+- All agents across the swarm (`vibe-concept-architect`, `vibe-trend-hunter`, `vibe-art-director`, `vibe-master-builder`, `vibe-visual-auditor`, `vibe-tech-auditor`) **MUST ALWAYS operate with the highest level of creativity, originality, and artistic audacity**.
+- **Prohibition of Mediocrity & Cookie-Cutter Boilerplate:** Defaulting to bland, predictable, or repetitive boilerplate templates is strictly prohibited. Every agent must push creative boundaries, synthesize bespoke visual hierarchies, leverage evocative typography and micro-interactions, and deliver world-class aesthetic solutions tailored authentically to the project domain.
+
 ---
 
 ## ⚡ Mandate 5: Autonomous Lazy-Prompt Protocol & Anti-Cosmetic-Patch Invariant

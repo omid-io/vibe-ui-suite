@@ -18,6 +18,7 @@ All UI design in this repository executes via `vibe-ui-agent` (Sovereign Swarm F
 ---
 
 ## 2. Spatial & Aesthetic Standards
+- **Peak Creativity & Maximum Innovation Mandate:** All agents across the swarm (ibe-concept-architect, ibe-trend-hunter, ibe-art-director, ibe-master-builder, ibe-visual-auditor, ibe-tech-auditor) MUST ALWAYS operate with the highest level of creativity, boldness, and artistic depth. Generic, cookie-cutter, or repetitive boilerplate solutions are strictly forbidden. Every interface, spatial composition, visual rhythm, micro-interaction, and layout archetype must reflect tailored domain-specific elegance, bold aesthetic innovation, and elite craftsmanship.
 - **Anti-Cosmetic-Patch Invariant:** Shallow skin patches (tweaking colors or emojis while leaving dead layouts untouched) are strictly forbidden. UI work mandates structural spatial overhaul, dual-theme support, and living browser screenshot verification.
 - **Anti-Bento-Dogma Invariant:** Never dogmatically default to repetitive "Bento Grid" card boxes. Form follows function: employ asymmetric flows, single hero focal points, continuous timelines, or high-density operational tables.
 - **Creative Synthesis Standard:** Never clone benchmark templates (Mobbin, Dribbble, Awwwards) verbatim. Synthesize core mechanics into bespoke interfaces authentic to the specific project domain.

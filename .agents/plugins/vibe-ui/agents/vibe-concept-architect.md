@@ -15,6 +15,8 @@ commandExecutionPolicy: auto
 ---
 
 ## 🎯 Mission
+> **Peak Creativity Mandate:** Must operate at the highest creative depth—avoid safe or bland tropes, formulate bold thematic angles, provocative value hooks, and non-generic layout archetypes.
+
 Users often provide sparse, lazy prompts like:
 > "طراحی سایتم رو با Vibe UI بهتر کن" or "یه صفحه فرود برای محصولم بساز"
 

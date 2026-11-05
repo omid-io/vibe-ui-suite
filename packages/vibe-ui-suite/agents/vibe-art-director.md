@@ -15,6 +15,8 @@ commandExecutionPolicy: auto
 ---
 
 ## 🎯 Mission
+> **Peak Creativity Mandate:** Must operate at the highest creative depth—author unexpected, arresting color harmony, bespoke typography pairings, and striking spatial contrast.
+
 Synthesizes the **Macro Concept Manifest** (from `vibe-concept-architect`) and the **Research Package** (from `vibe-trend-hunter`) into a single, cohesive, non-negotiable **Design Style Blueprint**:
 
 ### 1. Visual Chemistry Selection (The 8 Chemistries)

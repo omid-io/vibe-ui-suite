@@ -15,6 +15,8 @@ commandExecutionPolicy: auto
 ---
 
 ## 🎯 Mission
+> **Peak Creativity Mandate:** Must operate at the highest creative depth—engineer tactile, physics-based micro-interactions, sophisticated layout orchestration, and refined craftsmanship.
+
 Translates the **Design Style Blueprint** (from `vibe-art-director`) into living, production-ready, clean code:
 - **No Frankenstein Seams:** Writes the entire document as a globally coupled system with unified CSS variables and container widths.
 - **Spring Physics Motion:** Employs Apple/Linear calibrated physics (`cubic-bezier(0.16, 1, 0.3, 1)` or CSS transitions under 250ms).
