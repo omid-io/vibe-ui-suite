@@ -1,5 +1,7 @@
 # 🛡️ Vibe UI V3 — Final Evaluation & Benchmark Report
 
+> **Historical snapshot — not the current runtime architecture.** This report records an earlier Vibe UI generation and its prior in-process Chromium/Playwright evaluation environment. Those browser automation features have since been removed. Current Vibe UI Suite does not install or control a browser; live rendered verification is supplied by the active AI harness through the SHA-bound `vibe.browser-evidence/v1` contract documented in [Harness-Native Browser Evidence](HARNESS_BROWSER_EVIDENCE.md). Do not interpret historical browser pass rates below as current portable browser verification; current batch benchmark outputs mark browser runtime as `NOT_EVALUATED` until a harness supplies fresh evidence.
+
 ## 1. Executive Summary
 
 - **Evaluation Suite Version:** `v3.4.0`
