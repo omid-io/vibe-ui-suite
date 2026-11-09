@@ -181,7 +181,7 @@ class VerificationEngine:
             mode:         "fast" = static DOM eval (<50ms, default).
                           "strict" = static eval + Playwright headless browser (opt-in).
         """
-        fast_result = self._fast_path(html_content, filename)
+        fast_result = self._fast_path(html_content, filename, base_dir=base_dir)
 
         if mode == "strict":
             strict_result = self._strict_path(html_content, filename)
@@ -198,7 +198,12 @@ class VerificationEngine:
         return fast_result
 
     # ─────────────────────────── FAST PATH ────────────────────────────
-    def _fast_path(self, html_content: str, filename: str) -> Dict[str, Any]:
+    def _fast_path(
+        self,
+        html_content: str,
+        filename: str,
+        base_dir: Optional[Path] = None,
+    ) -> Dict[str, Any]:
         """Pure static DOM evaluation — no browser, no network. Target: <50ms."""
         evidence_records = []
         passed = 0

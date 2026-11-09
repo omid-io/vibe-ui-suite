@@ -47,10 +47,10 @@ def _extract_wcag_evidence(report: Dict[str, Any]) -> Tuple[float, str]:
         if "contrast" not in check_name:
             continue
         measured = str(record.get("measured_value") or "")
-        match = re.search(r"(\\d+(?:\\.\\d+)?)\\s*:\\s*1", measured)
+        match = re.search(r"(\d+(?:\.\d+)?)\s*:\s*1", measured)
         if not match:
             evidence = str(record.get("evidence") or "")
-            match = re.search(r"(?i)body contrast\\s+(\\d+(?:\\.\\d+)?)\\s*:\\s*1", evidence)
+            match = re.search(r"(?i)body contrast\s+(\d+(?:\.\d+)?)\s*:\s*1", evidence)
         status = str(record.get("status", "")).upper()
         if match and status in {"PASS", "FAIL"}:
             return min(21.0, max(0.0, float(match.group(1)))), status
@@ -466,7 +466,7 @@ class ForemanSwarmOrchestrator:
         """Copy only referenced package assets, without overwriting consumer files."""
         copied: List[str] = []
         missing: List[str] = []
-        references = sorted(set(re.findall(r'assets/curated_webp/[^\\s"\\',)]+', html)))
+        references = sorted(set(re.findall(r'assets/curated_webp/[^\s"\',)]+', html)))
         for relative in references:
             relative_path = Path(relative)
             if relative_path.is_absolute() or ".." in relative_path.parts:
