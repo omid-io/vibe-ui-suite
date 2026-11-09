@@ -244,6 +244,55 @@ def run_suite():
     banned_grads = anti_slop.get("banned_gradients", [])
     assert_test("linear-gradient(135deg, #6366f1, #a855f7)" in banned_grads or len(banned_grads) > 0, "Cliché Purple/Indigo AI-Slop Gradient Explicitly Banned")
 
+    # --------------------------------------------------------------------------
+    # 7. Intent Preservation & TrendEvidence Recommendation Coupling
+    # --------------------------------------------------------------------------
+    print("\n[Phase 7] Intent Preservation & TrendEvidence Coupling")
+    from vibe_core.recommendation import RecommendationEngine
+    rec_engine = RecommendationEngine()
+    test_intent = director.infer_intent("Modern luxury real estate architecture")
+    concept_obj = ConceptContract(
+        domain=test_intent["product_domain"],
+        product_name="Elysium Estates",
+        target_audience="High-net-worth investors",
+        emotional_tone="prestigious, restrained",
+        primary_job_to_be_done="Inquire on off-market residences",
+        spatial_flow=["hero", "curated_gallery", "private_consultation"],
+        language="en",
+        is_rtl=False,
+        metadata=test_intent
+    )
+
+    # Verify Blueprint preservation across contract & recommendation
+    assert_test(bool(concept_obj.blueprint), "Blueprint Preserved in ConceptContract")
+    assert_test(bool(concept_obj.to_dict().get("blueprint")), "Blueprint Accessible at Top-Level in to_dict()")
+
+    # Verify strict boolean parsing on is_rtl
+    concept_str_bool = ConceptContract.from_dict({
+        "domain": "test",
+        "product_name": "Test",
+        "target_audience": "Test",
+        "emotional_tone": "calm",
+        "primary_job_to_be_done": "test",
+        "spatial_flow": ["hero"],
+        "is_rtl": "false"
+    })
+    assert_test(concept_str_bool.is_rtl is False, "Strict Boolean Parser: is_rtl='false' Evaluates to False")
+
+    # Verify TrendEvidence coupling in recommendation
+    te_test = TrendEvidence(
+        selected_style="swiss_editorial",
+        style_reasoning="Bespoke typography and asymmetric flow",
+        composition_archetype="asymmetric_operational_split",
+        typography_pair={"display": "Newsreader", "body": "Inter"},
+        novelty_risk_assessment="LOW",
+        banned_slop_tropes=["repetitive_bento_cards"]
+    )
+    rec_with_trend = rec_engine.recommend(concept_obj, trend_evidence=te_test)
+    assert_test(rec_with_trend.get("composition_archetype") == "asymmetric_operational_split", "TrendEvidence Archetype Active in Recommendation")
+    assert_test(bool(rec_with_trend.get("trend_evidence")), "TrendEvidence Trace Stored in Decision")
+    assert_test(bool(rec_with_trend.get("intent", {}).get("blueprint")), "Blueprint Preserved in Final Decision Contract")
+
     print("\n" + "=" * 70)
     print(f"📊 SUMMARY: {PASSED_COUNT} PASSED, {FAILED_COUNT} FAILED")
     print("=" * 70)

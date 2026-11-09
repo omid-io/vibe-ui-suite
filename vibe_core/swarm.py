@@ -14,6 +14,7 @@ Coordinates the 5-phase sequential multi-agent pipeline with typed data contract
 from __future__ import annotations
 
 import json
+import re
 import subprocess
 import sys
 from pathlib import Path
@@ -57,7 +58,8 @@ class ForemanSwarmOrchestrator:
         target_output: Optional[str] = None,
         style_override: Optional[str] = None,
         output_format: str = "html",
-        max_remediation_loops: int = 3
+        max_remediation_loops: int = 3,
+        quiet: bool = False
     ) -> Dict[str, Any]:
         """
         Executes the full 5-station pipeline from raw user prompt to verified screenshots.
@@ -67,7 +69,10 @@ class ForemanSwarmOrchestrator:
         def log(station: str, message: str):
             entry = f"[{station}] {message}"
             logs.append(entry)
-            print(entry)
+            if quiet:
+                print(entry, file=sys.stderr)
+            else:
+                print(entry)
 
         # -------------------------------------------------------------
         # Station 1: Concept Architect (ConceptContract)
@@ -192,7 +197,7 @@ class ForemanSwarmOrchestrator:
         # Station 4: Master Builder (UIArtifactContract)
         # -------------------------------------------------------------
         log("STATION 4 / Master Builder", f"Compiling single-author {output_format.upper()} code artifact...")
-        out_path = Path(target_output).resolve() if target_output else (self.workspace_root / "examples" / f"swarm_output.{output_format}").resolve()
+        out_path = Path(target_output).resolve() if target_output else (Path.cwd() / f"swarm_output.{output_format}").resolve()
         out_path.parent.mkdir(parents=True, exist_ok=True)
 
         if output_format == "tsx":
@@ -257,17 +262,58 @@ class ForemanSwarmOrchestrator:
                 f.write(code)
             iteration += 1
 
-        # Encapsulate audit findings into EvaluationReportContract
+        # Encapsulate audit findings into EvaluationReportContract with real audit evidence
+        hard_gates_pass = c_report.get("hard_gates_pass", True) if isinstance(c_report, dict) else False
+        hard_quality_pass = bool(failed_checks == 0 and hard_gates_pass)
+
+        # Extract genuine WCAG contrast ratio from verifier evidence records
+        real_wcag_contrast = 4.5
+        if isinstance(v_report, dict):
+            for rec in v_report.get("evidence_records", []):
+                if "contrast" in str(rec.get("name", "")).lower():
+                    m = re.search(r"(\d+\.?\d*)\s*:\s*1", str(rec.get("msg", "")) + " " + str(rec.get("evidence", "")))
+                    if m:
+                        real_wcag_contrast = min(21.0, max(1.0, float(m.group(1))))
+                        break
+
+        # Check for genuine mobile overflow violations
+        overflow_failed = False
+        if isinstance(v_report, dict):
+            for rec in v_report.get("evidence_records", []):
+                if "overflow" in str(rec.get("name", "")).lower() and rec.get("status") in ("FAIL", "WARN"):
+                    overflow_failed = True
+                    break
+        overflow_0px_pass = not overflow_failed
+
+        # Extract authentic critic aesthetic score & slop penalties
+        critic_score = 90.0
+        slop_penalty = 0.0
+        advice_list: List[str] = []
+        if isinstance(c_report, dict):
+            critic_score = float(c_report.get("quality_score", c_report.get("score", 90.0)))
+            for defect in c_report.get("defects_ranked", []):
+                sev = defect.get("severity", "minor")
+                slop_penalty += 10.0 if sev == "critical" else (5.0 if sev == "major" else 2.0)
+                msg = defect.get("message") or defect.get("suggested_patch")
+                if msg and msg not in advice_list:
+                    advice_list.append(str(msg))
+
+        detailed_checks: List[Dict[str, Any]] = []
+        if isinstance(v_report, dict):
+            detailed_checks.extend(v_report.get("evidence_records", []))
+        if isinstance(c_report, dict):
+            detailed_checks.extend(c_report.get("hard_gate_failures", []))
+
         evaluation_report = EvaluationReportContract(
-            hard_quality_pass=bool(failed_checks == 0),
-            wcag_contrast_score=float(c_report.get("wcag_contrast_ratio", 7.5) if isinstance(c_report, dict) else 7.5),
-            overflow_0px_pass=bool(v_report.get("checks_summary", {}).get("overflow_0px", True) if isinstance(v_report, dict) else True),
-            aesthetic_quality_score=float(c_report.get("aesthetic_score", 92.0) if isinstance(c_report, dict) else 92.0),
-            slop_penalty_deductions=float(c_report.get("slop_penalty", 0.0) if isinstance(c_report, dict) else 0.0),
-            correction_advice=list(c_report.get("correction_advice", []) if isinstance(c_report, dict) else []),
+            hard_quality_pass=hard_quality_pass,
+            wcag_contrast_score=round(real_wcag_contrast, 2),
+            overflow_0px_pass=overflow_0px_pass,
+            aesthetic_quality_score=round(max(0.0, min(100.0, critic_score)), 1),
+            slop_penalty_deductions=round(slop_penalty, 1),
+            correction_advice=advice_list,
             iteration=iteration,
             acceptance_status="ACCEPTED" if audit_passed else "ACCEPTABLE_WITH_NOTES",
-            detailed_checks=v_report.get("failed_checks_details", []) if isinstance(v_report, dict) else []
+            detailed_checks=detailed_checks
         )
         er_valid, er_errors = evaluation_report.validate()
         if not er_valid:

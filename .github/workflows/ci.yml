@@ -39,6 +39,9 @@ jobs:
       - name: Run BM25 & Design Intelligence Engine Self-Tests
         run: python vibe_core/search_engine.py
 
+      - name: Run Schema & Design Genome Validation
+        run: python scripts/validate_schemas.py
+
       - name: Run Inter-Agent Swarm Contracts Verification
         run: python scripts/test_agent_contracts.py
 
@@ -81,6 +84,8 @@ jobs:
           TMP_DIR=$(mktemp -d)
           cd "$TMP_DIR"
           node "$CLI_PATH" swarm "Minimalist Tech Blog" --json
+          test -s ./swarm_output.html
+          echo "Verified: swarm_output.html was successfully generated inside the consumer workspace!"
 
   nextjs-starter-build:
     name: Next.js 15 & TypeScript 5 Build Audit

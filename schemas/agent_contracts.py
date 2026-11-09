@@ -88,8 +88,25 @@ class ConceptContract:
             errors.append("spatial_flow must be a non-empty list of section identifiers")
         return len(errors) == 0, errors
 
+    @property
+    def blueprint(self) -> Dict[str, Any]:
+        return self.metadata.get("blueprint", {})
+
+    @property
+    def product_mode(self) -> str:
+        return self.metadata.get("product_mode", "persuade")
+
+    @property
+    def visual_energy(self) -> str:
+        return self.metadata.get("visual_energy", "balanced")
+
     def to_dict(self) -> Dict[str, Any]:
-        return asdict(self)
+        d = asdict(self)
+        if self.metadata:
+            for k in ("blueprint", "product_mode", "visual_energy", "audience", "confidence"):
+                if k in self.metadata and k not in d:
+                    d[k] = self.metadata[k]
+        return d
 
     @classmethod
     def from_dict(cls, data: Dict[str, Any]) -> "ConceptContract":
@@ -109,7 +126,7 @@ class ConceptContract:
             primary_job_to_be_done=data.get("primary_job_to_be_done", ""),
             spatial_flow=list(data.get("spatial_flow", [])),
             language=data.get("language", "en"),
-            is_rtl=bool(data.get("is_rtl", False)),
+            is_rtl=_parse_strict_bool(data.get("is_rtl", False)),
             metadata=dict(data.get("metadata", {}))
         )
 

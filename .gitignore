@@ -51,6 +51,8 @@ examples/swarm_output.*
 packages/vibe-ui-suite/vibe_core/
 packages/vibe-ui-suite/schemas/
 packages/vibe-ui-suite/data/
+packages/vibe-ui-suite/assets/
+packages/vibe-ui-suite/scripts/
 packages/vibe-ui-suite/examples/
 packages/vibe-ui-suite/vibe_cli.py
 

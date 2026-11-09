@@ -345,13 +345,15 @@ def cmd_swarm(args):
     """Executes the full 5-station Foreman Multi-Agent Swarm pipeline."""
     orchestrator = ForemanSwarmOrchestrator(workspace_root=ROOT_DIR)
     prompt = args.prompt or "Modern high-converting web interface"
+    is_json = bool(getattr(args, "json", False))
     result = orchestrator.run_swarm(
         prompt=prompt,
         target_output=args.output,
         style_override=args.style,
-        output_format=getattr(args, "format", "html") or "html"
+        output_format=getattr(args, "format", "html") or "html",
+        quiet=is_json
     )
-    if getattr(args, "json", False):
+    if is_json:
         print(json.dumps(result, indent=2, ensure_ascii=False))
     else:
         print("\n" + "═" * 60)

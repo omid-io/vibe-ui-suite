@@ -75,11 +75,27 @@ class RecommendationEngine:
         and generates a unified DesignDecision contract.
         """
         if hasattr(intent, "to_dict"):
-            intent_dict = intent.to_dict()
+            c_dict = intent.to_dict()
+            meta = c_dict.get("metadata", {})
+            intent_dict = {**meta, **c_dict}
         elif isinstance(intent, dict):
-            intent_dict = intent
+            meta = intent.get("metadata", {})
+            intent_dict = {**meta, **intent}
         else:
             intent_dict = {}
+
+        trend_style = ""
+        trend_arch = ""
+        trend_banned: List[str] = []
+        te_dict: Dict[str, Any] = {}
+        if trend_evidence:
+            if hasattr(trend_evidence, "to_dict"):
+                te_dict = trend_evidence.to_dict()
+            elif isinstance(trend_evidence, dict):
+                te_dict = trend_evidence
+            trend_style = str(te_dict.get("selected_style", "")).lower()
+            trend_arch = str(te_dict.get("composition_archetype", ""))
+            trend_banned = [str(b).lower() for b in te_dict.get("banned_slop_tropes", [])]
 
         domain_id = intent_dict.get("domain") or intent_dict.get("product_domain", "general_modern_saas")
         domain_info = next((d for d in self.taxonomy if d.get("id") == domain_id), {"id": domain_id, "name_en": domain_id})
@@ -130,6 +146,12 @@ class RecommendationEngine:
 
             if user_style_preference and (user_style_preference == s_id or user_style_preference in s_id):
                 composite_score = min(99.0, composite_score + 20.0)
+
+            # Trend evidence style boost & slop penalties
+            if trend_style and (trend_style in s_id.lower() or trend_style in str(s_obj.get("name", "")).lower()):
+                composite_score = min(99.0, composite_score + 15.0)
+            if any(b in s_id.lower() or b in str(s_obj.get("name", "")).lower() for b in trend_banned):
+                composite_score = max(5.0, composite_score - 25.0)
 
             ranked_candidates.append({
                 "style": s_id,
@@ -233,9 +255,9 @@ class RecommendationEngine:
         }
 
         # -------------------------------------------------------------
-        # 4. Match Composition Archetype
+        # 4. Match Composition Archetype (Incorporate TrendEvidence)
         # -------------------------------------------------------------
-        comp_archetype = self._match_archetype(domain_id)
+        comp_archetype = trend_arch or self._match_archetype(domain_id)
 
         # -------------------------------------------------------------
         # 5. Geometry, Density, Surfaces & Motion Physics
@@ -382,6 +404,7 @@ class RecommendationEngine:
             "genome": genome,
             "decision_trace": decision_trace,
             "hard_constraints_verified": intent_dict.get("hard_constraints", []),
+            "trend_evidence": te_dict,
             "intent": intent_dict
         }
 

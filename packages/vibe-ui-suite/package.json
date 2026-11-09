@@ -41,6 +41,8 @@
     "vibe_core",
     "schemas",
     "data",
+    "assets",
+    "scripts",
     "vibe_cli.py"
   ],
   "scripts": {

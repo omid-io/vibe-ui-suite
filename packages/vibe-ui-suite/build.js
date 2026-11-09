@@ -204,6 +204,33 @@ if (fs.existsSync(rootDataTaxonomy)) {
   console.log('📑 Synced data/taxonomy.json into packages/vibe-ui-suite/data/taxonomy.json');
 }
 
+const rootDomainBlueprints = path.resolve(__dirname, '../../data/domain_blueprints.json');
+const pkgDomainBlueprints = path.join(__dirname, 'data', 'domain_blueprints.json');
+if (fs.existsSync(rootDomainBlueprints)) {
+  fs.mkdirSync(path.dirname(pkgDomainBlueprints), { recursive: true });
+  fs.copyFileSync(rootDomainBlueprints, pkgDomainBlueprints);
+  console.log('🏛️ Synced data/domain_blueprints.json into packages/vibe-ui-suite/data/domain_blueprints.json');
+}
+
+const rootCuratedWebp = path.resolve(__dirname, '../../assets/curated_webp');
+const pkgCuratedWebp = path.join(__dirname, 'assets', 'curated_webp');
+if (fs.existsSync(rootCuratedWebp)) {
+  if (fs.existsSync(pkgCuratedWebp)) {
+    fs.rmSync(pkgCuratedWebp, { recursive: true, force: true });
+  }
+  fs.mkdirSync(path.dirname(pkgCuratedWebp), { recursive: true });
+  fs.cpSync(rootCuratedWebp, pkgCuratedWebp, { recursive: true });
+  console.log('🖼️ Synced assets/curated_webp into packages/vibe-ui-suite/assets/curated_webp');
+}
+
+const rootScreenshotAudit = path.resolve(__dirname, '../../scripts/screenshot_audit.py');
+const pkgScreenshotAudit = path.join(__dirname, 'scripts', 'screenshot_audit.py');
+if (fs.existsSync(rootScreenshotAudit)) {
+  fs.mkdirSync(path.dirname(pkgScreenshotAudit), { recursive: true });
+  fs.copyFileSync(rootScreenshotAudit, pkgScreenshotAudit);
+  console.log('📸 Synced scripts/screenshot_audit.py into packages/vibe-ui-suite/scripts/screenshot_audit.py');
+}
+
 const rootVibeCli = path.resolve(__dirname, '../../vibe_cli.py');
 const pkgVibeCli = path.join(__dirname, 'vibe_cli.py');
 if (fs.existsSync(rootVibeCli)) {

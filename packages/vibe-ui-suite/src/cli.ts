@@ -637,6 +637,8 @@ function handleSwarm(promptText?: string, swarmOpts: SwarmCliOptions = {}) {
   }
   if (swarmOpts.output) {
     pyArgs.push('-o', swarmOpts.output);
+  } else {
+    pyArgs.push('-o', path.resolve(process.cwd(), `swarm_output.${swarmOpts.format || 'html'}`));
   }
   if (swarmOpts.style) {
     pyArgs.push('-s', swarmOpts.style);
