@@ -393,7 +393,7 @@ class ForemanSwarmOrchestrator:
                     screenshot_report.get("error")
                     or screenshot_report.get("stderr")
                     or "Playwright/Chromium did not produce browser evidence"
-                ).replace("\\n", " ").strip()[:240]
+                ).replace("\n", " ").strip()[:240]
                 log(
                     "STATION 5 / Auditor Swarm",
                     "All code-based gates passed, but browser evidence is unavailable; "
