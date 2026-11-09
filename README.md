@@ -72,7 +72,7 @@ Headless Browser Evaluation (Playwright 390px mobile overflow)
 Verified Output or Actionable Failure Diagnostics
 ```
 
-> **Day-One Transparency**: Vibe UI Suite is built upon **The Two Golden Pillars: Trend Inspiration & Living Visual Feedback Loop** (featuring **Living Micro-Interactions, Galaxy Inspiration Standard, Section Blocks & MCP Server**). Anchored on Pillar 1 (deep trend research across Mobbin, Dribbble, Figma Community, and Awwwards with Vibrant Light Mode default) and Pillar 2 (deterministic Playwright multi-viewport screenshot verification across Desktop 1440px and Mobile 390px with zero orphaned processes), Galaxy Inspiration Engine (3,800+ community elements with offline caching), Curated High-Res Unsplash Asset Vault covering all 24 canonical domains with tested HTTP 200 CDN URLs, clean component catalog with living interactive micro-interactions (`shimmer-button`, `cyber-loader`, `holographic-card`, `tactile-switch`, `glow-input`), full section blocks (`bento-hero`, `pricing-matrix`, `feature-grid`, `glass-navbar`, `conversion-cta`, `faq-accordion`), living React 19 TSX generation (`-f tsx`), zero-dependency TypeScript audit (`audit`), standard MCP server (`mcp`), and synchronized cross-platform tooling across npm, Python CLI, and VS Code. Constructive criticism, issues, and contributions from frontend engineers and AI researchers are warmly welcomed.
+> **Day-One Transparency**: Vibe UI Suite is built upon **The Two Golden Pillars: Trend Inspiration & Living Visual Feedback Loop** (featuring **Living Micro-Interactions, Galaxy Inspiration Standard, Section Blocks & MCP Server**). Anchored on Pillar 1 (offline, reproducible inspiration from local BM25 ranking over the versioned Design Genome and curated benchmark metadata; this module does not live-scrape GitHub stars or third-party trend sites) and Pillar 2 (deterministic Playwright multi-viewport screenshot verification across Desktop 1440px and Mobile 390px with zero orphaned processes), Galaxy Inspiration Engine (3,800+ community elements with offline caching), Curated High-Res Unsplash Asset Vault covering all 24 canonical domains with tested HTTP 200 CDN URLs, clean component catalog with living interactive micro-interactions (`shimmer-button`, `cyber-loader`, `holographic-card`, `tactile-switch`, `glow-input`), full section blocks (`bento-hero`, `pricing-matrix`, `feature-grid`, `glass-navbar`, `conversion-cta`, `faq-accordion`), living React 19 TSX generation (`-f tsx`), zero-dependency TypeScript audit (`audit`), standard MCP server (`mcp`), and synchronized cross-platform tooling across npm, Python CLI, and VS Code. Constructive criticism, issues, and contributions from frontend engineers and AI researchers are warmly welcomed.
 
 ---
 
@@ -87,7 +87,7 @@ flowchart TD
     
     subgraph SwarmPipeline ["The 5-Phase Autonomous Swarm (agents/)"]
         Orchestrator --> P1["💡 Phase 1: vibe-concept-architect<br/>Expands 1-line lazy prompts into psychographics & layout archetypes"]
-        P1 --> P2["🔍 Phase 2: vibe-trend-hunter<br/>Mines GitHub Stars (>10k shadcn/aceternity) & Uiverse Likes"]
+        P1 --> P2["🔍 Phase 2: vibe-trend-hunter<br/>Ranks curated GitHub benchmark metadata with local BM25 & searches offline Galaxy"]
         P2 --> P3["🎨 Phase 3: vibe-art-director<br/>Synthesizes OKLCH color tokens, typography & Design Blueprint"]
         P3 --> P4["🛠️ Phase 4: vibe-master-builder<br/>Single-author HTML / React 19 TSX synthesis with spring physics"]
         P4 --> P5["📸 Isolated Headless Chromium<br/>Captures Desktop (1440px) & Mobile (390px) screenshots"]
@@ -114,7 +114,7 @@ python vibe_cli.py swarm "High-velocity AI developer platform" -o landing.html
 Every agent is defined as an independent, portable specification in `agents/` ready to drop into any AI IDE:
 - **`vibe-ui-agent`**: Sovereign Swarm Orchestrator. Coordinates execution state, enforces phase progression, and strictly obeys the **Zero Direct Code Writing Invariant**.
 - **`vibe-concept-architect`** (Phase 1): Solves lazy prompts by determining product domain, audience psychographics, and spatial layout archetypes.
-- **`vibe-trend-hunter`** (Phase 2): Discovers top-starred benchmarks (>10k stars like shadcn/aceternity) and 3,800+ offline Galaxy components.
+- **`vibe-trend-hunter`** (Phase 2): Ranks locally curated GitHub benchmark metadata with BM25 and searches 3,800+ offline Galaxy components. Star labels are cached metadata, not live GitHub counts.
 - **`vibe-art-director`** (Phase 3): Compiles the binding `Design Style Blueprint` with calibrated OKLCH palettes and typography scales.
 - **`vibe-master-builder`** (Phase 4): The sole code author, producing pristine HTML / React 19 TSX with spring physics and zero seams.
 - **`vibe-visual-auditor` & `vibe-tech-auditor`** (Phase 5): Dual adversarial inspectors enforcing WCAG AA contrast (>=4.5:1), 0px mobile overflow, and visual hierarchy.
@@ -142,7 +142,7 @@ Just give your AI assistant (Cursor, Claude Code, Windsurf, Copilot, Antigravity
 
 **What `vibe-ui-agent` guarantees automatically (Lazy-Prompt Protocol & The 5 Gates):**
 - **Mandatory Pre-Edit Visual Audit:** Captures headless browser screenshot (`screenshots/before.png`) before touching code to diagnose spatial and typographic flaws with multimodal vision.
-- **Architectural Paradigm & Trend Anchoring:** Autonomously selects proven paradigms (Bento Grid, Linear Minimal, Stripe Crisp Light, Swiss Editorial) benchmarked from Dribbble, Mobbin, and Awwwards.
+- **Architectural Paradigm & Local Benchmark Anchoring:** Selects paradigms using the local Design Genome, domain blueprints, and curated open-source benchmark metadata. The repository's Trend Hunter does not scrape Dribbble, Mobbin, Figma Community, Awwwards, or live GitHub star counts.
 - **Structural DOM & Spatial Rhythm Overhaul:** Re-architects real layout structures and 8pt spatial rhythm (Zero Cosmetic-Only Patch Invariant).
 - **Living Component & Rich Media Synthesis:** Injects tactile Galaxy micro-interactions (shimmer buttons, tactile switches, cyber loaders), authentic photography, and contextual ambient hero loops for creative portfolios and landing pages.
 - **Silent Table-Stakes (Internal Worker Delegation):** OKLCH color math, WCAG AAA contrast, inline SVGs, and `<bdi>` isolation are handled invisibly by internal workers and never clutter primary deliverables.
