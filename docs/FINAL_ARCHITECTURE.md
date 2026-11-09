@@ -40,7 +40,7 @@ User Prompt ("Decentralized Crypto Swap in Tehran")
 [3-Layer Tripartite Verification Engine] (evals/run_evals.py)
    │
    ├── Layer 1 (Static): JSON Schema, semantic tags, anti-slop regex
-   ├── Layer 2 (Runtime Chromium): Real DOM contrast, focus rings, mobile viewports
+   ├── Layer 2 (Harness-owned Browser Evidence): Real DOM geometry, computed styles, interactions and screenshots; no browser runtime is bundled
    └── Layer 3 (Visual / Geometry): Zero-overflow bounds, backdrop blur limits
    │
    ▼
@@ -63,7 +63,7 @@ To eliminate supply-chain vulnerabilities and build coupling, Vibe UI strictly i
 | **Vibe Core** | `vibe_core/` | Python 3.10+ stdlib | Zero external dependencies for core inference. |
 | **Design Tokens & Suite** | `packages/vibe-ui-suite` | TypeScript 5 / Node 20+ | Flagship NPM package `vibe-ui-suite`. |
 | **VS Code Extension** | `packages/vibe-ui-vscode` | TypeScript 5 / VS Code API | Independent extension packaging without examples coupling. |
-| **Evaluation Engine** | `evals/` | Python + Playwright | Independent test runner with headless Chromium runtime. |
+| **Evaluation Engine** | `evals/` | Python stdlib + harness evidence contract | Independent static test runner plus a validated evidence contract supplied by the host harness. |
 | **Showcase & Studio** | `showcase/` & `index.html` | Client-side Vanilla JS | 100% zero-server interactive studio on GitHub Pages. |
 
 ---

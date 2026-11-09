@@ -1,7 +1,7 @@
 """
 vibe_core.interaction_contract — Deterministic Interaction Contracts for 24 Canonical Domains (v4.0.0)
 Defines semantic control targeting, input variable bounds, test sweep parameters,
-and fine-grained per-metric causal & directional assertion invariants for Chromium Browser Truth.
+and fine-grained per-metric causal & directional assertion invariants consumed by harness-owned browser evidence.
 """
 
 from dataclasses import dataclass, field

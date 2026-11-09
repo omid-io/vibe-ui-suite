@@ -20,6 +20,7 @@ from vibe_core.swarm import (
     _severity_penalty,
 )
 from vibe_core.verifier import VerificationEngine
+from vibe_core.browser_evidence import SCHEMA_VERSION, build_browser_request, validate_browser_evidence
 
 
 def assert_true(condition, message):
@@ -100,6 +101,56 @@ def run():
     default_report = EvaluationReportContract()
     valid, errors = default_report.validate()
     assert_true(valid, f"Unevaluated evidence remains explicit and valid: {errors}")
+
+    # Harness-native evidence is bound to the exact artifact and inspected viewports.
+    with tempfile.TemporaryDirectory() as temp_dir:
+        root = Path(temp_dir)
+        artifact = root / "index.html"
+        artifact.write_text("<!doctype html><title>Evidence fixture</title>", encoding="utf-8")
+        import hashlib
+        digest = hashlib.sha256(artifact.read_bytes()).hexdigest()
+        shots = {}
+        for name in ("mobile", "tablet", "desktop"):
+            shot = root / f"{name}.png"
+            shot.write_bytes(b"non-empty test screenshot bytes")
+            shots[name] = shot
+        evidence = {
+            "schema_version": SCHEMA_VERSION,
+            "artifact": {"path": str(artifact), "sha256": digest},
+            "runtime": {"harness": "test-harness", "browser": "WebKit", "browser_version": "stable", "platform": "linux"},
+            "captured_at": "2026-11-09T12:00:00Z", "overall_status": "PASS",
+            "viewports": [
+                {"name": name, "width": width, "height": height, "horizontal_overflow": False,
+                 "broken_images": 0, "console_errors": [],
+                 "screenshot": {"path": str(shots[name]), "sha256": hashlib.sha256(shots[name].read_bytes()).hexdigest()}}
+                for name, width, height in (("mobile",390,844),("tablet",768,1024),("desktop",1440,900))
+            ],
+            "checks": [
+                {"id":"responsive_layout","status":"PASS","summary":"No overflow at required viewports"},
+                {"id":"runtime_errors","status":"PASS","summary":"No page or console errors"},
+                {"id":"accessibility","status":"PASS","summary":"Keyboard and accessible names passed"},
+                {"id":"interaction_smoke","status":"PASS","summary":"Navigation and controls exercised"},
+                {"id":"visual_review","status":"PASS","summary":"All screenshots inspected"},
+            ],
+            "visual_review": {"status":"PASS","reviewer":"vision-enabled-test-agent",
+                "summary":"Balanced layout at all viewport classes",
+                "inspected_screenshots":["mobile","tablet","desktop"],"findings":[],"score":94}
+        }
+        request = build_browser_request(artifact, root / ".vibe" / "browser-evidence-request.json")
+        assert_true(request["artifact"]["sha256"] == digest, "Browser request binds to final artifact SHA-256")
+        accepted, errors = validate_browser_evidence(evidence, artifact, root / "browser-evidence.json")
+        assert_true(not errors and accepted["overall_status"] == "PASS", f"Valid harness evidence passes gates: {errors}")
+        stale = dict(evidence); stale["artifact"] = dict(evidence["artifact"], sha256="0" * 64)
+        rejected, stale_errors = validate_browser_evidence(stale, artifact, root / "browser-evidence.json")
+        assert_true(rejected["overall_status"] == "NOT_EVALUATED" and any("SHA-256" in item for item in stale_errors), "Stale browser evidence is rejected")
+        failing = dict(evidence); failing["viewports"] = [dict(item) for item in evidence["viewports"]]
+        failing["viewports"][0]["horizontal_overflow"] = True
+        failing_report, failing_errors = validate_browser_evidence(failing, artifact, root / "browser-evidence.json")
+        assert_true(not failing_errors and failing_report["overall_status"] == "FAIL", "Measured overflow blocks acceptance")
+        no_vision = dict(evidence); no_vision["visual_review"] = dict(evidence["visual_review"], status="FAIL")
+        no_vision_report, no_vision_errors = validate_browser_evidence(no_vision, artifact, root / "browser-evidence.json")
+        assert_true(not no_vision_errors and no_vision_report["overall_status"] == "FAIL", "Visual rejection blocks runtime acceptance")
+
 
     invalid_report = EvaluationReportContract(
         overflow_0px_pass=True,

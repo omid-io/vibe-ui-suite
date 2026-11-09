@@ -12,7 +12,7 @@ All UI design in this repository executes via `vibe-ui-agent` (Sovereign Swarm F
   2. **Phase 2 (Trend & Asset Mining):** GitHub >10k stars, Uiverse micro-interactions, and Living Media Shelf.
   3. **Phase 3 (Art Direction):** Binding Design Style Blueprint (OKLCH tokens, typography scales, hierarchy).
   4. **Phase 4 (Master Engineering Build):** Pristine single-author HTML/React markup with spring physics and zero seams.
-  5. **Phase 5 (Adversarial Inspection Gate):** Multi-viewport headless screenshots (1440px / 390px), WCAG AA contrast (>=4.5:1), and 0px overflow closed-loop healing (<=3 loops).
+  5. **Phase 5 (Adversarial Inspection Gate):** Harness-owned multi-viewport screenshots (390px / 768px / 1440px), WCAG AA contrast (>=4.5:1), and 0px overflow closed-loop healing (<=3 loops).
 - **Consolidated Delivery:** `vibe-ui-agent` delivers the final verified artifact, screenshots, and audit metrics in a single consolidated presentation.
 
 ---
@@ -36,7 +36,7 @@ Whenever publishing or releasing this suite:
 3. **Mandatory Pre-Release Inspector Agent Audit (Regression & Compatibility Gate):** Before proceeding to deployment, always dispatch an independent Inspector/Auditor Agent (or run adversarial multi-file diff inspection) to audit all code changes. The inspector must verify that newly added features or modifications do not introduce regressions, break backwards compatibility, or create conflicts/inconsistencies with existing components, templates, CLI commands, tokens, or prior architectural standards.
 4. **Build & Automated Quality Gates:** Run `python scripts/validate_versions.py`, `python evals/run_evals.py --json`, and Gitleaks scan (`E:\programming\Tools\gitleaks\gitleaks.exe`).
 5. **NPM & Open-VSX Publishing:** Build `packages/vibe-ui-suite` and package `vibe-ui-vscode-*.vsix`. Commit, tag (`vX.Y.Z`), and push to GitHub to trigger automated publishing to **NPM** and **Open-VSX** via `.github/workflows/publish.yml`.
-6. **Microsoft Visual Studio Marketplace Upload:** Run `python scripts/publish_marketplace_browser.py`, connect to the active Chrome publisher session on `https://marketplace.visualstudio.com/manage/publishers/omid-io` via Playwright MCP, open the `Update` dialog, inject the VSIX via `browser_run_code_unsafe(filename='run_upload.js')`, and verify version status reaches "Verifying" or "Published".
+6. **Microsoft Visual Studio Marketplace Upload:** Upload the VSIX through the publisher dashboard at `https://marketplace.visualstudio.com/manage/publishers/omid-io` using browser capabilities exposed by the active harness, then verify marketplace status.
 
 ---
 

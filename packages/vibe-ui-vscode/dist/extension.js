@@ -61,7 +61,7 @@ function activate(context) {
             vscode.window.showInformationMessage('Vibe UI Audit: Clean vector icons verified. Consider migrating legacy hex colors to typed OKLCH tokens.');
         }
         else {
-            vscode.window.showInformationMessage('Vibe UI Audit: Vector standards & OKLCH color spaces detected. (Run Playwright browser runtime eval for mathematical WCAG 2.2 AA contrast verification)');
+            vscode.window.showInformationMessage('Vibe UI Audit: Vector standards & OKLCH color spaces detected. (Use the browser exposed by your active AI harness for rendered WCAG 2.2 AA contrast verification)');
         }
     }));
     // 3. Register Workspace Adapter Command

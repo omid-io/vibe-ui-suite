@@ -1,15 +1,18 @@
 #!/usr/bin/env python3
-"""
-run_benchmark.py — Vibe UI V3 Stratified 100-Prompt A/B Benchmark Suite
-Compares Baseline (V2/Vanilla) vs. V3 Autonomous Design Intelligence across User-Effort and Quality KPIs.
-"""
+"""Stratified design benchmark with explicitly static/browser-neutral scoring.
 
-import sys
+This batch runner measures deterministic intent, code-generation, critic,
+refiner, and static-verifier behavior. It does not claim live browser,
+pixel, DOM-geometry, or visual-vision results; those require an active harness
+and a separate SHA-bound browser evidence report.
+"""
+from __future__ import annotations
+import argparse
 import json
+import sys
 import time
 from datetime import datetime, timezone
 from pathlib import Path
-from typing import Dict, Any, List
 
 if sys.stdout and hasattr(sys.stdout, "reconfigure"):
     try:
@@ -20,7 +23,6 @@ if sys.stdout and hasattr(sys.stdout, "reconfigure"):
 
 ROOT_DIR = Path(__file__).resolve().parent.parent.parent
 sys.path.insert(0, str(ROOT_DIR))
-
 from vibe_core.director import DesignDirector
 from vibe_core.recommendation import RecommendationEngine
 from vibe_core.generator import InterfaceGenerator
@@ -29,47 +31,39 @@ from vibe_core.visual_critic import VisualCritic
 from vibe_core.refiner import AutoRefiner
 from vibe_core.verifier import VerificationEngine
 from vibe_core.runtime_compiler import RuntimeCompiler
-from vibe_core.physical_critic import PhysicalCritic
-
-import argparse
 
 PROMPTS_100_PATH = ROOT_DIR / "evals" / "benchmark" / "prompts_100_stratified.json"
 PROMPTS_HOLDOUT_PATH = ROOT_DIR / "evals" / "benchmark" / "prompts_50_blind_holdout.json"
 PROMPTS_HUMAN_PATH = ROOT_DIR / "evals" / "benchmark" / "prompts_25_human_tasks.json"
 
-def main():
-    parser = argparse.ArgumentParser(description="Vibe UI Benchmark Suite")
+
+def main() -> int:
+    parser = argparse.ArgumentParser(description="Vibe UI static design-intelligence benchmark")
     parser.add_argument("--holdout", action="store_true", help="Run 50-scenario blind holdout benchmark")
     parser.add_argument("--human", action="store_true", help="Run 25-task human one-shot benchmark")
-    parser.add_argument("--browser-audit-sample", type=int, default=10, help="Sampling interval for live Chromium Browser Truth audit (default: 10)")
     args, _ = parser.parse_known_args()
 
     if args.human:
         prompts_path = PROMPTS_HUMAN_PATH
         results_path = ROOT_DIR / "evals" / "benchmark" / "benchmark_human_results.json"
-        bench_label = "25 Human One-Shot Tasks"
+        label = "25 Human One-Shot Tasks"
     elif args.holdout:
         prompts_path = PROMPTS_HOLDOUT_PATH
         results_path = ROOT_DIR / "evals" / "benchmark" / "benchmark_holdout_results.json"
-        bench_label = "50 Blind Holdout Scenarios"
+        label = "50 Blind Holdout Scenarios"
     else:
         prompts_path = PROMPTS_100_PATH
         results_path = ROOT_DIR / "evals" / "benchmark" / "benchmark_results.json"
-        bench_label = "100 Stratified Scenarios"
-
-    print("=" * 70)
-    print(f"🚀 VIBE UI V4 ENDGAME BENCHMARK SUITE ({bench_label})")
-    print("=" * 70)
+        label = "100 Stratified Scenarios"
 
     if not prompts_path.exists():
-        print(f"[FAIL] Prompts file not found at {prompts_path}", file=sys.stderr)
+        print(f"[FAIL] Prompts file not found: {prompts_path}", file=sys.stderr)
         return 1
-
-    with open(prompts_path, "r", encoding="utf-8") as f:
-        prompt_data = json.load(f)
-        scenarios = prompt_data.get("tasks", prompt_data.get("prompts", []))
-
-    print(f"[INFO] Loaded {len(scenarios)} evaluation scenarios ({bench_label}).\n")
+    data = json.loads(prompts_path.read_text(encoding="utf-8"))
+    scenarios = data.get("tasks", data.get("prompts", []))
+    if not scenarios:
+        print("[FAIL] Benchmark contains no scenarios", file=sys.stderr)
+        return 1
 
     director = DesignDirector()
     engine = RecommendationEngine()
@@ -78,318 +72,142 @@ def main():
     visual_critic = VisualCritic()
     refiner = AutoRefiner()
     verifier = VerificationEngine()
-    runtime_compiler = RuntimeCompiler()
-    physical_critic = PhysicalCritic(enable_browser=True)
+    compiler = RuntimeCompiler()
 
-    v3_first_pass = 0
-    v3_autonomous_resolved = 0
-    v3_react_compiled = 0
-    v3_browser_truth_passes = 0
-    v3_causal_contract_passes = 0
-    v3_directional_passes = 0
-    v3_formula_passes = 0
-    v3_pixel_passes = 0
-    v3_browser_audited_count = 0
-    v3_vision_scores = []
-    v3_corrections = 0
-    v3_tokens = 0
-    v3_total_ms = 0.0
-    v3_styles = set()
-    v3_domain_matches = 0
-    v3_details = []
+    first_pass = 0
+    autonomous_resolved = 0
+    compiled_count = 0
+    corrections = 0
+    correction_tokens = 0
+    total_ms = 0.0
+    domain_matches = 0
+    styles = set()
+    details = []
 
-    # Baseline Methodology Note:
-    # These values represent an internal heuristic baseline (baseline_type: "internal_heuristic_prior").
-    # They reflect estimated prior-study averages for Vanilla LLM (no Director) and V2 pipelines
-    # across equivalent UI generation tasks. They are NOT generated by this script at runtime.
-    # Results evaluate generator compliance against internal critic invariants, not human subjective quality.
-    # Independent replication against a blind control cohort is required for peer-reviewed claims.
-    BASELINE_TYPE = "internal_heuristic_prior"
-    baseline_first_pass = int(len(scenarios) * 0.52)   # Heuristic prior estimate: ~52% first-pass acceptance
-    baseline_corrections = 2.4   # Heuristic prior estimate: avg 2.4 refiner rounds
-    baseline_tokens = 2400        # Heuristic prior estimate: avg 2400 correction tokens per session
+    baseline_first_pass = 52.0
+    baseline_corrections = 2.4
+    baseline_tokens = 2400.0
+    started = time.perf_counter()
 
-    start_bench_time = time.perf_counter()
+    print("=" * 72)
+    print(f"VIBE UI DESIGN INTELLIGENCE BENCHMARK — {label}")
+    print("Browser runtime, rendered geometry and screenshot vision: NOT_EVALUATED")
+    print("=" * 72)
 
-    # Launch reusable Chromium browser instance for 100% Browser Truth audit coverage
-    pw_ctx = None
-    browser = None
-    shared_page = None
-    try:
-        from playwright.sync_api import sync_playwright
-        pw_ctx = sync_playwright()
-        p = pw_ctx.__enter__()
-        browser = p.chromium.launch(headless=True)
-        shared_page = browser.new_page(viewport={"width": 1280, "height": 800})
-        print("[INFO] Reusable Chromium browser pool initialized for 100% scenario auditing.\n")
-    except Exception as e:
-        print(f"[WARN] Chromium browser pool init error: {e}. Falling back to dynamic invocation.\n")
+    for index, scenario in enumerate(scenarios, 1):
+        prompt = scenario["prompt"]
+        expected_domain = scenario["domain"]
+        started_case = time.perf_counter()
 
-    try:
-        for idx, sc in enumerate(scenarios, 1):
-            prompt_text = sc["prompt"]
-            domain_id = sc["domain"]
+        intent = director.infer_intent(prompt)
+        domain_match = intent.get("product_domain") == expected_domain
+        domain_matches += int(domain_match)
 
-            t0 = time.perf_counter()
+        decision = engine.recommend(intent)
+        selected_style = decision.get("selected_style", "")
+        styles.add(selected_style)
 
-            # Step 1: Director
-            intent = director.infer_intent(prompt_text)
-            is_domain_match = (intent["product_domain"] == domain_id)
-            if is_domain_match:
-                v3_domain_matches += 1
+        html = generator.generate_html(decision, prompt_title=prompt)
+        tsx = generator.generate_react_tsx(decision)
+        compiled_js, compile_error = compiler.compile_tsx(tsx)
+        tsx_compiled = bool(compiled_js) and compile_error is None
+        compiled_count += int(tsx_compiled)
 
-            # Step 2: Recommendation & Genome
-            decision = engine.recommend(intent)
-            selected_style = decision["selected_style"]
-            v3_styles.add(selected_style)
+        code_critique = critic.critique(html, decision, iteration=1)
+        visual_critique = visual_critic.evaluate(html, decision)
+        first_pass_ok = (
+            code_critique.get("acceptance_status") == "ACCEPTED"
+            and visual_critique.get("acceptance_status") == "ACCEPTED"
+        )
+        if first_pass_ok:
+            first_pass += 1
+            final_html = html
+            final_critique = dict(code_critique)
+            final_critique["visual_critic"] = visual_critique
+        else:
+            final_html, final_critique = refiner.refine(html, decision, max_iterations=2)
+            corrections += 1
+            correction_tokens += 350
 
-            # Step 3: Generator (HTML + React 19 TSX)
-            html = generator.generate_html(decision, prompt_title=prompt_text)
-            react_tsx = generator.generate_react_tsx(decision)
-            compiled_js, compile_err = runtime_compiler.compile_tsx(react_tsx)
-            react_valid = (compile_err is None and bool(compiled_js) and len(compiled_js) > 0)
-            if react_valid:
-                v3_react_compiled += 1
+        accepted = final_critique.get("acceptance_status") == "ACCEPTED"
+        autonomous_resolved += int(accepted)
+        static_report = verifier.verify_html(final_html, f"scenario_{index}.html")
+        elapsed_ms = (time.perf_counter() - started_case) * 1000.0
+        total_ms += elapsed_ms
 
-            # Step 3b: 100% Live Chromium Browser Truth Audit across all scenarios
-            is_rtl = ("fa" in intent.get("language", [])) or decision.get("genome", {}).get("platform", {}).get("rtl_support", False)
-            active_domain = decision.get("genome", {}).get("domain") or intent.get("product_domain") or domain_id
-            browser_audit = physical_critic.audit_runtime_react_tsx(
-                react_tsx,
-                domain_id=active_domain,
-                is_rtl=is_rtl,
-                capture_screenshots=False,
-                page=shared_page
-            )
-            v3_browser_audited_count += 1
+        details.append({
+            "scenario_id": scenario.get("id", str(index)),
+            "domain": expected_domain,
+            "prompt": prompt,
+            "detected_domain": intent.get("product_domain"),
+            "domain_match": domain_match,
+            "selected_style": selected_style,
+            "candidate_passed_first_pass": first_pass_ok,
+            "autonomous_resolved": accepted,
+            "react_tsx_compiled": tsx_compiled,
+            "browser_runtime_status": "NOT_EVALUATED",
+            "visual_critic_score": visual_critique.get("visual_score", 0),
+            "critic_score": final_critique.get("quality_score", 0),
+            "verification_status": static_report.get("overall_status", "NOT_EVALUATED"),
+            "elapsed_ms": round(elapsed_ms, 2),
+        })
+        if index % 20 == 0 or index == len(scenarios):
+            print(f"Processed {index}/{len(scenarios)} scenarios — first-pass: {first_pass / index * 100:.1f}%")
 
-            browser_truth_accepted = browser_audit.get("interactive_verified", False)
-            causal_contract_accepted = browser_audit.get("causal_contract_satisfied", False)
-            directional_accepted = browser_audit.get("directional_passed", True)
-            formula_accepted = browser_audit.get("formula_passed", True)
-            pixel_accepted = not browser_audit.get("pixel_report", {}).get("is_blank", False)
+    count = len(scenarios)
+    first_rate = first_pass / count * 100.0
+    autonomous_rate = autonomous_resolved / count * 100.0
+    compile_rate = compiled_count / count * 100.0
+    domain_accuracy = domain_matches / count * 100.0
+    avg_corrections = corrections / count
+    avg_tokens = correction_tokens / count
+    avg_ms = total_ms / count
+    diversity = len(styles) / 12.0 * 100.0
+    passed_static = sum(item["verification_status"] == "PASS" for item in details)
+    static_gate_rate = passed_static / count * 100.0
 
-            if browser_truth_accepted:
-                v3_browser_truth_passes += 1
-            if causal_contract_accepted:
-                v3_causal_contract_passes += 1
-            if directional_accepted:
-                v3_directional_passes += 1
-            if formula_accepted:
-                v3_formula_passes += 1
-            if pixel_accepted:
-                v3_pixel_passes += 1
-
-            vis_rep = browser_audit.get("vision_report", {})
-            if vis_rep and "visual_score" in vis_rep:
-                v3_vision_scores.append(vis_rep["visual_score"])
-
-            # Step 4: Quad-Composite Gate (DOM + Visual + Physical Browser Truth + Runtime Causal)
-            critique_report = critic.critique(html, decision, iteration=1)
-            visual_report = visual_critic.evaluate(html, decision)
-            critique_report["visual_critic"] = visual_report
-            critique_report["browser_audit"] = browser_audit
-
-            dom_accepted = (critique_report.get("acceptance_status") == "ACCEPTED")
-            vis_accepted = (visual_report.get("acceptance_status") == "ACCEPTED")
-            composite_first_pass = (dom_accepted and vis_accepted and browser_truth_accepted and causal_contract_accepted and directional_accepted and formula_accepted and pixel_accepted)
-
-            # Step 5: Refiner (if any gate requires revision)
-            if composite_first_pass:
-                v3_first_pass += 1
-                final_html = html
-                final_report = critique_report
-            else:
-                final_html, final_report = refiner.refine(html, decision, max_iterations=2)
-                v3_corrections += 1
-                v3_tokens += 350
-
-            is_accepted = (final_report.get("acceptance_status") == "ACCEPTED" and browser_truth_accepted and causal_contract_accepted and directional_accepted and formula_accepted and pixel_accepted)
-            if is_accepted:
-                v3_autonomous_resolved += 1
-
-            # Step 6: Physical Verification
-            verify_report = verifier.verify_html(final_html, f"scenario_{idx}.html")
-
-            elapsed_ms = (time.perf_counter() - t0) * 1000.0
-            v3_total_ms += elapsed_ms
-
-            v3_details.append({
-                "scenario_id": sc["id"],
-                "domain": domain_id,
-                "prompt": prompt_text,
-                "detected_domain": intent["product_domain"],
-                "domain_match": is_domain_match,
-                "selected_style": selected_style,
-                "candidate_passed_first_pass": composite_first_pass,
-                "autonomous_resolved": is_accepted,
-                "react_tsx_compiled": react_valid,
-                "browser_truth_verified": browser_truth_accepted,
-                "causal_contract_satisfied": causal_contract_accepted,
-                "directional_passed": directional_accepted,
-                "formula_validation_passed": formula_accepted,
-                "pixel_buffer_valid": pixel_accepted,
-                "in_browser_vision_score": browser_audit.get("vision_report", {}).get("visual_score") if browser_audit else None,
-                "dom_quality_score": final_report.get("quality_score", 0),
-                "visual_quality_score": final_report.get("visual_critic", {}).get("visual_score", visual_report.get("visual_score", 0)),
-                "critic_score": final_report["quality_score"],
-                "verification_status": verify_report["overall_status"],
-                "elapsed_ms": round(elapsed_ms, 2)
-            })
-
-            if idx % 20 == 0 or idx == len(scenarios):
-                print(f"  Processed {idx}/{len(scenarios)} scenarios... (Quad First-Pass: {(v3_first_pass/idx)*100:.1f}%, Browser Truth: {(v3_browser_truth_passes/idx)*100:.1f}%)")
-
-    finally:
-        if browser:
-            try:
-                browser.close()
-                pw_ctx.__exit__(None, None, None)
-            except Exception:
-                pass
-
-
-    total_bench_ms = (time.perf_counter() - start_bench_time) * 1000.0
-
-    v3_first_pass_rate = (v3_first_pass / len(scenarios)) * 100.0
-    v3_autonomous_rate = (v3_autonomous_resolved / len(scenarios)) * 100.0
-    v3_react_compile_rate = (v3_react_compiled / len(scenarios)) * 100.0
-    v3_domain_accuracy = (v3_domain_matches / len(scenarios)) * 100.0
-    v3_avg_corrections = round(v3_corrections / len(scenarios), 2)
-    v3_avg_tokens = round(v3_tokens / len(scenarios), 0)
-    v3_avg_ms = round(v3_total_ms / len(scenarios), 2)
-    v3_diversity_score = round((len(v3_styles) / 12.0) * 100.0, 1)
-    passed_verifications = sum(1 for d in v3_details if d.get("verification_status") == "PASS")
-    v3_gate_compliance = round((passed_verifications / len(v3_details)) * 100.0, 1) if v3_details else 0.0
-    v3_browser_truth_rate = round((v3_browser_truth_passes / v3_browser_audited_count) * 100.0, 1) if v3_browser_audited_count else 100.0
-    v3_causal_contract_rate = round((v3_causal_contract_passes / v3_browser_audited_count) * 100.0, 1) if v3_browser_audited_count else 100.0
-    v3_directional_rate = round((v3_directional_passes / v3_browser_audited_count) * 100.0, 1) if v3_browser_audited_count else 100.0
-    v3_formula_rate = round((v3_formula_passes / v3_browser_audited_count) * 100.0, 1) if v3_browser_audited_count else 100.0
-    v3_pixel_rate = round((v3_pixel_passes / v3_browser_audited_count) * 100.0, 1) if v3_browser_audited_count else 100.0
-    v3_avg_vision_score = round(sum(v3_vision_scores) / len(v3_vision_scores), 1) if v3_vision_scores else 95.0
-
-    # Compile Benchmark Results Object
-    benchmark_results = {
+    baseline_type = "internal_heuristic_prior"
+    results = {
         "$schema": "../../schemas/benchmark-result.v1.json",
         "timestamp": datetime.now(timezone.utc).isoformat(),
-        "suite_version": "4.0.0",
-        "scenario_count": len(scenarios),
-        "benchmark_type": "internal_deterministic_heuristic",
+        "suite_version": "6.5.1",
+        "scenario_count": count,
+        "benchmark_type": "static_design_intelligence_and_code_critique",
         "baseline_system": "Vanilla LLM / V2 Heuristic Baseline",
-        "baseline_type": BASELINE_TYPE,
-        "baseline_methodology": "Internal deterministic heuristic evaluation measuring generator adherence to critic invariants. Values reflect automated rule-engine compliance, not human subjective evaluation. Independent replication required.",
-        "candidate_system": "Vibe UI V4 Endgame Autonomous Closed-Loop Browser Engine (100% Browser Truth)",
+        "baseline_type": baseline_type,
+        "baseline_methodology": "Internal heuristic prior, not a measured control cohort. This benchmark measures deterministic intent, code critique, visual source heuristics, TSX compilation and static verification only.",
+        "candidate_system": "Vibe UI Suite — Design Intelligence and Static Quality Pipeline",
         "kpi_comparison": {
-            "first_pass_rate": {
-                "baseline": 52.0,
-                "candidate": v3_first_pass_rate,
-                "delta_percent": round(v3_first_pass_rate - 52.0, 1),
-                "gate_type": "quad_composite_dom_visual_physical_causal_pixel"
-            },
-            "autonomous_resolution_rate": {
-                "baseline": 65.0,
-                "candidate": v3_autonomous_rate,
-                "delta_percent": round(v3_autonomous_rate - 65.0, 1)
-            },
-            "react_tsx_compilation_rate": {
-                "baseline": 0.0,
-                "candidate": v3_react_compile_rate,
-                "delta_percent": v3_react_compile_rate
-            },
-            "browser_truth_verification_rate": {
-                "baseline": 0.0,
-                "candidate": v3_browser_truth_rate,
-                "audited_scenarios": v3_browser_audited_count,
-                "audit_coverage_percent": 100.0
-            },
-            "causal_contract_satisfaction_rate": {
-                "baseline": 0.0,
-                "candidate": v3_causal_contract_rate,
-                "audited_scenarios": v3_browser_audited_count
-            },
-            "directional_contract_satisfaction_rate": {
-                "baseline": 0.0,
-                "candidate": v3_directional_rate,
-                "audited_scenarios": v3_browser_audited_count
-            },
-            "formula_validation_rate": {
-                "baseline": 0.0,
-                "candidate": v3_formula_rate,
-                "audited_scenarios": v3_browser_audited_count
-            },
-            "pixel_critic_validation_rate": {
-                "baseline": 0.0,
-                "candidate": v3_pixel_rate,
-                "audited_scenarios": v3_browser_audited_count
-            },
-            "avg_in_browser_vision_score": {
-                "baseline": 45.0,
-                "candidate": v3_avg_vision_score
-            },
-            "domain_resolution_accuracy": {
-                "baseline": 56.0,
-                "candidate": round(v3_domain_accuracy, 1),
-                "delta_percent": round(v3_domain_accuracy - 56.0, 1)
-            },
-            "avg_automated_refiner_rounds": {
-                "baseline": baseline_corrections,
-                "candidate": v3_avg_corrections,
-                "reduction_percent": round(((baseline_corrections - v3_avg_corrections) / baseline_corrections) * 100.0, 1)
-            },
-            "avg_user_corrections": {
-                "baseline": baseline_corrections,
-                "candidate": v3_avg_corrections,
-                "reduction_percent": round(((baseline_corrections - v3_avg_corrections) / baseline_corrections) * 100.0, 1),
-                "note": "Alias for avg_automated_refiner_rounds for schema backward compatibility"
-            },
-            "avg_correction_tokens": {
-                "baseline": baseline_tokens,
-                "candidate": v3_avg_tokens,
-                "reduction_percent": round(((baseline_tokens - v3_avg_tokens) / baseline_tokens) * 100.0, 1)
-            },
-            "avg_time_to_accept_ms": {
-                "candidate": v3_avg_ms
-            },
-            "visual_diversity_index": {
-                "candidate": v3_diversity_score,
-                "unique_styles_rendered": len(v3_styles)
-            },
-            "hard_gates_compliance": {
-                "candidate": v3_gate_compliance
-            }
+            "first_pass_rate": {"baseline": baseline_first_pass, "candidate": round(first_rate, 1), "delta_percent": round(first_rate - baseline_first_pass, 1), "gate_type": "static_code_and_visual_critic"},
+            "autonomous_resolution_rate": {"baseline": 65.0, "candidate": round(autonomous_rate, 1), "delta_percent": round(autonomous_rate - 65.0, 1)},
+            "react_tsx_compilation_rate": {"baseline": 0.0, "candidate": round(compile_rate, 1), "delta_percent": round(compile_rate, 1)},
+            "domain_resolution_accuracy": {"baseline": 56.0, "candidate": round(domain_accuracy, 1), "delta_percent": round(domain_accuracy - 56.0, 1)},
+            "avg_automated_refiner_rounds": {"baseline": baseline_corrections, "candidate": round(avg_corrections, 2), "reduction_percent": round((baseline_corrections - avg_corrections) / baseline_corrections * 100.0, 1)},
+            "avg_user_corrections": {"baseline": baseline_corrections, "candidate": round(avg_corrections, 2), "reduction_percent": round((baseline_corrections - avg_corrections) / baseline_corrections * 100.0, 1), "note": "Alias retained for backward compatibility."},
+            "avg_correction_tokens": {"baseline": baseline_tokens, "candidate": round(avg_tokens, 0), "reduction_percent": round((baseline_tokens - avg_tokens) / baseline_tokens * 100.0, 1)},
+            "avg_time_to_accept_ms": {"candidate": round(avg_ms, 2)},
+            "visual_diversity_index": {"candidate": round(diversity, 1), "unique_styles_rendered": len(styles)},
+            "hard_gates_compliance": {"candidate": round(static_gate_rate, 1)},
+            "browser_runtime_evaluation": {"status": "NOT_EVALUATED", "reason": "The batch benchmark does not control or launch a browser. Use a live AI harness and submit a SHA-bound browser evidence report."},
         },
-        "scenario_breakdown": v3_details
+        "scenario_breakdown": details,
     }
-
     results_path.parent.mkdir(parents=True, exist_ok=True)
-    with open(results_path, "w", encoding="utf-8") as f:
-        json.dump(benchmark_results, f, indent=2, ensure_ascii=False)
+    results_path.write_text(json.dumps(results, indent=2, ensure_ascii=False), encoding="utf-8")
 
-    print("\n" + "=" * 70)
-    print("📊 VIBE UI V4 BENCHMARK SCOREBOARD (v4.0.0 — Endgame / Closed-Loop Autonomy)")
-    print("=" * 70)
-    print(f"| KPI Metric                  | Baseline (V2) | Vibe UI V4    | Improvement           |")
-    print(f"| :-------------------------- | :------------ | :------------ | :-------------------- |")
-    print(f"| Quad First-Pass Acceptance  | 52.0%         | {v3_first_pass_rate:.1f}%         | +{v3_first_pass_rate - 52.0:.1f}% (Quad-Gate)   |")
-    print(f"| Autonomous Resolution Rate  | 65.0%         | {v3_autonomous_rate:.1f}%        | +{v3_autonomous_rate - 65.0:.1f}%               |")
-    print(f"| React 19 TSX ESM Compile    | 0.0%          | {v3_react_compile_rate:.1f}%        | Native In-Memory ESM  |")
-    print(f"| 100% Browser Truth Live     | 0.0%          | {v3_browser_truth_rate:.1f}%        | 100/100 Real Chromium |")
-    print(f"| Causal Contract Satisfied   | 0.0%          | {v3_causal_contract_rate:.1f}%        | 24/24 Reactive Metric |")
-    print(f"| Directional Invariant Valid | 0.0%          | {v3_directional_rate:.1f}%        | Metric-Level Invariants|")
-    print(f"| Executable Formula Valid    | 0.0%          | {v3_formula_rate:.1f}%        | DOM vs Math Eval Match|")
-    print(f"| Pixel Critic Buffer Valid   | 0.0%          | {v3_pixel_rate:.1f}%        | 0 Blank / 0 Collapse  |")
-    print(f"| In-Browser Vision Score     | 45.0/100      | {v3_avg_vision_score:.1f}/100       | Hero/Collision/Touch  |")
-    print(f"| Domain Match Accuracy       | 56.0%         | {v3_domain_accuracy:.1f}%        | +{v3_domain_accuracy - 56.0:.1f}% accuracy gain   |")
-    print(f"| Avg Refiner Rounds          | {baseline_corrections} rounds   | {v3_avg_corrections} rounds   | -{((baseline_corrections - v3_avg_corrections)/baseline_corrections)*100:.1f}% reduction       |")
-    print(f"| Avg Correction Tokens       | {baseline_tokens} tokens   | {v3_avg_tokens:.0f} tokens     | -{((baseline_tokens - v3_avg_tokens)/baseline_tokens)*100:.1f}% token savings   |")
-    print(f"| Avg Inference Time          | ~4500ms       | {v3_avg_ms:.1f}ms       | > 100x faster local   |")
-    print(f"| Visual Diversity            | 2 styles      | {len(v3_styles)} styles      | {v3_diversity_score}% coverage         |")
-    print(f"| WCAG AA Hard Gates          | ~80%          | 100.0%        | Zero Regressions      |")
-    print("=" * 70)
-    print(f"\n[SUCCESS] Benchmark completed in {total_bench_ms:.2f}ms. Results saved to {results_path.relative_to(ROOT_DIR)}")
-
-
+    print("\n" + "=" * 72)
+    print("VIBE UI DESIGN INTELLIGENCE BENCHMARK")
+    print("=" * 72)
+    print(f"First-pass static acceptance: {first_rate:.1f}%")
+    print(f"Autonomous resolution: {autonomous_rate:.1f}%")
+    print(f"React TSX compilation: {compile_rate:.1f}%")
+    print(f"Domain resolution: {domain_accuracy:.1f}%")
+    print(f"Static verification gates: {static_gate_rate:.1f}%")
+    print("Browser runtime / actual rendered visual assessment: NOT_EVALUATED")
+    print(f"Elapsed: {(time.perf_counter() - started) * 1000.0:.1f}ms")
+    print(f"Results: {results_path.relative_to(ROOT_DIR)}")
     return 0
+
 
 if __name__ == "__main__":
     sys.exit(main())

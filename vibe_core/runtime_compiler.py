@@ -1,7 +1,7 @@
 """
 vibe_core.runtime_compiler — Sub-25ms In-Memory React 19 TSX to ESM Compiler
 Transforms autonomous Vibe UI React 19 TSX components into standard ECMAScript modules
-and builds self-contained, browser-executable harnesses for headless Chromium execution.
+and builds portable preview HTML that can be opened by a browser already supplied by the host harness.
 """
 
 import sys
@@ -50,7 +50,7 @@ def find_esbuild_command() -> str:
 
 
 class RuntimeCompiler:
-    """Compiles React 19 TSX to ESM and generates self-contained browser execution harnesses."""
+    """Compiles React 19 TSX to ESM and generates portable preview HTML for host-harness rendering."""
 
     def __init__(self):
         self.esbuild_cmd = find_esbuild_command()
@@ -116,7 +116,7 @@ if (rootEl) {{
     ) -> str:
         """
         Builds a self-contained HTML page that executes the compiled component module inside #root.
-        If compiled_js is bundled (contains React runtime), operates 100% offline without remote CDNs.
+        If compiled_js is bundled (contains React runtime), operates 100% offline without remote CDNs. This method does not launch a browser.
         """
         dir_attr = 'dir="rtl" lang="fa"' if is_rtl else 'dir="ltr" lang="en"'
         is_bundled = ("esm.sh" not in compiled_js) and ("import " not in compiled_js[:500])
