@@ -6,6 +6,7 @@ import tempfile
 
 from schemas.agent_contracts import EvaluationReportContract, TrendEvidence
 from vibe_core.swarm import (
+    ForemanSwarmOrchestrator,
     _extract_overflow_status,
     _extract_screenshot_status,
     _extract_wcag_evidence,
@@ -85,6 +86,26 @@ def run():
 
     with tempfile.TemporaryDirectory() as temp_dir:
         root = Path(temp_dir)
+        package_root = root / "package"
+        consumer_root = root / "consumer"
+        source_asset = package_root / "assets" / "curated_webp" / "sample.webp"
+        source_asset.parent.mkdir(parents=True)
+        source_asset.write_bytes(b"package asset")
+        output_path = consumer_root / "generated" / "index.html"
+        output_path.parent.mkdir(parents=True)
+        orchestrator = ForemanSwarmOrchestrator.__new__(ForemanSwarmOrchestrator)
+        orchestrator.package_root = package_root
+        delivered = orchestrator._provision_consumer_assets(
+            '<img src="assets/curated_webp/sample.webp">', output_path
+        )
+        consumer_asset = output_path.parent / "assets" / "curated_webp" / "sample.webp"
+        assert_true(consumer_asset.is_file() and delivered["copied"], "Package provisions referenced assets beside consumer output")
+        consumer_asset.write_bytes(b"consumer-owned")
+        orchestrator._provision_consumer_assets(
+            '<img src="assets/curated_webp/sample.webp">', output_path
+        )
+        assert_true(consumer_asset.read_bytes() == b"consumer-owned", "Asset provisioning never overwrites consumer-owned files")
+
         asset = root / "assets" / "curated_webp" / "sample.webp"
         asset.parent.mkdir(parents=True)
         asset.write_bytes(b"test")
