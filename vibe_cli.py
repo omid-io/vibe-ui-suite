@@ -343,7 +343,7 @@ def cmd_assets(args):
 
 def cmd_swarm(args):
     """Executes the full 5-station Foreman Multi-Agent Swarm pipeline."""
-    orchestrator = ForemanSwarmOrchestrator(workspace_root=ROOT_DIR)
+    orchestrator = ForemanSwarmOrchestrator(workspace_root=Path.cwd())
     prompt = args.prompt or "Modern high-converting web interface"
     is_json = bool(getattr(args, "json", False))
     result = orchestrator.run_swarm(

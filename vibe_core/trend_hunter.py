@@ -177,8 +177,26 @@ class TrendHunter:
         galaxy_buttons = self.search_galaxy_top_liked("button", limit=2)
         galaxy_cards = self.search_galaxy_top_liked("card", limit=2)
 
-        # Retrieve domain-specific spatial composition
+        # Retrieve domain-specific spatial composition and only publish typography
+        # when the matched genome actually contains a font recommendation.
         spatial = DOMAIN_SPATIAL_BLUEPRINTS.get(domain, DEFAULT_SPATIAL_BLUEPRINT)
+        raw_typography = top_style.get("typography", {})
+        typography_pair: Dict[str, str] = {}
+        if isinstance(raw_typography, dict):
+            display_font = (
+                raw_typography.get("heading_font")
+                or raw_typography.get("display")
+                or raw_typography.get("display_font")
+            )
+            body_font = (
+                raw_typography.get("body_font")
+                or raw_typography.get("body")
+                or raw_typography.get("text_font")
+            )
+            if display_font:
+                typography_pair["display"] = str(display_font)
+            if body_font:
+                typography_pair["body"] = str(body_font)
 
         return {
             "domain": domain,
@@ -188,6 +206,11 @@ class TrendHunter:
             "spatial_rules": spatial["rules"],
             "banned_slop_tropes": spatial["banned"],
             "recommended_palette": top_palette,
+            "typography_pair": typography_pair,
+            "style_reasoning": (
+                f"Matched local Design Genome evidence for {domain}"
+                if top_style else "No direct style metadata match; using domain fallback"
+            ),
             "benchmarks": benchmarks,
             "curated_micro_interactions": {
                 "buttons": galaxy_buttons,
@@ -202,6 +225,12 @@ class TrendHunter:
         return {
             "domain": domain,
             "target_style": evidence["target_style"],
+            "composition_archetype": evidence["composition_archetype"],
+            "banned_slop_tropes": evidence["banned_slop_tropes"],
+            "typography_pair": evidence["typography_pair"],
+            "style_reasoning": evidence["style_reasoning"],
+            "evidence_confidence": evidence["evidence_confidence"],
+            "recommended_palette": evidence["recommended_palette"],
             "top_starred_benchmarks": evidence["benchmarks"],
             "curated_components": evidence["curated_micro_interactions"],
             "recommended_spatial_rules": evidence["spatial_rules"]
