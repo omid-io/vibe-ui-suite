@@ -515,6 +515,8 @@ class ForemanSwarmOrchestrator:
             "style": selected_style,
             "artifact_path": str(out_path),
             "screenshots": screenshot_results,
+            "browser_evidence": screenshot_report,
+            # Deprecated compatibility alias; this is harness evidence, not an internal screenshot audit.
             "screenshot_audit": screenshot_report,
             "browser_evidence_request": browser_request,
             "verify_existing": verify_existing,

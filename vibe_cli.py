@@ -161,7 +161,7 @@ def cmd_generate(args):
             print("─" * 60 + "\n")
 
     verify_mode = "strict" if getattr(args, "strict", False) else "fast"
-    mode_label = "Runtime Playwright" if verify_mode == "strict" else "Static Fast-Path"
+    mode_label = "Harness Browser Evidence Required" if verify_mode == "strict" else "Static Fast-Path"
     print(f"[5/5] Executing Verification 2.0 ({mode_label})...")
     verification = verifier.verify_html(html, args.output or "output.html", mode=verify_mode)
     print(f"      Verification: {verification['overall_status']} ({verification['checks_summary']['passed']}/{verification['checks_summary']['total']} checks passed)")
@@ -323,6 +323,8 @@ def cmd_swarm(args):
         print("\n" + "═" * 60)
         print(f"✨ SWARM EXECUTION COMPLETE: [{result['status']}]")
         print(f"📄 Artifact: {result['artifact_path']}")
+        print(f"🧭 Browser request: {Path.cwd() / '.vibe' / 'browser-evidence-request.json'}")
+        print(f"🧾 Browser evidence: {result.get('browser_evidence_path')}")
         shots = result.get('screenshots', {})
         if shots.get('desktop'):
             print(f"🖥️  Desktop Screenshot: {shots['desktop']}")
@@ -380,7 +382,7 @@ def main():
     # verify
     p_ver = subparsers.add_parser("verify", help="Run Verification 2.0 evidence checks on HTML file")
     p_ver.add_argument("file", help="Path to HTML file")
-    p_ver.add_argument("--strict", action="store_true", help="Add a notice that browser evidence is owned by the active harness")
+    p_ver.add_argument("--strict", action="store_true", help="Add a notice that browser evidence must be supplied by the active harness")
     p_ver.add_argument("--summary", action="store_true", help="Display readable ASCII audit scorecard")
 
     # inspect
