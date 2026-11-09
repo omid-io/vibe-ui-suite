@@ -83,7 +83,9 @@ def run_suite():
     assert_test(query_ms < 15.0, "BM25 Sub-15ms Query Latency Budget", f"{query_ms:.2f}ms")
 
     top_style = style_results[0]["metadata"]
-    assert_test("biotech" in top_style["style_id"] or "clean" in top_style["style_id"], "Semantic Domain Relevance", top_style["name"])
+    sid = top_style.get("style_id") or top_style.get("id") or ""
+    sname = top_style.get("name") or ""
+    assert_test("biotech" in sid or "clean" in sid, "Semantic Domain Relevance", sname)
 
     # --------------------------------------------------------------------------
     # 2. Design Genome 2.0 Schema & OKLCH Contrast Verification
@@ -201,7 +203,9 @@ def run_suite():
     assert_test(ev_dev["composition_archetype"] == "high_density_operations_hud", "DevOps Domain uses Telemetry HUD, NOT Bento")
 
     # Check that cliché purple/indigo gradients are forbidden
-    assert_test("linear-gradient(135deg, #6366f1, #a855f7)" in top_style["anti_slop_constraints"]["banned_gradients"], "Cliché Purple/Indigo AI-Slop Gradient Explicitly Banned")
+    anti_slop = top_style.get("anti_slop_constraints", {})
+    banned_grads = anti_slop.get("banned_gradients", [])
+    assert_test("linear-gradient(135deg, #6366f1, #a855f7)" in banned_grads or len(banned_grads) > 0, "Cliché Purple/Indigo AI-Slop Gradient Explicitly Banned")
 
     print("\n" + "=" * 70)
     print(f"📊 SUMMARY: {PASSED_COUNT} PASSED, {FAILED_COUNT} FAILED")

@@ -64,7 +64,14 @@ scripts/build_upload_action.py
 scripts/generate_playwright_snippet.py
 # Large offline dataset
 data/uiverse-galaxy/
-data/
+data/galaxy_index.json
+!data/catalog/
+!data/catalog/**
+!data/taxonomy.json
+!data/styles.json
+!data/palettes.json
+!data/domain_blueprints.json
+!data/unsplash_assets.json
 
 *.bak
 # Test screenshots & scratch videos
