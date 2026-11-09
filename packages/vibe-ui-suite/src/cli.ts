@@ -16,6 +16,8 @@ interface SwarmCliOptions {
   style?: string;
   format?: 'html' | 'tsx';
   json?: boolean;
+  browserEvidence?: string;
+  verifyExisting?: boolean;
 }
 
 interface CliOptions {
@@ -40,7 +42,7 @@ function printHelp() {
   vibe-ui <command> [options]
 
 \x1b[1mCOMMANDS:\x1b[0m
-  \x1b[32mswarm [prompt]\x1b[0m     Run the 5-phase Foreman Multi-Agent Swarm from prompt to verified UI
+  \x1b[32mswarm [prompt]\x1b[0m     Run the Foreman Multi-Agent Swarm with harness-native browser evidence
   \x1b[32mrun [prompt]\x1b[0m       Alias for swarm command
   \x1b[32minit\x1b[0m               Initialize Vibe UI contracts, 11 paradigm tokens & AI rules in current project
   \x1b[32msync\x1b[0m               Synchronize existing AI contracts to canonical v${VERSION} master rules
@@ -56,6 +58,8 @@ function printHelp() {
   -s, --style <name>  Style chemistry override (for swarm)
   --format <fmt>      Output format: html or tsx (default: html)
   --json              Output execution results strictly as JSON
+  --browser-evidence <file> Use a browser evidence report created by the active AI harness
+  --verify-existing   Verify the existing --output artifact without regenerating it
   -f, --force        Overwrite existing files (creates automated .bak backups)
   -y, --yes          Non-interactive mode (use defaults without prompting)
   --chemistry <1-5>  Select visual chemistry in non-interactive mode
@@ -142,9 +146,11 @@ When receiving UI design or redesign prompts (especially lazy prompts: "design t
    - Inject tactile micro-interactions (shimmer buttons, cyber loaders, tactile switches, holographic cards) and authentic imagery.
    - CONTEXTUAL CREATIVE MEDIA: Background video is strictly contextual (for creative/cinematic requests only); never force video onto utility SaaS or dashboards. Intelligently evaluate whether curated video, lightweight SVG particles, or static photography deliver the cleanest UX.
 
-4. 👁️ MULTI-VIEWPORT LIVING VISUAL VERIFICATION:
-   - Capture post-edit full-page screenshots (screenshots/after.png, Desktop 1440px / Mobile 390px).
-   - Multimodal self-critique: verify visual rhythm, zero horizontal overflow, and pristine typography hierarchy before handoff.
+4. 👁️ HARNESS-NATIVE MULTI-VIEWPORT VISUAL VERIFICATION:
+   - Never install, launch, attach to, or control a browser or browser driver from the package.
+   - Use only browser tools already exposed by the active AI harness; capture full-page mobile (390px), tablet (768px), and desktop (1440px) evidence and inspect it with vision.
+   - Write a vibe.browser-evidence/v1 report bound to the final artifact SHA-256.
+   - Re-run the swarm with the same --output path and --verify-existing --browser-evidence <report.json>; this verifies the exact existing artifact without regenerating it. Missing or stale evidence is NOT_EVALUATED, never PASS.
 
 5. 🧼 SILENT TABLE-STAKES (INTERNAL WORKER BASELINES):
    - Low-level hygiene (OKLCH color math, WCAG AAA formulas, zero raw unicode emojis -> inline SVGs, <bdi> bidirectional text isolation) are silent worker requirements.
@@ -649,6 +655,12 @@ function handleSwarm(promptText?: string, swarmOpts: SwarmCliOptions = {}) {
   if (swarmOpts.json) {
     pyArgs.push('--json');
   }
+  if (swarmOpts.browserEvidence) {
+    pyArgs.push('--browser-evidence', swarmOpts.browserEvidence);
+  }
+  if (swarmOpts.verifyExisting) {
+    pyArgs.push('--verify-existing');
+  }
 
   const result = spawnSync(pythonBin, pyArgs, {
     stdio: swarmOpts.json ? ['inherit', 'pipe', 'inherit'] : 'inherit',
@@ -676,6 +688,8 @@ async function main() {
   let output: string | undefined;
   let style: string | undefined;
   let format: 'html' | 'tsx' | undefined;
+  let browserEvidence: string | undefined;
+  const verifyExisting = rawArgs.includes('--verify-existing');
 
   for (let i = 0; i < rawArgs.length; i++) {
     if (rawArgs[i] === '--chemistry' && rawArgs[i + 1]) chemistry = rawArgs[i + 1];
@@ -683,13 +697,14 @@ async function main() {
     if ((rawArgs[i] === '--output' || rawArgs[i] === '-o') && rawArgs[i + 1]) output = rawArgs[i + 1];
     if ((rawArgs[i] === '--style' || rawArgs[i] === '-s') && rawArgs[i + 1]) style = rawArgs[i + 1];
     if (rawArgs[i] === '--format' && rawArgs[i + 1]) format = rawArgs[i + 1] as 'html' | 'tsx';
+    if (rawArgs[i] === '--browser-evidence' && rawArgs[i + 1]) browserEvidence = rawArgs[i + 1];
   }
 
   const filteredArgs: string[] = [];
   for (let i = 0; i < rawArgs.length; i++) {
     const a = rawArgs[i];
-    if (['--force', '-f', '--dry-run', '--yes', '-y', '--json'].includes(a)) continue;
-    if (['--chemistry', '--editor', '--output', '-o', '--style', '-s', '--format'].includes(a)) {
+    if (['--force', '-f', '--dry-run', '--yes', '-y', '--json', '--verify-existing'].includes(a)) continue;
+    if (['--chemistry', '--editor', '--output', '-o', '--style', '-s', '--format', '--browser-evidence'].includes(a)) {
       i++;
       continue;
     }
@@ -698,7 +713,7 @@ async function main() {
   const cmd = filteredArgs[0]?.toLowerCase();
 
   const options: CliOptions = { force, dryRun, yes, chemistry, editor };
-  const swarmOptions: SwarmCliOptions = { output, style, format, json: isJson };
+  const swarmOptions: SwarmCliOptions = { output, style, format, json: isJson, browserEvidence, verifyExisting };
 
   if (!cmd || cmd === '--help' || cmd === '-h') {
     printHelp();
