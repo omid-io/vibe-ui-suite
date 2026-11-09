@@ -83,6 +83,33 @@ def _extract_screenshot_status(report: Dict[str, Any]) -> str:
     return "PASS" if overall == "PASS" and has_both else "NOT_EVALUATED"
 
 
+def _is_runtime_only_blocker(
+    failed_checks: int,
+    wcag_status: str,
+    critic_status: str,
+    critic_hard_gates: bool,
+    screenshot_report: Dict[str, Any],
+) -> bool:
+    """Return True when browser evidence is unavailable and every code gate passed.
+
+    In this case the code-only healer cannot repair the missing browser runtime.
+    Keep the result explicitly unaccepted, but avoid repeating identical code edits.
+    """
+    browser_not_evaluated = bool(
+        screenshot_report.get("success") is not True
+        and str(screenshot_report.get("overall_status", "")).upper() == "NOT_EVALUATED"
+        and _extract_overflow_status(screenshot_report) == "NOT_EVALUATED"
+        and _extract_screenshot_status(screenshot_report) == "NOT_EVALUATED"
+    )
+    return bool(
+        browser_not_evaluated
+        and failed_checks == 0
+        and str(wcag_status).upper() == "PASS"
+        and str(critic_status).upper() == "ACCEPTED"
+        and critic_hard_gates
+    )
+
+
 def _severity_penalty(severity: Any) -> float:
     """Map the critic's actual severity vocabulary to stable penalty weights."""
     return {
@@ -350,6 +377,26 @@ class ForemanSwarmOrchestrator:
                 f"overflow={overflow_status}, screenshot={screenshot_status}, critic={critic_status}."
             )
             if iteration >= max_remediation_loops:
+                break
+
+            if _is_runtime_only_blocker(
+                failed_checks=failed_checks,
+                wcag_status=wcag_status,
+                critic_status=critic_status,
+                critic_hard_gates=critic_hard_gates,
+                screenshot_report=screenshot_report,
+            ):
+                runtime_reason = str(
+                    screenshot_report.get("error")
+                    or screenshot_report.get("stderr")
+                    or "Playwright/Chromium did not produce browser evidence"
+                ).replace("\\n", " ").strip()[:240]
+                log(
+                    "STATION 5 / Auditor Swarm",
+                    "All code-based gates passed, but browser evidence is unavailable; "
+                    f"skipping code-only healing because it cannot repair the runtime blocker ({runtime_reason}). "
+                    "Acceptance remains ACCEPTABLE_WITH_NOTES until browser verification succeeds."
+                )
                 break
 
             # The current healer acts on critic findings; it does not receive pixels.
