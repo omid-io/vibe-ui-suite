@@ -209,16 +209,19 @@ class ForemanSwarmOrchestrator:
         # -------------------------------------------------------------
         # Station 2: Trend Hunter (TrendEvidence)
         # -------------------------------------------------------------
-        log("STATION 2 / Trend Hunter", f"Mining top-starred benchmarks and micro-interactions for '{domain}'...")
+        log("STATION 2 / Trend Hunter", f"Ranking curated local benchmark metadata and offline micro-interactions for '{domain}'...")
         trend_package = self.trend_hunter.curate_trend_package(domain, style_preference=style_override)
+        benchmark_references = trend_package.get(
+            "benchmark_references", trend_package.get("top_starred_benchmarks", [])
+        )
         top_benchmarks = [
             b.get("name") or b.get("metadata", {}).get("name") or b.get("id") or str(b)
-            for b in trend_package.get("top_starred_benchmarks", [])
+            for b in benchmark_references
         ]
-        log("STATION 2 / Trend Hunter", f"Anchored in elite benchmarks: {', '.join(top_benchmarks[:3])}")
+        log("STATION 2 / Trend Hunter", f"Matched local benchmark references: {', '.join(top_benchmarks[:3])}")
 
         target_style_name = style_override or trend_package.get("target_style") or "clean_stripe"
-        top_bench_meta = trend_package.get("top_starred_benchmarks", [{}])[0].get("metadata", {})
+        top_bench_meta = benchmark_references[0].get("metadata", {}) if benchmark_references else {}
         comp_arch = (
             trend_package.get("composition_archetype")
             or top_bench_meta.get("composition_archetype")
@@ -226,7 +229,7 @@ class ForemanSwarmOrchestrator:
         )
         trend_sources = [
             b.get("metadata", {}).get("name", b.get("id", ""))
-            for b in trend_package.get("top_starred_benchmarks", [])
+            for b in benchmark_references
         ]
         if not trend_sources:
             trend_sources = ["shadcn/ui", "tailwindlabs"]
