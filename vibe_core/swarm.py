@@ -15,6 +15,7 @@ from __future__ import annotations
 
 import json
 import re
+import shutil
 import subprocess
 import sys
 from pathlib import Path
@@ -39,11 +40,65 @@ from schemas.agent_contracts import (
 )
 
 
+def _extract_wcag_evidence(report: Dict[str, Any]) -> Tuple[float, str]:
+    """Return only a measured body-copy contrast ratio; never substitute a target threshold."""
+    for record in report.get("evidence_records", []):
+        check_name = str(record.get("check_name") or record.get("name") or "").lower()
+        if "contrast" not in check_name:
+            continue
+        measured = str(record.get("measured_value") or "")
+        match = re.search(r"(\\d+(?:\\.\\d+)?)\\s*:\\s*1", measured)
+        if not match:
+            evidence = str(record.get("evidence") or "")
+            match = re.search(r"(?i)body contrast\\s+(\\d+(?:\\.\\d+)?)\\s*:\\s*1", evidence)
+        status = str(record.get("status", "")).upper()
+        if match and status in {"PASS", "FAIL"}:
+            return min(21.0, max(0.0, float(match.group(1)))), status
+        return 0.0, "NOT_EVALUATED"
+    return 0.0, "NOT_EVALUATED"
+
+
+def _extract_overflow_status(report: Dict[str, Any]) -> str:
+    explicit = str(report.get("overflow_status", "")).upper()
+    if explicit in {"PASS", "FAIL"}:
+        return explicit
+    viewports = report.get("viewports", {})
+    if not isinstance(viewports, dict) or not viewports:
+        return "NOT_EVALUATED"
+    records = list(viewports.values())
+    if not all("horizontal_overflow" in record for record in records if isinstance(record, dict)):
+        return "NOT_EVALUATED"
+    return "FAIL" if any(record.get("horizontal_overflow") for record in records) else "PASS"
+
+
+def _extract_screenshot_status(report: Dict[str, Any]) -> str:
+    explicit = str(report.get("screenshot_status", "")).upper()
+    files = report.get("files", {})
+    has_both = isinstance(files, dict) and all(files.get(name) for name in ("desktop", "mobile"))
+    if explicit in {"PASS", "FAIL"}:
+        return explicit if (explicit == "FAIL" or has_both) else "NOT_EVALUATED"
+    overall = str(report.get("overall_status", "")).upper()
+    if overall == "FAIL":
+        return "FAIL"
+    return "PASS" if overall == "PASS" and has_both else "NOT_EVALUATED"
+
+
+def _severity_penalty(severity: Any) -> float:
+    """Map the critic's actual severity vocabulary to stable penalty weights."""
+    return {
+        "critical": 10.0,
+        "high": 7.0,
+        "medium": 4.0,
+        "low": 1.0,
+    }.get(str(severity or "").strip().lower(), 0.0)
+
+
 class ForemanSwarmOrchestrator:
     """Master orchestrator running the multi-agent pipeline deterministically."""
 
     def __init__(self, workspace_root: Optional[Path] = None):
-        self.workspace_root = workspace_root or ROOT_DIR
+        self.package_root = ROOT_DIR
+        self.workspace_root = Path(workspace_root or Path.cwd()).resolve()
         self.director = DesignDirector()
         self.recommendation = RecommendationEngine()
         self.generator = InterfaceGenerator()
@@ -151,18 +206,21 @@ class ForemanSwarmOrchestrator:
 
         trend_evidence = TrendEvidence(
             selected_style=target_style_name,
-            style_reasoning=f"Curated from elite open-source benchmarks ({', '.join(trend_sources[:2])}) with zero-slop constraints.",
+            style_reasoning=trend_package.get(
+                "style_reasoning",
+                f"Curated from local Design Genome and open-source benchmarks ({', '.join(trend_sources[:2])})."
+            ),
             composition_archetype=comp_arch,
-            typography_pair={"display": "Inter", "body": "Inter"},
-            novelty_risk_assessment="Controlled novelty with verified high-contrast WCAG compliance",
-            banned_slop_tropes=[
+            typography_pair=trend_package.get("typography_pair") or {},
+            novelty_risk_assessment="Domain-calibrated novelty; browser and critic gates determine acceptance",
+            banned_slop_tropes=trend_package.get("banned_slop_tropes") or [
                 "meaningless_ai_sparkles",
                 "muddy_dark_grey_void",
                 "unlabelled_fake_sparkline",
                 "repetitive_bento_boxes"
             ],
             trend_sources=trend_sources,
-            confidence=float(confidence)
+            confidence=float(trend_package.get("evidence_confidence", confidence))
         )
         t_valid, t_errors = trend_evidence.validate()
         if not t_valid:
@@ -205,6 +263,10 @@ class ForemanSwarmOrchestrator:
         else:
             code = self.generator.generate_html(design_genome, prompt_title=prompt)
 
+        asset_delivery = self._provision_consumer_assets(code, out_path)
+        if asset_delivery["missing"]:
+            log("STATION 4 / Master Builder", f"[WARN] {len(asset_delivery['missing'])} referenced curated asset(s) could not be provisioned")
+
         with open(out_path, "w", encoding="utf-8") as f:
             f.write(code)
 
@@ -239,81 +301,136 @@ class ForemanSwarmOrchestrator:
 
         v_report: Dict[str, Any] = {}
         c_report: Dict[str, Any] = {}
+        screenshot_report: Dict[str, Any] = {}
         failed_checks = 0
 
         while iteration <= max_remediation_loops:
-            # 5A: Technical Verification (WCAG AA, 0px overflow)
-            v_report = self.verifier.verify_html(code, out_path.name, mode="fast")
+            asset_delivery = self._provision_consumer_assets(code, out_path)
+            v_report = self.verifier.verify_html(
+                code,
+                out_path.name,
+                mode="fast",
+                base_dir=out_path.parent
+            )
             failed_checks = v_report.get("checks_summary", {}).get("failed", 0)
-            score = v_report.get("overall_status", "UNKNOWN")
 
-            # 5B: Design Critic Evaluation
+            # Browser audit is part of the acceptance gate, not a post-hoc artifact.
+            screenshot_report = self._capture_screenshots(out_path)
+
             c_report = self.critic.critique(code, decision, iteration=iteration)
-            critic_status = c_report.get("acceptance_status", "PENDING")
+            critic_status_raw = str(c_report.get("acceptance_status", "NOT_EVALUATED")).upper()
+            critic_status = (
+                "ACCEPTED" if critic_status_raw == "ACCEPTED"
+                else "REJECTED" if critic_status_raw in {"REJECTED", "FAILED"}
+                else "NOT_EVALUATED"
+            )
 
-            if failed_checks == 0 and critic_status == "ACCEPTED":
-                log("STATION 5 / Auditor Swarm", f"Passed all technical & visual quality gates on iteration {iteration}!")
-                audit_passed = True
+            wcag_score, wcag_status = _extract_wcag_evidence(v_report)
+            overflow_status = _extract_overflow_status(screenshot_report)
+            screenshot_status = _extract_screenshot_status(screenshot_report)
+            browser_overall = str(screenshot_report.get("overall_status", "NOT_EVALUATED")).upper()
+            critic_hard_gates = c_report.get("hard_gates_pass", True) is not False
+
+            audit_passed = bool(
+                failed_checks == 0
+                and wcag_status == "PASS"
+                and overflow_status == "PASS"
+                and screenshot_status == "PASS"
+                and browser_overall == "PASS"
+                and critic_status == "ACCEPTED"
+                and critic_hard_gates
+            )
+            if audit_passed:
+                log("STATION 5 / Auditor Swarm", f"All static, WCAG, browser, screenshot, and critic gates passed on iteration {iteration}.")
                 break
 
-            log("STATION 5 / Auditor Swarm", f"Iteration {iteration}: {failed_checks} checks failed (Critic: {critic_status}). Triggering closed-loop healing...")
-            code, c_report, correction_prompt = self.healer.heal(code, decision, original_prompt=prompt)
+            log(
+                "STATION 5 / Auditor Swarm",
+                f"Iteration {iteration}: static failures={failed_checks}, WCAG={wcag_status}, "
+                f"overflow={overflow_status}, screenshot={screenshot_status}, critic={critic_status}."
+            )
+            if iteration >= max_remediation_loops:
+                break
+
+            # The current healer acts on critic findings; it does not receive pixels.
+            # Browser findings therefore block acceptance but are not represented as
+            # image-understanding or screenshot-driven LLM remediation.
+            code, c_report, correction_prompt = self.healer.heal(
+                code, decision, original_prompt=prompt
+            )
             with open(out_path, "w", encoding="utf-8") as f:
                 f.write(code)
             iteration += 1
 
-        # Encapsulate audit findings into EvaluationReportContract with real audit evidence
-        hard_gates_pass = c_report.get("hard_gates_pass", True) if isinstance(c_report, dict) else False
-        hard_quality_pass = bool(failed_checks == 0 and hard_gates_pass)
+        wcag_score, wcag_status = _extract_wcag_evidence(v_report)
+        overflow_status = _extract_overflow_status(screenshot_report)
+        screenshot_status = _extract_screenshot_status(screenshot_report)
+        critic_status_raw = str(c_report.get("acceptance_status", "NOT_EVALUATED")).upper()
+        critic_status = (
+            "ACCEPTED" if critic_status_raw == "ACCEPTED"
+            else "REJECTED" if critic_status_raw in {"REJECTED", "FAILED"}
+            else "NOT_EVALUATED"
+        )
 
-        # Extract genuine WCAG contrast ratio from verifier evidence records
-        real_wcag_contrast = 4.5
-        if isinstance(v_report, dict):
-            for rec in v_report.get("evidence_records", []):
-                if "contrast" in str(rec.get("name", "")).lower():
-                    m = re.search(r"(\d+\.?\d*)\s*:\s*1", str(rec.get("msg", "")) + " " + str(rec.get("evidence", "")))
-                    if m:
-                        real_wcag_contrast = min(21.0, max(1.0, float(m.group(1))))
-                        break
+        critic_score_raw = c_report.get("quality_score", c_report.get("score"))
+        try:
+            critic_score = max(0.0, min(100.0, float(critic_score_raw))) if critic_score_raw is not None else 0.0
+        except (TypeError, ValueError):
+            critic_score = 0.0
 
-        # Check for genuine mobile overflow violations
-        overflow_failed = False
-        if isinstance(v_report, dict):
-            for rec in v_report.get("evidence_records", []):
-                if "overflow" in str(rec.get("name", "")).lower() and rec.get("status") in ("FAIL", "WARN"):
-                    overflow_failed = True
-                    break
-        overflow_0px_pass = not overflow_failed
-
-        # Extract authentic critic aesthetic score & slop penalties
-        critic_score = 90.0
         slop_penalty = 0.0
         advice_list: List[str] = []
         if isinstance(c_report, dict):
-            critic_score = float(c_report.get("quality_score", c_report.get("score", 90.0)))
             for defect in c_report.get("defects_ranked", []):
-                sev = defect.get("severity", "minor")
-                slop_penalty += 10.0 if sev == "critical" else (5.0 if sev == "major" else 2.0)
+                slop_penalty += _severity_penalty(defect.get("severity", ""))
                 msg = defect.get("message") or defect.get("suggested_patch")
-                if msg and msg not in advice_list:
+                if msg and str(msg) not in advice_list:
                     advice_list.append(str(msg))
 
         detailed_checks: List[Dict[str, Any]] = []
-        if isinstance(v_report, dict):
-            detailed_checks.extend(v_report.get("evidence_records", []))
-        if isinstance(c_report, dict):
-            detailed_checks.extend(c_report.get("hard_gate_failures", []))
+        detailed_checks.extend(v_report.get("evidence_records", []))
+        for vp_name, vp_record in screenshot_report.get("viewports", {}).items():
+            detailed_checks.append({
+                "pillar": "Browser Runtime",
+                "check_name": f"{vp_name.title()} Viewport Screenshot Audit",
+                "status": vp_record.get("status", "NOT_EVALUATED"),
+                "evidence": (
+                    f"overflow={vp_record.get('horizontal_overflow')}; "
+                    f"broken_images={vp_record.get('broken_images')}; "
+                    f"screenshot_bytes={vp_record.get('file_size_bytes')}; "
+                    f"path={vp_record.get('screenshot_path')}"
+                )
+            })
+        detailed_checks.extend(c_report.get("hard_gate_failures", []))
 
+        hard_quality_pass = bool(
+            failed_checks == 0
+            and wcag_status == "PASS"
+            and overflow_status == "PASS"
+            and screenshot_status == "PASS"
+            and screenshot_report.get("overall_status") == "PASS"
+            and critic_status == "ACCEPTED"
+            and c_report.get("hard_gates_pass", True) is not False
+        )
         evaluation_report = EvaluationReportContract(
             hard_quality_pass=hard_quality_pass,
-            wcag_contrast_score=round(real_wcag_contrast, 2),
-            overflow_0px_pass=overflow_0px_pass,
-            aesthetic_quality_score=round(max(0.0, min(100.0, critic_score)), 1),
+            wcag_contrast_score=round(wcag_score, 2),
+            overflow_0px_pass=(overflow_status == "PASS"),
+            aesthetic_quality_score=round(critic_score, 1),
             slop_penalty_deductions=round(slop_penalty, 1),
             correction_advice=advice_list,
             iteration=iteration,
-            acceptance_status="ACCEPTED" if audit_passed else "ACCEPTABLE_WITH_NOTES",
-            detailed_checks=detailed_checks
+            acceptance_status="ACCEPTED" if hard_quality_pass else "ACCEPTABLE_WITH_NOTES",
+            detailed_checks=detailed_checks,
+            wcag_contrast_status=wcag_status,
+            overflow_status=overflow_status,
+            screenshot_status=screenshot_status,
+            critic_status=critic_status,
+            runtime_mode=(
+                "browser_runtime_eval"
+                if screenshot_report.get("success") is True
+                else str(v_report.get("runtime_mode", "static_only"))
+            )
         )
         er_valid, er_errors = evaluation_report.validate()
         if not er_valid:
@@ -321,9 +438,8 @@ class ForemanSwarmOrchestrator:
         else:
             log("STATION 5 / Auditor Swarm", f"EvaluationReportContract validated: status={evaluation_report.acceptance_status}")
 
-        # 5C: Multi-Viewport Headless Screenshot Capture
-        screenshot_results = self._capture_screenshots(out_path)
-
+        # Keep a compact file map for existing consumers; retain full audit evidence separately.
+        screenshot_results = screenshot_report.get("files", {})
         # Final Delivery Packaging
         status = "PASS" if audit_passed else "ACCEPTABLE_WITH_NOTES"
         log("DELIVERY GATE", f"Pipeline completed with status [{status}]. Artifact ready at: {out_path.name}")
@@ -335,6 +451,8 @@ class ForemanSwarmOrchestrator:
             "style": selected_style,
             "artifact_path": str(out_path),
             "screenshots": screenshot_results,
+            "screenshot_audit": screenshot_report,
+            "asset_delivery": asset_delivery,
             "iterations_count": iteration,
             "logs": logs,
             "concept": concept.to_dict(),
@@ -344,35 +462,96 @@ class ForemanSwarmOrchestrator:
             "evaluation_report": evaluation_report.to_dict()
         }
 
-    def _capture_screenshots(self, html_path: Path) -> Dict[str, str]:
-        """Runs the isolated headless Chromium renderer to capture Desktop and Mobile screenshots."""
-        audit_script = self.workspace_root / "scripts" / "screenshot_audit.py"
+    def _provision_consumer_assets(self, html: str, output_path: Path) -> Dict[str, List[str]]:
+        """Copy only referenced package assets, without overwriting consumer files."""
+        copied: List[str] = []
+        missing: List[str] = []
+        references = sorted(set(re.findall(r'assets/curated_webp/[^\\s"\\',)]+', html)))
+        for relative in references:
+            relative_path = Path(relative)
+            if relative_path.is_absolute() or ".." in relative_path.parts:
+                missing.append(relative)
+                continue
+            source = (self.package_root / relative_path).resolve()
+            destination = (output_path.parent / relative_path).resolve()
+            if output_path.parent.resolve() not in destination.parents:
+                missing.append(relative)
+                continue
+            if destination.is_file():
+                continue
+            if not source.is_file():
+                missing.append(relative)
+                continue
+            destination.parent.mkdir(parents=True, exist_ok=True)
+            shutil.copy2(source, destination)
+            copied.append(str(destination))
+        return {"copied": copied, "missing": missing}
+
+    def _capture_screenshots(self, html_path: Path) -> Dict[str, Any]:
+        """Capture and return full browser audit evidence under the consumer workspace."""
+        audit_script = self.package_root / "scripts" / "screenshot_audit.py"
         out_screenshots_dir = self.workspace_root / ".test-artifacts" / "screenshots"
         out_screenshots_dir.mkdir(parents=True, exist_ok=True)
 
-        if not audit_script.exists() or html_path.suffix != ".html":
-            return {}
+        report: Dict[str, Any] = {
+            "overall_status": "NOT_EVALUATED",
+            "overflow_status": "NOT_EVALUATED",
+            "screenshot_status": "NOT_EVALUATED",
+            "success": False,
+            "files": {},
+            "viewports": {},
+        }
+        if not audit_script.is_file() or html_path.suffix.lower() not in {".html", ".tsx"}:
+            report["error"] = "Browser audit script or supported HTML/TSX artifact is unavailable"
+            return report
 
         try:
-            res = subprocess.run(
-                [sys.executable, str(audit_script), str(html_path), "--json", "-o", str(out_screenshots_dir)],
+            result = subprocess.run(
+                [
+                    sys.executable,
+                    str(audit_script),
+                    str(html_path.resolve()),
+                    "--json",
+                    "-o",
+                    str(out_screenshots_dir),
+                ],
                 capture_output=True,
                 text=True,
-                timeout=30
+                timeout=120,
+                cwd=str(self.workspace_root),
             )
-            if res.returncode == 0 and res.stdout.strip():
+            if result.stdout.strip():
                 try:
-                    data = json.loads(res.stdout)
-                    return data.get("saved_screenshots", {})
-                except Exception:
-                    pass
-        except Exception as e:
-            print(f"[WARN] Headless screenshot capture skipped: {e}", file=sys.stderr)
+                    parsed = json.loads(result.stdout)
+                    if isinstance(parsed, dict):
+                        report.update(parsed)
+                except json.JSONDecodeError:
+                    report["error"] = "Screenshot audit did not return valid JSON"
+            if result.returncode != 0 and report.get("overall_status") == "PASS":
+                report["overall_status"] = "FAIL"
+            if result.stderr.strip():
+                report["stderr"] = result.stderr.strip()[-4000:]
+        except (OSError, subprocess.TimeoutExpired) as exc:
+            report["error"] = str(exc)
 
-        stem = html_path.stem
-        desktop_img = out_screenshots_dir / f"{stem}_desktop.png"
-        mobile_img = out_screenshots_dir / f"{stem}_mobile.png"
-        return {
-            "desktop": str(desktop_img) if desktop_img.exists() else "",
-            "mobile": str(mobile_img) if mobile_img.exists() else ""
-        }
+        files = report.get("files", {})
+        if not isinstance(files, dict):
+            files = {}
+        normalized_files: Dict[str, str] = {}
+        for name in ("desktop", "mobile"):
+            candidate = files.get(name, "")
+            try:
+                candidate_path = Path(candidate) if candidate else None
+                if candidate_path and candidate_path.is_file() and candidate_path.stat().st_size > 0:
+                    normalized_files[name] = str(candidate_path.resolve())
+                else:
+                    normalized_files[name] = ""
+            except OSError:
+                normalized_files[name] = ""
+        report["files"] = normalized_files
+
+        if report.get("overall_status") == "PASS" and not all(normalized_files.values()):
+            report["overall_status"] = "FAIL"
+            report["screenshot_status"] = "FAIL"
+            report["error"] = "Browser audit reported PASS but one or more screenshot files are missing or empty"
+        return report

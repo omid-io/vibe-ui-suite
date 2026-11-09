@@ -175,8 +175,8 @@ class TrendEvidence:
         if not self.composition_archetype:
             errors.append("composition_archetype must be specified")
         if isinstance(self.typography_pair, dict):
-            if not self.typography_pair or not any(str(v).strip() for v in self.typography_pair.values()):
-                errors.append("typography_pair must be a non-empty dictionary (e.g. {'display': '...', 'body': '...'})")
+            if self.typography_pair and not any(str(v).strip() for v in self.typography_pair.values()):
+                errors.append("typography_pair values must contain at least one non-empty font name when supplied")
         elif isinstance(self.typography_pair, (tuple, list)):
             if len(self.typography_pair) < 2 or not str(self.typography_pair[0]).strip() or not str(self.typography_pair[1]).strip():
                 errors.append("typography_pair tuple must contain at least (display, body)")
@@ -375,6 +375,11 @@ class EvaluationReportContract:
     iteration: int = 1
     acceptance_status: str = "PENDING"
     detailed_checks: List[Dict[str, Any]] = field(default_factory=list)
+    wcag_contrast_status: str = "NOT_EVALUATED"
+    overflow_status: str = "NOT_EVALUATED"
+    screenshot_status: str = "NOT_EVALUATED"
+    critic_status: str = "NOT_EVALUATED"
+    runtime_mode: str = "static"
 
     def validate(self) -> Tuple[bool, List[str]]:
         errors = []
@@ -390,6 +395,24 @@ class EvaluationReportContract:
             errors.append("slop_penalty_deductions cannot be negative")
         if not isinstance(self.correction_advice, (list, tuple)):
             errors.append("correction_advice must be a list of actionable guidance strings")
+
+        status_values = {"PASS", "FAIL", "NOT_EVALUATED"}
+        for field_name in ("wcag_contrast_status", "overflow_status", "screenshot_status"):
+            if getattr(self, field_name) not in status_values:
+                errors.append(f"{field_name} must be one of {sorted(status_values)}")
+        if self.critic_status not in {"ACCEPTED", "REJECTED", "NOT_EVALUATED"}:
+            errors.append("critic_status must be ACCEPTED, REJECTED, or NOT_EVALUATED")
+        if not isinstance(self.runtime_mode, str) or not self.runtime_mode.strip():
+            errors.append("runtime_mode must be a non-empty string")
+        if self.overflow_status == "PASS" and self.overflow_0px_pass is not True:
+            errors.append("overflow_status=PASS requires overflow_0px_pass=True")
+        if self.overflow_status != "PASS" and self.overflow_0px_pass is True:
+            errors.append("overflow_0px_pass=True requires overflow_status=PASS")
+        if self.hard_quality_pass and any(
+            status == "FAIL"
+            for status in (self.wcag_contrast_status, self.overflow_status, self.screenshot_status)
+        ):
+            errors.append("hard_quality_pass cannot be True when an evidence gate is FAIL")
         return len(errors) == 0, errors
 
     def to_dict(self) -> Dict[str, Any]:
@@ -420,7 +443,12 @@ class EvaluationReportContract:
             correction_advice=list(data.get("correction_advice", [])),
             iteration=int(data.get("iteration", 1)),
             acceptance_status=acceptance_status,
-            detailed_checks=list(data.get("detailed_checks", []))
+            detailed_checks=list(data.get("detailed_checks", [])),
+            wcag_contrast_status=str(data.get("wcag_contrast_status", "NOT_EVALUATED")).upper(),
+            overflow_status=str(data.get("overflow_status", "NOT_EVALUATED")).upper(),
+            screenshot_status=str(data.get("screenshot_status", "NOT_EVALUATED")).upper(),
+            critic_status=str(data.get("critic_status", "NOT_EVALUATED")).upper(),
+            runtime_mode=str(data.get("runtime_mode", "static"))
         )
 
     def to_json(self, indent: int = 2) -> str:

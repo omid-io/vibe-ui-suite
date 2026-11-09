@@ -45,11 +45,14 @@ jobs:
       - name: Run Inter-Agent Swarm Contracts Verification
         run: python scripts/test_agent_contracts.py
 
+      - name: Run Evidence Integrity & Runtime Contract Tests
+        run: python scripts/test_endgame_runtime.py
+
       - name: Run Advanced Quality, E2E Smoke & Anti-Slop Test Suite
         run: python scripts/test_advanced_quality.py
 
   vibe-ui-package-audit:
-    name: NPM Package Distribution & CLI Verification
+    name: NPM Packed Consumer & Browser Runtime Audit
     runs-on: ubuntu-latest
 
     steps:
@@ -66,26 +69,50 @@ jobs:
         with:
           python-version: "3.12"
 
-      - name: Install dependencies & build packages/vibe-ui-suite
+      - name: Build and pack the publishable npm artifact
         working-directory: packages/vibe-ui-suite
         run: |
           npm install
           npm run build
+          npm pack --pack-destination "$RUNNER_TEMP"
 
-      - name: Verify CLI Execution & Help
-        working-directory: packages/vibe-ui-suite
+      - name: Install browser runtime for the packed consumer test
         run: |
-          node dist/cli.js --help
-          node dist/cli.js list
+          pip install beautifulsoup4 jsonschema playwright
+          playwright install --with-deps chromium
 
-      - name: Verify Standalone Swarm Execution Outside Repo Root
+      - name: Install tarball in an isolated consumer project and run the installed CLI
+        shell: bash
         run: |
-          CLI_PATH="$(pwd)/packages/vibe-ui-suite/dist/cli.js"
-          TMP_DIR=$(mktemp -d)
-          cd "$TMP_DIR"
-          node "$CLI_PATH" swarm "Minimalist Tech Blog" --json
+          set -euo pipefail
+          TARBALL="$(find "$RUNNER_TEMP" -maxdepth 1 -name 'vibe-ui-suite-*.tgz' -print -quit)"
+          test -n "$TARBALL"
+          CONSUMER_DIR="$(mktemp -d)"
+          cd "$CONSUMER_DIR"
+          npm init -y
+          npm install "$TARBALL"
+          ./node_modules/.bin/vibe-ui-suite --help
+          ./node_modules/.bin/vibe-ui-suite list
+          ./node_modules/.bin/vibe-ui-suite swarm "Minimalist Tech Blog" --json > swarm-result.json
           test -s ./swarm_output.html
-          echo "Verified: swarm_output.html was successfully generated inside the consumer workspace!"
+          python - <<'PY'
+          import json
+          from pathlib import Path
+
+          result = json.loads(Path("swarm-result.json").read_text(encoding="utf-8"))
+          assert result.get("artifact_path"), "Missing artifact_path in CLI JSON"
+          assert Path(result["artifact_path"]).is_file(), "Artifact path does not exist"
+          report = result.get("evaluation_report", {})
+          assert "wcag_contrast_status" in report, "Evidence status fields missing"
+          assert "screenshot_status" in report, "Screenshot evidence status missing"
+          shots = result.get("screenshots", {})
+          assert Path(shots.get("desktop", "")).is_file(), "Desktop screenshot missing"
+          assert Path(shots.get("mobile", "")).is_file(), "Mobile screenshot missing"
+          audit = result.get("screenshot_audit", {})
+          assert audit.get("success") is True, "Browser audit did not complete"
+          assert audit.get("overall_status") in {"PASS", "FAIL"}, "Browser result is not explicit"
+          print("Verified packed npm install, external consumer CWD, report JSON, and browser artifacts.")
+          PY
 
   nextjs-starter-build:
     name: Next.js 15 & TypeScript 5 Build Audit

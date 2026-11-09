@@ -372,13 +372,11 @@ def capture_audit_screenshots(
                     screenshot_path.stat().st_size if screenshot_path.exists() else 0
                 )
 
-                # Determine viewport health status
+                # A viewport is healthy only when layout, images, and capture are all verified.
                 status = "PASS"
-                if vp_name == "mobile" and has_overflow:
+                if has_overflow or img_stats.get("broken", 0) > 0 or file_size_bytes <= 0:
                     status = "FAIL"
                     any_failure = True
-                elif img_stats.get("broken", 0) > 0:
-                    status = "WARN"
 
                 vp_record = {
                     "name": vp_name,
@@ -418,6 +416,16 @@ def capture_audit_screenshots(
                 }
                 for vp_info in report["viewports"].values()
             ]
+            report["overflow_status"] = (
+                "FAIL"
+                if any(vp_info.get("horizontal_overflow") for vp_info in report["viewports"].values())
+                else "PASS"
+            )
+            report["screenshot_status"] = (
+                "PASS"
+                if report["viewports"] and all(vp_info.get("file_size_bytes", 0) > 0 for vp_info in report["viewports"].values())
+                else "FAIL"
+            )
             report["overall_status"] = "FAIL" if any_failure else "PASS"
             report["success"] = True
             return report

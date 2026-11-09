@@ -236,10 +236,20 @@ class RecommendationEngine:
         # -------------------------------------------------------------
         matched_typography = self._match_typography(selected_style_id, domain_id)
         style_typo = selected_style_obj.get("typography", {})
+        trend_typography = te_dict.get("typography_pair", {})
+        if not isinstance(trend_typography, dict):
+            trend_typography = {}
+        trend_display_font = str(trend_typography.get("display") or "").strip()
+        trend_body_font = str(trend_typography.get("body") or "").strip()
 
-        display_font = style_typo.get("heading_font") or matched_typography.get("display") or matched_typography.get("display_en", "Inter")
-        body_font = style_typo.get("body_font") or matched_typography.get("body") or matched_typography.get("body_en", "Inter")
+        display_font = trend_display_font or style_typo.get("heading_font") or matched_typography.get("display") or matched_typography.get("display_en", "Inter")
+        body_font = trend_body_font or style_typo.get("body_font") or matched_typography.get("body") or matched_typography.get("body_en", "Inter")
         mono_font = style_typo.get("mono_font") or matched_typography.get("mono") or "JetBrains Mono"
+        typography_source = (
+            "trend_evidence"
+            if trend_display_font or trend_body_font
+            else "selected_style_or_domain_genome"
+        )
         scale_ratio = style_typo.get("scale_ratio") or matched_typography.get("scale_ratio", 1.25)
 
         typography_dict = {
@@ -372,9 +382,15 @@ class RecommendationEngine:
             "bm25_score": top_choice["score"],
             "rationale": [
                 f"Selected '{top_choice['name']}' ({selected_style_id}) via Okapi BM25 ranking across Design Genome 2.0.",
-                f"Typography matched: display='{display_font}', body='{body_font}' with guaranteed Persian Vazirmatn fallback.",
+                f"Typography matched: display='{display_font}', body='{body_font}' (source: {typography_source}) with Persian Vazirmatn fallback.",
                 f"Palette '{matched_palette.get('name', 'Calibrated OKLCH')}' loaded with dual-theme (Light canonical & OLED secondary)."
             ],
+            "trend_evidence": {
+                "confidence": te_dict.get("confidence"),
+                "style_reasoning": te_dict.get("style_reasoning", ""),
+                "novelty_risk_assessment": te_dict.get("novelty_risk_assessment", ""),
+                "typography_source": typography_source
+            },
             "alternatives_considered": [
                 {"style": c["style"], "score": c["score"], "rejection_reason": f"Lower composite score ({c['score']}) compared to {top_choice['score']}"}
                 for c in ranked_candidates[1:4]

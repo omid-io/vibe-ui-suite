@@ -170,6 +170,7 @@ class VerificationEngine:
         html_content: str,
         filename: str = "interface.html",
         mode: str = "fast",
+        base_dir: Optional[Path] = None,
     ) -> Dict[str, Any]:
         """
         Runs physical evidence audit across all 5 verification pillars.
@@ -467,25 +468,44 @@ class VerificationEngine:
             })
 
         # 10. Asset Media Integrity Check
-        broken_relative_assets = re.findall(r'(?:src|srcset)=["\'](assets/curated_webp/[^"\']+)["\']', html_content)
-        if broken_relative_assets:
-            failed += 1
+        relative_assets = sorted(set(re.findall(r'assets/curated_webp/[^\s"\',)]+', html_content)))
+        if relative_assets and base_dir is None:
+            warned += 1
             evidence_records.append({
                 "pillar": "Visual Anti-Slop",
                 "check_name": "Asset Media Integrity",
-                "status": "FAIL",
-                "evidence": f"Found unresolved relative asset path(s): {broken_relative_assets[:2]}",
-                "threshold": "zero unbundled relative assets"
+                "status": "WARN",
+                "evidence": "Relative curated assets were found, but no output directory was supplied; file existence was not evaluated",
+                "measured_value": str(len(relative_assets)),
+                "threshold": "all referenced local assets exist beside the output artifact"
             })
         else:
-            passed += 1
-            evidence_records.append({
-                "pillar": "Visual Anti-Slop",
-                "check_name": "Asset Media Integrity",
-                "status": "PASS",
-                "evidence": "Zero broken relative asset paths detected; verified asset integrity",
-                "threshold": "zero unbundled relative assets"
-            })
+            output_root = Path(base_dir).resolve() if base_dir is not None else None
+            missing_assets = []
+            for relative_asset in relative_assets:
+                candidate = (output_root / relative_asset).resolve()
+                if output_root not in candidate.parents or not candidate.is_file():
+                    missing_assets.append(relative_asset)
+            if missing_assets:
+                failed += 1
+                evidence_records.append({
+                    "pillar": "Visual Anti-Slop",
+                    "check_name": "Asset Media Integrity",
+                    "status": "FAIL",
+                    "evidence": f"Missing relative asset file(s): {missing_assets[:3]}",
+                    "measured_value": str(len(missing_assets)),
+                    "threshold": "all referenced local assets exist beside the output artifact"
+                })
+            else:
+                passed += 1
+                evidence_records.append({
+                    "pillar": "Visual Anti-Slop",
+                    "check_name": "Asset Media Integrity",
+                    "status": "PASS",
+                    "evidence": f"Verified {len(relative_assets)} referenced local asset file(s) on disk",
+                    "measured_value": str(len(relative_assets)),
+                    "threshold": "all referenced local assets exist beside the output artifact"
+                })
 
         # 11. 2px Rounding Error / Off-Grid Spacing Check (Skillry Polish Invariant)
         # Scan inline styles and custom classes for odd pixel padding/margin (13px, 15px, 17px, 19px, 21px, 23px)
