@@ -406,8 +406,10 @@ class EvaluationReportContract:
             errors.append("runtime_mode must be a non-empty string")
         if self.overflow_status == "PASS" and self.overflow_0px_pass is not True:
             errors.append("overflow_status=PASS requires overflow_0px_pass=True")
-        if self.overflow_status != "PASS" and self.overflow_0px_pass is True:
-            errors.append("overflow_0px_pass=True requires overflow_status=PASS")
+        if self.overflow_status == "FAIL" and self.overflow_0px_pass is True:
+            errors.append("overflow_0px_pass=True contradicts overflow_status=FAIL")
+        # NOT_EVALUATED is authoritative for new consumers. Preserve the legacy
+        # boolean during deserialization instead of silently upgrading it to PASS.
         if self.hard_quality_pass and any(
             status == "FAIL"
             for status in (self.wcag_contrast_status, self.overflow_status, self.screenshot_status)
