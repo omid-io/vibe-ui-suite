@@ -655,25 +655,44 @@ class InterfaceGenerator:
             return self.generate_react_tsx(decision, **kwargs)
         return self.generate_html(decision, **kwargs)
 
-    def generate_react_tsx(self, decision: Dict[str, Any], component_name: str = "VibeMasterpiece") -> str:
+    def generate_react_tsx(self, decision: Any, component_name: str = "VibeMasterpiece") -> str:
         """
         Generates a modular, living React 19 / TypeScript component (.tsx)
         featuring render-affecting style compiler, living micro-states (useState),
         domain-calibrated signature widgets, and complete WCAG AAA / BiDi isolation.
         """
-        domain_id = decision.get("genome", {}).get("domain") or decision.get("intent", {}).get("product_domain", "general_modern_saas")
-        blueprint = decision.get("intent", {}).get("blueprint") or self.blueprints.get("domains", {}).get(domain_id, {})
+        if hasattr(decision, "to_dict"):
+            decision_dict = decision.to_dict()
+        elif isinstance(decision, dict):
+            decision_dict = decision
+        else:
+            decision_dict = {}
+
+        domain_id = (
+            decision_dict.get("domain")
+            or decision_dict.get("genome", {}).get("domain")
+            or decision_dict.get("intent", {}).get("product_domain", "general_modern_saas")
+        )
+        blueprint = decision_dict.get("intent", {}).get("blueprint") or self.blueprints.get("domains", {}).get(domain_id, {})
         sig_widget = blueprint.get("signature_widget", {})
-        selected_style = decision.get("selected_style", "clean_stripe")
-        theme_strategy = decision.get("intent", {}).get("theme_strategy", "light")
-        intent_obj = decision.get("intent", {})
+        selected_style = (
+            decision_dict.get("style")
+            or decision_dict.get("selected_style")
+            or decision_dict.get("genome", {}).get("style", "clean_stripe")
+        )
+        theme_strategy = decision_dict.get("intent", {}).get("theme_strategy", "light")
+        intent_obj = decision_dict.get("intent", {})
         intent_lang = intent_obj.get("language", "en")
         has_fa = (
             intent_lang == "fa"
             or (isinstance(intent_lang, (list, tuple)) and "fa" in intent_lang)
             or ("fa" in intent_obj.get("languages", []))
         )
-        is_rtl = decision.get("genome", {}).get("platform", {}).get("rtl_support", False) or has_fa
+        is_rtl = (
+            decision_dict.get("genome", {}).get("platform", {}).get("rtl_support", False)
+            or decision_dict.get("is_rtl", False)
+            or has_fa
+        )
         dir_attr = 'dir="rtl"' if is_rtl else 'dir="ltr"'
 
         style_cfg = self._compile_style(selected_style, theme_strategy)
@@ -842,14 +861,89 @@ export default {component_name};
 '''
         return tsx
 
-    def generate_html(self, decision: Dict[str, Any], prompt_title: str = "Vibe UI Component") -> str:
-        """Generates a complete, self-contained, accessible HTML page from DesignDecisionContract."""
-        genome = decision.get("genome", {})
-        color = genome.get("color", {})
-        typography = genome.get("typography", {})
-        radius = genome.get("radius", {})
-        depth = genome.get("depth", "diffused_soft")
-        intent_obj = decision.get("intent", {})
+    def _build_google_fonts_url(self, typography: Dict[str, Any]) -> str:
+        """Assembles a clean Google Fonts URL for display, body, mono, and Vazirmatn."""
+        disp = typography.get("display_family") or typography.get("heading_font") or typography.get("heading", "Inter")
+        body = typography.get("body_family") or typography.get("body_font") or typography.get("body", "Inter")
+        mono = typography.get("mono_family") or typography.get("mono_font") or typography.get("mono", "JetBrains Mono")
+
+        font_specs = {
+            "Inter": "family=Inter:wght@400;500;600;700;800",
+            "Newsreader": "family=Newsreader:ital,opsz,wght@0,6..72,400..700;1,6..72,400..700",
+            "Space Grotesk": "family=Space+Grotesk:wght@400;500;600;700",
+            "Space Mono": "family=Space+Mono:wght@400;700",
+            "IBM Plex Mono": "family=IBM+Plex+Mono:wght@400;500;600",
+            "JetBrains Mono": "family=JetBrains+Mono:wght@400;500",
+            "Plus Jakarta Sans": "family=Plus+Jakarta+Sans:wght@400;500;600;700;800",
+            "Playfair Display": "family=Playfair+Display:ital,wght@0,600;1,400",
+            "Vazirmatn": "family=Vazirmatn:wght@400;500;600;700",
+            "Cabinet Grotesk": "family=Plus+Jakarta+Sans:wght@400;600;700;800",
+            "Satoshi": "family=Inter:wght@400;500;600;700",
+            "Courier Prime": "family=JetBrains+Mono:wght@400;500"
+        }
+
+        families = []
+        for f in [disp, body, mono, "Vazirmatn"]:
+            spec = font_specs.get(f)
+            if not spec and f and str(f).strip():
+                clean_f = str(f).strip().replace(" ", "+")
+                spec = f"family={clean_f}:wght@400;500;600;700"
+            if spec and spec not in families:
+                families.append(spec)
+
+        if not families:
+            families = ["family=Inter:wght@400;500;600;700", "family=Vazirmatn:wght@400;500;600;700"]
+
+        return f"https://fonts.googleapis.com/css2?{'&'.join(families)}&display=swap"
+
+    def generate_html(self, decision: Any, prompt_title: str = "Vibe UI Component") -> str:
+        """Generates a complete, self-contained, accessible HTML page from DesignDecisionContract or DesignGenomeContract."""
+        if hasattr(decision, "to_dict"):
+            decision_dict = decision.to_dict()
+        elif isinstance(decision, dict):
+            decision_dict = decision
+        else:
+            decision_dict = {}
+
+        genome = decision_dict.get("genome", {}) or {}
+        tokens = decision_dict.get("tokens", {}) or genome.get("tokens", {}) or genome.get("color", {})
+        typography = decision_dict.get("typography", {}) or genome.get("typography", {})
+        geometry = decision_dict.get("geometry", {}) or genome.get("geometry", {}) or genome.get("radius", {})
+        density = decision_dict.get("density", genome.get("density", "balanced"))
+        surfaces = decision_dict.get("surfaces", {})
+        depth = surfaces.get("depth") if isinstance(surfaces, dict) else genome.get("depth", "diffused_soft")
+        domain_id = (
+            decision_dict.get("domain")
+            or genome.get("domain")
+            or decision_dict.get("intent", {}).get("product_domain", "")
+        )
+        selected_style = (
+            decision_dict.get("style")
+            or decision_dict.get("selected_style")
+            or genome.get("style", "clean_stripe")
+        )
+
+        genome["tokens"] = tokens
+        genome["color"] = {
+            "canvas": tokens.get("canvas", "oklch(0.99 0.005 0.0)"),
+            "surface": tokens.get("surface", "oklch(0.96 0.007 0.0)"),
+            "accent": tokens.get("accent", "oklch(0.58 0.080 0.0)"),
+            "border": tokens.get("border", "oklch(0.90 0.006 0.0)"),
+            "text": tokens.get("text_primary") or tokens.get("text", "oklch(0.12 0.020 0.0)"),
+            "muted_text": tokens.get("text_secondary") or tokens.get("text_muted", "oklch(0.40 0.016 0.0)")
+        }
+        genome["typography"] = typography
+        genome["geometry"] = geometry
+        genome["radius"] = {
+            "base": geometry.get("border_radius") or geometry.get("radius_base", "8px"),
+            "container": geometry.get("container", "12px"),
+            "button": geometry.get("button", "8px")
+        }
+        genome["depth"] = depth
+        genome["domain"] = domain_id
+        genome["style"] = selected_style
+
+        intent_obj = decision_dict.get("intent", {})
         intent_lang = intent_obj.get("language", "en")
         has_fa_lang = (
             intent_lang == "fa"
@@ -858,6 +952,7 @@ export default {component_name};
         )
         is_rtl = (
             genome.get("platform", {}).get("rtl_support", False)
+            or decision_dict.get("is_rtl", False)
             or has_fa_lang
             or intent_obj.get("language_direction") == "rtl"
             or intent_lang in ["fa", "ar", "he", "ur"]
@@ -865,7 +960,7 @@ export default {component_name};
         dir_attr = 'dir="rtl" lang="fa"' if is_rtl else 'dir="ltr" lang="en"'
 
         css_vars = self.genome_engine.to_css_variables(genome)
-        font_url = "https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Playfair+Display:ital,wght@0,600;1,400&family=Vazirmatn:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap"
+        font_url = self._build_google_fonts_url(typography)
 
         # Stylistic shadows
         if depth == "hard_drop":

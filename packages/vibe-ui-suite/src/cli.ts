@@ -592,9 +592,9 @@ function handleInspire(query?: string) {
 
 function findVibeCliScript(): string | null {
   const candidates = [
+    path.resolve(__dirname, '..', 'vibe_cli.py'),
+    path.resolve(__dirname, 'vibe_cli.py'),
     path.resolve(__dirname, '../../../vibe_cli.py'),
-    path.resolve(__dirname, '../../vibe_cli.py'),
-    path.resolve(__dirname, '../vibe_cli.py'),
     path.resolve(process.cwd(), 'vibe_cli.py'),
   ];
   for (const c of candidates) {

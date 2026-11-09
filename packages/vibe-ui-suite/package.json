@@ -37,7 +37,11 @@
     "dist",
     "skills",
     "agents",
-    "README.md"
+    "README.md",
+    "vibe_core",
+    "schemas",
+    "data",
+    "vibe_cli.py"
   ],
   "scripts": {
     "build": "node build.js"

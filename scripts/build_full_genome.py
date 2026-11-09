@@ -81,6 +81,66 @@ def make_palette_spec(canvas_l, canvas_c, canvas_h, text_l, text_c, text_h, acce
         "status_tokens": STATUS_DARK if is_dark else STATUS_LIGHT
     }
 
+def _generate_oklch_palette(domain: str, pid: int, mood_name: str, h: float, c: float) -> Dict[str, Any]:
+    """
+    Generate calibrated OKLCH palette with true WCAG relative luminance calculation:
+      - Light mode: canvas L >= 0.96 (0.98), text_primary L <= 0.20 (0.14) -> guaranteed contrast ratio > 10:1!
+      - Dark mode: canvas L <= 0.16 (0.12), text_primary L >= 0.94 (0.96) -> guaranteed contrast ratio > 10:1!
+    Computes true contrast ratio between foreground (text_primary) and background (canvas).
+    Stores true light_contrast and dark_contrast with zero clamping.
+    """
+    canvas_l_light = 0.98
+    canvas_c_light = 0.006
+    text_l_light = 0.14
+    text_c_light = 0.02
+    accent_l_light = 0.58
+
+    canvas_l_dark = 0.12
+    canvas_c_dark = 0.015
+    text_l_dark = 0.96
+    text_c_dark = 0.01
+    accent_l_dark = 0.72
+
+    light_spec = make_palette_spec(
+        canvas_l_light, canvas_c_light, h,
+        text_l_light, text_c_light, h,
+        accent_l_light, c, h,
+        is_dark=False
+    )
+    dark_spec = make_palette_spec(
+        canvas_l_dark, canvas_c_dark, h,
+        text_l_dark, text_c_dark, h,
+        accent_l_dark, c * 1.05, h,
+        is_dark=True
+    )
+
+    # Compute true WCAG relative luminance and contrast ratio
+    lum_light_canvas = calc_oklch_luminance(canvas_l_light, canvas_c_light, h)
+    lum_light_text = calc_oklch_luminance(text_l_light, text_c_light, h)
+    c_light = contrast_ratio(lum_light_canvas, lum_light_text)
+
+    lum_dark_canvas = calc_oklch_luminance(canvas_l_dark, canvas_c_dark, h)
+    lum_dark_text = calc_oklch_luminance(text_l_dark, text_c_dark, h)
+    c_dark = contrast_ratio(lum_dark_canvas, lum_dark_text)
+
+    assert c_light >= 4.5, f"Natural light contrast {c_light} must be >= 4.5"
+    assert c_dark >= 4.5, f"Natural dark contrast {c_dark} must be >= 4.5"
+
+    return {
+        "id": f"pal_{domain}_{pid}",
+        "name": f"{domain.replace('_', ' ').title()} - {mood_name}",
+        "best_for": [domain],
+        "mood": mood_name,
+        "canonical_mode": "light",
+        "light": light_spec,
+        "dark": dark_spec,
+        "dark_oled": dark_spec,
+        "contrast_metrics": {
+            "light_contrast": c_light,
+            "dark_contrast": c_dark
+        }
+    }
+
 # 88 Core Styles across domains and design archetypes
 STYLE_DEFINITIONS = [
     ("minimalist_saas", "Minimalist High-Performance SaaS", ["saas_b2b_enterprise", "devops_cloud_terminal"], ["fast", "engineered", "linear"], "micro_shadow", "compact", "flat", ("Inter", "Inter", "JetBrains Mono", 1.25)),
@@ -115,12 +175,14 @@ for i in range(88):
     hue_shift = (i * 17.5) % 360
     chroma = 0.08 if "luxury" in style_id or "minimal" in style_id else 0.16
     
-    light_spec = make_palette_spec(0.99, 0.005, hue_shift, 0.12, 0.02, hue_shift, 0.58, chroma, hue_shift, is_dark=False)
+    light_spec = make_palette_spec(0.98, 0.005, hue_shift, 0.14, 0.02, hue_shift, 0.58, chroma, hue_shift, is_dark=False)
     dark_spec = make_palette_spec(0.12, 0.015, hue_shift, 0.96, 0.01, hue_shift, 0.72, chroma * 1.1, hue_shift, is_dark=True)
     
     style_entry = {
+        "id": style_id,
         "style_id": style_id,
         "name": style_name,
+        "family": domains_base[0] if domains_base else "general",
         "domains": domains_base,
         "emotional_tone": tones_base,
         "geometry": {
@@ -131,10 +193,16 @@ for i in range(88):
         },
         "typography": {
             "heading_font": typo[0],
+            "display_font": typo[0],
+            "heading": typo[0],
+            "display": typo[0],
             "body_font": typo[1],
+            "body": typo[1],
             "mono_font": typo[2],
+            "mono": typo[2],
             "scale_ratio": typo[3]
         },
+        "tokens": light_spec,
         "palette": light_spec,
         "secondary_oled": dark_spec,
         "spacing_density": density,
@@ -153,7 +221,7 @@ for i in range(88):
     }
     ALL_STYLES.append(style_entry)
 
-# Generate 164 domain-calibrated color palettes
+# Generate 168 domain-calibrated color palettes
 ALL_PALETTES = []
 DOMAINS = [
     "fintech_banking", "crypto_trading_web3", "healthcare_hospital_medical", "beauty_clinical_wellness",
@@ -177,32 +245,23 @@ PALETTE_MOODS = [
 pid = 1
 for d in DOMAINS:
     for mood_name, h, c in PALETTE_MOODS:
-        light_spec = make_palette_spec(0.99, 0.006, h, 0.12, 0.02, h, 0.58, c, h, is_dark=False)
-        dark_spec = make_palette_spec(0.11, 0.015, h, 0.95, 0.01, h, 0.72, c * 1.05, h, is_dark=True)
-        
-        # Calculate luminance contrast
-        lum_light_canvas = calc_oklch_luminance(0.99, 0.006, h)
-        lum_light_text = calc_oklch_luminance(0.12, 0.02, h)
-        c_light = contrast_ratio(lum_light_canvas, lum_light_text)
-        
-        lum_dark_canvas = calc_oklch_luminance(0.11, 0.015, h)
-        lum_dark_text = calc_oklch_luminance(0.95, 0.01, h)
-        c_dark = contrast_ratio(lum_dark_canvas, lum_dark_text)
-        
-        ALL_PALETTES.append({
-            "id": f"pal_{d}_{pid}",
-            "name": f"{d.replace('_', ' ').title()} - {mood_name}",
-            "best_for": [d],
-            "mood": mood_name,
-            "canonical_mode": "light",
-            "light": light_spec,
-            "dark_oled": dark_spec,
-            "contrast_metrics": {
-                "light_contrast": max(4.5, c_light),
-                "dark_contrast": max(4.5, c_dark)
-            }
-        })
+        palette_entry = _generate_oklch_palette(d, pid, mood_name, h, c)
+        ALL_PALETTES.append(palette_entry)
         pid += 1
+
+typography_definitions = [
+    {"name": "Inter & JetBrains Mono", "heading": "Inter", "display": "Inter", "body": "Inter", "mono": "JetBrains Mono"},
+    {"name": "Newsreader & Inter", "heading": "Newsreader", "display": "Newsreader", "body": "Inter", "mono": "IBM Plex Mono"},
+    {"name": "Space Grotesk & Space Mono", "heading": "Space Grotesk", "display": "Space Grotesk", "body": "Space Grotesk", "mono": "Space Mono"},
+    {"name": "Cabinet Grotesk & Satoshi", "heading": "Cabinet Grotesk", "display": "Cabinet Grotesk", "body": "Satoshi", "mono": "Courier Prime"}
+]
+
+archetypes_definitions = [
+    {"id": "asymmetric_split_editorial", "name": "Asymmetric Editorial Split"},
+    {"id": "high_density_operations_hud", "name": "High-Density Operations HUD"},
+    {"id": "canvas_workspace_split", "name": "Canvas & Artifact Workspace"},
+    {"id": "horizontal_timeline_flow", "name": "Horizontal Continuous Timeline"}
+]
 
 catalog_data = {
     "version": "6.6.0",
@@ -210,18 +269,10 @@ catalog_data = {
     "catalog_summary": f"Canonical Design Genome 2.0 with {len(ALL_STYLES)} styles and {len(ALL_PALETTES)} calibrated palettes.",
     "styles": ALL_STYLES,
     "palettes": ALL_PALETTES,
-    "typography_systems": [
-        {"name": "Inter & JetBrains Mono", "heading": "Inter", "body": "Inter", "mono": "JetBrains Mono"},
-        {"name": "Newsreader & Inter", "heading": "Newsreader", "body": "Inter", "mono": "IBM Plex Mono"},
-        {"name": "Space Grotesk & Space Mono", "heading": "Space Grotesk", "body": "Space Grotesk", "mono": "Space Mono"},
-        {"name": "Cabinet Grotesk & Satoshi", "heading": "Cabinet Grotesk", "body": "Satoshi", "mono": "Courier Prime"}
-    ],
-    "composition_archetypes": [
-        {"id": "asymmetric_split_editorial", "name": "Asymmetric Editorial Split"},
-        {"id": "high_density_operations_hud", "name": "High-Density Operations HUD"},
-        {"id": "canvas_workspace_split", "name": "Canvas & Artifact Workspace"},
-        {"id": "horizontal_timeline_flow", "name": "Horizontal Continuous Timeline"}
-    ]
+    "typography_systems": typography_definitions,
+    "typography": typography_definitions,
+    "composition_archetypes": archetypes_definitions,
+    "archetypes": archetypes_definitions
 }
 
 with open(OUTPUT_FILE, "w", encoding="utf-8") as f:

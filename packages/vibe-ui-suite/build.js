@@ -163,4 +163,52 @@ if (fs.existsSync(rootAgentsDir)) {
   console.log(`🤖 Synced ${fs.readdirSync(pkgAgentsDir).length} canonical agents into packages/vibe-ui-suite/agents`);
 }
 
+// Copy python execution engine into package root
+const rootVibeCore = path.resolve(__dirname, '../../vibe_core');
+const pkgVibeCore = path.join(__dirname, 'vibe_core');
+if (fs.existsSync(rootVibeCore)) {
+  if (fs.existsSync(pkgVibeCore)) {
+    fs.rmSync(pkgVibeCore, { recursive: true, force: true });
+  }
+  fs.cpSync(rootVibeCore, pkgVibeCore, { recursive: true });
+  console.log('🐍 Synced vibe_core into packages/vibe-ui-suite/vibe_core');
+}
+
+const rootSchemas = path.resolve(__dirname, '../../schemas');
+const pkgSchemas = path.join(__dirname, 'schemas');
+if (fs.existsSync(rootSchemas)) {
+  if (fs.existsSync(pkgSchemas)) {
+    fs.rmSync(pkgSchemas, { recursive: true, force: true });
+  }
+  fs.cpSync(rootSchemas, pkgSchemas, { recursive: true });
+  console.log('📐 Synced schemas into packages/vibe-ui-suite/schemas');
+}
+
+const rootDataCatalog = path.resolve(__dirname, '../../data/catalog');
+const pkgDataCatalog = path.join(__dirname, 'data', 'catalog');
+const rootDataTaxonomy = path.resolve(__dirname, '../../data/taxonomy.json');
+const pkgDataTaxonomy = path.join(__dirname, 'data', 'taxonomy.json');
+
+if (fs.existsSync(rootDataCatalog)) {
+  if (fs.existsSync(pkgDataCatalog)) {
+    fs.rmSync(pkgDataCatalog, { recursive: true, force: true });
+  }
+  fs.mkdirSync(path.dirname(pkgDataCatalog), { recursive: true });
+  fs.cpSync(rootDataCatalog, pkgDataCatalog, { recursive: true });
+  console.log('📊 Synced data/catalog into packages/vibe-ui-suite/data/catalog');
+}
+
+if (fs.existsSync(rootDataTaxonomy)) {
+  fs.mkdirSync(path.dirname(pkgDataTaxonomy), { recursive: true });
+  fs.copyFileSync(rootDataTaxonomy, pkgDataTaxonomy);
+  console.log('📑 Synced data/taxonomy.json into packages/vibe-ui-suite/data/taxonomy.json');
+}
+
+const rootVibeCli = path.resolve(__dirname, '../../vibe_cli.py');
+const pkgVibeCli = path.join(__dirname, 'vibe_cli.py');
+if (fs.existsSync(rootVibeCli)) {
+  fs.copyFileSync(rootVibeCli, pkgVibeCli);
+  console.log('🚀 Synced vibe_cli.py into packages/vibe-ui-suite/vibe_cli.py');
+}
+
 console.log('✅ vibe-ui-suite build complete: CLI, ESM, CJS, v4.css, skills, and .d.ts generated in dist/');

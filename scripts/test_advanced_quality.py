@@ -119,13 +119,14 @@ def run_suite():
         domain="food_restaurant_cafe",
         product_name="Narenj Garden Cafe",
         target_audience="Artisanal food lovers",
-        emotional_tone=["warm", "sensory", "welcoming"],
+        emotional_tone="warm, sensory, welcoming",
         primary_job_to_be_done="Reserve a fine dining table",
-        spatial_flow="sensory_culinary_stage",
+        spatial_flow=["hero", "culinary_gallery", "reservation_drawer"],
         language="fa",
         is_rtl=True
     )
-    assert_test(concept.validate(), "ConceptContract Validation")
+    valid, errors = concept.validate()
+    assert_test(valid, "ConceptContract Validation", "; ".join(errors))
     concept_json = concept.to_json()
     reloaded_concept = ConceptContract.from_json(concept_json)
     assert_test(reloaded_concept.product_name == concept.product_name, "ConceptContract Round-Trip Serialization")
@@ -134,12 +135,43 @@ def run_suite():
         selected_style="Nordic Warm Minimal",
         style_reasoning="Warm grounded tones complement organic culinary ingredients",
         composition_archetype="asymmetric_editorial_split",
-        typography_pair=("Cabinet Grotesk", "Satoshi"),
+        typography_pair={"display": "Cabinet Grotesk", "body": "Satoshi"},
         novelty_risk_assessment="LOW",
         banned_slop_tropes=["repetitive_bento_cards", "generic_purple_gradient"]
     )
-    assert_test(evidence.validate(), "TrendEvidence Validation")
+    valid_ev, errors_ev = evidence.validate()
+    assert_test(valid_ev, "TrendEvidence Validation", "; ".join(errors_ev))
     assert_test("repetitive_bento_cards" in evidence.banned_slop_tropes, "Anti-Bento Tropes Enforced in Evidence")
+
+    # Negative Tests: Verify that invalid contracts are rejected
+    invalid_concept = ConceptContract(
+        domain="",
+        product_name="",
+        target_audience="",
+        emotional_tone="",
+        primary_job_to_be_done="",
+        spatial_flow=[]
+    )
+    assert_test(not invalid_concept.validate()[0], "Negative Test: Invalid Concept Rejected")
+
+    invalid_evidence = TrendEvidence(
+        selected_style="",
+        style_reasoning="",
+        composition_archetype="",
+        typography_pair={},
+        novelty_risk_assessment="",
+        banned_slop_tropes="not_a_list"
+    )
+    assert_test(not invalid_evidence.validate()[0], "Negative Test: Invalid TrendEvidence Rejected")
+
+    invalid_genome = DesignGenomeContract(
+        tokens={},
+        geometry={},
+        density="ultra_dense",
+        surfaces="invalid_type",
+        motion_profile="invalid_type"
+    )
+    assert_test(not invalid_genome.validate()[0], "Negative Test: Invalid DesignGenome Rejected")
 
     # --------------------------------------------------------------------------
     # 4. Persian Intent Disambiguation & Domain Matching (BUG-006 Fix)
@@ -190,6 +222,11 @@ def run_suite():
     ]
     telemetry_clean = not any(dev_str in html_output for dev_str in dev_telemetry_strings)
     assert_test(telemetry_clean, "BUG-007 Fix: Zero Developer Telemetry Leakage in User-Facing DOM")
+
+    # Verify Design Genome 2.0 tokens present in generated UI
+    has_oklch_tokens = "oklch(" in html_output
+    has_canvas_token = "--canvas-bg" in html_output or "--surface-bg" in html_output or "--accent" in html_output
+    assert_test(has_oklch_tokens and has_canvas_token, "Design Genome 2.0 Tokens Verified in Generated UI", "OKLCH palette & CSS tokens active")
 
     # --------------------------------------------------------------------------
     # 6. Aesthetic Quality & Anti-Slop Audit

@@ -53,10 +53,15 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      - name: Set up Node.js 20.x
+      - name: Set up Node.js 22.x
         uses: actions/setup-node@v4
         with:
-          node-version: 20.x
+          node-version: 22.x
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
 
       - name: Install dependencies & build packages/vibe-ui-suite
         working-directory: packages/vibe-ui-suite
@@ -70,6 +75,13 @@ jobs:
           node dist/cli.js --help
           node dist/cli.js list
 
+      - name: Verify Standalone Swarm Execution Outside Repo Root
+        run: |
+          CLI_PATH="$(pwd)/packages/vibe-ui-suite/dist/cli.js"
+          TMP_DIR=$(mktemp -d)
+          cd "$TMP_DIR"
+          node "$CLI_PATH" swarm "Minimalist Tech Blog" --json
+
   nextjs-starter-build:
     name: Next.js 15 & TypeScript 5 Build Audit
     runs-on: ubuntu-latest
@@ -78,10 +90,10 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      - name: Set up Node.js 20.x
+      - name: Set up Node.js 22.x
         uses: actions/setup-node@v4
         with:
-          node-version: 20.x
+          node-version: 22.x
 
       - name: Install dependencies
         working-directory: examples/nextjs-starter

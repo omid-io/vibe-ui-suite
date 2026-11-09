@@ -40,6 +40,18 @@ def test_concept_contract():
     assert c2.domain == c.domain
     assert c2.product_name == c.product_name
     assert c2.spatial_flow == c.spatial_flow
+    # Test emotional_tone as List[str]
+    c_list = ConceptContract(
+        domain="food_restaurant_cafe",
+        product_name="L'Artisan Bistro",
+        target_audience="Fine dining patrons",
+        emotional_tone=["warm", "intimate", "refined"],
+        primary_job_to_be_done="Reserve a dining table",
+        spatial_flow=["hero", "menu"]
+    )
+    valid_list, errs_list = c_list.validate()
+    assert valid_list, f"ConceptContract with list emotional_tone failed: {errs_list}"
+    assert c_list.emotional_tones == ["warm", "intimate", "refined"]
     print("[PASS] ConceptContract validation & serialization")
 
 
@@ -61,6 +73,29 @@ def test_trend_evidence():
     t2 = TrendEvidence.from_dict(d)
     assert t2.selected_style == "organic_nordic"
     assert len(t2.banned_slop_tropes) == 3
+
+    # Test tuple typography_pair auto-conversion
+    t_tuple = TrendEvidence(
+        selected_style="minimalist_saas",
+        style_reasoning="Sharp clarity",
+        composition_archetype="asymmetric_split_editorial",
+        typography_pair=("Inter", "JetBrains Mono"),
+        novelty_risk_assessment="Minimal",
+        banned_slop_tropes=[]
+    )
+    assert t_tuple.typography_pair == {"display": "Inter", "body": "JetBrains Mono"}
+    valid_t, errs_t = t_tuple.validate()
+    assert valid_t, f"TrendEvidence with tuple typography failed: {errs_t}"
+
+    t_tuple_dict = TrendEvidence.from_dict({
+        "selected_style": "minimalist_saas",
+        "style_reasoning": "Sharp clarity",
+        "composition_archetype": "asymmetric_split_editorial",
+        "typography_pair": ("Space Grotesk", "Space Mono"),
+        "novelty_risk_assessment": "Minimal",
+        "banned_slop_tropes": []
+    })
+    assert t_tuple_dict.typography_pair == {"display": "Space Grotesk", "body": "Space Mono"}
     print("[PASS] TrendEvidence validation & serialization")
 
 
@@ -137,6 +172,21 @@ def test_evaluation_report_contract():
     r2 = EvaluationReportContract.from_dict(r.to_dict())
     assert r2.hard_quality_pass is True
     assert r2.wcag_contrast_score == 17.12
+
+    # Test strict boolean parsing and fail-closed defaults
+    r_fail = EvaluationReportContract.from_dict({
+        "hard_quality_pass": "false",
+        "overflow_0px_pass": "false",
+        "wcag_contrast_score": 3.2
+    })
+    assert r_fail.hard_quality_pass is False, "bool('false') must not become True"
+    assert r_fail.overflow_0px_pass is False, "bool('false') must not become True"
+    assert r_fail.acceptance_status == "PENDING", "fail-closed default must be PENDING"
+
+    # Test empty dict fail-closed
+    r_empty = EvaluationReportContract.from_dict({})
+    assert r_empty.hard_quality_pass is False
+    assert r_empty.acceptance_status == "PENDING"
     print("[PASS] EvaluationReportContract validation & serialization")
 
 
