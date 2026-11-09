@@ -5,6 +5,16 @@ All notable changes to the **Vibe UI Skills** repository are documented in this 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [Unreleased]
+
+### Runtime Reliability & Evidence Provenance
+- Skip repeated code-only healing when static, WCAG, and critic gates pass but browser evidence is unavailable; keep acceptance explicitly pending browser verification.
+- Strengthen real-estate domain matching for luxury showcase prompts and add regression coverage.
+- Clarify that Trend Hunter ranks local Design Genome and curated benchmark metadata; stored star labels are not live GitHub statistics.
+
+---
+
+
 ## [6.5.1] - 2026-11-04
 
 ### Encapsulated Background Swarm Architecture & Multi-Harness Adapters

@@ -10,7 +10,9 @@ if str(ROOT_DIR) not in sys.path:
     sys.path.insert(0, str(ROOT_DIR))
 
 from schemas.agent_contracts import EvaluationReportContract, TrendEvidence
+from vibe_core.director import DesignDirector, normalize_text
 from vibe_core.swarm import (
+    _is_runtime_only_blocker,
     ForemanSwarmOrchestrator,
     _extract_overflow_status,
     _extract_screenshot_status,
@@ -65,6 +67,34 @@ def run():
     assert_true(
         [_severity_penalty(v) for v in ("critical", "high", "medium", "low")] == [10.0, 7.0, 4.0, 1.0],
         "Critic severity vocabulary maps to distinct penalty weights",
+    )
+
+    unavailable_browser = {
+        "success": False,
+        "overall_status": "NOT_EVALUATED",
+        "overflow_status": "NOT_EVALUATED",
+        "screenshot_status": "NOT_EVALUATED",
+    }
+    assert_true(
+        _is_runtime_only_blocker(0, "PASS", "ACCEPTED", True, unavailable_browser),
+        "Unavailable browser runtime skips image-agnostic healing when all code gates pass",
+    )
+    assert_true(
+        not _is_runtime_only_blocker(1, "PASS", "ACCEPTED", True, unavailable_browser),
+        "Static code failures still permit a healing attempt when browser runtime is unavailable",
+    )
+    assert_true(
+        not _is_runtime_only_blocker(0, "PASS", "REJECTED", True, unavailable_browser),
+        "Critic rejection still permits a healing attempt when browser runtime is unavailable",
+    )
+
+    director = DesignDirector()
+    domain, confidence, reasons = director._match_domain(
+        normalize_text("modern dark luxury real estate showcase")
+    )
+    assert_true(
+        domain.get("id") == "real_estate_architecture" and confidence >= 0.80,
+        f"Luxury real-estate showcase prompt gets high-confidence domain match ({confidence:.2f}; {reasons})",
     )
 
     default_report = EvaluationReportContract()

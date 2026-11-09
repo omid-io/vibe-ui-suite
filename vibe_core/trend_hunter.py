@@ -128,7 +128,7 @@ DEFAULT_SPATIAL_BLUEPRINT: Dict[str, Any] = {
 
 
 class TrendHunter:
-    """Discovers and structures top-trending UI patterns and design evidence."""
+    """Ranks local design evidence and curated benchmark metadata; performs no live trend scraping."""
 
     def __init__(self):
         self.galaxy = GalaxyEngine()
@@ -136,8 +136,8 @@ class TrendHunter:
 
     def search_benchmarks(self, query: str, limit: int = 4) -> List[Dict[str, Any]]:
         """
-        Retrieves top-starred design benchmarks using local BM25 ranking.
-        Never stalls or fails on network timeouts or API rate-limits.
+        Ranks the local Design Genome and curated benchmark metadata with BM25.
+        Repository star labels are cached metadata; this method does not call GitHub.
         """
         # First query BM25 engine for matching benchmarks
         engine_results = self.engine.search_benchmarks(query, limit=limit)
@@ -150,7 +150,7 @@ class TrendHunter:
         return matched[:limit] if matched else CURATED_ELITE_REPOS[:limit]
 
     def search_github_top_starred(self, query: str, limit: int = 4) -> List[Dict[str, Any]]:
-        """Backward-compatible alias for search_benchmarks."""
+        """Deprecated compatibility alias; searches local metadata and never calls GitHub."""
         return self.search_benchmarks(query, limit=limit)
 
     def search_galaxy_top_liked(self, category_or_query: str, limit: int = 4) -> List[Dict[str, Any]]:
@@ -231,6 +231,8 @@ class TrendHunter:
             "style_reasoning": evidence["style_reasoning"],
             "evidence_confidence": evidence["evidence_confidence"],
             "recommended_palette": evidence["recommended_palette"],
+            "benchmark_references": evidence["benchmarks"],
+            # Deprecated compatibility key; these are curated local references, not live GitHub results.
             "top_starred_benchmarks": evidence["benchmarks"],
             "curated_components": evidence["curated_micro_interactions"],
             "recommended_spatial_rules": evidence["spatial_rules"]
