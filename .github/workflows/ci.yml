@@ -91,8 +91,14 @@ jobs:
           npm install "$TARBALL"
           ./node_modules/.bin/vibe-ui-suite --help
           ./node_modules/.bin/vibe-ui-suite list
-          ./node_modules/.bin/vibe-ui-suite swarm "Minimalist Tech Blog" --json > swarm-result.json
+          ./node_modules/.bin/vibe-ui-suite swarm "Minimalist Tech Blog" --output swarm_output.html --json > swarm-result.json
           test -s ./swarm_output.html
+          BEFORE_SHA="$(sha256sum swarm_output.html | cut -d ' ' -f 1)"
+          mkdir -p .vibe
+          printf '{}' > .vibe/browser-evidence.json
+          ./node_modules/.bin/vibe-ui-suite swarm "Minimalist Tech Blog" --output swarm_output.html --verify-existing --browser-evidence .vibe/browser-evidence.json --json > verify-existing-result.json
+          AFTER_SHA="$(sha256sum swarm_output.html | cut -d ' ' -f 1)"
+          test "$BEFORE_SHA" = "$AFTER_SHA"
           python - <<'PY'
           import json
           from pathlib import Path
@@ -107,7 +113,11 @@ jobs:
           request = result.get("browser_evidence_request", {})
           assert request.get("schema_version") == "vibe.browser-evidence/v1"
           assert [vp["width"] for vp in request.get("required_viewports", [])] == [390, 768, 1440]
-          print("Verified packed npm install, external consumer CWD, and harness-native browser request.")
+          final = json.loads(Path("verify-existing-result.json").read_text(encoding="utf-8"))
+          assert final.get("verify_existing") is True, "Verify-existing mode was not used"
+          assert final.get("status") == "ACCEPTABLE_WITH_NOTES", "Malformed browser evidence must not pass"
+          assert final.get("screenshot_audit", {}).get("overall_status") == "NOT_EVALUATED"
+          print("Verified packed npm install, browser request, stale-report fail-closed behavior, and no-regeneration SHA stability.")
           PY
 
   nextjs-starter-build:

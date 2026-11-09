@@ -417,7 +417,7 @@ python evals/run_evals.py
 python evals/run_evals.py --json
 
 # 3. Run the swarm; it emits a browser request and stays unaccepted until the active harness supplies matching evidence.
-npx vibe-ui-suite swarm "Build a polished product interface" --json
+npx vibe-ui-suite swarm "Build a polished product interface" --output swarm_output.html --json
 
 # 4. Validate the final browser report against the exact artifact
 npx vibe-ui-suite browser-evidence validate .vibe/browser-evidence.json --artifact swarm_output.html

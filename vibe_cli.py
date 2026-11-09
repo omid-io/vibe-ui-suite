@@ -314,7 +314,8 @@ def cmd_swarm(args):
         style_override=args.style,
         output_format=getattr(args, "format", "html") or "html",
         quiet=is_json,
-        browser_evidence_path=getattr(args, "browser_evidence", None)
+        browser_evidence_path=getattr(args, "browser_evidence", None),
+        verify_existing=bool(getattr(args, "verify_existing", False))
     )
     if is_json:
         print(json.dumps(result, indent=2, ensure_ascii=False))
@@ -342,6 +343,7 @@ def main():
     p_swarm.add_argument("--format", choices=["html", "tsx"], default="html", help="Output format: html or tsx")
     p_swarm.add_argument("--json", action="store_true", help="Output execution results strictly as JSON")
     p_swarm.add_argument("--browser-evidence", help="Path to a harness-native browser evidence JSON report")
+    p_swarm.add_argument("--verify-existing", action="store_true", help="Audit an existing --output artifact without regenerating it")
 
     # run (alias for swarm)
     p_run = subparsers.add_parser("run", help="Alias for swarm command")
@@ -351,6 +353,7 @@ def main():
     p_run.add_argument("--format", choices=["html", "tsx"], default="html", help="Output format: html or tsx")
     p_run.add_argument("--json", action="store_true", help="Output execution results strictly as JSON")
     p_run.add_argument("--browser-evidence", help="Path to a harness-native browser evidence JSON report")
+    p_run.add_argument("--verify-existing", action="store_true", help="Audit an existing --output artifact without regenerating it")
 
     # search
     p_search = subparsers.add_parser("search", help="Search Knowledge Base (<10ms)")

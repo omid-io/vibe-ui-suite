@@ -15,11 +15,11 @@ The same integration applies whether a host exposes a graphical browser, a remot
 3. Render the final artifact in its real host environment. For a framework component, use the project's normal runtime rather than a synthetic package-owned browser harness.
 4. Inspect the complete page at mobile (390px), tablet (768px), and desktop (1440px). Measure horizontal overflow and visible geometry; check broken images and page/console errors; test real controls, keyboard traversal, menus, forms, dialogs, Escape dismissal and reduced-motion behavior where applicable.
 5. Ask a vision-capable reviewer to inspect all supplied screenshots for hierarchy, spacing, typography, clipping, image quality, responsive composition and domain fit.
-6. Save a `vibe.browser-evidence/v1` JSON report at `.vibe/browser-evidence.json`. The report must identify the final artifact by SHA-256.
+6. Save a `vibe.browser-evidence/v1` JSON report at `.vibe/browser-evidence.json`. The report must identify the final artifact by SHA-256. For React/TSX output, pass the same `--format tsx` option on the verify-existing invocation.
 7. Validate the report before claiming acceptance:
 
 ```bash
-npx vibe-ui-suite browser-evidence validate .vibe/browser-evidence.json --artifact swarm_output.html
+npx vibe-ui-suite swarm "Build a polished product interface" --output swarm_output.html --verify-existing --browser-evidence .vibe/browser-evidence.json --json
 ```
 
 Any edit after browser inspection changes the artifact hash and invalidates the prior report. Regenerate evidence after the last source change.

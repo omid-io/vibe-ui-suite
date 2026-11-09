@@ -142,9 +142,10 @@ class ForemanSwarmOrchestrator:
         max_remediation_loops: int = 3,
         quiet: bool = False,
         browser_evidence_path: Optional[str] = None,
+        verify_existing: bool = False,
     ) -> Dict[str, Any]:
         """
-        Executes the full 5-station pipeline from raw user prompt to verified screenshots.
+        Executes the design pipeline and optionally verifies an existing artifact using harness-owned browser evidence.
         Enforces formal contract generation, validation, and delivery across all stations.
         """
         logs = []
@@ -284,21 +285,26 @@ class ForemanSwarmOrchestrator:
         # -------------------------------------------------------------
         # Station 4: Master Builder (UIArtifactContract)
         # -------------------------------------------------------------
-        log("STATION 4 / Master Builder", f"Compiling single-author {output_format.upper()} code artifact...")
         out_path = Path(target_output).resolve() if target_output else (Path.cwd() / f"swarm_output.{output_format}").resolve()
         out_path.parent.mkdir(parents=True, exist_ok=True)
 
-        if output_format == "tsx":
-            code = self.generator.generate_react_tsx(design_genome)
+        if verify_existing:
+            if not target_output or not out_path.is_file():
+                raise FileNotFoundError("--verify-existing requires an existing --output artifact")
+            code = out_path.read_text(encoding="utf-8")
+            log("STATION 4 / Master Builder", f"Reusing existing {output_format.upper()} artifact without regeneration: {out_path.name}")
         else:
-            code = self.generator.generate_html(design_genome, prompt_title=prompt)
+            log("STATION 4 / Master Builder", f"Compiling single-author {output_format.upper()} code artifact...")
+            if output_format == "tsx":
+                code = self.generator.generate_react_tsx(design_genome)
+            else:
+                code = self.generator.generate_html(design_genome, prompt_title=prompt)
+            with open(out_path, "w", encoding="utf-8") as f:
+                f.write(code)
 
         asset_delivery = self._provision_consumer_assets(code, out_path)
         if asset_delivery["missing"]:
             log("STATION 4 / Master Builder", f"[WARN] {len(asset_delivery['missing'])} referenced curated asset(s) could not be provisioned")
-
-        with open(out_path, "w", encoding="utf-8") as f:
-            f.write(code)
 
         ui_artifact = UIArtifactContract(
             code_html_or_tsx=code,
@@ -511,6 +517,7 @@ class ForemanSwarmOrchestrator:
             "screenshots": screenshot_results,
             "screenshot_audit": screenshot_report,
             "browser_evidence_request": browser_request,
+            "verify_existing": verify_existing,
             "browser_evidence_path": (str((self.workspace_root / browser_evidence_path).resolve()) if browser_evidence_path and not Path(browser_evidence_path).is_absolute() else str(Path(browser_evidence_path).resolve())) if browser_evidence_path else str(self.workspace_root / ".vibe" / "browser-evidence.json"),
             "asset_delivery": asset_delivery,
             "iterations_count": iteration,

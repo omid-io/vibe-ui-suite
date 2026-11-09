@@ -375,7 +375,7 @@ python evals/run_evals.py
 python evals/run_evals.py --json
 
 # ۳. آزمون زنده در مرورگر واقعی با پلی رایت
-`vibe-ui-suite swarm` و سپس `vibe-ui-suite browser-evidence validate <report.json> --artifact <file>`
+`vibe-ui-suite swarm`، سپس بررسی رابط با مرورگر هارنس، و در پایان اجرای دوبارهٔ همان دستور با `--verify-existing --browser-evidence .vibe/browser-evidence.json` و همان مسیر `--output`
 ```
 
 ### تفاوت آزمون های قطعی و تحلیلی:

@@ -46,7 +46,7 @@ commandExecutionPolicy: auto
   - If the harness exposes no browser, complete static review, emit the browser request manifest, and mark runtime/visual gates NOT_EVALUATED. Never fabricate screenshots or PASS states.
   - Capture mobile (390px), tablet (768px), and desktop (1440px) screenshots; inspect them with a vision-capable model; test controls, keyboard access, runtime errors, broken images, and horizontal overflow.
   - After the final source edit, regenerate browser evidence. It must match the final artifact SHA-256.
-  - Validate reports with `vibe-ui-suite browser-evidence validate <report.json> --artifact <output.html>` before claiming runtime acceptance.
+  - After the harness captures screenshots and writes `.vibe/browser-evidence.json`, rerun the swarm with `--verify-existing --browser-evidence .vibe/browser-evidence.json` and the same `--output` path. This confirms the exact existing artifact without regenerating it.
 - **Silent Table-Stakes (Internal Worker Delegation):** Low-level hygiene specifications (OKLCH color math, WCAG AAA calculations, zero raw emojis -> inline SVGs, `<bdi>` bidirectional text isolation) are **strictly internal worker baselines** delegated to execution modules. Deliverables must highlight architectural layout transformations, interactive components, and visual before/after screenshot proof.
 
 ---
