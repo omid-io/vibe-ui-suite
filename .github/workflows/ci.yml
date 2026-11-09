@@ -36,6 +36,40 @@ jobs:
       - name: Run Vibe UI Automated Verification (Machine-Readable JSON Mode)
         run: python evals/run_evals.py --json
 
+      - name: Run BM25 & Design Intelligence Engine Self-Tests
+        run: python vibe_core/search_engine.py
+
+      - name: Run Inter-Agent Swarm Contracts Verification
+        run: python scripts/test_agent_contracts.py
+
+      - name: Run Advanced Quality, E2E Smoke & Anti-Slop Test Suite
+        run: python scripts/test_advanced_quality.py
+
+  vibe-ui-package-audit:
+    name: NPM Package Distribution & CLI Verification
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js 20.x
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20.x
+
+      - name: Install dependencies & build packages/vibe-ui-suite
+        working-directory: packages/vibe-ui-suite
+        run: |
+          npm install
+          npm run build
+
+      - name: Verify CLI Execution & Help
+        working-directory: packages/vibe-ui-suite
+        run: |
+          node dist/cli.js --help
+          node dist/cli.js list
+
   nextjs-starter-build:
     name: Next.js 15 & TypeScript 5 Build Audit
     runs-on: ubuntu-latest
@@ -77,4 +111,3 @@ jobs:
 
       - name: Run Playwright Browser Runtime Verification
         run: python evals/run_evals.py --browser
-
