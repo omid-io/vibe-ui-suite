@@ -5,8 +5,11 @@ Audits production examples against the 5-Pillar UI-Verifier specification
 and validates machine-readable JSON design specs.
 """
 
+from __future__ import annotations
+
 import argparse
 from datetime import datetime, timezone
+from typing import Any, Dict, List, Optional, Tuple, Union
 import json
 import math
 from pathlib import Path
