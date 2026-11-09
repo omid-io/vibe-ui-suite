@@ -293,7 +293,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   - Injected authentic domain-specific mock data, signature metric cards, and domain CTA actions derived from `domain_blueprints.json`.
   - Implemented dynamic clean H1/title extraction to prevent raw conversational user prompts from leaking into headings.
 - **Tailwind CSS v4 Motion & Timing Utilities (`packages/tokens/v4.css`)**:
-  - Added native `@utility transition-vibe-spring`, `@utility transition-vibe-snap`, and `@utility transition-vibe-glide` classes alongside `--ease-*` variables to prevent broken transitions when agents copy utility class names.
+  - Added native `@utility ease-vibe-spring`, `@utility ease-vibe-snap`, and `@utility ease-vibe-glide` classes alongside `--ease-*` variables (`ease-vibe-spring transition-all`) to guarantee physics transitions when agents copy utility class names.
 - **Non-Interactive Autonomous CLI & Dual-Theme Tokens (`packages/tokens`)**:
   - Added `-y` / `--yes` non-interactive flags to `vibe init` preventing terminal stalls in agent sandbox pipelines.
   - Exported dual-theme token definitions in `vibe-tokens.css` with active `:root` (Light) and `.dark` (Dark) variables.

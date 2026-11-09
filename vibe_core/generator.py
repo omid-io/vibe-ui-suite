@@ -58,6 +58,63 @@ DOMAIN_MACRO_ARCHETYPES: Dict[str, str] = {
     "general_modern_saas": "classic_structured_saas",
 }
 
+# Curated Domain Canonical Brands (en, fa) to eliminate raw user prompt leakage into brand names
+DOMAIN_CANONICAL_BRANDS: Dict[str, Dict[str, str]] = {
+    "food_restaurant_cafe": {"en": "L'Artisan Bistro", "fa": "کافه رستوران نارنج"},
+    "fintech_banking": {"en": "Aura Wealth", "fa": "مدیریت سرمایه آئورا"},
+    "crypto_trading_web3": {"en": "Nexus Exchange", "fa": "صرافی نکسوس"},
+    "devops_cloud_terminal": {"en": "OpsCore Command", "fa": "آپزکور"},
+    "saas_b2b_enterprise": {"en": "Stratum Enterprise", "fa": "استراتوم"},
+    "ai_developer_platform": {"en": "Cognition Studio", "fa": "استودیو شناختی هوش مصنوعی"},
+    "ecommerce_luxury_fashion": {"en": "Maison Atelier", "fa": "مزون آتلیه"},
+    "ecommerce_mass_market": {"en": "OmniStore", "fa": "فروشگاه آنلاین اومنی"},
+    "real_estate_architecture": {"en": "Archstone Realty", "fa": "املاک آرچ‌استون"},
+    "healthcare_hospital_medical": {"en": "Apex Health Clinic", "fa": "کلینیک جامع سلامت"},
+    "education_edtech_lms": {"en": "Skillforge Academy", "fa": "آکادمی مهارت‌آموزی"},
+    "creative_portfolio_agency": {"en": "Vanguard Studio", "fa": "استودیو پیشرو"},
+    "media_editorial_magazine": {"en": "The Chronos Review", "fa": "نشریه کرونوس"},
+    "beauty_clinical_wellness": {"en": "Lumina Dermal Care", "fa": "کلینیک لومینا"},
+    "travel_hospitality_tourism": {"en": "Wanderlust Retreats", "fa": "اقامتگاه‌های وندرلاست"},
+    "legal_compliance_law": {"en": "Veritas Law Partners", "fa": "موسسه حقوقی وریتاس"},
+    "gaming_entertainment_streaming": {"en": "Vortex Gaming", "fa": "ورتکس گیمینگ"},
+    "automotive_ev_mobility": {"en": "VoltDynamics Mobility", "fa": "ولت داینامیکس"},
+    "logistics_supply_chain": {"en": "FreightFlow Global", "fa": "سامانه لجستیک فریت‌فلو"},
+    "energy_greentech_sustainability": {"en": "Verdant Energy", "fa": "انرژی سبز وردانت"},
+    "nonprofit_charity_social": {"en": "Compassion Foundation", "fa": "بنیاد نیکوکاری همیاران"},
+    "personal_branding_creator": {"en": "Apex Athletic Lab", "fa": "استودیو ورزشی اپکس"},
+    "cybersecurity_identity_auth": {"en": "CipherShield Zero-Trust", "fa": "امنیت سایبری سایفرشیلد"},
+    "general_modern_saas": {"en": "Vibe Modern Platform", "fa": "سامانه مدرن وایب"}
+}
+
+# Curated Domain Canonical Badges (en, fa) to purge framework telemetry badges ("Vibe UI Verified")
+DOMAIN_CANONICAL_BADGES: Dict[str, Dict[str, str]] = {
+    "food_restaurant_cafe": {"en": "Curated Culinary Experience", "fa": "طعم و کیفیت برگزیده"},
+    "fintech_banking": {"en": "Institutional Grade Security", "fa": "امنیت و اعتبار مالی"},
+    "crypto_trading_web3": {"en": "Real-Time Liquidity Mesh", "fa": "نقدینگی لحظه‌ای و امن"},
+    "devops_cloud_terminal": {"en": "Live Cluster Ingress", "fa": "سامانه مانیتورینگ زنده"},
+    "saas_b2b_enterprise": {"en": "Enterprise Cloud Platform", "fa": "سامانه ابری سازمانی"},
+    "ai_developer_platform": {"en": "Autonomous Intelligence Engine", "fa": "موتور مدل‌های هوش مصنوعی"},
+    "ecommerce_luxury_fashion": {"en": "Limited Haute Couture", "fa": "مجموعه اختصاصی لوکس"},
+    "ecommerce_mass_market": {"en": "Verified Merchant Guarantee", "fa": "ضمانت اصالت و سلامت کالا"},
+    "real_estate_architecture": {"en": "Prime Architectural Properties", "fa": "املاک و ویلاهای برتر"},
+    "healthcare_hospital_medical": {"en": "Board-Certified Specialists", "fa": "کادر فوق تخصصی پزشکی"},
+    "education_edtech_lms": {"en": "Accredited Curriculum", "fa": "دوره‌های تایید شده آموزشی"},
+    "creative_portfolio_agency": {"en": "Award-Winning Creative Studio", "fa": "استودیو طراحی خلاق"},
+    "media_editorial_magazine": {"en": "In-Depth Investigative Journalism", "fa": "گزارش‌های تحلیلی و تخصصی"},
+    "beauty_clinical_wellness": {"en": "Clinical Aesthetics Certified", "fa": "خدمات تخصصی پوست و زیبایی"},
+    "travel_hospitality_tourism": {"en": "Handpicked Boutique Escapes", "fa": "اقامتگاه‌های بومگردی منتخب"},
+    "legal_compliance_law": {"en": "Confidential Legal Counsel", "fa": "مشاوره تخصصی حقوقی"},
+    "gaming_entertainment_streaming": {"en": "Ultra-Low Latency Engine", "fa": "سرورهای فوق سریع گیمینگ"},
+    "automotive_ev_mobility": {"en": "Next-Gen EV Powertrain", "fa": "فناوری پیشرفته خودرو برقی"},
+    "logistics_supply_chain": {"en": "Autonomous Route Intelligence", "fa": "شبکه هوشمند حمل‌ونقل"},
+    "energy_greentech_sustainability": {"en": "Zero-Emission Certified", "fa": "گواهی انرژی پاک و پایدار"},
+    "nonprofit_charity_social": {"en": "100% Transparent Aid Delivery", "fa": "کمک‌رسانی شفاف و مستقیم"},
+    "personal_branding_creator": {"en": "Elite Athlete & Performance Lab", "fa": "تمرینات تخصصی و مربیگری حرفه‌ای"},
+    "cybersecurity_identity_auth": {"en": "FIDO2 & Zero-Trust Certified", "fa": "استاندارد احراز هویت امن"},
+    "general_modern_saas": {"en": "Production-Grade Platform", "fa": "کیفیت و عملکرد استاندارد"}
+}
+
+
 class InterfaceGenerator:
 
     def __init__(self):
@@ -624,15 +681,15 @@ class InterfaceGenerator:
         mock_data_all = blueprint.get("mock_data", {})
         mock_data_dict = mock_data_all.get("en", {}) if isinstance(mock_data_all.get("en"), dict) else mock_data_all
         headline = mock_data_dict.get("headline", "Next-Generation Autonomous Intelligence")
-        subheadline = mock_data_dict.get("subheadline", "Autonomous precision interface engineered with strict WCAG AAA contrast, physics spring motion, and domain priors.")
+        subheadline = mock_data_dict.get("subheadline", "تجربه‌ای اصیل و منحصربه‌فرد با طراحی مدرن و کیفیتی متمایز." if is_rtl else "Engineered for uncompromising quality, modern elegance, and seamless customer experiences.")
         cta_primary = mock_data_dict.get("cta_primary", "Get Started Now")
         cta_secondary = mock_data_dict.get("cta_secondary", "Explore Interactive Demo")
         sig_widget_name = sig_widget.get("name", "Interactive Intelligence Hub")
 
         domain_metrics = mock_data_dict.get("metrics", [])
-        metric1 = domain_metrics[0] if len(domain_metrics) > 0 else {"label": "Accessibility Compliance", "value": "100% WCAG AAA"}
-        metric2 = domain_metrics[1] if len(domain_metrics) > 1 else {"label": "Sensor Latency", "value": "< 0.5 ms"}
-        metric3 = domain_metrics[2] if len(domain_metrics) > 2 else {"label": "Iteration Reduction", "value": "- 78.4%"}
+        metric1 = domain_metrics[0] if len(domain_metrics) > 0 else ({"label": "رضایت مراجعین", "value": "۹۹.۲٪"} if is_rtl else {"label": "Customer Satisfaction", "value": "99.2%"})
+        metric2 = domain_metrics[1] if len(domain_metrics) > 1 else ({"label": "سرعت ارائه خدمات", "value": "کمتر از ۲ ساعت"} if is_rtl else {"label": "Response Velocity", "value": "< 2 Hours"})
+        metric3 = domain_metrics[2] if len(domain_metrics) > 2 else ({"label": "امتیاز خدمات", "value": "۴.۹ از ۵"} if is_rtl else {"label": "Verified Experience", "value": "4.9 / 5"})
 
         domain_widget_code = self._render_domain_widget(domain_id, is_rtl, style_cfg, blueprint)
         media_container_code = self.asset_director.generate_media_container_jsx(domain_id, selected_style, is_rtl)
@@ -727,7 +784,7 @@ export const {component_name}: React.FC<{component_name}Props> = ({{
               <div className="text-2xl font-bold font-mono text-emerald-600 dark:text-emerald-400">
                 <bdi>{{{json.dumps(metric1['value'], ensure_ascii=False)}}}</bdi>
               </div>
-              <div className="text-xs text-zinc-400">Verified production benchmark metric</div>
+              <div className="text-xs text-zinc-400">{"شاخص عملکرد و بازخورد مراجعین" if is_rtl else "Verified customer satisfaction rating"}</div>
             </div>
 
             <div className="{style_cfg['telemetry_card']}">
@@ -735,7 +792,7 @@ export const {component_name}: React.FC<{component_name}Props> = ({{
               <div className="text-2xl font-bold font-mono text-sky-600 dark:text-sky-400">
                 <bdi>{{{json.dumps(metric2['value'], ensure_ascii=False)}}}</bdi>
               </div>
-              <div className="text-xs text-zinc-400">Real-time telemetry and SLA assurance</div>
+              <div className="text-xs text-zinc-400">{"پایداری خدمات و تضمین کیفیت" if is_rtl else "Service availability and quality guarantee"}</div>
             </div>
 
             <div className="{style_cfg['telemetry_card']}">
@@ -743,7 +800,7 @@ export const {component_name}: React.FC<{component_name}Props> = ({{
               <div className="text-2xl font-bold font-mono text-indigo-600 dark:text-indigo-400">
                 <bdi>{{{json.dumps(metric3['value'], ensure_ascii=False)}}}</bdi>
               </div>
-              <div className="text-xs text-zinc-400">Continuously optimized by invariant monitoring</div>
+              <div className="text-xs text-zinc-400">{"تطبیق کامل با استانداردهای تخصصی" if is_rtl else "Optimized for seamless performance and speed"}</div>
             </div>
           </div>
         )}}
@@ -799,7 +856,12 @@ export default {component_name};
             or (isinstance(intent_lang, (list, tuple)) and "fa" in intent_lang)
             or ("fa" in intent_obj.get("languages", []))
         )
-        is_rtl = genome.get("platform", {}).get("rtl_support", False) or has_fa_lang
+        is_rtl = (
+            genome.get("platform", {}).get("rtl_support", False)
+            or has_fa_lang
+            or intent_obj.get("language_direction") == "rtl"
+            or intent_lang in ["fa", "ar", "he", "ur"]
+        )
         dir_attr = 'dir="rtl" lang="fa"' if is_rtl else 'dir="ltr" lang="en"'
 
         css_vars = self.genome_engine.to_css_variables(genome)
@@ -833,17 +895,49 @@ export default {component_name};
         blueprint_cta_secondary = mock_data_dict.get("cta_secondary")
         blueprint_metrics = mock_data_dict.get("metrics")
 
-        # Resolve clean display title and navbar brand name
+        # Resolve clean display title, navbar brand name, and domain badge
         raw_prompt_indicators = [
-            "create", "build", "make", "want", "for a", "landing", "app", "book", "generate", "design"
+            "create", "build", "make", "want", "for a", "landing", "app", "book", "generate", "design", "page", "website", "site",
+            "بساز", "طراحی", "میخوام", "می‌خوام", "سایت", "یک", "یه", "برای", "صفحه"
         ]
-        is_raw_prompt = any(ind in prompt_title.lower() for ind in raw_prompt_indicators) or len(prompt_title.split()) > 3
-        display_title = blueprint_headline if (blueprint_headline and is_raw_prompt) else prompt_title
-        hero_headline = blueprint_headline or display_title
-        brand_name = (decision.get("intent", {}).get("audience", {}).get("type") or "Vibe Studio") if is_raw_prompt else prompt_title
-        hero_subheadline = blueprint_subheadline or "Autonomous precision interface engineered with strict accessibility, responsive geometry, and domain priors."
-        cta_primary_label = blueprint_cta_primary or "Get Started"
-        cta_secondary_label = blueprint_cta_secondary or "Explore Services"
+        lower_prompt = prompt_title.lower()
+        is_raw_prompt = (
+            any(ind in lower_prompt for ind in raw_prompt_indicators)
+            or len(prompt_title.split()) > 2
+            or any(w in prompt_title for w in ["میخوام", "می‌خوام", "بساز", "طراحی"])
+            or prompt_title.strip() == "Vibe UI Component"
+        )
+
+        domain_brands = DOMAIN_CANONICAL_BRANDS.get(domain_id, {"en": "Vibe Studio", "fa": "استودیو وایب"})
+        canonical_brand = domain_brands.get("fa" if is_rtl else "en", "Vibe Studio")
+
+        if is_raw_prompt or not prompt_title.strip():
+            brand_name = canonical_brand
+        else:
+            brand_name = prompt_title.strip()
+
+        # Hero Headline: prioritize domain blueprint copy over raw user prompt
+        if blueprint_headline:
+            hero_headline = blueprint_headline
+        else:
+            hero_headline = f"{brand_name} — {'تجربه متمایز و پیشرو' if is_rtl else 'Premium Digital Experience'}"
+
+        # Hero Subheadline: clean business copy, zero telemetry jargon
+        if blueprint_subheadline:
+            hero_subheadline = blueprint_subheadline
+        else:
+            hero_subheadline = (
+                "تجربه‌ای اصیل، کارآمد و منحصربه‌فرد با طراحی مدرن و خدماتی در تراز استانداردهای روز دنیا."
+                if is_rtl
+                else "Engineered for uncompromising quality, modern elegance, and seamless customer experiences."
+            )
+
+        # Domain Badge: authentic domain guarantee, zero framework telemetry
+        domain_badges = DOMAIN_CANONICAL_BADGES.get(domain_id, {"en": "Verified Experience", "fa": "تضمین اصالت و کیفیت"})
+        hero_badge_text = domain_badges.get("fa" if is_rtl else "en", "Verified Experience")
+
+        cta_primary_label = blueprint_cta_primary or ("شروع تجربه" if is_rtl else "Get Started")
+        cta_secondary_label = blueprint_cta_secondary or ("مشاهده خدمات" if is_rtl else "Explore Services")
 
         # Smart sub-intent adaptation for loans and credit in fintech domain
         lower_prompt = prompt_title.lower()
@@ -1276,7 +1370,7 @@ export default {component_name};
               <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
               <span class="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
             </span>
-            <span>Vibe UI Verified</span>
+            <span>{hero_badge_text}</span>
           </div>
           <h1 id="hero-title" class="text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight mb-4 vibe-gradient-heading">
             {hero_headline}
@@ -1324,9 +1418,9 @@ export default {component_name};
           <div class="mt-6 pt-4 border-t border-[var(--border-subtle)] text-xs text-[var(--text-muted)] flex items-center justify-between">
             <div class="flex items-center space-x-1.5 rtl:space-x-reverse">
               <span class="w-2 h-2 rounded-full bg-emerald-500"></span>
-              <span>Active & Ready</span>
+              <span>{"آماده ارائه خدمات" if is_rtl else "Active & Ready"}</span>
             </div>
-            <span class="font-mono text-[10px] opacity-70"><bdi>99.99% SLO</bdi></span>
+            <span class="font-mono text-[10px] opacity-70"><bdi>{"تضمین کیفیت ۱۰۰٪" if is_rtl else "100% Guaranteed"}</bdi></span>
           </div>
         </div>
       </aside>
@@ -1407,7 +1501,7 @@ export default {component_name};
       // 4. Interactive Action Buttons
       document.querySelectorAll('.btn-action').forEach(function(btn) {{
         btn.addEventListener('click', function() {{
-          showToast('Telemetry traces inspection opened.');
+          showToast(document.documentElement.getAttribute('dir') === 'rtl' ? 'جزئیات و امکانات مشاهده شد.' : 'Details and services overview opened.');
         }});
       }});
 

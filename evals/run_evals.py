@@ -59,7 +59,7 @@ NAMED_COLORS = {
 }
 
 EMOJI_PATTERN = re.compile(
-    r"[\U00010000-\U0010ffff]|[\u2600-\u27bf]|[\u2300-\u23ff]|[\u2b50-\u2b55]|[\u203c-\u2049]|[\u2194-\u21aa]"
+    r"[\U0001F300-\U0001F9FF]|[\U0001FA70-\U0001FAFF]|[\u2600-\u26FF]|[\u2700-\u27BF]|[\u2300-\u23FF]|[\u2b50-\u2b55]|[\u203c-\u2049]|[\u2194-\u21aa]|[\U00010000-\U0010ffff]"
 )
 
 def srgb_to_linear(c_byte: float) -> float:
@@ -95,19 +95,26 @@ def oklch_to_linear_srgb(l: float, c: float, h: float) -> tuple[float, float, fl
 
     return (max(0.0, min(1.0, r_lin)), max(0.0, min(1.0, g_lin)), max(0.0, min(1.0, b_lin)))
 
-def parse_color_to_luminance(color_str: str) -> float:
+def parse_color_to_luminance(color_str: str) -> Optional[float]:
     """
     Parses Hex (#rgb, #rrggbb, #rrggbbaa), OKLCH (oklch(L C H)), or named colors
     into relative luminance L in [0.0, 1.0].
-    Relative luminance formula: L = 0.2126 * R' + 0.7152 * G' + 0.0722 * B'.
+    Returns None if the color cannot be parsed or resolved statically (BUG-001 fix:
+    never return synthetic 0.0 which could falsely yield 21:1 contrast).
     """
+    if not color_str or not isinstance(color_str, str):
+        return None
     color_str = color_str.strip().split("/*")[0].strip()
+    if not color_str or color_str.startswith("var(") or color_str in ("undefined", "unresolved"):
+        return None
 
     # Named color lookup
     if color_str in NAMED_COLORS:
         color_str = NAMED_COLORS[color_str]
     elif color_str.startswith("text-") and color_str[5:] in NAMED_COLORS:
         color_str = NAMED_COLORS[color_str[5:]]
+    elif color_str.startswith("bg-") and color_str[3:] in NAMED_COLORS:
+        color_str = NAMED_COLORS[color_str[3:]]
 
     # OKLCH parsing: oklch(L C H) or oklch(L C H / alpha)
     oklch_match = re.match(
@@ -116,35 +123,44 @@ def parse_color_to_luminance(color_str: str) -> float:
         re.IGNORECASE,
     )
     if oklch_match:
-        l_str, c_str, h_str = oklch_match.groups()
-        l_val = float(l_str[:-1]) / 100.0 if l_str.endswith("%") else float(l_str)
-        c_val = float(c_str)
-        h_val = float(h_str)
-        r_lin, g_lin, b_lin = oklch_to_linear_srgb(l_val, c_val, h_val)
-        return 0.2126 * r_lin + 0.7152 * g_lin + 0.0722 * b_lin
+        try:
+            l_str, c_str, h_str = oklch_match.groups()
+            l_val = float(l_str[:-1]) / 100.0 if l_str.endswith("%") else float(l_str)
+            c_val = float(c_str)
+            h_val = float(h_str)
+            r_lin, g_lin, b_lin = oklch_to_linear_srgb(l_val, c_val, h_val)
+            return 0.2126 * r_lin + 0.7152 * g_lin + 0.0722 * b_lin
+        except Exception:
+            return None
 
     # Hex parsing: #rgb, #rgba, #rrggbb, #rrggbbaa
     hex_match = re.match(r"^#([0-9a-fA-F]+)$", color_str)
     if hex_match:
-        h = hex_match.group(1)
-        if len(h) in (3, 4):
-            h = "".join([c * 2 for c in h[:3]])
-        elif len(h) in (6, 8):
-            h = h[:6]
-        else:
-            h = "000000"
-        r = srgb_to_linear(int(h[0:2], 16))
-        g = srgb_to_linear(int(h[2:4], 16))
-        b = srgb_to_linear(int(h[4:6], 16))
-        return 0.2126 * r + 0.7152 * g + 0.0722 * b
+        try:
+            h = hex_match.group(1)
+            if len(h) in (3, 4):
+                h = "".join([c * 2 for c in h[:3]])
+            elif len(h) in (6, 8):
+                h = h[:6]
+            else:
+                return None
+            r = srgb_to_linear(int(h[0:2], 16))
+            g = srgb_to_linear(int(h[2:4], 16))
+            b = srgb_to_linear(int(h[4:6], 16))
+            return 0.2126 * r + 0.7152 * g + 0.0722 * b
+        except Exception:
+            return None
 
-    return 0.0
+    return None
 
-def contrast_ratio(lum1: float, lum2: float) -> float:
+def contrast_ratio(lum1: Optional[float], lum2: Optional[float]) -> Optional[float]:
     """
     Calculates WCAG relative luminance contrast ratio:
     (L1 + 0.05) / (L2 + 0.05) where L1 >= L2.
+    Returns None if either luminance value is unresolved (BUG-001 fix: never calculate synthetic 21:1).
     """
+    if lum1 is None or lum2 is None:
+        return None
     l1 = max(lum1, lum2)
     l2 = min(lum1, lum2)
     return (l1 + 0.05) / (l2 + 0.05)
@@ -527,56 +543,65 @@ def audit_html_file(file_path: Path) -> dict:
             })
             results["overall_status"] = "FAIL"
 
-    # Pillar 7: Exact Mathematical WCAG AA Relative Luminance Contrast
+    # Pillar 7: Exact Mathematical WCAG AA Relative Luminance Contrast (BUG-001 Hardened)
     canvas_color, body_color, header_color = extract_html_colors(content)
-    if not canvas_color or not body_color:
+    lum_canvas = parse_color_to_luminance(canvas_color) if canvas_color else None
+    lum_body = parse_color_to_luminance(body_color) if body_color else None
+    lum_header = parse_color_to_luminance(header_color) if header_color else lum_body
+
+    body_cr = contrast_ratio(lum_canvas, lum_body)
+    header_cr = contrast_ratio(lum_canvas, lum_header)
+
+    if body_cr is None:
         results["checks"].append({
             "pillar": "WCAG AA Contrast",
             "name": "Static Contrast Resolution",
             "status": "WARN",
-            "msg": f"Static color tokens unresolved [canvas: {canvas_color or 'undefined'}, body: {body_color or 'undefined'}]. Run Playwright browser eval for physical computed contrast."
+            "msg": f"Static color tokens unresolved or unparseable [canvas: {canvas_color or 'unresolved'}, body: {body_color or 'unresolved'}]. Run Playwright browser eval for physical computed contrast."
         })
         if results["overall_status"] != "FAIL":
             results["overall_status"] = "WARN"
+    elif body_cr >= 4.5:
+        results["checks"].append({
+            "pillar": "WCAG AA Contrast",
+            "name": "Body Copy Contrast",
+            "status": "PASS",
+            "msg": f"Body contrast {body_cr:.2f}:1 exceeds WCAG AA threshold (>= 4.5:1) [bg: {canvas_color}, fg: {body_color}]"
+        })
     else:
-        lum_canvas = parse_color_to_luminance(canvas_color)
-        lum_body = parse_color_to_luminance(body_color)
-        lum_header = parse_color_to_luminance(header_color) if header_color else lum_body
+        results["checks"].append({
+            "pillar": "WCAG AA Contrast",
+            "name": "Body Copy Contrast",
+            "status": "FAIL",
+            "msg": f"Body contrast {body_cr:.2f}:1 fails WCAG AA threshold (>= 4.5:1) [bg: {canvas_color}, fg: {body_color}]"
+        })
+        results["overall_status"] = "FAIL"
 
-        body_cr = contrast_ratio(lum_canvas, lum_body)
-        header_cr = contrast_ratio(lum_canvas, lum_header)
-
-        if body_cr >= 4.5:
+    if header_cr is None:
+        if body_cr is not None:
             results["checks"].append({
                 "pillar": "WCAG AA Contrast",
-                "name": "Body Copy Contrast",
-                "status": "PASS",
-                "msg": f"Body contrast {body_cr:.2f}:1 exceeds WCAG AA threshold (>= 4.5:1) [bg: {canvas_color}, fg: {body_color}]"
+                "name": "Header Contrast Resolution",
+                "status": "WARN",
+                "msg": f"Header color token unresolved [header: {header_color or 'unresolved'}]."
             })
-        else:
-            results["checks"].append({
-                "pillar": "WCAG AA Contrast",
-                "name": "Body Copy Contrast",
-                "status": "FAIL",
-                "msg": f"Body contrast {body_cr:.2f}:1 fails WCAG AA threshold (>= 4.5:1) [bg: {canvas_color}, fg: {body_color}]"
-            })
-            results["overall_status"] = "FAIL"
-
-        if header_cr >= 3.0:
-            results["checks"].append({
-                "pillar": "WCAG AA Contrast",
-                "name": "Header / Large Text Contrast",
-                "status": "PASS",
-                "msg": f"Header contrast {header_cr:.2f}:1 exceeds WCAG AA threshold (>= 3.0:1) [bg: {canvas_color}, fg: {header_color}]"
-            })
-        else:
-            results["checks"].append({
-                "pillar": "WCAG AA Contrast",
-                "name": "Header / Large Text Contrast",
-                "status": "FAIL",
-                "msg": f"Header contrast {header_cr:.2f}:1 fails WCAG AA threshold (>= 3.0:1) [bg: {canvas_color}, fg: {header_color}]"
-            })
-            results["overall_status"] = "FAIL"
+            if results["overall_status"] != "FAIL":
+                results["overall_status"] = "WARN"
+    elif header_cr >= 3.0:
+        results["checks"].append({
+            "pillar": "WCAG AA Contrast",
+            "name": "Header / Large Text Contrast",
+            "status": "PASS",
+            "msg": f"Header contrast {header_cr:.2f}:1 exceeds WCAG AA threshold (>= 3.0:1) [bg: {canvas_color}, fg: {header_color}]"
+        })
+    else:
+        results["checks"].append({
+            "pillar": "WCAG AA Contrast",
+            "name": "Header / Large Text Contrast",
+            "status": "FAIL",
+            "msg": f"Header contrast {header_cr:.2f}:1 fails WCAG AA threshold (>= 3.0:1) [bg: {canvas_color}, fg: {header_color}]"
+        })
+        results["overall_status"] = "FAIL"
 
     return results
 

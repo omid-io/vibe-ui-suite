@@ -42,38 +42,46 @@ Unsplash leverages imgix CDN processing parameters to perform server-side format
   `https://images.unsplash.com/{photo_id}?auto=format&fit=crop&w=1600&h=900&q=80`
   *Target payload size: ~180KB - 240KB.*
 
+### 2.3 Asset Intelligence Standard (2026 Specification)
+
+To eliminate visual collisions between overlay typography and photographic content, every asset in this vault is tagged with four dimensional parameters:
+- `focal_point`: Center of visual gravity (`center`, `center-left`, `center-right`, `bottom-right`, `bottom-center`).
+- `negative_space`: Natural low-contrast area optimal for readable copy and KPI overlays (`left-half`, `right-half`, `top-third`, `bottom-third`, `top-half`, `top-left`).
+- `mobile_crop_safe`: Boolean (`true`/`false`) validating that mobile portrait viewports (`390px` or `aspect-[9/16]`) preserve the focal subject without awkward clipping.
+- `visual_energy`: Perceptual dynamism rating (`calm`, `focused`, `dynamic`, `high`, `ambient`) to calibrate visual weight against UI density.
+
 ---
 
 ## 3. Master Catalog Matrix (24 Canonical Domains)
 
 All 24 domains are mapped to permanent photo identifiers, categorized by sector, and provided with dual English and Persian semantic titles.
 
-| # | Domain ID | Category | English Title | Persian Title | Vetted Photo ID | Recommended Aspect | Role |
-| :- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-| 1 | `beauty_clinical_wellness` | Health & Lifestyle | Beauty, Clinical & Wellness | کلینیک زیبایی، پوست و سلامت | `photo-1629909613654-28e377c37b09` | `aspect-[4/5] sm:aspect-[3/4]` | `clinical_portrait` |
-| 2 | `fintech_banking` | Finance | FinTech & Digital Banking | فین تک و بانکداری دیجیتال | `photo-1642543492481-44e81e3914a7` | `aspect-[16/9] sm:aspect-[16/10]` | `capital_portfolio` |
-| 3 | `crypto_trading_web3` | Finance & Web3 | Crypto, Web3 & DeFi | رمزارز و پلتفرم معاملاتی غیرمتمرکز | `photo-1639762681485-074b7f938ba0` | `aspect-[16/9] sm:aspect-[21/9]` | `orderbook_depth` |
-| 4 | `devops_cloud_terminal` | Developer Tools | DevOps & Cloud Infrastructure | دواپس و زیرساخت های ابری | `photo-1558494949-ef010cbdcc31` | `aspect-[16/10] sm:aspect-[16/9]` | `cluster_topology` |
-| 5 | `saas_b2b_enterprise` | Enterprise Software | B2B Enterprise SaaS | نرم افزار سازمانی ابری | `photo-1460925895917-afdab827c52f` | `aspect-[16/9] sm:aspect-[16/10]` | `enterprise_dashboard` |
-| 6 | `ai_developer_platform` | Artificial Intelligence | AI Developer Platform | پلتفرم توسعه هوش مصنوعی مولد | `photo-1618005182384-a83a8bd57fbe` | `aspect-[16/9] sm:aspect-[21/9]` | `neural_latent_canvas` |
-| 7 | `ecommerce_luxury_fashion` | Luxury Retail | Haute Horology & Luxury Fashion | مد فاخر و ساعت سازی لوکس | `photo-1539109136881-3be0616acf4b` | `aspect-square sm:aspect-[4/5]` | `atelier_lookbook` |
-| 8 | `ecommerce_mass_market` | Retail & Commerce | E-Commerce Retail Storefront | فروشگاه آنلاین و خرده فروشی دیجیتال | `photo-1441986300917-64674bd600d8` | `aspect-square sm:aspect-[4/3]` | `product_catalog_showcase` |
-| 9 | `real_estate_architecture` | Real Estate | Prime Architecture & Real Estate | املاک لوکس و معماری معاصر | `photo-1600585154340-be6161a56a0c` | `aspect-[16/9] sm:aspect-[3/2]` | `architectural_perspective` |
-| 10 | `healthcare_hospital_medical` | Healthcare | Hospital & Clinical Diagnostics | بیمارستان و خدمات تشخیصی سلامت | `photo-1519494026892-80bbd2d6fd0d` | `aspect-[4/3] sm:aspect-[16/10]` | `clinical_diagnostic` |
-| 11 | `education_edtech_lms` | Education | EdTech & Digital Learning | سامانه آموزش تعاملی و دانشگاهی | `photo-1523240795612-9a054b0db644` | `aspect-[16/9] sm:aspect-[16/10]` | `curriculum_interactive` |
-| 12 | `creative_portfolio_agency` | Design & Creative | Creative Design Agency | استودیو طراحی خلاق و برندینگ | `photo-1507238691740-187a5b1d37b8` | `aspect-[16/10] sm:aspect-[3/2]` | `editorial_case_study` |
-| 13 | `media_editorial_magazine` | Media & Publishing | Editorial Media & Longform Journalism | نشریه تخصصی و رسانه تحلیلی | `photo-1505373877841-8d25f7d46678` | `aspect-[3/4] sm:aspect-[4/5]` | `longform_journalism` |
-| 14 | `food_restaurant_cafe` | Food & Hospitality | Artisanal Food & Restaurant | رستوران و کافه تجربی | `photo-1555396273-367ea4eb4db5` | `aspect-[16/9] sm:aspect-[4/3]` | `sensory_food_editorial` |
-| 15 | `travel_hospitality_tourism` | Hospitality & Travel | Luxury Travel & Hospitality | هتل داری و گردشگری لوکس | `photo-1566073771259-6a8506099945` | `aspect-[16/9] sm:aspect-[3/2]` | `destination_panoramic` |
-| 16 | `legal_compliance_law` | Legal & Corporate | Legal & Corporate Compliance | مشاوره حقوقی و ممیزی مقرراتی | `photo-1589829545856-d10d557cf95f` | `aspect-[16/9] sm:aspect-[4/3]` | `statutory_compliance` |
-| 17 | `gaming_entertainment_streaming` | Gaming & Media | Esports & Interactive Gaming | گیمینگ و استریمینگ تعاملی | `photo-1542751371-adc38448a05e` | `aspect-[16/9] sm:aspect-[21/9]` | `gameplay_cinematic` |
-| 18 | `automotive_ev_mobility` | Automotive | Next-Gen EV Mobility & Automotive | خودروهای برقی و حمل ونقل نوین | `photo-1617814076367-b759c7d7e738` | `aspect-[16/9] sm:aspect-[21/9]` | `aerodynamic_chassis` |
-| 19 | `logistics_supply_chain` | Logistics | Global Freight & Supply Chain | لجستیک بین الملل و زنجیره تامین | `photo-1586528116311-ad8dd3c8310d` | `aspect-[16/9] sm:aspect-[16/10]` | `supply_telematics` |
-| 20 | `energy_greentech_sustainability` | CleanTech & Energy | GreenTech & Clean Energy Grid | انرژی پاک و فناوری های پایدار | `photo-1497435334941-8c899ee9e8e9` | `aspect-[16/9] sm:aspect-[3/2]` | `renewable_grid` |
-| 21 | `nonprofit_charity_social` | Social Impact | Social Impact & Humanitarian Aid | توانمندسازی مدنی و امور بشردوستانه | `photo-1488521787991-ed7bbaae773c` | `aspect-[16/9] sm:aspect-[4/3]` | `humanitarian_impact` |
-| 22 | `personal_branding_creator` | Creator Economy | Executive Personal Branding | برند شخصی و تولید محتوای تخصصی | `photo-1534528741775-53994a69daeb` | `aspect-[4/5] sm:aspect-[1/1]` | `creator_signature` |
-| 23 | `cybersecurity_identity_auth` | Cybersecurity | Zero-Trust Cybersecurity | امنیت ابری و احراز هویت یکپارچه | `photo-1563986768609-322da13575f3` | `aspect-[16/9] sm:aspect-[21/9]` | `zero_trust_matrix` |
-| 24 | `general_modern_saas` | Cloud Software | General Modern Cloud SaaS | نرم افزار ابری نوین و اتوماسیون | `photo-1551288049-bebda4e38f71` | `aspect-[16/9] sm:aspect-[16/10]` | `workflow_orchestration` |
+| # | Domain ID | Category | English Title | Persian Title | Vetted Photo ID | Recommended Aspect | Role | Focal Point | Negative Space | Mobile Crop Safe | Visual Energy |
+| :- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :---: | :--- |
+| 1 | `beauty_clinical_wellness` | Health & Lifestyle | Beauty, Clinical & Wellness | کلینیک زیبایی، پوست و سلامت | `photo-1629909613654-28e377c37b09` | `aspect-[4/5] sm:aspect-[3/4]` | `clinical_portrait` | `center-right` | `left-half` | `true` | `calm` |
+| 2 | `fintech_banking` | Finance | FinTech & Digital Banking | فین تک و بانکداری دیجیتال | `photo-1642543492481-44e81e3914a7` | `aspect-[16/9] sm:aspect-[16/10]` | `capital_portfolio` | `bottom-right` | `top-left` | `true` | `focused` |
+| 3 | `crypto_trading_web3` | Finance & Web3 | Crypto, Web3 & DeFi | رمزارز و پلتفرم معاملاتی غیرمتمرکز | `photo-1639762681485-074b7f938ba0` | `aspect-[16/9] sm:aspect-[21/9]` | `orderbook_depth` | `center` | `top-third` | `true` | `high` |
+| 4 | `devops_cloud_terminal` | Developer Tools | DevOps & Cloud Infrastructure | دواپس و زیرساخت های ابری | `photo-1558494949-ef010cbdcc31` | `aspect-[16/10] sm:aspect-[16/9]` | `cluster_topology` | `center-left` | `right-half` | `true` | `focused` |
+| 5 | `saas_b2b_enterprise` | Enterprise Software | B2B Enterprise SaaS | نرم افزار سازمانی ابری | `photo-1460925895917-afdab827c52f` | `aspect-[16/9] sm:aspect-[16/10]` | `enterprise_dashboard` | `center-right` | `left-half` | `true` | `calm` |
+| 6 | `ai_developer_platform` | Artificial Intelligence | AI Developer Platform | پلتفرم توسعه هوش مصنوعی مولد | `photo-1618005182384-a83a8bd57fbe` | `aspect-[16/9] sm:aspect-[21/9]` | `neural_latent_canvas` | `center` | `bottom-third` | `true` | `dynamic` |
+| 7 | `ecommerce_luxury_fashion` | Luxury Retail | Haute Horology & Luxury Fashion | مد فاخر و ساعت سازی لوکس | `photo-1539109136881-3be0616acf4b` | `aspect-square sm:aspect-[4/5]` | `atelier_lookbook` | `center` | `top-half` | `true` | `calm` |
+| 8 | `ecommerce_mass_market` | Retail & Commerce | E-Commerce Retail Storefront | فروشگاه آنلاین و خرده فروشی دیجیتال | `photo-1441986300917-64674bd600d8` | `aspect-square sm:aspect-[4/3]` | `product_catalog_showcase` | `center-right` | `top-left` | `true` | `dynamic` |
+| 9 | `real_estate_architecture` | Real Estate | Prime Architecture & Real Estate | املاک لوکس و معماری معاصر | `photo-1600585154340-be6161a56a0c` | `aspect-[16/9] sm:aspect-[3/2]` | `architectural_perspective` | `center` | `top-third` | `true` | `calm` |
+| 10 | `healthcare_hospital_medical` | Healthcare | Hospital & Clinical Diagnostics | بیمارستان و خدمات تشخیصی سلامت | `photo-1519494026892-80bbd2d6fd0d` | `aspect-[4/3] sm:aspect-[16/10]` | `clinical_diagnostic` | `center-right` | `left-half` | `true` | `calm` |
+| 11 | `education_edtech_lms` | Education | EdTech & Digital Learning | سامانه آموزش تعاملی و دانشگاهی | `photo-1523240795612-9a054b0db644` | `aspect-[16/9] sm:aspect-[16/10]` | `curriculum_interactive` | `center-right` | `left-half` | `true` | `focused` |
+| 12 | `creative_portfolio_agency` | Design & Creative | Creative Design Agency | استودیو طراحی خلاق و برندینگ | `photo-1507238691740-187a5b1d37b8` | `aspect-[16/10] sm:aspect-[3/2]` | `editorial_case_study` | `center-left` | `right-half` | `true` | `dynamic` |
+| 13 | `media_editorial_magazine` | Media & Publishing | Editorial Media & Longform Journalism | نشریه تخصصی و رسانه تحلیلی | `photo-1505373877841-8d25f7d46678` | `aspect-[3/4] sm:aspect-[4/5]` | `longform_journalism` | `center-right` | `top-left` | `true` | `calm` |
+| 14 | `food_restaurant_cafe` | Food & Hospitality | Artisanal Food & Restaurant | رستوران و کافه تجربی | `photo-1555396273-367ea4eb4db5` | `aspect-[16/9] sm:aspect-[4/3]` | `sensory_food_editorial` | `center` | `top-third` | `true` | `ambient` |
+| 15 | `travel_hospitality_tourism` | Hospitality & Travel | Luxury Travel & Hospitality | هتل داری و گردشگری لوکس | `photo-1566073771259-6a8506099945` | `aspect-[16/9] sm:aspect-[3/2]` | `destination_panoramic` | `bottom-right` | `top-left` | `true` | `ambient` |
+| 16 | `legal_compliance_law` | Legal & Corporate | Legal & Corporate Compliance | مشاوره حقوقی و ممیزی مقرراتی | `photo-1589829545856-d10d557cf95f` | `aspect-[16/9] sm:aspect-[4/3]` | `statutory_compliance` | `center-right` | `left-half` | `true` | `calm` |
+| 17 | `gaming_entertainment_streaming` | Gaming & Media | Esports & Interactive Gaming | گیمینگ و استریمینگ تعاملی | `photo-1542751371-adc38448a05e` | `aspect-[16/9] sm:aspect-[21/9]` | `gameplay_cinematic` | `center` | `bottom-third` | `true` | `high` |
+| 18 | `automotive_ev_mobility` | Automotive | Next-Gen EV Mobility & Automotive | خودروهای برقی و حمل ونقل نوین | `photo-1617814076367-b759c7d7e738` | `aspect-[16/9] sm:aspect-[21/9]` | `aerodynamic_chassis` | `center` | `top-third` | `true` | `dynamic` |
+| 19 | `logistics_supply_chain` | Logistics | Global Freight & Supply Chain | لجستیک بین الملل و زنجیره تامین | `photo-1586528116311-ad8dd3c8310d` | `aspect-[16/9] sm:aspect-[16/10]` | `supply_telematics` | `center-left` | `right-half` | `true` | `focused` |
+| 20 | `energy_greentech_sustainability` | CleanTech & Energy | GreenTech & Clean Energy Grid | انرژی پاک و فناوری های پایدار | `photo-1497435334941-8c899ee9e8e9` | `aspect-[16/9] sm:aspect-[3/2]` | `renewable_grid` | `bottom-center` | `top-half` | `true` | `calm` |
+| 21 | `nonprofit_charity_social` | Social Impact | Social Impact & Humanitarian Aid | توانمندسازی مدنی و امور بشردوستانه | `photo-1488521787991-ed7bbaae773c` | `aspect-[16/9] sm:aspect-[4/3]` | `humanitarian_impact` | `center` | `bottom-third` | `true` | `calm` |
+| 22 | `personal_branding_creator` | Creator Economy | Executive Personal Branding | برند شخصی و تولید محتوای تخصصی | `photo-1534528741775-53994a69daeb` | `aspect-[4/5] sm:aspect-[1/1]` | `creator_signature` | `center` | `left-half` | `true` | `calm` |
+| 23 | `cybersecurity_identity_auth` | Cybersecurity | Zero-Trust Cybersecurity | امنیت ابری و احراز هویت یکپارچه | `photo-1563986768609-322da13575f3` | `aspect-[16/9] sm:aspect-[21/9]` | `zero_trust_matrix` | `center-right` | `left-half` | `true` | `focused` |
+| 24 | `general_modern_saas` | Cloud Software | General Modern Cloud SaaS | نرم افزار ابری نوین و اتوماسیون | `photo-1551288049-bebda4e38f71` | `aspect-[16/9] sm:aspect-[16/10]` | `workflow_orchestration` | `center-right` | `left-half` | `true` | `calm` |
 
 ---
 
@@ -108,7 +116,7 @@ Use when the asset is placed above-the-fold or requires dynamic viewport density
   <div class="absolute inset-0 bg-gradient-to-t from-black/95 via-black/40 to-black/20 pointer-events-none" />
 
   <!-- Synthetic Slot Demarcation Badge -->
-  <div class="absolute top-4 start-4 end-4 flex items-center justify-between text-[11px] font-mono text-zinc-300 z-10">
+  <div class="absolute | top-4 start-4 end-4 flex items-center justify-between text-[11px] font-mono text-zinc-300 z-10">
     <span class="px-2.5 py-0.5 rounded-full bg-black/60 dark:bg-white/10 backdrop-blur-md border border-white/20 text-white font-semibold">
       <bdi>NEURAL_LATENT_CANVAS</bdi>
     </span>
@@ -119,7 +127,7 @@ Use when the asset is placed above-the-fold or requires dynamic viewport density
   </div>
 
   <!-- Editorial Caption with Bidirectional Isolation -->
-  <figcaption class="absolute bottom-0 inset-x-0 p-6 z-10 text-white">
+  <figcaption class="absolute | bottom-0 inset-x-0 p-6 z-10 text-white">
     <p class="text-sm font-medium text-white/95 leading-relaxed drop-shadow-sm">
       <bdi>Transformer Attention Map & Cluster Latency Telemetry</bdi>
     </p>
@@ -143,7 +151,7 @@ Use when the asset resides in a multi-card grid, feature section, or below-the-f
 
   <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/35 to-transparent pointer-events-none" />
 
-  <div class="absolute top-3 start-3 end-3 flex items-center justify-between text-[10px] font-mono text-zinc-300 z-10">
+  <div class="absolute | top-3 start-3 end-3 flex items-center justify-between text-[10px] font-mono text-zinc-300 z-10">
     <span class="px-2 py-0.5 rounded bg-black/60 backdrop-blur-md border border-white/15 text-white font-bold">
       <bdi>CAPITAL_PORTFOLIO</bdi>
     </span>
@@ -153,7 +161,7 @@ Use when the asset resides in a multi-card grid, feature section, or below-the-f
     </span>
   </div>
 
-  <div class="absolute bottom-0 inset-x-0 p-4 z-10 text-white">
+  <div class="absolute | bottom-0 inset-x-0 p-4 z-10 text-white">
     <p class="text-xs font-semibold text-white/95 leading-snug">
       <bdi>Smart Capital Allocation & Real-Time Liquidity Chart</bdi>
     </p>
@@ -188,6 +196,10 @@ interface DomainSpec {
   captionEn: string;
   captionFa: string;
   altText: string;
+  focalPoint: "center" | "center-left" | "center-right" | "top-center" | "bottom-right" | "bottom-center";
+  negativeSpace: "left-half" | "right-half" | "top-third" | "bottom-third" | "top-half" | "top-left";
+  mobileCropSafe: boolean;
+  visualEnergy: "calm" | "focused" | "dynamic" | "high" | "ambient";
 }
 
 const VAULT_REGISTRY: Record<string, DomainSpec> = {
@@ -198,6 +210,10 @@ const VAULT_REGISTRY: Record<string, DomainSpec> = {
     captionEn: "Clinical Outcome Visual Slot (Laser Rejuvenation Protocol)",
     captionFa: "فریم نتایج بالینی جوانسازی پوست و پروتکل درمانی",
     altText: "Clinical outcome visual slot for dermatology and laser therapy",
+    focalPoint: "center-right",
+    negativeSpace: "left-half",
+    mobileCropSafe: true,
+    visualEnergy: "calm",
   },
   fintech_banking: {
     photoId: "photo-1642543492481-44e81e3914a7",
@@ -206,6 +222,10 @@ const VAULT_REGISTRY: Record<string, DomainSpec> = {
     captionEn: "Smart Capital Allocation & Real-Time Liquidity Chart",
     captionFa: "نمودار تخصیص سرمایه هوشمند و شاخص نقدشوندگی",
     altText: "Real-time financial capital allocation dashboard and analytics",
+    focalPoint: "bottom-right",
+    negativeSpace: "top-left",
+    mobileCropSafe: true,
+    visualEnergy: "focused",
   },
   crypto_trading_web3: {
     photoId: "photo-1639762681485-074b7f938ba0",
@@ -214,6 +234,10 @@ const VAULT_REGISTRY: Record<string, DomainSpec> = {
     captionEn: "Aggregated Liquidity Depth & Low-Slippage Routing Matrix",
     captionFa: "عمق نقدینگی صرافی نامتمرکز و ماتریکس مسیریابی",
     altText: "Decentralized crypto orderbook depth and liquidity routing visualization",
+    focalPoint: "center",
+    negativeSpace: "top-third",
+    mobileCropSafe: true,
+    visualEnergy: "high",
   },
   devops_cloud_terminal: {
     photoId: "photo-1558494949-ef010cbdcc31",
@@ -222,6 +246,10 @@ const VAULT_REGISTRY: Record<string, DomainSpec> = {
     captionEn: "Multi-Region Kubernetes Pod Topology & Egress Flow",
     captionFa: "توپولوژی نودهای ابری کوبرنتیز و مسیرهای شبکه",
     altText: "High-density cloud server racks and Kubernetes network infrastructure",
+    focalPoint: "center-left",
+    negativeSpace: "right-half",
+    mobileCropSafe: true,
+    visualEnergy: "focused",
   },
   saas_b2b_enterprise: {
     photoId: "photo-1460925895917-afdab827c52f",
@@ -230,6 +258,10 @@ const VAULT_REGISTRY: Record<string, DomainSpec> = {
     captionEn: "Unified Enterprise Orchestration & Provisioning Suite",
     captionFa: "داشبورد یکپارچه مدیریت فرآیندهای سازمانی",
     altText: "Enterprise dashboard analytics and business performance metrics",
+    focalPoint: "center-right",
+    negativeSpace: "left-half",
+    mobileCropSafe: true,
+    visualEnergy: "calm",
   },
   ai_developer_platform: {
     photoId: "photo-1618005182384-a83a8bd57fbe",
@@ -238,6 +270,10 @@ const VAULT_REGISTRY: Record<string, DomainSpec> = {
     captionEn: "Transformer Attention Map & Cluster Latency Telemetry",
     captionFa: "نقشه توجه لایه های هوش مصنوعی و تله متری کلاستر GPU",
     altText: "Generative neural latent spectrum and abstract compute visualization",
+    focalPoint: "center",
+    negativeSpace: "bottom-third",
+    mobileCropSafe: true,
+    visualEnergy: "dynamic",
   },
   ecommerce_luxury_fashion: {
     photoId: "photo-1539109136881-3be0616acf4b",
@@ -246,6 +282,10 @@ const VAULT_REGISTRY: Record<string, DomainSpec> = {
     captionEn: "Handcrafted Bespoke Atelier Collection • Limited Edition",
     captionFa: "کلکسیون دست دوز آتلیه مد اختصاصی با پارچه های ارگانیک",
     altText: "High-fashion editorial model in bespoke luxury designer garments",
+    focalPoint: "center",
+    negativeSpace: "top-half",
+    mobileCropSafe: true,
+    visualEnergy: "calm",
   },
   ecommerce_mass_market: {
     photoId: "photo-1441986300917-64674bd600d8",
@@ -254,6 +294,10 @@ const VAULT_REGISTRY: Record<string, DomainSpec> = {
     captionEn: "Dynamic Catalog Showcase with Tiered Volume Discounts",
     captionFa: "کاتالوگ محصولات با اعمال آنی تخفیف های پلکانی",
     altText: "Modern bright retail storefront display and product collection",
+    focalPoint: "center-right",
+    negativeSpace: "top-left",
+    mobileCropSafe: true,
+    visualEnergy: "dynamic",
   },
   real_estate_architecture: {
     photoId: "photo-1600585154340-be6161a56a0c",
@@ -262,6 +306,10 @@ const VAULT_REGISTRY: Record<string, DomainSpec> = {
     captionEn: "Prime Residential Penthouse Portfolio & Skyline View",
     captionFa: "پلان معماری پنت هاوس اختصاصی و چشم انداز پانوراما",
     altText: "Contemporary luxury architectural villa with warm ambient lighting",
+    focalPoint: "center",
+    negativeSpace: "top-third",
+    mobileCropSafe: true,
+    visualEnergy: "calm",
   },
   healthcare_hospital_medical: {
     photoId: "photo-1519494026892-80bbd2d6fd0d",
@@ -270,6 +318,10 @@ const VAULT_REGISTRY: Record<string, DomainSpec> = {
     captionEn: "FHIR-Compliant Electronic Health Record & Tele-Triage",
     captionFa: "پرونده الکترونیک سلامت و تریاژ هوشمند بالینی",
     altText: "Clean modern hospital corridor and clinical medical diagnostic facility",
+    focalPoint: "center-right",
+    negativeSpace: "left-half",
+    mobileCropSafe: true,
+    visualEnergy: "calm",
   },
   education_edtech_lms: {
     photoId: "photo-1523240795612-9a054b0db644",
@@ -278,6 +330,10 @@ const VAULT_REGISTRY: Record<string, DomainSpec> = {
     captionEn: "Adaptive Learning Graph & Mastery Certification Track",
     captionFa: "مسیر یادگیری انطباقی و گراف تسلط بر مهارت ها",
     altText: "University students collaborating with digital laptops and learning materials",
+    focalPoint: "center-right",
+    negativeSpace: "left-half",
+    mobileCropSafe: true,
+    visualEnergy: "focused",
   },
   creative_portfolio_agency: {
     photoId: "photo-1507238691740-187a5b1d37b8",
@@ -286,6 +342,10 @@ const VAULT_REGISTRY: Record<string, DomainSpec> = {
     captionEn: "Award-Winning Brand Identity & Design System Deliverable",
     captionFa: "نمونه کار هویت بصری جامع و سیستم طراحی برند",
     altText: "Designer workspace with sketches, brand typography, and laptop displays",
+    focalPoint: "center-left",
+    negativeSpace: "right-half",
+    mobileCropSafe: true,
+    visualEnergy: "dynamic",
   },
   media_editorial_magazine: {
     photoId: "photo-1505373877841-8d25f7d46678",
@@ -294,6 +354,10 @@ const VAULT_REGISTRY: Record<string, DomainSpec> = {
     captionEn: "Investigative Edition Cover • Independent Journalism",
     captionFa: "گزارش ویژه تحلیلی و روزنامه نگاری مستقل",
     altText: "Large keynote conference hall and editorial symposium auditorium",
+    focalPoint: "center-right",
+    negativeSpace: "top-left",
+    mobileCropSafe: true,
+    visualEnergy: "calm",
   },
   food_restaurant_cafe: {
     photoId: "photo-1555396273-367ea4eb4db5",
@@ -302,6 +366,10 @@ const VAULT_REGISTRY: Record<string, DomainSpec> = {
     captionEn: "Signature Seasonal Degustation Menu Presentation",
     captionFa: "معرفی منوی فصلی سرآشپز و هنر آشپزی ارگانیک",
     altText: "Gourmet dining restaurant interior with ambient warm chandeliers and tables",
+    focalPoint: "center",
+    negativeSpace: "top-third",
+    mobileCropSafe: true,
+    visualEnergy: "ambient",
   },
   travel_hospitality_tourism: {
     photoId: "photo-1566073771259-6a8506099945",
@@ -310,6 +378,10 @@ const VAULT_REGISTRY: Record<string, DomainSpec> = {
     captionEn: "Exclusive Coastal Villa Retreat & Private Heliport",
     captionFa: "ویلای ساحلی اختصاصی و چشم انداز طبیعی بکر",
     altText: "Luxury resort infinity pool overlooking tranquil coastal waters",
+    focalPoint: "bottom-right",
+    negativeSpace: "top-left",
+    mobileCropSafe: true,
+    visualEnergy: "ambient",
   },
   legal_compliance_law: {
     photoId: "photo-1589829545856-d10d557cf95f",
@@ -318,6 +390,10 @@ const VAULT_REGISTRY: Record<string, DomainSpec> = {
     captionEn: "Cross-Border Regulatory Compliance & Audit Assurance",
     captionFa: "ممیزی مقرراتی حقوقی بین المللی و تطبیق استانداردها",
     altText: "Classic brass Lady Justice scales and legal reference volumes in library",
+    focalPoint: "center-right",
+    negativeSpace: "left-half",
+    mobileCropSafe: true,
+    visualEnergy: "calm",
   },
   gaming_entertainment_streaming: {
     photoId: "photo-1542751371-adc38448a05e",
@@ -326,6 +402,10 @@ const VAULT_REGISTRY: Record<string, DomainSpec> = {
     captionEn: "Real-Time 4K Raytraced Stream & Sub-Millisecond Tickrate",
     captionFa: "استریم با کیفیت 4K و تاخیر شبکه نزدیک به صفر",
     altText: "High-end esports gaming battlestation with neon ambient RGB lighting",
+    focalPoint: "center",
+    negativeSpace: "bottom-third",
+    mobileCropSafe: true,
+    visualEnergy: "high",
   },
   automotive_ev_mobility: {
     photoId: "photo-1617814076367-b759c7d7e738",
@@ -334,6 +414,10 @@ const VAULT_REGISTRY: Record<string, DomainSpec> = {
     captionEn: "Silicon-Carbide 800V Powertrain & Telemetry Matrix",
     captionFa: "شاسی آیرودینامیک و سیستم محرکه پیشرفته ۸۰۰ ولت",
     altText: "Sleek aerodynamic electric sports car profile with laser LED headlights",
+    focalPoint: "center",
+    negativeSpace: "top-third",
+    mobileCropSafe: true,
+    visualEnergy: "dynamic",
   },
   logistics_supply_chain: {
     photoId: "photo-1586528116311-ad8dd3c8310d",
@@ -342,6 +426,10 @@ const VAULT_REGISTRY: Record<string, DomainSpec> = {
     captionEn: "Autonomous Global Freight Corridor & Fleet Tracking",
     captionFa: "مسیریابی هوشمند ناوگان ترانزیت و نظارت بر بار",
     altText: "High-bay automated logistics fulfillment warehouse with organized cargo pallets",
+    focalPoint: "center-left",
+    negativeSpace: "right-half",
+    mobileCropSafe: true,
+    visualEnergy: "focused",
   },
   energy_greentech_sustainability: {
     photoId: "photo-1497435334941-8c899ee9e8e9",
@@ -350,6 +438,10 @@ const VAULT_REGISTRY: Record<string, DomainSpec> = {
     captionEn: "Megawatt Solar Array & Battery Energy Storage System (BESS)",
     captionFa: "نیروگاه خورشیدی متصل به شبکه و ذخیره سازی انرژی",
     altText: "Expansive photovoltaic solar farm panels basking in bright natural sunlight",
+    focalPoint: "bottom-center",
+    negativeSpace: "top-half",
+    mobileCropSafe: true,
+    visualEnergy: "calm",
   },
   nonprofit_charity_social: {
     photoId: "photo-1488521787991-ed7bbaae773c",
@@ -358,6 +450,10 @@ const VAULT_REGISTRY: Record<string, DomainSpec> = {
     captionEn: "On-the-Ground Direct Clean Water Installation & Solar Pump",
     captionFa: "پروژه میدانی دسترسی مستقیم به آب پاک و توسعه پایدار",
     altText: "Heartwarming community volunteers and children engaged in humanitarian support",
+    focalPoint: "center",
+    negativeSpace: "bottom-third",
+    mobileCropSafe: true,
+    visualEnergy: "calm",
   },
   personal_branding_creator: {
     photoId: "photo-1534528741775-53994a69daeb",
@@ -366,6 +462,10 @@ const VAULT_REGISTRY: Record<string, DomainSpec> = {
     captionEn: "Curated Thought-Leadership Digest & Audio Studio Edition",
     captionFa: "استودیوی اختصاصی تولید محتوای تخصصی و خبرنامه",
     altText: "High-fashion executive portrait with natural studio lighting and warm tones",
+    focalPoint: "center",
+    negativeSpace: "left-half",
+    mobileCropSafe: true,
+    visualEnergy: "calm",
   },
   cybersecurity_identity_auth: {
     photoId: "photo-1563986768609-322da13575f3",
@@ -374,6 +474,10 @@ const VAULT_REGISTRY: Record<string, DomainSpec> = {
     captionEn: "Continuous Behavioral Anomaly Detection & Zero-Trust Shield",
     captionFa: "سپر دفاعی احراز هویت بدون گذرواژه و پایش تهدیدات",
     altText: "Modern cybersecurity operations screen monitoring network traffic and digital locks",
+    focalPoint: "center-right",
+    negativeSpace: "left-half",
+    mobileCropSafe: true,
+    visualEnergy: "focused",
   },
   general_modern_saas: {
     photoId: "photo-1551288049-bebda4e38f71",
@@ -382,6 +486,10 @@ const VAULT_REGISTRY: Record<string, DomainSpec> = {
     captionEn: "Autonomous Multi-Agent Workflow Engine & Automation Matrix",
     captionFa: "موتور خودکارسازی فرآیندهای ابری و هوش مصنوعی مولد",
     altText: "Interactive modern cloud SaaS data analytics charts and collaboration platform",
+    focalPoint: "center-right",
+    negativeSpace: "left-half",
+    mobileCropSafe: true,
+    visualEnergy: "calm",
   },
 };
 

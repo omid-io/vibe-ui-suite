@@ -1,0 +1,433 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://vibe-ui.io/schemas/design_genome.schema.json",
+  "title": "DesignGenomeCatalogOrItem",
+  "description": "Canonical Design Genome 2.0 Schema defining visual styles, palettes, geometry, typography, and anti-slop constraints.",
+  "oneOf": [
+    {
+      "$ref": "#/definitions/StyleGenome"
+    },
+    {
+      "$ref": "#/definitions/DesignGenomeCatalog"
+    }
+  ],
+  "definitions": {
+    "StatusTokens": {
+      "type": "object",
+      "required": [
+        "success",
+        "warning",
+        "error",
+        "info"
+      ],
+      "properties": {
+        "success": {
+          "type": "string",
+          "description": "OKLCH color token for success states"
+        },
+        "warning": {
+          "type": "string",
+          "description": "OKLCH color token for warning states"
+        },
+        "error": {
+          "type": "string",
+          "description": "OKLCH color token for error states"
+        },
+        "info": {
+          "type": "string",
+          "description": "OKLCH color token for informational states"
+        }
+      },
+      "additionalProperties": false
+    },
+    "PaletteSpecification": {
+      "type": "object",
+      "required": [
+        "canvas",
+        "surface",
+        "border",
+        "text_primary",
+        "text_secondary",
+        "accent",
+        "accent_hover",
+        "status_tokens"
+      ],
+      "properties": {
+        "canvas": {
+          "type": "string",
+          "description": "Base canvas background in OKLCH format"
+        },
+        "surface": {
+          "type": "string",
+          "description": "Primary card/container surface in OKLCH format"
+        },
+        "surface_elevated": {
+          "type": "string",
+          "description": "Floating/elevated surface in OKLCH format"
+        },
+        "border": {
+          "type": "string",
+          "description": "Subtle border token in OKLCH format"
+        },
+        "text_primary": {
+          "type": "string",
+          "description": "High-contrast primary typography in OKLCH format"
+        },
+        "text_secondary": {
+          "type": "string",
+          "description": "Secondary muted typography in OKLCH format"
+        },
+        "accent": {
+          "type": "string",
+          "description": "Vibrant brand accent in OKLCH format"
+        },
+        "accent_hover": {
+          "type": "string",
+          "description": "Interactive hover state in OKLCH format"
+        },
+        "status_tokens": {
+          "$ref": "#/definitions/StatusTokens"
+        }
+      },
+      "additionalProperties": true
+    },
+    "GeometrySpecification": {
+      "type": "object",
+      "required": [
+        "border_radius",
+        "border_weight",
+        "shadow_style"
+      ],
+      "properties": {
+        "border_radius": {
+          "type": "string",
+          "description": "CSS border radius (e.g. 0px, 6px, 12px, 9999px)"
+        },
+        "border_weight": {
+          "type": "string",
+          "description": "Border line width (e.g. 0px, 1px, 2px)"
+        },
+        "shadow_style": {
+          "type": "string",
+          "enum": [
+            "none",
+            "micro_shadow",
+            "diffused_soft",
+            "hard_offset_shadow",
+            "specular_glow",
+            "elevated_float"
+          ]
+        },
+        "border_style": {
+          "type": "string",
+          "default": "solid"
+        }
+      },
+      "additionalProperties": true
+    },
+    "TypographySpecification": {
+      "type": "object",
+      "required": [
+        "heading_font",
+        "body_font",
+        "mono_font",
+        "scale_ratio"
+      ],
+      "properties": {
+        "heading_font": {
+          "type": "string",
+          "description": "Display/Hero typeface name"
+        },
+        "body_font": {
+          "type": "string",
+          "description": "Body/Copy typeface name"
+        },
+        "mono_font": {
+          "type": "string",
+          "description": "Monospace typeface name"
+        },
+        "scale_ratio": {
+          "type": "number",
+          "minimum": 1.0,
+          "maximum": 2.0,
+          "description": "Modular typography scale ratio"
+        }
+      },
+      "additionalProperties": true
+    },
+    "MotionSpecification": {
+      "type": "object",
+      "required": [
+        "spring_physics",
+        "easing",
+        "duration_scale"
+      ],
+      "properties": {
+        "spring_physics": {
+          "type": "object",
+          "required": [
+            "stiffness",
+            "damping",
+            "mass"
+          ],
+          "properties": {
+            "stiffness": {
+              "type": "number",
+              "minimum": 50,
+              "maximum": 600
+            },
+            "damping": {
+              "type": "number",
+              "minimum": 5,
+              "maximum": 100
+            },
+            "mass": {
+              "type": "number",
+              "minimum": 0.1,
+              "maximum": 5.0
+            }
+          },
+          "additionalProperties": false
+        },
+        "easing": {
+          "type": "string",
+          "description": "CSS cubic-bezier curve string"
+        },
+        "duration_scale": {
+          "type": [
+            "number",
+            "string"
+          ],
+          "description": "Temporal factor or duration in ms"
+        }
+      },
+      "additionalProperties": true
+    },
+    "AntiSlopConstraints": {
+      "type": "object",
+      "required": [
+        "banned_gradients",
+        "max_card_limits",
+        "forbidden_tropes"
+      ],
+      "properties": {
+        "banned_gradients": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "List of clich\u00e9d, muddy, or ungrounded gradient patterns forbidden in this style"
+        },
+        "max_card_limits": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 24,
+          "description": "Maximum allowable card containers per view to prevent repetitive bento slop"
+        },
+        "forbidden_tropes": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "Explicit anti-patterns (e.g. meaningless sparkle icons, ungrounded 3D clay bubbles)"
+        },
+        "anti_bento_rules": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "Directives enforcing asymmetric, timeline, or operational flows over repetitive boxes"
+        }
+      },
+      "additionalProperties": true
+    },
+    "StyleGenome": {
+      "type": "object",
+      "required": [
+        "style_id",
+        "name",
+        "domains",
+        "emotional_tone",
+        "geometry",
+        "typography",
+        "palette",
+        "spacing_density",
+        "surfaces",
+        "motion",
+        "anti_slop_constraints"
+      ],
+      "properties": {
+        "style_id": {
+          "type": "string",
+          "pattern": "^[a-z0-9_]+$"
+        },
+        "name": {
+          "type": "string"
+        },
+        "domains": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "minItems": 1
+        },
+        "emotional_tone": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "minItems": 1
+        },
+        "geometry": {
+          "$ref": "#/definitions/GeometrySpecification"
+        },
+        "typography": {
+          "$ref": "#/definitions/TypographySpecification"
+        },
+        "palette": {
+          "$ref": "#/definitions/PaletteSpecification"
+        },
+        "secondary_oled": {
+          "$ref": "#/definitions/PaletteSpecification"
+        },
+        "spacing_density": {
+          "type": "string",
+          "enum": [
+            "compact",
+            "balanced",
+            "airy"
+          ]
+        },
+        "surfaces": {
+          "type": "string",
+          "enum": [
+            "flat",
+            "frosted_glass",
+            "tactile",
+            "elevated"
+          ]
+        },
+        "motion": {
+          "$ref": "#/definitions/MotionSpecification"
+        },
+        "anti_slop_constraints": {
+          "$ref": "#/definitions/AntiSlopConstraints"
+        }
+      },
+      "additionalProperties": true
+    },
+    "DomainPaletteEntry": {
+      "type": "object",
+      "required": [
+        "id",
+        "name",
+        "best_for",
+        "canonical_mode",
+        "light",
+        "dark_oled",
+        "contrast_metrics"
+      ],
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "best_for": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "mood": {
+          "type": "string"
+        },
+        "canonical_mode": {
+          "type": "string",
+          "enum": [
+            "light"
+          ]
+        },
+        "light": {
+          "$ref": "#/definitions/PaletteSpecification"
+        },
+        "dark_oled": {
+          "$ref": "#/definitions/PaletteSpecification"
+        },
+        "contrast_metrics": {
+          "type": "object",
+          "required": [
+            "light_contrast",
+            "dark_contrast"
+          ],
+          "properties": {
+            "light_contrast": {
+              "type": "number",
+              "minimum": 4.5
+            },
+            "dark_contrast": {
+              "type": "number",
+              "minimum": 4.5
+            }
+          }
+        }
+      },
+      "additionalProperties": true
+    },
+    "DesignGenomeCatalog": {
+      "type": "object",
+      "required": [
+        "version",
+        "updated_at",
+        "styles",
+        "palettes"
+      ],
+      "properties": {
+        "version": {
+          "type": "string"
+        },
+        "updated_at": {
+          "type": "string"
+        },
+        "catalog_summary": {
+          "type": "string"
+        },
+        "styles": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/StyleGenome"
+          },
+          "minItems": 80
+        },
+        "palettes": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/DomainPaletteEntry"
+          },
+          "minItems": 150
+        },
+        "typography_systems": {
+          "type": "array",
+          "items": {
+            "type": "object"
+          }
+        },
+        "composition_archetypes": {
+          "type": "array",
+          "items": {
+            "type": "object"
+          }
+        },
+        "benchmarks": {
+          "type": "array",
+          "items": {
+            "type": "object"
+          }
+        }
+      },
+      "additionalProperties": true
+    }
+  },
+  "type": "object"
+}

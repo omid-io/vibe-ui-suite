@@ -347,15 +347,20 @@
 }
 
 /* Tailwind CSS v4 Motion & Transition Utilities */
-@utility transition-vibe-spring {
+@utility ease-vibe-spring {
   transition-timing-function: cubic-bezier(0.34, 1.56, 0.64, 1);
 }
 
-@utility transition-vibe-snap {
+@utility ease-vibe-snap {
   transition-timing-function: cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-@utility transition-vibe-glide {
+@utility ease-vibe-glide {
   transition-timing-function: cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+@utility vibe-spring {
+  transition-property: all;
+  transition-timing-function: cubic-bezier(0.34, 1.56, 0.64, 1);
 }
 

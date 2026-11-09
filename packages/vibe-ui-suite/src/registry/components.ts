@@ -13,6 +13,458 @@ export interface ComponentTemplate {
 
 export const COMPONENT_REGISTRY: Record<string, ComponentTemplate> = {
   // ─── AI Contracts & Observation Primitives ───────────────────────────
+  'streaming-text': {
+    name: 'streaming-text',
+    filename: 'AiStreamingText.tsx',
+    category: 'ai-contracts',
+    description: 'Streaming token text display with smooth cursor, telemetry speeds and stop/resume controls',
+    code: `'use client';
+
+import React, { useState } from 'react';
+
+export interface AiStreamingTextProps {
+  initialText?: string;
+  modelName?: string;
+  className?: string;
+}
+
+export function AiStreamingText({
+  initialText = 'The generated design system establishes a high-fidelity light-first canonical foundation, mapping semantic OKLCH tokens to CSS custom properties with strict WCAG AA contrast compliance.',
+  modelName = 'claude-3-5-sonnet',
+  className = '',
+}: AiStreamingTextProps) {
+  const [text, setText] = useState(initialText);
+  const [isPaused, setIsPaused] = useState(false);
+  const [autoScroll, setAutoScroll] = useState(true);
+  const [copied, setCopied] = useState(false);
+
+  const handleCopy = () => {
+    if (typeof navigator !== 'undefined') {
+      navigator.clipboard.writeText(text);
+      setCopied(true);
+      setTimeout(() => setCopied(false), 2000);
+    }
+  };
+
+  return (
+    <div className={\`w-full max-w-2xl mx-auto rounded-2xl border border-slate-200 dark:border-slate-800 bg-white/90 dark:bg-slate-900/90 backdrop-blur-md shadow-md p-5 text-slate-900 dark:text-slate-100 space-y-4 \${className}\`}>
+      <div className="flex items-center justify-between pb-3 border-b border-slate-200 dark:border-slate-800 text-xs">
+        <div className="flex items-center gap-2">
+          <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
+          <span className="font-mono font-medium text-slate-500 dark:text-slate-400">{modelName}</span>
+        </div>
+        <div className="flex items-center gap-3 font-mono text-[11px] text-slate-500 dark:text-slate-400">
+          <span><bdi>48.2 tok/s</bdi></span>
+          <span>•</span>
+          <span><bdi>{text.split(' ').length * 2} tokens</bdi></span>
+        </div>
+      </div>
+
+      <div className="text-sm leading-relaxed font-sans text-slate-800 dark:text-slate-200 min-h-[4rem]">
+        <p>
+          {text}
+          <span className="inline-block w-1.5 h-4.5 bg-indigo-600 dark:bg-indigo-400 ms-1 align-middle rounded-sm animate-pulse shadow-[0_0_8px_rgba(99,102,241,0.6)]" />
+        </p>
+      </div>
+
+      <div className="flex items-center justify-between pt-3 border-t border-slate-200 dark:border-slate-800 text-xs">
+        <div className="flex items-center gap-2">
+          <button
+            type="button"
+            onClick={() => setIsPaused(!isPaused)}
+            className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg border border-slate-200 dark:border-slate-700 bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 text-slate-900 dark:text-slate-100 font-medium ease-vibe-spring transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-indigo-500"
+          >
+            {isPaused ? 'Resume' : 'Pause'}
+          </button>
+          <button
+            type="button"
+            className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg border border-rose-500/30 bg-rose-500/10 hover:bg-rose-500/20 text-rose-600 dark:text-rose-400 font-medium ease-vibe-spring transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-rose-500"
+          >
+            Stop
+          </button>
+        </div>
+
+        <div className="flex items-center gap-3">
+          <label className="inline-flex items-center gap-1.5 text-slate-500 dark:text-slate-400 text-[11px] cursor-pointer select-none">
+            <input
+              type="checkbox"
+              checked={autoScroll}
+              onChange={(e) => setAutoScroll(e.target.checked)}
+              className="rounded border-slate-300 text-indigo-600 focus:ring-indigo-500 w-3.5 h-3.5"
+            />
+            <span>Auto-scroll</span>
+          </label>
+          <button
+            type="button"
+            onClick={handleCopy}
+            className="p-1.5 rounded-lg text-slate-500 hover:text-slate-900 dark:hover:text-white hover:bg-slate-100 dark:hover:bg-slate-800 ease-vibe-spring transition-all"
+            title="Copy to clipboard"
+          >
+            {copied ? '✓' : 'Copy'}
+          </button>
+        </div>
+      </div>
+    </div>
+  );
+}
+`,
+  },
+  'thinking-accordion': {
+    name: 'thinking-accordion',
+    filename: 'AiThinkingAccordion.tsx',
+    category: 'ai-contracts',
+    description: 'Collapsible thinking accordion with CSS grid 0fr -> 1fr spring transition & elapsed timer',
+    code: `'use client';
+
+import React, { useState } from 'react';
+
+export interface ThinkingTimelineStep {
+  id: string;
+  label: string;
+  latency?: string;
+  status: 'completed' | 'running' | 'pending';
+}
+
+export interface AiThinkingAccordionProps {
+  initialOpen?: boolean;
+  title?: string;
+  elapsedSeconds?: number;
+  steps?: ThinkingTimelineStep[];
+  className?: string;
+}
+
+const DEFAULT_TIMELINE: ThinkingTimelineStep[] = [
+  { id: '1', label: 'Parsed prompt intent & calculated ambiguity budget', latency: '18ms', status: 'completed' },
+  { id: '2', label: 'Audited color tokens in OKLCH space (contrast >= 4.5:1)', latency: '42ms', status: 'completed' },
+  { id: '3', label: 'Synthesizing responsive Tailwind v4 grid layout', status: 'running' },
+];
+
+export function AiThinkingAccordion({
+  initialOpen = true,
+  title = 'Reasoning Architecture',
+  elapsedSeconds = 2.4,
+  steps = DEFAULT_TIMELINE,
+  className = '',
+}: AiThinkingAccordionProps) {
+  const [open, setOpen] = useState(initialOpen);
+
+  return (
+    <div className={\`w-full max-w-2xl mx-auto rounded-2xl border border-slate-200 dark:border-slate-800 bg-white/80 dark:bg-slate-900/80 backdrop-blur-md shadow-sm overflow-hidden text-xs font-sans \${className}\`}>
+      <button
+        type="button"
+        onClick={() => setOpen(!open)}
+        aria-expanded={open}
+        className="w-full flex items-center justify-between px-4 py-3 cursor-pointer select-none text-left hover:bg-slate-50 dark:hover:bg-slate-800/50 ease-vibe-spring transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-indigo-500"
+      >
+        <div className="flex items-center gap-3">
+          <span className="relative flex h-3 w-3">
+            <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-indigo-500 opacity-75" />
+            <span className="relative inline-flex rounded-full h-3 w-3 bg-indigo-600 dark:bg-indigo-400" />
+          </span>
+          <span className="font-semibold font-mono text-slate-900 dark:text-slate-100 flex items-center gap-2">
+            <span>{title}</span>
+            <span className="text-[10px] font-normal px-2 py-0.5 rounded-full bg-indigo-500/10 text-indigo-600 dark:text-indigo-400 border border-indigo-500/20">Active</span>
+          </span>
+        </div>
+        <div className="flex items-center gap-3">
+          <span className="font-mono text-[11px] text-slate-500 dark:text-slate-400 flex items-center gap-1.5 bg-slate-100 dark:bg-slate-800 px-2 py-0.5 rounded-md border border-slate-200 dark:border-slate-700">
+            <bdi>Thinking ({elapsedSeconds}s)...</bdi>
+          </span>
+          <svg className={\`w-4 h-4 text-slate-400 ease-vibe-spring transition-all duration-300 transform \${open ? 'rotate-180' : ''}\`} fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7" />
+          </svg>
+        </div>
+      </button>
+
+      <div className={\`grid ease-vibe-spring transition-all duration-300 \${open ? 'grid-rows-[1fr]' : 'grid-rows-[0fr]'}\`}>
+        <div className="overflow-hidden">
+          <div className="px-4 pb-4 pt-1 space-y-2 border-t border-slate-200 dark:border-slate-800 font-mono text-[11px]">
+            {steps.map((s) => (
+              <div key={s.id} className="flex items-start justify-between p-2 rounded-lg bg-slate-50 dark:bg-slate-800/40 border border-slate-200/60 dark:border-slate-700/50">
+                <div className="flex items-center gap-2">
+                  {s.status === 'completed' && <span className="w-4 h-4 rounded-full bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 flex items-center justify-center text-[10px] font-bold">✓</span>}
+                  {s.status === 'running' && <div className="w-3.5 h-3.5 rounded-full border-2 border-indigo-600 dark:border-indigo-400 border-t-transparent animate-spin" />}
+                  {s.status === 'pending' && <span className="w-2 h-2 rounded-full bg-slate-400 ml-1 mr-1" />}
+                  <span className="text-slate-800 dark:text-slate-200">{s.label}</span>
+                </div>
+                {s.latency && <span className="text-slate-400 text-[10px]">{s.latency}</span>}
+                {s.status === 'running' && <span className="text-indigo-600 dark:text-indigo-400 font-bold text-[10px]">running</span>}
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
+`,
+  },
+  'tool-chip': {
+    name: 'tool-chip',
+    filename: 'AiToolExecutionCard.tsx',
+    category: 'ai-contracts',
+    description: 'Tool execution card with multi-state badges (running, success, error) & argument preview',
+    code: `'use client';
+
+import React, { useState } from 'react';
+
+export interface AiToolExecutionCardProps {
+  name?: string;
+  args?: Record<string, any>;
+  status?: 'running' | 'success' | 'error';
+  latencyMs?: number;
+  outputSummary?: string;
+  errorMessage?: string;
+  className?: string;
+}
+
+export function AiToolExecutionCard({
+  name = 'vector_search',
+  args = { query: 'Tailwind v4 @theme configuration', limit: 5 },
+  status = 'success',
+  latencyMs = 28,
+  outputSummary = 'Returned 5 high-confidence chunks (score >= 0.92)',
+  errorMessage = 'Connection timeout to embedding endpoint',
+  className = '',
+}: AiToolExecutionCardProps) {
+  const [expanded, setExpanded] = useState(false);
+
+  return (
+    <div className={\`w-full max-w-lg mx-auto rounded-xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 p-4 shadow-sm text-xs space-y-3 font-sans \${className}\`}>
+      <div className="flex items-center justify-between">
+        <div className="flex items-center gap-2">
+          <span className="p-1.5 rounded-lg bg-indigo-500/10 text-indigo-600 dark:text-indigo-400">
+            <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" />
+            </svg>
+          </span>
+          <span className="font-mono font-bold text-slate-900 dark:text-slate-100">{name}()</span>
+        </div>
+
+        {status === 'running' && (
+          <span className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-indigo-500/10 text-indigo-600 dark:text-indigo-400 text-[10px] font-mono font-bold border border-indigo-500/20">
+            <span className="w-2 h-2 rounded-full border-2 border-indigo-600 dark:border-indigo-400 border-t-transparent animate-spin" />
+            running {latencyMs}ms
+          </span>
+        )}
+        {status === 'success' && (
+          <span className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 text-[10px] font-mono font-bold border border-emerald-500/20">
+            ✓ 200 OK • {latencyMs}ms
+          </span>
+        )}
+        {status === 'error' && (
+          <span className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-rose-500/10 text-rose-600 dark:text-rose-400 text-[10px] font-mono font-bold border border-rose-500/20">
+            ⚠ Failed
+          </span>
+        )}
+      </div>
+
+      <div className="rounded-lg bg-slate-50 dark:bg-slate-800/60 p-2.5 font-mono text-[11px] text-slate-600 dark:text-slate-400">
+        <span className="text-slate-900 dark:text-slate-200 font-semibold">Args:</span> {JSON.stringify(args)}
+      </div>
+
+      {status === 'error' && (
+        <div className="p-2.5 rounded-lg bg-rose-50 dark:bg-rose-950/30 border border-rose-200 dark:border-rose-800 text-rose-700 dark:text-rose-300 font-mono text-[11px]">
+          {errorMessage}
+        </div>
+      )}
+
+      {status === 'success' && (
+        <div className="flex items-center justify-between text-[11px] text-slate-500 dark:text-slate-400 pt-1 border-t border-slate-100 dark:border-slate-800">
+          <span>{outputSummary}</span>
+          <button
+            type="button"
+            onClick={() => setExpanded(!expanded)}
+            className="text-indigo-600 dark:text-indigo-400 hover:underline font-mono"
+          >
+            {expanded ? 'Hide Payload' : 'Inspect Payload →'}
+          </button>
+        </div>
+      )}
+    </div>
+  );
+}
+`,
+  },
+  'artifact-canvas': {
+    name: 'artifact-canvas',
+    filename: 'AiArtifactWorkspace.tsx',
+    category: 'ai-contracts',
+    description: 'Interactive artifact canvas split-pane workspace with live preview, code inspection and diff viewer',
+    code: `'use client';
+
+import React, { useState } from 'react';
+
+export interface AiArtifactWorkspaceProps {
+  title?: string;
+  version?: string;
+  className?: string;
+}
+
+export function AiArtifactWorkspace({
+  title = 'DesignGenomeHero.tsx',
+  version = 'v2.1',
+  className = '',
+}: AiArtifactWorkspaceProps) {
+  const [activeTab, setActiveTab] = useState<'preview' | 'code' | 'diff'>('preview');
+
+  return (
+    <div className={\`w-full max-w-5xl mx-auto grid grid-cols-1 lg:grid-cols-12 rounded-2xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-950 overflow-hidden shadow-2xl min-h-[500px] font-sans \${className}\`}>
+      <div className="lg:col-span-5 flex flex-col justify-between border-b lg:border-b-0 lg:border-r border-slate-200 dark:border-slate-800 bg-slate-50/50 dark:bg-slate-900/50 p-4 space-y-4">
+        <div className="space-y-3">
+          <div className="flex items-center justify-between pb-3 border-b border-slate-200 dark:border-slate-800 text-xs">
+            <div className="flex items-center gap-2">
+              <span className="w-2.5 h-2.5 rounded-full bg-indigo-600 dark:bg-indigo-400 animate-pulse" />
+              <span className="font-bold text-slate-900 dark:text-slate-100 font-mono">Vibe Agent Swarm</span>
+            </div>
+            <span className="text-[11px] font-mono text-slate-500">Live Workspace</span>
+          </div>
+          <div className="p-3 rounded-xl bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-xs text-slate-800 dark:text-slate-200 leading-relaxed">
+            <p>Artifact synthesized successfully with Tailwind CSS v4 @theme tokens.</p>
+          </div>
+        </div>
+      </div>
+
+      <div className="lg:col-span-7 flex flex-col bg-white dark:bg-slate-900">
+        <div className="flex items-center justify-between px-4 py-2.5 border-b border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-800/50 text-xs">
+          <div className="flex items-center gap-3">
+            <span className="font-mono font-bold text-slate-900 dark:text-slate-100">{title}</span>
+            <span className="px-2 py-0.5 rounded-md bg-indigo-500/10 text-indigo-600 dark:text-indigo-400 font-mono text-[10px] font-semibold">{version}</span>
+          </div>
+
+          <div className="flex items-center rounded-lg bg-slate-200/70 dark:bg-slate-800 p-0.5 text-[11px] font-medium text-slate-600 dark:text-slate-400">
+            <button
+              onClick={() => setActiveTab('preview')}
+              className={\`px-2.5 py-1 rounded-md transition-all \${activeTab === 'preview' ? 'bg-white dark:bg-slate-700 text-slate-900 dark:text-white shadow-sm font-semibold' : ''}\`}
+            >
+              Preview
+            </button>
+            <button
+              onClick={() => setActiveTab('code')}
+              className={\`px-2.5 py-1 rounded-md transition-all \${activeTab === 'code' ? 'bg-white dark:bg-slate-700 text-slate-900 dark:text-white shadow-sm font-semibold' : ''}\`}
+            >
+              Code
+            </button>
+            <button
+              onClick={() => setActiveTab('diff')}
+              className={\`px-2.5 py-1 rounded-md transition-all \${activeTab === 'diff' ? 'bg-white dark:bg-slate-700 text-slate-900 dark:text-white shadow-sm font-semibold' : ''}\`}
+            >
+              Diff
+            </button>
+          </div>
+        </div>
+
+        <div className="flex-1 p-6 flex items-center justify-center bg-slate-50/50 dark:bg-slate-950/50">
+          {activeTab === 'preview' && (
+            <div className="w-full max-w-sm p-6 rounded-2xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 shadow-xl text-center space-y-3">
+              <h3 className="text-base font-bold text-slate-900 dark:text-white">Active Component Preview</h3>
+              <p className="text-xs text-slate-500">Live interactive rendering in split canvas.</p>
+            </div>
+          )}
+          {activeTab === 'code' && (
+            <pre className="w-full p-4 rounded-xl bg-slate-900 text-slate-100 font-mono text-xs overflow-x-auto">
+              <code>export function Component() &#123; return &lt;div&gt;Vibe UI&lt;/div&gt;; &#125;</code>
+            </pre>
+          )}
+          {activeTab === 'diff' && (
+            <div className="w-full p-4 rounded-xl bg-slate-900 text-xs font-mono space-y-1">
+              <div className="text-rose-400 bg-rose-500/10 px-2 py-1 rounded">- &lt;div className=&quot;transition-vibe-spring&quot;&gt;</div>
+              <div className="text-emerald-400 bg-emerald-500/10 px-2 py-1 rounded">+ &lt;div className=&quot;ease-vibe-spring transition-all&quot;&gt;</div>
+            </div>
+          )}
+        </div>
+      </div>
+    </div>
+  );
+}
+`,
+  },
+  'approval-card': {
+    name: 'approval-card',
+    filename: 'AiApprovalCard.tsx',
+    category: 'ai-contracts',
+    description: 'Human-in-the-loop mutation approval card with severity tiers and parameter diff',
+    code: `'use client';
+
+import React, { useState } from 'react';
+
+export interface AiApprovalCardProps {
+  title?: string;
+  severity?: 'low' | 'moderate' | 'critical';
+  diffAddition?: string;
+  diffRemoval?: string;
+  onApprove?: () => void;
+  onDecline?: () => void;
+  className?: string;
+}
+
+export function AiApprovalCard({
+  title = 'Approve Database Schema Migration',
+  severity = 'critical',
+  diffAddition = '+ ALTER TABLE users ADD COLUMN passkey_credential_id VARCHAR(255);',
+  diffRemoval = '- ALTER TABLE users DROP COLUMN legacy_auth_hash;',
+  onApprove,
+  onDecline,
+  className = '',
+}: AiApprovalCardProps) {
+  const [decided, setDecided] = useState<'approved' | 'declined' | null>(null);
+
+  if (decided) {
+    return (
+      <div className="p-4 rounded-xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 text-xs font-mono">
+        Action {decided.toUpperCase()} by user.
+      </div>
+    );
+  }
+
+  return (
+    <div className={\`w-full max-w-xl mx-auto rounded-2xl border-2 border-amber-500/50 bg-white dark:bg-slate-900 p-6 shadow-2xl space-y-4 font-sans text-slate-900 dark:text-slate-100 \${className}\`}>
+      <div className="flex items-start gap-3">
+        <div className="p-2.5 rounded-xl bg-amber-500/10 text-amber-600 dark:text-amber-400 border border-amber-500/20">
+          <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
+          </svg>
+        </div>
+        <div>
+          <span className="px-2 py-0.5 rounded text-[10px] font-bold font-mono tracking-wider bg-amber-500/20 text-amber-700 dark:text-amber-300 border border-amber-500/30">
+            {severity.toUpperCase()} PERMISSION GATE
+          </span>
+          <h4 className="text-base font-bold mt-1">{title}</h4>
+        </div>
+      </div>
+
+      <div className="rounded-xl border border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-800/60 p-3 font-mono text-xs overflow-x-auto space-y-1">
+        <div className="text-rose-600 dark:text-rose-400 bg-rose-500/10 px-2 py-0.5 rounded">{diffRemoval}</div>
+        <div className="text-emerald-600 dark:text-emerald-400 bg-emerald-500/10 px-2 py-0.5 rounded">{diffAddition}</div>
+      </div>
+
+      <div className="flex items-center justify-end gap-2.5 pt-2">
+        <button
+          type="button"
+          onClick={() => {
+            setDecided('declined');
+            onDecline?.();
+          }}
+          className="px-4 py-2 rounded-xl text-xs font-semibold border border-slate-300 dark:border-slate-700 bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 text-slate-800 dark:text-slate-200 ease-vibe-spring transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-slate-400"
+        >
+          Decline (Esc)
+        </button>
+        <button
+          type="button"
+          onClick={() => {
+            setDecided('approved');
+            onApprove?.();
+          }}
+          className="px-5 py-2 rounded-xl text-xs font-bold bg-amber-500 text-slate-950 hover:bg-amber-400 shadow-lg shadow-amber-500/20 ease-vibe-spring transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-amber-500"
+        >
+          Approve & Execute (↵)
+        </button>
+      </div>
+    </div>
+  );
+}
+`,
+  },
   'thinking-drawer': {
     name: 'thinking-drawer',
     filename: 'AiThinkingDrawer.tsx',

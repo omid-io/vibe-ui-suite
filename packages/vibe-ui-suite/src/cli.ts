@@ -3,12 +3,20 @@
 import * as fs from 'fs';
 import * as path from 'path';
 import * as readline from 'readline';
+import { spawnSync } from 'child_process';
 import { COMPONENT_REGISTRY } from './registry/components';
 import { VISUAL_CHEMISTRIES } from './index';
 import { auditCode } from './audit';
 import { startMcpServer } from './mcp';
 
 const VERSION = '6.5.1';
+
+interface SwarmCliOptions {
+  output?: string;
+  style?: string;
+  format?: 'html' | 'tsx';
+  json?: boolean;
+}
 
 interface CliOptions {
   force: boolean;
@@ -32,6 +40,8 @@ function printHelp() {
   vibe-ui <command> [options]
 
 \x1b[1mCOMMANDS:\x1b[0m
+  \x1b[32mswarm [prompt]\x1b[0m     Run the 5-phase Foreman Multi-Agent Swarm from prompt to verified UI
+  \x1b[32mrun [prompt]\x1b[0m       Alias for swarm command
   \x1b[32minit\x1b[0m               Initialize Vibe UI contracts, 11 paradigm tokens & AI rules in current project
   \x1b[32msync\x1b[0m               Synchronize existing AI contracts to canonical v${VERSION} master rules
   \x1b[32minstall-skills\x1b[0m     Install or update Vibe UI agent skills in .agents/skills/
@@ -42,6 +52,10 @@ function printHelp() {
   \x1b[32mmcp\x1b[0m                 Start standard Model Context Protocol (MCP) JSON-RPC stdio server
 
 \x1b[1mOPTIONS:\x1b[0m
+  -o, --output <file> Target output file path (for swarm)
+  -s, --style <name>  Style chemistry override (for swarm)
+  --format <fmt>      Output format: html or tsx (default: html)
+  --json              Output execution results strictly as JSON
   -f, --force        Overwrite existing files (creates automated .bak backups)
   -y, --yes          Non-interactive mode (use defaults without prompting)
   --chemistry <1-5>  Select visual chemistry in non-interactive mode
@@ -51,6 +65,8 @@ function printHelp() {
   -h, --help         Show help menu
 
 \x1b[1mEXAMPLES:\x1b[0m
+  npx vibe-ui-suite swarm "Modern Dark Luxury Real Estate Showcase"
+  npx vibe-ui-suite swarm "AI Developer Platform" -o landing.html --format html
   npx vibe-ui-suite init
   npx vibe-ui-suite init -y
   npx vibe-ui-suite sync
@@ -336,12 +352,41 @@ async function handleInit(options: CliOptions) {
     if (res.written) createdFiles.push('AGENTS.md');
   }
 
-  // 4. Generate Dual-Theme CSS Tokens file safely
-  const cssContent = `:root {
-  /* Vibe UI Chemistry: ${selectedChem.name} (${selectedChem.id}) - Light Theme */
+  // 4. Generate Dual-Theme CSS Tokens file safely (Tailwind CSS v4 @theme Block Standard)
+  const cssContent = `@theme {
+  /* OKLCH Perceptual Colors — Semantic Palette */
+  --color-vibe-canvas: var(--vibe-canvas);
+  --color-vibe-surface: var(--vibe-surface);
+  --color-vibe-border: var(--vibe-border);
+  --color-vibe-primary: var(--vibe-primary-accent);
+  --color-vibe-primary-accent: var(--vibe-primary-accent);
+  --color-vibe-on-primary: var(--vibe-on-primary);
+  --color-vibe-text-primary: var(--vibe-text-primary);
+  --color-vibe-text-muted: var(--vibe-text-muted);
+  --color-vibe-ring: var(--vibe-ring);
+
+  /* Typography Stacks with Vazirmatn Persian Web Font */
+  --font-vibe-sans: Vazirmatn, Inter, system-ui, -apple-system, sans-serif;
+  --font-vibe-display: Vazirmatn, Inter, system-ui, sans-serif;
+  --font-vibe-mono: JetBrains Mono, Menlo, monospace;
+
+  /* Spring & Snap Physics Curves */
+  --ease-vibe-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
+  --ease-vibe-snap: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-vibe-glide: cubic-bezier(0.25, 1, 0.5, 1);
+
+  /* Elevation & Specular Shadows */
+  --shadow-vibe-glass: inset 0 1px 1px rgba(255, 255, 255, 0.15);
+  --shadow-vibe-brutal: 4px 4px 0px #000000;
+  --shadow-vibe-brutal-lg: 6px 6px 0px #000000;
+}
+
+:root {
+  /* Vibe UI Chemistry: ${selectedChem.name} (${selectedChem.id}) - Light Theme (Canonical) */
   --vibe-canvas: ${selectedChem.colors.canvas};
   --vibe-surface: ${selectedChem.colors.surface};
   --vibe-border: ${selectedChem.colors.border};
+  --vibe-primary: ${selectedChem.colors.primaryAccent};
   --vibe-primary-accent: ${selectedChem.colors.primaryAccent};
   --vibe-on-primary: ${selectedChem.colors.onPrimaryAccent};
   --vibe-text-primary: ${selectedChem.colors.textPrimary};
@@ -350,10 +395,11 @@ async function handleInit(options: CliOptions) {
 }
 
 .dark, [data-theme="dark"] {
-  /* Vibe UI Chemistry: ${selectedChem.name} (${selectedChem.id}) - Dark Theme */
+  /* Vibe UI Chemistry: ${selectedChem.name} (${selectedChem.id}) - Dark Theme (OLED Cockpit) */
   --vibe-canvas: ${darkColors.canvas};
   --vibe-surface: ${darkColors.surface};
   --vibe-border: ${darkColors.border};
+  --vibe-primary: ${darkColors.primaryAccent};
   --vibe-primary-accent: ${darkColors.primaryAccent};
   --vibe-on-primary: ${darkColors.onPrimaryAccent};
   --vibe-text-primary: ${darkColors.textPrimary};
@@ -544,25 +590,113 @@ function handleInspire(query?: string) {
   }
 }
 
+function findVibeCliScript(): string | null {
+  const candidates = [
+    path.resolve(__dirname, '../../../vibe_cli.py'),
+    path.resolve(__dirname, '../../vibe_cli.py'),
+    path.resolve(__dirname, '../vibe_cli.py'),
+    path.resolve(process.cwd(), 'vibe_cli.py'),
+  ];
+  for (const c of candidates) {
+    if (fs.existsSync(c)) {
+      return c;
+    }
+  }
+  return null;
+}
+
+function getPythonExecutable(): string {
+  const pyCandidates = ['python', 'python3', 'py'];
+  for (const py of pyCandidates) {
+    try {
+      const res = spawnSync(py, ['--version'], { stdio: 'ignore' });
+      if (res.status === 0) {
+        return py;
+      }
+    } catch {
+      // Continue searching
+    }
+  }
+  return 'python';
+}
+
+function handleSwarm(promptText?: string, swarmOpts: SwarmCliOptions = {}) {
+  const scriptPath = findVibeCliScript();
+  if (!scriptPath) {
+    console.error('\x1b[31mError: Could not locate vibe_cli.py swarm engine in workspace.\x1b[0m');
+    console.error('Make sure you are running from within the vibe-ui-suite workspace.');
+    process.exit(1);
+    return;
+  }
+
+  const pythonBin = getPythonExecutable();
+  const pyArgs = [scriptPath, 'swarm'];
+
+  if (promptText && promptText.trim()) {
+    pyArgs.push(promptText.trim());
+  }
+  if (swarmOpts.output) {
+    pyArgs.push('-o', swarmOpts.output);
+  }
+  if (swarmOpts.style) {
+    pyArgs.push('-s', swarmOpts.style);
+  }
+  if (swarmOpts.format) {
+    pyArgs.push('--format', swarmOpts.format);
+  }
+  if (swarmOpts.json) {
+    pyArgs.push('--json');
+  }
+
+  const result = spawnSync(pythonBin, pyArgs, {
+    stdio: swarmOpts.json ? ['inherit', 'pipe', 'inherit'] : 'inherit',
+    encoding: 'utf-8',
+  });
+
+  if (swarmOpts.json && result.stdout) {
+    process.stdout.write(result.stdout);
+  }
+
+  if (result.status !== 0 && result.status !== null) {
+    process.exit(result.status);
+  }
+}
+
 async function main() {
   const rawArgs = process.argv.slice(2);
   const force = rawArgs.includes('--force') || rawArgs.includes('-f');
   const dryRun = rawArgs.includes('--dry-run');
   const yes = rawArgs.includes('--yes') || rawArgs.includes('-y');
+  const isJson = rawArgs.includes('--json');
 
   let chemistry: string | undefined;
   let editor: string | undefined;
+  let output: string | undefined;
+  let style: string | undefined;
+  let format: 'html' | 'tsx' | undefined;
+
   for (let i = 0; i < rawArgs.length; i++) {
     if (rawArgs[i] === '--chemistry' && rawArgs[i + 1]) chemistry = rawArgs[i + 1];
     if (rawArgs[i] === '--editor' && rawArgs[i + 1]) editor = rawArgs[i + 1];
+    if ((rawArgs[i] === '--output' || rawArgs[i] === '-o') && rawArgs[i + 1]) output = rawArgs[i + 1];
+    if ((rawArgs[i] === '--style' || rawArgs[i] === '-s') && rawArgs[i + 1]) style = rawArgs[i + 1];
+    if (rawArgs[i] === '--format' && rawArgs[i + 1]) format = rawArgs[i + 1] as 'html' | 'tsx';
   }
 
-  const filteredArgs = rawArgs.filter(
-    (a: string) => !['--force', '-f', '--dry-run', '--yes', '-y', '--chemistry', '--editor'].includes(a) && a !== chemistry && a !== editor
-  );
+  const filteredArgs: string[] = [];
+  for (let i = 0; i < rawArgs.length; i++) {
+    const a = rawArgs[i];
+    if (['--force', '-f', '--dry-run', '--yes', '-y', '--json'].includes(a)) continue;
+    if (['--chemistry', '--editor', '--output', '-o', '--style', '-s', '--format'].includes(a)) {
+      i++;
+      continue;
+    }
+    filteredArgs.push(a);
+  }
   const cmd = filteredArgs[0]?.toLowerCase();
 
   const options: CliOptions = { force, dryRun, yes, chemistry, editor };
+  const swarmOptions: SwarmCliOptions = { output, style, format, json: isJson };
 
   if (!cmd || cmd === '--help' || cmd === '-h') {
     printHelp();
@@ -575,6 +709,12 @@ async function main() {
   }
 
   switch (cmd) {
+    case 'swarm':
+    case 'run': {
+      const swarmPrompt = filteredArgs.slice(1).join(' ');
+      handleSwarm(swarmPrompt, swarmOptions);
+      break;
+    }
     case 'init':
       await handleInit(options);
       break;
