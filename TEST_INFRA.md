@@ -1,6 +1,9 @@
-# E2E Test Infra: vibe-ui-suite
+# Test Infrastructure: vibe-ui-suite
 
 ## Test Philosophy
+
+The suite itself is browser-runtime agnostic. CI runs deterministic static, schema, contract and package-consumer tests. A real browser pass is performed only by tools already exposed by the user's AI harness and is submitted through `schemas/browser-evidence.v1.schema.json`, bound to the exact artifact SHA-256. CI does not install browser engines or automation drivers.
+
 - Opaque-box, requirement-driven verification derived directly from `ORIGINAL_REQUEST.md`.
 - Multi-tier testing methodology: Category-Partition, Boundary Value Analysis, Pairwise Combinations, Real-World Application Workloads, and Automated Acceptance Gates.
 

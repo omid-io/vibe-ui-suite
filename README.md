@@ -41,7 +41,7 @@ What happens when you ask a standard AI assistant to generate a frontend compone
 │ • Dead toggle cards & static mockups │      │ • Living React 19 TSX + Dual Theme   │
 │ • Rushed, flat, uninspired output    │      │ • Trend-First Harvest (Dribbble/etc) │
 │ • Empty blank or broken image links  │      │ • Curated 24-Domain Unsplash CDN     │
-│ • Broken mobile overflow (390px)     │      │ • Headless Multi-Viewport Screenshots│
+│ • Broken mobile overflow (390px)     │      │ • Harness-Native Multi-Viewport Evidence│
 │ • Mixed direction text / numbers     │      │ • On-Demand Scoped RTL & BiDi Guard  │
 └──────────────────────────────────────┘      └──────────────────────────────────────┘
 ```
@@ -67,12 +67,12 @@ Code Implementation (Next.js 15 / React 19 TSX / Tailwind OKLCH)
     ↓
 Static Evaluation (Schema, luminance math, negative fixtures)
     ↓
-Headless Browser Evaluation (Playwright 390px mobile overflow)
+Harness-Native Browser Evaluation (mobile / tablet / desktop evidence)
     ↓
 Verified Output or Actionable Failure Diagnostics
 ```
 
-> **Day-One Transparency**: Vibe UI Suite is built upon **The Two Golden Pillars: Trend Inspiration & Living Visual Feedback Loop** (featuring **Living Micro-Interactions, Galaxy Inspiration Standard, Section Blocks & MCP Server**). Anchored on Pillar 1 (offline, reproducible inspiration from local BM25 ranking over the versioned Design Genome and curated benchmark metadata; this module does not live-scrape GitHub stars or third-party trend sites) and Pillar 2 (deterministic Playwright multi-viewport screenshot verification across Desktop 1440px and Mobile 390px with zero orphaned processes), Galaxy Inspiration Engine (3,800+ community elements with offline caching), Curated High-Res Unsplash Asset Vault covering all 24 canonical domains with tested HTTP 200 CDN URLs, clean component catalog with living interactive micro-interactions (`shimmer-button`, `cyber-loader`, `holographic-card`, `tactile-switch`, `glow-input`), full section blocks (`bento-hero`, `pricing-matrix`, `feature-grid`, `glass-navbar`, `conversion-cta`, `faq-accordion`), living React 19 TSX generation (`-f tsx`), zero-dependency TypeScript audit (`audit`), standard MCP server (`mcp`), and synchronized cross-platform tooling across npm, Python CLI, and VS Code. Constructive criticism, issues, and contributions from frontend engineers and AI researchers are warmly welcomed.
+> **Day-One Transparency**: Vibe UI Suite is built upon **The Two Golden Pillars: Trend Inspiration & Living Visual Feedback Loop** (featuring **Living Micro-Interactions, Galaxy Inspiration Standard, Section Blocks & MCP Server**). Anchored on Pillar 1 (offline, reproducible inspiration from local BM25 ranking over the versioned Design Genome and curated benchmark metadata; this module does not live-scrape GitHub stars or third-party trend sites) and Pillar 2 (harness-native browser verification across Mobile 390px, Tablet 768px and Desktop 1440px; the package never installs or controls a browser), Galaxy Inspiration Engine (3,800+ community elements with offline caching), Curated High-Res Unsplash Asset Vault covering all 24 canonical domains with tested HTTP 200 CDN URLs, clean component catalog with living interactive micro-interactions (`shimmer-button`, `cyber-loader`, `holographic-card`, `tactile-switch`, `glow-input`), full section blocks (`bento-hero`, `pricing-matrix`, `feature-grid`, `glass-navbar`, `conversion-cta`, `faq-accordion`), living React 19 TSX generation (`-f tsx`), zero-dependency TypeScript audit (`audit`), standard MCP server (`mcp`), and synchronized cross-platform tooling across npm, Python CLI, and VS Code. Constructive criticism, issues, and contributions from frontend engineers and AI researchers are warmly welcomed.
 
 ---
 
@@ -90,7 +90,7 @@ flowchart TD
         P1 --> P2["🔍 Phase 2: vibe-trend-hunter<br/>Ranks curated GitHub benchmark metadata with local BM25 & searches offline Galaxy"]
         P2 --> P3["🎨 Phase 3: vibe-art-director<br/>Synthesizes OKLCH color tokens, typography & Design Blueprint"]
         P3 --> P4["🛠️ Phase 4: vibe-master-builder<br/>Single-author HTML / React 19 TSX synthesis with spring physics"]
-        P4 --> P5["📸 Isolated Headless Chromium<br/>Captures Desktop (1440px) & Mobile (390px) screenshots"]
+        P4 --> P5["📸 Active Harness Browser<br/>Captures Mobile (390px), Tablet (768px) & Desktop (1440px) evidence"]
         P5 --> P6["👁️ Phase 5: vibe-visual-auditor & 🛡️ vibe-tech-auditor<br/>Adversarial Inspection: WCAG AA, 0px overflow, visual harmony"]
     end
     
@@ -141,7 +141,7 @@ Just give your AI assistant (Cursor, Claude Code, Windsurf, Copilot, Antigravity
 - `@vibe-ui-agent create a patient booking screen for an aesthetic dental clinic`
 
 **What `vibe-ui-agent` guarantees automatically (Lazy-Prompt Protocol & The 5 Gates):**
-- **Mandatory Pre-Edit Visual Audit:** Captures headless browser screenshot (`screenshots/before.png`) before touching code to diagnose spatial and typographic flaws with multimodal vision.
+- **Mandatory Pre-Edit Visual Audit:** Uses the browser already exposed by the active harness to inspect the current UI before structural changes; no browser driver is installed or launched by the package.
 - **Architectural Paradigm & Local Benchmark Anchoring:** Selects paradigms using the local Design Genome, domain blueprints, and curated open-source benchmark metadata. The repository's Trend Hunter does not scrape Dribbble, Mobbin, Figma Community, Awwwards, or live GitHub star counts.
 - **Structural DOM & Spatial Rhythm Overhaul:** Re-architects real layout structures and 8pt spatial rhythm (Zero Cosmetic-Only Patch Invariant).
 - **Living Component & Rich Media Synthesis:** Injects tactile Galaxy micro-interactions (shimmer buttons, tactile switches, cyber loaders), authentic photography, and contextual ambient hero loops for creative portfolios and landing pages.
@@ -157,10 +157,10 @@ When an existing screen looks flat, amateur, or cluttered (unbalanced spacing, d
 ```
 
 **The Agent's Autonomous Multi-Step Pipeline:**
-1. Renders current screen in browser and saves `screenshots/before.png` to audit layout balance and ergonomic flaws.
+1. Uses the active harness browser to inspect the current screen and record baseline visual/runtime evidence.
 2. Dismantles the dead container structure and replaces it with a clean Bento Grid or modern minimal architecture.
 3. Rewires all buttons, inputs, and state into living micro-interaction primitives without breaking existing business logic.
-4. Captures post-implementation screenshots (`screenshots/after.png`, Desktop 1440px / Mobile 390px) for multi-viewport visual verification.
+4. Captures post-implementation screenshots at 390px, 768px and 1440px, inspects them with a vision-capable reviewer, and validates a SHA-bound browser evidence report.
 5. Delivers a report focused 100% on spatial and structural transformation, keeping low-level styling baselines in the background.
 
 ---
@@ -352,7 +352,7 @@ The system is coordinated by a lead architect agent (**`vibe-ui-agent`**) that o
 | **`ui-kit`** | Component primitives & interaction patterns | AI reasoning drawers, tool chips, telemetry HUDs, Bento recipes |
 | **`vibe-physics-engine`** | Motion, color, and GPU budgets | OKLCH perceptual spaces, spring curves, strict $\le 3$ blur layer limit |
 | **`conversion-copy-engine`** | Strategic narrative architecture | Domain-aware copy; strictly prohibits fake testimonials or false urgency |
-| **`ui-verifier`** | Automated quality & accessibility gates | Static math + headless browser runtime DOM assertions |
+| **`ui-verifier`** | Automated quality & accessibility gates | Static checks + validated harness-owned browser evidence |
 
 ---
 
@@ -405,17 +405,22 @@ Vibe UI enforces **Fixed-Structure Semantic RTL**:
 
 ## 🧪 Evaluation Suite & Runtime Quality Gates
 
+Rendered browser verification is owned by the active AI harness, not bundled into Vibe UI. See the [Harness-Native Browser Evidence Contract](docs/HARNESS_BROWSER_EVIDENCE.md) for the request/report protocol and SHA-256 acceptance rules.
+
 The repository includes an automated test runner:
 
-```bash
+ ```bash
 # 1. Run deterministic static checks & negative fixtures
 python evals/run_evals.py
 
 # 2. Run machine-readable CI output
 python evals/run_evals.py --json
 
-# 3. Run headless browser DOM verification (Chromium via Playwright)
-python evals/run_evals.py --browser
+# 3. Run the swarm; it emits a browser request and stays unaccepted until the active harness supplies matching evidence.
+npx vibe-ui-suite swarm "Build a polished product interface" --json
+
+# 4. Validate the final browser report against the exact artifact
+npx vibe-ui-suite browser-evidence validate .vibe/browser-evidence.json --artifact swarm_output.html
 ```
 
 ### Deterministic vs. Heuristic Checks:
@@ -425,7 +430,7 @@ python evals/run_evals.py --browser
 | **JSON Schema Validation** | Deterministic | Draft 2020-12 Schema Validator | Validates technical design spec with `additionalProperties: false` |
 | **Negative Fixture Rejection** | Deterministic | Exit code assertion | Verifies exit code 1 on out-of-range entropy, invalid archetypes, or touch targets $< 24\text{px}$ |
 | **Relative Luminance & Contrast** | Deterministic | $L = 0.2126 R' + 0.7152 G' + 0.0722 B'$ | Enforces WCAG AA ($\ge 4.5:1$ body, $\ge 3.0:1$ headings) |
-| **Mobile Viewport Overflow** | Runtime | Chromium DOM (`scrollWidth <= clientWidth`) | Verifies 0px horizontal overflow across 375px and 390px viewports |
+| **Mobile Viewport Overflow** | Runtime | Harness browser measurement (`scrollWidth <= clientWidth`) | Verifies 0px horizontal overflow across 375px and 390px viewports |
 | **Semantic Clickables** | Static / Lint | Regex DOM tree audit | Asserts 0 raw `<div onclick>` instances (buttons/anchors required) |
 | **Focus Rings** | Static / Lint | CSS rule check | Verifies presence of `:focus-visible` styles |
 | **GPU Compositing Budget** | Static / Heuristic | CSS rule check | Enforces $\le 3$ active `backdrop-filter` blur layers |

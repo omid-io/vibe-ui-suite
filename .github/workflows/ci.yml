@@ -52,7 +52,7 @@ jobs:
         run: python scripts/test_advanced_quality.py
 
   vibe-ui-package-audit:
-    name: NPM Packed Consumer & Browser Runtime Audit
+    name: NPM Packed Consumer & Harness Evidence Contract
     runs-on: ubuntu-latest
 
     steps:
@@ -76,10 +76,8 @@ jobs:
           npm run build
           npm pack --pack-destination "$RUNNER_TEMP"
 
-      - name: Install browser runtime for the packed consumer test
-        run: |
-          pip install beautifulsoup4 jsonschema playwright
-          playwright install --with-deps chromium
+      - name: Install static validation dependencies
+        run: pip install beautifulsoup4 jsonschema
 
       - name: Install tarball in an isolated consumer project and run the installed CLI
         shell: bash
@@ -105,13 +103,11 @@ jobs:
           report = result.get("evaluation_report", {})
           assert "wcag_contrast_status" in report, "Evidence status fields missing"
           assert "screenshot_status" in report, "Screenshot evidence status missing"
-          shots = result.get("screenshots", {})
-          assert Path(shots.get("desktop", "")).is_file(), "Desktop screenshot missing"
-          assert Path(shots.get("mobile", "")).is_file(), "Mobile screenshot missing"
-          audit = result.get("screenshot_audit", {})
-          assert audit.get("success") is True, "Browser audit did not complete"
-          assert audit.get("overall_status") in {"PASS", "FAIL"}, "Browser result is not explicit"
-          print("Verified packed npm install, external consumer CWD, report JSON, and browser artifacts.")
+          assert result.get("status") == "ACCEPTABLE_WITH_NOTES", "Missing harness browser evidence must never be reported as accepted"
+          request = result.get("browser_evidence_request", {})
+          assert request.get("schema_version") == "vibe.browser-evidence/v1"
+          assert [vp["width"] for vp in request.get("required_viewports", [])] == [390, 768, 1440]
+          print("Verified packed npm install, external consumer CWD, and harness-native browser request.")
           PY
 
   nextjs-starter-build:
@@ -135,23 +131,3 @@ jobs:
         working-directory: examples/nextjs-starter
         run: npm run build
 
-  browser-runtime-evals:
-    name: Headless Playwright Browser Verification
-    runs-on: ubuntu-latest
-
-    steps:
-      - name: Checkout repository
-        uses: actions/checkout@v4
-
-      - name: Set up Python 3.10
-        uses: actions/setup-python@v5
-        with:
-          python-version: "3.10"
-
-      - name: Install Playwright & Chromium
-        run: |
-          pip install playwright beautifulsoup4 jsonschema
-          playwright install --with-deps chromium
-
-      - name: Run Playwright Browser Runtime Verification
-        run: python evals/run_evals.py --browser

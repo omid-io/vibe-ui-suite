@@ -1,5 +1,10 @@
 # Changelog — Vibe UI Extension
 
+## [Unreleased]
+
+- Replace Playwright-specific audit guidance with the harness-native browser evidence workflow. The extension no longer implies that it installs or owns a browser runtime.
+
+
 All notable changes to the **Vibe UI (VS Code, Cursor & Open-VSX)** extension will be documented in this file.
 This project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 

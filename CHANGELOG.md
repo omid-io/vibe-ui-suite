@@ -7,6 +7,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Harness-Native Browser Architecture
+- Remove the bundled Playwright/Chromium runtime, screenshot launcher, browser-bound DOM sensor and marketplace automation helper from the package.
+- Move rendered visual/runtime verification to the browser tools already exposed by the active AI harness; add a versioned browser-evidence contract bound to the final artifact SHA-256.
+- Require mobile, tablet and desktop evidence plus vision review; stale, missing or incomplete reports remain NOT_EVALUATED.
+- Keep CI browser-free and move the batch benchmark to explicitly static metrics; legacy browser benchmark claims are marked NOT_EVALUATED.
+
 ### Runtime Reliability & Evidence Provenance
 - Skip repeated code-only healing when static, WCAG, and critic gates pass but browser evidence is unavailable; keep acceptance explicitly pending browser verification.
 - Strengthen real-estate domain matching for luxury showcase prompts and add regression coverage.

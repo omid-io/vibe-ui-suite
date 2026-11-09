@@ -16,7 +16,6 @@ from __future__ import annotations
 import json
 import re
 import shutil
-import subprocess
 import sys
 from pathlib import Path
 from typing import Any, Dict, List, Optional, Tuple
@@ -31,6 +30,7 @@ from vibe_core.refiner import AutoRefiner
 from vibe_core.verifier import VerificationEngine
 from vibe_core.healer import SelfHealingLoop
 from vibe_core.trend_hunter import TrendHunter
+from vibe_core.browser_evidence import build_browser_request, load_browser_evidence
 from schemas.agent_contracts import (
     ConceptContract,
     TrendEvidence,
@@ -95,14 +95,13 @@ def _is_runtime_only_blocker(
     In this case the code-only healer cannot repair the missing browser runtime.
     Keep the result explicitly unaccepted, but avoid repeating identical code edits.
     """
-    browser_not_evaluated = bool(
-        screenshot_report.get("success") is not True
-        and str(screenshot_report.get("overall_status", "")).upper() == "NOT_EVALUATED"
-        and _extract_overflow_status(screenshot_report) == "NOT_EVALUATED"
-        and _extract_screenshot_status(screenshot_report) == "NOT_EVALUATED"
+    browser_not_passed = bool(
+        str(screenshot_report.get("overall_status", "NOT_EVALUATED")).upper() != "PASS"
+        or _extract_overflow_status(screenshot_report) != "PASS"
+        or _extract_screenshot_status(screenshot_report) != "PASS"
     )
     return bool(
-        browser_not_evaluated
+        browser_not_passed
         and failed_checks == 0
         and str(wcag_status).upper() == "PASS"
         and str(critic_status).upper() == "ACCEPTED"
@@ -141,7 +140,8 @@ class ForemanSwarmOrchestrator:
         style_override: Optional[str] = None,
         output_format: str = "html",
         max_remediation_loops: int = 3,
-        quiet: bool = False
+        quiet: bool = False,
+        browser_evidence_path: Optional[str] = None,
     ) -> Dict[str, Any]:
         """
         Executes the full 5-station pipeline from raw user prompt to verified screenshots.
@@ -333,6 +333,10 @@ class ForemanSwarmOrchestrator:
         c_report: Dict[str, Any] = {}
         screenshot_report: Dict[str, Any] = {}
         failed_checks = 0
+        request_path = self.workspace_root / ".vibe" / "browser-evidence-request.json"
+        browser_request = build_browser_request(out_path, request_path)
+        browser_request["report_path"] = str(self.workspace_root / ".vibe" / "browser-evidence.json")
+        request_path.write_text(json.dumps(browser_request, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
 
         while iteration <= max_remediation_loops:
             asset_delivery = self._provision_consumer_assets(code, out_path)
@@ -344,8 +348,13 @@ class ForemanSwarmOrchestrator:
             )
             failed_checks = v_report.get("checks_summary", {}).get("failed", 0)
 
-            # Browser audit is part of the acceptance gate, not a post-hoc artifact.
-            screenshot_report = self._capture_screenshots(out_path)
+            # The browser belongs to the active harness. Build a SHA-bound task
+            # and load only evidence for this exact artifact revision.
+            request_path = self.workspace_root / ".vibe" / "browser-evidence-request.json"
+            browser_request = build_browser_request(out_path, request_path)
+            browser_request["report_path"] = str(self.workspace_root / ".vibe" / "browser-evidence.json")
+            request_path.write_text(json.dumps(browser_request, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+            screenshot_report = self._load_browser_evidence(out_path, browser_evidence_path)
 
             c_report = self.critic.critique(code, decision, iteration=iteration)
             critic_status_raw = str(c_report.get("acceptance_status", "NOT_EVALUATED")).upper()
@@ -392,19 +401,18 @@ class ForemanSwarmOrchestrator:
                 runtime_reason = str(
                     screenshot_report.get("error")
                     or screenshot_report.get("stderr")
-                    or "Playwright/Chromium did not produce browser evidence"
+                    or "No valid harness browser evidence is available for this artifact"
                 ).replace("\n", " ").strip()[:240]
                 log(
                     "STATION 5 / Auditor Swarm",
-                    "All code-based gates passed, but browser evidence is unavailable; "
+                    "All code-based gates passed, but harness browser evidence did not pass; "
                     f"skipping code-only healing because it cannot repair the runtime blocker ({runtime_reason}). "
                     "Acceptance remains ACCEPTABLE_WITH_NOTES until browser verification succeeds."
                 )
                 break
 
-            # The current healer acts on critic findings; it does not receive pixels.
-            # Browser findings therefore block acceptance but are not represented as
-            # image-understanding or screenshot-driven LLM remediation.
+            # The code healer does not receive browser pixels. Do not repeat
+            # image-agnostic edits for browser-only defects.
             code, c_report, correction_prompt = self.healer.heal(
                 code, decision, original_prompt=prompt
             )
@@ -477,9 +485,9 @@ class ForemanSwarmOrchestrator:
             screenshot_status=screenshot_status,
             critic_status=critic_status,
             runtime_mode=(
-                "browser_runtime_eval"
+                "harness_browser_eval"
                 if screenshot_report.get("success") is True
-                else str(v_report.get("runtime_mode", "static_only"))
+                else "static_plus_harness_browser_pending"
             )
         )
         er_valid, er_errors = evaluation_report.validate()
@@ -502,6 +510,8 @@ class ForemanSwarmOrchestrator:
             "artifact_path": str(out_path),
             "screenshots": screenshot_results,
             "screenshot_audit": screenshot_report,
+            "browser_evidence_request": browser_request,
+            "browser_evidence_path": (str((self.workspace_root / browser_evidence_path).resolve()) if browser_evidence_path and not Path(browser_evidence_path).is_absolute() else str(Path(browser_evidence_path).resolve())) if browser_evidence_path else str(self.workspace_root / ".vibe" / "browser-evidence.json"),
             "asset_delivery": asset_delivery,
             "iterations_count": iteration,
             "logs": logs,
@@ -537,23 +547,44 @@ class ForemanSwarmOrchestrator:
             copied.append(str(destination))
         return {"copied": copied, "missing": missing}
 
-    def _capture_screenshots(self, html_path: Path) -> Dict[str, Any]:
-        """Capture and return full browser audit evidence under the consumer workspace."""
-        audit_script = self.package_root / "scripts" / "screenshot_audit.py"
-        out_screenshots_dir = self.workspace_root / ".test-artifacts" / "screenshots"
-        out_screenshots_dir.mkdir(parents=True, exist_ok=True)
-
-        report: Dict[str, Any] = {
-            "overall_status": "NOT_EVALUATED",
-            "overflow_status": "NOT_EVALUATED",
-            "screenshot_status": "NOT_EVALUATED",
-            "success": False,
-            "files": {},
-            "viewports": {},
-        }
-        if not audit_script.is_file() or html_path.suffix.lower() not in {".html", ".tsx"}:
-            report["error"] = "Browser audit script or supported HTML/TSX artifact is unavailable"
-            return report
+    def _load_browser_evidence(
+        self,
+        artifact_path: Path,
+        evidence_path: Optional[str] = None,
+    ) -> Dict[str, Any]:
+        """Load evidence created by the active harness; never control a browser."""
+        report_path = Path(evidence_path) if evidence_path else (
+            self.workspace_root / ".vibe" / "browser-evidence.json"
+        )
+        if not report_path.is_absolute():
+            report_path = (self.workspace_root / report_path).resolve()
+        if not report_path.is_file():
+            return {
+                "success": False,
+                "overall_status": "NOT_EVALUATED",
+                "overflow_status": "NOT_EVALUATED",
+                "screenshot_status": "NOT_EVALUATED",
+                "files": {},
+                "viewports": {},
+                "error": (
+                    f"No harness browser evidence found at {report_path}. "
+                    "Use the browser exposed by the active harness and submit a "
+                    "vibe.browser-evidence/v1 report."
+                ),
+                "report_path": str(report_path),
+            }
+        report, errors = load_browser_evidence(report_path, artifact_path)
+        report["report_path"] = str(report_path)
+        if errors:
+            report.update({
+                "success": False,
+                "overall_status": "NOT_EVALUATED",
+                "overflow_status": "NOT_EVALUATED",
+                "screenshot_status": "NOT_EVALUATED",
+                "files": {},
+                "error": "; ".join(errors),
+            })
+        return report
 
         try:
             result = subprocess.run(

@@ -20,26 +20,28 @@ ROOT_DIR = Path(__file__).resolve().parent.parent
 
 TEST_SUITES = [
     ("Version Synchronization", ["python", "scripts/validate_versions.py"]),
-    ("Schema Validation (8 Schemas)", ["python", "scripts/validate_schemas.py"]),
+    ("Schema Validation (9 Schemas)", ["python", "scripts/validate_schemas.py"]),
     ("Knowledge Base Validation (15 Datasets)", ["python", "scripts/validate_data.py"]),
     ("Search & Recommendation Unit Tests", ["python", "scripts/test_search.py"]),
     ("Design Critic & AutoRefiner Unit Tests", ["python", "scripts/test_critic_refiner.py"]),
     ("Visual Critic Multi-Dimensional Tests", ["python", "scripts/test_visual_critic.py"]),
     ("24-Domain Canonical Widget & Causal Model Suite", ["python", "scripts/test_domain_registry.py"]),
     ("Asset Director 24-Domain Alignment Suite", ["python", "scripts/test_asset_director.py"]),
-    ("Headless Physical Viewport Critic Suite", ["python", "scripts/test_physical_critic.py"]),
-    ("In-Browser Pixel Buffer Critic Unit Tests", ["python", "scripts/test_pixel_critic.py"]),
+    ("Static Physical Heuristics & Harness Evidence Adapter", ["python", "scripts/test_physical_critic.py"]),
+    ("Pure-Python Pixel Buffer Critic Unit Tests", ["python", "scripts/test_pixel_critic.py"]),
+    ("Harness-Native Browser Evidence Contract", ["python", "scripts/test_endgame_runtime.py"]),
+    ("Harness-Native Architecture Regression", ["python", "scripts/test_v6_e2e_suite.py"]),
     ("Full Pipeline Integration Tests (E2E)", ["python", "scripts/test_pipeline_e2e.py"]),
     ("Vibe UI Feature Verification", ["python", "scripts/test_v32_features.py"]),
     ("Stratified 100-Scenario Benchmark", ["python", "evals/benchmark/run_benchmark.py"]),
     ("Blind Holdout 50-Scenario Benchmark", ["python", "evals/benchmark/run_benchmark.py", "--holdout"]),
     ("Human One-Shot 25-Task Benchmark", ["python", "evals/benchmark/run_benchmark.py", "--human"]),
-    ("Physical Runtime Evals (WCAG AA & DOM)", ["python", "evals/run_evals.py", "--json"])
+    ("Static Runtime Contract Evals (WCAG AA & DOM)", ["python", "evals/run_evals.py", "--json"])
 ]
 
 def main():
     print("=" * 70)
-    print("🛡️  VIBE UI V4 ENDGAME VALIDATION & QUALITY GATES")
+    print("🛡️  VIBE UI SUITE REGRESSION & QUALITY GATES")
     print("=" * 70)
 
     overall_failures = []

@@ -8,7 +8,7 @@
 [![GitHub Stars](https://img.shields.io/github/stars/omid-io/vibe-ui-suite?style=flat-square&logo=github&color=ffb400)](https://github.com/omid-io/vibe-ui-suite)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg?style=flat-square)](https://github.com/omid-io/vibe-ui-suite/blob/main/LICENSE)
 
-The official IDE extension for **Vibe UI Suite** — an open-source deterministic design architecture and headless Chromium evaluation engine that prevents AI coding assistants (Cursor, Claude Code, Windsurf, Copilot) from generating generic, low-contrast **"AI Design Slop"**.
+The official IDE extension for **Vibe UI Suite** — an open-source deterministic design architecture and harness-native browser evidence contract and static evaluation engine that prevents AI coding assistants (Cursor, Claude Code, Windsurf, Copilot) from generating generic, low-contrast **"AI Design Slop"**.
 
 ---
 

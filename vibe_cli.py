@@ -287,44 +287,6 @@ def cmd_heal(args):
             out.write_text(final_html, encoding="utf-8")
             print(f"[SAVED] Healed artifact: {args.output}")
 
-def cmd_screenshot(args):
-    """Executes multi-viewport headless screenshot audit on an HTML/TSX artifact."""
-    from scripts.screenshot_audit import capture_audit_screenshots
-
-    file_path = Path(args.file)
-    if not file_path.exists():
-        print(f"[FAIL] Target file not found: {args.file}", file=sys.stderr)
-        sys.exit(1)
-
-    out_dir = getattr(args, "output_dir", None) or getattr(args, "output", ".test-artifacts/screenshots")
-    viewports = getattr(args, "viewports", "desktop,mobile")
-    full_page = getattr(args, "full_page", True)
-    if getattr(args, "no_full_page", False):
-        full_page = False
-
-    try:
-        report = capture_audit_screenshots(
-            file_path=file_path,
-            output_dir=out_dir,
-            viewports=viewports,
-            full_page=full_page,
-        )
-        if getattr(args, "json", False):
-            print(json.dumps(report, indent=2, ensure_ascii=False))
-        else:
-            rendered_target = report.get("rendered_file", str(file_path))
-            print(f"[SUCCESS] Multi-viewport screenshots captured for: {rendered_target}")
-            for item in report.get("viewports_captured", []):
-                rel_path = Path(item["path"]).name
-                size_kb = item["bytes"] / 1024
-                print(f"  * {item['viewport'].upper()} ({item['width']}px): {rel_path} ({size_kb:.1f} KB, Status: {item['status']})")
-            print(f"\nOverall Status: {report['overall_status']}")
-    except Exception as e:
-        print(f"[FAIL] Screenshot capture failed: {e}", file=sys.stderr)
-        sys.exit(1)
-
-    if report.get("overall_status") == "FAIL":
-        sys.exit(1)
 
 def cmd_assets(args):
     from scripts.cache_assets import cache_all_assets, verify_assets, DEFAULT_OUTPUT_DIR
@@ -351,7 +313,8 @@ def cmd_swarm(args):
         target_output=args.output,
         style_override=args.style,
         output_format=getattr(args, "format", "html") or "html",
-        quiet=is_json
+        quiet=is_json,
+        browser_evidence_path=getattr(args, "browser_evidence", None)
     )
     if is_json:
         print(json.dumps(result, indent=2, ensure_ascii=False))
@@ -372,12 +335,13 @@ def main():
     subparsers = parser.add_subparsers(dest="command", help="Command to run")
 
     # swarm (Foreman Multi-Agent Swarm)
-    p_swarm = subparsers.add_parser("swarm", help="Run the full 5-station Foreman Multi-Agent Swarm from prompt to verified screenshots")
+    p_swarm = subparsers.add_parser("swarm", help="Run the full Foreman Multi-Agent Swarm and prepare a harness-native browser evidence request")
     p_swarm.add_argument("prompt", nargs="?", default="", help="User design prompt or goal")
     p_swarm.add_argument("-o", "--output", help="Target output file path")
     p_swarm.add_argument("-s", "--style", help="Style chemistry override")
     p_swarm.add_argument("--format", choices=["html", "tsx"], default="html", help="Output format: html or tsx")
     p_swarm.add_argument("--json", action="store_true", help="Output execution results strictly as JSON")
+    p_swarm.add_argument("--browser-evidence", help="Path to a harness-native browser evidence JSON report")
 
     # run (alias for swarm)
     p_run = subparsers.add_parser("run", help="Alias for swarm command")
@@ -386,6 +350,7 @@ def main():
     p_run.add_argument("-s", "--style", help="Style chemistry override")
     p_run.add_argument("--format", choices=["html", "tsx"], default="html", help="Output format: html or tsx")
     p_run.add_argument("--json", action="store_true", help="Output execution results strictly as JSON")
+    p_run.add_argument("--browser-evidence", help="Path to a harness-native browser evidence JSON report")
 
     # search
     p_search = subparsers.add_parser("search", help="Search Knowledge Base (<10ms)")
@@ -403,7 +368,7 @@ def main():
     p_gen.add_argument("-o", "--output", help="Output file path (.html or .tsx)")
     p_gen.add_argument("-f", "--format", choices=["html", "tsx"], default=None, help="Output format: 'html' (default) or 'tsx' (React 19 component)")
     p_gen.add_argument("-s", "--style", help="Style override")
-    p_gen.add_argument("--strict", action="store_true", help="Run Playwright runtime verification after generation")
+    p_gen.add_argument("--strict", action="store_true", help="Request harness-native browser evidence after static generation; no browser is launched by the CLI")
 
     # critique
     p_crit = subparsers.add_parser("critique", help="Run independent Design Critic on HTML file")
@@ -412,7 +377,7 @@ def main():
     # verify
     p_ver = subparsers.add_parser("verify", help="Run Verification 2.0 evidence checks on HTML file")
     p_ver.add_argument("file", help="Path to HTML file")
-    p_ver.add_argument("--strict", action="store_true", help="Add Playwright headless DOM runtime assertions")
+    p_ver.add_argument("--strict", action="store_true", help="Add a notice that browser evidence is owned by the active harness")
     p_ver.add_argument("--summary", action="store_true", help="Display readable ASCII audit scorecard")
 
     # inspect
@@ -426,13 +391,12 @@ def main():
     p_heal.add_argument("-p", "--prompt", help="Original design prompt for context in correction output")
     p_heal.add_argument("-o", "--output", help="Save healed HTML to this path (if ACCEPTED)")
 
-    # screenshot
-    p_ss = subparsers.add_parser("screenshot", help="Capture multi-viewport screenshots (Desktop 1440px, Mobile 390px) via Playwright")
-    p_ss.add_argument("file", help="Path to target HTML or TSX file to render")
-    p_ss.add_argument("-o", "--output", "--output-dir", dest="output", default=".test-artifacts/screenshots", help="Directory for saved screenshots (default: .test-artifacts/screenshots)")
-    p_ss.add_argument("--viewports", default="desktop,mobile", help="Comma-separated viewports: 'desktop', 'mobile' (default: desktop,mobile)")
-    p_ss.add_argument("--no-full-page", dest="full_page", action="store_false", default=True, help="Capture only initial viewport area instead of full page")
-    p_ss.add_argument("--json", action="store_true", default=False, help="Output audit report as JSON")
+    # browser-evidence
+    p_be = subparsers.add_parser("browser-evidence", help="Validate evidence produced by the browser exposed by the active AI harness")
+    be_sub = p_be.add_subparsers(dest="browser_evidence_command", required=True)
+    p_be_validate = be_sub.add_parser("validate", help="Bind a browser report to the exact artifact SHA-256")
+    p_be_validate.add_argument("report", help="Path to vibe.browser-evidence/v1 report JSON")
+    p_be_validate.add_argument("--artifact", required=True, help="Exact HTML or TSX artifact inspected by the harness")
 
     # assets
     p_assets = subparsers.add_parser("assets", help="Manage curated WebP assets (download, verify)")
@@ -470,8 +434,12 @@ def main():
         cmd_inspect(args)
     elif args.command == "heal":
         cmd_heal(args)
-    elif args.command == "screenshot":
-        cmd_screenshot(args)
+    elif args.command == "browser-evidence":
+        from vibe_core.browser_evidence import load_browser_evidence
+        report, errors = load_browser_evidence(Path(args.report).resolve(), Path(args.artifact).resolve())
+        print(json.dumps(report, indent=2, ensure_ascii=False))
+        if errors or report.get("overall_status") != "PASS":
+            sys.exit(1)
     elif args.command == "assets":
         cmd_assets(args)
     elif args.command == "inspire":

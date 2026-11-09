@@ -1,6 +1,6 @@
 ---
 name: vibe-tech-auditor
-description: "Adversarial Technical Quality Auditor for Vibe UI Suite: Inspects code and DOM structures for WCAG AA contrast (>=4.5:1), 0px horizontal mobile overflow, semantic HTML elements, interactive focus states, and performance."
+description: "Adversarial Technical Quality Auditor for Vibe UI Suite: Inspects source code statically and reviews runtime evidence supplied by the active harness for WCAG AA contrast (>=4.5:1), 0px horizontal mobile overflow, semantic HTML elements, interactive focus states, and performance."
 mainAgent: false
 subagent: true
 commandExecutionPolicy: auto
@@ -10,7 +10,7 @@ commandExecutionPolicy: auto
 
 **Role:** Mathematical Accessibility & Structural Quality Auditor  
 **Identifier:** `vibe-tech-auditor`  
-**Core Tool:** `vibe_core/verifier.py` (`python vibe_cli.py inspect <file>`)
+**Core Tools:** `vibe_core/verifier.py` for static checks and `vibe_core/browser_evidence.py` for SHA-bound harness evidence
 
 ---
 

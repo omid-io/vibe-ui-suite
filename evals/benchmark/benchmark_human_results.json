@@ -3,78 +3,48 @@
   "timestamp": "2026-11-03T07:34:03.788042+00:00",
   "suite_version": "4.0.0",
   "scenario_count": 25,
-  "benchmark_type": "internal_deterministic_heuristic",
+  "benchmark_type": "legacy_snapshot_with_browser_runtime_not_revalidated",
   "baseline_system": "Vanilla LLM / V2 Heuristic Baseline",
   "baseline_type": "internal_heuristic_prior",
   "baseline_methodology": "Internal deterministic heuristic evaluation measuring generator adherence to critic invariants. Values reflect automated rule-engine compliance, not human subjective evaluation. Independent replication required.",
-  "candidate_system": "Vibe UI V4 Endgame Autonomous Closed-Loop Browser Engine (100% Browser Truth)",
+  "candidate_system": "Vibe UI Suite legacy benchmark snapshot; live browser evidence was not revalidated",
   "kpi_comparison": {
     "first_pass_rate": {
-      "baseline": 52.0,
-      "candidate": 100.0,
-      "delta_percent": 48.0,
+      "baseline": 52,
+      "candidate": 100,
+      "delta_percent": 48,
       "gate_type": "quad_composite_dom_visual_physical_causal_pixel"
     },
     "autonomous_resolution_rate": {
-      "baseline": 65.0,
-      "candidate": 100.0,
-      "delta_percent": 35.0
+      "baseline": 65,
+      "candidate": 100,
+      "delta_percent": 35
     },
     "react_tsx_compilation_rate": {
-      "baseline": 0.0,
-      "candidate": 100.0,
-      "delta_percent": 100.0
-    },
-    "browser_truth_verification_rate": {
-      "baseline": 0.0,
-      "candidate": 100.0,
-      "audited_scenarios": 25,
-      "audit_coverage_percent": 100.0
-    },
-    "causal_contract_satisfaction_rate": {
-      "baseline": 0.0,
-      "candidate": 100.0,
-      "audited_scenarios": 25
-    },
-    "directional_contract_satisfaction_rate": {
-      "baseline": 0.0,
-      "candidate": 100.0,
-      "audited_scenarios": 25
-    },
-    "formula_validation_rate": {
-      "baseline": 0.0,
-      "candidate": 100.0,
-      "audited_scenarios": 25
-    },
-    "pixel_critic_validation_rate": {
-      "baseline": 0.0,
-      "candidate": 100.0,
-      "audited_scenarios": 25
-    },
-    "avg_in_browser_vision_score": {
-      "baseline": 45.0,
-      "candidate": 95.0
+      "baseline": 0,
+      "candidate": 100,
+      "delta_percent": 100
     },
     "domain_resolution_accuracy": {
-      "baseline": 56.0,
-      "candidate": 60.0,
-      "delta_percent": 4.0
+      "baseline": 56,
+      "candidate": 60,
+      "delta_percent": 4
     },
     "avg_automated_refiner_rounds": {
       "baseline": 2.4,
-      "candidate": 0.0,
-      "reduction_percent": 100.0
+      "candidate": 0,
+      "reduction_percent": 100
     },
     "avg_user_corrections": {
       "baseline": 2.4,
-      "candidate": 0.0,
-      "reduction_percent": 100.0,
+      "candidate": 0,
+      "reduction_percent": 100,
       "note": "Alias for avg_automated_refiner_rounds for schema backward compatibility"
     },
     "avg_correction_tokens": {
       "baseline": 2400,
-      "candidate": 0.0,
-      "reduction_percent": 100.0
+      "candidate": 0,
+      "reduction_percent": 100
     },
     "avg_time_to_accept_ms": {
       "candidate": 381.61
@@ -84,7 +54,11 @@
       "unique_styles_rendered": 8
     },
     "hard_gates_compliance": {
-      "candidate": 100.0
+      "candidate": 100
+    },
+    "browser_runtime_evaluation": {
+      "status": "NOT_EVALUATED",
+      "reason": "This stored result predates the harness-native evidence contract. Its historical browser metrics are not asserted as current, portable verification."
     }
   },
   "scenario_breakdown": [
@@ -98,17 +72,12 @@
       "candidate_passed_first_pass": true,
       "autonomous_resolved": true,
       "react_tsx_compiled": true,
-      "browser_truth_verified": true,
-      "causal_contract_satisfied": true,
-      "directional_passed": true,
-      "formula_validation_passed": true,
-      "pixel_buffer_valid": true,
-      "in_browser_vision_score": 95,
-      "dom_quality_score": 96.0,
+      "dom_quality_score": 96,
       "visual_quality_score": 93.2,
-      "critic_score": 96.0,
+      "critic_score": 96,
       "verification_status": "PASS",
-      "elapsed_ms": 484.02
+      "elapsed_ms": 484.02,
+      "browser_runtime_status": "NOT_EVALUATED"
     },
     {
       "scenario_id": "task_02",
@@ -120,17 +89,12 @@
       "candidate_passed_first_pass": true,
       "autonomous_resolved": true,
       "react_tsx_compiled": true,
-      "browser_truth_verified": true,
-      "causal_contract_satisfied": true,
-      "directional_passed": true,
-      "formula_validation_passed": true,
-      "pixel_buffer_valid": true,
-      "in_browser_vision_score": 95,
-      "dom_quality_score": 93.0,
-      "visual_quality_score": 95.0,
-      "critic_score": 93.0,
+      "dom_quality_score": 93,
+      "visual_quality_score": 95,
+      "critic_score": 93,
       "verification_status": "PASS",
-      "elapsed_ms": 407.65
+      "elapsed_ms": 407.65,
+      "browser_runtime_status": "NOT_EVALUATED"
     },
     {
       "scenario_id": "task_03",
@@ -142,17 +106,12 @@
       "candidate_passed_first_pass": true,
       "autonomous_resolved": true,
       "react_tsx_compiled": true,
-      "browser_truth_verified": true,
-      "causal_contract_satisfied": true,
-      "directional_passed": true,
-      "formula_validation_passed": true,
-      "pixel_buffer_valid": true,
-      "in_browser_vision_score": 95,
-      "dom_quality_score": 96.0,
+      "dom_quality_score": 96,
       "visual_quality_score": 93.2,
-      "critic_score": 96.0,
+      "critic_score": 96,
       "verification_status": "PASS",
-      "elapsed_ms": 405.46
+      "elapsed_ms": 405.46,
+      "browser_runtime_status": "NOT_EVALUATED"
     },
     {
       "scenario_id": "task_04",
@@ -164,17 +123,12 @@
       "candidate_passed_first_pass": true,
       "autonomous_resolved": true,
       "react_tsx_compiled": true,
-      "browser_truth_verified": true,
-      "causal_contract_satisfied": true,
-      "directional_passed": true,
-      "formula_validation_passed": true,
-      "pixel_buffer_valid": true,
-      "in_browser_vision_score": 95,
-      "dom_quality_score": 96.0,
+      "dom_quality_score": 96,
       "visual_quality_score": 91.7,
-      "critic_score": 96.0,
+      "critic_score": 96,
       "verification_status": "PASS",
-      "elapsed_ms": 403.37
+      "elapsed_ms": 403.37,
+      "browser_runtime_status": "NOT_EVALUATED"
     },
     {
       "scenario_id": "task_05",
@@ -186,17 +140,12 @@
       "candidate_passed_first_pass": true,
       "autonomous_resolved": true,
       "react_tsx_compiled": true,
-      "browser_truth_verified": true,
-      "causal_contract_satisfied": true,
-      "directional_passed": true,
-      "formula_validation_passed": true,
-      "pixel_buffer_valid": true,
-      "in_browser_vision_score": 95,
-      "dom_quality_score": 96.0,
+      "dom_quality_score": 96,
       "visual_quality_score": 93.2,
-      "critic_score": 96.0,
+      "critic_score": 96,
       "verification_status": "PASS",
-      "elapsed_ms": 362.25
+      "elapsed_ms": 362.25,
+      "browser_runtime_status": "NOT_EVALUATED"
     },
     {
       "scenario_id": "task_06",
@@ -208,17 +157,12 @@
       "candidate_passed_first_pass": true,
       "autonomous_resolved": true,
       "react_tsx_compiled": true,
-      "browser_truth_verified": true,
-      "causal_contract_satisfied": true,
-      "directional_passed": true,
-      "formula_validation_passed": true,
-      "pixel_buffer_valid": true,
-      "in_browser_vision_score": 95,
-      "dom_quality_score": 93.0,
+      "dom_quality_score": 93,
       "visual_quality_score": 91.7,
-      "critic_score": 93.0,
+      "critic_score": 93,
       "verification_status": "PASS",
-      "elapsed_ms": 376.48
+      "elapsed_ms": 376.48,
+      "browser_runtime_status": "NOT_EVALUATED"
     },
     {
       "scenario_id": "task_07",
@@ -230,17 +174,12 @@
       "candidate_passed_first_pass": true,
       "autonomous_resolved": true,
       "react_tsx_compiled": true,
-      "browser_truth_verified": true,
-      "causal_contract_satisfied": true,
-      "directional_passed": true,
-      "formula_validation_passed": true,
-      "pixel_buffer_valid": true,
-      "in_browser_vision_score": 95,
-      "dom_quality_score": 96.0,
+      "dom_quality_score": 96,
       "visual_quality_score": 93.2,
-      "critic_score": 96.0,
+      "critic_score": 96,
       "verification_status": "PASS",
-      "elapsed_ms": 357.82
+      "elapsed_ms": 357.82,
+      "browser_runtime_status": "NOT_EVALUATED"
     },
     {
       "scenario_id": "task_08",
@@ -252,17 +191,12 @@
       "candidate_passed_first_pass": true,
       "autonomous_resolved": true,
       "react_tsx_compiled": true,
-      "browser_truth_verified": true,
-      "causal_contract_satisfied": true,
-      "directional_passed": true,
-      "formula_validation_passed": true,
-      "pixel_buffer_valid": true,
-      "in_browser_vision_score": 95,
-      "dom_quality_score": 93.0,
+      "dom_quality_score": 93,
       "visual_quality_score": 91.7,
-      "critic_score": 93.0,
+      "critic_score": 93,
       "verification_status": "PASS",
-      "elapsed_ms": 394.02
+      "elapsed_ms": 394.02,
+      "browser_runtime_status": "NOT_EVALUATED"
     },
     {
       "scenario_id": "task_09",
@@ -274,17 +208,12 @@
       "candidate_passed_first_pass": true,
       "autonomous_resolved": true,
       "react_tsx_compiled": true,
-      "browser_truth_verified": true,
-      "causal_contract_satisfied": true,
-      "directional_passed": true,
-      "formula_validation_passed": true,
-      "pixel_buffer_valid": true,
-      "in_browser_vision_score": 95,
-      "dom_quality_score": 93.0,
+      "dom_quality_score": 93,
       "visual_quality_score": 91.7,
-      "critic_score": 93.0,
+      "critic_score": 93,
       "verification_status": "PASS",
-      "elapsed_ms": 364.3
+      "elapsed_ms": 364.3,
+      "browser_runtime_status": "NOT_EVALUATED"
     },
     {
       "scenario_id": "task_10",
@@ -296,17 +225,12 @@
       "candidate_passed_first_pass": true,
       "autonomous_resolved": true,
       "react_tsx_compiled": true,
-      "browser_truth_verified": true,
-      "causal_contract_satisfied": true,
-      "directional_passed": true,
-      "formula_validation_passed": true,
-      "pixel_buffer_valid": true,
-      "in_browser_vision_score": 95,
-      "dom_quality_score": 96.0,
+      "dom_quality_score": 96,
       "visual_quality_score": 93.2,
-      "critic_score": 96.0,
+      "critic_score": 96,
       "verification_status": "PASS",
-      "elapsed_ms": 371.45
+      "elapsed_ms": 371.45,
+      "browser_runtime_status": "NOT_EVALUATED"
     },
     {
       "scenario_id": "task_11",
@@ -318,17 +242,12 @@
       "candidate_passed_first_pass": true,
       "autonomous_resolved": true,
       "react_tsx_compiled": true,
-      "browser_truth_verified": true,
-      "causal_contract_satisfied": true,
-      "directional_passed": true,
-      "formula_validation_passed": true,
-      "pixel_buffer_valid": true,
-      "in_browser_vision_score": 95,
-      "dom_quality_score": 93.0,
+      "dom_quality_score": 93,
       "visual_quality_score": 88.2,
-      "critic_score": 93.0,
+      "critic_score": 93,
       "verification_status": "PASS",
-      "elapsed_ms": 364.95
+      "elapsed_ms": 364.95,
+      "browser_runtime_status": "NOT_EVALUATED"
     },
     {
       "scenario_id": "task_12",
@@ -340,17 +259,12 @@
       "candidate_passed_first_pass": true,
       "autonomous_resolved": true,
       "react_tsx_compiled": true,
-      "browser_truth_verified": true,
-      "causal_contract_satisfied": true,
-      "directional_passed": true,
-      "formula_validation_passed": true,
-      "pixel_buffer_valid": true,
-      "in_browser_vision_score": 95,
-      "dom_quality_score": 93.0,
+      "dom_quality_score": 93,
       "visual_quality_score": 91.7,
-      "critic_score": 93.0,
+      "critic_score": 93,
       "verification_status": "PASS",
-      "elapsed_ms": 359.63
+      "elapsed_ms": 359.63,
+      "browser_runtime_status": "NOT_EVALUATED"
     },
     {
       "scenario_id": "task_13",
@@ -362,17 +276,12 @@
       "candidate_passed_first_pass": true,
       "autonomous_resolved": true,
       "react_tsx_compiled": true,
-      "browser_truth_verified": true,
-      "causal_contract_satisfied": true,
-      "directional_passed": true,
-      "formula_validation_passed": true,
-      "pixel_buffer_valid": true,
-      "in_browser_vision_score": 95,
-      "dom_quality_score": 96.0,
+      "dom_quality_score": 96,
       "visual_quality_score": 93.2,
-      "critic_score": 96.0,
+      "critic_score": 96,
       "verification_status": "PASS",
-      "elapsed_ms": 358.77
+      "elapsed_ms": 358.77,
+      "browser_runtime_status": "NOT_EVALUATED"
     },
     {
       "scenario_id": "task_14",
@@ -384,17 +293,12 @@
       "candidate_passed_first_pass": true,
       "autonomous_resolved": true,
       "react_tsx_compiled": true,
-      "browser_truth_verified": true,
-      "causal_contract_satisfied": true,
-      "directional_passed": true,
-      "formula_validation_passed": true,
-      "pixel_buffer_valid": true,
-      "in_browser_vision_score": 95,
-      "dom_quality_score": 96.0,
+      "dom_quality_score": 96,
       "visual_quality_score": 93.2,
-      "critic_score": 96.0,
+      "critic_score": 96,
       "verification_status": "PASS",
-      "elapsed_ms": 367.34
+      "elapsed_ms": 367.34,
+      "browser_runtime_status": "NOT_EVALUATED"
     },
     {
       "scenario_id": "task_15",
@@ -406,17 +310,12 @@
       "candidate_passed_first_pass": true,
       "autonomous_resolved": true,
       "react_tsx_compiled": true,
-      "browser_truth_verified": true,
-      "causal_contract_satisfied": true,
-      "directional_passed": true,
-      "formula_validation_passed": true,
-      "pixel_buffer_valid": true,
-      "in_browser_vision_score": 95,
-      "dom_quality_score": 93.0,
+      "dom_quality_score": 93,
       "visual_quality_score": 91.7,
-      "critic_score": 93.0,
+      "critic_score": 93,
       "verification_status": "PASS",
-      "elapsed_ms": 379.81
+      "elapsed_ms": 379.81,
+      "browser_runtime_status": "NOT_EVALUATED"
     },
     {
       "scenario_id": "task_16",
@@ -428,17 +327,12 @@
       "candidate_passed_first_pass": true,
       "autonomous_resolved": true,
       "react_tsx_compiled": true,
-      "browser_truth_verified": true,
-      "causal_contract_satisfied": true,
-      "directional_passed": true,
-      "formula_validation_passed": true,
-      "pixel_buffer_valid": true,
-      "in_browser_vision_score": 95,
-      "dom_quality_score": 93.0,
+      "dom_quality_score": 93,
       "visual_quality_score": 91.7,
-      "critic_score": 93.0,
+      "critic_score": 93,
       "verification_status": "PASS",
-      "elapsed_ms": 384.25
+      "elapsed_ms": 384.25,
+      "browser_runtime_status": "NOT_EVALUATED"
     },
     {
       "scenario_id": "task_17",
@@ -450,17 +344,12 @@
       "candidate_passed_first_pass": true,
       "autonomous_resolved": true,
       "react_tsx_compiled": true,
-      "browser_truth_verified": true,
-      "causal_contract_satisfied": true,
-      "directional_passed": true,
-      "formula_validation_passed": true,
-      "pixel_buffer_valid": true,
-      "in_browser_vision_score": 95,
-      "dom_quality_score": 93.0,
+      "dom_quality_score": 93,
       "visual_quality_score": 91.7,
-      "critic_score": 93.0,
+      "critic_score": 93,
       "verification_status": "PASS",
-      "elapsed_ms": 400.95
+      "elapsed_ms": 400.95,
+      "browser_runtime_status": "NOT_EVALUATED"
     },
     {
       "scenario_id": "task_18",
@@ -472,17 +361,12 @@
       "candidate_passed_first_pass": true,
       "autonomous_resolved": true,
       "react_tsx_compiled": true,
-      "browser_truth_verified": true,
-      "causal_contract_satisfied": true,
-      "directional_passed": true,
-      "formula_validation_passed": true,
-      "pixel_buffer_valid": true,
-      "in_browser_vision_score": 95,
-      "dom_quality_score": 93.0,
+      "dom_quality_score": 93,
       "visual_quality_score": 91.7,
-      "critic_score": 93.0,
+      "critic_score": 93,
       "verification_status": "PASS",
-      "elapsed_ms": 380.38
+      "elapsed_ms": 380.38,
+      "browser_runtime_status": "NOT_EVALUATED"
     },
     {
       "scenario_id": "task_19",
@@ -494,17 +378,12 @@
       "candidate_passed_first_pass": true,
       "autonomous_resolved": true,
       "react_tsx_compiled": true,
-      "browser_truth_verified": true,
-      "causal_contract_satisfied": true,
-      "directional_passed": true,
-      "formula_validation_passed": true,
-      "pixel_buffer_valid": true,
-      "in_browser_vision_score": 95,
-      "dom_quality_score": 93.0,
+      "dom_quality_score": 93,
       "visual_quality_score": 91.7,
-      "critic_score": 93.0,
+      "critic_score": 93,
       "verification_status": "PASS",
-      "elapsed_ms": 370.96
+      "elapsed_ms": 370.96,
+      "browser_runtime_status": "NOT_EVALUATED"
     },
     {
       "scenario_id": "task_20",
@@ -516,17 +395,12 @@
       "candidate_passed_first_pass": true,
       "autonomous_resolved": true,
       "react_tsx_compiled": true,
-      "browser_truth_verified": true,
-      "causal_contract_satisfied": true,
-      "directional_passed": true,
-      "formula_validation_passed": true,
-      "pixel_buffer_valid": true,
-      "in_browser_vision_score": 95,
-      "dom_quality_score": 93.0,
+      "dom_quality_score": 93,
       "visual_quality_score": 91.7,
-      "critic_score": 93.0,
+      "critic_score": 93,
       "verification_status": "PASS",
-      "elapsed_ms": 361.36
+      "elapsed_ms": 361.36,
+      "browser_runtime_status": "NOT_EVALUATED"
     },
     {
       "scenario_id": "task_21",
@@ -538,17 +412,12 @@
       "candidate_passed_first_pass": true,
       "autonomous_resolved": true,
       "react_tsx_compiled": true,
-      "browser_truth_verified": true,
-      "causal_contract_satisfied": true,
-      "directional_passed": true,
-      "formula_validation_passed": true,
-      "pixel_buffer_valid": true,
-      "in_browser_vision_score": 95,
-      "dom_quality_score": 93.0,
+      "dom_quality_score": 93,
       "visual_quality_score": 91.7,
-      "critic_score": 93.0,
+      "critic_score": 93,
       "verification_status": "PASS",
-      "elapsed_ms": 369.49
+      "elapsed_ms": 369.49,
+      "browser_runtime_status": "NOT_EVALUATED"
     },
     {
       "scenario_id": "task_22",
@@ -560,17 +429,12 @@
       "candidate_passed_first_pass": true,
       "autonomous_resolved": true,
       "react_tsx_compiled": true,
-      "browser_truth_verified": true,
-      "causal_contract_satisfied": true,
-      "directional_passed": true,
-      "formula_validation_passed": true,
-      "pixel_buffer_valid": true,
-      "in_browser_vision_score": 95,
-      "dom_quality_score": 93.0,
+      "dom_quality_score": 93,
       "visual_quality_score": 91.7,
-      "critic_score": 93.0,
+      "critic_score": 93,
       "verification_status": "PASS",
-      "elapsed_ms": 384.34
+      "elapsed_ms": 384.34,
+      "browser_runtime_status": "NOT_EVALUATED"
     },
     {
       "scenario_id": "task_23",
@@ -582,17 +446,12 @@
       "candidate_passed_first_pass": true,
       "autonomous_resolved": true,
       "react_tsx_compiled": true,
-      "browser_truth_verified": true,
-      "causal_contract_satisfied": true,
-      "directional_passed": true,
-      "formula_validation_passed": true,
-      "pixel_buffer_valid": true,
-      "in_browser_vision_score": 95,
-      "dom_quality_score": 93.0,
-      "visual_quality_score": 95.0,
-      "critic_score": 93.0,
+      "dom_quality_score": 93,
+      "visual_quality_score": 95,
+      "critic_score": 93,
       "verification_status": "PASS",
-      "elapsed_ms": 360.81
+      "elapsed_ms": 360.81,
+      "browser_runtime_status": "NOT_EVALUATED"
     },
     {
       "scenario_id": "task_24",
@@ -604,17 +463,12 @@
       "candidate_passed_first_pass": true,
       "autonomous_resolved": true,
       "react_tsx_compiled": true,
-      "browser_truth_verified": true,
-      "causal_contract_satisfied": true,
-      "directional_passed": true,
-      "formula_validation_passed": true,
-      "pixel_buffer_valid": true,
-      "in_browser_vision_score": 95,
-      "dom_quality_score": 96.0,
+      "dom_quality_score": 96,
       "visual_quality_score": 93.2,
-      "critic_score": 96.0,
+      "critic_score": 96,
       "verification_status": "PASS",
-      "elapsed_ms": 371.3
+      "elapsed_ms": 371.3,
+      "browser_runtime_status": "NOT_EVALUATED"
     },
     {
       "scenario_id": "task_25",
@@ -626,17 +480,12 @@
       "candidate_passed_first_pass": true,
       "autonomous_resolved": true,
       "react_tsx_compiled": true,
-      "browser_truth_verified": true,
-      "causal_contract_satisfied": true,
-      "directional_passed": true,
-      "formula_validation_passed": true,
-      "pixel_buffer_valid": true,
-      "in_browser_vision_score": 95,
-      "dom_quality_score": 93.0,
+      "dom_quality_score": 93,
       "visual_quality_score": 91.7,
-      "critic_score": 93.0,
+      "critic_score": 93,
       "verification_status": "PASS",
-      "elapsed_ms": 399.02
+      "elapsed_ms": 399.02,
+      "browser_runtime_status": "NOT_EVALUATED"
     }
   ]
 }

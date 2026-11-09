@@ -29,13 +29,14 @@ Whenever asked to audit, verify, or review any web page, component, or frontend 
 
 ---
 
-### Pillar 1: Living Visual & Screenshot Inspection (Playwright Multi-Viewport)
+### Pillar 1: Living Visual & Screenshot Inspection (Harness-Native)
 - **Light-First & Anti-Suffocating Gate (Constitution Standard):**
   - Verify that the interface is designed, structured, and visually verified in LIGHT THEME first (#ffffff/#f8fafc surfaces, #e2e8f0 borders, #0f172a text).
   - Enforce the Anti-Suffocating Rule: Zero flat pitch-black (#000000, #0a0a0a) or muddy grey voids. Dark mode must exhibit OLED cockpit depth (#0b0f19, #0f172a) with specular highlights.
-- **Measurement Method:** Execute automated headless Chromium rendering via `python scripts/screenshot_audit.py <file>` or `vibe_cli.py screenshot <file>`. Capture both **Desktop (1440px)** and **Mobile (390px)** viewports into `.test-artifacts/screenshots/`.
-- **Vision Review:** Inspect captured PNGs directly (`view_file`) to audit whitespace cadence, optical balance, alignment, typographic contrast, and card boundaries.
-- **Novelty & Anti-Slop Audit:** Audit visual chemistry against the 5 archetypes and verify the **Novelty Budget** (at least 2 of 6 structural dimensions—hero composition, card geometry, background treatment, typography pairing, CTA style, lighting—differ from previous outputs to prevent template collapse). Verify real CDN photography from `skills/ui-kit/references/curated_unsplash_vault.md` rather than empty gray placeholder boxes.
+- **Measurement Method:** Use only the browser exposed by the active AI harness. The suite never installs, launches or controls a browser. Capture Mobile (390px), Tablet (768px) and Desktop (1440px) screenshots, including the complete page.
+- **Vision Review:** A vision-capable reviewer must inspect every screenshot for whitespace cadence, optical balance, alignment, typography, clipping, image quality and domain fit.
+- **Evidence Contract:** Submit vibe.browser-evidence/v1 bound to the final artifact SHA-256. Validate it with `vibe-ui-suite browser-evidence validate <report.json> --artifact <file>`. Missing, stale or invalid evidence is NOT_EVALUATED, never PASS.
+- **Novelty & Anti-Slop Audit:**- **Novelty & Anti-Slop Audit:** Audit visual chemistry against the 5 archetypes and verify the **Novelty Budget** (at least 2 of 6 structural dimensions—hero composition, card geometry, background treatment, typography pairing, CTA style, lighting—differ from previous outputs to prevent template collapse). Verify real CDN photography from `skills/ui-kit/references/curated_unsplash_vault.md` rather than empty gray placeholder boxes.
 
 ### Pillar 2: Responsive Multi-Device Integrity
 - **Measurement Method:** Verify CSS rules across 3 critical viewport widths.
@@ -86,7 +87,7 @@ When evaluating or generating any frontend code, `ui-verifier` outputs a structu
 ├─────────────────────────────────────────────────────────────────┤
 │ Overall Status: [ PASS | WARN | FAIL ]                          │
 ├─────────────────────────────────────────────────────────────────┤
-│ 1. Living Visual & Screenshot Inspection (Playwright Multi-VP)  │
+│ 1. Living Visual & Screenshot Inspection (Harness Multi-VP)  │
 │    [PASS] Multi-Viewport PNG : 1440px & 390px screenshots viewed│
 │    [PASS] Visual Hierarchy   : Whitespace & typography balanced │
 │    [PASS] Novelty Budget     : 3/6 structural dimensions unique │
@@ -131,7 +132,7 @@ When conducting an audit, output findings using this concise scorecard:
 
 | Pillar | Status | Key Observations & Verified Items |
 | :--- | :---: | :--- |
-| **1. Living Visual Inspection** | ✅ PASS | Playwright 1440px/390px screenshots captured & inspected; 0 template slop. |
+| **1. Living Visual Inspection** | ✅ PASS | Harness-provided 390px/768px/1440px screenshots inspected and evidence SHA verified; 0 template slop. |
 | **2. Responsive Design** | ✅ PASS | Fluid across 390px, 768px, and 1440px with no horizontal overflow. |
 | **3. Accessibility (WCAG)** | ✅ PASS | Semantic `<button>` elements, visible focus, reduced-motion handled. |
 | **4. Motion & Performance** | ✅ PASS | GPU-friendly compositing (<=5 blur layers), inline SVGs, rAF interpolation. |

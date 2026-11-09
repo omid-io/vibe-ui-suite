@@ -4,7 +4,7 @@ Generates physical proof conforming to schemas/verification-report.v1.json.
 
 Verification tiers:
   fast   (default) — Pure static DOM evaluation (<50ms, no browser required).
-  strict           — Full Playwright headless DOM + physical pixel assertions (3-8s, opt-in via --strict).
+  strict           — Static checks plus a NOT_EVALUATED notice; browser evaluation is harness-owned.
 
 AST-based HTML parsing via BeautifulSoup4 (falls back to regex if unavailable).
 """
@@ -179,22 +179,22 @@ class VerificationEngine:
             html_content: Raw HTML string to evaluate.
             filename:     Artifact name reported in the output.
             mode:         "fast" = static DOM eval (<50ms, default).
-                          "strict" = static eval + Playwright headless browser (opt-in).
+                          "strict" = static eval + a request for harness-owned browser evidence.
         """
         fast_result = self._fast_path(html_content, filename, base_dir=base_dir)
 
         if mode == "strict":
-            strict_result = self._strict_path(html_content, filename)
-            # Merge strict evidence records into fast result
-            fast_result["evidence_records"].extend(strict_result.get("evidence_records", []))
-            fast_result["checks_summary"]["total"] += strict_result["checks_summary"]["total"]
-            fast_result["checks_summary"]["passed"] += strict_result["checks_summary"]["passed"]
-            fast_result["checks_summary"]["failed"] += strict_result["checks_summary"]["failed"]
-            # If strict path found any failures, overall status is FAIL
-            if strict_result.get("overall_status") == "FAIL":
-                fast_result["overall_status"] = "FAIL"
-            fast_result["runtime_mode"] = "browser_runtime_eval"
-        
+            fast_result["evidence_records"].append({
+                "pillar": "Browser Runtime",
+                "check_name": "Harness Browser Evidence",
+                "status": "WARN",
+                "evidence": "No browser was launched. Use the browser exposed by the active harness and validate a vibe.browser-evidence/v1 report.",
+                "threshold": "current-artifact browser evidence required for runtime acceptance",
+            })
+            fast_result["checks_summary"]["total"] += 1
+            fast_result["checks_summary"]["warned"] = fast_result["checks_summary"].get("warned", 0) + 1
+            fast_result["runtime_mode"] = "harness_browser_required"
+
         return fast_result
 
     # ─────────────────────────── FAST PATH ────────────────────────────
@@ -773,87 +773,5 @@ class VerificationEngine:
                 "failed": failed,
                 "warned": warned
             },
-            "evidence_records": evidence_records
-        }
-
-    # ─────────────────────────── STRICT PATH ──────────────────────────
-    def _strict_path(self, html_content: str, filename: str) -> Dict[str, Any]:
-        """
-        Playwright headless DOM assertions — physical pixel measurements.
-        Opt-in only. Called when mode="strict".
-        Requires: pip install playwright && playwright install chromium
-        """
-        evidence_records: List[Dict[str, Any]] = []
-        passed = 0
-        failed = 0
-
-        try:
-            from playwright.sync_api import sync_playwright
-        except ImportError:
-            return {
-                "overall_status": "SKIP",
-                "runtime_mode": "browser_runtime_eval",
-                "checks_summary": {"total": 0, "passed": 0, "failed": 0},
-                "evidence_records": [{
-                    "pillar": "Runtime",
-                    "check_name": "Playwright Availability",
-                    "status": "SKIP",
-                    "evidence": "playwright not installed. Run: pip install playwright && playwright install chromium",
-                    "threshold": "installed"
-                }]
-            }
-
-        import tempfile, os
-        with tempfile.NamedTemporaryFile(mode="w", suffix=".html", delete=False, encoding="utf-8") as tmp:
-            tmp.write(html_content)
-            tmp_path = tmp.name
-
-        try:
-            with sync_playwright() as pw:
-                browser = pw.chromium.launch(headless=True)
-
-                for viewport_label, viewport in [("375px mobile", {"width": 375, "height": 667}),
-                                                  ("320px narrow", {"width": 320, "height": 568})]:
-                    page = browser.new_page(viewport=viewport)
-                    try:
-                        page.goto(f"file:///{tmp_path.replace(chr(92), '/')}", wait_until="networkidle", timeout=3000)
-                    except Exception:
-                        page.goto(f"file:///{tmp_path.replace(chr(92), '/')}", wait_until="domcontentloaded")
-                    page.evaluate("() => document.fonts.ready")
-                    page.evaluate("() => new Promise(r => requestAnimationFrame(() => requestAnimationFrame(r)))")
-
-                    # Check: horizontal overflow
-                    overflow = page.evaluate(
-                        "() => document.documentElement.scrollWidth > document.documentElement.clientWidth"
-                    )
-                    if not overflow:
-                        passed += 1
-                        evidence_records.append({
-                            "pillar": "Responsive",
-                            "check_name": f"No Horizontal Overflow ({viewport_label})",
-                            "status": "PASS",
-                            "evidence": f"scrollWidth <= clientWidth at {viewport['width']}px",
-                            "threshold": "no overflow"
-                        })
-                    else:
-                        failed += 1
-                        evidence_records.append({
-                            "pillar": "Responsive",
-                            "check_name": f"No Horizontal Overflow ({viewport_label})",
-                            "status": "FAIL",
-                            "evidence": f"Horizontal overflow detected at {viewport['width']}px viewport",
-                            "threshold": "no overflow"
-                        })
-                    page.close()
-
-                browser.close()
-        finally:
-            os.unlink(tmp_path)
-
-        overall_status = "PASS" if failed == 0 else "FAIL"
-        return {
-            "overall_status": overall_status,
-            "runtime_mode": "browser_runtime_eval",
-            "checks_summary": {"total": passed + failed, "passed": passed, "failed": failed},
             "evidence_records": evidence_records
         }

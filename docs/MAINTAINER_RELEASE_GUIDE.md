@@ -63,13 +63,9 @@ Whenever the user instructs to publish or update releases, execute this 5-step d
    npx --yes ovsx publish packages/vibe-ui-vscode/vibe-ui-vscode-{version}.vsix -p <OPENVSX_TOKEN>
    ```
 
-### Step 5: Zero-Token Visual Studio Marketplace Deployment
-No Personal Access Token (PAT) required. Uses the user's active Chrome publisher session on Microsoft Visual Studio Marketplace:
-1. Ensure the user's Chrome is on: `https://marketplace.visualstudio.com/manage/publishers/omid-io`
+### Step 5: Manual Visual Studio Marketplace Deployment
+No Personal Access Token (PAT) is required for the dashboard upload. Use any browser already available in the active AI harness; this repository does not install, launch, or automate a browser.
+1. Open the publisher dashboard: `https://marketplace.visualstudio.com/manage/publishers/omid-io`
 2. Open the Update dialog: Click `More Actions...` () next to `Vibe UI Studio & Contrast Gate` -> `Update`.
-3. Run the automated script:
-   ```bash
-   python scripts/publish_marketplace_browser.py
-   ```
-4. Alternatively, upload the generated VSIX directly via the publisher dashboard (`https://marketplace.visualstudio.com/manage/publishers/omid-io`).
-5. Confirm Microsoft verification status: `4.x.xVerifying4.y.y` -> Published.
+3. Upload the generated VSIX through the dashboard's file picker.
+4. Confirm Microsoft verification status reaches `Verifying` and then `Published`.

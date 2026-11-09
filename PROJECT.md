@@ -7,7 +7,7 @@ The `vibe-ui-suite` (Vibe UI Suite) repository is an autonomous AI agent UI desi
 3. `vibe_core/critic.py`: Evaluates HTML designs across 9 scorecard dimensions (100-point scale) and enforces binary hard-gate invariants.
 4. `vibe_core/refiner.py`: Iteratively repairs critic defects, balances DOM tags, and enforces anti-regression hard-gate monotonic progression.
 5. `vibe_core/verifier.py`: 5-pillar autonomous quality gate certifying WCAG AA contrast, compositing blur budget, and semantic RTL.
-6. `evals/run_evals.py` & `evals/benchmark/`: Mathematical luminance validation, negative schema tests, browser runtime audits, and empirical benchmark suites.
+6. `evals/run_evals.py` & `evals/benchmark/`: Mathematical luminance validation, negative schema tests, harness-native browser evidence contracts, and empirical static benchmark suites.
 
 ## Feature Inventory
 | # | Feature | Description | Milestone | Source |
@@ -21,7 +21,7 @@ The `vibe-ui-suite` (Vibe UI Suite) repository is an autonomous AI agent UI desi
 | 7 | Transparent Benchmark Metadata & Schemas | Add `baseline_type: "estimated_prior_study"` and detailed methodological notes to `evals/benchmark/run_benchmark.py` and `schemas/benchmark-result.v1.json`, harmonizing property names. | M3 | ORIGINAL_REQUEST §R3 |
 | 8 | Ecosystem Version Synchronization (v3.0.0) | Synchronize version to `3.0.0` across 18 files with alpha drift (`data/styles.json`, all `data/*.json`, `vibe_core/__init__.py`, `install.ps1`, `install.sh`, `schemas/design-spec.v1.schema.json`). | M3 | ORIGINAL_REQUEST §R3 |
 | 9 | Version Validation Script Hardening | Update `scripts/validate_versions.py` to assert version synchronization across all 18 data and installer files. | M3 | Survey 3 |
-| 10 | Multi-Agent Zero-Regression Verification | Verify all 7 test suites pass 100% in `python scripts/run_all_tests.py`, verify Next.js 15 TypeScript build, verify Playwright headless browser runtime, and run forensic audit. | M4 | ORIGINAL_REQUEST §R4 |
+| 10 | Multi-Agent Zero-Regression Verification | Verify all 7 test suites pass 100% in `python scripts/run_all_tests.py`, verify Next.js 15 TypeScript build, verify the harness-native browser evidence contract and SHA binding, and run forensic audit. | M4 | ORIGINAL_REQUEST §R4 |
 
 ## Milestones
 | # | Name | Scope | Dependencies | Status |
@@ -29,7 +29,7 @@ The `vibe-ui-suite` (Vibe UI Suite) repository is an autonomous AI agent UI desi
 | M1 | AutoRefiner HTML Repair & Hard-Gate Anti-Regression | `vibe_core/refiner.py`, `scripts/test_critic_refiner.py` | Survey completed | IN_PROGRESS |
 | M2 | Measurement-Based Critic & Threshold Harmonization | `vibe_core/critic.py`, `vibe_core/verifier.py`, `evals/run_evals.py`, `ARCHITECTURE.md`, `data/anti-patterns.json` | M1 | PLANNED |
 | M3 | Transparent Benchmark Metadata & Version Sync | `evals/benchmark/run_benchmark.py`, `schemas/benchmark-result.v1.json`, `data/styles.json`, `data/*.json`, `scripts/validate_versions.py` | M1, M2 | PLANNED |
-| M4 | Multi-Agent Verification & Zero-Regression Proof | All 7 test suites via `scripts/run_all_tests.py`, Next.js 15 starter compilation, Playwright runtime checks, forensic integrity audit | M1, M2, M3 | PLANNED |
+| M4 | Multi-Agent Verification & Zero-Regression Proof | All 7 test suites via `scripts/run_all_tests.py`, Next.js 15 starter compilation, harness-native browser evidence checks, forensic integrity audit | M1, M2, M3 | PLANNED |
 
 ## Interface Contracts
 ### AutoRefiner ↔ DesignCritic
@@ -64,7 +64,7 @@ The `vibe-ui-suite` (Vibe UI Suite) repository is an autonomous AI agent UI desi
 - `vibe_core/refiner.py` — AutoRefiner HTML repair & anti-regression gate
 - `vibe_core/critic.py` — DesignCritic measurement-based scoring engine
 - `vibe_core/verifier.py` — 5-pillar autonomous quality gate
-- `evals/run_evals.py` — Mathematical evaluation suite & Playwright browser audits
+- `evals/run_evals.py` — Mathematical evaluation suite and harness evidence contracts
 - `evals/benchmark/run_benchmark.py` — Benchmark execution & KPI comparisons
 - `schemas/benchmark-result.v1.json` — JSON schema for benchmark result objects
 - `schemas/design-spec.v1.schema.json` — Design specification schema
@@ -80,4 +80,4 @@ Whenever prompted to publish or release ("منتشر کن"), the agent must stri
 3. **Inspector Agent Regression & Compatibility Audit**: Always dispatch an independent Inspector/Auditor Agent to inspect the code diff and verify that newly added features or modifications do not introduce regressions, break backwards compatibility, or cause conflicts with existing components, templates, CLI commands, tokens, or prior architectural standards.
 4. **Build & Automated Testing**: Validate versions (`python scripts/validate_versions.py`) and evals (`python evals/run_evals.py --json`).
 5. **NPM & Open-VSX**: Build `packages/vibe-ui-suite` and package `vibe-ui-vscode-*.vsix`. Commit, tag (`vX.Y.Z`), push to GitHub triggering `.github/workflows/publish.yml`.
-6. **Microsoft Visual Studio Marketplace**: Run `python scripts/publish_marketplace_browser.py` to initiate marketplace upload or upload the generated VSIX directly via the publisher dashboard (`https://marketplace.visualstudio.com/manage/publishers/omid-io`), then verify status reaches "Verifying" or "Published".
+6. **Microsoft Visual Studio Marketplace**: Run `manual upload through the publisher dashboard using the active harness browser` to initiate marketplace upload or upload the generated VSIX directly via the publisher dashboard (`https://marketplace.visualstudio.com/manage/publishers/omid-io`), then verify status reaches "Verifying" or "Published".
